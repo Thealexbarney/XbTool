@@ -1,0 +1,5 @@
+Display,BTL_Enhance,Caption
+Display,FLD_maplist,nameID
+Display,RSC_BgmList,filename
+Display,EVT_randtype,id
+Display,FLD_WeatherInfo,msg
