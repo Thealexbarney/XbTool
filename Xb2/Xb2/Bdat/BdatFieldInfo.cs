@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Xb2.BdatString;
+using Xb2.Types;
 
 namespace Xb2.Bdat
 {
@@ -16,8 +17,10 @@ namespace Xb2.Bdat
     {
         public BdatFieldType Type { get; set; }
         public string Table { get; set; }
+        public string TableType { get; set; }
         public string Field { get; set; }
         public string RefTable { get; set; }
+        public string ChildType { get; set; }
         public string RefField { get; set; }
         public int Adjust { get; set; }
         public Type EnumType { get; set; }
@@ -38,6 +41,15 @@ namespace Xb2.Bdat
         TimeRange,
         WeatherBitfield,
         WeatherIdMap
+    }
+
+    public class BdatArrayInfo
+    {
+        public string Name { get; set; }
+        public string Table { get; set; }
+        public string Type { get; set; }
+        public bool IsReferences { get; set; }
+        public List<string> Elements { get; } = new List<string>();
     }
 
     public static class BdatInfoImport
@@ -118,6 +130,36 @@ namespace Xb2.Bdat
             }
 
             return info;
+        }
+
+        public static BdatArrayInfo[] ReadBdatArrayInfo()
+        {
+            var info = new List<BdatArrayInfo>();
+
+            using (var stream = new FileStream("arrays.csv", FileMode.Open, FileAccess.Read))
+            using (var reader = new StreamReader(stream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string[] line = reader.ReadLine()?.Split(new[] { ',' });
+                    if (line == null || line.Length < 3) continue;
+
+                    var array = new BdatArrayInfo
+                    {
+                        Table = line[0],
+                        Name = line[1]
+                    };
+
+                    for (int i = 2; i < line.Length; i++)
+                    {
+                        array.Elements.Add(line[i]);
+                    }
+
+                    info.Add(array);
+                }
+            }
+
+            return info.ToArray();
         }
 
         public static Dictionary<string, string> ReadBdatTableInfo()

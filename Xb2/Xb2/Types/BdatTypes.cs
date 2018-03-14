@@ -6,21 +6,29 @@ namespace Xb2.Types
 {
     [BdatType]
     [Serializable]
-    public class autotalk_ma02
+    public class BdatEnum
     {
         public int Id;
-        public ushort style;
         public string name;
+        public short value;
     }
 
     [BdatType]
     [Serializable]
-    public class bf01030100_ms
+    public class BdatStateEnum
     {
         public int Id;
-        public string label;
-        public ushort style;
         public string name;
+        public short value;
+        public string stat;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class BdatValue
+    {
+        public int Id;
+        public uint Value;
     }
 
     [BdatType]
@@ -123,14 +131,6 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_CreateConfig
-    {
-        public int Id;
-        public uint Value;
-    }
-
-    [BdatType]
-    [Serializable]
     public class BLD_Idea
     {
         public int Id;
@@ -188,6 +188,8 @@ namespace Xb2.Types
         public byte Assure4;
         public float Prob5;
         public byte Assure5;
+        public CHR_Bl _Blade;
+        public FLD_ConditionList _Condition;
     }
 
     [BdatType]
@@ -365,6 +367,9 @@ namespace Xb2.Types
         public bool NoWpn;
         public bool Return;
         public bool Shoot;
+        public Message _Caption;
+        public Message _Name;
+        public ITM_PcWpnType _WpnType;
     }
 
     [BdatType]
@@ -534,6 +539,10 @@ namespace Xb2.Types
         public bool Fcombo;
         public bool NoPraise;
         public bool Shoot;
+        public CHR_Bl _AddBl;
+        public Message _Caption;
+        public Message _Name;
+        public ITM_PcWpnType _WpnType;
     }
 
     [BdatType]
@@ -863,6 +872,7 @@ namespace Xb2.Types
         public bool BackAtk;
         public bool MyBom;
         public bool CallEnemy;
+        public Message _Name;
     }
 
     [BdatType]
@@ -996,14 +1006,7 @@ namespace Xb2.Types
         public byte Custom03;
         public byte CustomParam03;
         public bool common;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class BTL_Bl_TrustUp
-    {
-        public int Id;
-        public ushort Point;
+        public BTL_Bl_KizunaBase _KizunaBase;
     }
 
     [BdatType]
@@ -1036,6 +1039,8 @@ namespace Xb2.Types
         public ushort Icon;
         public bool Buff;
         public bool SE;
+        public Message _Caption;
+        public Message _Name;
     }
 
     [BdatType]
@@ -1214,6 +1219,10 @@ namespace Xb2.Types
         public sbyte ArtsHateNum;
         public bool Pot;
         public bool HealMode;
+        public Message _Name;
+        public Message _Role1;
+        public Message _Role2;
+        public Message _Role3;
     }
 
     [BdatType]
@@ -1226,6 +1235,7 @@ namespace Xb2.Types
         public byte PArmorRand;
         public byte EArmorCon;
         public byte EArmorRand;
+        public ITM_PcWpnType _WpnType;
     }
 
     [BdatType]
@@ -1452,6 +1462,7 @@ namespace Xb2.Types
         public byte Atr1;
         public string Effect;
         public byte SE;
+        public Message _Name;
     }
 
     [BdatType]
@@ -1503,6 +1514,14 @@ namespace Xb2.Types
         public ushort DropProb8;
         public byte NoGetByEnh8;
         public byte FirstNamed8;
+        public object _ItemID1;
+        public object _ItemID2;
+        public object _ItemID3;
+        public object _ItemID4;
+        public object _ItemID5;
+        public object _ItemID6;
+        public object _ItemID7;
+        public object _ItemID8;
     }
 
     [BdatType]
@@ -1522,6 +1541,7 @@ namespace Xb2.Types
         public ushort ItemID4;
         public ushort DropProb4;
         public ushort GetConditon4;
+        public object _ItemID1;
     }
 
     [BdatType]
@@ -1533,6 +1553,7 @@ namespace Xb2.Types
         public float Param1;
         public float Param2;
         public ushort Caption;
+        public BTL_EnhanceEff _EnhanceEffect;
     }
 
     [BdatType]
@@ -1549,6 +1570,7 @@ namespace Xb2.Types
         public bool Condition;
         public bool UI;
         public bool PG;
+        public Message _Name;
     }
 
     [BdatType]
@@ -1810,6 +1832,14 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class BTL_Points
+    {
+        public int Id;
+        public ushort Point;
+    }
+
+    [BdatType]
+    [Serializable]
     public class BTL_PouchBuff
     {
         public int Id;
@@ -1895,6 +1925,12 @@ namespace Xb2.Types
         public byte MaxLv;
         public ushort Caption;
         public bool common;
+        public BTL_Enhance _Enhance1;
+        public BTL_Enhance _Enhance2;
+        public BTL_Enhance _Enhance3;
+        public BTL_Enhance _Enhance4;
+        public BTL_Enhance _Enhance5;
+        public Message _Name;
     }
 
     [BdatType]
@@ -1906,11 +1942,13 @@ namespace Xb2.Types
         public string DebugName;
         public ushort Enhance;
         public ushort UI;
+        public BTL_Enhance _Enhance;
+        public Message _Name;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_Skill_Dr_Table01
+    public class BTL_Skill_Dr_Table
     {
         public int Id;
         public ushort SkillID;
@@ -1918,6 +1956,7 @@ namespace Xb2.Types
         public byte Round;
         public byte ColumnNum;
         public byte RowNum;
+        public BTL_Skill_Dr _SkillID;
     }
 
     [BdatType]
@@ -2178,6 +2217,53 @@ namespace Xb2.Types
         public uint sortTW;
         public bool OnlyWpn;
         public bool NoBuildWpn;
+        public FLD_AchievementSet _ArtsAchievement1;
+        public FLD_AchievementSet _ArtsAchievement2;
+        public FLD_AchievementSet _ArtsAchievement3;
+        public MNU_Name _Atr;
+        public BTL_Arts_Bl _BArts1;
+        public BTL_Arts_Bl _BArts2;
+        public BTL_Arts_Bl _BArts3;
+        public BTL_Arts_BlSp _BartsEx;
+        public BTL_Arts_BlSp _BartsEx2;
+        public BTL_Skill_Bl _BSkill1;
+        public BTL_Skill_Bl _BSkill2;
+        public BTL_Skill_Bl _BSkill3;
+        public ITM_PcWpn _DefWeapon;
+        public Message _FavoriteCategory1;
+        public Message _FavoriteCategory2;
+        public ITM_FavoriteList _FavoriteItem1;
+        public ITM_FavoriteList _FavoriteItem2;
+        public FLD_FieldSkillList _FSkill1;
+        public FLD_FieldSkillList _FSkill2;
+        public FLD_FieldSkillList _FSkill3;
+        public FLD_AchievementSet _FskillAchivement1;
+        public FLD_AchievementSet _FskillAchivement2;
+        public FLD_AchievementSet _FskillAchivement3;
+        public MNU_Name _Gender;
+        public FLD_AchievementSet _KeyAchievement;
+        public Message _MerceName;
+        public Message _Name;
+        public BTL_Buff _NArts1;
+        public BTL_Buff _NArts2;
+        public BTL_Buff _NArts3;
+        public BTL_Bl_Personality _Personality;
+        public MNU_Name _QuestRace;
+        public FLD_AchievementSet _SkillAchievement1;
+        public FLD_AchievementSet _SkillAchievement2;
+        public FLD_AchievementSet _SkillAchievement3;
+        public ITM_PcWpnType _WeaponType;
+        public BTL_Arts_Bl[] _BArts;
+        public BTL_Buff[] _NArts;
+        public byte[] _NArtsRecastRev;
+        public BTL_Skill_Bl[] _BSkill;
+        public FLD_FieldSkillList[] _FSkill;
+        public FLD_AchievementSet[] _ArtsAchievement;
+        public FLD_AchievementSet[] _SkillAchievement;
+        public FLD_AchievementSet[] _FskillAchivement;
+        public FLD_AchievementSet[] _Achievement;
+        public Message[] _FavoriteCategory;
+        public ITM_FavoriteList[] _FavoriteItem;
     }
 
     [BdatType]
@@ -2250,6 +2336,15 @@ namespace Xb2.Types
         public string CenterBone;
         public string CamBone;
         public byte Personality;
+        public CHR_Bl _DefBlade1;
+        public CHR_Bl _DefBlade2;
+        public CHR_Bl _DefBlade3;
+        public Message _FavoriteCategory1;
+        public Message _FavoriteCategory2;
+        public ITM_FavoriteList _FavoriteItem1;
+        public ITM_FavoriteList _FavoriteItem2;
+        public MNU_Name _Gender;
+        public Message _Name;
     }
 
     [BdatType]
@@ -2338,6 +2433,15 @@ namespace Xb2.Types
         public bool AlwaysAttack;
         public bool PGMax;
         public bool Salvage;
+        public MNU_Filename _BGMID;
+        public CHR_Bl _BladeID;
+        public BTL_EnDropItem _DropTableID;
+        public BTL_EnDropItem _DropTableID2;
+        public BTL_EnDropItem _DropTableID3;
+        public Message _Name;
+        public CHR_EnParam _ParamID;
+        public object _PreciousID;
+        public FLD_maplist _ZoneID;
     }
 
     [BdatType]
@@ -2490,6 +2594,35 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class EventChange
+    {
+        public int Id;
+        public string chgName;
+        public sbyte chgType;
+        public int id;
+        public int value0;
+        public int value1;
+        public string string0;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class EventGroup
+    {
+        public int Id;
+        public string grpName;
+        public string grpNameJP;
+        public byte atrDisp;
+        public string atrName;
+        public string atrNameJP;
+        public byte atrType;
+        public string atrOptStr1;
+        public string atrOptStr2;
+        public string atrDefStr1;
+    }
+
+    [BdatType]
+    [Serializable]
     public class EVT_acttype
     {
         public int Id;
@@ -2502,25 +2635,6 @@ namespace Xb2.Types
         public string cmd0;
         public string cmd1;
         public string cmd2;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class EVT_aimmottype
-    {
-        public int Id;
-        public string name;
-        public short value;
-        public string stat;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class EVT_aimtype
-    {
-        public int Id;
-        public string name;
-        public short value;
     }
 
     [BdatType]
@@ -2552,35 +2666,6 @@ namespace Xb2.Types
         public string atrOptStr1;
         public string atrOptStr2;
         public string atrDefStr1;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class EVT_change
-    {
-        public int Id;
-        public string grpName;
-        public string grpNameJP;
-        public byte atrDisp;
-        public string atrName;
-        public string atrNameJP;
-        public byte atrType;
-        public string atrOptStr1;
-        public string atrOptStr2;
-        public string atrDefStr1;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class EVT_chgBf01
-    {
-        public int Id;
-        public string chgName;
-        public sbyte chgType;
-        public int id;
-        public int value0;
-        public int value1;
-        public string string0;
     }
 
     [BdatType]
@@ -2642,26 +2727,6 @@ namespace Xb2.Types
         public short value;
         public string stat;
         public sbyte disableWink;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class EVT_facialTemplate
-    {
-        public int Id;
-        public string name;
-        public short brow_type;
-        public float brow_weight;
-        public short eye_type;
-        public float eye_weight;
-        public short lip_type;
-        public float lip_weight;
-        public short facial_blend;
-        public float talk_head_weight;
-        public float talk_head_speed;
-        public float talk_lip_weight;
-        public float talk_lip_speed;
-        public short talk_blend;
     }
 
     [BdatType]
@@ -3206,7 +3271,7 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_setupBf01
+    public class EVT_setup
     {
         public int Id;
         public string setupName;
@@ -3219,7 +3284,7 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_setupBf10
+    public class EVT_setupB
     {
         public int Id;
         public string setupName;
@@ -3228,6 +3293,26 @@ namespace Xb2.Types
         public string objID;
         public string objModel;
         public string wpnBlade;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class FacialConfig
+    {
+        public int Id;
+        public string name;
+        public short brow_type;
+        public float brow_weight;
+        public short eye_type;
+        public float eye_weight;
+        public short lip_type;
+        public float lip_weight;
+        public short facial_blend;
+        public float talk_head_weight;
+        public float talk_head_speed;
+        public float talk_lip_weight;
+        public float talk_lip_speed;
+        public short talk_blend;
     }
 
     [BdatType]
@@ -3254,6 +3339,7 @@ namespace Xb2.Types
         public byte Difficulty;
         public byte IdeaCategory;
         public ushort IdeaValue;
+        public FLD_QuestList _Task;
     }
 
     [BdatType]
@@ -3268,6 +3354,12 @@ namespace Xb2.Types
         public ushort AchievementID3;
         public ushort AchievementID4;
         public ushort AchievementID5;
+        public FLD_AchievementList _AchievementID1;
+        public FLD_AchievementList _AchievementID2;
+        public FLD_AchievementList _AchievementID3;
+        public FLD_AchievementList _AchievementID4;
+        public FLD_AchievementList _AchievementID5;
+        public FLD_AchievementList[] _AchievementID;
     }
 
     [BdatType]
@@ -3298,6 +3390,9 @@ namespace Xb2.Types
         public sbyte ItemNumber2;
         public ushort ItemID3;
         public sbyte ItemNumber3;
+        public object _ItemID1;
+        public object _ItemID2;
+        public object _ItemID3;
     }
 
     [BdatType]
@@ -3367,6 +3462,7 @@ namespace Xb2.Types
         public int Id;
         public ushort AchievementSetID;
         public byte Value;
+        public FLD_AchievementSet _AchievementSetID;
     }
 
     [BdatType]
@@ -3386,6 +3482,7 @@ namespace Xb2.Types
         public int Id;
         public ushort FieldSkillID;
         public byte Level;
+        public FLD_FieldSkillList _FieldSkillID;
     }
 
     [BdatType]
@@ -3421,6 +3518,7 @@ namespace Xb2.Types
         public byte ItemCategory;
         public ushort ItemID;
         public byte Number;
+        public object _ItemID;
     }
 
     [BdatType]
@@ -3454,6 +3552,22 @@ namespace Xb2.Types
         public ushort Condition7;
         public byte ConditionType8;
         public ushort Condition8;
+        public object _Condition1;
+        public object _Condition2;
+        public object _Condition3;
+        public object _Condition4;
+        public object _Condition5;
+        public object _Condition6;
+        public object _Condition7;
+        public object _Condition8;
+        public ConditionType _ConditionType1;
+        public ConditionType _ConditionType2;
+        public ConditionType _ConditionType3;
+        public ConditionType _ConditionType4;
+        public ConditionType _ConditionType5;
+        public ConditionType _ConditionType6;
+        public ConditionType _ConditionType7;
+        public ConditionType _ConditionType8;
     }
 
     [BdatType]
@@ -3661,6 +3775,14 @@ namespace Xb2.Types
         public ushort EnemyID6;
         public ushort EnemyID7;
         public ushort EnemyID8;
+        public CHR_EnArrange _EnemyID1;
+        public CHR_EnArrange _EnemyID2;
+        public CHR_EnArrange _EnemyID3;
+        public CHR_EnArrange _EnemyID4;
+        public CHR_EnArrange _EnemyID5;
+        public CHR_EnArrange _EnemyID6;
+        public CHR_EnArrange _EnemyID7;
+        public CHR_EnArrange _EnemyID8;
     }
 
     [BdatType]
@@ -3696,6 +3818,8 @@ namespace Xb2.Types
         public ushort Icon;
         public ushort VoiceCategory;
         public byte Attirbute;
+        public Message _Caption;
+        public Message _Name;
     }
 
     [BdatType]
@@ -3720,6 +3844,9 @@ namespace Xb2.Types
         public byte FieldSkillLevel2;
         public ushort SuccessVoiceCategory;
         public ushort MissVoiceCategory;
+        public FLD_FieldSkillList _FieldSkillID1;
+        public FLD_FieldSkillList _FieldSkillID2;
+        public Message _Name;
     }
 
     [BdatType]
@@ -4008,6 +4135,27 @@ namespace Xb2.Types
         public ushort textID;
         public byte e_balloondisp_r;
         public byte zone;
+        public RSC_BgmCondition _bgm_cndID;
+        public Message _change_nameID;
+        public FLD_ConditionList _ebb_inn_cndID;
+        public FLD_ConditionList _ebb_ON_cndID;
+        public FLD_ConditionList _mapON_cndID;
+        public FLD_ConditionList _name_cndID;
+        public Message _nameID;
+        public FLD_ConditionList _st_allOFF_cndID;
+        public FLD_ConditionList _stopTIME_cndID;
+        public FLD_ConditionList _wa_OFF_cndID;
+        public FLD_ConditionList _wa_ON_cndID;
+        public FLD_WeatherInfo _wa_type;
+        public FLD_ConditionList _wb_OFF_cndID;
+        public FLD_ConditionList _wb_ON_cndID;
+        public FLD_WeatherInfo _wb_type;
+        public FLD_ConditionList _wc_OFF_cndID;
+        public FLD_ConditionList _wc_ON_cndID;
+        public FLD_WeatherInfo _wc_type;
+        public FLD_ConditionList _wd_OFF_cndID;
+        public FLD_ConditionList _wd_ON_cndID;
+        public FLD_WeatherInfo _wd_type;
     }
 
     [BdatType]
@@ -4088,6 +4236,9 @@ namespace Xb2.Types
         public byte TimeCountFlag;
         public ushort ReduceEnemyHP;
         public ushort ReducePCHP;
+        public FLD_EnemyGroup _EnemyGroupID;
+        public CHR_EnArrange _EnemyID;
+        public RSC_EnGenus _EnemySpeciesID;
     }
 
     [BdatType]
@@ -4104,6 +4255,10 @@ namespace Xb2.Types
         public ushort EnemyID;
         public ushort MapID;
         public ushort NpcID;
+        public Message _Category;
+        public CHR_EnArrange _EnemyID;
+        public object _ItemID;
+        public FLD_maplist _MapID;
     }
 
     [BdatType]
@@ -4114,6 +4269,7 @@ namespace Xb2.Types
         public ushort ConditionID;
         public ushort MapID;
         public ushort NpcID;
+        public FLD_ConditionList _ConditionID;
     }
 
     [BdatType]
@@ -4131,6 +4287,7 @@ namespace Xb2.Types
         public int Id;
         public byte FieldSkillID;
         public ushort Count;
+        public FLD_FieldSkillList _FieldSkillID;
     }
 
     [BdatType]
@@ -4148,6 +4305,7 @@ namespace Xb2.Types
         public ushort SalvagePointID;
         public ushort TboxPopID;
         public byte EndCheck;
+        public FLD_maplist _MapID;
     }
 
     [BdatType]
@@ -4164,6 +4322,11 @@ namespace Xb2.Types
         public ushort FSkillID3;
         public ushort ClientNpc;
         public ushort ZoneID;
+        public RSC_NpcList _ClientNpc;
+        public FLD_FieldSkillList _FSkillID1;
+        public FLD_FieldSkillList _FSkillID2;
+        public FLD_FieldSkillList _FSkillID3;
+        public FLD_maplist _ZoneID;
     }
 
     [BdatType]
@@ -4198,6 +4361,17 @@ namespace Xb2.Types
         public ushort CancelCondition;
         public ushort QuestIcon;
         public ushort LinkedQuestID;
+        public FLD_QuestTask _PurposeID;
+        public FLD_QuestHints _HintsID;
+        public Message _QuestTitle;
+        public Message _ResultA;
+        public Message _ResultB;
+        public FLD_QuestReward _RewardSetA;
+        public FLD_QuestList _PRTQuestID;
+        public FLD_QuestList _NextQuestA;
+        public FLD_QuestReward _RewardSetB;
+        public Message _Summary;
+        public Message _QuestCategory;
     }
 
     [BdatType]
@@ -4208,6 +4382,7 @@ namespace Xb2.Types
         public byte Category;
         public ushort MapID;
         public ushort PlaceID;
+        public FLD_maplist _MapID;
     }
 
     [BdatType]
@@ -4233,6 +4408,13 @@ namespace Xb2.Types
         public byte ItemNumber3;
         public ushort ItemID4;
         public byte ItemNumber4;
+        public FLD_maplist _DevelopZone;
+        public object _ItemID1;
+        public object _ItemID2;
+        public object _ItemID3;
+        public object _ItemID4;
+        public object[] _ItemID;
+        public byte[] _ItemNumber;
     }
 
     [BdatType]
@@ -4266,6 +4448,8 @@ namespace Xb2.Types
         public ushort MapID;
         public ushort NpcID;
         public ushort DummyGroup;
+        public FLD_QuestTalkDummyGroup _DummyGroup;
+        public FLD_maplist _MapID;
     }
 
     [BdatType]
@@ -4313,6 +4497,18 @@ namespace Xb2.Types
         public ushort TaskLog4;
         public byte TaskUI4;
         public ushort TaskCondition4;
+        public object _TaskID1;
+        public object _TaskID2;
+        public object _TaskID3;
+        public object _TaskID4;
+        public Message _TaskLog1;
+        public Message _TaskLog2;
+        public Message _TaskLog3;
+        public Message _TaskLog4;
+        public TaskType _TaskType1;
+        public TaskType _TaskType2;
+        public TaskType _TaskType3;
+        public TaskType _TaskType4;
     }
 
     [BdatType]
@@ -4325,6 +4521,9 @@ namespace Xb2.Types
         public byte ItemNumber;
         public ushort PartyInPC;
         public ushort bladeID;
+        public CHR_Bl _bladeID;
+        public Message _Category;
+        public object _ItemID;
     }
 
     [BdatType]
@@ -4339,6 +4538,9 @@ namespace Xb2.Types
         public short talk1;
         public short text1;
         public sbyte target1;
+        public Message _text0;
+        public Message _text1;
+        public EVT_randtype _type;
     }
 
     [BdatType]
@@ -4412,6 +4614,10 @@ namespace Xb2.Types
         public sbyte ene4Lv;
         public byte ene4Per;
         public byte pop_act_type;
+        public CHR_EnArrange _ene1ID;
+        public CHR_EnArrange _ene2ID;
+        public CHR_EnArrange _ene3ID;
+        public CHR_EnArrange _ene4ID;
     }
 
     [BdatType]
@@ -4473,6 +4679,14 @@ namespace Xb2.Types
         public byte randitmPopMax;
         public byte rsc_paramID;
         public bool accessAngle;
+        public object _itm1ID;
+        public object _itm2ID;
+        public object _itm3ID;
+        public object _itm4ID;
+        public object _itm5ID;
+        public object _itm6ID;
+        public object _itm7ID;
+        public object _itm8ID;
     }
 
     [BdatType]
@@ -4495,6 +4709,16 @@ namespace Xb2.Types
         public ushort SalvageTable4;
         public ushort SalvageTable5;
         public ushort menuMapImage;
+        public Message _SalvagePointName;
+        public FLD_ConditionList _Condition;
+        public FLD_SalvageTable _SalvageTable1;
+        public FLD_SalvageTable _SalvageTable2;
+        public FLD_SalvageTable _SalvageTable3;
+        public FLD_SalvageTable _SalvageTable4;
+        public FLD_SalvageTable _SalvageTable5;
+        public MNU_BtnChallenge2 _BtnChallenge0;
+        public MNU_BtnChallenge2 _BtnChallenge1;
+        public MNU_BtnChallenge2 _BtnChallenge2;
     }
 
     [BdatType]
@@ -4523,6 +4747,15 @@ namespace Xb2.Types
         public ushort EnemyPopTablePercent2;
         public ushort EnemyPopTable3;
         public ushort EnemyPopTablePercent3;
+        public FLD_SalvageItemSet _ColleTable1;
+        public FLD_SalvageItemSet _ColleTable2;
+        public FLD_SalvageItemSet _ColleTable3;
+        public FLD_SalvageItemSet _TresureTable1;
+        public FLD_SalvageItemSet _TresureTable2;
+        public FLD_SalvageItemSet _TresureTable3;
+        public FLD_SalvageEnemySet _EnemyPopTable1;
+        public FLD_SalvageEnemySet _EnemyPopTable2;
+        public FLD_SalvageEnemySet _EnemyPopTable3;
     }
 
     [BdatType]
@@ -4558,6 +4791,7 @@ namespace Xb2.Types
     {
         public int Id;
         public ushort msg;
+        public Message _msg;
     }
 
     [BdatType]
@@ -4755,6 +4989,7 @@ namespace Xb2.Types
         public string eff;
         public string snd;
         public string sndBegin;
+        public Message _msg;
     }
 
     [BdatType]
@@ -4835,6 +5070,9 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Category;
+        public Message _Name;
+        public Message _Rarity;
     }
 
     [BdatType]
@@ -4856,6 +5094,10 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Category;
+        public Message _Name;
+        public Message _Rarity;
+        public FLD_maplist _Zone;
     }
 
     [BdatType]
@@ -4885,6 +5127,12 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public CHR_Bl _BladeID;
+        public MNU_Name _CommonAtr;
+        public ITM_PcWpnType _CommonWpn;
+        public FLD_ConditionList _Condition;
+        public Message _Name;
+        public Message _Rarity;
     }
 
     [BdatType]
@@ -4910,6 +5158,8 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Caption;
+        public Message _Name;
     }
 
     [BdatType]
@@ -4935,6 +5185,10 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Category;
+        public Message _Name;
+        public Message _Rarity;
+        public FLD_maplist _Zone;
     }
 
     [BdatType]
@@ -4961,6 +5215,7 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public Message _Name;
     }
 
     [BdatType]
@@ -4988,6 +5243,7 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5015,6 +5271,9 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public MNU_Name _Atr;
+        public Message _Caption;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5042,6 +5301,7 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5078,6 +5338,7 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5097,6 +5358,8 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Caption;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5120,6 +5383,10 @@ namespace Xb2.Types
         public uint sortCN;
         public uint sortTW;
         public bool NoSell;
+        public object _EquipItemID;
+        public Message _Name;
+        public Message _Rarity;
+        public ITM_OrbRecipe _Recipe;
     }
 
     [BdatType]
@@ -5143,6 +5410,8 @@ namespace Xb2.Types
         public uint sortCN;
         public uint sortTW;
         public bool NoSell;
+        public Message _Name;
+        public Message _Rarity;
     }
 
     [BdatType]
@@ -5170,6 +5439,15 @@ namespace Xb2.Types
         public ushort ItemNumber7;
         public ushort ItemID8;
         public ushort ItemNumber8;
+        public object _ItemID1;
+        public object _ItemID2;
+        public object _ItemID3;
+        public object _ItemID4;
+        public object _ItemID5;
+        public object _ItemID6;
+        public object _ItemID7;
+        public object _ItemID8;
+        public Message _Rarity;
     }
 
     [BdatType]
@@ -5214,6 +5492,12 @@ namespace Xb2.Types
         public bool EqPC07;
         public bool EqPC08;
         public bool EqPC09;
+        public BTL_Enhance _Enhance1;
+        public BTL_Enhance _Enhance2;
+        public Message _Name;
+        public Message _Rarity;
+        public FLD_maplist _Zone;
+        public FLD_maplist _Zone2;
     }
 
     [BdatType]
@@ -5238,6 +5522,10 @@ namespace Xb2.Types
         public ushort EArmor;
         public ushort Enhance2;
         public bool Private;
+        public BTL_Enhance _Enhance1;
+        public BTL_Enhance _Enhance2;
+        public Message _Name;
+        public ITM_PcWpnType _WpnType;
     }
 
     [BdatType]
@@ -5278,6 +5566,28 @@ namespace Xb2.Types
         public uint sortCN;
         public uint sortTW;
         public bool NoSell;
+        public ITM_PcWpn _CreateWpn1;
+        public ITM_PcWpn _CreateWpn10;
+        public ITM_PcWpn _CreateWpn11;
+        public ITM_PcWpn _CreateWpn12;
+        public ITM_PcWpn _CreateWpn13;
+        public ITM_PcWpn _CreateWpn14;
+        public ITM_PcWpn _CreateWpn15;
+        public ITM_PcWpn _CreateWpn16;
+        public ITM_PcWpn _CreateWpn2;
+        public ITM_PcWpn _CreateWpn3;
+        public ITM_PcWpn _CreateWpn4;
+        public ITM_PcWpn _CreateWpn5;
+        public ITM_PcWpn _CreateWpn6;
+        public ITM_PcWpn _CreateWpn7;
+        public ITM_PcWpn _CreateWpn8;
+        public ITM_PcWpn _CreateWpn9;
+        public Message _Name;
+        public Message _Rarity;
+        public FLD_maplist _Zone;
+        public FLD_maplist _Zone2;
+        public ITM_PcWpn[] _CreateWpn;
+        public FLD_maplist[] _Zones;
     }
 
     [BdatType]
@@ -5292,6 +5602,8 @@ namespace Xb2.Types
         public byte JustRange2;
         public byte VoiceType;
         public byte Motion;
+        public Message _Name;
+        public Message _Role;
     }
 
     [BdatType]
@@ -5315,6 +5627,7 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Name;
     }
 
     [BdatType]
@@ -5337,6 +5650,9 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Caption;
+        public Message _Name;
+        public Message _Rarity;
     }
 
     [BdatType]
@@ -5362,6 +5678,19 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Name;
+        public Message _Rarity;
+        public FLD_maplist _Zone;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class LabeledMessage
+    {
+        public int Id;
+        public string label;
+        public ushort style;
+        public string name;
     }
 
     [BdatType]
@@ -6008,6 +6337,7 @@ namespace Xb2.Types
         public bool ene_priority;
         public bool pop_smn;
         public bool popCloud;
+        public CHR_EnArrange _ene1ID;
     }
 
     [BdatType]
@@ -6120,6 +6450,15 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class Message
+    {
+        public int Id;
+        public ushort style;
+        public string name;
+    }
+
+    [BdatType]
+    [Serializable]
     public class MIN_TT_Crystal
     {
         public int Id;
@@ -6212,6 +6551,16 @@ namespace Xb2.Types
         public ushort cond9;
         public ushort tdef10;
         public ushort cond10;
+        public MIN_TT_Tdef _tdef1;
+        public MIN_TT_Tdef _tdef10;
+        public MIN_TT_Tdef _tdef2;
+        public MIN_TT_Tdef _tdef3;
+        public MIN_TT_Tdef _tdef4;
+        public MIN_TT_Tdef _tdef5;
+        public MIN_TT_Tdef _tdef6;
+        public MIN_TT_Tdef _tdef7;
+        public MIN_TT_Tdef _tdef8;
+        public MIN_TT_Tdef _tdef9;
     }
 
     [BdatType]
@@ -6243,6 +6592,18 @@ namespace Xb2.Types
         public byte rate11;
         public ushort item12;
         public byte rate12;
+        public object _item1;
+        public object _item10;
+        public object _item11;
+        public object _item12;
+        public object _item2;
+        public object _item3;
+        public object _item4;
+        public object _item5;
+        public object _item6;
+        public object _item7;
+        public object _item8;
+        public object _item9;
     }
 
     [BdatType]
@@ -6323,6 +6684,11 @@ namespace Xb2.Types
         public ushort challenge03;
         public byte challenge04;
         public ushort challenge05;
+        public MNU_BtnChallenge2 _challenge01;
+        public MNU_BtnChallenge2 _challenge02;
+        public MNU_BtnChallenge2 _challenge03;
+        public MNU_BtnChallenge2 _challenge04;
+        public MNU_BtnChallenge2 _challenge05;
     }
 
     [BdatType]
@@ -6349,7 +6715,7 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CharBladeOrder
+    public class MNU_CharOrder
     {
         public int Id;
         public ushort layer;
@@ -6443,6 +6809,14 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class MNU_Filename
+    {
+        public int Id;
+        public string filename;
+    }
+
+    [BdatType]
+    [Serializable]
     public class MNU_FontSet01
     {
         public int Id;
@@ -6461,14 +6835,6 @@ namespace Xb2.Types
         public ushort icon;
         public ushort text;
         public ushort desc;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class MNU_Hana_custom
-    {
-        public int Id;
-        public string filename;
     }
 
     [BdatType]
@@ -6610,6 +6976,16 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class MNU_jog_txt
+    {
+        public int Id;
+        public ushort fs_menu_id;
+        public ushort txt;
+        public ushort lock_flag;
+    }
+
+    [BdatType]
+    [Serializable]
     public class MNU_KeyOrder
     {
         public int Id;
@@ -6699,14 +7075,6 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MsgBlStatusIndex
-    {
-        public int Id;
-        public ushort name;
-    }
-
-    [BdatType]
-    [Serializable]
     public class MNU_MsgChapterEnd
     {
         public int Id;
@@ -6733,6 +7101,15 @@ namespace Xb2.Types
         public ushort item02;
         public ushort item03;
         public ushort item04;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class MNU_Name
+    {
+        public int Id;
+        public ushort name;
+        public Message _name;
     }
 
     [BdatType]
@@ -6826,6 +7203,30 @@ namespace Xb2.Types
         public ushort LinkQuestTask;
         public ushort LinkQuestTaskID;
         public ushort UnitText;
+        public FLD_ConditionList _AddCondition1;
+        public FLD_ConditionList _AddCondition2;
+        public FLD_ConditionList _AddCondition3;
+        public FLD_ConditionList _AddCondition4;
+        public FLD_ConditionList _AddCondition5;
+        public FLD_ConditionList _AddCondition6;
+        public FLD_ConditionList _AddCondition7;
+        public FLD_ConditionList _AddCondition8;
+        public MNU_ShopChangeTask _AddTaskSet1;
+        public MNU_ShopChangeTask _AddTaskSet2;
+        public MNU_ShopChangeTask _AddTaskSet3;
+        public MNU_ShopChangeTask _AddTaskSet4;
+        public MNU_ShopChangeTask _AddTaskSet5;
+        public MNU_ShopChangeTask _AddTaskSet6;
+        public MNU_ShopChangeTask _AddTaskSet7;
+        public MNU_ShopChangeTask _AddTaskSet8;
+        public MNU_ShopChangeTask _DefTaskSet1;
+        public MNU_ShopChangeTask _DefTaskSet2;
+        public MNU_ShopChangeTask _DefTaskSet3;
+        public MNU_ShopChangeTask _DefTaskSet4;
+        public MNU_ShopChangeTask _DefTaskSet5;
+        public MNU_ShopChangeTask _DefTaskSet6;
+        public MNU_ShopChangeTask _DefTaskSet7;
+        public MNU_ShopChangeTask _DefTaskSet8;
     }
 
     [BdatType]
@@ -6848,6 +7249,12 @@ namespace Xb2.Types
         public ushort Reward;
         public ushort HideRewardFlag;
         public byte AddFlagValue;
+        public Message _Name;
+        public object _SetItem1;
+        public object _SetItem2;
+        public object _SetItem3;
+        public object _SetItem4;
+        public object _SetItem5;
     }
 
     [BdatType]
@@ -6872,6 +7279,7 @@ namespace Xb2.Types
         public byte Discount3;
         public byte Discount4;
         public byte Discount5;
+        public Message _Name;
     }
 
     [BdatType]
@@ -6906,6 +7314,27 @@ namespace Xb2.Types
         public byte PrivilegeCheck5;
         public ushort PrivilegeFlag;
         public ushort PrivilegeItem;
+        public object _DefItem1;
+        public object _DefItem2;
+        public object _DefItem3;
+        public object _DefItem4;
+        public object _DefItem5;
+        public object _DefItem6;
+        public object _DefItem7;
+        public object _DefItem8;
+        public object _DefItem9;
+        public object _DefItem10;
+        public object _Addtem1;
+        public object _Addtem2;
+        public object _Addtem3;
+        public object _Addtem4;
+        public object _Addtem5;
+        public object _PrivilegeItem;
+        public FLD_ConditionList _AddCondition1;
+        public FLD_ConditionList _AddCondition2;
+        public FLD_ConditionList _AddCondition3;
+        public FLD_ConditionList _AddCondition4;
+        public FLD_ConditionList _AddCondition5;
     }
 
     [BdatType]
@@ -6930,6 +7359,7 @@ namespace Xb2.Types
         public int Id;
         public ushort resource;
         public float time;
+        public MNU_Filename _resource;
     }
 
     [BdatType]
@@ -6981,6 +7411,15 @@ namespace Xb2.Types
 
     [BdatType]
     [Serializable]
+    public class MNU_txt
+    {
+        public int Id;
+        public string obj_name;
+        public uint text_id;
+    }
+
+    [BdatType]
+    [Serializable]
     public class MNU_WorldMap
     {
         public int Id;
@@ -7001,25 +7440,6 @@ namespace Xb2.Types
         public ushort cond3;
         public ushort pos3;
         public ushort enter;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class mnu001_title_txt
-    {
-        public int Id;
-        public string obj_name;
-        public uint text_id;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class mnu010_jog_character
-    {
-        public int Id;
-        public ushort fs_menu_id;
-        public ushort txt;
-        public ushort lock_flag;
     }
 
     [BdatType]
@@ -7045,6 +7465,14 @@ namespace Xb2.Types
         public ushort ConditionD;
         public ushort BgmIDD;
         public byte Priority;
+        public MNU_Filename _BgmIDA;
+        public MNU_Filename _BgmIDB;
+        public MNU_Filename _BgmIDC;
+        public MNU_Filename _BgmIDD;
+        public FLD_ConditionList _ConditionA;
+        public FLD_ConditionList _ConditionB;
+        public FLD_ConditionList _ConditionC;
+        public FLD_ConditionList _ConditionD;
     }
 
     [BdatType]
@@ -7183,6 +7611,7 @@ namespace Xb2.Types
         public byte CAPTION;
         public byte Flag;
         public bool gimmicktype;
+        public Message _NAME;
     }
 
     [BdatType]
@@ -7352,6 +7781,7 @@ namespace Xb2.Types
         public byte ExtraParts6;
         public ushort Scale;
         public ushort EventAsset;
+        public Message _Name;
     }
 
     [BdatType]

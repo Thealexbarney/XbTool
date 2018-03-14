@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Xb2.Bdat;
+using Xb2.Types;
 
 namespace Xb2.BdatString
 {

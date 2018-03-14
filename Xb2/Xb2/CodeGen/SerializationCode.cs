@@ -12,12 +12,13 @@ namespace Xb2.CodeGen
         public static void CreateFiles(BdatTable[] tables, string csDir)
         {
             Directory.CreateDirectory(csDir);
-            Dictionary<BdatTable, List<string>> types = GetClasses(tables);
 
-            string bdatTypes = GenerateTypesFile(types.Keys.OrderBy(x => x.Name).ToArray());
-            string readFunctions = GenerateReadFunctionsFile(types.Keys.OrderBy(x => x.Name).ToArray());
-            string bdatCollection = GenerateBdatCollectionFile(types);
-            string typeMap = GenerateTypeMapFile(types);
+            var info = new BdatCollInfo(tables);
+
+            string bdatTypes = GenerateTypesFile(info);
+            string readFunctions = GenerateReadFunctionsFile(info);
+            string bdatCollection = GenerateBdatCollectionFile(info);
+            string typeMap = GenerateTypeMapFile(info);
 
             File.WriteAllText(Path.Combine(csDir, "BdatTypes.cs"), bdatTypes);
             File.WriteAllText(Path.Combine(csDir, "ReadFunctions.cs"), readFunctions);
@@ -25,28 +26,12 @@ namespace Xb2.CodeGen
             File.WriteAllText(Path.Combine(csDir, "TypeMap.txt"), typeMap);
         }
 
-        private static Dictionary<BdatTable, List<string>> GetClasses(BdatTable[] tables)
-        {
-            var types = new Dictionary<BdatTable, List<string>>(new BdatTableComparer());
-            foreach (BdatTable table in tables)
-            {
-                if (!types.ContainsKey(table))
-                {
-                    types.Add(table, new List<string>());
-                }
-
-                types[table].Add(table.Name);
-            }
-
-            return types;
-        }
-
         private static string GetIdentifier(string input)
         {
             return Keywords.Contains(input) ? "@" + input : input;
         }
 
-        private static string GenerateTypesFile(BdatTable[] tables)
+        private static string GenerateTypesFile(BdatCollInfo info)
         {
             var sb = new Indenter();
 
@@ -57,27 +42,27 @@ namespace Xb2.CodeGen
             sb.AppendLine("namespace Xb2.Types");
             sb.AppendLineAndIncrease("{");
 
-            for (int i = 0; i < tables.Length; i++)
+            for (int i = 0; i < info.Types.Length; i++)
             {
                 if (i != 0) sb.AppendLine();
-                GenerateType(tables[i], sb);
+                GenerateType(info.Types[i], sb);
             }
 
             sb.DecreaseAndAppendLine("}");
             return sb.ToString();
         }
 
-        private static void GenerateType(BdatTable table, Indenter sb)
+        private static void GenerateType(BdatType type, Indenter sb)
         {
             var added = new HashSet<string>();
 
             sb.AppendLine("[BdatType]");
             sb.AppendLine("[Serializable]");
-            sb.AppendLine($"public class {table.Name}");
+            sb.AppendLine($"public class {type.Name}");
             sb.AppendLineAndIncrease("{");
             sb.AppendLine("public int Id;");
 
-            foreach (var member in table.Members)
+            foreach (var member in type.Members)
             {
                 if (added.Contains(member.Name)) continue;
                 added.Add(member.Name);
@@ -94,18 +79,45 @@ namespace Xb2.CodeGen
                         break;
                     case BdatMemberType.Array:
                         int length = member.ArrayCount;
-                        var type = GetType(member.ValType);
-                        sb.AppendLine($"public {type}[] {name} = new {type}[{length}];");
+                        var valType = GetType(member.ValType);
+                        sb.AppendLine($"public {valType}[] {name} = new {valType}[{length}];");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
 
+            foreach (var bdatRef in type.TableRefs)
+            {
+                switch (bdatRef.Type)
+                {
+                    case BdatFieldType.Reference:
+                    case BdatFieldType.Message:
+                        sb.AppendLine($"public {bdatRef.ChildType} _{bdatRef.Field};");
+                        break;
+                    case BdatFieldType.Item:
+                    case BdatFieldType.Task:
+                    case BdatFieldType.Condition:
+                        sb.AppendLine($"public object _{bdatRef.Field};");
+                        break;
+                    default:
+                        if (bdatRef.EnumType != null)
+                        {
+                            sb.AppendLine($"public {bdatRef.EnumType.Name} _{bdatRef.Field};");
+                        }
+                        break;
+                }
+            }
+
+            foreach (var array in type.Arrays)
+            {
+                sb.AppendLine($"public {array.Type}[] _{array.Name};");
+            }
+
             sb.DecreaseAndAppendLine("}");
         }
 
-        private static string GenerateReadFunctionsFile(BdatTable[] tables)
+        private static string GenerateReadFunctionsFile(BdatCollInfo info)
         {
             var sb = new Indenter();
 
@@ -117,38 +129,42 @@ namespace Xb2.CodeGen
             sb.AppendLine("public static class ReadFunctions");
             sb.AppendLineAndIncrease("{");
             bool firstFunction = true;
-            
-            foreach (BdatTable table in tables)
+
+            foreach (var type in info.Types)
             {
                 if (!firstFunction) sb.AppendLine();
                 firstFunction = false;
-                GenerateReadFunction(table, sb);
+                GenerateReadFunction(type, sb);
             }
+
+            sb.AppendLine();
+            GenerateSetReferencesFunction(sb, info);
 
             sb.DecreaseAndAppendLine("}");
             sb.DecreaseAndAppendLine("}");
             return sb.ToString();
         }
 
-        private static void GenerateReadFunction(BdatTable table, Indenter sb)
+        private static void GenerateReadFunction(BdatType type, Indenter sb)
         {
-            sb.AppendLine($"public static {table.Name} Read{table.Name}(byte[] file, int itemOffset, int tableOffset)");
+            sb.AppendLine($"public static {type.Name} Read{type.Name}(byte[] file, int itemId, int itemOffset, int tableOffset)");
             sb.AppendLineAndIncrease("{");
-            sb.AppendLine($"var item = new {table.Name}();");
+            sb.AppendLine($"var item = new {type.Name}();");
+            sb.AppendLine("item.Id = itemId;");
 
-            foreach (var member in table.Members.Where(x => x.Type == BdatMemberType.Scalar))
+            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Scalar))
             {
                 sb.AppendLine(GetReader(member));
             }
 
-            foreach (var member in table.Members.Where(x => x.Type == BdatMemberType.Array))
+            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Array))
             {
                 GetArrayReader(member, sb);
             }
 
-            foreach (var member in table.Members.Where(x => x.Type == BdatMemberType.Flag))
+            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Flag))
             {
-                var flagVarName = GetIdentifier(table.Members[member.FlagVarIndex].Name);
+                var flagVarName = GetIdentifier(type.Members[member.FlagVarIndex].Name);
                 sb.AppendLine($"item.{GetIdentifier(member.Name)} = (item.{flagVarName} & {member.FlagMask}) != 0;");
             }
 
@@ -156,14 +172,80 @@ namespace Xb2.CodeGen
             sb.DecreaseAndAppendLine("}");
         }
 
-        private static string GenerateTypeMapFile(Dictionary<BdatTable, List<string>> types)
+        private static void GenerateSetReferencesFunction(Indenter sb, BdatCollInfo info)
+        {
+            sb.AppendLine("public static void SetReferences(BdatCollection tables)");
+            sb.AppendLineAndIncrease("{");
+            bool firstTable = true;
+
+            foreach (var table in info.Tables)
+            {
+                if (!firstTable) sb.AppendLine();
+                firstTable = false;
+
+                GenerateSetReferencesTable(sb, table);
+            }
+
+            sb.DecreaseAndAppendLine("}");
+        }
+
+        private static void GenerateSetReferencesTable(Indenter sb, BdatTableDesc table)
+        {
+            sb.AppendLine($"foreach (var item in tables.{table.Name}.Items)");
+            sb.AppendLineAndIncrease("{");
+            foreach (var fieldRef in table.TableRefs)
+            {
+                switch (fieldRef.Type)
+                {
+                    case BdatFieldType.Reference:
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{fieldRef.Field});");
+                        break;
+                    case BdatFieldType.Message:
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{fieldRef.Field});");
+                        break;
+                    case BdatFieldType.Item:
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetItem(item.{fieldRef.Field});");
+                        break;
+                    case BdatFieldType.Task:
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetTask((TaskType)item.{fieldRef.RefField}, item.{fieldRef.Field});");
+                        break;
+                    case BdatFieldType.Condition:
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{fieldRef.Field});");
+                        break;
+                    default:
+                        if (fieldRef.EnumType != null)
+                        {
+                            sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{fieldRef.Field};");
+                        }
+                        break;
+                }
+            }
+
+            foreach (var array in table.Arrays)
+            {
+                sb.AppendLine($"item._{array.Name} = new[]");
+                sb.AppendLineAndIncrease("{");
+
+                foreach (var element in array.Elements)
+                {
+                    string name = (array.IsReferences ? "_" : "") + element;
+                    sb.AppendLine($"item.{name},");
+                }
+
+                sb.DecreaseAndAppendLine("};");
+            }
+
+            sb.DecreaseAndAppendLine("}");
+        }
+
+        private static string GenerateTypeMapFile(BdatCollInfo info)
         {
             var sb = new StringBuilder();
 
-            foreach (var type in types.OrderBy(x => x.Key.Name))
+            foreach (var type in info.Types)
             {
-                sb.Append(type.Key.Name);
-                foreach (var table in type.Value.OrderBy(x => x))
+                sb.Append(type.Name);
+                foreach (var table in type.TableNames.OrderBy(x => x))
                 {
                     sb.Append($",{table}");
                 }
@@ -172,7 +254,7 @@ namespace Xb2.CodeGen
             return sb.ToString();
         }
 
-        private static string GenerateBdatCollectionFile(Dictionary<BdatTable, List<string>> types)
+        private static string GenerateBdatCollectionFile(BdatCollInfo info)
         {
             var sb = new Indenter();
 
@@ -185,11 +267,11 @@ namespace Xb2.CodeGen
             sb.AppendLine("public class BdatCollection");
             sb.AppendLineAndIncrease("{");
 
-            foreach (var type in types.OrderBy(x => x.Key.Name))
+            foreach (var type in info.Types)
             {
-                foreach (string table in type.Value.OrderBy(x => x))
+                foreach (string table in type.TableNames.OrderBy(x => x))
                 {
-                    sb.AppendLine($"public BdatTable<{type.Key.Name}> {table};");
+                    sb.AppendLine($"public BdatTable<{type.Name}> {table};");
                 }
             }
 

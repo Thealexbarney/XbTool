@@ -21,6 +21,8 @@ namespace Xb2.Serialization
                 ReadBdat(file, tables);
             }
 
+            ReadFunctions.SetReferences(tables);
+
             return tables;
         }
 
@@ -64,6 +66,7 @@ namespace Xb2.Serialization
             int itemSize = BitConverter.ToUInt16(file, offset + 8);
             int itemTableOffset = BitConverter.ToUInt16(file, offset + 14);
             int itemCount = BitConverter.ToUInt16(file, offset + 16);
+            int baseId = BitConverter.ToUInt16(file, offset + 18);
 
             Array items = Array.CreateInstance(itemType, itemCount);
             var func = TypeMap.GetTableReadFunction(itemType);
@@ -71,7 +74,7 @@ namespace Xb2.Serialization
             for (int i = 0; i < itemCount; i++)
             {
                 int itemOffset = offset + itemTableOffset + i * itemSize;
-                object item = func(file, itemOffset, offset);
+                object item = func(file, baseId + i, itemOffset, offset);
                 items.SetValue(item, i);
             }
 

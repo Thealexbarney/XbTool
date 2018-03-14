@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CodeGen\TypeNames.txt" />
     <None Remove="Serialization\TypeMap.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="CodeGen\TypeNames.txt" />
     <EmbeddedResource Include="Serialization\TypeMap.txt" />
   </ItemGroup>
 

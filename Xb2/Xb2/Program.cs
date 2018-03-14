@@ -44,6 +44,7 @@ namespace Xb2
         // ReSharper disable once UnusedMethodReturnValue.Local
         private static BdatCollection DeserializeBdat(string bdatDir, string pattern)
         {
+            var watch = Stopwatch.StartNew();
             string[] filenames = Directory.GetFiles(bdatDir, pattern, SearchOption.AllDirectories);
             byte[][] files = new byte[filenames.Length][];
 
@@ -53,6 +54,8 @@ namespace Xb2
             }
 
             BdatCollection tables = Deserialize.ReadBdats(files);
+            watch.Stop();
+            Console.WriteLine($"Deserialize: {watch.Elapsed.TotalMilliseconds}ms");
             return tables;
         }
 
@@ -103,10 +106,18 @@ namespace Xb2
             Console.WriteLine(watch.Elapsed.TotalMilliseconds);
         }
 
-        public static void PrintAchievements(string bdatDir, string pattern)
+        public static void PrintData(string bdatDir, string pattern, string dataDir)
         {
             var tables = DeserializeBdat(bdatDir, pattern);
-            Achievements.PrintAchievements(tables);
+            Directory.CreateDirectory(dataDir);
+
+            var watch = Stopwatch.StartNew();
+            using (var writer = new StreamWriter(Path.Combine(dataDir, "achievements.csv")))
+            {
+                Achievements.PrintAchievements(tables, writer);
+            }
+            watch.Stop();
+            Console.WriteLine($"Print Achievements: {watch.Elapsed.TotalMilliseconds}ms");
         }
 
         public static void Main(string[] args)
@@ -137,8 +148,8 @@ namespace Xb2
                 case "bdat2html" when args.Length == 3:
                     BdatToHtml(args[1], args[2]);
                     break;
-                case "achievements" when args.Length == 3:
-                    PrintAchievements(args[1], args[2]);
+                case "generatedata" when args.Length == 4:
+                    PrintData(args[1], args[2], args[3]);
                     break;
                 default:
                     PrintUsage();

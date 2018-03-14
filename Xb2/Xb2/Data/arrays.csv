@@ -1,0 +1,16 @@
+CHR_Bl,BArts,BArts1,BArts2,BArts3
+CHR_Bl,NArts,NArts1,NArts2,NArts3
+CHR_Bl,NArtsRecastRev,NArtsRecastRev1,NArtsRecastRev2,NArtsRecastRev3
+CHR_Bl,BSkill,BSkill1,BSkill2,BSkill3
+CHR_Bl,FSkill,FSkill1,FSkill2,FSkill3
+CHR_Bl,ArtsAchievement,ArtsAchievement1,ArtsAchievement2,ArtsAchievement3
+CHR_Bl,SkillAchievement,SkillAchievement1,SkillAchievement2,SkillAchievement3
+CHR_Bl,FskillAchivement,FskillAchivement1,FskillAchivement2,FskillAchivement3
+CHR_Bl,Achievement,KeyAchievement,ArtsAchievement1,ArtsAchievement2,ArtsAchievement3,SkillAchievement1,SkillAchievement2,SkillAchievement3,FskillAchivement1,FskillAchivement2,FskillAchivement3
+CHR_Bl,FavoriteCategory,FavoriteCategory1,FavoriteCategory2
+CHR_Bl,FavoriteItem,FavoriteItem1,FavoriteItem2
+FLD_AchievementSet,AchievementID,AchievementID1,AchievementID2,AchievementID3,AchievementID4,AchievementID5
+FLD_QuestReward,ItemID,ItemID1,ItemID2,ItemID3,ItemID4
+FLD_QuestReward,ItemNumber,ItemNumber1,ItemNumber2,ItemNumber3,ItemNumber4
+ITM_PcWpnChip,CreateWpn,CreateWpn1,CreateWpn2,CreateWpn3,CreateWpn4,CreateWpn5,CreateWpn6,CreateWpn7,CreateWpn8,CreateWpn9,CreateWpn10,CreateWpn11,CreateWpn12,CreateWpn13,CreateWpn14,CreateWpn15,CreateWpn16
+ITM_PcWpnChip,Zones,Zone,Zone2

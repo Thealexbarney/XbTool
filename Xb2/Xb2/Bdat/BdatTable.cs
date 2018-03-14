@@ -63,13 +63,14 @@ namespace Xb2.Bdat
         }
     }
 
-    public class BdatTable<T> : IBdatTable
+    public class BdatTable<T> : IBdatTable where T : class
     {
         public string Name { get; set; }
         public int BaseId { get; set; }
         public BdatMember[] Members { get; set; }
         public T[] Items { get; set; }
         public T this[int itemId] => Items[itemId - BaseId];
+        public T GetItemOrNull(int itemId) => ContainsId(itemId) ? this[itemId] : null;
         public Type ItemType { get; } = typeof(T);
         Array IBdatTable.Items { get => Items; set => Items = (T[])value; }
 
