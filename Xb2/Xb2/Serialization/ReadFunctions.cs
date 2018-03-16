@@ -7891,7 +7891,7 @@ namespace Xb2.Serialization
                 item._ArtsAchievement1 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievement1);
                 item._ArtsAchievement2 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievement2);
                 item._ArtsAchievement3 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievement3);
-                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr);
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._BArts1 = tables.BTL_Arts_Bl.GetItemOrNull(item.BArts1);
                 item._BArts2 = tables.BTL_Arts_Bl.GetItemOrNull(item.BArts2);
                 item._BArts3 = tables.BTL_Arts_Bl.GetItemOrNull(item.BArts3);
@@ -7901,8 +7901,8 @@ namespace Xb2.Serialization
                 item._BSkill2 = tables.BTL_Skill_Bl.GetItemOrNull(item.BSkill2);
                 item._BSkill3 = tables.BTL_Skill_Bl.GetItemOrNull(item.BSkill3);
                 item._DefWeapon = tables.ITM_PcWpn.GetItemOrNull(item.DefWeapon);
-                item._FavoriteCategory1 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory1);
-                item._FavoriteCategory2 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory2);
+                item._FavoriteCategory1 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory1 - 11);
+                item._FavoriteCategory2 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory2 - 11);
                 item._FavoriteItem1 = tables.ITM_FavoriteList.GetItemOrNull(item.FavoriteItem1);
                 item._FavoriteItem2 = tables.ITM_FavoriteList.GetItemOrNull(item.FavoriteItem2);
                 item._FSkill1 = tables.FLD_FieldSkillList.GetItemOrNull(item.FSkill1);
@@ -8002,8 +8002,8 @@ namespace Xb2.Serialization
                 item._DefBlade1 = tables.CHR_Bl.GetItemOrNull(item.DefBlade1);
                 item._DefBlade2 = tables.CHR_Bl.GetItemOrNull(item.DefBlade2);
                 item._DefBlade3 = tables.CHR_Bl.GetItemOrNull(item.DefBlade3);
-                item._FavoriteCategory1 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory1);
-                item._FavoriteCategory2 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory2);
+                item._FavoriteCategory1 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory1 - 11);
+                item._FavoriteCategory2 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory2 - 11);
                 item._FavoriteItem1 = tables.ITM_FavoriteList.GetItemOrNull(item.FavoriteItem1);
                 item._FavoriteItem2 = tables.ITM_FavoriteList.GetItemOrNull(item.FavoriteItem2);
                 item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
@@ -8146,7 +8146,7 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.FLD_QuestCollect.Items)
             {
-                item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category);
+                item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category - 3);
                 item._EnemyID = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID);
                 item._ItemID = tables.GetItem(item.ItemID);
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
@@ -8356,7 +8356,7 @@ namespace Xb2.Serialization
             foreach (var item in tables.FLD_QuestUse.Items)
             {
                 item._bladeID = tables.CHR_Bl.GetItemOrNull(item.bladeID);
-                item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category);
+                item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category - 11);
                 item._ItemID = tables.GetItem(item.ItemID);
             }
 
@@ -8426,27 +8426,27 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_BoosterList.Items)
             {
-                item._Category = tables.menu_ideacollar_ms.GetItemOrNull(item.Category);
+                item._Category = tables.menu_ideacollar_ms.GetItemOrNull(item.Category + 1);
                 item._Name = tables.itm_booster.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
             foreach (var item in tables.ITM_CollectionList.Items)
             {
-                item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category);
+                item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category - 3);
                 item._Name = tables.itm_collection.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 
             foreach (var item in tables.ITM_CrystalList.Items)
             {
                 item._BladeID = tables.CHR_Bl.GetItemOrNull(item.BladeID);
-                item._CommonAtr = tables.MNU_Msg_Attr.GetItemOrNull(item.CommonAtr);
+                item._CommonAtr = tables.MNU_Msg_Attr.GetItemOrNull(item.CommonAtr + 1);
                 item._CommonWpn = tables.ITM_PcWpnType.GetItemOrNull(item.CommonWpn);
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Name = tables.itm_crystal.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
             foreach (var item in tables.ITM_EventList.Items)
@@ -8457,9 +8457,9 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_FavoriteList.Items)
             {
-                item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category);
+                item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category - 11);
                 item._Name = tables.itm_favorite.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 
@@ -8475,7 +8475,7 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_HanaAtr.Items)
             {
-                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr);
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Caption = tables.itm_hana_atr_ms.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_hana_atr_ms.GetItemOrNull(item.Name);
             }
@@ -8500,14 +8500,14 @@ namespace Xb2.Serialization
             {
                 item._EquipItemID = tables.GetItem(item.EquipItemID);
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Recipe = tables.ITM_OrbRecipe.GetItemOrNull(item.Recipe);
             }
 
             foreach (var item in tables.ITM_OrbEquip.Items)
             {
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
             foreach (var item in tables.ITM_OrbRecipe.Items)
@@ -8520,7 +8520,7 @@ namespace Xb2.Serialization
                 item._ItemID6 = tables.GetItem(item.ItemID6);
                 item._ItemID7 = tables.GetItem(item.ItemID7);
                 item._ItemID8 = tables.GetItem(item.ItemID8);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
             foreach (var item in tables.ITM_PcEquip.Items)
@@ -8528,7 +8528,7 @@ namespace Xb2.Serialization
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
                 item._Name = tables.itm_pcequip.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
                 item._Zone2 = tables.FLD_maplist.GetItemOrNull(item.Zone2);
             }
@@ -8560,7 +8560,7 @@ namespace Xb2.Serialization
                 item._CreateWpn8 = tables.ITM_PcWpn.GetItemOrNull(item.CreateWpn8);
                 item._CreateWpn9 = tables.ITM_PcWpn.GetItemOrNull(item.CreateWpn9);
                 item._Name = tables.itm_pcwpnchip_ms.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
                 item._Zone2 = tables.FLD_maplist.GetItemOrNull(item.Zone2);
                 item._CreateWpn = new[]
@@ -8604,13 +8604,13 @@ namespace Xb2.Serialization
             {
                 item._Caption = tables.itm_salvage.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_salvage.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
             foreach (var item in tables.ITM_TresureList.Items)
             {
                 item._Name = tables.itm_tresure.GetItemOrNull(item.Name);
-                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity);
+                item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 

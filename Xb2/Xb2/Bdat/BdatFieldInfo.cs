@@ -40,7 +40,8 @@ namespace Xb2.Bdat
         Enhance,
         TimeRange,
         WeatherBitfield,
-        WeatherIdMap
+        WeatherIdMap,
+        PartyConditionEnum
     }
 
     public class BdatArrayInfo
@@ -104,6 +105,9 @@ namespace Xb2.Bdat
                             break;
                         case BdatFieldType.TaskTypeEnum:
                             fInfo.EnumType = typeof(TaskType);
+                            break;
+                        case BdatFieldType.PartyConditionEnum:
+                            fInfo.EnumType = typeof(PartyConditionType);
                             break;
                         case BdatFieldType.Task:
                             fInfo.RefField = line[col++];

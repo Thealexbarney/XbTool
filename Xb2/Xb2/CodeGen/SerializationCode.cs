@@ -198,24 +198,24 @@ namespace Xb2.CodeGen
                 switch (fieldRef.Type)
                 {
                     case BdatFieldType.Reference:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{fieldRef.Field});");
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
                         break;
                     case BdatFieldType.Message:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{fieldRef.Field});");
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
                         break;
                     case BdatFieldType.Item:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetItem(item.{fieldRef.Field});");
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetItem(item.{PrintFieldRefId(fieldRef)});");
                         break;
                     case BdatFieldType.Task:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetTask((TaskType)item.{fieldRef.RefField}, item.{fieldRef.Field});");
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetTask((TaskType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
                         break;
                     case BdatFieldType.Condition:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{fieldRef.Field});");
+                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
                         break;
                     default:
                         if (fieldRef.EnumType != null)
                         {
-                            sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{fieldRef.Field};");
+                            sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{PrintFieldRefId(fieldRef)};");
                         }
                         break;
                 }
@@ -236,6 +236,23 @@ namespace Xb2.CodeGen
             }
 
             sb.DecreaseAndAppendLine("}");
+        }
+
+        private static string PrintFieldRefId(BdatFieldInfo fieldRef)
+        {
+            string output = fieldRef.Field;
+
+            if (fieldRef.Adjust > 0)
+            {
+                output += $" + {fieldRef.Adjust}";
+            }
+
+            if (fieldRef.Adjust < 0)
+            {
+                output += $" - {-fieldRef.Adjust}";
+            }
+
+            return output;
         }
 
         private static string GenerateTypeMapFile(BdatCollInfo info)

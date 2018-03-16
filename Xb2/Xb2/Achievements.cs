@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using CsvHelper;
@@ -95,6 +96,7 @@ namespace Xb2
             }
         }
 
+        [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
         private class Achievement
         {
             public int BladeId { get; set; }

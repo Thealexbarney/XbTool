@@ -67,7 +67,7 @@ namespace Xb2.BdatString
 
             if (field.EnumType != null)
             {
-                display = refId == 0 ? null : Enum.GetName(field.EnumType, refId);
+                display = Enum.GetName(field.EnumType, refId);
             }
 
             return (display, childTable, childId);

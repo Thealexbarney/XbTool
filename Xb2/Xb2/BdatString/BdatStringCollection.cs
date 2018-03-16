@@ -104,12 +104,4 @@ namespace Xb2.BdatString
         Aurora = 1 << 12,
         CloudSeaMist = 1 << 13
     }
-
-    public enum IdeaCategory
-    {
-        Bravery,
-        Truth,
-        Compassion,
-        Justice
-    }
 }
