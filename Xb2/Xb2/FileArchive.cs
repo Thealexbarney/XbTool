@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Ionic.Zlib;
 
-namespace Xb2.Archive
+namespace Xb2
 {
-    public class ArdArchive
+    public class FileArchive
     {
         private Node[] Nodes { get; }
-        public FsEntry[] FileInfo { get; }
+        public FileInfo[] FileInfo { get; }
         public byte[] StringTable { get; }
         public int Field4 { get; }
         public int NodeCount { get; }
@@ -20,12 +21,14 @@ namespace Xb2.Archive
         public int FileCount { get; }
         public uint Key { get; }
 
-        public ArdArchive(byte[] arh)
-        {
-            DecryptArh(arh);
+        private FileStream Stream { get; }
 
-            using (var stream = new MemoryStream(arh))
-            using (BinaryReader reader = new BinaryReader(stream))
+        public FileArchive(byte[] headerFile, string dataFilename)
+        {
+            DecryptArh(headerFile);
+
+            using (var stream = new MemoryStream(headerFile))
+            using (var reader = new BinaryReader(stream))
             {
                 stream.Position = 4;
                 Field4 = reader.ReadInt32();
@@ -53,19 +56,21 @@ namespace Xb2.Archive
                     };
                 }
 
-                FileInfo = new FsEntry[FileCount];
+                FileInfo = new FileInfo[FileCount];
                 stream.Position = FileTableOffset;
 
                 for (int i = 0; i < FileCount; i++)
                 {
-                    FileInfo[i] = new FsEntry(reader);
+                    FileInfo[i] = new FileInfo(reader);
                 }
 
                 AddAllFilenames();
             }
+
+            Stream = new FileStream(dataFilename, FileMode.Open, FileAccess.Read);
         }
 
-        public FsEntry GetFile(string filename)
+        public FileInfo GetFileInfo(string filename)
         {
             int cur = 0;
             Node curNode = Nodes[cur];
@@ -90,6 +95,47 @@ namespace Xb2.Archive
 
             int fileId = BitConverter.ToInt32(StringTable, offset);
             return FileInfo[fileId];
+        }
+
+        public byte[] ReadFile(string filename)
+        {
+            return ReadFile(GetFileInfo(filename));
+        }
+
+        public byte[] ReadFile(FileInfo fileInfo)
+        {
+            if (fileInfo.Offset + fileInfo.CompressedSize > Stream.Length) return null;
+
+            int fileSize = fileInfo.Type == 2 ? fileInfo.UncompressedSize : fileInfo.CompressedSize;
+            var output = new byte[fileSize];
+            OutputFile(fileInfo, Stream, new MemoryStream(output));
+
+            return output;
+        }
+
+        public void OutputFile(FileInfo fileInfo, Stream outStream)
+        {
+            OutputFile(fileInfo, Stream, outStream);
+        }
+
+        private void OutputFile(FileInfo fileInfo, Stream input, Stream output)
+        {
+            input.Position = fileInfo.Offset;
+
+            switch (fileInfo.Type)
+            {
+                case 2:
+                    input.Position += 0x30;
+
+                    using (var deflate = new ZlibStream(input, CompressionMode.Decompress, true))
+                    {
+                        deflate.CopyTo(output, fileInfo.UncompressedSize);
+                    }
+                    break;
+                case 0:
+                    input.CopyStream(output, fileInfo.CompressedSize);
+                    break;
+            }
         }
 
         private void AddAllFilenames()
@@ -156,6 +202,21 @@ namespace Xb2.Archive
             Buffer.BlockCopy(filei, 0, file, 0, file.Length);
         }
 
+        public static void Extract(FileArchive archive, string outDir)
+        {
+            foreach (FileInfo fileInfo in archive.FileInfo.Where(x => !string.IsNullOrWhiteSpace(x.Filename)))
+            {
+                string filename = Path.Combine(outDir, fileInfo.Filename.TrimStart('/'));
+                string dir = Path.GetDirectoryName(filename) ?? throw new InvalidOperationException();
+                Directory.CreateDirectory(dir);
+
+                using (var outStream = new FileStream(filename, FileMode.Create, FileAccess.Write))
+                {
+                    archive.OutputFile(fileInfo, outStream);
+                }
+            }
+        }
+
         private class Node
         {
             public int Next { get; set; }
@@ -163,9 +224,9 @@ namespace Xb2.Archive
         }
     }
 
-    public class FsEntry
+    public class FileInfo
     {
-        public FsEntry(BinaryReader reader)
+        public FileInfo(BinaryReader reader)
         {
             Offset = reader.ReadInt64();
             CompressedSize = reader.ReadInt32();

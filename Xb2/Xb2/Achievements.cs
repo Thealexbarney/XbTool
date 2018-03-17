@@ -5,7 +5,6 @@ using System.Linq;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Xb2.Bdat;
-using Xb2.BdatString;
 using Xb2.Types;
 
 namespace Xb2

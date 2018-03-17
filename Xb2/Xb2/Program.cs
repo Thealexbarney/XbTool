@@ -15,8 +15,9 @@ namespace Xb2
     {
         private static void Extract(string arhFilename, string ardFilename, string outDir)
         {
-            ArhFile arhFile = ArdExtract.ReadArhFile(arhFilename);
-            ArdExtract.ExtractArdFile(ardFilename, arhFile, outDir);
+            var arh = File.ReadAllBytes(arhFilename);
+            var archive = new FileArchive(arh, ardFilename);
+            FileArchive.Extract(archive, outDir);
         }
 
         private static void DecryptBdatFile(string filename)
@@ -41,7 +42,6 @@ namespace Xb2
             SerializationCode.CreateFiles(tables, csDir);
         }
 
-        // ReSharper disable once UnusedMethodReturnValue.Local
         private static BdatCollection DeserializeBdat(string bdatDir, string pattern)
         {
             var watch = Stopwatch.StartNew();
