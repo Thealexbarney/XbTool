@@ -57,9 +57,6 @@ namespace Xb2.BdatString
                 case BdatFieldType.TimeRange:
                     display = PrintTimeRange(int.Parse((string)tables[tableName][itemId]?[memberName]));
                     break;
-                case BdatFieldType.WeatherBitfield:
-                    display = PrintWeatherBits((WeatherBits)int.Parse((string)tables[tableName][itemId]?[memberName]));
-                    break;
                 case BdatFieldType.WeatherIdMap:
                     display = PrintWeatherIdMap(int.Parse((string)tables[tableName][itemId]?[memberName]), 13, tables);
                     break;
@@ -67,7 +64,14 @@ namespace Xb2.BdatString
 
             if (field.EnumType != null)
             {
-                display = Enum.GetName(field.EnumType, refId);
+                if (field.EnumType.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0)
+                {
+                    display = PrintEnumFlags(field.EnumType, refId);
+                }
+                else
+                {
+                    display = Enum.GetName(field.EnumType, refId);
+                }
             }
 
             return (display, childTable, childId);
@@ -262,12 +266,12 @@ namespace Xb2.BdatString
             "0:00 - 23:59"
         };
 
-        public static string PrintWeatherBits(WeatherBits weather)
+        public static string PrintEnumFlags(Type enumType, object value)
         {
             var sb = new StringBuilder();
             bool first = true;
 
-            foreach (var flag in weather.GetIndividualFlags())
+            foreach (var flag in EnumExtensions.GetIndividualFlags(enumType, value))
             {
                 if (!first) sb.Append(", ");
                 sb.Append(flag);

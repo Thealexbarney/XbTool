@@ -1,4 +1,6 @@
-﻿namespace Xb2.Types
+﻿using System;
+
+namespace Xb2.Types
 {
     public enum ConditionType
     {
@@ -56,5 +58,23 @@
         Truth,
         Compassion,
         Justice
+    }
+
+    [Flags]
+    public enum IdeaCategoryBits
+    {
+        Bravery = 1 << 0,
+        Truth = 1 << 1,
+        Compassion = 1 << 2,
+        Justice = 1 << 3
+    }
+
+    [Flags]
+    public enum FieldSkillCategory
+    {
+        Collection = 1 << 0,
+        Elemental = 1 << 1,
+        Mercenary = 1 << 2,
+        Rare = 1 << 3
     }
 }

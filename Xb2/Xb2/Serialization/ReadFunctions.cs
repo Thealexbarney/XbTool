@@ -7758,6 +7758,27 @@ namespace Xb2.Serialization
 
         public static void SetReferences(BdatCollection tables)
         {
+            foreach (var item in tables.BLD_BladeList.Items)
+            {
+                item._StatusID = tables.CHR_Bl.GetItemOrNull(item.StatusID);
+            }
+
+            foreach (var item in tables.BLD_BladeModelList.Items)
+            {
+                item._Parts = new[]
+                {
+                    item.Parts1,
+                    item.Parts2,
+                    item.Parts3,
+                    item.Parts4,
+                };
+            }
+
+            foreach (var item in tables.BLD_NameList.Items)
+            {
+                item._Category = tables.bld_bladename.GetItemOrNull(item.Category);
+            }
+
             foreach (var item in tables.BLD_RareList.Items)
             {
                 item._Blade = tables.CHR_Bl.GetItemOrNull(item.Blade);
@@ -7808,9 +7829,106 @@ namespace Xb2.Serialization
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
+            foreach (var item in tables.BTL_CmnBl_Capacity.Items)
+            {
+                item._ArtsLvProb = new[]
+                {
+                    item.ArtsLv1Prob,
+                    item.ArtsLv2Prob,
+                    item.ArtsLv3Prob,
+                    item.ArtsLv4Prob,
+                    item.ArtsLv5Prob,
+                };
+                item._SkillNumProb = new[]
+                {
+                    item.SkillNum1Prob,
+                    item.SkillNum2Prob,
+                    item.SkillNum3Prob,
+                };
+                item._SkillLvProb = new[]
+                {
+                    item.SkillLv1Prob,
+                    item.SkillLv2Prob,
+                    item.SkillLv3Prob,
+                    item.SkillLv4Prob,
+                    item.SkillLv5Prob,
+                };
+                item._OrbNumProb = new[]
+                {
+                    item.OrbNum0Prob,
+                    item.OrbNum1Prob,
+                    item.OrbNum2Prob,
+                    item.OrbNum3Prob,
+                };
+                item._NartsNumProb = new[]
+                {
+                    item.NartsNum1Prob,
+                    item.NartsNum2Prob,
+                    item.NartsNum3Prob,
+                };
+                item._ArtsNumProb = new[]
+                {
+                    item.ArtsNum1Prob,
+                    item.ArtsNum2Prob,
+                    item.ArtsNum3Prob,
+                };
+            }
+
+            foreach (var item in tables.BTL_CmnBl_NewBlArts.Items)
+            {
+                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
+                item._NBA = new[]
+                {
+                    item.NBA_01,
+                    item.NBA_02,
+                    item.NBA_03,
+                    item.NBA_04,
+                    item.NBA_05,
+                    item.NBA_06,
+                    item.NBA_07,
+                    item.NBA_08,
+                };
+            }
+
+            foreach (var item in tables.BTL_CmnBl_Power.Items)
+            {
+                item._Pow = new[]
+                {
+                    item.Pow01,
+                    item.Pow02,
+                    item.Pow03,
+                    item.Pow04,
+                    item.Pow05,
+                    item.Pow06,
+                    item.Pow07,
+                    item.Pow08,
+                    item.Pow09,
+                    item.Pow10,
+                };
+            }
+
+            foreach (var item in tables.BTL_CmnBl_StatusType.Items)
+            {
+                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
+                item._Status = new[]
+                {
+                    item.Status01,
+                    item.Status02,
+                    item.Status03,
+                    item.Status04,
+                    item.Status05,
+                    item.Status06,
+                };
+            }
+
             foreach (var item in tables.BTL_ElementalEffect.Items)
             {
                 item._Name = tables.btl_elementaleffect_ms.GetItemOrNull(item.Name);
+            }
+
+            foreach (var item in tables.BTL_EnBook.Items)
+            {
+                item._BaseEnemyID = tables.CHR_EnArrange.GetItemOrNull(item.BaseEnemyID);
             }
 
             foreach (var item in tables.BTL_EnDropItem.Items)
@@ -7838,6 +7956,18 @@ namespace Xb2.Serialization
             foreach (var item in tables.BTL_EnhanceEff.Items)
             {
                 item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
+            }
+
+            foreach (var item in tables.BTL_HanaChipset.Items)
+            {
+                item._RoleParts = tables.GetItem(item.RoleParts);
+                item._AtrParts = tables.GetItem(item.AtrParts);
+                item._NArtsParts1 = tables.GetItem(item.NArtsParts1);
+                item._NArtsParts2 = tables.GetItem(item.NArtsParts2);
+                item._NArtsParts3 = tables.GetItem(item.NArtsParts3);
+                item._NCondParts1 = tables.GetItem(item.NCondParts1);
+                item._NCondParts2 = tables.GetItem(item.NCondParts2);
+                item._NCondParts3 = tables.GetItem(item.NCondParts3);
             }
 
             foreach (var item in tables.BTL_Skill_Bl.Items)
@@ -7915,6 +8045,8 @@ namespace Xb2.Serialization
                 item._KeyAchievement = tables.FLD_AchievementSet.GetItemOrNull(item.KeyAchievement);
                 item._MerceName = tables.bld_mercename.GetItemOrNull(item.MerceName);
                 item._Name = tables.chr_bl_ms.GetItemOrNull(item.Name);
+                item._MnuIlustName = tables.menu_ilust_name.GetItemOrNull(item.MnuIlustName);
+                item._MnuCastName = tables.menu_cast_name.GetItemOrNull(item.MnuCastName);
                 item._NArts1 = tables.BTL_Buff.GetItemOrNull(item.NArts1);
                 item._NArts2 = tables.BTL_Buff.GetItemOrNull(item.NArts2);
                 item._NArts3 = tables.BTL_Buff.GetItemOrNull(item.NArts3);
@@ -8021,6 +8153,14 @@ namespace Xb2.Serialization
                 item._ParamID = tables.CHR_EnParam.GetItemOrNull(item.ParamID);
                 item._PreciousID = tables.GetItem(item.PreciousID);
                 item._ZoneID = tables.FLD_maplist.GetItemOrNull(item.ZoneID);
+                item._BookID = tables.BTL_EnBook.GetItemOrNull(item.BookID);
+            }
+
+            foreach (var item in tables.EVT_listQst01.Items)
+            {
+                item._setupID = tables.EVT_setupQst01.GetItemOrNull(item.setupID);
+                item._category = tables.menu_quest_cate_ms.GetItemOrNull(item.category);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
             }
 
             foreach (var item in tables.FLD_AchievementList.Items)
@@ -8085,6 +8225,7 @@ namespace Xb2.Serialization
                 item._ConditionType6 = (ConditionType)item.ConditionType6;
                 item._ConditionType7 = (ConditionType)item.ConditionType7;
                 item._ConditionType8 = (ConditionType)item.ConditionType8;
+                item._Premise = tables.EVT_andortype.GetItemOrNull(item.Premise + 1);
             }
 
             foreach (var item in tables.FLD_EnemyGroup.Items)
@@ -8135,6 +8276,11 @@ namespace Xb2.Serialization
                 item._wd_OFF_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wd_OFF_cndID);
                 item._wd_ON_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wd_ON_cndID);
                 item._wd_type = tables.FLD_WeatherInfo.GetItemOrNull(item.wd_type);
+            }
+
+            foreach (var item in tables.FLD_MercenariesMission.Items)
+            {
+                item._QuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.QuestID);
             }
 
             foreach (var item in tables.FLD_QuestBattle.Items)
@@ -8197,6 +8343,12 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.FLD_QuestListBlade.Items)
             {
+                item._PurposeID = tables.FLD_QuestTaskBlade.GetItemOrNull(item.PurposeID);
+                item._PRTQuestID = tables.FLD_QuestListBlade.GetItemOrNull(item.PRTQuestID);
+                item._NextQuestA = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestB);
+                item._CallEventA = tables.EVT_listQst01.GetItemOrNull(item.CallEventA);
+                item._CallEventB = tables.EVT_listQst01.GetItemOrNull(item.CallEventB);
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
                 item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_blade.GetItemOrNull(item.QuestTitle);
@@ -8205,6 +8357,20 @@ namespace Xb2.Serialization
                 item._RewardSetA = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetA);
                 item._RewardSetB = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetB);
                 item._Summary = tables.fld_quest_blade.GetItemOrNull(item.Summary);
+            }
+
+            foreach (var item in tables.FLD_QuestListMercenaries.Items)
+            {
+                item._QuestTitle = tables.fld_quest_mercenaries.GetItemOrNull(item.QuestTitle);
+                item._ResultA = tables.fld_quest_mercenaries.GetItemOrNull(item.ResultA);
+                item._ResultB = tables.fld_quest_mercenaries.GetItemOrNull(item.ResultB);
+                item._RewardSetA = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetA);
+                item._PRTQuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.PRTQuestID);
+                item._NextQuestA = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestA);
+                item._RewardSetB = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetB);
+                item._Summary = tables.fld_quest_mercenaries.GetItemOrNull(item.Summary);
+                item._PurposeID = tables.FLD_QuestTaskMercenaries.GetItemOrNull(item.PurposeID);
+                item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
             }
 
             foreach (var item in tables.FLD_QuestListMini.Items)
@@ -8220,6 +8386,7 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.FLD_QuestListNormal.Items)
             {
+                item._PurposeID = tables.FLD_QuestTaskNormal.GetItemOrNull(item.PurposeID);
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
                 item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_normal.GetItemOrNull(item.QuestTitle);
@@ -8291,6 +8458,10 @@ namespace Xb2.Serialization
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
                 item._TaskType4 = (TaskType)item.TaskType4;
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
             }
 
             foreach (var item in tables.FLD_QuestTaskBlade.Items)
@@ -8303,6 +8474,10 @@ namespace Xb2.Serialization
                 item._TaskLog2 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog2);
                 item._TaskLog3 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog3);
                 item._TaskLog4 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog4);
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskType1 = (TaskType)item.TaskType1;
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
@@ -8327,10 +8502,10 @@ namespace Xb2.Serialization
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
                 item._TaskID4 = tables.GetTask((TaskType)item.TaskType4, item.TaskID4);
-                item._TaskLog1 = tables.fld_quest.GetItemOrNull(item.TaskLog1);
-                item._TaskLog2 = tables.fld_quest.GetItemOrNull(item.TaskLog2);
-                item._TaskLog3 = tables.fld_quest.GetItemOrNull(item.TaskLog3);
-                item._TaskLog4 = tables.fld_quest.GetItemOrNull(item.TaskLog4);
+                item._TaskLog1 = tables.fld_quest_mini.GetItemOrNull(item.TaskLog1);
+                item._TaskLog2 = tables.fld_quest_mini.GetItemOrNull(item.TaskLog2);
+                item._TaskLog3 = tables.fld_quest_mini.GetItemOrNull(item.TaskLog3);
+                item._TaskLog4 = tables.fld_quest_mini.GetItemOrNull(item.TaskLog4);
                 item._TaskType1 = (TaskType)item.TaskType1;
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
@@ -8465,16 +8640,21 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_HanaArtsEnh.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
+                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
             }
 
             foreach (var item in tables.ITM_HanaAssist.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
             }
 
             foreach (var item in tables.ITM_HanaAtr.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Caption = tables.itm_hana_atr_ms.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_hana_atr_ms.GetItemOrNull(item.Name);
@@ -8487,6 +8667,8 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_HanaRole.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Role = tables.menu_role_name_ms.GetItemOrNull(item.Role);
                 item._Name = tables.itm_hana_role_ms.GetItemOrNull(item.Name);
             }
 
@@ -8591,6 +8773,7 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.ITM_PcWpnType.Items)
             {
+                item._Motion = tables.ITM_PcWpnType.GetItemOrNull(item.Motion);
                 item._Name = tables.itm_pcwpntype_ms.GetItemOrNull(item.Name);
                 item._Role = tables.menu_role_name_ms.GetItemOrNull(item.Role);
             }
@@ -8612,6 +8795,18 @@ namespace Xb2.Serialization
                 item._Name = tables.itm_tresure.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
+            }
+
+            foreach (var item in tables.ma07a_FLD_TboxPop.Items)
+            {
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
             }
 
             foreach (var item in tables.ma13a_FLD_EnemyPop.Items)
@@ -8647,6 +8842,13 @@ namespace Xb2.Serialization
                 item._item7 = tables.GetItem(item.item7);
                 item._item8 = tables.GetItem(item.item8);
                 item._item9 = tables.GetItem(item.item9);
+            }
+
+            foreach (var item in tables.MNU_BtnChallenge2.Items)
+            {
+                item._Param1 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param1);
+                item._Param2 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param2);
+                item._Param3 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param3);
             }
 
             foreach (var item in tables.MNU_BtnChallengeSeq.Items)
@@ -8744,6 +8946,634 @@ namespace Xb2.Serialization
             foreach (var item in tables.MNU_SoundBgm.Items)
             {
                 item._resource = tables.RSC_BgmList.GetItemOrNull(item.resource);
+            }
+
+            foreach (var item in tables.MNU_WorldMapCond.Items)
+            {
+                item._mapId = tables.FLD_maplist.GetItemOrNull(item.mapId);
+                item._cond1 = tables.FLD_ConditionList.GetItemOrNull(item.cond1);
+                item._enter = tables.FLD_ConditionList.GetItemOrNull(item.enter);
+                item._pos1 = tables.MNU_WorldMap.GetItemOrNull(item.pos1);
+            }
+
+            foreach (var item in tables.mnu001_title_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu002_balloon_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu003_dropitem_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu004_gauge_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu004_palette_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu004_palette2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu007_buff_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu007_damage_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu009_expget_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu010_jog_character.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu010_jog_custom.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu010_jog_setup.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu010_jog_story.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu010_jog_top.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu010_mainmenu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu010_mainmenu2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu011_dr_custom.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu011_dr_custom_select_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu012_bl_custom.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu012_bl_custom_select_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu013_dr_arts_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu014_kizuna_ring_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu016_ptform_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu016_ptform2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu018_skip_time_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu018_world_map_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu018_zone_map_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu020_quest_list_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu020_quest_reward_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu020_top_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu021_blade_book_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu022_en_book_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu024_shop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu025_fade_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu027_info_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu027_list_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu027_text_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu029_fieldskill_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu030_actionwindow_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu030_elem_eff_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu030_enemystatus_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu030_fieldtarget_info_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu032_buttonchallenge_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu032_buttonchallenge2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu033_save_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu033_save2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu034_partystatus_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu034_partystatus2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu035_locationtelop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu035_locationtelop2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu036_eventsubtitle_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu037_bladechange_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu038_bladeform_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu039_combo_req_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu040_environmentinfo_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu041_eventskip_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu042_questorder_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu043_questresult_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu045_compass_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu046_popup_window_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu048_item_submenu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu048_itemlist_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu050_chapter_telop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu051_operation_info_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu052_link_jump_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu053_jog_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu054_jog_top.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (var item in tables.mnu054_mercenary_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu055_blade_create_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu055_blade_name_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu056_dr_equip_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu060_blade_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu061_inn_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu061_inn_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu061_lv_setup_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu062_battle_telop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu063_common_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu064_cylinderselect_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu064_salvage_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu065_chain_attack_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu069_tutorial_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu070_pouch_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu070_pouch_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu071_bl_weapon_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu071_blade_weapon_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu072_bl_orb_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu072_blade_orb_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu074_comboroot_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu075_main_menu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu076_char_menu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu076_hana_submenu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu079_event_theater_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu080_option_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu081_quest_log_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu082_ptform_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu083_bl_cmn_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu083_cmn_status_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu083_dr_cmn_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu084_dr_equip_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu085_shop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu086_blade_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu087_dialog_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu088_dr_arts_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu089_bl_kizuna_ring_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu089_dr_kizuna_ring_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu090_mercenary_form_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu090_mercenary_report_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu090_mercenary_top_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu091_hana_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu091_hana_main2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu091_parts_make_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu091_parts_make2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu091_parts_recrystal_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu092_zone_telop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu094_submenu_book_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu094_submenu_crystal_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu094_submenu_system_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu095_blade_release_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu096_blade_switch_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu100_bladecreate_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu100_name_select_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu101_sort_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu103_staffroll_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (var item in tables.mnu999_chaincount_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
             foreach (var item in tables.RSC_BgmCondition.Items)

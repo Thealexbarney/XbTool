@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,6 @@ namespace Xb2
 
         private static BdatCollection DeserializeBdat(string bdatDir, string pattern)
         {
-            var watch = Stopwatch.StartNew();
             string[] filenames = Directory.GetFiles(bdatDir, pattern, SearchOption.AllDirectories);
             byte[][] files = new byte[filenames.Length][];
 
@@ -54,8 +54,26 @@ namespace Xb2
             }
 
             BdatCollection tables = Deserialize.ReadBdats(files);
-            watch.Stop();
-            Console.WriteLine($"Deserialize: {watch.Elapsed.TotalMilliseconds}ms");
+            return tables;
+        }
+
+        private static BdatCollection DeserializeBdatArchive(string arhFilename, string ardFilename)
+        {
+            var header = File.ReadAllBytes(arhFilename);
+            var archive = new FileArchive(header, ardFilename);
+
+            var files = new List<byte[]>();
+
+            files.Add(archive.ReadFile("/bdat/common.bdat"));
+            files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
+            foreach(var file in archive.GetChildFileInfos("/bdat/gb/"))
+            {
+                byte[] bdat = archive.ReadFile(file);
+                if (bdat == null) continue;
+                files.Add(bdat);
+            }
+
+            BdatCollection tables = Deserialize.ReadBdats(files.ToArray());
             return tables;
         }
 
@@ -106,18 +124,14 @@ namespace Xb2
             Console.WriteLine(watch.Elapsed.TotalMilliseconds);
         }
 
-        public static void PrintData(string bdatDir, string pattern, string dataDir)
+        public static void PrintData(BdatCollection tables, string dataDir)
         {
-            var tables = DeserializeBdat(bdatDir, pattern);
             Directory.CreateDirectory(dataDir);
 
-            var watch = Stopwatch.StartNew();
             using (var writer = new StreamWriter(Path.Combine(dataDir, "achievements.csv")))
             {
                 Achievements.PrintAchievements(tables, writer);
             }
-            watch.Stop();
-            Console.WriteLine($"Print Achievements: {watch.Elapsed.TotalMilliseconds}ms");
         }
 
         public static void Main(string[] args)
@@ -149,7 +163,16 @@ namespace Xb2
                     BdatToHtml(args[1], args[2]);
                     break;
                 case "generatedata" when args.Length == 4:
-                    PrintData(args[1], args[2], args[3]);
+                    var tables = DeserializeBdat(args[1], args[2]);
+                    PrintData(tables, args[3]);
+                    break;
+                case "generatedataarc" when args.Length == 4:
+                    var tablesArd = DeserializeBdatArchive(args[1], args[2]);
+                    PrintData(tablesArd, args[3]);
+                    break;
+                case "createblade" when args.Length == 3:
+                    var tablesCb = DeserializeBdatArchive(args[1], args[2]);
+                    CreateBlade.Run.Create(tablesCb);
                     break;
                 default:
                     PrintUsage();
@@ -209,6 +232,12 @@ namespace Xb2
             }
 
             return Encoding.UTF8.GetString(value, offset, length);
+        }
+
+        public static T ChooseRandom<T>(this IEnumerable<T> source, Random rand)
+        {
+            T[] arr = source.ToArray();
+            return arr[rand.Next(arr.Length)];
         }
     }
 }

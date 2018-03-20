@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Xb2.Bdat
 {
@@ -63,7 +65,7 @@ namespace Xb2.Bdat
         }
     }
 
-    public class BdatTable<T> : IBdatTable where T : class
+    public class BdatTable<T> : IBdatTable, IReadOnlyList<T> where T : class
     {
         public string Name { get; set; }
         public int BaseId { get; set; }
@@ -71,6 +73,7 @@ namespace Xb2.Bdat
         public T[] Items { get; set; }
         public T this[int itemId] => Items[itemId - BaseId];
         public T GetItemOrNull(int itemId) => ContainsId(itemId) ? this[itemId] : null;
+        public T GetItemOrNull(uint itemId) => GetItemOrNull((int)itemId);
         public Type ItemType { get; } = typeof(T);
         Array IBdatTable.Items { get => Items; set => Items = (T[])value; }
 
@@ -79,6 +82,10 @@ namespace Xb2.Bdat
             int id = itemId - BaseId;
             return id >= 0 && id < Items.Length;
         }
+
+        public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public int Count => Items.Length;
     }
 
     public interface IBdatTable

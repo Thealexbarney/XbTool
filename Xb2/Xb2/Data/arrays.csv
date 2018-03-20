@@ -14,3 +14,11 @@ FLD_QuestReward,ItemID,ItemID1,ItemID2,ItemID3,ItemID4
 FLD_QuestReward,ItemNumber,ItemNumber1,ItemNumber2,ItemNumber3,ItemNumber4
 ITM_PcWpnChip,CreateWpn,CreateWpn1,CreateWpn2,CreateWpn3,CreateWpn4,CreateWpn5,CreateWpn6,CreateWpn7,CreateWpn8,CreateWpn9,CreateWpn10,CreateWpn11,CreateWpn12,CreateWpn13,CreateWpn14,CreateWpn15,CreateWpn16
 ITM_PcWpnChip,Zones,Zone,Zone2
+BTL_CmnBl_Power,Pow,Pow01,Pow02,Pow03,Pow04,Pow05,Pow06,Pow07,Pow08,Pow09,Pow10
+BTL_CmnBl_Capacity,ArtsLvProb,ArtsLv1Prob,ArtsLv2Prob,ArtsLv3Prob,ArtsLv4Prob,ArtsLv5Prob
+BTL_CmnBl_Capacity,SkillNumProb,SkillNum1Prob,SkillNum2Prob,SkillNum3Prob
+BTL_CmnBl_Capacity,SkillLvProb,SkillLv1Prob,SkillLv2Prob,SkillLv3Prob,SkillLv4Prob,SkillLv5Prob
+BTL_CmnBl_Capacity,OrbNumProb,OrbNum0Prob,OrbNum1Prob,OrbNum2Prob,OrbNum3Prob
+BTL_CmnBl_Capacity,NartsNumProb,NartsNum1Prob,NartsNum2Prob,NartsNum3Prob
+BTL_CmnBl_Capacity,ArtsNumProb,ArtsNum1Prob,ArtsNum2Prob,ArtsNum3Prob
+BLD_BladeModelList,Parts,Parts1,Parts2,Parts3,Parts4

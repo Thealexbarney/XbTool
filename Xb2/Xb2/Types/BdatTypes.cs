@@ -38,6 +38,7 @@ namespace Xb2.Types
         public int Id;
         public byte Category;
         public ushort StatusID;
+        public CHR_Bl _StatusID;
     }
 
     [BdatType]
@@ -57,6 +58,7 @@ namespace Xb2.Types
         public byte Parts2;
         public byte Parts3;
         public byte Parts4;
+        public byte[] _Parts;
     }
 
     [BdatType]
@@ -169,6 +171,7 @@ namespace Xb2.Types
         public uint sortGB;
         public uint sortCN;
         public uint sortTW;
+        public Message _Category;
     }
 
     [BdatType]
@@ -1274,6 +1277,12 @@ namespace Xb2.Types
         public byte ArtsNum1Prob;
         public byte ArtsNum2Prob;
         public byte ArtsNum3Prob;
+        public byte[] _ArtsLvProb;
+        public byte[] _SkillNumProb;
+        public byte[] _SkillLvProb;
+        public byte[] _OrbNumProb;
+        public byte[] _NartsNumProb;
+        public byte[] _ArtsNumProb;
     }
 
     [BdatType]
@@ -1290,6 +1299,8 @@ namespace Xb2.Types
         public byte NBA_06;
         public byte NBA_07;
         public byte NBA_08;
+        public ITM_PcWpnType _WpnType;
+        public byte[] _NBA;
     }
 
     [BdatType]
@@ -1309,6 +1320,7 @@ namespace Xb2.Types
         public ushort Pow08;
         public ushort Pow09;
         public ushort Pow10;
+        public ushort[] _Pow;
     }
 
     [BdatType]
@@ -1323,6 +1335,8 @@ namespace Xb2.Types
         public byte Status04;
         public byte Status05;
         public byte Status06;
+        public ITM_PcWpnType _WpnType;
+        public byte[] _Status;
     }
 
     [BdatType]
@@ -1473,6 +1487,7 @@ namespace Xb2.Types
         public ushort BaseEnemyID;
         public uint BOOK_POP_TIME;
         public byte BOOK_popWeather;
+        public CHR_EnArrange _BaseEnemyID;
     }
 
     [BdatType]
@@ -1643,6 +1658,14 @@ namespace Xb2.Types
         public ushort NCondParts2;
         public ushort NCondParts3;
         public string UI;
+        public object _RoleParts;
+        public object _AtrParts;
+        public object _NArtsParts1;
+        public object _NArtsParts2;
+        public object _NArtsParts3;
+        public object _NCondParts1;
+        public object _NCondParts2;
+        public object _NCondParts3;
     }
 
     [BdatType]
@@ -2244,6 +2267,8 @@ namespace Xb2.Types
         public FLD_AchievementSet _KeyAchievement;
         public Message _MerceName;
         public Message _Name;
+        public Message _MnuIlustName;
+        public Message _MnuCastName;
         public BTL_Buff _NArts1;
         public BTL_Buff _NArts2;
         public BTL_Buff _NArts3;
@@ -2442,6 +2467,7 @@ namespace Xb2.Types
         public CHR_EnParam _ParamID;
         public object _PreciousID;
         public FLD_maplist _ZoneID;
+        public BTL_EnBook _BookID;
     }
 
     [BdatType]
@@ -3176,6 +3202,9 @@ namespace Xb2.Types
         public string scriptName;
         public int scriptStartId;
         public ushort nextIDtheater;
+        public EVT_setupB _setupID;
+        public Message _category;
+        public FLD_maplist _zoneID;
     }
 
     [BdatType]
@@ -3568,6 +3597,7 @@ namespace Xb2.Types
         public ConditionType _ConditionType6;
         public ConditionType _ConditionType7;
         public ConditionType _ConditionType8;
+        public BdatEnum _Premise;
     }
 
     [BdatType]
@@ -4168,6 +4198,7 @@ namespace Xb2.Types
         public ushort RequestPerformance;
         public byte Repeatable;
         public ushort AutoStart;
+        public FLD_QuestList _QuestID;
     }
 
     [BdatType]
@@ -4363,12 +4394,15 @@ namespace Xb2.Types
         public ushort LinkedQuestID;
         public FLD_QuestTask _PurposeID;
         public FLD_QuestHints _HintsID;
+        public FLD_QuestList _PRTQuestID;
+        public FLD_QuestList _NextQuestA;
+        public FLD_QuestList _NextQuestB;
+        public EVT_listQst01 _CallEventA;
+        public EVT_listQst01 _CallEventB;
         public Message _QuestTitle;
         public Message _ResultA;
         public Message _ResultB;
         public FLD_QuestReward _RewardSetA;
-        public FLD_QuestList _PRTQuestID;
-        public FLD_QuestList _NextQuestA;
         public FLD_QuestReward _RewardSetB;
         public Message _Summary;
         public Message _QuestCategory;
@@ -4509,6 +4543,10 @@ namespace Xb2.Types
         public TaskType _TaskType2;
         public TaskType _TaskType3;
         public TaskType _TaskType4;
+        public FLD_ConditionList _TaskCondition1;
+        public FLD_ConditionList _TaskCondition2;
+        public FLD_ConditionList _TaskCondition3;
+        public FLD_ConditionList _TaskCondition4;
     }
 
     [BdatType]
@@ -5215,7 +5253,9 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public FLD_ConditionList _Condition;
         public Message _Name;
+        public BTL_Enhance _Enhance;
     }
 
     [BdatType]
@@ -5243,6 +5283,8 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public FLD_ConditionList _Condition;
+        public BTL_Enhance _Enhance;
         public Message _Name;
     }
 
@@ -5271,6 +5313,7 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public FLD_ConditionList _Condition;
         public MNU_Name _Atr;
         public Message _Caption;
         public Message _Name;
@@ -5338,6 +5381,8 @@ namespace Xb2.Types
         public bool JS;
         public bool JK;
         public bool JD;
+        public FLD_ConditionList _Condition;
+        public Message _Role;
         public Message _Name;
     }
 
@@ -5602,6 +5647,7 @@ namespace Xb2.Types
         public byte JustRange2;
         public byte VoiceType;
         public byte Motion;
+        public ITM_PcWpnType _Motion;
         public Message _Name;
         public Message _Role;
     }
@@ -6046,6 +6092,14 @@ namespace Xb2.Types
         public byte rsc_paramID;
         public byte msgdigVisible;
         public bool Digflg;
+        public object _itm1ID;
+        public object _itm2ID;
+        public object _itm3ID;
+        public object _itm4ID;
+        public object _itm5ID;
+        public object _itm6ID;
+        public object _itm7ID;
+        public object _itm8ID;
     }
 
     [BdatType]
@@ -6672,6 +6726,9 @@ namespace Xb2.Types
         public byte Param3;
         public byte BtnType3;
         public byte Point3;
+        public MNU_ChallengeParam _Param1;
+        public MNU_ChallengeParam _Param2;
+        public MNU_ChallengeParam _Param3;
     }
 
     [BdatType]
@@ -6982,6 +7039,7 @@ namespace Xb2.Types
         public ushort fs_menu_id;
         public ushort txt;
         public ushort lock_flag;
+        public Message _txt;
     }
 
     [BdatType]
@@ -7416,6 +7474,7 @@ namespace Xb2.Types
         public int Id;
         public string obj_name;
         public uint text_id;
+        public Message _text_id;
     }
 
     [BdatType]
@@ -7440,6 +7499,10 @@ namespace Xb2.Types
         public ushort cond3;
         public ushort pos3;
         public ushort enter;
+        public FLD_maplist _mapId;
+        public FLD_ConditionList _cond1;
+        public FLD_ConditionList _enter;
+        public MNU_WorldMap _pos1;
     }
 
     [BdatType]

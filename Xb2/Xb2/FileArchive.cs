@@ -97,6 +97,20 @@ namespace Xb2
             return FileInfo[fileId];
         }
 
+        public FileInfo[] GetChildFileInfos(string path)
+        {
+            var fileInfos = new List<FileInfo>();
+            foreach (var file in FileInfo)
+            {
+                if (file.Filename != null && file.Filename.StartsWith(path))
+                {
+                    fileInfos.Add(file);
+                }
+            }
+
+            return fileInfos.ToArray();
+        }
+
         public byte[] ReadFile(string filename)
         {
             return ReadFile(GetFileInfo(filename));

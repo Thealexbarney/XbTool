@@ -16,7 +16,12 @@ namespace Xb2
             return GetFlags(value, GetFlagValues(value.GetType()).ToArray());
         }
 
-        private static IEnumerable<Enum> GetFlags(Enum value, Enum[] values)
+        public static IEnumerable<Enum> GetIndividualFlags(Type enumType, object value)
+        {
+            return GetFlags(value, GetFlagValues(enumType).ToArray());
+        }
+
+        private static IEnumerable<Enum> GetFlags(object value, Enum[] values)
         {
             ulong bits = Convert.ToUInt64(value);
             List<Enum> results = new List<Enum>();

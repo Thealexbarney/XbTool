@@ -41,7 +41,9 @@ namespace Xb2.Bdat
         TimeRange,
         WeatherBitfield,
         WeatherIdMap,
-        PartyConditionEnum
+        PartyConditionEnum,
+        IdeaCatEnumBits,
+        FieldSkillEnum
     }
 
     public class BdatArrayInfo
@@ -109,6 +111,15 @@ namespace Xb2.Bdat
                         case BdatFieldType.PartyConditionEnum:
                             fInfo.EnumType = typeof(PartyConditionType);
                             break;
+                        case BdatFieldType.IdeaCatEnumBits:
+                            fInfo.EnumType = typeof(IdeaCategoryBits);
+                            break;
+                        case BdatFieldType.WeatherBitfield:
+                            fInfo.EnumType = typeof(WeatherBits);
+                            break;
+                        case BdatFieldType.FieldSkillEnum:
+                            fInfo.EnumType = typeof(FieldSkillCategory);
+                            break;
                         case BdatFieldType.Task:
                             fInfo.RefField = line[col++];
                             break;
@@ -117,7 +128,6 @@ namespace Xb2.Bdat
                         case BdatFieldType.Hide:
                         case BdatFieldType.Enhance:
                         case BdatFieldType.TimeRange:
-                        case BdatFieldType.WeatherBitfield:
                         case BdatFieldType.WeatherIdMap:
                             break;
                         default:
