@@ -28,17 +28,17 @@ namespace Xb2.CreateBlade
 
             sb.AppendLine();
             sb.AppendLine($"Voice ID: {blade.VoiceId}");
-            sb.AppendLine($"Personality ID: {blade.PersonalityId}");
+            sb.AppendLine($"Personality ID: {blade.Personality.Id}");
 
             sb.AppendLine();
-            for (int i = 0; i < blade.FavCategories?.Count; i++)
+            for (int i = 0; i < blade.FavCategories?.Length; i++)
             {
                 sb.AppendLine($"Favorite Category {i + 1}: {blade.FavCategories[i].ToString()}");
             }
 
-            for (int i = 0; i < blade.FavItems?.Count; i++)
+            for (int i = 0; i < blade.FavItems?.Length; i++)
             {
-                sb.AppendLine($"Favorite Item {i + 1}: {blade.FavItems[i].Name}");
+                sb.AppendLine($"Favorite Item {i + 1}: {blade.FavItems[i]._Name.name}");
             }
 
             sb.AppendLine();

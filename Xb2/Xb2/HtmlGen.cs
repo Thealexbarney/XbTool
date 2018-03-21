@@ -93,7 +93,8 @@ namespace Xb2
                             var val = BdatStringTools.ReadValue(tableName, id, member.Name, tables, info);
                             if (val.childTable != null)
                             {
-                                sb.AppendLine($"<td><a href=\"{val.childTable}.html#{val.childId}\">{val.value}</td></a>");
+                                var link = GetLink(table, tables[val.childTable], val.childId);
+                                sb.AppendLine($"<td><a href=\"{link}\">{val.value}</td></a>");
                             }
                             else
                             {
@@ -115,6 +116,27 @@ namespace Xb2
             }
 
             sb.DecreaseAndAppendLine("</table>");
+        }
+
+        public static string GetLink(BdatStringTable table, BdatStringTable childTable, string childId)
+        {
+            string path = string.Empty;
+            if (table.Filename == null && childTable.Filename != null)
+            {
+                path = $"{childTable.Filename}/";
+            }
+
+            if (table.Filename != null && childTable.Filename == null)
+            {
+                path = "../";
+            }
+
+            if (table.Filename != null && childTable.Filename != null && table.Filename != childTable.Filename)
+            {
+                path = $"../{childTable.Filename}/";
+            }
+
+            return $"{path}{childTable.Name}.html#{childId}";
         }
     }
 }

@@ -8,21 +8,17 @@ namespace Xb2.CreateBlade
         public BladeAttribute Attribute { get; set; }
         public Gender Gender { get; set; }
         public BladeWeapon WeaponType { get; set; }
-        public int DefaultWeaponId { get; set; }
         public Race QuestRace { get; set; }
         public int StatusId { get; set; }
         public BLD_BladeModelList Model { get; set; }
-        public int ModelId { get; set; }
-        public string ModelName { get; set; }
-        public string MotionName { get; set; }
-        public string SePackName { get; set; }
+        public CHR_Bl ChrBlade { get; set; }
         public int ModelParts { get; set; }
         public CommonBladeType CommonBladeType { get; set; }
         public int NameId { get; set; }
         public string Name { get; set; }
         public int VoiceId { get; set; }
-        public int PersonalityId { get; set; }
-        public int KizunaLinkSet { get; set; }
+        public BTL_Bl_Personality Personality { get; set; }
+        public BTL_Bl_KizunaLinkSet KizunaLinkSet { get; set; }
         public int Power { get; set; }
         public int OrbCount { get; set; }
         public StatusType StatusType { get; set; }
@@ -37,7 +33,7 @@ namespace Xb2.CreateBlade
         public List<Art> NArts { get; set; }
         public List<Skill> BSkills { get; set; }
         public List<Skill> FSkills { get; set; }
-        public List<ItemCategory> FavCategories { get; set; }
-        public List<Item> FavItems { get; set; }
+        public ItemCategory[] FavCategories { get; set; }
+        public ITM_FavoriteList[] FavItems { get; set; }
     }
 }

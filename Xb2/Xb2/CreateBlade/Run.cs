@@ -29,12 +29,12 @@ namespace Xb2.CreateBlade
         {
             var driver = new DriverInfo();
             var createParams = new BladeCreateParams();
-            driver.Level = 70;
-            createParams.Crystal =  CrystalType.Rare;
-            driver.IdeaLevels[0] = 5;
-            driver.IdeaLevels[1] = 6;
-            driver.IdeaLevels[2] = 7;
-            driver.IdeaLevels[3] = 8;
+            driver.Level = 99;
+            createParams.Crystal = CrystalType.Legendary;
+            driver.IdeaLevels[0] = 10;
+            driver.IdeaLevels[1] = 10;
+            driver.IdeaLevels[2] = 10;
+            driver.IdeaLevels[3] = 10;
             createParams.BoosterCount = 0;
 
             if (createParams.BoosterCount > 0)
@@ -50,13 +50,11 @@ namespace Xb2.CreateBlade
             for (int i = 0; i < times; i++)
             {
                 Console.WriteLine();
+                Console.WriteLine($"Blade #{i + 1:D5}");
                 Console.WriteLine(delim);
                 Console.Write(OutputBlade.GetString(create.Create()));
                 Console.WriteLine(delim);
             }
-
-            Console.WriteLine("Press enter to exit");
-            Console.ReadLine();
         }
 
         public static void PromptCreate(BdatCollection tables)

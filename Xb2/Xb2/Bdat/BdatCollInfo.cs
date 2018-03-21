@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -178,7 +179,10 @@ namespace Xb2.Bdat
             BdatFieldType.ConditionEnum,
             BdatFieldType.Condition,
             BdatFieldType.TaskTypeEnum,
-            BdatFieldType.Task
+            BdatFieldType.Task,
+            BdatFieldType.ButtonTypeEnum,
+            BdatFieldType.IdeaCatEnumBits,
+            BdatFieldType.FieldSkillEnum
         };
     }
 
@@ -189,6 +193,7 @@ namespace Xb2.Bdat
         public BdatArrayInfo[] Arrays { get; set; }
     }
 
+    [DebuggerDisplay("{Name}")]
     public class BdatType
     {
         public string Name { get; set; }

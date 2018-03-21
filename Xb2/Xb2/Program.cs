@@ -66,7 +66,7 @@ namespace Xb2
 
             files.Add(archive.ReadFile("/bdat/common.bdat"));
             files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
-            foreach(var file in archive.GetChildFileInfos("/bdat/gb/"))
+            foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
             {
                 byte[] bdat = archive.ReadFile(file);
                 if (bdat == null) continue;
@@ -77,17 +77,27 @@ namespace Xb2
             return tables;
         }
 
-        private static BdatStringCollection DeserializeBdatString(string bdatDir, string pattern)
+        private static BdatStringCollection DeserializeBdatStringArchive(string arhFilename, string ardFilename)
         {
-            string[] filenames = Directory.GetFiles(bdatDir, pattern, SearchOption.AllDirectories);
-            byte[][] files = new byte[filenames.Length][];
+            var header = File.ReadAllBytes(arhFilename);
+            var archive = new FileArchive(header, ardFilename);
 
-            for (int i = 0; i < filenames.Length; i++)
+            var files = new List<byte[]>();
+            var fileNames = new List<string>();
+
+            files.Add(archive.ReadFile("/bdat/common.bdat"));
+            fileNames.Add(Path.GetFileNameWithoutExtension("common.bdat"));
+            files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
+            fileNames.Add(Path.GetFileNameWithoutExtension("common_gmk.bdat"));
+            foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
             {
-                files[i] = File.ReadAllBytes(filenames[i]);
+                byte[] bdat = archive.ReadFile(file);
+                if (bdat == null) continue;
+                files.Add(bdat);
+                fileNames.Add(Path.GetFileNameWithoutExtension(file.Filename));
             }
 
-            BdatStringCollection tables = DeserializeStrings.ReadBdats(files, filenames);
+            BdatStringCollection tables = DeserializeStrings.ReadBdats(files.ToArray(), fileNames.ToArray());
             return tables;
         }
 
@@ -108,10 +118,10 @@ namespace Xb2
             return flat;
         }
 
-        private static void BdatToHtml(string bdatDir, string htmlDir)
+        private static void BdatToHtmlArchive(string arhFilename, string ardFilename, string htmlDir)
         {
             var watch = Stopwatch.StartNew();
-            BdatStringCollection tables = DeserializeBdatString(bdatDir, "*");
+            BdatStringCollection tables = DeserializeBdatStringArchive(arhFilename, ardFilename);
             watch.Stop();
             Console.WriteLine(watch.Elapsed.TotalMilliseconds);
 
@@ -159,8 +169,8 @@ namespace Xb2
                 case "deserializebdat" when args.Length == 3:
                     DeserializeBdat(args[1], args[2]);
                     break;
-                case "bdat2html" when args.Length == 3:
-                    BdatToHtml(args[1], args[2]);
+                case "bdat2html" when args.Length == 4:
+                    BdatToHtmlArchive(args[1], args[2], args[3]);
                     break;
                 case "generatedata" when args.Length == 4:
                     var tables = DeserializeBdat(args[1], args[2]);
@@ -238,6 +248,63 @@ namespace Xb2
         {
             T[] arr = source.ToArray();
             return arr[rand.Next(arr.Length)];
+        }
+
+        public static T ChooseRandom<T>(this IEnumerable<T> source, Random rand, IEnumerable<int> probabilities)
+        {
+            T[] arr = source.ToArray();
+            int[] probs = probabilities as int[] ?? probabilities.ToArray();
+
+            var randVal = rand.NextDouble() * probs.Sum();
+            float sum = 0;
+
+            for (int i = 0; i < probs.Length; i++)
+            {
+                sum += probs[i];
+                if (sum >= randVal)
+                {
+                    return arr[i];
+                }
+            }
+
+            return default(T);
+        }
+
+        public static T[] ChooseRandom<T>(this IEnumerable<T> source, Random rand, IEnumerable<byte> probabilities, int count) =>
+            source.ChooseRandom(rand, probabilities.Select(x => (int)x), count);
+
+        public static T[] ChooseRandom<T>(this IEnumerable<T> source, Random rand, IEnumerable<int> probabilities, int count)
+        {
+            T[] arr = source as T[] ?? source.ToArray();
+            int[] probs = probabilities as int[] ?? probabilities.ToArray();
+
+            if (arr.Length < count)
+                throw new ArgumentOutOfRangeException(nameof(count),
+                    $"There are fewer than {count} elements in {nameof(source)}");
+
+            var chosen = new HashSet<T>();
+            while (chosen.Count < count)
+            {
+                chosen.Add(arr.ChooseRandom(rand, probs));
+            }
+
+            return chosen.ToArray();
+        }
+
+        public static T[] ChooseRandom<T>(this IEnumerable<T> source, Random rand, int count)
+        {
+            T[] arr = source.ToArray();
+            if (arr.Length < count)
+                throw new ArgumentOutOfRangeException(nameof(count),
+                    $"There are fewer than {count} elements in {nameof(source)}");
+
+            var chosen = new HashSet<T>();
+            while (chosen.Count < count)
+            {
+                chosen.Add(arr[rand.Next(arr.Length)]);
+            }
+
+            return chosen.ToArray();
         }
     }
 }

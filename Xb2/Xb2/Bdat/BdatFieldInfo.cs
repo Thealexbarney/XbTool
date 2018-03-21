@@ -43,7 +43,8 @@ namespace Xb2.Bdat
         WeatherIdMap,
         PartyConditionEnum,
         IdeaCatEnumBits,
-        FieldSkillEnum
+        FieldSkillEnum,
+        ButtonTypeEnum
     }
 
     public class BdatArrayInfo
@@ -119,6 +120,9 @@ namespace Xb2.Bdat
                             break;
                         case BdatFieldType.FieldSkillEnum:
                             fInfo.EnumType = typeof(FieldSkillCategory);
+                            break;
+                        case BdatFieldType.ButtonTypeEnum:
+                            fInfo.EnumType = typeof(ButtonType);
                             break;
                         case BdatFieldType.Task:
                             fInfo.RefField = line[col++];

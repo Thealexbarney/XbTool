@@ -27,9 +27,16 @@ namespace Xb2.CreateBlade
     [DebuggerDisplay("{Name} Lv {MaxLevel}")]
     public class Skill
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int MaxLevel { get; set; }
+        public int Id { get; }
+        public string Name { get; }
+        public int MaxLevel { get; }
+
+        public Skill(int id, string name, int maxLevel)
+        {
+            Id = id;
+            Name = name;
+            MaxLevel = maxLevel;
+        }
     }
 
     public class Item

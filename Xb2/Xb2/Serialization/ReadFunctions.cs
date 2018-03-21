@@ -7774,6 +7774,14 @@ namespace Xb2.Serialization
                 };
             }
 
+            foreach (var item in tables.BLD_CommonList.Items)
+            {
+                item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
+                item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
+                item._IdeaType = (IdeaCategoryBits)item.IdeaType;
+                item._Fskill = (FieldSkillCategory)item.Fskill;
+            }
+
             foreach (var item in tables.BLD_NameList.Items)
             {
                 item._Category = tables.bld_bladename.GetItemOrNull(item.Category);
@@ -7790,6 +7798,13 @@ namespace Xb2.Serialization
                 item._Caption = tables.btl_arts_bl_ms.GetItemOrNull(item.Caption);
                 item._Name = tables.btl_arts_bl_ms.GetItemOrNull(item.Name);
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
+                item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
+                item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
+                item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
+                item._Enhance4 = tables.BTL_Enhance.GetItemOrNull(item.Enhance4);
+                item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
+                item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
+                item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
             }
 
             foreach (var item in tables.BTL_Arts_BlSp.Items)
@@ -7798,6 +7813,10 @@ namespace Xb2.Serialization
                 item._Caption = tables.btl_arts_blsp_ms.GetItemOrNull(item.Caption);
                 item._Name = tables.btl_arts_blsp_ms.GetItemOrNull(item.Name);
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
+                item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
+                item._BtnChal2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal2);
+                item._BtnChal3 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal3);
+                item._BtnChal6 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal6);
             }
 
             foreach (var item in tables.BTL_Arts_En.Items)
@@ -7968,6 +7987,11 @@ namespace Xb2.Serialization
                 item._NCondParts1 = tables.GetItem(item.NCondParts1);
                 item._NCondParts2 = tables.GetItem(item.NCondParts2);
                 item._NCondParts3 = tables.GetItem(item.NCondParts3);
+            }
+
+            foreach (var item in tables.BTL_PouchBuff.Items)
+            {
+                item._Name = tables.btl_pouchbuff_ms.GetItemOrNull(item.Name);
             }
 
             foreach (var item in tables.BTL_Skill_Bl.Items)
@@ -8242,6 +8266,7 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.FLD_FieldSkillList.Items)
             {
+                item._Category = (FieldSkillCategory)item.Category;
                 item._Caption = tables.fld_fieldskilltxt.GetItemOrNull(item.Caption);
                 item._Name = tables.fld_fieldskilltxt.GetItemOrNull(item.Name);
             }
@@ -8846,6 +8871,9 @@ namespace Xb2.Serialization
 
             foreach (var item in tables.MNU_BtnChallenge2.Items)
             {
+                item._BtnType1 = (ButtonType)item.BtnType1;
+                item._BtnType2 = (ButtonType)item.BtnType2;
+                item._BtnType3 = (ButtonType)item.BtnType3;
                 item._Param1 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param1);
                 item._Param2 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param2);
                 item._Param3 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param3);

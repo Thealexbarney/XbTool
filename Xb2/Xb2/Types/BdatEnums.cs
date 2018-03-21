@@ -77,4 +77,13 @@ namespace Xb2.Types
         Mercenary = 1 << 2,
         Rare = 1 << 3
     }
+
+    public enum ButtonType
+    {
+        A = 1,
+        B,
+        X,
+        Y,
+        Random
+    }
 }

@@ -129,6 +129,10 @@ namespace Xb2.Types
         public byte KeyAchievementSet;
         public byte FavoriteCategoryMax;
         public byte FavoriteItemMax;
+        public MNU_Name _Gender;
+        public MNU_Name _QuestRace;
+        public IdeaCategoryBits _IdeaType;
+        public FieldSkillCategory _Fskill;
     }
 
     [BdatType]
@@ -373,6 +377,13 @@ namespace Xb2.Types
         public Message _Caption;
         public Message _Name;
         public ITM_PcWpnType _WpnType;
+        public BTL_Enhance _Enhance1;
+        public BTL_Enhance _Enhance2;
+        public BTL_Enhance _Enhance3;
+        public BTL_Enhance _Enhance4;
+        public BTL_Enhance _Enhance5;
+        public BTL_Enhance _Enhance6;
+        public MNU_BtnChallenge2 _BtnChal1;
     }
 
     [BdatType]
@@ -546,6 +557,10 @@ namespace Xb2.Types
         public Message _Caption;
         public Message _Name;
         public ITM_PcWpnType _WpnType;
+        public MNU_BtnChallenge2 _BtnChal1;
+        public MNU_BtnChallenge2 _BtnChal2;
+        public MNU_BtnChallenge2 _BtnChal3;
+        public MNU_BtnChallenge2 _BtnChal6;
     }
 
     [BdatType]
@@ -1868,6 +1883,7 @@ namespace Xb2.Types
         public int Id;
         public ushort Max;
         public byte Name;
+        public Message _Name;
     }
 
     [BdatType]
@@ -3848,6 +3864,7 @@ namespace Xb2.Types
         public ushort Icon;
         public ushort VoiceCategory;
         public byte Attirbute;
+        public FieldSkillCategory _Category;
         public Message _Caption;
         public Message _Name;
     }
@@ -6726,6 +6743,9 @@ namespace Xb2.Types
         public byte Param3;
         public byte BtnType3;
         public byte Point3;
+        public ButtonType _BtnType1;
+        public ButtonType _BtnType2;
+        public ButtonType _BtnType3;
         public MNU_ChallengeParam _Param1;
         public MNU_ChallengeParam _Param2;
         public MNU_ChallengeParam _Param3;

@@ -9,17 +9,16 @@ namespace Xb2.CreateBlade
     {
         private BdatCollection Tables { get; }
         private Random Rand { get; } = new Random();
+
+        private DriverInfo DriverInfo { get; }
+        private BladeCreateParams CreateParams { get; }
         private IdeaCategory IdeaCat { get; set; }
         private int IdeaLevel { get; set; }
-        private int BladePower { get; set; }
-        private int TemplateId { get; set; }
-        private BTL_CmnBl_Power BdatPower { get; set; }
-        private CHR_Bl ChrBlade { get; set; }
-        private BTL_CmnBl_Capacity Capacity { get; set; }
-        private CharBlade Blade { get; set; }
 
-        public DriverInfo DriverInfo { get; }
-        public BladeCreateParams CreateParams { get; }
+        private CharBlade Blade { get; set; }
+        private BLD_CommonList Template { get; set; }
+        private BTL_CmnBl_Power BdatPower { get; set; }
+        private BTL_CmnBl_Capacity Capacity { get; set; }
 
         public CreateCommon(BdatCollection tables, DriverInfo driverInfo, BladeCreateParams createParams)
         {
@@ -31,35 +30,33 @@ namespace Xb2.CreateBlade
         public CharBlade Create()
         {
             Blade = new CharBlade();
-            CalcIdeaCat();
-            int tier = CalcLevelTier(DriverInfo.Level);
-            int power = GetPowerRng(tier);
-            BladePower = CalcBladePower(power);
-            Capacity = Tables.BTL_CmnBl_Capacity[BladePower];
-            Blade.Power = BladePower;
-            TemplateId = GetTemplateId();
-            Blade.Attribute = GetBladeAttribute();
-            GetBladeWeapon();
-            GetBladeModel();
-            Blade.ModelParts = GetModelParts();
-            GetName();
-            GetPersonality();
-            Blade.OrbCount = GetOrbNum();
-            Blade.StatusType = (StatusType)GetStatusType();
-            Blade.StatusValue = GetStatusValue();
-            GetArmorRating();
-            GetSpecials();
-            GetSpecialLv4();
-            GetNArts();
-            GetBSkills();
-            //GetFSkills();
-            //GetFavoriteCategory();
-            //GetCrowns();
-            ;
+            CalcIdeaCategory();
+            CalcBladePower();
+
+            ChooseBladeTemplate();
+            ChooseBladeAttribute();
+            ChooseBladeWeapon();
+            ChooseBladeModel();
+            ChooseName();
+            ChoosePersonality();
+
+            Blade.OrbCount = GetRandomIndex(Capacity._OrbNumProb);
+            Blade.StatusValue = Rand.Next(Capacity.StatusRevRand) + Capacity.StatusRevCon;
+            Blade.StatusType = (StatusType)GetRandomIndex(Tables.BTL_CmnBl_StatusType
+                .First(x => x.WpnType == (int)Blade.WeaponType)._Status);
+
+            ChooseArmorRating();
+            ChooseSpecials();
+            ChooseSpecialLv4();
+            ChooseBladeArts();
+            ChooseBattleSkills();
+            ChooseFieldSkills();
+            ChooseFavoriteCategory();
+            GetCrownCount();
             return Blade;
         }
 
-        private void CalcIdeaCat()
+        private void CalcIdeaCategory()
         {
             if (CreateParams.BoosterCount > 0)
             {
@@ -85,44 +82,32 @@ namespace Xb2.CreateBlade
             IdeaLevel = DriverInfo.IdeaLevels[(int)IdeaCat];
         }
 
-        private int CalcLevelTier(int level)
+        private void CalcBladePower()
         {
-            BdatPower = Tables.BTL_CmnBl_Power
-                .FirstOrDefault(x => x.MinLv <= level && x.MaxLv >= level);
-
-            return BdatPower?.Id ?? 1;
+            BdatPower = Tables.BTL_CmnBl_Power.First(x => x.MinLv <= DriverInfo.Level && x.MaxLv >= DriverInfo.Level);
+            int basePower = GetRandomIndex(BdatPower._Pow) + 1;
+            int crystalPow = Tables.ITM_CrystalList[(int)CreateParams.Crystal].CommonPow;
+            Blade.Power = Math.Min(basePower + crystalPow + IdeaLevel / 5, 15);
+            Capacity = Tables.BTL_CmnBl_Capacity[Blade.Power];
         }
 
-        private int GetPowerRng(int tier)
-        {
-            var probs = BdatPower._Pow;
-            return GetRandomIndex(probs) + 1;
-        }
-
-        private int CalcBladePower(int basePower)
-        {
-            int pow = Tables.ITM_CrystalList[(int)CreateParams.Crystal].CommonPow;
-            pow = pow + basePower + IdeaLevel / 5;
-            return Math.Min(pow, 15);
-        }
-
-        private int GetTemplateId()
+        private void ChooseBladeTemplate()
         {
             var driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
             var ideaCatBits = 1 << (int)IdeaCat;
 
-            var a = Tables.BLD_CommonList
+            var possible = Tables.BLD_CommonList
                 .Where(x => x.IdeaMin <= driverIdea && x.IdeaMax >= driverIdea)
                 .Where(x => (x.IdeaType & ideaCatBits) != 0).ToArray();
 
-            return a[GetRandomIndex(a.Select(x => (ushort)x.Ratio).ToArray())].Id;
+            Template = possible.ChooseRandom(Rand, possible.Select(x => (int)x.Ratio));
         }
 
-        private BladeAttribute GetBladeAttribute()
+        private void ChooseBladeAttribute()
         {
-            long attProb = Tables.BLD_CreateConfig[42].Value;
-            float baseProb = 50 - attProb;
-            var probs = new float[9];
+            int attProb = (int)Tables.BLD_CreateConfig[42].Value;
+            int baseProb = 50 - attProb;
+            var probs = new int[9];
             for (int i = 1; i < probs.Length; i++)
             {
                 probs[i] = baseProb;
@@ -136,22 +121,10 @@ namespace Xb2.CreateBlade
 
             probs[(int)BladeAttribute.Light] = 0;
 
-            var randVal = Rand.NextDouble() * probs.Sum();
-            float sum = 0;
-
-            for (int i = 0; i < probs.Length; i++)
-            {
-                sum += probs[i];
-                if (sum >= randVal)
-                {
-                    return (BladeAttribute)i;
-                }
-            }
-
-            return BladeAttribute.Fire;
+            Blade.Attribute = Attributes.ChooseRandom(Rand, probs);
         }
 
-        private void GetBladeWeapon()
+        private void ChooseBladeWeapon()
         {
             int randVal = Rand.Next(8);
             Blade.WeaponType = CommonWeapons[randVal];
@@ -159,7 +132,7 @@ namespace Xb2.CreateBlade
             Blade.Gender = Blade.QuestRace == Race.Humanoid ? (Gender)Rand.Next(1, 3) : Gender.Male;
         }
 
-        private void GetBladeModel()
+        private void ChooseBladeModel()
         {
             var driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
 
@@ -192,7 +165,6 @@ namespace Xb2.CreateBlade
                 }
             }
 
-
             if (Blade.WeaponType == BladeWeapon.TwinRings)
             {
                 Blade.StatusId = 1072;
@@ -214,21 +186,12 @@ namespace Xb2.CreateBlade
                 Blade.CommonBladeType = CommonBladeType.Male;
             }
 
-            var chrBlade = Tables.CHR_Bl[Blade.StatusId];
-            ChrBlade = chrBlade;
-            Blade.ModelName = chrBlade.Model;
-            Blade.MotionName = chrBlade.Motion;
-            Blade.SePackName = chrBlade.SePack;
-            Blade.DefaultWeaponId = chrBlade.DefWeapon;
+            Blade.ChrBlade = Tables.CHR_Bl[Blade.StatusId];
+            Blade.ModelParts = GetRandomIndex(Blade.Model._Parts) - 1;
+
         }
 
-        private int GetModelParts()
-        {
-            var probs = Blade.Model._Parts;
-            return GetRandomIndex(probs) - 1;
-        }
-
-        private void GetName()
+        private void ChooseName()
         {
             int race = (int)Blade.QuestRace << 1;
             int gender = (int)Blade.Gender;
@@ -238,7 +201,7 @@ namespace Xb2.CreateBlade
             Blade.Name = name._Category.name;
         }
 
-        private void GetPersonality()
+        private void ChoosePersonality()
         {
             switch (Blade.CommonBladeType)
             {
@@ -259,38 +222,19 @@ namespace Xb2.CreateBlade
                     break;
             }
 
-            BTL_Bl_Personality personality = Tables.BTL_Bl_Personality
+            Blade.Personality = Tables.BTL_Bl_Personality
                 .FirstOrDefault(x => x.common && x.VoiceID == Blade.VoiceId);
-
-            Blade.PersonalityId = personality?.Id ?? 0;
-            Blade.KizunaLinkSet = Tables.BTL_Bl_KizunaLinkSet.First(x => x.VoiceID == Blade.VoiceId).Id;
+            Blade.KizunaLinkSet = Tables.BTL_Bl_KizunaLinkSet.First(x => x.VoiceID == Blade.VoiceId);
         }
 
-        public int GetOrbNum()
-        {
-            byte[] probs = Tables.BTL_CmnBl_Capacity[BladePower]._OrbNumProb;
-            return GetRandomIndex(probs);
-        }
-
-        public int GetStatusType()
-        {
-            byte[] probs = Tables.BTL_CmnBl_StatusType.First(x => x.WpnType == (int)Blade.WeaponType)._Status;
-            return GetRandomIndex(probs);
-        }
-
-        public int GetStatusValue()
-        {
-            return Rand.Next(Capacity.StatusRevRand) + Capacity.StatusRevCon;
-        }
-
-        public void GetArmorRating()
+        private void ChooseArmorRating()
         {
             BTL_CmnBl_Armor armor = Tables.BTL_CmnBl_Armor.First(x => x.WpnType == (int)Blade.WeaponType);
             Blade.PhysicalArmor = armor.PArmorCon + Rand.Next(armor.PArmorRand);
             Blade.EtherArmor = armor.EArmorCon + Rand.Next(armor.EArmorRand);
         }
 
-        public void GetSpecials()
+        private void ChooseSpecials()
         {
             var bArts = new List<Art>();
 
@@ -308,14 +252,14 @@ namespace Xb2.CreateBlade
                 {
                     Id = arts.Id,
                     Name = arts._Name.name,
-                    MaxLevel = GetRandomIndex(Capacity._ArtsLvProb)
+                    MaxLevel = GetRandomIndex(Capacity._ArtsLvProb) + 1
                 });
             }
 
             Blade.BArts = bArts;
         }
 
-        public void GetSpecialLv4()
+        private void ChooseSpecialLv4()
         {
             var special = Tables.BTL_Arts_BlSp.Where(x =>
                     x.CmnBlType == (int)Blade.CommonBladeType &&
@@ -330,131 +274,112 @@ namespace Xb2.CreateBlade
             };
         }
 
-        public void GetNArts()
+        private void ChooseBladeArts()
         {
             int nArtsCount = GetRandomIndex(Capacity._NartsNumProb) + 1;
-            var artIds = new List<int>();
-            var arts = new List<Art>();
+            byte[] probs = Tables.BTL_CmnBl_NewBlArts.First(x => x.WpnType == (int)Blade.WeaponType)._NBA;
+            Blade.NArts = new List<Art>();
 
-            var probs = Tables.BTL_CmnBl_NewBlArts.First(x => x.WpnType == (int)Blade.WeaponType)._NBA;
-            var buffs = Tables.BTL_Buff;
-
-            while (arts.Count < nArtsCount)
+            BTL_Buff[] arts = Tables.BTL_Buff.ChooseRandom(Rand, probs, nArtsCount);
+            foreach (var nArt in arts)
             {
-                BTL_Buff nArt = buffs[GetRandomIndex(probs) + 1];
-                if (artIds.Contains(nArt.Id)) continue;
-
-                artIds.Add(nArt.Id);
-                arts.Add(new Art { Id = nArt.Id, Name = nArt._Name.name });
+                Blade.NArts.Add(new Art { Id = nArt.Id, Name = nArt._Name.name });
             }
-
-            Blade.NArts = arts;
         }
 
-        public void GetBSkills()
+        private void ChooseBattleSkills()
         {
             int skillCount = GetRandomIndex(Capacity._SkillNumProb) + 1;
             var role = (Role)Tables.ITM_PcWpnType[(int)Blade.WeaponType].Role;
 
-            BTL_Skill_Bl[] possibleSkills = Tables.BTL_Skill_Bl.Where(x =>
+            Blade.BSkills = new List<Skill>();
+            BTL_Skill_Bl[] bSkills = Tables.BTL_Skill_Bl.Where(x =>
                 role == Role.Tank && x.Tank != 0 ||
                 role == Role.Attacker && x.Attacker != 0 ||
-                role == Role.Healer && x.Healer != 0).ToArray();
+                role == Role.Healer && x.Healer != 0)
+                .ChooseRandom(Rand, skillCount);
 
-            var skillIds = new List<int>();
-            var skills = new List<Skill>();
-
-            while (skillIds.Count < skillCount)
+            foreach (var skill in bSkills)
             {
-                BTL_Skill_Bl skill = possibleSkills.ChooseRandom(Rand);
-                if (skillIds.Contains(skill.Id)) continue;
-
-                skillIds.Add(skill.Id);
-                skills.Add(new Skill
-                {
-                    Id = skill.Id,
-                    Name = skill._Name.name,
-                    MaxLevel = GetRandomIndex(Capacity._SkillLvProb)
-                });
+                int maxLevel = GetRandomIndex(Capacity._SkillLvProb) + 1;
+                Blade.BSkills.Add(new Skill(skill.Id, skill._Name.name, maxLevel));
             }
-
-            Blade.BSkills = skills;
         }
 
-        //public void GetFSkills()
-        //{
-        //    var fSkillCategory = Tables.BLD_CommonList[TemplateId].Fskill;
-
-        //    var skillProb = Math.Clamp(DriverInfo.Level - 1, 1, 60);
-        //    var skillCount = GetRandomIndex(FSkillProbs[skillProb]) + 1;
-
-        //    var possibleSkills = new List<int>();
-        //    var skillIds = new List<int>();
-        //    var skills = new List<Skill>();
-
-        //    f
-
-        //    for (int i = startId; i < endId; i++)
-        //    {
-        //        if ((XmlRead.GetValue(BladeFSkillTable, BladeFSkillCategory, i) & 2) == 0) continue;
-
-        //        int attribute = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillAttribute, i);
-        //        if (attribute > 0 && attribute != (int)Blade.Attribute) continue;
-
-        //        skillIds.Add(i);
-        //        break;
-        //    }
-
-        //    for (int i = startId; i < endId; i++)
-        //    {
-        //        if ((XmlRead.GetValue(BladeFSkillTable, BladeFSkillCategory, i) & fSkillCategory) == 0) continue;
-
-        //        int attribute = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillAttribute, i);
-        //        if (attribute > 0 && attribute != (int)Blade.Attribute) continue;
-        //        int nameId = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillName, i);
-        //        if (nameId == 0) continue;
-
-        //        possibleSkills.Add(i);
-        //    }
-
-        //    while (skillIds.Count < skillCount)
-        //    {
-        //        int skillId = possibleSkills[Rand.Next(possibleSkills.Count)];
-        //        if (!skillIds.Contains(skillId))
-        //        {
-        //            skillIds.Add(skillId);
-        //        }
-        //    }
-
-        //    foreach (int skillId in skillIds)
-        //    {
-        //        var art = new Skill { Id = skillId };
-        //        int nameId = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillName, skillId);
-        //        art.Name = XmlRead.GetString(BladeFSkillMsTable, MsName, nameId);
-        //        int minLevel = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillMinLevel, skillId);
-        //        int maxLevel = (int)XmlRead.GetValue(BladeFSkillTable, BladeFSkillMaxLevel, skillId);
-        //        art.MaxLevel = Math.Min(Rand.Next(minLevel, maxLevel + 1), 3);
-        //        skills.Add(art);
-        //    }
-
-        //    Blade.FSkills = skills;
-        //}
-
-        private int GetRandomIndex(int[] probs)
+        private void ChooseFieldSkills()
         {
-            double randVal = Rand.Next(probs.Sum(x => x));
-            int sum = 0;
+            int probsIndex = Math.Min(DriverInfo.Level - 1, 60) / 15;
+            int skillCount = GetRandomIndex(FSkillProbs[probsIndex]) + 1;
 
-            for (int i = 0; i < probs.Length; i++)
+            var skills = new List<Skill>();
+            var fSkills = new List<FLD_FieldSkillList>
             {
-                sum += probs[i];
-                if (sum >= randVal && sum != 0)
-                {
-                    return i;
-                }
+                Tables.FLD_FieldSkillList.First(x =>
+                    x._Category == FieldSkillCategory.Elemental && x.Attirbute == (int) Blade.Attribute)
+            };
+
+            fSkills.AddRange(Tables.FLD_FieldSkillList
+                .Where(x => (x._Category & Template._Fskill) != 0 && x.Name != 0)
+                .ChooseRandom(Rand, skillCount - 1));
+
+            foreach (var skill in fSkills)
+            {
+                int maxLevel = Math.Min(Rand.Next(skill.MinLevel, skill.MaxLevel + 1), 3);
+                skills.Add(new Skill(skill.Id, skill._Name.name, maxLevel));
             }
 
-            return 0;
+            Blade.FSkills = skills;
+        }
+
+        private void ChooseFavoriteCategory()
+        {
+            Blade.FavCategories = FavoriteCategories.ChooseRandom(Rand, Template.FavoriteCategoryMax);
+
+            Blade.FavItems = Tables.ITM_FavoriteList.Where(x => x.Name != 0)
+                .ChooseRandom(Rand, Template.FavoriteItemMax);
+        }
+
+        private void GetCrownCount()
+        {
+            Blade.AffinityNodeCount = GetAffinityNodeCount();
+
+            for (int i = 0; i < 4; i++)
+            {
+                int threshold = Tables.FLD_wildcardData[63 + i].valueU2;
+
+                if (Blade.AffinityNodeCount <= threshold)
+                {
+                    Blade.CrownCount = i + 1;
+                    return;
+                }
+            }
+        }
+
+        private int GetAffinityNodeCount()
+        {
+            int count = 5;
+
+            foreach (var bArt in Blade.BArts)
+            {
+                count += bArt.MaxLevel;
+            }
+
+            foreach (var bArt in Blade.NArts)
+            {
+                count += bArt.MaxLevel;
+            }
+
+            foreach (var bArt in Blade.BSkills)
+            {
+                count += bArt.MaxLevel;
+            }
+
+            foreach (var bArt in Blade.FSkills)
+            {
+                count += bArt.MaxLevel;
+            }
+
+            return count;
         }
 
         private int GetRandomIndex(ushort[] probs)
@@ -508,19 +433,13 @@ namespace Xb2.CreateBlade
             }
         }
 
-        private static readonly int[] FSkillProbs00 = { 50, 45, 5 };
-        private static readonly int[] FSkillProbs15 = { 40, 45, 15 };
-        private static readonly int[] FSkillProbs30 = { 30, 45, 25 };
-        private static readonly int[] FSkillProbs45 = { 20, 45, 35 };
-        private static readonly int[] FSkillProbs60 = { 10, 45, 45 };
-
-        private static readonly int[][] FSkillProbs =
+        private static readonly byte[][] FSkillProbs =
         {
-            new[] {50, 45, 5},
-            new[] {40, 45, 15},
-            new[] {30, 45, 25},
-            new[] {20, 45, 35},
-            new[] {10, 45, 45}
+            new byte[] {50, 45, 5},
+            new byte[] {40, 45, 15},
+            new byte[] {30, 45, 25},
+            new byte[] {20, 45, 35},
+            new byte[] {10, 45, 45}
         };
 
         private static readonly BladeWeapon[] CommonWeapons =
@@ -533,6 +452,35 @@ namespace Xb2.CreateBlade
             BladeWeapon.ChromaKatana,
             BladeWeapon.Bitball,
             BladeWeapon.KnuckleClaws
+        };
+
+        private static readonly ItemCategory[] FavoriteCategories =
+        {
+            ItemCategory.StapleFoods,
+            ItemCategory.Vegetables,
+            ItemCategory.Meat,
+            ItemCategory.Seafood,
+            ItemCategory.Desserts,
+            ItemCategory.Drinks,
+            ItemCategory.Instruments,
+            ItemCategory.Art,
+            ItemCategory.Literature,
+            ItemCategory.BoardGames,
+            ItemCategory.Cosmetics,
+            ItemCategory.Textiles
+        };
+
+        private static readonly BladeAttribute[] Attributes =
+        {
+            BladeAttribute.None,
+            BladeAttribute.Fire,
+            BladeAttribute.Water,
+            BladeAttribute.Wind,
+            BladeAttribute.Earth,
+            BladeAttribute.Electric,
+            BladeAttribute.Ice,
+            BladeAttribute.Light,
+            BladeAttribute.Dark
         };
     }
 }
