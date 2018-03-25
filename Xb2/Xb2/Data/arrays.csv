@@ -22,3 +22,5 @@ BTL_CmnBl_Capacity,OrbNumProb,OrbNum0Prob,OrbNum1Prob,OrbNum2Prob,OrbNum3Prob
 BTL_CmnBl_Capacity,NartsNumProb,NartsNum1Prob,NartsNum2Prob,NartsNum3Prob
 BTL_CmnBl_Capacity,ArtsNumProb,ArtsNum1Prob,ArtsNum2Prob,ArtsNum3Prob
 BLD_BladeModelList,Parts,Parts1,Parts2,Parts3,Parts4
+BTL_CmnBl_StatusType,Status,Status01,Status02,Status03,Status04,Status05,Status06
+BTL_CmnBl_NewBlArts,NBA,NBA_01,NBA_02,NBA_03,NBA_04,NBA_05,NBA_06,NBA_07,NBA_08

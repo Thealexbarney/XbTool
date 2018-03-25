@@ -34,7 +34,11 @@ namespace Xb2.BdatString
 
     public class BdatStringItem
     {
+        public int Id { get; set; }
+        public string Table { get; set; }
         public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
+
+        public HashSet<BdatStringItem> ReferencedBy { get; } = new HashSet<BdatStringItem>();
 
         public object this[string memberName] => Values[memberName];
 
@@ -43,7 +47,7 @@ namespace Xb2.BdatString
             Values[member] = value;
         }
     }
-    
+
     public enum ItemType
     {
         PcWpnChip = 1,

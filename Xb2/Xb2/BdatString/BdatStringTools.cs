@@ -40,6 +40,9 @@ namespace Xb2.BdatString
                 case BdatFieldType.Item:
                     ApplyRef(GetItemTable(refId));
                     break;
+                case BdatFieldType.Event:
+                    ApplyRef(GetEventTable(refId));
+                    break;
                 case BdatFieldType.Condition:
                     var conditionType = (ConditionType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
                     ApplyRef(GetConditionTable(conditionType));
@@ -47,6 +50,10 @@ namespace Xb2.BdatString
                 case BdatFieldType.Task:
                     var taskType = (TaskType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
                     ApplyRef(GetTaskTable(taskType));
+                    break;
+                case BdatFieldType.ShopTable:
+                    var shopType = (ShopType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
+                    ApplyRef(GetShopTable(shopType));
                     break;
                 case BdatFieldType.Character:
                     ApplyRef(GetCharacterTable(refId));
@@ -59,6 +66,9 @@ namespace Xb2.BdatString
                     break;
                 case BdatFieldType.WeatherIdMap:
                     display = PrintWeatherIdMap(int.Parse((string)tables[tableName][itemId]?[memberName]), 13, tables);
+                    break;
+                case BdatFieldType.PouchBuff:
+                    display = GetPouchBuffCaption(tables[tableName][itemId], field, tables, info);
                     break;
             }
 
@@ -136,6 +146,31 @@ namespace Xb2.BdatString
             return sb.ToString();
         }
 
+        private static string GetPouchBuffCaption(BdatStringItem item, BdatFieldInfo field, BdatStringCollection tables, BdatInfo info)
+        {
+            if (item == null) return null;
+
+            int capId = int.Parse((string)item[field.Field]);
+            var cap = ReadValue("BTL_PouchBuff", capId, "Name", tables, info).value;
+            if (cap == null) return null;
+
+            var sb = new StringBuilder(cap);
+
+            var tags = ParseTags(cap);
+
+            foreach (var tag in tags.OrderByDescending(x => x.Start))
+            {
+                if (tag.SubType != "PouchParam") continue;
+
+                float buffValue = float.Parse((string)item[field.RefField]);
+
+                sb.Remove(tag.Start, tag.Length);
+                sb.Insert(tag.Start, buffValue);
+            }
+
+            return sb.ToString();
+        }
+
         public static string GetItemTable(int id)
         {
             if (id > 61000) return "ITM_EtherCrystal";
@@ -158,6 +193,16 @@ namespace Xb2.BdatString
             if (id > 10000) return "ITM_PcWpnChip";
             if (id > 5000) return "ITM_PcWpn";
             return "ITM_PcEquip";
+        }
+
+        public static string GetEventTable(int id)
+        {
+            if (id > 60000) return "EVT_listDeb01";
+            if (id > 40000) return "EVT_listTlk01";
+            if (id > 30000) return "EVT_listFev01";
+            if (id > 20000) return "EVT_listQst01";
+            if (id > 19000) return "EVT_listBl";
+            return "EVT_listBf";
         }
 
         public static string GetCharacterTable(int id)
@@ -224,6 +269,21 @@ namespace Xb2.BdatString
                     return "FLD_QuestFieldSkillCount";
                 case TaskType.StatCount:
                     return "FLD_Achievement";
+            }
+
+            return null;
+        }
+
+        public static string GetShopTable(ShopType shopType)
+        {
+            switch (shopType)
+            {
+                case ShopType.Normal:
+                    return "MNU_ShopNormal";
+                case ShopType.Exchange:
+                    return "MNU_ShopChange";
+                case ShopType.Inn:
+                    return "MNU_ShopInn";
             }
 
             return null;
@@ -355,6 +415,27 @@ namespace Xb2.BdatString
             }
 
             return tags;
+        }
+
+        public static void ProcessReferences(BdatStringCollection tables, BdatInfo info)
+        {
+            foreach (BdatStringTable table in tables.Tables.Values)
+            {
+                int id = table.BaseId;
+                foreach (var item in table.Items)
+                {
+                    foreach (BdatMember member in table.Members.Where(x => x.Type == BdatMemberType.Scalar))
+                    {
+                        var val = ReadValue(table.Name, id, member.Name, tables, info);
+                        if (val.childTable != null)
+                        {
+                            BdatStringItem childItem = tables[val.childTable][int.Parse(val.childId)];
+                            childItem.ReferencedBy.Add(item);
+                        }
+                    }
+                    id++;
+                }
+            }
         }
     }
 

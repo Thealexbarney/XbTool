@@ -3,3 +3,5 @@ Display,FLD_maplist,nameID
 Display,RSC_BgmList,filename
 Display,EVT_randtype,id
 Display,FLD_WeatherInfo,msg
+Display,FLD_QuestListMercenaries,QuestTitle
+Display,MNU_MapGroup,disp_name

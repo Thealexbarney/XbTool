@@ -55,6 +55,13 @@ namespace Xb2.Serialization
                 Items = ReadItems(file, offset, members)
             };
 
+            int id = table.BaseId;
+            foreach (BdatStringItem item in table.Items)
+            {
+                item.Table = tableName;
+                item.Id = id++;
+            }
+
             return table;
         }
 

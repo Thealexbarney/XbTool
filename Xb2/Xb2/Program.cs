@@ -126,7 +126,7 @@ namespace Xb2
             Console.WriteLine(watch.Elapsed.TotalMilliseconds);
 
             BdatInfo info = BdatInfoImport.GetBdatInfo(tables);
-
+            BdatStringTools.ProcessReferences(tables, info);
 
             watch.Restart();
             HtmlGen.OutputHtml(tables, info, htmlDir);

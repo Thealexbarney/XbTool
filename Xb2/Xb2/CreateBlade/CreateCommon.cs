@@ -359,25 +359,10 @@ namespace Xb2.CreateBlade
         {
             int count = 5;
 
-            foreach (var bArt in Blade.BArts)
-            {
-                count += bArt.MaxLevel;
-            }
-
-            foreach (var bArt in Blade.NArts)
-            {
-                count += bArt.MaxLevel;
-            }
-
-            foreach (var bArt in Blade.BSkills)
-            {
-                count += bArt.MaxLevel;
-            }
-
-            foreach (var bArt in Blade.FSkills)
-            {
-                count += bArt.MaxLevel;
-            }
+            count += Blade.BArts.Sum(x => x.MaxLevel);
+            count += Blade.NArts.Sum(x => x.MaxLevel);
+            count += Blade.BSkills.Sum(x => x.MaxLevel);
+            count += Blade.FSkills.Sum(x => x.MaxLevel);
 
             return count;
         }

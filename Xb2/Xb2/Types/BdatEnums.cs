@@ -86,4 +86,19 @@ namespace Xb2.Types
         Y,
         Random
     }
+
+    public enum LandmarkType
+    {
+        Landmark,
+        SecretArea,
+        Location
+    }
+
+    public enum ShopType
+    {
+        Normal,
+        Exchange,
+        Inn,
+        AuxCore
+    }
 }

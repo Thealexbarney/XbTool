@@ -44,7 +44,12 @@ namespace Xb2.Bdat
         PartyConditionEnum,
         IdeaCatEnumBits,
         FieldSkillEnum,
-        ButtonTypeEnum
+        ButtonTypeEnum,
+        PouchBuff,
+        LandmarkTypeEnum,
+        Event,
+        ShopTypeEnum,
+        ShopTable
     }
 
     public class BdatArrayInfo
@@ -83,16 +88,14 @@ namespace Xb2.Bdat
                     if (line == null || line.Length < 2) continue;
                     int col = 0;
 
-                    BdatFieldType type = (BdatFieldType)Enum.Parse(typeof(BdatFieldType), line[col++]);
-
                     var fInfo = new BdatFieldInfo
                     {
-                        Type = type,
                         Table = line[col++],
-                        Field = line[col++]
+                        Field = line[col++],
+                        Type = (BdatFieldType)Enum.Parse(typeof(BdatFieldType), line[col++])
                     };
 
-                    switch (type)
+                    switch (fInfo.Type)
                     {
                         case BdatFieldType.Message:
                             fInfo.RefTable = line[col++];
@@ -101,6 +104,9 @@ namespace Xb2.Bdat
                             fInfo.RefTable = line[col++];
                             break;
                         case BdatFieldType.Condition:
+                            fInfo.RefField = line[col++];
+                            break;
+                        case BdatFieldType.ShopTable:
                             fInfo.RefField = line[col++];
                             break;
                         case BdatFieldType.ConditionEnum:
@@ -124,7 +130,17 @@ namespace Xb2.Bdat
                         case BdatFieldType.ButtonTypeEnum:
                             fInfo.EnumType = typeof(ButtonType);
                             break;
+                        case BdatFieldType.LandmarkTypeEnum:
+                            fInfo.EnumType = typeof(LandmarkType);
+                            break;
+                        case BdatFieldType.ShopTypeEnum:
+                            fInfo.EnumType = typeof(ShopType);
+                            break;
                         case BdatFieldType.Task:
+                            fInfo.RefField = line[col++];
+                            break;
+                        case BdatFieldType.PouchBuff:
+                            fInfo.RefTable = "BTL_PouchBuff";
                             fInfo.RefField = line[col++];
                             break;
                         case BdatFieldType.Character:
@@ -133,6 +149,7 @@ namespace Xb2.Bdat
                         case BdatFieldType.Enhance:
                         case BdatFieldType.TimeRange:
                         case BdatFieldType.WeatherIdMap:
+                        case BdatFieldType.Event:
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
