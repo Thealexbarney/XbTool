@@ -22,13 +22,16 @@ namespace Xb2.Textures
                     for (int i = 0; i < wilay.Textures.Length; i++)
                     {
                         byte[] png = wilay.Textures[i].ToPng();
-
+                        
                         if (png == null)
                         {
                             Console.WriteLine($"{wilay.Textures[i].Format} decoding not implemented");
+
+                            byte[] dds = Dds.CreateDds(wilay.Textures[i]);
+                            File.WriteAllBytes(Path.Combine(outDir, filename + "_" + i + ".dds"), dds);
                             continue;
                         }
-
+                        
                         File.WriteAllBytes(Path.Combine(outDir, filename + "_" + i + ".png"), png);
                     }
                 }

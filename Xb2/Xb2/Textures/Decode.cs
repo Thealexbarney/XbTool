@@ -21,7 +21,7 @@ namespace Xb2.Textures
             switch (texture.Format)
             {
                 case TextureFormat.BC1:
-                    Swizzle.Deswizzle(texture,3);
+                    Swizzle.Deswizzle(texture, 3);
                     decoded = Dxt.DecompressDxt1(texture);
                     break;
                 case TextureFormat.BC3:
@@ -29,8 +29,11 @@ namespace Xb2.Textures
                     decoded = Dxt.DecompressDxt5(texture);
                     break;
                 case TextureFormat.BC4:
+                    Swizzle.Deswizzle(texture, 3);
+                    break;
                 case TextureFormat.BC6H_UF16:
                 case TextureFormat.BC7:
+                    Swizzle.Deswizzle(texture, 4);
                     break;
             }
 
