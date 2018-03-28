@@ -8,13 +8,14 @@ using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
 using Xb2.Serialization;
+using Xb2.Textures;
 using Xb2.Types;
 
 namespace Xb2
 {
     public static class Program
     {
-        private static void Extract(string arhFilename, string ardFilename, string outDir)
+        private static void ExtractArchive(string arhFilename, string ardFilename, string outDir)
         {
             var arh = File.ReadAllBytes(arhFilename);
             var archive = new FileArchive(arh, ardFilename);
@@ -144,6 +145,13 @@ namespace Xb2
             }
         }
 
+        public static void ReadWilay(string arhFilename, string ardFilename, string inPath, string outPath)
+        {
+            byte[] header = File.ReadAllBytes(arhFilename);
+            var archive = new FileArchive(header, ardFilename);
+            Extract.ExtractTextures(archive, inPath, outPath);
+        }
+
         public static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -155,7 +163,7 @@ namespace Xb2
             switch (args[0])
             {
                 case "extract" when args.Length == 4:
-                    Extract(args[1], args[2], args[3]);
+                    ExtractArchive(args[1], args[2], args[3]);
                     break;
                 case "decrypt" when args.Length == 2:
                     DecryptBdatFile(args[1]);
@@ -172,17 +180,20 @@ namespace Xb2
                 case "bdat2html" when args.Length == 4:
                     BdatToHtmlArchive(args[1], args[2], args[3]);
                     break;
-                case "generatedata" when args.Length == 4:
+                case "generatedatabdat" when args.Length == 4:
                     var tables = DeserializeBdat(args[1], args[2]);
                     PrintData(tables, args[3]);
                     break;
-                case "generatedataarc" when args.Length == 4:
+                case "generatedata" when args.Length == 4:
                     var tablesArd = DeserializeBdatArchive(args[1], args[2]);
                     PrintData(tablesArd, args[3]);
                     break;
                 case "createblade" when args.Length == 3:
                     var tablesCb = DeserializeBdatArchive(args[1], args[2]);
-                    CreateBlade.Run.Create(tablesCb);
+                    CreateBlade.Run.PromptCreate(tablesCb);
+                    break;
+                case "wilay" when args.Length == 5:
+                    ReadWilay(args[1], args[2], args[3], args[4]);
                     break;
                 default:
                     PrintUsage();
@@ -195,6 +206,10 @@ namespace Xb2
             Console.WriteLine("Xb2 extract <arh filename> <ard filename> <out dir>");
             Console.WriteLine("Xb2 decrypt <bdat filename>");
             Console.WriteLine("Xb2 decrypt <directory> <search pattern>");
+            Console.WriteLine("Xb2 bdat2html <arh filename> <ard filename> <out dir>");
+            Console.WriteLine("Xb2 generatedata <arh filename> <ard filename> <out dir>");
+            Console.WriteLine("Xb2 createblade <arh filename> <ard filename>");
+            Console.WriteLine("Xb2 wilay <arh filename> <ard filename> <wilay dir> <out dir>");
         }
     }
 

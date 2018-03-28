@@ -16,6 +16,7 @@ namespace Xb2
         public static void PrintSeparateTables(BdatStringCollection bdats, BdatInfo info, string htmlDir)
         {
             string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
+            Directory.CreateDirectory(htmlDir);
 
             PrintIndex(bdats, htmlDir);
             foreach (string tableName in bdats.Tables.Keys)
@@ -56,7 +57,6 @@ namespace Xb2
 
         public static void PrintIndex(BdatStringCollection bdats, string htmlDir)
         {
-            string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
             var sb = new Indenter(2);
             sb.AppendLine("<!DOCTYPE html>");
             sb.AppendLineAndIncrease("<html>");
