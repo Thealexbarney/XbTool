@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Xb2.BdatString;
-using Xb2.Types;
 
 namespace Xb2.Bdat
 {
@@ -24,6 +24,8 @@ namespace Xb2.Bdat
         public string RefField { get; set; }
         public int Adjust { get; set; }
         public Type EnumType { get; set; }
+
+        public BdatFieldInfo Clone() => (BdatFieldInfo)MemberwiseClone();
     }
 
     public enum BdatFieldType
@@ -49,7 +51,8 @@ namespace Xb2.Bdat
         LandmarkTypeEnum,
         Event,
         ShopTypeEnum,
-        ShopTable
+        ShopTable,
+        Enum
     }
 
     public class BdatArrayInfo
@@ -70,6 +73,7 @@ namespace Xb2.Bdat
                 FieldInfo = ReadBdatFieldInfo(),
                 DisplayFields = ReadBdatTableInfo()
             };
+            ResolveWildcards(tables, info);
             SetDisplayFields(tables, info);
 
             return info;
@@ -84,87 +88,68 @@ namespace Xb2.Bdat
             {
                 while (!reader.EndOfStream)
                 {
-                    string[] line = reader.ReadLine()?.Split(new[] { ',' });
+                    string[] line = reader.ReadLine()?.Split(',');
                     if (line == null || line.Length < 2) continue;
-                    int col = 0;
-
-                    var fInfo = new BdatFieldInfo
-                    {
-                        Table = line[col++],
-                        Field = line[col++],
-                        Type = (BdatFieldType)Enum.Parse(typeof(BdatFieldType), line[col++])
-                    };
-
-                    switch (fInfo.Type)
-                    {
-                        case BdatFieldType.Message:
-                            fInfo.RefTable = line[col++];
-                            break;
-                        case BdatFieldType.Reference:
-                            fInfo.RefTable = line[col++];
-                            break;
-                        case BdatFieldType.Condition:
-                            fInfo.RefField = line[col++];
-                            break;
-                        case BdatFieldType.ShopTable:
-                            fInfo.RefField = line[col++];
-                            break;
-                        case BdatFieldType.ConditionEnum:
-                            fInfo.EnumType = typeof(ConditionType);
-                            break;
-                        case BdatFieldType.TaskTypeEnum:
-                            fInfo.EnumType = typeof(TaskType);
-                            break;
-                        case BdatFieldType.PartyConditionEnum:
-                            fInfo.EnumType = typeof(PartyConditionType);
-                            break;
-                        case BdatFieldType.IdeaCatEnumBits:
-                            fInfo.EnumType = typeof(IdeaCategoryBits);
-                            break;
-                        case BdatFieldType.WeatherBitfield:
-                            fInfo.EnumType = typeof(WeatherBits);
-                            break;
-                        case BdatFieldType.FieldSkillEnum:
-                            fInfo.EnumType = typeof(FieldSkillCategory);
-                            break;
-                        case BdatFieldType.ButtonTypeEnum:
-                            fInfo.EnumType = typeof(ButtonType);
-                            break;
-                        case BdatFieldType.LandmarkTypeEnum:
-                            fInfo.EnumType = typeof(LandmarkType);
-                            break;
-                        case BdatFieldType.ShopTypeEnum:
-                            fInfo.EnumType = typeof(ShopType);
-                            break;
-                        case BdatFieldType.Task:
-                            fInfo.RefField = line[col++];
-                            break;
-                        case BdatFieldType.PouchBuff:
-                            fInfo.RefTable = "BTL_PouchBuff";
-                            fInfo.RefField = line[col++];
-                            break;
-                        case BdatFieldType.Character:
-                        case BdatFieldType.Item:
-                        case BdatFieldType.Hide:
-                        case BdatFieldType.Enhance:
-                        case BdatFieldType.TimeRange:
-                        case BdatFieldType.WeatherIdMap:
-                        case BdatFieldType.Event:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    if (line.Length >= col + 1 && int.TryParse(line[col], out int adjust))
-                    {
-                        fInfo.Adjust = adjust;
-                    }
-
-                    info.Add((fInfo.Table, fInfo.Field), fInfo);
+                    ReadBdatFieldInfoLine(info, line);
                 }
             }
 
             return info;
+        }
+
+        private static void ReadBdatFieldInfoLine(Dictionary<(string table, string member), BdatFieldInfo> info, string[] line)
+        {
+            int col = 0;
+
+            var fInfo = new BdatFieldInfo
+            {
+                Table = line[col++],
+                Field = line[col++],
+                Type = (BdatFieldType)Enum.Parse(typeof(BdatFieldType), line[col++])
+            };
+
+            switch (fInfo.Type)
+            {
+                case BdatFieldType.Message:
+                    fInfo.RefTable = line[col++];
+                    break;
+                case BdatFieldType.Reference:
+                    fInfo.RefTable = line[col++];
+                    break;
+                case BdatFieldType.Condition:
+                    fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.ShopTable:
+                    fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.Task:
+                    fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.PouchBuff:
+                    fInfo.RefTable = "BTL_PouchBuff";
+                    fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.Enum:
+                    string type = line[col++];
+                    fInfo.EnumType = Type.GetType("Xb2.Types." + type);
+                    break;
+                case BdatFieldType.Character:
+                case BdatFieldType.Item:
+                case BdatFieldType.Hide:
+                case BdatFieldType.Enhance:
+                case BdatFieldType.WeatherIdMap:
+                case BdatFieldType.Event:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (line.Length >= col + 1 && int.TryParse(line[col], out int adjust))
+            {
+                fInfo.Adjust = adjust;
+            }
+
+            info.Add((fInfo.Table, fInfo.Field), fInfo);
         }
 
         public static BdatArrayInfo[] ReadBdatArrayInfo()
@@ -176,7 +161,7 @@ namespace Xb2.Bdat
             {
                 while (!reader.EndOfStream)
                 {
-                    string[] line = reader.ReadLine()?.Split(new[] { ',' });
+                    string[] line = reader.ReadLine()?.Split(',');
                     if (line == null || line.Length < 3) continue;
 
                     var array = new BdatArrayInfo
@@ -206,7 +191,7 @@ namespace Xb2.Bdat
             {
                 while (!reader.EndOfStream)
                 {
-                    string[] line = reader.ReadLine()?.Split(new[] { ',' });
+                    string[] line = reader.ReadLine()?.Split(',');
                     if (line == null || line.Length < 2) continue;
 
                     display.Add(line[1], line[2]);
@@ -214,6 +199,55 @@ namespace Xb2.Bdat
             }
 
             return display;
+        }
+
+        public static void ResolveWildcards(BdatStringCollection tables, BdatInfo info)
+        {
+            var fields = info.FieldInfo.Where(x => x.Value.Table.Contains('*')).ToArray();
+
+            foreach (var field in fields)
+            {
+                var regex = new Regex("^" + Regex.Escape(field.Value.Table).Replace(@"\*", "(.*)") + "$");
+                var matches = tables.Tables.Select(x => regex.Match(x.Key)).Where(x => x.Success).ToArray();
+                foreach (var match in matches)
+                {
+                    var newInfo = field.Value.Clone();
+                    newInfo.Table = match.Value;
+
+                    if (newInfo.RefTable?.Contains('*') == true)
+                    {
+                        newInfo.RefTable = newInfo.RefTable.Replace("*", match.Groups[1].Value);
+
+                        if (!tables.Tables.ContainsKey(newInfo.RefTable)) continue;
+                    }
+
+                    info.FieldInfo.Add((newInfo.Table, newInfo.Field), newInfo);
+                }
+
+                info.FieldInfo.Remove(field.Key);
+            }
+
+            fields = info.FieldInfo.Where(x => x.Value.Field.Contains('*')).ToArray();
+
+            foreach (var field in fields)
+            {
+                var st = Regex.Escape(field.Value.Field).Replace(@"\*", "(.*)");
+                var regex = new Regex(st);
+                var matches = tables[field.Value.Table].Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
+                foreach (var match in matches)
+                {
+                    var newInfo = field.Value.Clone();
+                    newInfo.Field = match.Value;
+                    info.FieldInfo.Add((newInfo.Table, newInfo.Field), newInfo);
+
+                    if (newInfo.RefField?.Contains('*') == true)
+                    {
+                        newInfo.RefField = newInfo.RefField.Replace("*", match.Groups[1].Value);
+                    }
+                }
+
+                info.FieldInfo.Remove(field.Key);
+            }
         }
 
         public static void SetDisplayFields(BdatStringCollection tables, BdatInfo info)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xb2.Bdat;
 
 namespace Xb2.BdatString
@@ -46,66 +45,5 @@ namespace Xb2.BdatString
         {
             Values[member] = value;
         }
-    }
-
-    public enum ItemType
-    {
-        PcWpnChip = 1,
-        PcEquip = 2,
-        EquipOrb = 3,
-        PcWpn = 4,
-        Salvage = 5,
-        Precious = 6,
-        CollectionList = 7,
-        Tresure = 8,
-        EmptyOrb = 9,
-        Favorite = 10,
-        CrystalList = 11,
-        Booster = 12,
-        HealPot = 13,
-        Info = 14,
-        Event = 15,
-        HanaRole = 16,
-        HanaAtr = 17,
-        HanaArtsEnh = 18,
-        HanaNArtsSet = 19,
-        HanaAssist = 20
-    }
-
-    public enum Weather
-    {
-        Overcast = 1,
-        Lightning,
-        Rain,
-        Thunderstorm,
-        Storm,
-        Fog,
-        Snow,
-        Sandstorm,
-        CrystalSquall,
-        SurfaceHeat,
-        NightIncense,
-        Overcast2,
-        Aurora,
-        CloudSeaMist
-    }
-
-    [Flags]
-    public enum WeatherBits
-    {
-        Overcast = 1 << 0,
-        Lightning = 1 << 1,
-        Rain = 1 << 2,
-        Thunderstorm = 1 << 3,
-        Storm = 1 << 4,
-        Fog = 1 << 5,
-        Snow = 1 << 6,
-        Sandstorm = 1 << 7,
-        CrystalSquall = 1 << 8,
-        SurfaceHeat = 1 << 9,
-        NightIncense = 1 << 10,
-        Overcast2 = 1 << 11,
-        Aurora = 1 << 12,
-        CloudSeaMist = 1 << 13
     }
 }

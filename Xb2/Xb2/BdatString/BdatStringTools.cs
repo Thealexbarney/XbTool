@@ -61,9 +61,6 @@ namespace Xb2.BdatString
                 case BdatFieldType.Enhance:
                     display = GetEnhanceCaption(itemId, tables);
                     break;
-                case BdatFieldType.TimeRange:
-                    display = PrintTimeRange(int.Parse((string)tables[tableName][itemId]?[memberName]));
-                    break;
                 case BdatFieldType.WeatherIdMap:
                     display = PrintWeatherIdMap(int.Parse((string)tables[tableName][itemId]?[memberName]), 13, tables);
                     break;
@@ -288,43 +285,6 @@ namespace Xb2.BdatString
 
             return null;
         }
-
-        public static string PrintTimeRange(int timeRange)
-        {
-            var sb = new StringBuilder();
-            bool first = true;
-
-            for (int i = 0; i < TimeRanges.Length; i++)
-            {
-                if ((timeRange & (1 << i)) != 0)
-                {
-                    if (!first) sb.Append(", ");
-                    sb.Append(TimeRanges[i]);
-                    first = false;
-                }
-            }
-
-            if ((timeRange & (1 << 15)) != 0)
-            {
-                if (!first) sb.Append(", ");
-                sb.Append(TimeRanges[3]);
-            }
-
-            return sb.ToString();
-        }
-
-        public static string[] TimeRanges =
-        {
-            "7:00 - 11:59",
-            "12:00 - 15:59",
-            "16:00 - 18:59",
-            "19:00 - 23:59",
-            "0:00 - 4:59",
-            "5:00 - 6:59",
-            "7:00 - 18:59",
-            "19:00 - 6:59",
-            "0:00 - 23:59"
-        };
 
         public static string PrintEnumFlags(Type enumType, object value)
         {
