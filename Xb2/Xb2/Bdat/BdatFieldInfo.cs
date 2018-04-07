@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Xb2.BdatString;
 
 namespace Xb2.Bdat
 {
-    public class BdatInfo
-    {
-        public Dictionary<string, string> DisplayFields { get; set; }
-        public Dictionary<(string table, string member), BdatFieldInfo> FieldInfo { get; set; }
-    }
-
+    [DebuggerDisplay("{" + nameof(DebugString) + ", nq}")]
     public class BdatFieldInfo
     {
         public BdatFieldType Type { get; set; }
@@ -26,6 +19,7 @@ namespace Xb2.Bdat
         public Type EnumType { get; set; }
 
         public BdatFieldInfo Clone() => (BdatFieldInfo)MemberwiseClone();
+        private string DebugString => $"Type: {Type} Table: {Table} Member: {Field}";
     }
 
     public enum BdatFieldType
@@ -34,25 +28,16 @@ namespace Xb2.Bdat
         Reference,
         Item,
         Condition,
-        ConditionEnum,
         Character,
         Task,
-        TaskTypeEnum,
         Hide,
         Enhance,
-        TimeRange,
-        WeatherBitfield,
         WeatherIdMap,
-        PartyConditionEnum,
-        IdeaCatEnumBits,
-        FieldSkillEnum,
-        ButtonTypeEnum,
         PouchBuff,
-        LandmarkTypeEnum,
         Event,
-        ShopTypeEnum,
         ShopTable,
-        Enum
+        Enum,
+        QuestFlag
     }
 
     public class BdatArrayInfo
@@ -66,19 +51,6 @@ namespace Xb2.Bdat
 
     public static class BdatInfoImport
     {
-        public static BdatInfo GetBdatInfo(BdatStringCollection tables)
-        {
-            BdatInfo info = new BdatInfo
-            {
-                FieldInfo = ReadBdatFieldInfo(),
-                DisplayFields = ReadBdatTableInfo()
-            };
-            ResolveWildcards(tables, info);
-            SetDisplayFields(tables, info);
-
-            return info;
-        }
-
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo()
         {
             var info = new Dictionary<(string table, string member), BdatFieldInfo>();
@@ -139,6 +111,7 @@ namespace Xb2.Bdat
                 case BdatFieldType.Enhance:
                 case BdatFieldType.WeatherIdMap:
                 case BdatFieldType.Event:
+                case BdatFieldType.QuestFlag:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -199,70 +172,6 @@ namespace Xb2.Bdat
             }
 
             return display;
-        }
-
-        public static void ResolveWildcards(BdatStringCollection tables, BdatInfo info)
-        {
-            var fields = info.FieldInfo.Where(x => x.Value.Table.Contains('*')).ToArray();
-
-            foreach (var field in fields)
-            {
-                var regex = new Regex("^" + Regex.Escape(field.Value.Table).Replace(@"\*", "(.*)") + "$");
-                var matches = tables.Tables.Select(x => regex.Match(x.Key)).Where(x => x.Success).ToArray();
-                foreach (var match in matches)
-                {
-                    var newInfo = field.Value.Clone();
-                    newInfo.Table = match.Value;
-
-                    if (newInfo.RefTable?.Contains('*') == true)
-                    {
-                        newInfo.RefTable = newInfo.RefTable.Replace("*", match.Groups[1].Value);
-
-                        if (!tables.Tables.ContainsKey(newInfo.RefTable)) continue;
-                    }
-
-                    info.FieldInfo.Add((newInfo.Table, newInfo.Field), newInfo);
-                }
-
-                info.FieldInfo.Remove(field.Key);
-            }
-
-            fields = info.FieldInfo.Where(x => x.Value.Field.Contains('*')).ToArray();
-
-            foreach (var field in fields)
-            {
-                var st = Regex.Escape(field.Value.Field).Replace(@"\*", "(.*)");
-                var regex = new Regex(st);
-                var matches = tables[field.Value.Table].Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
-                foreach (var match in matches)
-                {
-                    var newInfo = field.Value.Clone();
-                    newInfo.Field = match.Value;
-                    info.FieldInfo.Add((newInfo.Table, newInfo.Field), newInfo);
-
-                    if (newInfo.RefField?.Contains('*') == true)
-                    {
-                        newInfo.RefField = newInfo.RefField.Replace("*", match.Groups[1].Value);
-                    }
-                }
-
-                info.FieldInfo.Remove(field.Key);
-            }
-        }
-
-        public static void SetDisplayFields(BdatStringCollection tables, BdatInfo info)
-        {
-            foreach (BdatStringTable table in tables.Tables.Values)
-            {
-                if (info.DisplayFields.ContainsKey(table.Name)) continue;
-
-                var fieldName = table.Members.FirstOrDefault(x => x.Name.ToLower() == "name")?.Name;
-
-                if (fieldName != null)
-                {
-                    info.DisplayFields.Add(table.Name, fieldName);
-                }
-            }
         }
     }
 }

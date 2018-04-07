@@ -9,16 +9,14 @@ namespace Xb2.CodeGen
 {
     public static class SerializationCode
     {
-        public static void CreateFiles(BdatTable[] tables, string csDir)
+        public static void CreateFiles(BdatTables tables, string csDir)
         {
             Directory.CreateDirectory(csDir);
 
-            var info = new BdatCollInfo(tables);
-
-            string bdatTypes = GenerateTypesFile(info);
-            string readFunctions = GenerateReadFunctionsFile(info);
-            string bdatCollection = GenerateBdatCollectionFile(info);
-            string typeMap = GenerateTypeMapFile(info);
+            string bdatTypes = GenerateTypesFile(tables);
+            string readFunctions = GenerateReadFunctionsFile(tables);
+            string bdatCollection = GenerateBdatCollectionFile(tables);
+            string typeMap = GenerateTypeMapFile(tables);
 
             File.WriteAllText(Path.Combine(csDir, "BdatTypes.cs"), bdatTypes);
             File.WriteAllText(Path.Combine(csDir, "ReadFunctions.cs"), readFunctions);
@@ -31,11 +29,12 @@ namespace Xb2.CodeGen
             return Keywords.Contains(input) ? "@" + input : input;
         }
 
-        private static string GenerateTypesFile(BdatCollInfo info)
+        private static string GenerateTypesFile(BdatTables info)
         {
             var sb = new Indenter();
 
             sb.AppendLine("// ReSharper disable InconsistentNaming");
+            sb.AppendLine("// ReSharper disable NotAccessedField.Global");
             sb.AppendLine();
             sb.AppendLine("using System;");
             sb.AppendLine();
@@ -80,7 +79,7 @@ namespace Xb2.CodeGen
                     case BdatMemberType.Array:
                         int length = member.ArrayCount;
                         var valType = GetType(member.ValType);
-                        sb.AppendLine($"public {valType}[] {name} = new {valType}[{length}];");
+                        sb.AppendLine($"public readonly {valType}[] {name} = new {valType}[{length}];");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -100,6 +99,9 @@ namespace Xb2.CodeGen
                     case BdatFieldType.Condition:
                         sb.AppendLine($"public object _{bdatRef.Field};");
                         break;
+                    case BdatFieldType.Enum:
+                        sb.AppendLine($"public {bdatRef.EnumType.Name} _{bdatRef.Field};");
+                        break;
                     default:
                         if (bdatRef.EnumType != null)
                         {
@@ -117,11 +119,14 @@ namespace Xb2.CodeGen
             sb.DecreaseAndAppendLine("}");
         }
 
-        private static string GenerateReadFunctionsFile(BdatCollInfo info)
+        private static string GenerateReadFunctionsFile(BdatTables info)
         {
             var sb = new Indenter();
 
-            sb.AppendLine("// ReSharper disable InconsistentNaming").AppendLine();
+            sb.AppendLine("// ReSharper disable InconsistentNaming");
+            sb.AppendLine("// ReSharper disable UnusedMember.Global");
+            sb.AppendLine("// ReSharper disable UseObjectOrCollectionInitializer");
+            sb.AppendLine("// ReSharper disable UnusedParameter.Global").AppendLine();
             sb.AppendLine("using System;");
             sb.AppendLine("using Xb2.Types;").AppendLine();
             sb.AppendLine("namespace Xb2.Serialization");
@@ -172,13 +177,13 @@ namespace Xb2.CodeGen
             sb.DecreaseAndAppendLine("}");
         }
 
-        private static void GenerateSetReferencesFunction(Indenter sb, BdatCollInfo info)
+        private static void GenerateSetReferencesFunction(Indenter sb, BdatTables info)
         {
             sb.AppendLine("public static void SetReferences(BdatCollection tables)");
             sb.AppendLineAndIncrease("{");
             bool firstTable = true;
 
-            foreach (var table in info.Tables)
+            foreach (var table in info.TableDesc)
             {
                 if (!firstTable) sb.AppendLine();
                 firstTable = false;
@@ -191,9 +196,9 @@ namespace Xb2.CodeGen
 
         private static void GenerateSetReferencesTable(Indenter sb, BdatTableDesc table)
         {
-            sb.AppendLine($"foreach (var item in tables.{table.Name}.Items)");
+            sb.AppendLine($"foreach ({table.Type.Name} item in tables.{table.Name}.Items)");
             sb.AppendLineAndIncrease("{");
-            foreach (var fieldRef in table.TableRefs)
+            foreach (var fieldRef in table.TableRefs.OrderBy(x => x.Field))
             {
                 switch (fieldRef.Type)
                 {
@@ -212,6 +217,9 @@ namespace Xb2.CodeGen
                     case BdatFieldType.Condition:
                         sb.AppendLine($"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
                         break;
+                    case BdatFieldType.Enum:
+                        sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{fieldRef.Field};");
+                        break;
                     default:
                         if (fieldRef.EnumType != null)
                         {
@@ -221,15 +229,16 @@ namespace Xb2.CodeGen
                 }
             }
 
-            foreach (var array in table.Arrays)
+            foreach (var array in table.Arrays.OrderBy(x => x.Name))
             {
                 sb.AppendLine($"item._{array.Name} = new[]");
                 sb.AppendLineAndIncrease("{");
 
-                foreach (var element in array.Elements)
+                var elementCount = array.Elements.Count;
+                for (int i = 0; i < elementCount; i++)
                 {
-                    string name = (array.IsReferences ? "_" : "") + element;
-                    sb.AppendLine($"item.{name},");
+                    string name = (array.IsReferences ? "_" : "") + array.Elements[i];
+                    sb.AppendLine($"item.{name}{(i < elementCount - 1 ? "," : "")}");
                 }
 
                 sb.DecreaseAndAppendLine("};");
@@ -255,7 +264,7 @@ namespace Xb2.CodeGen
             return output;
         }
 
-        private static string GenerateTypeMapFile(BdatCollInfo info)
+        private static string GenerateTypeMapFile(BdatTables info)
         {
             var sb = new StringBuilder();
 
@@ -271,11 +280,13 @@ namespace Xb2.CodeGen
             return sb.ToString();
         }
 
-        private static string GenerateBdatCollectionFile(BdatCollInfo info)
+        private static string GenerateBdatCollectionFile(BdatTables info)
         {
             var sb = new Indenter();
 
-            sb.AppendLine("// ReSharper disable InconsistentNaming").AppendLine();
+            sb.AppendLine("// ReSharper disable InconsistentNaming");
+            sb.AppendLine("// ReSharper disable UnassignedField.Global");
+            sb.AppendLine("// ReSharper disable UnusedMember.Global").AppendLine();
             sb.AppendLine("using System;");
             sb.AppendLine("using Xb2.Bdat;").AppendLine();
             sb.AppendLine("namespace Xb2.Types");
@@ -300,24 +311,25 @@ namespace Xb2.CodeGen
         private static string GetReader(BdatMember member)
         {
             string name = GetIdentifier(member.Name);
+            string memberPos = member.MemberPos > 0 ? $" + {member.MemberPos}" : string.Empty;
             switch (member.ValType)
             {
                 case BdatValueType.UInt8:
-                    return $"item.{name} = file[itemOffset + {member.MemberPos}];";
+                    return $"item.{name} = file[itemOffset{memberPos}];";
                 case BdatValueType.UInt16:
-                    return $"item.{name} = BitConverter.ToUInt16(file, itemOffset + {member.MemberPos});";
+                    return $"item.{name} = BitConverter.ToUInt16(file, itemOffset{memberPos});";
                 case BdatValueType.UInt32:
-                    return $"item.{name} = BitConverter.ToUInt32(file, itemOffset + {member.MemberPos});";
+                    return $"item.{name} = BitConverter.ToUInt32(file, itemOffset{memberPos});";
                 case BdatValueType.Int8:
-                    return $"item.{name} = (sbyte)file[itemOffset + {member.MemberPos}];";
+                    return $"item.{name} = (sbyte)file[itemOffset{memberPos}];";
                 case BdatValueType.Int16:
-                    return $"item.{name} = BitConverter.ToInt16(file, itemOffset + {member.MemberPos});";
+                    return $"item.{name} = BitConverter.ToInt16(file, itemOffset{memberPos});";
                 case BdatValueType.Int32:
-                    return $"item.{name} = BitConverter.ToInt32(file, itemOffset + {member.MemberPos});";
+                    return $"item.{name} = BitConverter.ToInt32(file, itemOffset{memberPos});";
                 case BdatValueType.String:
-                    return $"item.{name} = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + {member.MemberPos}));";
+                    return $"item.{name} = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset{memberPos}));";
                 case BdatValueType.FP32:
-                    return $"item.{name} = BitConverter.ToSingle(file, itemOffset + {member.MemberPos});";
+                    return $"item.{name} = BitConverter.ToSingle(file, itemOffset{memberPos});";
             }
             throw new ArgumentOutOfRangeException();
         }
@@ -326,8 +338,9 @@ namespace Xb2.CodeGen
         {
             string name = GetIdentifier(member.Name);
             int itemSize = GetSize(member.ValType);
+            string memberPos = member.MemberPos > 0 ? $" + {member.MemberPos}" : string.Empty;
 
-            sb.AppendLine($"for (int i = 0, offset = itemOffset + {member.MemberPos}; i < {member.ArrayCount}; i++, offset += {itemSize})");
+            sb.AppendLine($"for (int i = 0, offset = itemOffset{memberPos}; i < {member.ArrayCount}; i++, offset += {itemSize})");
             sb.AppendLineAndIncrease("{");
 
             switch (member.ValType)

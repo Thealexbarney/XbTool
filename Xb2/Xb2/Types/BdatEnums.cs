@@ -1,4 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Global
+
 using System;
 
 namespace Xb2.Types
@@ -185,5 +187,4 @@ namespace Xb2.Types
         Category,
         Specific
     }
-
 }

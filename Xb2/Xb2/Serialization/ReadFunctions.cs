@@ -1,4 +1,7 @@
 // ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UseObjectOrCollectionInitializer
+// ReSharper disable UnusedParameter.Global
 
 using System;
 using Xb2.Types;
@@ -11,7 +14,7 @@ namespace Xb2.Serialization
         {
             var item = new BdatEnum();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             return item;
         }
@@ -20,7 +23,7 @@ namespace Xb2.Serialization
         {
             var item = new BdatStateEnum();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.stat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             return item;
@@ -30,7 +33,7 @@ namespace Xb2.Serialization
         {
             var item = new BdatValue();
             item.Id = itemId;
-            item.Value = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.Value = BitConverter.ToUInt32(file, itemOffset);
             return item;
         }
 
@@ -38,7 +41,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_BladeList();
             item.Id = itemId;
-            item.Category = file[itemOffset + 0];
+            item.Category = file[itemOffset];
             item.StatusID = BitConverter.ToUInt16(file, itemOffset + 1);
             return item;
         }
@@ -47,7 +50,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_BladeModelList();
             item.Id = itemId;
-            item.QuestRace = file[itemOffset + 0];
+            item.QuestRace = file[itemOffset];
             item.Gender = file[itemOffset + 1];
             item.IdeaMin = file[itemOffset + 2];
             item.IdeaMax = file[itemOffset + 3];
@@ -66,7 +69,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_BladeTable();
             item.Id = itemId;
-            item.CharaID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.CharaID1 = BitConverter.ToUInt16(file, itemOffset);
             item.CharID1Percent = file[itemOffset + 2];
             item.CharaID2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.CharID2Percent = file[itemOffset + 5];
@@ -105,7 +108,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_CommonList();
             item.Id = itemId;
-            item.QuestRace = file[itemOffset + 0];
+            item.QuestRace = file[itemOffset];
             item.Gender = file[itemOffset + 1];
             item.Weapon = BitConverter.ToUInt32(file, itemOffset + 2);
             item.Atr = file[itemOffset + 6];
@@ -136,7 +139,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_Idea();
             item.Id = itemId;
-            item.NeedPoint = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.NeedPoint = BitConverter.ToUInt32(file, itemOffset);
             item.ProbRev = BitConverter.ToUInt16(file, itemOffset + 4);
             item.AtrDamRev = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
@@ -146,7 +149,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_IdeaTable();
             item.Id = itemId;
-            item.Item = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Item = BitConverter.ToUInt16(file, itemOffset);
             item.IdeaBlue = file[itemOffset + 2];
             item.IdeaRed = file[itemOffset + 3];
             item.IdeaWhite = file[itemOffset + 4];
@@ -160,7 +163,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_NameList();
             item.Id = itemId;
-            item.Category = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Category = BitConverter.ToUInt16(file, itemOffset);
             item.Race = file[itemOffset + 2];
             item.Gender = file[itemOffset + 3];
             item.sortJP = BitConverter.ToUInt32(file, itemOffset + 4);
@@ -178,7 +181,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_RareList();
             item.Id = itemId;
-            item.Blade = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Blade = BitConverter.ToUInt16(file, itemOffset);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Prob1 = BitConverter.ToSingle(file, itemOffset + 4);
             item.Assure1 = file[itemOffset + 8];
@@ -197,7 +200,7 @@ namespace Xb2.Serialization
         {
             var item = new BLD_ReleaceReward();
             item.Id = itemId;
-            item.Releace001 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Releace001 = BitConverter.ToUInt16(file, itemOffset);
             item.Releace002 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Releace003 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Releace004 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -211,7 +214,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Ai();
             item.Id = itemId;
-            item.Script = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Script = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -219,7 +222,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_Bl();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 6);
             item.WpnType = file[itemOffset + 8];
@@ -374,7 +377,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_Bl_Cam();
             item.Id = itemId;
-            item.Camera1 = file[itemOffset + 0];
+            item.Camera1 = file[itemOffset];
             item.Camera2 = file[itemOffset + 1];
             item.Camera3 = file[itemOffset + 2];
             item.Camera4 = file[itemOffset + 3];
@@ -390,7 +393,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_BlSp();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 6);
             item.WpnType = file[itemOffset + 8];
@@ -543,7 +546,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_BlSpVo();
             item.Id = itemId;
-            item.Talker1 = file[itemOffset + 0];
+            item.Talker1 = file[itemOffset];
             item.MotionNum1 = file[itemOffset + 1];
             item.Motionf1 = BitConverter.ToInt16(file, itemOffset + 2);
             item.VoiceNum1 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -582,7 +585,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_Dr();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 6);
             item.Driver = file[itemOffset + 8];
@@ -747,7 +750,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Arts_En();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.WpnNo = file[itemOffset + 6];
             item.ActNo = file[itemOffset + 7];
@@ -872,7 +875,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ArtsDirection();
             item.Id = itemId;
-            item.MotionNo1 = file[itemOffset + 0];
+            item.MotionNo1 = file[itemOffset];
             item.Startf1 = BitConverter.ToUInt16(file, itemOffset + 1);
             item.Keepf1 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.SlowRate1 = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -895,7 +898,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Aura();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Enhance1 = BitConverter.ToUInt16(file, itemOffset + 6);
             item.Enhance2 = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -908,7 +911,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_BallBreak();
             item.Id = itemId;
-            item.DamageRate = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.DamageRate = BitConverter.ToUInt16(file, itemOffset);
             item.FBGauge = BitConverter.ToUInt16(file, itemOffset + 2);
             item.FBBonus = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -918,7 +921,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bl_KizunaBase();
             item.Id = itemId;
-            item.KizunaDef = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.KizunaDef = BitConverter.ToUInt16(file, itemOffset);
             item.KizunaUpRev = (sbyte)file[itemOffset + 2];
             item.KizunaDownRev = (sbyte)file[itemOffset + 3];
             return item;
@@ -928,7 +931,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bl_KizunaLink();
             item.Id = itemId;
-            item.LinkNum = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.LinkNum = BitConverter.ToUInt16(file, itemOffset);
             item.DeadNum = BitConverter.ToUInt16(file, itemOffset + 2);
             item.AppStNum = BitConverter.ToUInt16(file, itemOffset + 4);
             item.AppEndNum = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -946,7 +949,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bl_KizunaLinkSet();
             item.Id = itemId;
-            item.KizunaLink1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.KizunaLink1 = BitConverter.ToUInt16(file, itemOffset);
             item.KizunaLink2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.LinkChType = BitConverter.ToUInt16(file, itemOffset + 4);
             item.LinkChNum = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -958,7 +961,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bl_KizunaUpDown();
             item.Id = itemId;
-            item.ParamE = BitConverter.ToInt16(file, itemOffset + 0);
+            item.ParamE = BitConverter.ToInt16(file, itemOffset);
             item.ParamD = BitConverter.ToInt16(file, itemOffset + 2);
             item.ParamC = BitConverter.ToInt16(file, itemOffset + 4);
             item.ParamB = BitConverter.ToInt16(file, itemOffset + 6);
@@ -982,7 +985,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bl_Personality();
             item.Id = itemId;
-            item.Flag = file[itemOffset + 0];
+            item.Flag = file[itemOffset];
             item.KizunaBase = file[itemOffset + 1];
             item.VoiceID = file[itemOffset + 2];
             item.BLC_A = file[itemOffset + 3];
@@ -1005,7 +1008,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_BtnChallenge();
             item.Id = itemId;
-            item.Speed = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Speed = BitConverter.ToUInt16(file, itemOffset);
             item.GSuccess = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Success = BitConverter.ToUInt16(file, itemOffset + 4);
             item.RecastRate = file[itemOffset + 6];
@@ -1016,7 +1019,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Buff();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.Caption = file[itemOffset + 5];
             item.BaseNum = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1037,7 +1040,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Bullet();
             item.Id = itemId;
-            item.MoveType = file[itemOffset + 0];
+            item.MoveType = file[itemOffset];
             item.SpdFirst = BitConverter.ToUInt16(file, itemOffset + 1);
             item.SpdLast = BitConverter.ToUInt16(file, itemOffset + 3);
             item.AclStart = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -1059,7 +1062,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_BulletEffect();
             item.Id = itemId;
-            item.Flag = file[itemOffset + 0];
+            item.Flag = file[itemOffset];
             item.EffPack = file[itemOffset + 1];
             item.WpnType = file[itemOffset + 2];
             item.Muzzle = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 3));
@@ -1080,7 +1083,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ChainAttackCam();
             item.Id = itemId;
-            item.CamType = file[itemOffset + 0];
+            item.CamType = file[itemOffset];
             item.EnSize = file[itemOffset + 1];
             item.SpeedType = file[itemOffset + 2];
             item.SpeedNum = BitConverter.ToUInt16(file, itemOffset + 3);
@@ -1106,7 +1109,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ChainAttackFull();
             item.Id = itemId;
-            item.Wpn01 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Wpn01 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Wpn02 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Wpn03 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Wpn04 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -1132,7 +1135,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ChainAttackStart();
             item.Id = itemId;
-            item.Wpn01 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Wpn01 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Wpn01b = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Wpn02 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Wpn02b = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -1177,7 +1180,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Circle();
             item.Id = itemId;
-            item.Point = file[itemOffset + 0];
+            item.Point = file[itemOffset];
             item.Radius = file[itemOffset + 1];
             item.Damage = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Target = file[itemOffset + 4];
@@ -1191,7 +1194,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Class();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Role1 = file[itemOffset + 2];
             item.Role2 = file[itemOffset + 3];
             item.Role3 = file[itemOffset + 4];
@@ -1215,7 +1218,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_CmnBl_Armor();
             item.Id = itemId;
-            item.WpnType = file[itemOffset + 0];
+            item.WpnType = file[itemOffset];
             item.PArmorCon = file[itemOffset + 1];
             item.PArmorRand = file[itemOffset + 2];
             item.EArmorCon = file[itemOffset + 3];
@@ -1227,7 +1230,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_CmnBl_Capacity();
             item.Id = itemId;
-            item.ArtsLv1Prob = file[itemOffset + 0];
+            item.ArtsLv1Prob = file[itemOffset];
             item.ArtsLv2Prob = file[itemOffset + 1];
             item.ArtsLv3Prob = file[itemOffset + 2];
             item.ArtsLv4Prob = file[itemOffset + 3];
@@ -1265,7 +1268,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_CmnBl_NewBlArts();
             item.Id = itemId;
-            item.WpnType = file[itemOffset + 0];
+            item.WpnType = file[itemOffset];
             item.NBA_01 = file[itemOffset + 1];
             item.NBA_02 = file[itemOffset + 2];
             item.NBA_03 = file[itemOffset + 3];
@@ -1281,7 +1284,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_CmnBl_Power();
             item.Id = itemId;
-            item.MinLv = file[itemOffset + 0];
+            item.MinLv = file[itemOffset];
             item.MaxLv = file[itemOffset + 1];
             item.Pow01 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Pow02 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -1300,7 +1303,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_CmnBl_StatusType();
             item.Id = itemId;
-            item.WpnType = file[itemOffset + 0];
+            item.WpnType = file[itemOffset];
             item.Status01 = file[itemOffset + 1];
             item.Status02 = file[itemOffset + 2];
             item.Status03 = file[itemOffset + 3];
@@ -1314,7 +1317,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Condition();
             item.Id = itemId;
-            item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset);
             item.Param01 = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -1323,7 +1326,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Dr_IdeaUpType();
             item.Id = itemId;
-            item.IdeaBlue = file[itemOffset + 0];
+            item.IdeaBlue = file[itemOffset];
             item.IdeaRed = file[itemOffset + 1];
             item.IdeaWhite = file[itemOffset + 2];
             item.IdeaBlack = file[itemOffset + 3];
@@ -1334,7 +1337,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Drop_Heal();
             item.Id = itemId;
-            item.RatioDeath = file[itemOffset + 0];
+            item.RatioDeath = file[itemOffset];
             item.PotNumMin1 = file[itemOffset + 1];
             item.PotNumMax1 = file[itemOffset + 2];
             item.PotLvMin1 = file[itemOffset + 3];
@@ -1361,7 +1364,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ElementalCombo();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.Caption = file[itemOffset + 5];
             item.Atr = file[itemOffset + 6];
@@ -1440,7 +1443,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_ElementalEffect();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.Caption = file[itemOffset + 5];
             item.Atr1 = file[itemOffset + 6];
@@ -1453,7 +1456,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_EnBook();
             item.Id = itemId;
-            item.BaseEnemyID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.BaseEnemyID = BitConverter.ToUInt16(file, itemOffset);
             item.BOOK_POP_TIME = BitConverter.ToUInt32(file, itemOffset + 2);
             item.BOOK_popWeather = file[itemOffset + 6];
             return item;
@@ -1463,7 +1466,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_EnDropItem();
             item.Id = itemId;
-            item.LimitNum = file[itemOffset + 0];
+            item.LimitNum = file[itemOffset];
             item.SelectType = file[itemOffset + 1];
             item.ItemID1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DropProb1 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -1504,7 +1507,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_EnDropQuest();
             item.Id = itemId;
-            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset);
             item.DropProb1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.GetConditon1 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ItemID2 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1523,7 +1526,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Enhance();
             item.Id = itemId;
-            item.EnhanceEffect = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.EnhanceEffect = BitConverter.ToUInt16(file, itemOffset);
             item.Param1 = BitConverter.ToSingle(file, itemOffset + 2);
             item.Param2 = BitConverter.ToSingle(file, itemOffset + 6);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -1534,7 +1537,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_EnhanceEff();
             item.Id = itemId;
-            item.Category = file[itemOffset + 0];
+            item.Category = file[itemOffset];
             item.Icon = file[itemOffset + 1];
             item.Flag = file[itemOffset + 2];
             item.Param = BitConverter.ToUInt16(file, itemOffset + 3);
@@ -1550,7 +1553,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_EnhanceMax();
             item.Id = itemId;
-            item.Max = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Max = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -1558,7 +1561,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_FightCombo();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.ComboStage = file[itemOffset + 5];
             item.PreCombo = file[itemOffset + 6];
@@ -1576,7 +1579,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Grow();
             item.Id = itemId;
-            item.LevelExp = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.LevelExp = BitConverter.ToUInt32(file, itemOffset);
             item.EnemyExp = BitConverter.ToUInt16(file, itemOffset + 4);
             item.EnemyWP = BitConverter.ToUInt16(file, itemOffset + 6);
             item.EnemySP = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -1589,7 +1592,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HanaBase();
             item.Id = itemId;
-            item.NCondNum = file[itemOffset + 0];
+            item.NCondNum = file[itemOffset];
             item.ECondNum = file[itemOffset + 1];
             item.NArtsNum = file[itemOffset + 2];
             item.Circuit1Num = BitConverter.ToUInt16(file, itemOffset + 3);
@@ -1606,7 +1609,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HanaChipset();
             item.Id = itemId;
-            item.RoleParts = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.RoleParts = BitConverter.ToUInt16(file, itemOffset);
             item.AtrParts = BitConverter.ToUInt16(file, itemOffset + 2);
             item.NArtsParts1 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.NArtsParts2 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1622,7 +1625,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HanaPower();
             item.Id = itemId;
-            item.PowerNum1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.PowerNum1 = BitConverter.ToUInt16(file, itemOffset);
             item.PowerNum2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.PowerNum3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.EtherNum1 = BitConverter.ToUInt32(file, itemOffset + 6);
@@ -1635,7 +1638,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HealPot();
             item.Id = itemId;
-            item.DropRsc = file[itemOffset + 0];
+            item.DropRsc = file[itemOffset];
             item.HpRatio = file[itemOffset + 1];
             item.Category = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             return item;
@@ -1645,7 +1648,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HitCameraParam();
             item.Id = itemId;
-            item.type = file[itemOffset + 0];
+            item.type = file[itemOffset];
             item.sub_type = file[itemOffset + 1];
             item.param01 = file[itemOffset + 2];
             item.param02 = file[itemOffset + 3];
@@ -1658,7 +1661,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HitDirection();
             item.Id = itemId;
-            item.DirectType = file[itemOffset + 0];
+            item.DirectType = file[itemOffset];
             item.DirectFrm = file[itemOffset + 1];
             item.CamType = file[itemOffset + 2];
             item.CamAngle = file[itemOffset + 3];
@@ -1669,7 +1672,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HitEffect();
             item.Id = itemId;
-            item.x0 = BitConverter.ToInt16(file, itemOffset + 0);
+            item.x0 = BitConverter.ToInt16(file, itemOffset);
             item.y0 = BitConverter.ToInt16(file, itemOffset + 2);
             item.z0 = BitConverter.ToInt16(file, itemOffset + 4);
             item.x1 = BitConverter.ToInt16(file, itemOffset + 6);
@@ -1732,7 +1735,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_HitEffectRim();
             item.Id = itemId;
-            item.RimName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.RimName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -1740,7 +1743,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Kizuna();
             item.Id = itemId;
-            item.KizunaMin = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.KizunaMin = BitConverter.ToUInt16(file, itemOffset);
             item.KizunaMax = BitConverter.ToUInt16(file, itemOffset + 2);
             item.BArtsProbRev = BitConverter.ToUInt16(file, itemOffset + 4);
             item.BArtsDamageRev = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1754,7 +1757,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Lv_Rev();
             item.Id = itemId;
-            item.ExpRevHigh = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ExpRevHigh = BitConverter.ToUInt16(file, itemOffset);
             item.ExpRevLow = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DamageRevHigh = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DamageRevLow = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1767,7 +1770,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_MapRev();
             item.Id = itemId;
-            item.Flag = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Flag = BitConverter.ToUInt16(file, itemOffset);
             item.KizunaCap = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ArtSp = file[itemOffset + 4];
             item.PC01Atk = file[itemOffset + 5];
@@ -1805,7 +1808,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_PartyGauge();
             item.Id = itemId;
-            item.Param = BitConverter.ToInt16(file, itemOffset + 0);
+            item.Param = BitConverter.ToInt16(file, itemOffset);
             return item;
         }
 
@@ -1813,7 +1816,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Points();
             item.Id = itemId;
-            item.Point = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Point = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -1821,7 +1824,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_PouchBuff();
             item.Id = itemId;
-            item.Max = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Max = BitConverter.ToUInt16(file, itemOffset);
             item.Name = file[itemOffset + 2];
             return item;
         }
@@ -1830,7 +1833,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_PouchBuffSet();
             item.Id = itemId;
-            item.PBuff1 = file[itemOffset + 0];
+            item.PBuff1 = file[itemOffset];
             item.PBuffParam1 = BitConverter.ToSingle(file, itemOffset + 1);
             item.PBuff2 = file[itemOffset + 5];
             item.PBuffParam2 = BitConverter.ToSingle(file, itemOffset + 6);
@@ -1843,7 +1846,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Reaction();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.Priority = file[itemOffset + 5];
             item.PowLv1_S = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -1877,7 +1880,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_SE();
             item.Id = itemId;
-            item.PackName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.PackName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tag = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.delivered = file[itemOffset + 8];
             return item;
@@ -1887,7 +1890,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Skill_Bl();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Enhance1 = BitConverter.ToUInt16(file, itemOffset + 6);
             item.Enhance2 = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -1910,7 +1913,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Skill_Dr();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Enhance = BitConverter.ToUInt16(file, itemOffset + 6);
             item.UI = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -1921,7 +1924,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Skill_Dr_Table();
             item.Id = itemId;
-            item.SkillID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.SkillID = BitConverter.ToUInt16(file, itemOffset);
             item.NeedSp = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Round = file[itemOffset + 4];
             item.ColumnNum = file[itemOffset + 5];
@@ -1933,7 +1936,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_SpArtsRecast();
             item.Id = itemId;
-            item.Param = file[itemOffset + 0];
+            item.Param = file[itemOffset];
             item.Param2 = file[itemOffset + 1];
             return item;
         }
@@ -1942,7 +1945,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Summon();
             item.Id = itemId;
-            item.SummonType = file[itemOffset + 0];
+            item.SummonType = file[itemOffset];
             item.LimitRad = BitConverter.ToUInt16(file, itemOffset + 1);
             item.Num = file[itemOffset + 3];
             item.Rate = file[itemOffset + 4];
@@ -1973,7 +1976,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_SystemBalance();
             item.Id = itemId;
-            item.Param = BitConverter.ToInt16(file, itemOffset + 0);
+            item.Param = BitConverter.ToInt16(file, itemOffset);
             item.Decimal = file[itemOffset + 2];
             return item;
         }
@@ -1982,7 +1985,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_TestSetting();
             item.Id = itemId;
-            item.Dr1 = file[itemOffset + 0];
+            item.Dr1 = file[itemOffset];
             item.Dr1Lv = file[itemOffset + 1];
             item.Dr1Bl1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Dr1Bl2 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -2004,7 +2007,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_UCDirect();
             item.Id = itemId;
-            item.Slow = file[itemOffset + 0];
+            item.Slow = file[itemOffset];
             item.Slowf = file[itemOffset + 1];
             item.Camera = file[itemOffset + 2];
             item.Waitf = file[itemOffset + 3];
@@ -2019,7 +2022,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_UniteCombo();
             item.Id = itemId;
-            item.StageSum = file[itemOffset + 0];
+            item.StageSum = file[itemOffset];
             item.NorDamageBonus = file[itemOffset + 1];
             item.NorTimeBonus = file[itemOffset + 2];
             item.NorPartyBonus = file[itemOffset + 3];
@@ -2035,7 +2038,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_VolumeFade();
             item.Id = itemId;
-            item.VolumeName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.VolumeName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -2043,7 +2046,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_VtxParticle();
             item.Id = itemId;
-            item.Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -2051,7 +2054,7 @@ namespace Xb2.Serialization
         {
             var item = new BTL_Wpn_En();
             item.Id = itemId;
-            item.RscR = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.RscR = BitConverter.ToUInt16(file, itemOffset);
             item.RscL = BitConverter.ToUInt16(file, itemOffset + 2);
             item.TypeRange = file[itemOffset + 4];
             item.Damage = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -2063,7 +2066,7 @@ namespace Xb2.Serialization
         {
             var item = new CAM_MaxLevel();
             item.Id = itemId;
-            item.RevReset = file[itemOffset + 0];
+            item.RevReset = file[itemOffset];
             item.RevAuto = file[itemOffset + 1];
             item.RotSpeed = file[itemOffset + 2];
             item.ZoomSpeed = file[itemOffset + 3];
@@ -2074,7 +2077,7 @@ namespace Xb2.Serialization
         {
             var item = new CAM_Params();
             item.Id = itemId;
-            item.RevReset = file[itemOffset + 0];
+            item.RevReset = file[itemOffset];
             item.RevAuto = file[itemOffset + 1];
             item.YawRotSpeed = file[itemOffset + 2];
             item.PitchRotSpeed = file[itemOffset + 3];
@@ -2086,7 +2089,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_Bl();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Race = file[itemOffset + 6];
             item.RotateLimitPitch = file[itemOffset + 7];
@@ -2208,7 +2211,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_Dr();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Race = file[itemOffset + 6];
             item.RotateLimitPitch = file[itemOffset + 7];
@@ -2286,7 +2289,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_DriverParam();
             item.Id = itemId;
-            item.ExtMountNpc = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ExtMountNpc = BitConverter.ToUInt16(file, itemOffset);
             item.ExtMountBone = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.ExtMountCond = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
@@ -2296,7 +2299,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_EnArrange();
             item.Id = itemId;
-            item.ParamID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ParamID = BitConverter.ToUInt16(file, itemOffset);
             item.EnemyBladeID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.BladeID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.BladeAtr = file[itemOffset + 6];
@@ -2374,7 +2377,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_EnParam();
             item.Id = itemId;
-            item.Debug_Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Debug_Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ResourceID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.AiID = BitConverter.ToUInt16(file, itemOffset + 6);
             item.EnemyRole = file[itemOffset + 8];
@@ -2450,7 +2453,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_EnParam_Rev();
             item.Id = itemId;
-            item.HpMaxRev = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.HpMaxRev = BitConverter.ToUInt16(file, itemOffset);
             item.StrengthRev = BitConverter.ToUInt16(file, itemOffset + 2);
             item.PowEtherRev = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DexRev = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -2463,7 +2466,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_EnParamTable();
             item.Id = itemId;
-            item.HpMaxBase = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.HpMaxBase = BitConverter.ToUInt32(file, itemOffset);
             item.StrengthBase = BitConverter.ToUInt16(file, itemOffset + 4);
             item.PowEtherBase = BitConverter.ToUInt16(file, itemOffset + 6);
             item.DexBase = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -2476,7 +2479,7 @@ namespace Xb2.Serialization
         {
             var item = new CHR_EnRstDebuff_Rev();
             item.Id = itemId;
-            item.RevType = file[itemOffset + 0];
+            item.RevType = file[itemOffset];
             item.RstFiCombo = BitConverter.ToUInt16(file, itemOffset + 1);
             item.IvdFiCombo = BitConverter.ToUInt16(file, itemOffset + 3);
             item.RstDebuffRev = BitConverter.ToUInt32(file, itemOffset + 5);
@@ -2489,7 +2492,7 @@ namespace Xb2.Serialization
         {
             var item = new COL_CharList();
             item.Id = itemId;
-            item.Radius = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Radius = BitConverter.ToUInt16(file, itemOffset);
             item.Height = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -2498,7 +2501,7 @@ namespace Xb2.Serialization
         {
             var item = new EFF_KizunaLink();
             item.Id = itemId;
-            item.WavePower = BitConverter.ToInt16(file, itemOffset + 0);
+            item.WavePower = BitConverter.ToInt16(file, itemOffset);
             item.WaveInterval = BitConverter.ToInt16(file, itemOffset + 2);
             item.WaveSpeed = BitConverter.ToInt16(file, itemOffset + 4);
             item.UTiling = BitConverter.ToInt16(file, itemOffset + 6);
@@ -2522,7 +2525,7 @@ namespace Xb2.Serialization
         {
             var item = new EventChange();
             item.Id = itemId;
-            item.chgName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.chgName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.chgType = (sbyte)file[itemOffset + 4];
             item.id = BitConverter.ToInt32(file, itemOffset + 5);
             item.value0 = BitConverter.ToInt32(file, itemOffset + 9);
@@ -2535,7 +2538,7 @@ namespace Xb2.Serialization
         {
             var item = new EventGroup();
             item.Id = itemId;
-            item.grpName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.grpName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.grpNameJP = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.atrDisp = file[itemOffset + 8];
             item.atrName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 9));
@@ -2551,7 +2554,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_acttype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.stat0 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.stat1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
@@ -2567,7 +2570,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_assetList();
             item.Id = itemId;
-            item.facialSeat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.facialSeat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.lensID = BitConverter.ToInt16(file, itemOffset + 4);
             return item;
         }
@@ -2576,7 +2579,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_bgm();
             item.Id = itemId;
-            item.nodeName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.nodeName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.nodeNameJP = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.nodeExtra = file[itemOffset + 8];
             item.nodeWidth = file[itemOffset + 9];
@@ -2598,7 +2601,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_cutscene_bl();
             item.Id = itemId;
-            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.id = BitConverter.ToInt16(file, itemOffset + 4);
             return item;
         }
@@ -2607,7 +2610,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_cutscene_pc();
             item.Id = itemId;
-            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.id = BitConverter.ToInt16(file, itemOffset + 4);
             item.scenarioMin = BitConverter.ToInt32(file, itemOffset + 6);
             item.scenarioMax = BitConverter.ToInt32(file, itemOffset + 10);
@@ -2618,7 +2621,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_cutscene_wp();
             item.Id = itemId;
-            item.id = BitConverter.ToInt16(file, itemOffset + 0);
+            item.id = BitConverter.ToInt16(file, itemOffset);
             item.blade = BitConverter.ToInt16(file, itemOffset + 2);
             item.resourceR = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.resourceL = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
@@ -2631,7 +2634,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_dof();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.dist = BitConverter.ToSingle(file, itemOffset + 4);
             item.range = BitConverter.ToSingle(file, itemOffset + 8);
             item.foMin = BitConverter.ToSingle(file, itemOffset + 12);
@@ -2648,7 +2651,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_eyetype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.stat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.disableWink = (sbyte)file[itemOffset + 10];
@@ -2659,7 +2662,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_facialtype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -2667,7 +2670,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_formation();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ofsX = BitConverter.ToSingle(file, itemOffset + 4);
             item.ofsZ = BitConverter.ToSingle(file, itemOffset + 8);
             item.rot = BitConverter.ToSingle(file, itemOffset + 12);
@@ -2678,7 +2681,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_headtype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.stat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.blend = BitConverter.ToInt16(file, itemOffset + 10);
@@ -2690,7 +2693,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_lens();
             item.Id = itemId;
-            item.thMin = BitConverter.ToInt16(file, itemOffset + 0);
+            item.thMin = BitConverter.ToInt16(file, itemOffset);
             item.thMax = BitConverter.ToInt16(file, itemOffset + 2);
             item.tvMin = BitConverter.ToInt16(file, itemOffset + 4);
             item.tvMax = BitConverter.ToInt16(file, itemOffset + 6);
@@ -2705,7 +2708,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_liptype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.stat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.disableTalkLip = (sbyte)file[itemOffset + 10];
@@ -2716,7 +2719,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listBf();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -2790,7 +2793,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listBl();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -2862,7 +2865,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listDeb01();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -2941,7 +2944,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listFev01();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -3018,7 +3021,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listList();
             item.Id = itemId;
-            item.type = file[itemOffset + 0];
+            item.type = file[itemOffset];
             item.chap = file[itemOffset + 1];
             item.listSeat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.setupSeat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
@@ -3030,7 +3033,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listQst01();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -3108,7 +3111,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_listTlk01();
             item.Id = itemId;
-            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.evtName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.mstxt = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.setupID = BitConverter.ToUInt16(file, itemOffset + 8);
             item.chgStID = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -3179,7 +3182,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_nearfar();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.near = BitConverter.ToSingle(file, itemOffset + 4);
             item.far = BitConverter.ToSingle(file, itemOffset + 8);
             return item;
@@ -3189,7 +3192,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_randtype();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.value = BitConverter.ToInt16(file, itemOffset + 4);
             item.id = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             return item;
@@ -3199,7 +3202,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_setup();
             item.Id = itemId;
-            item.setupName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.setupName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.objName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.objType = (sbyte)file[itemOffset + 8];
             item.objID = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 9));
@@ -3212,7 +3215,7 @@ namespace Xb2.Serialization
         {
             var item = new EVT_setupB();
             item.Id = itemId;
-            item.setupName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.setupName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.objName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.objType = file[itemOffset + 8];
             item.objID = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 9));
@@ -3225,7 +3228,7 @@ namespace Xb2.Serialization
         {
             var item = new FacialConfig();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.brow_type = BitConverter.ToInt16(file, itemOffset + 4);
             item.brow_weight = BitConverter.ToSingle(file, itemOffset + 6);
             item.eye_type = BitConverter.ToInt16(file, itemOffset + 10);
@@ -3245,7 +3248,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_Achievement();
             item.Id = itemId;
-            item.StatsID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.StatsID = BitConverter.ToUInt16(file, itemOffset);
             item.Count = BitConverter.ToUInt32(file, itemOffset + 2);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             return item;
@@ -3255,7 +3258,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_AchievementList();
             item.Id = itemId;
-            item.Title = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Title = BitConverter.ToUInt16(file, itemOffset);
             item.Category = file[itemOffset + 2];
             item.Icon = BitConverter.ToUInt16(file, itemOffset + 3);
             item.Task = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -3271,7 +3274,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_AchievementSet();
             item.Id = itemId;
-            item.Category = file[itemOffset + 0];
+            item.Category = file[itemOffset];
             item.AbilityLevel = file[itemOffset + 1];
             item.AchievementID1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.AchievementID2 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -3285,7 +3288,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_actorSE();
             item.Id = itemId;
-            item.LOD = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.LOD = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.se_type = file[itemOffset + 4];
             item.seName = BitConverter.ToUInt16(file, itemOffset + 5);
             item.max_volume_Dist = BitConverter.ToSingle(file, itemOffset + 7);
@@ -3302,7 +3305,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_AddItem();
             item.Id = itemId;
-            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset);
             item.ItemNumber1 = (sbyte)file[itemOffset + 2];
             item.ItemID2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.ItemNumber2 = (sbyte)file[itemOffset + 5];
@@ -3315,7 +3318,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_AntiBladeArea();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.BTL_MapRevId = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
         }
@@ -3324,7 +3327,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_BladePop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.BladeSizeCheck = file[itemOffset + 4];
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 5);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -3347,7 +3350,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_BtnChallenge();
             item.Id = itemId;
-            item.Start = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Start = BitConverter.ToUInt16(file, itemOffset);
             item.Speed = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Gsuccess = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Success = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -3358,7 +3361,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ClimbingPOP();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3375,7 +3378,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionAchievement();
             item.Id = itemId;
-            item.AchievementSetID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.AchievementSetID = BitConverter.ToUInt16(file, itemOffset);
             item.Value = file[itemOffset + 2];
             return item;
         }
@@ -3384,7 +3387,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionEnv();
             item.Id = itemId;
-            item.TimeRange = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.TimeRange = BitConverter.ToUInt32(file, itemOffset);
             item.Weather = BitConverter.ToUInt32(file, itemOffset + 4);
             item.CloudHeight = file[itemOffset + 8];
             return item;
@@ -3394,7 +3397,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionFieldSkiiLevel();
             item.Id = itemId;
-            item.FieldSkillID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.FieldSkillID = BitConverter.ToUInt16(file, itemOffset);
             item.Level = file[itemOffset + 2];
             return item;
         }
@@ -3403,7 +3406,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionFlag();
             item.Id = itemId;
-            item.FlagType = file[itemOffset + 0];
+            item.FlagType = file[itemOffset];
             item.FlagID = BitConverter.ToUInt16(file, itemOffset + 1);
             item.FlagMin = BitConverter.ToUInt16(file, itemOffset + 3);
             item.FlagMax = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -3414,7 +3417,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionIdea();
             item.Id = itemId;
-            item.PCID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.PCID = BitConverter.ToUInt16(file, itemOffset);
             item.IdeaLevelBlue = file[itemOffset + 2];
             item.IdeaLevelRed = file[itemOffset + 3];
             item.IdeaLevelWhite = file[itemOffset + 4];
@@ -3428,7 +3431,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionItem();
             item.Id = itemId;
-            item.ItemCategory = file[itemOffset + 0];
+            item.ItemCategory = file[itemOffset];
             item.ItemID = BitConverter.ToUInt16(file, itemOffset + 1);
             item.Number = file[itemOffset + 3];
             return item;
@@ -3438,7 +3441,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionLevel();
             item.Id = itemId;
-            item.PCID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.PCID = BitConverter.ToUInt16(file, itemOffset);
             item.Level = file[itemOffset + 2];
             return item;
         }
@@ -3447,7 +3450,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionList();
             item.Id = itemId;
-            item.Premise = file[itemOffset + 0];
+            item.Premise = file[itemOffset];
             item.ConditionType1 = file[itemOffset + 1];
             item.Condition1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ConditionType2 = file[itemOffset + 4];
@@ -3471,7 +3474,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionPT();
             item.Id = itemId;
-            item.Category = file[itemOffset + 0];
+            item.Category = file[itemOffset];
             item.PCID1 = BitConverter.ToUInt16(file, itemOffset + 1);
             item.PCID2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.PCID3 = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -3482,7 +3485,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionQuest();
             item.Id = itemId;
-            item.QuestFlag1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.QuestFlag1 = BitConverter.ToUInt16(file, itemOffset);
             item.QuestFlagMin1 = file[itemOffset + 2];
             item.QuestFlagMax1 = file[itemOffset + 3];
             item.QuestFlag2 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -3501,7 +3504,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ConditionScenario();
             item.Id = itemId;
-            item.ScenarioMin = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ScenarioMin = BitConverter.ToUInt16(file, itemOffset);
             item.ScenarioMax = BitConverter.ToUInt16(file, itemOffset + 2);
             item.NotScenarioMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.NotScenarioMax = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -3512,7 +3515,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_DMGFloor();
             item.Id = itemId;
-            item.Condition = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset);
             item.MAPID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.attributeID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DMG_interval = BitConverter.ToSingle(file, itemOffset + 6);
@@ -3525,7 +3528,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_DMGGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DEPOP_gimmickType = file[itemOffset + 6];
             item.DEPOP_gimmickID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -3547,7 +3550,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_DoorGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.gimmickType = file[itemOffset + 6];
             item.gimmickID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -3586,7 +3589,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_EffectPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3600,7 +3603,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ElevatorGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.OP_Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.tgt_callswitchMSG_ID = BitConverter.ToUInt16(file, itemOffset + 6);
             item.callnameRadius = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3636,7 +3639,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_ENActMove();
             item.Id = itemId;
-            item.actIDL_Per = file[itemOffset + 0];
+            item.actIDL_Per = file[itemOffset];
             item.actMove_Per = file[itemOffset + 1];
             item.IDL_Per = file[itemOffset + 2];
             item.IDL_Time = file[itemOffset + 3];
@@ -3663,7 +3666,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_EnemyGroup();
             item.Id = itemId;
-            item.EnemyID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.EnemyID1 = BitConverter.ToUInt16(file, itemOffset);
             item.EnemyID2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.EnemyID3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.EnemyID4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -3678,7 +3681,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_FieldLockGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3695,7 +3698,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_FieldSkillList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Type = file[itemOffset + 4];
             item.RandomID = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -3713,7 +3716,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_FieldSkillRandom();
             item.Id = itemId;
-            item.Level1Chance = file[itemOffset + 0];
+            item.Level1Chance = file[itemOffset];
             item.Level2Chance = file[itemOffset + 1];
             item.Level3Chance = file[itemOffset + 2];
             return item;
@@ -3723,7 +3726,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_FieldSkillSetting();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.FieldSkillID1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.FieldSkillLevel1 = file[itemOffset + 4];
             item.FieldSkillID2 = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -3737,7 +3740,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_FootPrintsRoutes();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.FootEffect = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 8);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -3752,7 +3755,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_GravePopList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.en_popID = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
@@ -3762,7 +3765,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_IdeaTable();
             item.Id = itemId;
-            item.TrustPoint = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.TrustPoint = BitConverter.ToUInt32(file, itemOffset);
             item.WpnRatio = BitConverter.ToUInt16(file, itemOffset + 4);
             item.NArtsProbRev = file[itemOffset + 6];
             item.BladeChangeRev = BitConverter.ToInt16(file, itemOffset + 7);
@@ -3774,7 +3777,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_InnEvent();
             item.Id = itemId;
-            item.Condition = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset);
             item.EventID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.KizunaTalkID = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -3784,7 +3787,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_JumpGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.FSID = BitConverter.ToUInt16(file, itemOffset + 6);
             item.jumpType = file[itemOffset + 8];
@@ -3800,7 +3803,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_KizunaTalk();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ConditionID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Title = BitConverter.ToUInt16(file, itemOffset + 6);
             item.EventID = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3813,7 +3816,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_LODList();
             item.Id = itemId;
-            item.LODID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.LODID = BitConverter.ToUInt16(file, itemOffset);
             item.flag = BitConverter.ToUInt32(file, itemOffset + 2);
             item.ScenarioFlagMin1 = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMax1 = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3866,7 +3869,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_MapGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.popTime = BitConverter.ToUInt32(file, itemOffset + 4);
             item.popWeather = file[itemOffset + 8];
             item.gimmickType = file[itemOffset + 9];
@@ -3944,7 +3947,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_MapJump();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MapJumpId = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -3959,7 +3962,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_maplist();
             item.Id = itemId;
-            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.resource = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.select = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.rscGmkId = BitConverter.ToUInt32(file, itemOffset + 8);
             item.ene_disp_r = file[itemOffset + 12];
@@ -4025,7 +4028,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_MercenariesMission();
             item.Id = itemId;
-            item.QuestID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.QuestID = BitConverter.ToUInt16(file, itemOffset);
             item.Category = file[itemOffset + 2];
             item.RequestPerformance = BitConverter.ToUInt16(file, itemOffset + 3);
             item.Repeatable = file[itemOffset + 5];
@@ -4037,7 +4040,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_MobGroupList();
             item.Id = itemId;
-            item.MOBID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.MOBID1 = BitConverter.ToUInt16(file, itemOffset);
             item.MOBID2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.MOBID3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.MOBID4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4052,7 +4055,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_NpcGroupId();
             item.Id = itemId;
-            item.memberNum = file[itemOffset + 0];
+            item.memberNum = file[itemOffset];
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 1);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 3);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -4067,7 +4070,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_NpcMobMotionId();
             item.Id = itemId;
-            item.cmdName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.cmdName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.flag = file[itemOffset + 4];
             item.notEyeBlink = (item.flag & 1) != 0;
             return item;
@@ -4077,7 +4080,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_OwnerBonus();
             item.Id = itemId;
-            item.Caption = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Caption = BitConverter.ToUInt16(file, itemOffset);
             item.Type = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Value = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -4087,7 +4090,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestBattle();
             item.Id = itemId;
-            item.Refer = file[itemOffset + 0];
+            item.Refer = file[itemOffset];
             item.EnemyID = BitConverter.ToUInt16(file, itemOffset + 1);
             item.EnemyGroupID = BitConverter.ToUInt16(file, itemOffset + 3);
             item.EnemySpeciesID = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -4105,7 +4108,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestCollect();
             item.Id = itemId;
-            item.Refer = file[itemOffset + 0];
+            item.Refer = file[itemOffset];
             item.ItemID = BitConverter.ToUInt16(file, itemOffset + 1);
             item.Category = file[itemOffset + 3];
             item.Count = file[itemOffset + 4];
@@ -4121,7 +4124,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestCondition();
             item.Id = itemId;
-            item.ConditionID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ConditionID = BitConverter.ToUInt16(file, itemOffset);
             item.MapID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -4131,7 +4134,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestEvent();
             item.Id = itemId;
-            item.EventID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.EventID = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -4139,7 +4142,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestFieldSkillCount();
             item.Id = itemId;
-            item.FieldSkillID = file[itemOffset + 0];
+            item.FieldSkillID = file[itemOffset];
             item.Count = BitConverter.ToUInt16(file, itemOffset + 1);
             return item;
         }
@@ -4148,7 +4151,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestGimmick();
             item.Id = itemId;
-            item.MapID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.MapID = BitConverter.ToUInt16(file, itemOffset);
             item.DoorGimmickID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ElevatorGimmickID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.JumpGimmickID = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4165,7 +4168,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestHints();
             item.Id = itemId;
-            item.MainChar1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.MainChar1 = BitConverter.ToUInt16(file, itemOffset);
             item.MainChar2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.MainChar3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.MainChar4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4181,7 +4184,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestList();
             item.Id = itemId;
-            item.QuestTitle = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.QuestTitle = BitConverter.ToUInt16(file, itemOffset);
             item.QuestCategory = file[itemOffset + 2];
             item.Visible = file[itemOffset + 3];
             item.Talker = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -4215,7 +4218,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestReach();
             item.Id = itemId;
-            item.Category = file[itemOffset + 0];
+            item.Category = file[itemOffset];
             item.MapID = BitConverter.ToUInt16(file, itemOffset + 1);
             item.PlaceID = BitConverter.ToUInt16(file, itemOffset + 3);
             return item;
@@ -4225,7 +4228,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestReward();
             item.Id = itemId;
-            item.Gold = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.Gold = BitConverter.ToUInt32(file, itemOffset);
             item.EXP = BitConverter.ToUInt32(file, itemOffset + 4);
             item.Sp = BitConverter.ToUInt16(file, itemOffset + 8);
             item.Coin = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -4250,7 +4253,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestRewardRandom();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.ItemCategory1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ItemID1 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ItemIDPercent1 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4273,7 +4276,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestTalk();
             item.Id = itemId;
-            item.MapID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.MapID = BitConverter.ToUInt16(file, itemOffset);
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DummyGroup = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -4283,7 +4286,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestTalkDummyGroup();
             item.Id = itemId;
-            item.NpcID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.NpcID1 = BitConverter.ToUInt16(file, itemOffset);
             item.NpcID2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.NpcID3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.NpcID4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4298,7 +4301,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestTask();
             item.Id = itemId;
-            item.PreCondition = file[itemOffset + 0];
+            item.PreCondition = file[itemOffset];
             item.TaskType1 = file[itemOffset + 1];
             item.TaskID1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Branch1 = file[itemOffset + 4];
@@ -4330,7 +4333,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_QuestUse();
             item.Id = itemId;
-            item.ItemID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ItemID = BitConverter.ToUInt16(file, itemOffset);
             item.Category = file[itemOffset + 2];
             item.ItemNumber = file[itemOffset + 3];
             item.PartyInPC = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -4342,7 +4345,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_randomTalk();
             item.Id = itemId;
-            item.type = (sbyte)file[itemOffset + 0];
+            item.type = (sbyte)file[itemOffset];
             item.talk0 = BitConverter.ToInt16(file, itemOffset + 1);
             item.text0 = BitConverter.ToInt16(file, itemOffset + 3);
             item.target0 = (sbyte)file[itemOffset + 5];
@@ -4356,7 +4359,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_RequestBlade();
             item.Id = itemId;
-            item.RequestCategory = file[itemOffset + 0];
+            item.RequestCategory = file[itemOffset];
             item.RequestAtr = file[itemOffset + 1];
             item.RequestPerformance = BitConverter.ToUInt16(file, itemOffset + 2);
             item.RequestRace = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -4373,7 +4376,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_RequestItemSet();
             item.Id = itemId;
-            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ItemID1 = BitConverter.ToUInt16(file, itemOffset);
             item.Count1 = file[itemOffset + 2];
             item.ItemID2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.Count2 = file[itemOffset + 5];
@@ -4383,7 +4386,7 @@ namespace Xb2.Serialization
             item.Count4 = file[itemOffset + 11];
             item.ItemID5 = BitConverter.ToUInt16(file, itemOffset + 12);
             item.Count5 = file[itemOffset + 14];
-            item.Count5 = file[itemOffset + 15];
+            item.Count5_0 = file[itemOffset + 15];
             item.MapID = BitConverter.ToUInt16(file, itemOffset + 16);
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 18);
             return item;
@@ -4393,7 +4396,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvageClimbLotTable();
             item.Id = itemId;
-            item.NoTBox = file[itemOffset + 0];
+            item.NoTBox = file[itemOffset];
             item.TBox = file[itemOffset + 1];
             item.RTBox = file[itemOffset + 2];
             item.SRTBox = file[itemOffset + 3];
@@ -4410,7 +4413,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvageEnemySet();
             item.Id = itemId;
-            item.ene1ID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ene1ID = BitConverter.ToUInt16(file, itemOffset);
             item.ene1Lv = (sbyte)file[itemOffset + 2];
             item.ene1Per = file[itemOffset + 3];
             item.ene2ID = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -4430,7 +4433,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvageEvent();
             item.Id = itemId;
-            item.EventID1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.EventID1 = BitConverter.ToUInt16(file, itemOffset);
             item.Percent1 = file[itemOffset + 2];
             item.EventID2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.Percent2 = file[itemOffset + 5];
@@ -4449,7 +4452,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvageItemSet();
             item.Id = itemId;
-            item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.RSC_ID = BitConverter.ToUInt16(file, itemOffset);
             item.flag = file[itemOffset + 2];
             item.msgVisible = file[itemOffset + 3];
             item.goldMin = BitConverter.ToUInt32(file, itemOffset + 4);
@@ -4491,7 +4494,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvagePointList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.SalvagePointName = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
             item.BtnChallenge0 = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -4513,7 +4516,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SalvageTable();
             item.Id = itemId;
-            item.ColleTable1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ColleTable1 = BitConverter.ToUInt16(file, itemOffset);
             item.ColleTablePercent1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ColleTable2 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ColleTablePercent2 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -4541,7 +4544,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_SePop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.flag = file[itemOffset + 4];
             item.seName = BitConverter.ToUInt16(file, itemOffset + 5);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -4568,7 +4571,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_TimeInfo();
             item.Id = itemId;
-            item.msg = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.msg = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -4576,7 +4579,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_Tutorial();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -4589,7 +4592,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_UniquePreset();
             item.Id = itemId;
-            item.Frequency = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Frequency = BitConverter.ToUInt16(file, itemOffset);
             item.Chara0 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Motion0 = file[itemOffset + 4];
             item.Delay0 = BitConverter.ToSingle(file, itemOffset + 5);
@@ -4615,7 +4618,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_UniqueTable();
             item.Id = itemId;
-            item.RefID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.RefID = BitConverter.ToUInt16(file, itemOffset);
             item.Probability = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DelayMin = BitConverter.ToSingle(file, itemOffset + 4);
             item.DelayMax = BitConverter.ToSingle(file, itemOffset + 8);
@@ -4629,7 +4632,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_VoiceTable();
             item.Id = itemId;
-            item.Driver1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Driver1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Driver2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Driver3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Driver4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -4642,7 +4645,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_VoiceTableBlade();
             item.Id = itemId;
-            item.Blade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Blade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Blade2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Blade3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Blade4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -4660,7 +4663,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_VoiceTableCommon();
             item.Id = itemId;
-            item.CommonBlade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.CommonBlade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.CommonBlade2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.CommonBlade3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.CommonBlade4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -4699,7 +4702,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_VoiceTableRare();
             item.Id = itemId;
-            item.RareBlade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.RareBlade1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.RareBlade2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.RareBlade3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.RareBlade4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -4743,7 +4746,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_WarpGimmick();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.gimmickType = file[itemOffset + 6];
             item.gimmickID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -4762,7 +4765,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_WeatherInfo();
             item.Id = itemId;
-            item.msg = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.msg = BitConverter.ToUInt16(file, itemOffset);
             item.eff = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.snd = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.sndBegin = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
@@ -4773,7 +4776,7 @@ namespace Xb2.Serialization
         {
             var item = new FLD_wildcardData();
             item.Id = itemId;
-            item.valueF4 = BitConverter.ToSingle(file, itemOffset + 0);
+            item.valueF4 = BitConverter.ToSingle(file, itemOffset);
             item.valueU2 = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
         }
@@ -4782,7 +4785,7 @@ namespace Xb2.Serialization
         {
             var item = new Fx_Act_Surface_Table();
             item.Id = itemId;
-            item.SolidDefault = file[itemOffset + 0];
+            item.SolidDefault = file[itemOffset];
             item.SolidWater = file[itemOffset + 1];
             item.SolidSoil = file[itemOffset + 2];
             item.SolidSand = file[itemOffset + 3];
@@ -4808,7 +4811,7 @@ namespace Xb2.Serialization
         {
             var item = new Fx_FileName();
             item.Id = itemId;
-            item.file_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.file_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -4816,7 +4819,7 @@ namespace Xb2.Serialization
         {
             var item = new Fx_Surface_Chara_Table();
             item.Id = itemId;
-            item.TYPE_HUMAN = file[itemOffset + 0];
+            item.TYPE_HUMAN = file[itemOffset];
             item.TYPE_HUMAN_HEELS = file[itemOffset + 1];
             item.TYPE_HUMAN_GETA = file[itemOffset + 2];
             item.TYPE_NOPON = file[itemOffset + 3];
@@ -4831,7 +4834,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_BoosterList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Category = file[itemOffset + 4];
             item.Idea = (sbyte)file[itemOffset + 5];
@@ -4853,7 +4856,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_CollectionList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Category = file[itemOffset + 4];
             item.Zone = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -4874,7 +4877,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_CrystalList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Rarity = file[itemOffset + 2];
             item.Price = BitConverter.ToUInt32(file, itemOffset + 3);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -4903,7 +4906,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_EtherCrystal();
             item.Id = itemId;
-            item.Score = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Score = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -4911,7 +4914,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_EventList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.sortJP = BitConverter.ToUInt32(file, itemOffset + 4);
             item.sortGE = BitConverter.ToUInt32(file, itemOffset + 8);
@@ -4928,7 +4931,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_FavoriteList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Category = file[itemOffset + 4];
             item.Zone = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -4953,7 +4956,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_HanaArtsEnh();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Enhance = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Flag = file[itemOffset + 4];
             item.NeedPow = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -4979,7 +4982,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_HanaAssist();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Enhance = BitConverter.ToUInt16(file, itemOffset + 2);
             item.EnhanceCategory = file[itemOffset + 4];
             item.Flag = file[itemOffset + 5];
@@ -5006,7 +5009,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_HanaAtr();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.Caption = file[itemOffset + 1];
             item.Atr = file[itemOffset + 2];
             item.Flag = file[itemOffset + 3];
@@ -5033,7 +5036,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_HanaNArtsSet();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.NArts = file[itemOffset + 1];
             item.NArtsRecastRev = file[itemOffset + 2];
             item.Flag = file[itemOffset + 3];
@@ -5060,7 +5063,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_HanaRole();
             item.Id = itemId;
-            item.Name = file[itemOffset + 0];
+            item.Name = file[itemOffset];
             item.Role = file[itemOffset + 1];
             item.PArmor = file[itemOffset + 2];
             item.EArmor = file[itemOffset + 3];
@@ -5096,7 +5099,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_InfoList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Price = BitConverter.ToUInt32(file, itemOffset + 4);
             item.ClearNewGame = file[itemOffset + 8];
@@ -5115,7 +5118,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_Orb();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Recipe = BitConverter.ToUInt16(file, itemOffset + 6);
             item.EquipItemID = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5138,7 +5141,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_OrbEquip();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Enhance = BitConverter.ToUInt16(file, itemOffset + 6);
             item.EnhanceCategory = file[itemOffset + 8];
@@ -5161,7 +5164,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_OrbRecipe();
             item.Id = itemId;
-            item.RecipeType = file[itemOffset + 0];
+            item.RecipeType = file[itemOffset];
             item.Rarity = file[itemOffset + 1];
             item.RscCat = file[itemOffset + 2];
             item.AssortNumber = BitConverter.ToUInt16(file, itemOffset + 3);
@@ -5188,7 +5191,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_PcEquip();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.ArmorType = file[itemOffset + 6];
             item.Enhance1 = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -5232,7 +5235,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_PcWpn();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Rank = file[itemOffset + 6];
             item.Flag = file[itemOffset + 7];
@@ -5256,7 +5259,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_PcWpnChip();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Rank = file[itemOffset + 6];
             item.CreateWpn1 = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -5296,7 +5299,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_PcWpnType();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Role = file[itemOffset + 2];
             item.EffType = file[itemOffset + 3];
             item.JustRange = file[itemOffset + 4];
@@ -5310,7 +5313,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_PreciousList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Category = file[itemOffset + 4];
             item.Type = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -5333,7 +5336,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_SalvageList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Rarity = file[itemOffset + 4];
             item.Price = BitConverter.ToUInt32(file, itemOffset + 5);
@@ -5355,7 +5358,7 @@ namespace Xb2.Serialization
         {
             var item = new ITM_TresureList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Category = file[itemOffset + 4];
             item.Graphic = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -5380,7 +5383,7 @@ namespace Xb2.Serialization
         {
             var item = new LabeledMessage();
             item.Id = itemId;
-            item.label = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.label = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.style = BitConverter.ToUInt16(file, itemOffset + 4);
             item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             return item;
@@ -5390,7 +5393,7 @@ namespace Xb2.Serialization
         {
             var item = new ma01a_FLD_EnemyPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -5443,7 +5446,7 @@ namespace Xb2.Serialization
         {
             var item = new ma01a_FLD_LandmarkPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MSGID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.category = file[itemOffset + 6];
             item.cndID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -5462,7 +5465,7 @@ namespace Xb2.Serialization
         {
             var item = new ma01a_FLD_MapObjPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 6);
             item.StateName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
@@ -5480,7 +5483,7 @@ namespace Xb2.Serialization
         {
             var item = new ma01a_FLD_NpcPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5524,7 +5527,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_AutoTalk();
             item.Id = itemId;
-            item.MOBID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.MOBID = BitConverter.ToUInt16(file, itemOffset);
             item.Range = BitConverter.ToUInt16(file, itemOffset + 2);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Text = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -5537,7 +5540,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_CollectionPopList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.gimmickID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
             item.POP_TIME = BitConverter.ToUInt32(file, itemOffset + 8);
@@ -5568,7 +5571,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_EventPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5586,7 +5589,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_LandmarkPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MSGID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.category = file[itemOffset + 6];
             item.cndID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -5610,7 +5613,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_MobPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MobID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.MOBGroupID = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5650,7 +5653,7 @@ namespace Xb2.Serialization
         {
             var item = new ma02a_FLD_TboxPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
             item.FSID = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5698,7 +5701,7 @@ namespace Xb2.Serialization
         {
             var item = new ma03a_FLD_TboxPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
             item.FSID = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5745,7 +5748,7 @@ namespace Xb2.Serialization
         {
             var item = new ma04a_FLD_PreciousPopList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlagMin = file[itemOffset + 6];
             item.QuestFlagMax = file[itemOffset + 7];
@@ -5763,7 +5766,7 @@ namespace Xb2.Serialization
         {
             var item = new ma05a_FLD_EnemyPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -5817,7 +5820,7 @@ namespace Xb2.Serialization
         {
             var item = new ma05a_FLD_LandmarkPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MSGID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.category = file[itemOffset + 6];
             item.cndID = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -5841,7 +5844,7 @@ namespace Xb2.Serialization
         {
             var item = new ma05a_FLD_NpcPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5887,7 +5890,7 @@ namespace Xb2.Serialization
         {
             var item = new ma07a_FLD_CollectionPopList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.gimmickID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
             item.POP_TIME = BitConverter.ToUInt32(file, itemOffset + 8);
@@ -5919,7 +5922,7 @@ namespace Xb2.Serialization
         {
             var item = new ma07a_FLD_EventPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5938,7 +5941,7 @@ namespace Xb2.Serialization
         {
             var item = new ma07a_FLD_NpcPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.NpcID = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 6);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -5983,7 +5986,7 @@ namespace Xb2.Serialization
         {
             var item = new ma08a_FLD_EnemyPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -6036,7 +6039,7 @@ namespace Xb2.Serialization
         {
             var item = new ma10a_FLD_EnemyPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -6090,7 +6093,7 @@ namespace Xb2.Serialization
         {
             var item = new ma20a_FLD_EnemyPop();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
             item.QuestFlagMin = file[itemOffset + 8];
@@ -6144,7 +6147,7 @@ namespace Xb2.Serialization
         {
             var item = new Message();
             item.Id = itemId;
-            item.style = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.style = BitConverter.ToUInt16(file, itemOffset);
             item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             return item;
         }
@@ -6153,7 +6156,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_Crystal();
             item.Id = itemId;
-            item.Score = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Score = BitConverter.ToUInt16(file, itemOffset);
             item.Res = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             return item;
         }
@@ -6162,7 +6165,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_Enemy();
             item.Id = itemId;
-            item.Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.MoveType = file[itemOffset + 4];
             item.HitType = file[itemOffset + 5];
             item.HitW = file[itemOffset + 6];
@@ -6184,7 +6187,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_PC();
             item.Id = itemId;
-            item.Hp = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Hp = BitConverter.ToUInt16(file, itemOffset);
             item.HitW = file[itemOffset + 2];
             item.HitH = file[itemOffset + 3];
             item.AtkW = file[itemOffset + 4];
@@ -6199,7 +6202,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_Stage();
             item.Id = itemId;
-            item.SpdD = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.SpdD = BitConverter.ToUInt16(file, itemOffset);
             item.SpdU = BitConverter.ToUInt16(file, itemOffset + 2);
             item.AccU = BitConverter.ToUInt16(file, itemOffset + 4);
             item.MaxU = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6221,7 +6224,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_Tbox();
             item.Id = itemId;
-            item.Type = file[itemOffset + 0];
+            item.Type = file[itemOffset];
             item.tdef1 = BitConverter.ToUInt16(file, itemOffset + 1);
             item.cond1 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.tdef2 = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -6249,7 +6252,7 @@ namespace Xb2.Serialization
         {
             var item = new MIN_TT_Tdef();
             item.Id = itemId;
-            item.item1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.item1 = BitConverter.ToUInt16(file, itemOffset);
             item.rate1 = file[itemOffset + 2];
             item.item2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.rate2 = file[itemOffset + 5];
@@ -6280,7 +6283,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_BladeCreate();
             item.Id = itemId;
-            item.limited_item = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.limited_item = BitConverter.ToUInt16(file, itemOffset);
             item.after_pt_in = file[itemOffset + 2];
             return item;
         }
@@ -6289,7 +6292,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_BlCoolTimeLv();
             item.Id = itemId;
-            item.value = BitConverter.ToUInt32(file, itemOffset + 0);
+            item.value = BitConverter.ToUInt32(file, itemOffset);
             return item;
         }
 
@@ -6297,7 +6300,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_BlImageID();
             item.Id = itemId;
-            item.icon_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.icon_id = BitConverter.ToUInt16(file, itemOffset);
             item.offs_x = BitConverter.ToInt16(file, itemOffset + 2);
             item.offs_y = BitConverter.ToInt16(file, itemOffset + 4);
             item.scale = BitConverter.ToSingle(file, itemOffset + 6);
@@ -6320,7 +6323,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_BtnChallenge2();
             item.Id = itemId;
-            item.Speed = file[itemOffset + 0];
+            item.Speed = file[itemOffset];
             item.Wait = BitConverter.ToUInt16(file, itemOffset + 1);
             item.Type = file[itemOffset + 3];
             item.Start1 = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -6348,7 +6351,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_BtnChallengeSeq();
             item.Id = itemId;
-            item.challenge01 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.challenge01 = BitConverter.ToUInt16(file, itemOffset);
             item.challenge02 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.challenge03 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.challenge04 = file[itemOffset + 6];
@@ -6360,7 +6363,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ChallengeParam();
             item.Id = itemId;
-            item.InputType = file[itemOffset + 0];
+            item.InputType = file[itemOffset];
             item.PushRange = BitConverter.ToUInt16(file, itemOffset + 1);
             item.PushSweetRange = BitConverter.ToUInt16(file, itemOffset + 3);
             item.MashingCount = file[itemOffset + 5];
@@ -6373,7 +6376,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ChallengeResult();
             item.Id = itemId;
-            item.Point = file[itemOffset + 0];
+            item.Point = file[itemOffset];
             item.Text = BitConverter.ToUInt32(file, itemOffset + 1);
             return item;
         }
@@ -6382,7 +6385,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_CharOrder();
             item.Id = itemId;
-            item.layer = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.layer = BitConverter.ToUInt16(file, itemOffset);
             item.useCond = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -6391,7 +6394,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_CmnJog();
             item.Id = itemId;
-            item.angle_range = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.angle_range = BitConverter.ToUInt16(file, itemOffset);
             item.start_angle = BitConverter.ToUInt16(file, itemOffset + 2);
             item.def_select = file[itemOffset + 4];
             item.theme_col = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 5));
@@ -6403,7 +6406,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_CmnList();
             item.Id = itemId;
-            for (int i = 0, offset = itemOffset + 0; i < 9; i++, offset += 2)
+            for (int i = 0, offset = itemOffset; i < 9; i++, offset += 2)
             {
                 item.item[i] = BitConverter.ToUInt16(file, offset);
             }
@@ -6414,7 +6417,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_CmnWindow();
             item.Id = itemId;
-            item.type = file[itemOffset + 0];
+            item.type = file[itemOffset];
             item.select = file[itemOffset + 1];
             item.text = BitConverter.ToUInt16(file, itemOffset + 2);
             item.title = BitConverter.ToUInt16(file, itemOffset + 4);
@@ -6427,7 +6430,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ColorList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.col_r = file[itemOffset + 4];
             item.col_g = file[itemOffset + 5];
             item.col_b = file[itemOffset + 6];
@@ -6438,7 +6441,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Condition();
             item.Id = itemId;
-            item.cond = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.cond = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -6446,7 +6449,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_DamageValue();
             item.Id = itemId;
-            item.value = BitConverter.ToSingle(file, itemOffset + 0);
+            item.value = BitConverter.ToSingle(file, itemOffset);
             return item;
         }
 
@@ -6454,7 +6457,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_EventTheater();
             item.Id = itemId;
-            item.title = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.title = BitConverter.ToUInt16(file, itemOffset);
             item.event_id = BitConverter.ToUInt16(file, itemOffset + 2);
             item.condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.thumbnail = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6470,7 +6473,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_FacePatternList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.image_no = file[itemOffset + 4];
             return item;
         }
@@ -6479,7 +6482,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Filename();
             item.Id = itemId;
-            item.filename = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.filename = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -6487,7 +6490,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_FontSet01();
             item.Id = itemId;
-            item.type = file[itemOffset + 0];
+            item.type = file[itemOffset];
             item.resource = BitConverter.ToUInt32(file, itemOffset + 1);
             item.image_type = file[itemOffset + 5];
             return item;
@@ -6497,7 +6500,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_FSMenu();
             item.Id = itemId;
-            item.next_jog = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.next_jog = BitConverter.ToUInt16(file, itemOffset);
             item.layer_id = BitConverter.ToUInt16(file, itemOffset + 2);
             item.icon = BitConverter.ToUInt16(file, itemOffset + 4);
             item.text = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6509,7 +6512,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_HanaMode();
             item.Id = itemId;
-            item.JS_SET = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.JS_SET = BitConverter.ToUInt16(file, itemOffset);
             item.JK_SET = BitConverter.ToUInt16(file, itemOffset + 2);
             item.JD_SET = BitConverter.ToUInt16(file, itemOffset + 4);
             item.JS_EXPAND = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6524,7 +6527,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_HanaSet();
             item.Id = itemId;
-            item.name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name = BitConverter.ToUInt16(file, itemOffset);
             item.icon = BitConverter.ToUInt16(file, itemOffset + 2);
             item.slotIcon = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -6534,7 +6537,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_IconList();
             item.Id = itemId;
-            item.icon_index = file[itemOffset + 0];
+            item.icon_index = file[itemOffset];
             return item;
         }
 
@@ -6542,7 +6545,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_InputAct();
             item.Id = itemId;
-            item.act_id = file[itemOffset + 0];
+            item.act_id = file[itemOffset];
             item.text = BitConverter.ToUInt16(file, itemOffset + 1);
             item.text2 = BitConverter.ToUInt16(file, itemOffset + 3);
             item.text3 = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -6555,7 +6558,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_InputPad();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.pad_select = (sbyte)file[itemOffset + 4];
             item.select_text = BitConverter.ToUInt16(file, itemOffset + 5);
             item.loop = file[itemOffset + 7];
@@ -6595,7 +6598,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_InputPointer();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.pointer_speed = (sbyte)file[itemOffset + 4];
             item.snap = file[itemOffset + 5];
             item.select_text = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6623,7 +6626,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_InputWheel();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.start_angle = BitConverter.ToUInt16(file, itemOffset + 4);
             item.angle_range = BitConverter.ToUInt16(file, itemOffset + 6);
             item.select_dir = file[itemOffset + 8];
@@ -6646,7 +6649,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_jog_txt();
             item.Id = itemId;
-            item.fs_menu_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.fs_menu_id = BitConverter.ToUInt16(file, itemOffset);
             item.txt = BitConverter.ToUInt16(file, itemOffset + 2);
             item.lock_flag = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -6656,7 +6659,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_KeyOrder();
             item.Id = itemId;
-            item.key = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.key = BitConverter.ToUInt16(file, itemOffset);
             item.order = BitConverter.ToUInt16(file, itemOffset + 2);
             item.order2 = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
@@ -6666,7 +6669,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Layer();
             item.Id = itemId;
-            item.group = file[itemOffset + 0];
+            item.group = file[itemOffset];
             item.sheet01 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
             item.prio01 = file[itemOffset + 5];
             item.sheet02 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
@@ -6687,7 +6690,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MainOrder();
             item.Id = itemId;
-            item.layer = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.layer = BitConverter.ToUInt16(file, itemOffset);
             item.useCond = BitConverter.ToUInt16(file, itemOffset + 2);
             item.guide = BitConverter.ToUInt16(file, itemOffset + 4);
             item.title = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6701,7 +6704,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MapGroup();
             item.Id = itemId;
-            item.include_map = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.include_map = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.disp_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.under_water = file[itemOffset + 6];
             item.condition = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -6712,7 +6715,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MapInfo();
             item.Id = itemId;
-            item.level_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.level_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.disp_name = BitConverter.ToUInt16(file, itemOffset + 4);
             item.under_water = file[itemOffset + 6];
             item.level_priority = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -6725,7 +6728,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ModelView();
             item.Id = itemId;
-            item.camera_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.camera_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.efp_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.obj_model01 = BitConverter.ToUInt16(file, itemOffset + 8);
             item.obj_model02 = BitConverter.ToUInt16(file, itemOffset + 10);
@@ -6736,7 +6739,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Msg_SubContents();
             item.Id = itemId;
-            item.name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name = BitConverter.ToUInt16(file, itemOffset);
             item.caption = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -6745,7 +6748,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MsgChapterEnd();
             item.Id = itemId;
-            item.index = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.index = BitConverter.ToUInt16(file, itemOffset);
             item.title = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -6754,7 +6757,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MsgPopupTitle();
             item.Id = itemId;
-            item.name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name = BitConverter.ToUInt16(file, itemOffset);
             item.color = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.name2 = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
@@ -6764,7 +6767,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_MsgQListTab();
             item.Id = itemId;
-            item.item01 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.item01 = BitConverter.ToUInt16(file, itemOffset);
             item.item02 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.item03 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.item04 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6775,7 +6778,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Name();
             item.Id = itemId;
-            item.name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -6783,7 +6786,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_OffsetList();
             item.Id = itemId;
-            item.offs_x = BitConverter.ToSingle(file, itemOffset + 0);
+            item.offs_x = BitConverter.ToSingle(file, itemOffset);
             item.offs_y = BitConverter.ToSingle(file, itemOffset + 4);
             item.offs_z = BitConverter.ToSingle(file, itemOffset + 8);
             item.bone_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -6794,7 +6797,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_OptionCamera();
             item.Id = itemId;
-            item.name_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name_id = BitConverter.ToUInt16(file, itemOffset);
             item.cap_id = BitConverter.ToUInt16(file, itemOffset + 2);
             item.setting_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.default_level = file[itemOffset + 8];
@@ -6805,7 +6808,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_OptionDisp();
             item.Id = itemId;
-            item.name_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.name_id = BitConverter.ToUInt16(file, itemOffset);
             item.cap_id = BitConverter.ToUInt16(file, itemOffset + 2);
             item.max_level = file[itemOffset + 4];
             item.default_level = file[itemOffset + 5];
@@ -6816,7 +6819,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ResFont();
             item.Id = itemId;
-            item.file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             return item;
         }
 
@@ -6824,7 +6827,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ScriptList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.script = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             return item;
         }
@@ -6833,7 +6836,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopCategoryName();
             item.Id = itemId;
-            item.icon_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.icon_id = BitConverter.ToUInt16(file, itemOffset);
             item.name = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -6842,7 +6845,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopChange();
             item.Id = itemId;
-            item.DefTaskSet1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.DefTaskSet1 = BitConverter.ToUInt16(file, itemOffset);
             item.DefTaskSet2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DefTaskSet3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DefTaskSet4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6876,7 +6879,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopChangeTask();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.SetItem1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.SetNumber1 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.SetItem2 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6898,7 +6901,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopInn();
             item.Id = itemId;
-            item.Price = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Price = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -6906,7 +6909,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopList();
             item.Id = itemId;
-            item.Name = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.ShopIcon = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ShopType = file[itemOffset + 4];
             item.TableID = BitConverter.ToUInt16(file, itemOffset + 5);
@@ -6922,7 +6925,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_ShopNormal();
             item.Id = itemId;
-            item.DefItem1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.DefItem1 = BitConverter.ToUInt16(file, itemOffset);
             item.DefItem2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.DefItem3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.DefItem4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6956,7 +6959,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_SortTable();
             item.Id = itemId;
-            item.sort_type1 = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.sort_type1 = BitConverter.ToUInt16(file, itemOffset);
             item.sort_type2 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.sort_type3 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.sort_type4 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -6971,7 +6974,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_SoundBgm();
             item.Id = itemId;
-            item.resource = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.resource = BitConverter.ToUInt16(file, itemOffset);
             item.time = BitConverter.ToSingle(file, itemOffset + 2);
             return item;
         }
@@ -6980,7 +6983,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_SoundSe();
             item.Id = itemId;
-            item.resource_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.resource_id = BitConverter.ToUInt16(file, itemOffset);
             return item;
         }
 
@@ -6988,7 +6991,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_SpecialShop();
             item.Id = itemId;
-            item.shop_id = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.shop_id = BitConverter.ToUInt16(file, itemOffset);
             item.scenario_flag = BitConverter.ToUInt16(file, itemOffset + 2);
             return item;
         }
@@ -6997,7 +7000,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Stream_full_bl();
             item.Id = itemId;
-            item.filename = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.filename = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.filename_2nd = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             return item;
         }
@@ -7006,7 +7009,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_TextProperty();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.col_r = file[itemOffset + 4];
             item.col_g = file[itemOffset + 5];
             item.col_b = file[itemOffset + 6];
@@ -7018,7 +7021,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_Tutorial();
             item.Id = itemId;
-            item.script_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.script_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.param1 = BitConverter.ToUInt32(file, itemOffset + 4);
             return item;
         }
@@ -7027,7 +7030,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_txt();
             item.Id = itemId;
-            item.obj_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.obj_name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.text_id = BitConverter.ToUInt32(file, itemOffset + 4);
             return item;
         }
@@ -7036,7 +7039,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_WorldMap();
             item.Id = itemId;
-            item.posX = BitConverter.ToInt16(file, itemOffset + 0);
+            item.posX = BitConverter.ToInt16(file, itemOffset);
             item.posY = BitConverter.ToInt16(file, itemOffset + 2);
             return item;
         }
@@ -7045,7 +7048,7 @@ namespace Xb2.Serialization
         {
             var item = new MNU_WorldMapCond();
             item.Id = itemId;
-            item.mapId = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.mapId = BitConverter.ToUInt16(file, itemOffset);
             item.cond1 = BitConverter.ToUInt16(file, itemOffset + 2);
             item.pos1 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.cond2 = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -7060,7 +7063,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_AreaBgmList();
             item.Id = itemId;
-            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.bgmCondition = BitConverter.ToUInt16(file, itemOffset + 4);
             return item;
         }
@@ -7069,7 +7072,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_BgmCondition();
             item.Id = itemId;
-            item.ConditionA = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.ConditionA = BitConverter.ToUInt16(file, itemOffset);
             item.BgmIDA = BitConverter.ToUInt16(file, itemOffset + 2);
             item.ConditionB = BitConverter.ToUInt16(file, itemOffset + 4);
             item.BgmIDB = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -7085,7 +7088,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_dropitemList();
             item.Id = itemId;
-            item.mdo = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.mdo = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.paramid0 = BitConverter.ToUInt16(file, itemOffset + 4);
             item.paramid1 = BitConverter.ToUInt16(file, itemOffset + 6);
             item.paramid2 = BitConverter.ToUInt16(file, itemOffset + 8);
@@ -7100,7 +7103,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_dropitemParam();
             item.Id = itemId;
-            item.height = BitConverter.ToSingle(file, itemOffset + 0);
+            item.height = BitConverter.ToSingle(file, itemOffset);
             item.heightRand = BitConverter.ToSingle(file, itemOffset + 4);
             item.distance = BitConverter.ToSingle(file, itemOffset + 8);
             item.distanceRand = BitConverter.ToSingle(file, itemOffset + 12);
@@ -7130,7 +7133,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_En();
             item.Id = itemId;
-            item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.TypeFamily = file[itemOffset + 4];
             item.TypeGenus = file[itemOffset + 5];
             item.ActType = file[itemOffset + 6];
@@ -7212,7 +7215,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_EnGenus();
             item.Id = itemId;
-            item.NAME = file[itemOffset + 0];
+            item.NAME = file[itemOffset];
             item.CAPTION = file[itemOffset + 1];
             item.Flag = file[itemOffset + 2];
             item.gimmicktype = (item.Flag & 1) != 0;
@@ -7223,7 +7226,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_EnUnd();
             item.Id = itemId;
-            item.Flag = file[itemOffset + 0];
+            item.Flag = file[itemOffset];
             item.UndMinX = (sbyte)file[itemOffset + 1];
             item.UndMaxX = (sbyte)file[itemOffset + 2];
             item.UndMinZ = (sbyte)file[itemOffset + 3];
@@ -7238,7 +7241,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_EnWpn();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Scale = BitConverter.ToUInt16(file, itemOffset + 4);
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.MtpInChara = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
@@ -7252,7 +7255,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_GmkSetList();
             item.Id = itemId;
-            item.mapId = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.mapId = BitConverter.ToUInt16(file, itemOffset);
             item.enemy = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.enemy_bdat = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             item.npc = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
@@ -7323,7 +7326,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_MapObjList();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Comp_Eff = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.SE = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7338,7 +7341,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_MobList();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.AddMotion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Comp_Eff = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7362,7 +7365,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_NpcList();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.AddMotion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Comp_Eff = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7392,7 +7395,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_NpcWpn();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             return item;
         }
@@ -7401,7 +7404,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_PcWpn();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Effpack = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Flag = file[itemOffset + 12];
@@ -7414,7 +7417,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_PcWpnMount();
             item.Id = itemId;
-            item.Wpn01rIn = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Wpn01rIn = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Wpn01rOut = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Wpn02rIn = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.Wpn02rOut = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7499,7 +7502,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_TboxList();
             item.Id = itemId;
-            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Motion = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.Effect = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.SE = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7527,7 +7530,7 @@ namespace Xb2.Serialization
         {
             var item = new RSC_TypeWpn();
             item.Id = itemId;
-            item.rex = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.rex = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.nia = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.sieg = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
             item.tora = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
@@ -7542,7 +7545,7 @@ namespace Xb2.Serialization
         {
             var item = new SYS_BasicFormation();
             item.Id = itemId;
-            item.OffsetDr1X = BitConverter.ToSingle(file, itemOffset + 0);
+            item.OffsetDr1X = BitConverter.ToSingle(file, itemOffset);
             item.OffsetDr1Z = BitConverter.ToSingle(file, itemOffset + 4);
             item.OffsetDr1RotY = BitConverter.ToSingle(file, itemOffset + 8);
             item.OffsetDr2X = BitConverter.ToSingle(file, itemOffset + 12);
@@ -7555,7 +7558,7 @@ namespace Xb2.Serialization
         {
             var item = new SYS_BladeOffset();
             item.Id = itemId;
-            item.OffsetBlX = BitConverter.ToSingle(file, itemOffset + 0);
+            item.OffsetBlX = BitConverter.ToSingle(file, itemOffset);
             item.OffsetBlZ = BitConverter.ToSingle(file, itemOffset + 4);
             item.OffsetBlRotY = BitConverter.ToSingle(file, itemOffset + 8);
             return item;
@@ -7565,7 +7568,7 @@ namespace Xb2.Serialization
         {
             var item = new SYS_MapJumpEvList();
             item.Id = itemId;
-            item.MapList = file[itemOffset + 0];
+            item.MapList = file[itemOffset];
             item.FormationId = BitConverter.ToUInt16(file, itemOffset + 1);
             item.InfoPict = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 3));
             item.InfoTxt = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -7578,7 +7581,7 @@ namespace Xb2.Serialization
         {
             var item = new SYS_PcBtlKeyList();
             item.Id = itemId;
-            item.Shift = file[itemOffset + 0];
+            item.Shift = file[itemOffset];
             item.Type1 = file[itemOffset + 1];
             item.Button1 = file[itemOffset + 2];
             item.Type2 = file[itemOffset + 3];
@@ -7605,7 +7608,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Battle_Blade();
             item.Id = itemId;
-            item.Priority = file[itemOffset + 0];
+            item.Priority = file[itemOffset];
             item.Group = file[itemOffset + 1];
             item.CTDriver = BitConverter.ToUInt16(file, itemOffset + 2);
             item.LotRate = file[itemOffset + 6];
@@ -7634,7 +7637,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Battle_Driver();
             item.Id = itemId;
-            item.Priority = file[itemOffset + 0];
+            item.Priority = file[itemOffset];
             item.Group = file[itemOffset + 1];
             item.CTDriver = BitConverter.ToUInt16(file, itemOffset + 2);
             item.LotRate = file[itemOffset + 6];
@@ -7664,7 +7667,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Battle_Enemy();
             item.Id = itemId;
-            item.Priority = file[itemOffset + 0];
+            item.Priority = file[itemOffset];
             item.Group = file[itemOffset + 1];
             item.EnemyVC = BitConverter.ToUInt16(file, itemOffset + 2);
             item.CondEx = BitConverter.ToUInt16(file, itemOffset + 6);
@@ -7700,7 +7703,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Field();
             item.Id = itemId;
-            item.Priority = file[itemOffset + 0];
+            item.Priority = file[itemOffset];
             return item;
         }
 
@@ -7708,7 +7711,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Field_Filter();
             item.Id = itemId;
-            item.TargetFile = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.TargetFile = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 4);
             item.ChangeFile = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
             return item;
@@ -7718,7 +7721,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Filter();
             item.Id = itemId;
-            item.TargetFile = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 0));
+            item.TargetFile = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.Condition = file[itemOffset + 4];
             item.Param1 = BitConverter.ToUInt16(file, itemOffset + 5);
             item.Param2 = BitConverter.ToUInt16(file, itemOffset + 7);
@@ -7731,7 +7734,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_Group();
             item.Id = itemId;
-            item.Interval = file[itemOffset + 0];
+            item.Interval = file[itemOffset];
             return item;
         }
 
@@ -7739,7 +7742,7 @@ namespace Xb2.Serialization
         {
             var item = new Vo_WinSp();
             item.Id = itemId;
-            item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset + 0);
+            item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset);
             item.NeedChrID = BitConverter.ToUInt16(file, itemOffset + 2);
             for (int i = 0, offset = itemOffset + 4; i < 3; i++, offset += 2)
             {
@@ -7758,84 +7761,110 @@ namespace Xb2.Serialization
 
         public static void SetReferences(BdatCollection tables)
         {
-            foreach (var item in tables.BLD_BladeList.Items)
+            foreach (BLD_BladeList item in tables.BLD_BladeList.Items)
             {
                 item._StatusID = tables.CHR_Bl.GetItemOrNull(item.StatusID);
             }
 
-            foreach (var item in tables.BLD_BladeModelList.Items)
+            foreach (BLD_BladeModelList item in tables.BLD_BladeModelList.Items)
             {
                 item._Parts = new[]
                 {
                     item.Parts1,
                     item.Parts2,
                     item.Parts3,
-                    item.Parts4,
+                    item.Parts4
                 };
             }
 
-            foreach (var item in tables.BLD_CommonList.Items)
+            foreach (BLD_CommonList item in tables.BLD_CommonList.Items)
             {
-                item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
-                item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
-                item._IdeaType = (IdeaCategoryBits)item.IdeaType;
                 item._Fskill = (FieldSkillCategory)item.Fskill;
+                item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
+                item._IdeaType = (IdeaCategoryBits)item.IdeaType;
+                item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
             }
 
-            foreach (var item in tables.BLD_NameList.Items)
+            foreach (BLD_NameList item in tables.BLD_NameList.Items)
             {
                 item._Category = tables.bld_bladename.GetItemOrNull(item.Category);
             }
 
-            foreach (var item in tables.BLD_RareList.Items)
+            foreach (BLD_RareList item in tables.BLD_RareList.Items)
             {
                 item._Blade = tables.CHR_Bl.GetItemOrNull(item.Blade);
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
-            foreach (var item in tables.BTL_Arts_Bl.Items)
+            foreach (BTL_Arts_Bl item in tables.BTL_Arts_Bl.Items)
             {
+                item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
                 item._Caption = tables.btl_arts_bl_ms.GetItemOrNull(item.Caption);
-                item._Name = tables.btl_arts_bl_ms.GetItemOrNull(item.Name);
-                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
                 item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
                 item._Enhance4 = tables.BTL_Enhance.GetItemOrNull(item.Enhance4);
                 item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
                 item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
-                item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
+                item._Name = tables.btl_arts_bl_ms.GetItemOrNull(item.Name);
+                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
-            foreach (var item in tables.BTL_Arts_BlSp.Items)
+            foreach (BTL_Arts_BlSp item in tables.BTL_Arts_BlSp.Items)
             {
                 item._AddBl = tables.CHR_Bl.GetItemOrNull(item.AddBl);
-                item._Caption = tables.btl_arts_blsp_ms.GetItemOrNull(item.Caption);
-                item._Name = tables.btl_arts_blsp_ms.GetItemOrNull(item.Name);
-                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
                 item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
                 item._BtnChal2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal2);
                 item._BtnChal3 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal3);
                 item._BtnChal6 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal6);
+                item._Caption = tables.btl_arts_blsp_ms.GetItemOrNull(item.Caption);
+                item._Name = tables.btl_arts_blsp_ms.GetItemOrNull(item.Name);
+                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
-            foreach (var item in tables.BTL_Arts_En.Items)
+            foreach (BTL_Arts_Dr item in tables.BTL_Arts_Dr.Items)
             {
+                item._Caption = tables.btl_arts_dr_cap.GetItemOrNull(item.Caption);
+                item._Driver = tables.CHR_Dr.GetItemOrNull(item.Driver);
+                item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
+                item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
+                item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
+                item._Enhance4 = tables.BTL_Enhance.GetItemOrNull(item.Enhance4);
+                item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
+                item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
+                item._Name = tables.btl_arts_dr_ms.GetItemOrNull(item.Name);
+                item._NextArts = tables.BTL_Arts_Dr.GetItemOrNull(item.NextArts);
+                item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
+            }
+
+            foreach (BTL_Arts_En item in tables.BTL_Arts_En.Items)
+            {
+                item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
+                item._ArtsDeBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsDeBuff);
+                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.btl_arts_en_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_Bl_Personality.Items)
+            foreach (BTL_Aura item in tables.BTL_Aura.Items)
+            {
+                item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
+                item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
+                item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
+                item._Name = tables.btl_aura_ms.GetItemOrNull(item.Name);
+            }
+
+            foreach (BTL_Bl_Personality item in tables.BTL_Bl_Personality.Items)
             {
                 item._KizunaBase = tables.BTL_Bl_KizunaBase.GetItemOrNull(item.KizunaBase);
             }
 
-            foreach (var item in tables.BTL_Buff.Items)
+            foreach (BTL_Buff item in tables.BTL_Buff.Items)
             {
                 item._Caption = tables.btl_buff_cap.GetItemOrNull(item.Caption);
                 item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_Class.Items)
+            foreach (BTL_Class item in tables.BTL_Class.Items)
             {
                 item._Name = tables.btl_class_ms.GetItemOrNull(item.Name);
                 item._Role1 = tables.menu_role_name_ms.GetItemOrNull(item.Role1);
@@ -7843,12 +7872,12 @@ namespace Xb2.Serialization
                 item._Role3 = tables.menu_role_name_ms.GetItemOrNull(item.Role3);
             }
 
-            foreach (var item in tables.BTL_CmnBl_Armor.Items)
+            foreach (BTL_CmnBl_Armor item in tables.BTL_CmnBl_Armor.Items)
             {
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
-            foreach (var item in tables.BTL_CmnBl_Capacity.Items)
+            foreach (BTL_CmnBl_Capacity item in tables.BTL_CmnBl_Capacity.Items)
             {
                 item._ArtsLvProb = new[]
                 {
@@ -7856,13 +7885,26 @@ namespace Xb2.Serialization
                     item.ArtsLv2Prob,
                     item.ArtsLv3Prob,
                     item.ArtsLv4Prob,
-                    item.ArtsLv5Prob,
+                    item.ArtsLv5Prob
                 };
-                item._SkillNumProb = new[]
+                item._ArtsNumProb = new[]
                 {
-                    item.SkillNum1Prob,
-                    item.SkillNum2Prob,
-                    item.SkillNum3Prob,
+                    item.ArtsNum1Prob,
+                    item.ArtsNum2Prob,
+                    item.ArtsNum3Prob
+                };
+                item._NartsNumProb = new[]
+                {
+                    item.NartsNum1Prob,
+                    item.NartsNum2Prob,
+                    item.NartsNum3Prob
+                };
+                item._OrbNumProb = new[]
+                {
+                    item.OrbNum0Prob,
+                    item.OrbNum1Prob,
+                    item.OrbNum2Prob,
+                    item.OrbNum3Prob
                 };
                 item._SkillLvProb = new[]
                 {
@@ -7870,30 +7912,17 @@ namespace Xb2.Serialization
                     item.SkillLv2Prob,
                     item.SkillLv3Prob,
                     item.SkillLv4Prob,
-                    item.SkillLv5Prob,
+                    item.SkillLv5Prob
                 };
-                item._OrbNumProb = new[]
+                item._SkillNumProb = new[]
                 {
-                    item.OrbNum0Prob,
-                    item.OrbNum1Prob,
-                    item.OrbNum2Prob,
-                    item.OrbNum3Prob,
-                };
-                item._NartsNumProb = new[]
-                {
-                    item.NartsNum1Prob,
-                    item.NartsNum2Prob,
-                    item.NartsNum3Prob,
-                };
-                item._ArtsNumProb = new[]
-                {
-                    item.ArtsNum1Prob,
-                    item.ArtsNum2Prob,
-                    item.ArtsNum3Prob,
+                    item.SkillNum1Prob,
+                    item.SkillNum2Prob,
+                    item.SkillNum3Prob
                 };
             }
 
-            foreach (var item in tables.BTL_CmnBl_NewBlArts.Items)
+            foreach (BTL_CmnBl_NewBlArts item in tables.BTL_CmnBl_NewBlArts.Items)
             {
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
                 item._NBA = new[]
@@ -7905,11 +7934,11 @@ namespace Xb2.Serialization
                     item.NBA_05,
                     item.NBA_06,
                     item.NBA_07,
-                    item.NBA_08,
+                    item.NBA_08
                 };
             }
 
-            foreach (var item in tables.BTL_CmnBl_Power.Items)
+            foreach (BTL_CmnBl_Power item in tables.BTL_CmnBl_Power.Items)
             {
                 item._Pow = new[]
                 {
@@ -7922,11 +7951,11 @@ namespace Xb2.Serialization
                     item.Pow07,
                     item.Pow08,
                     item.Pow09,
-                    item.Pow10,
+                    item.Pow10
                 };
             }
 
-            foreach (var item in tables.BTL_CmnBl_StatusType.Items)
+            foreach (BTL_CmnBl_StatusType item in tables.BTL_CmnBl_StatusType.Items)
             {
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
                 item._Status = new[]
@@ -7936,21 +7965,33 @@ namespace Xb2.Serialization
                     item.Status03,
                     item.Status04,
                     item.Status05,
-                    item.Status06,
+                    item.Status06
                 };
             }
 
-            foreach (var item in tables.BTL_ElementalEffect.Items)
+            foreach (BTL_Condition item in tables.BTL_Condition.Items)
+            {
+                item._FLD_CondID = tables.FLD_ConditionList.GetItemOrNull(item.FLD_CondID);
+            }
+
+            foreach (BTL_ElementalCombo item in tables.BTL_ElementalCombo.Items)
+            {
+                item._Name = tables.btl_elementalcombo_ms.GetItemOrNull(item.Name);
+                item._PreCombo = tables.BTL_ElementalCombo.GetItemOrNull(item.PreCombo);
+                item._Reaction = tables.BTL_Reaction.GetItemOrNull(item.Reaction);
+            }
+
+            foreach (BTL_ElementalEffect item in tables.BTL_ElementalEffect.Items)
             {
                 item._Name = tables.btl_elementaleffect_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_EnBook.Items)
+            foreach (BTL_EnBook item in tables.BTL_EnBook.Items)
             {
                 item._BaseEnemyID = tables.CHR_EnArrange.GetItemOrNull(item.BaseEnemyID);
             }
 
-            foreach (var item in tables.BTL_EnDropItem.Items)
+            foreach (BTL_EnDropItem item in tables.BTL_EnDropItem.Items)
             {
                 item._ItemID1 = tables.GetItem(item.ItemID1);
                 item._ItemID2 = tables.GetItem(item.ItemID2);
@@ -7962,39 +8003,43 @@ namespace Xb2.Serialization
                 item._ItemID8 = tables.GetItem(item.ItemID8);
             }
 
-            foreach (var item in tables.BTL_EnDropQuest.Items)
+            foreach (BTL_EnDropQuest item in tables.BTL_EnDropQuest.Items)
             {
+                item._GetConditon1 = tables.FLD_ConditionList.GetItemOrNull(item.GetConditon1);
+                item._GetConditon2 = tables.FLD_ConditionList.GetItemOrNull(item.GetConditon2);
+                item._GetConditon3 = tables.FLD_ConditionList.GetItemOrNull(item.GetConditon3);
+                item._GetConditon4 = tables.FLD_ConditionList.GetItemOrNull(item.GetConditon4);
                 item._ItemID1 = tables.GetItem(item.ItemID1);
+                item._ItemID2 = tables.GetItem(item.ItemID2);
+                item._ItemID3 = tables.GetItem(item.ItemID3);
+                item._ItemID4 = tables.GetItem(item.ItemID4);
             }
 
-            foreach (var item in tables.BTL_Enhance.Items)
+            foreach (BTL_Enhance item in tables.BTL_Enhance.Items)
             {
                 item._EnhanceEffect = tables.BTL_EnhanceEff.GetItemOrNull(item.EnhanceEffect);
             }
 
-            foreach (var item in tables.BTL_EnhanceEff.Items)
+            foreach (BTL_EnhanceEff item in tables.BTL_EnhanceEff.Items)
             {
                 item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_HanaChipset.Items)
+            foreach (BTL_HanaChipset item in tables.BTL_HanaChipset.Items)
             {
-                item._RoleParts = tables.GetItem(item.RoleParts);
                 item._AtrParts = tables.GetItem(item.AtrParts);
                 item._NArtsParts1 = tables.GetItem(item.NArtsParts1);
                 item._NArtsParts2 = tables.GetItem(item.NArtsParts2);
                 item._NArtsParts3 = tables.GetItem(item.NArtsParts3);
-                item._NCondParts1 = tables.GetItem(item.NCondParts1);
-                item._NCondParts2 = tables.GetItem(item.NCondParts2);
-                item._NCondParts3 = tables.GetItem(item.NCondParts3);
+                item._RoleParts = tables.GetItem(item.RoleParts);
             }
 
-            foreach (var item in tables.BTL_PouchBuff.Items)
+            foreach (BTL_PouchBuff item in tables.BTL_PouchBuff.Items)
             {
                 item._Name = tables.btl_pouchbuff_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_Skill_Bl.Items)
+            foreach (BTL_Skill_Bl item in tables.BTL_Skill_Bl.Items)
             {
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
@@ -8004,43 +8049,43 @@ namespace Xb2.Serialization
                 item._Name = tables.btl_skill_bl_name.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr.Items)
+            foreach (BTL_Skill_Dr item in tables.BTL_Skill_Dr.Items)
             {
                 item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.btl_skill_dr_name.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table01.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table01.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table02.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table02.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table03.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table03.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table04.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table04.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table05.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table05.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.BTL_Skill_Dr_Table06.Items)
+            foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table06.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
-            foreach (var item in tables.CHR_Bl.Items)
+            foreach (CHR_Bl item in tables.CHR_Bl.Items)
             {
                 item._ArtsAchievement1 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievement1);
                 item._ArtsAchievement2 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievement2);
@@ -8054,6 +8099,7 @@ namespace Xb2.Serialization
                 item._BSkill1 = tables.BTL_Skill_Bl.GetItemOrNull(item.BSkill1);
                 item._BSkill2 = tables.BTL_Skill_Bl.GetItemOrNull(item.BSkill2);
                 item._BSkill3 = tables.BTL_Skill_Bl.GetItemOrNull(item.BSkill3);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._DefWeapon = tables.ITM_PcWpn.GetItemOrNull(item.DefWeapon);
                 item._FavoriteCategory1 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory1 - 11);
                 item._FavoriteCategory2 = tables.menu_favorite_category.GetItemOrNull(item.FavoriteCategory2 - 11);
@@ -8068,9 +8114,9 @@ namespace Xb2.Serialization
                 item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
                 item._KeyAchievement = tables.FLD_AchievementSet.GetItemOrNull(item.KeyAchievement);
                 item._MerceName = tables.bld_mercename.GetItemOrNull(item.MerceName);
-                item._Name = tables.chr_bl_ms.GetItemOrNull(item.Name);
-                item._MnuIlustName = tables.menu_ilust_name.GetItemOrNull(item.MnuIlustName);
                 item._MnuCastName = tables.menu_cast_name.GetItemOrNull(item.MnuCastName);
+                item._MnuIlustName = tables.menu_ilust_name.GetItemOrNull(item.MnuIlustName);
+                item._Name = tables.chr_bl_ms.GetItemOrNull(item.Name);
                 item._NArts1 = tables.BTL_Buff.GetItemOrNull(item.NArts1);
                 item._NArts2 = tables.BTL_Buff.GetItemOrNull(item.NArts2);
                 item._NArts3 = tables.BTL_Buff.GetItemOrNull(item.NArts3);
@@ -8080,54 +8126,6 @@ namespace Xb2.Serialization
                 item._SkillAchievement2 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement2);
                 item._SkillAchievement3 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement3);
                 item._WeaponType = tables.ITM_PcWpnType.GetItemOrNull(item.WeaponType);
-                item._BArts = new[]
-                {
-                    item._BArts1,
-                    item._BArts2,
-                    item._BArts3,
-                };
-                item._NArts = new[]
-                {
-                    item._NArts1,
-                    item._NArts2,
-                    item._NArts3,
-                };
-                item._NArtsRecastRev = new[]
-                {
-                    item.NArtsRecastRev1,
-                    item.NArtsRecastRev2,
-                    item.NArtsRecastRev3,
-                };
-                item._BSkill = new[]
-                {
-                    item._BSkill1,
-                    item._BSkill2,
-                    item._BSkill3,
-                };
-                item._FSkill = new[]
-                {
-                    item._FSkill1,
-                    item._FSkill2,
-                    item._FSkill3,
-                };
-                item._ArtsAchievement = new[]
-                {
-                    item._ArtsAchievement1,
-                    item._ArtsAchievement2,
-                    item._ArtsAchievement3,
-                };
-                item._SkillAchievement = new[]
-                {
-                    item._SkillAchievement1,
-                    item._SkillAchievement2,
-                    item._SkillAchievement3,
-                };
-                item._FskillAchivement = new[]
-                {
-                    item._FskillAchivement1,
-                    item._FskillAchivement2,
-                    item._FskillAchivement3,
-                };
                 item._Achievement = new[]
                 {
                     item._KeyAchievement,
@@ -8139,22 +8137,71 @@ namespace Xb2.Serialization
                     item._SkillAchievement3,
                     item._FskillAchivement1,
                     item._FskillAchivement2,
-                    item._FskillAchivement3,
+                    item._FskillAchivement3
+                };
+                item._ArtsAchievement = new[]
+                {
+                    item._ArtsAchievement1,
+                    item._ArtsAchievement2,
+                    item._ArtsAchievement3
+                };
+                item._BArts = new[]
+                {
+                    item._BArts1,
+                    item._BArts2,
+                    item._BArts3
+                };
+                item._BSkill = new[]
+                {
+                    item._BSkill1,
+                    item._BSkill2,
+                    item._BSkill3
                 };
                 item._FavoriteCategory = new[]
                 {
                     item._FavoriteCategory1,
-                    item._FavoriteCategory2,
+                    item._FavoriteCategory2
                 };
                 item._FavoriteItem = new[]
                 {
                     item._FavoriteItem1,
-                    item._FavoriteItem2,
+                    item._FavoriteItem2
+                };
+                item._FSkill = new[]
+                {
+                    item._FSkill1,
+                    item._FSkill2,
+                    item._FSkill3
+                };
+                item._FskillAchivement = new[]
+                {
+                    item._FskillAchivement1,
+                    item._FskillAchivement2,
+                    item._FskillAchivement3
+                };
+                item._NArts = new[]
+                {
+                    item._NArts1,
+                    item._NArts2,
+                    item._NArts3
+                };
+                item._NArtsRecastRev = new[]
+                {
+                    item.NArtsRecastRev1,
+                    item.NArtsRecastRev2,
+                    item.NArtsRecastRev3
+                };
+                item._SkillAchievement = new[]
+                {
+                    item._SkillAchievement1,
+                    item._SkillAchievement2,
+                    item._SkillAchievement3
                 };
             }
 
-            foreach (var item in tables.CHR_Dr.Items)
+            foreach (CHR_Dr item in tables.CHR_Dr.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._DefBlade1 = tables.CHR_Bl.GetItemOrNull(item.DefBlade1);
                 item._DefBlade2 = tables.CHR_Bl.GetItemOrNull(item.DefBlade2);
                 item._DefBlade3 = tables.CHR_Bl.GetItemOrNull(item.DefBlade3);
@@ -8166,33 +8213,101 @@ namespace Xb2.Serialization
                 item._Name = tables.chr_dr_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.CHR_EnArrange.Items)
+            foreach (CHR_DriverParam item in tables.CHR_DriverParam.Items)
+            {
+                item._ExtMountCond = tables.FLD_ConditionList.GetItemOrNull(item.ExtMountCond);
+                item._ExtMountNpc = tables.RSC_NpcList.GetItemOrNull(item.ExtMountNpc);
+            }
+
+            foreach (CHR_EnArrange item in tables.CHR_EnArrange.Items)
             {
                 item._BGMID = tables.RSC_BgmList.GetItemOrNull(item.BGMID);
                 item._BladeID = tables.CHR_Bl.GetItemOrNull(item.BladeID);
+                item._BookID = tables.BTL_EnBook.GetItemOrNull(item.BookID);
                 item._DropTableID = tables.BTL_EnDropItem.GetItemOrNull(item.DropTableID);
                 item._DropTableID2 = tables.BTL_EnDropItem.GetItemOrNull(item.DropTableID2);
                 item._DropTableID3 = tables.BTL_EnDropItem.GetItemOrNull(item.DropTableID3);
+                item._EnemyBladeID = tables.CHR_EnArrange.GetItemOrNull(item.EnemyBladeID);
+                item._EnhanceID1 = tables.BTL_Enhance.GetItemOrNull(item.EnhanceID1);
+                item._EnhanceID2 = tables.BTL_Enhance.GetItemOrNull(item.EnhanceID2);
+                item._EnhanceID3 = tables.BTL_Enhance.GetItemOrNull(item.EnhanceID3);
                 item._Name = tables.fld_enemyname.GetItemOrNull(item.Name);
                 item._ParamID = tables.CHR_EnParam.GetItemOrNull(item.ParamID);
                 item._PreciousID = tables.GetItem(item.PreciousID);
                 item._ZoneID = tables.FLD_maplist.GetItemOrNull(item.ZoneID);
-                item._BookID = tables.BTL_EnBook.GetItemOrNull(item.BookID);
             }
 
-            foreach (var item in tables.EVT_listQst01.Items)
+            foreach (CHR_EnParam item in tables.CHR_EnParam.Items)
             {
-                item._setupID = tables.EVT_setupQst01.GetItemOrNull(item.setupID);
+                item._ArtsNum1 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum1);
+                item._ArtsNum10 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum10);
+                item._ArtsNum11 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum11);
+                item._ArtsNum12 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum12);
+                item._ArtsNum13 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum13);
+                item._ArtsNum14 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum14);
+                item._ArtsNum15 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum15);
+                item._ArtsNum16 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum16);
+                item._ArtsNum2 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum2);
+                item._ArtsNum3 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum3);
+                item._ArtsNum4 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum4);
+                item._ArtsNum5 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum5);
+                item._ArtsNum6 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum6);
+                item._ArtsNum7 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum7);
+                item._ArtsNum8 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum8);
+                item._ArtsNum9 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum9);
+                item._Aura = tables.BTL_Aura.GetItemOrNull(item.Aura);
+                item._ResourceID = tables.RSC_En.GetItemOrNull(item.ResourceID);
+            }
+
+            foreach (EventChange item in tables.EVT_chgBf01.Items)
+            {
+                item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
+            }
+
+            foreach (EventChange item in tables.EVT_chgDeb01.Items)
+            {
+                item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
+            }
+
+            foreach (EventChange item in tables.EVT_chgFev01.Items)
+            {
+                item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
+            }
+
+            foreach (EventChange item in tables.EVT_chgQst01.Items)
+            {
+                item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
+            }
+
+            foreach (EventChange item in tables.EVT_chgTlk01.Items)
+            {
+                item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
+            }
+
+            foreach (EVT_listBf item in tables.EVT_listBf.Items)
+            {
+                item._chgEdID = tables.EVT_chgBf01.GetItemOrNull(item.chgEdID);
+                item._chgStID = tables.EVT_chgBf01.GetItemOrNull(item.chgStID);
+            }
+
+            foreach (EVT_listFev01 item in tables.EVT_listFev01.Items)
+            {
+                item._chgEdID = tables.EVT_chgFev01.GetItemOrNull(item.chgEdID);
+            }
+
+            foreach (EVT_listQst01 item in tables.EVT_listQst01.Items)
+            {
                 item._category = tables.menu_quest_cate_ms.GetItemOrNull(item.category);
+                item._setupID = tables.EVT_setupQst01.GetItemOrNull(item.setupID);
                 item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
             }
 
-            foreach (var item in tables.FLD_AchievementList.Items)
+            foreach (FLD_AchievementList item in tables.FLD_AchievementList.Items)
             {
                 item._Task = tables.FLD_QuestListAchievement.GetItemOrNull(item.Task);
             }
 
-            foreach (var item in tables.FLD_AchievementSet.Items)
+            foreach (FLD_AchievementSet item in tables.FLD_AchievementSet.Items)
             {
                 item._AchievementID1 = tables.FLD_AchievementList.GetItemOrNull(item.AchievementID1);
                 item._AchievementID2 = tables.FLD_AchievementList.GetItemOrNull(item.AchievementID2);
@@ -8205,33 +8320,55 @@ namespace Xb2.Serialization
                     item._AchievementID2,
                     item._AchievementID3,
                     item._AchievementID4,
-                    item._AchievementID5,
+                    item._AchievementID5
                 };
             }
 
-            foreach (var item in tables.FLD_AddItem.Items)
+            foreach (FLD_AddItem item in tables.FLD_AddItem.Items)
             {
                 item._ItemID1 = tables.GetItem(item.ItemID1);
                 item._ItemID2 = tables.GetItem(item.ItemID2);
                 item._ItemID3 = tables.GetItem(item.ItemID3);
             }
 
-            foreach (var item in tables.FLD_ConditionAchievement.Items)
+            foreach (FLD_AntiBladeArea item in tables.FLD_AntiBladeArea.Items)
+            {
+                item._BTL_MapRevId = tables.BTL_MapRev.GetItemOrNull(item.BTL_MapRevId);
+            }
+
+            foreach (FLD_BladePop item in tables.FLD_BladePop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_ClimbingPOP item in tables.FLD_ClimbingPOP.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_ConditionAchievement item in tables.FLD_ConditionAchievement.Items)
             {
                 item._AchievementSetID = tables.FLD_AchievementSet.GetItemOrNull(item.AchievementSetID);
             }
 
-            foreach (var item in tables.FLD_ConditionFieldSkiiLevel.Items)
+            foreach (FLD_ConditionEnv item in tables.FLD_ConditionEnv.Items)
+            {
+                item._CloudHeight = tables.EVT_cloudtype.GetItemOrNull(item.CloudHeight);
+                item._TimeRange = (TimeRange)item.TimeRange;
+                item._Weather = (WeatherBits)item.Weather;
+            }
+
+            foreach (FLD_ConditionFieldSkiiLevel item in tables.FLD_ConditionFieldSkiiLevel.Items)
             {
                 item._FieldSkillID = tables.FLD_FieldSkillList.GetItemOrNull(item.FieldSkillID);
             }
 
-            foreach (var item in tables.FLD_ConditionItem.Items)
+            foreach (FLD_ConditionItem item in tables.FLD_ConditionItem.Items)
             {
                 item._ItemID = tables.GetItem(item.ItemID);
             }
 
-            foreach (var item in tables.FLD_ConditionList.Items)
+            foreach (FLD_ConditionList item in tables.FLD_ConditionList.Items)
             {
                 item._Condition1 = tables.GetCondition((ConditionType)item.ConditionType1, item.Condition1);
                 item._Condition2 = tables.GetCondition((ConditionType)item.ConditionType2, item.Condition2);
@@ -8252,7 +8389,39 @@ namespace Xb2.Serialization
                 item._Premise = tables.EVT_andortype.GetItemOrNull(item.Premise + 1);
             }
 
-            foreach (var item in tables.FLD_EnemyGroup.Items)
+            foreach (FLD_ConditionPT item in tables.FLD_ConditionPT.Items)
+            {
+                item._Category = (PartyConditionType)item.Category;
+            }
+
+            foreach (FLD_DMGFloor item in tables.FLD_DMGFloor.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MAPID = tables.FLD_maplist.GetItemOrNull(item.MAPID);
+            }
+
+            foreach (FLD_DMGGimmick item in tables.FLD_DMGGimmick.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._DEPOP_Condition = tables.FLD_ConditionList.GetItemOrNull(item.DEPOP_Condition);
+            }
+
+            foreach (FLD_DoorGimmick item in tables.FLD_DoorGimmick.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_EffectPop item in tables.FLD_EffectPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_ElevatorGimmick item in tables.FLD_ElevatorGimmick.Items)
+            {
+                item._OP_Condition = tables.FLD_ConditionList.GetItemOrNull(item.OP_Condition);
+            }
+
+            foreach (FLD_EnemyGroup item in tables.FLD_EnemyGroup.Items)
             {
                 item._EnemyID1 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID1);
                 item._EnemyID2 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID2);
@@ -8264,21 +8433,65 @@ namespace Xb2.Serialization
                 item._EnemyID8 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID8);
             }
 
-            foreach (var item in tables.FLD_FieldSkillList.Items)
+            foreach (FLD_FieldLockGimmick item in tables.FLD_FieldLockGimmick.Items)
             {
-                item._Category = (FieldSkillCategory)item.Category;
-                item._Caption = tables.fld_fieldskilltxt.GetItemOrNull(item.Caption);
-                item._Name = tables.fld_fieldskilltxt.GetItemOrNull(item.Name);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
-            foreach (var item in tables.FLD_FieldSkillSetting.Items)
+            foreach (FLD_FieldSkillList item in tables.FLD_FieldSkillList.Items)
+            {
+                item._Caption = tables.fld_fieldskilltxt.GetItemOrNull(item.Caption);
+                item._Category = (FieldSkillCategory)item.Category;
+                item._Name = tables.fld_fieldskilltxt.GetItemOrNull(item.Name);
+                item._RandomID = tables.FLD_FieldSkillRandom.GetItemOrNull(item.RandomID);
+            }
+
+            foreach (FLD_FieldSkillSetting item in tables.FLD_FieldSkillSetting.Items)
             {
                 item._FieldSkillID1 = tables.FLD_FieldSkillList.GetItemOrNull(item.FieldSkillID1);
                 item._FieldSkillID2 = tables.FLD_FieldSkillList.GetItemOrNull(item.FieldSkillID2);
                 item._Name = tables.fld_fieldskillplace.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.FLD_maplist.Items)
+            foreach (FLD_FootPrintsRoutes item in tables.FLD_FootPrintsRoutes.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_JumpGimmick item in tables.FLD_JumpGimmick.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_KizunaTalk item in tables.FLD_KizunaTalk.Items)
+            {
+                item._ConditionID = tables.FLD_ConditionList.GetItemOrNull(item.ConditionID);
+                item._EVCondition = tables.FLD_ConditionList.GetItemOrNull(item.EVCondition);
+                item._EventID = tables.EVT_listFev01.GetItemOrNull(item.EventID);
+                item._Title = tables.fld_kizunatalktitle.GetItemOrNull(item.Title);
+            }
+
+            foreach (FLD_LODList item in tables.FLD_LODList.Items)
+            {
+                item._Condition1 = tables.FLD_ConditionList.GetItemOrNull(item.Condition1);
+                item._Condition2 = tables.FLD_ConditionList.GetItemOrNull(item.Condition2);
+                item._Condition3 = tables.FLD_ConditionList.GetItemOrNull(item.Condition3);
+            }
+
+            foreach (FLD_MapGimmick item in tables.FLD_MapGimmick.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._OP_Condition = tables.FLD_ConditionList.GetItemOrNull(item.OP_Condition);
+                item._tgtMSG_ID = tables.fld_gmkname.GetItemOrNull(item.tgtMSG_ID);
+            }
+
+            foreach (FLD_MapJump item in tables.FLD_MapJump.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_maplist item in tables.FLD_maplist.Items)
             {
                 item._bgm_cndID = tables.RSC_BgmCondition.GetItemOrNull(item.bgm_cndID);
                 item._change_nameID = tables.fld_mapinfo.GetItemOrNull(item.change_nameID);
@@ -8291,31 +8504,59 @@ namespace Xb2.Serialization
                 item._stopTIME_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stopTIME_cndID);
                 item._wa_OFF_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wa_OFF_cndID);
                 item._wa_ON_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wa_ON_cndID);
+                item._wa_time_BNS = (TimeRange)item.wa_time_BNS;
                 item._wa_type = tables.FLD_WeatherInfo.GetItemOrNull(item.wa_type);
                 item._wb_OFF_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wb_OFF_cndID);
                 item._wb_ON_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wb_ON_cndID);
+                item._wb_time_BNS = (TimeRange)item.wb_time_BNS;
                 item._wb_type = tables.FLD_WeatherInfo.GetItemOrNull(item.wb_type);
                 item._wc_OFF_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wc_OFF_cndID);
                 item._wc_ON_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wc_ON_cndID);
+                item._wc_time_BNS = (TimeRange)item.wc_time_BNS;
                 item._wc_type = tables.FLD_WeatherInfo.GetItemOrNull(item.wc_type);
                 item._wd_OFF_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wd_OFF_cndID);
                 item._wd_ON_cndID = tables.FLD_ConditionList.GetItemOrNull(item.wd_ON_cndID);
+                item._wd_time_BNS = (TimeRange)item.wd_time_BNS;
                 item._wd_type = tables.FLD_WeatherInfo.GetItemOrNull(item.wd_type);
+                item._zone = tables.fld_developmentname.GetItemOrNull(item.zone);
             }
 
-            foreach (var item in tables.FLD_MercenariesMission.Items)
+            foreach (FLD_MercenariesMission item in tables.FLD_MercenariesMission.Items)
             {
+                item._AutoStart = tables.FLD_ConditionList.GetItemOrNull(item.AutoStart);
                 item._QuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.QuestID);
             }
 
-            foreach (var item in tables.FLD_QuestBattle.Items)
+            foreach (FLD_MobGroupList item in tables.FLD_MobGroupList.Items)
+            {
+                item._MOBID1 = tables.RSC_MobList.GetItemOrNull(item.MOBID1);
+                item._MOBID2 = tables.RSC_MobList.GetItemOrNull(item.MOBID2);
+                item._MOBID3 = tables.RSC_MobList.GetItemOrNull(item.MOBID3);
+                item._MOBID4 = tables.RSC_MobList.GetItemOrNull(item.MOBID4);
+                item._MOBID5 = tables.RSC_MobList.GetItemOrNull(item.MOBID5);
+                item._MOBID6 = tables.RSC_MobList.GetItemOrNull(item.MOBID6);
+                item._MOBID7 = tables.RSC_MobList.GetItemOrNull(item.MOBID7);
+                item._MOBID8 = tables.RSC_MobList.GetItemOrNull(item.MOBID8);
+            }
+
+            foreach (FLD_NpcGroupId item in tables.FLD_NpcGroupId.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_OwnerBonus item in tables.FLD_OwnerBonus.Items)
+            {
+                item._Type = tables.FLD_OwnerBonusParam.GetItemOrNull(item.Type);
+            }
+
+            foreach (FLD_QuestBattle item in tables.FLD_QuestBattle.Items)
             {
                 item._EnemyGroupID = tables.FLD_EnemyGroup.GetItemOrNull(item.EnemyGroupID);
                 item._EnemyID = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID);
                 item._EnemySpeciesID = tables.RSC_EnGenus.GetItemOrNull(item.EnemySpeciesID);
             }
 
-            foreach (var item in tables.FLD_QuestCollect.Items)
+            foreach (FLD_QuestCollect item in tables.FLD_QuestCollect.Items)
             {
                 item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category - 3);
                 item._EnemyID = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID);
@@ -8323,22 +8564,24 @@ namespace Xb2.Serialization
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
             }
 
-            foreach (var item in tables.FLD_QuestCondition.Items)
+            foreach (FLD_QuestCondition item in tables.FLD_QuestCondition.Items)
             {
                 item._ConditionID = tables.FLD_ConditionList.GetItemOrNull(item.ConditionID);
+                item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
             }
 
-            foreach (var item in tables.FLD_QuestFieldSkillCount.Items)
+            foreach (FLD_QuestFieldSkillCount item in tables.FLD_QuestFieldSkillCount.Items)
             {
                 item._FieldSkillID = tables.FLD_FieldSkillList.GetItemOrNull(item.FieldSkillID);
             }
 
-            foreach (var item in tables.FLD_QuestGimmick.Items)
+            foreach (FLD_QuestGimmick item in tables.FLD_QuestGimmick.Items)
             {
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
             }
 
-            foreach (var item in tables.FLD_QuestHints.Items)
+            foreach (FLD_QuestHints item in tables.FLD_QuestHints.Items)
             {
                 item._ClientNpc = tables.RSC_NpcList.GetItemOrNull(item.ClientNpc);
                 item._FSkillID1 = tables.FLD_FieldSkillList.GetItemOrNull(item.FSkillID1);
@@ -8347,34 +8590,41 @@ namespace Xb2.Serialization
                 item._ZoneID = tables.FLD_maplist.GetItemOrNull(item.ZoneID);
             }
 
-            foreach (var item in tables.FLD_QuestList.Items)
-            {
-                item._PurposeID = tables.FLD_QuestTask.GetItemOrNull(item.PurposeID);
-            }
-
-            foreach (var item in tables.FLD_QuestListAchievement.Items)
+            foreach (FLD_QuestList item in tables.FLD_QuestList.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestList.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestList.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestList.GetItemOrNull(item.PRTQuestID);
+                item._PurposeID = tables.FLD_QuestTask.GetItemOrNull(item.PurposeID);
+                item._RewardSetA = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetA);
+                item._RewardSetB = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetB);
+            }
+
+            foreach (FLD_QuestList item in tables.FLD_QuestListAchievement.Items)
+            {
+                item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestListAchievement.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListAchievement.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestListAchievement.GetItemOrNull(item.PRTQuestID);
                 item._PurposeID = tables.FLD_QuestTaskAchievement.GetItemOrNull(item.PurposeID);
                 item._QuestTitle = tables.fld_quest_achievement.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_achievement.GetItemOrNull(item.ResultA);
                 item._ResultB = tables.fld_quest_achievement.GetItemOrNull(item.ResultB);
                 item._RewardSetA = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetA);
-                item._PRTQuestID = tables.FLD_QuestListAchievement.GetItemOrNull(item.PRTQuestID);
-                item._NextQuestA = tables.FLD_QuestListAchievement.GetItemOrNull(item.NextQuestA);
                 item._RewardSetB = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetB);
                 item._Summary = tables.fld_quest_achievement.GetItemOrNull(item.Summary);
             }
 
-            foreach (var item in tables.FLD_QuestListBlade.Items)
+            foreach (FLD_QuestList item in tables.FLD_QuestListBlade.Items)
             {
-                item._PurposeID = tables.FLD_QuestTaskBlade.GetItemOrNull(item.PurposeID);
-                item._PRTQuestID = tables.FLD_QuestListBlade.GetItemOrNull(item.PRTQuestID);
-                item._NextQuestA = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestA);
-                item._NextQuestB = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestB);
                 item._CallEventA = tables.EVT_listQst01.GetItemOrNull(item.CallEventA);
                 item._CallEventB = tables.EVT_listQst01.GetItemOrNull(item.CallEventB);
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestListBlade.GetItemOrNull(item.PRTQuestID);
+                item._PurposeID = tables.FLD_QuestTaskBlade.GetItemOrNull(item.PurposeID);
                 item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_blade.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_blade.GetItemOrNull(item.ResultA);
@@ -8384,23 +8634,28 @@ namespace Xb2.Serialization
                 item._Summary = tables.fld_quest_blade.GetItemOrNull(item.Summary);
             }
 
-            foreach (var item in tables.FLD_QuestListMercenaries.Items)
+            foreach (FLD_QuestList item in tables.FLD_QuestListMercenaries.Items)
             {
+                item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.PRTQuestID);
+                item._PurposeID = tables.FLD_QuestTaskMercenaries.GetItemOrNull(item.PurposeID);
                 item._QuestTitle = tables.fld_quest_mercenaries.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_mercenaries.GetItemOrNull(item.ResultA);
                 item._ResultB = tables.fld_quest_mercenaries.GetItemOrNull(item.ResultB);
                 item._RewardSetA = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetA);
-                item._PRTQuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.PRTQuestID);
-                item._NextQuestA = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestA);
                 item._RewardSetB = tables.FLD_QuestReward.GetItemOrNull(item.RewardSetB);
                 item._Summary = tables.fld_quest_mercenaries.GetItemOrNull(item.Summary);
-                item._PurposeID = tables.FLD_QuestTaskMercenaries.GetItemOrNull(item.PurposeID);
-                item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
             }
 
-            foreach (var item in tables.FLD_QuestListMini.Items)
+            foreach (FLD_QuestList item in tables.FLD_QuestListMini.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestListMini.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListMini.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestListMini.GetItemOrNull(item.PRTQuestID);
+                item._PurposeID = tables.FLD_QuestTaskMini.GetItemOrNull(item.PurposeID);
                 item._QuestTitle = tables.fld_quest_mini.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_mini.GetItemOrNull(item.ResultA);
                 item._ResultB = tables.fld_quest_mini.GetItemOrNull(item.ResultB);
@@ -8409,10 +8664,13 @@ namespace Xb2.Serialization
                 item._Summary = tables.fld_quest_mini.GetItemOrNull(item.Summary);
             }
 
-            foreach (var item in tables.FLD_QuestListNormal.Items)
+            foreach (FLD_QuestList item in tables.FLD_QuestListNormal.Items)
             {
-                item._PurposeID = tables.FLD_QuestTaskNormal.GetItemOrNull(item.PurposeID);
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._NextQuestA = tables.FLD_QuestListNormal.GetItemOrNull(item.NextQuestA);
+                item._NextQuestB = tables.FLD_QuestListNormal.GetItemOrNull(item.NextQuestB);
+                item._PRTQuestID = tables.FLD_QuestListNormal.GetItemOrNull(item.PRTQuestID);
+                item._PurposeID = tables.FLD_QuestTaskNormal.GetItemOrNull(item.PurposeID);
                 item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_normal.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_normal.GetItemOrNull(item.ResultA);
@@ -8422,12 +8680,12 @@ namespace Xb2.Serialization
                 item._Summary = tables.fld_quest_normal.GetItemOrNull(item.Summary);
             }
 
-            foreach (var item in tables.FLD_QuestReach.Items)
+            foreach (FLD_QuestReach item in tables.FLD_QuestReach.Items)
             {
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
             }
 
-            foreach (var item in tables.FLD_QuestReward.Items)
+            foreach (FLD_QuestReward item in tables.FLD_QuestReward.Items)
             {
                 item._DevelopZone = tables.FLD_maplist.GetItemOrNull(item.DevelopZone);
                 item._ItemID1 = tables.GetItem(item.ItemID1);
@@ -8439,24 +8697,24 @@ namespace Xb2.Serialization
                     item._ItemID1,
                     item._ItemID2,
                     item._ItemID3,
-                    item._ItemID4,
+                    item._ItemID4
                 };
                 item._ItemNumber = new[]
                 {
                     item.ItemNumber1,
                     item.ItemNumber2,
                     item.ItemNumber3,
-                    item.ItemNumber4,
+                    item.ItemNumber4
                 };
             }
 
-            foreach (var item in tables.FLD_QuestTalk.Items)
+            foreach (FLD_QuestTalk item in tables.FLD_QuestTalk.Items)
             {
                 item._DummyGroup = tables.FLD_QuestTalkDummyGroup.GetItemOrNull(item.DummyGroup);
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
             }
 
-            foreach (var item in tables.FLD_QuestTask.Items)
+            foreach (FLD_QuestTask item in tables.FLD_QuestTask.Items)
             {
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
@@ -8465,32 +8723,39 @@ namespace Xb2.Serialization
                 item._TaskLog1 = tables.fld_quest.GetItemOrNull(item.TaskLog1);
                 item._TaskLog2 = tables.fld_quest.GetItemOrNull(item.TaskLog2);
                 item._TaskLog3 = tables.fld_quest.GetItemOrNull(item.TaskLog3);
-                item._TaskLog4 = tables.fld_quest_mini.GetItemOrNull(item.TaskLog4);
+                item._TaskLog4 = tables.fld_quest.GetItemOrNull(item.TaskLog4);
                 item._TaskType1 = (TaskType)item.TaskType1;
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
                 item._TaskType4 = (TaskType)item.TaskType4;
             }
 
-            foreach (var item in tables.FLD_QuestTaskAchievement.Items)
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskAchievement.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
                 item._TaskID4 = tables.GetTask((TaskType)item.TaskType4, item.TaskID4);
                 item._TaskLog1 = tables.fld_quest_achievement.GetItemOrNull(item.TaskLog1);
+                item._TaskLog2 = tables.fld_quest_achievement.GetItemOrNull(item.TaskLog2);
+                item._TaskLog3 = tables.fld_quest_achievement.GetItemOrNull(item.TaskLog3);
+                item._TaskLog4 = tables.fld_quest_achievement.GetItemOrNull(item.TaskLog4);
                 item._TaskType1 = (TaskType)item.TaskType1;
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
                 item._TaskType4 = (TaskType)item.TaskType4;
+            }
+
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskBlade.Items)
+            {
                 item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
                 item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
                 item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
                 item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
-            }
-
-            foreach (var item in tables.FLD_QuestTaskBlade.Items)
-            {
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -8499,17 +8764,13 @@ namespace Xb2.Serialization
                 item._TaskLog2 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog2);
                 item._TaskLog3 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog3);
                 item._TaskLog4 = tables.fld_quest_blade.GetItemOrNull(item.TaskLog4);
-                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
-                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
-                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
-                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskType1 = (TaskType)item.TaskType1;
                 item._TaskType2 = (TaskType)item.TaskType2;
                 item._TaskType3 = (TaskType)item.TaskType3;
                 item._TaskType4 = (TaskType)item.TaskType4;
             }
 
-            foreach (var item in tables.FLD_QuestTaskMercenaries.Items)
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskMercenaries.Items)
             {
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
@@ -8521,7 +8782,7 @@ namespace Xb2.Serialization
                 item._TaskType4 = (TaskType)item.TaskType4;
             }
 
-            foreach (var item in tables.FLD_QuestTaskMini.Items)
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskMini.Items)
             {
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
@@ -8537,7 +8798,7 @@ namespace Xb2.Serialization
                 item._TaskType4 = (TaskType)item.TaskType4;
             }
 
-            foreach (var item in tables.FLD_QuestTaskNormal.Items)
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskNormal.Items)
             {
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
@@ -8553,21 +8814,21 @@ namespace Xb2.Serialization
                 item._TaskType4 = (TaskType)item.TaskType4;
             }
 
-            foreach (var item in tables.FLD_QuestUse.Items)
+            foreach (FLD_QuestUse item in tables.FLD_QuestUse.Items)
             {
                 item._bladeID = tables.CHR_Bl.GetItemOrNull(item.bladeID);
                 item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category - 11);
                 item._ItemID = tables.GetItem(item.ItemID);
             }
 
-            foreach (var item in tables.FLD_randomTalk.Items)
+            foreach (FLD_randomTalk item in tables.FLD_randomTalk.Items)
             {
                 item._text0 = tables.fld_randomtalk.GetItemOrNull(item.text0);
                 item._text1 = tables.fld_randomtalk.GetItemOrNull(item.text1);
                 item._type = tables.EVT_randtype.GetItemOrNull(item.type);
             }
 
-            foreach (var item in tables.FLD_SalvageEnemySet.Items)
+            foreach (FLD_SalvageEnemySet item in tables.FLD_SalvageEnemySet.Items)
             {
                 item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
@@ -8575,7 +8836,7 @@ namespace Xb2.Serialization
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
             }
 
-            foreach (var item in tables.FLD_SalvageItemSet.Items)
+            foreach (FLD_SalvageItemSet item in tables.FLD_SalvageItemSet.Items)
             {
                 item._itm1ID = tables.GetItem(item.itm1ID);
                 item._itm2ID = tables.GetItem(item.itm2ID);
@@ -8587,51 +8848,61 @@ namespace Xb2.Serialization
                 item._itm8ID = tables.GetItem(item.itm8ID);
             }
 
-            foreach (var item in tables.FLD_SalvagePointList.Items)
+            foreach (FLD_SalvagePointList item in tables.FLD_SalvagePointList.Items)
             {
-                item._SalvagePointName = tables.fld_salvagepoint.GetItemOrNull(item.SalvagePointName);
+                item._BtnChallenge0 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge0);
+                item._BtnChallenge1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge1);
+                item._BtnChallenge2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge2);
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._SalvagePointName = tables.fld_salvagepoint.GetItemOrNull(item.SalvagePointName);
                 item._SalvageTable1 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable1);
                 item._SalvageTable2 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable2);
                 item._SalvageTable3 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable3);
                 item._SalvageTable4 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable4);
                 item._SalvageTable5 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable5);
-                item._BtnChallenge0 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge0);
-                item._BtnChallenge1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge1);
-                item._BtnChallenge2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChallenge2);
             }
 
-            foreach (var item in tables.FLD_SalvageTable.Items)
+            foreach (FLD_SalvageTable item in tables.FLD_SalvageTable.Items)
             {
                 item._ColleTable1 = tables.FLD_SalvageItemSet.GetItemOrNull(item.ColleTable1);
                 item._ColleTable2 = tables.FLD_SalvageItemSet.GetItemOrNull(item.ColleTable2);
                 item._ColleTable3 = tables.FLD_SalvageItemSet.GetItemOrNull(item.ColleTable3);
-                item._TresureTable1 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable1);
-                item._TresureTable2 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable2);
-                item._TresureTable3 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable3);
                 item._EnemyPopTable1 = tables.FLD_SalvageEnemySet.GetItemOrNull(item.EnemyPopTable1);
                 item._EnemyPopTable2 = tables.FLD_SalvageEnemySet.GetItemOrNull(item.EnemyPopTable2);
                 item._EnemyPopTable3 = tables.FLD_SalvageEnemySet.GetItemOrNull(item.EnemyPopTable3);
+                item._TresureTable1 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable1);
+                item._TresureTable2 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable2);
+                item._TresureTable3 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable3);
             }
 
-            foreach (var item in tables.FLD_TimeInfo.Items)
+            foreach (FLD_SePop item in tables.FLD_SePop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_TimeInfo item in tables.FLD_TimeInfo.Items)
             {
                 item._msg = tables.fld_mapinfo.GetItemOrNull(item.msg);
             }
 
-            foreach (var item in tables.FLD_WeatherInfo.Items)
+            foreach (FLD_WarpGimmick item in tables.FLD_WarpGimmick.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_WeatherInfo item in tables.FLD_WeatherInfo.Items)
             {
                 item._msg = tables.fld_mapinfo.GetItemOrNull(item.msg);
             }
 
-            foreach (var item in tables.ITM_BoosterList.Items)
+            foreach (ITM_BoosterList item in tables.ITM_BoosterList.Items)
             {
                 item._Category = tables.menu_ideacollar_ms.GetItemOrNull(item.Category + 1);
                 item._Name = tables.itm_booster.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
-            foreach (var item in tables.ITM_CollectionList.Items)
+            foreach (ITM_CollectionList item in tables.ITM_CollectionList.Items)
             {
                 item._Category = tables.menu_collectionitemtype.GetItemOrNull(item.Category - 3);
                 item._Name = tables.itm_collection.GetItemOrNull(item.Name);
@@ -8639,7 +8910,7 @@ namespace Xb2.Serialization
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 
-            foreach (var item in tables.ITM_CrystalList.Items)
+            foreach (ITM_CrystalList item in tables.ITM_CrystalList.Items)
             {
                 item._BladeID = tables.CHR_Bl.GetItemOrNull(item.BladeID);
                 item._CommonAtr = tables.MNU_Msg_Attr.GetItemOrNull(item.CommonAtr + 1);
@@ -8649,61 +8920,63 @@ namespace Xb2.Serialization
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
-            foreach (var item in tables.ITM_EventList.Items)
+            foreach (ITM_EventList item in tables.ITM_EventList.Items)
             {
                 item._Caption = tables.itm_evt.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_evt.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.ITM_FavoriteList.Items)
+            foreach (ITM_FavoriteList item in tables.ITM_FavoriteList.Items)
             {
                 item._Category = tables.menu_favorite_category.GetItemOrNull(item.Category - 11);
                 item._Name = tables.itm_favorite.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
+                item._Type = tables.BTL_PouchBuffSet.GetItemOrNull(item.Type);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 
-            foreach (var item in tables.ITM_HanaArtsEnh.Items)
-            {
-                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
-                item._Name = tables.itm_orb.GetItemOrNull(item.Name);
-                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
-            }
-
-            foreach (var item in tables.ITM_HanaAssist.Items)
+            foreach (ITM_HanaArtsEnh item in tables.ITM_HanaArtsEnh.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.ITM_HanaAtr.Items)
+            foreach (ITM_HanaAssist item in tables.ITM_HanaAssist.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
+                item._Name = tables.itm_orb.GetItemOrNull(item.Name);
+            }
+
+            foreach (ITM_HanaAtr item in tables.ITM_HanaAtr.Items)
+            {
                 item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Caption = tables.itm_hana_atr_ms.GetItemOrNull(item.Caption);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Name = tables.itm_hana_atr_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.ITM_HanaNArtsSet.Items)
+            foreach (ITM_HanaNArtsSet item in tables.ITM_HanaNArtsSet.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Name = tables.itm_hana_narts_set_ms.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.ITM_HanaRole.Items)
+            foreach (ITM_HanaRole item in tables.ITM_HanaRole.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
-                item._Role = tables.menu_role_name_ms.GetItemOrNull(item.Role);
                 item._Name = tables.itm_hana_role_ms.GetItemOrNull(item.Name);
+                item._Role = tables.menu_role_name_ms.GetItemOrNull(item.Role);
             }
 
-            foreach (var item in tables.ITM_InfoList.Items)
+            foreach (ITM_InfoList item in tables.ITM_InfoList.Items)
             {
                 item._Caption = tables.itm_info.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_info.GetItemOrNull(item.Name);
             }
 
-            foreach (var item in tables.ITM_Orb.Items)
+            foreach (ITM_Orb item in tables.ITM_Orb.Items)
             {
                 item._EquipItemID = tables.GetItem(item.EquipItemID);
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
@@ -8711,13 +8984,13 @@ namespace Xb2.Serialization
                 item._Recipe = tables.ITM_OrbRecipe.GetItemOrNull(item.Recipe);
             }
 
-            foreach (var item in tables.ITM_OrbEquip.Items)
+            foreach (ITM_OrbEquip item in tables.ITM_OrbEquip.Items)
             {
                 item._Name = tables.itm_orb.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
-            foreach (var item in tables.ITM_OrbRecipe.Items)
+            foreach (ITM_OrbRecipe item in tables.ITM_OrbRecipe.Items)
             {
                 item._ItemID1 = tables.GetItem(item.ItemID1);
                 item._ItemID2 = tables.GetItem(item.ItemID2);
@@ -8728,9 +9001,11 @@ namespace Xb2.Serialization
                 item._ItemID7 = tables.GetItem(item.ItemID7);
                 item._ItemID8 = tables.GetItem(item.ItemID8);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
+                item._RecipeType = (RecipeType)item.RecipeType;
+                item._RscCat = tables.menu_collectionitemtype.GetItemOrNull(item.RscCat - 3);
             }
 
-            foreach (var item in tables.ITM_PcEquip.Items)
+            foreach (ITM_PcEquip item in tables.ITM_PcEquip.Items)
             {
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
@@ -8740,15 +9015,17 @@ namespace Xb2.Serialization
                 item._Zone2 = tables.FLD_maplist.GetItemOrNull(item.Zone2);
             }
 
-            foreach (var item in tables.ITM_PcWpn.Items)
+            foreach (ITM_PcWpn item in tables.ITM_PcWpn.Items)
             {
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
                 item._Name = tables.itm_pcwpn_ms.GetItemOrNull(item.Name);
+                item._RscL = tables.RSC_PcWpn.GetItemOrNull(item.RscL);
+                item._RscR = tables.RSC_PcWpn.GetItemOrNull(item.RscR);
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
-            foreach (var item in tables.ITM_PcWpnChip.Items)
+            foreach (ITM_PcWpnChip item in tables.ITM_PcWpnChip.Items)
             {
                 item._CreateWpn1 = tables.ITM_PcWpn.GetItemOrNull(item.CreateWpn1);
                 item._CreateWpn10 = tables.ITM_PcWpn.GetItemOrNull(item.CreateWpn10);
@@ -8787,43 +9064,133 @@ namespace Xb2.Serialization
                     item._CreateWpn13,
                     item._CreateWpn14,
                     item._CreateWpn15,
-                    item._CreateWpn16,
+                    item._CreateWpn16
                 };
                 item._Zones = new[]
                 {
                     item._Zone,
-                    item._Zone2,
+                    item._Zone2
                 };
             }
 
-            foreach (var item in tables.ITM_PcWpnType.Items)
+            foreach (ITM_PcWpnType item in tables.ITM_PcWpnType.Items)
             {
                 item._Motion = tables.ITM_PcWpnType.GetItemOrNull(item.Motion);
                 item._Name = tables.itm_pcwpntype_ms.GetItemOrNull(item.Name);
                 item._Role = tables.menu_role_name_ms.GetItemOrNull(item.Role);
             }
 
-            foreach (var item in tables.ITM_PreciousList.Items)
+            foreach (ITM_PreciousList item in tables.ITM_PreciousList.Items)
             {
+                item._Caption = tables.itm_precious.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_precious.GetItemOrNull(item.Name);
+                item._Type = tables.FLD_OwnerBonus.GetItemOrNull(item.Type);
             }
 
-            foreach (var item in tables.ITM_SalvageList.Items)
+            foreach (ITM_SalvageList item in tables.ITM_SalvageList.Items)
             {
                 item._Caption = tables.itm_salvage.GetItemOrNull(item.Caption);
                 item._Name = tables.itm_salvage.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
             }
 
-            foreach (var item in tables.ITM_TresureList.Items)
+            foreach (ITM_TresureList item in tables.ITM_TresureList.Items)
             {
                 item._Name = tables.itm_tresure.GetItemOrNull(item.Name);
                 item._Rarity = tables.menu_rarity.GetItemOrNull(item.Rarity + 1);
                 item._Zone = tables.FLD_maplist.GetItemOrNull(item.Zone);
             }
 
-            foreach (var item in tables.ma07a_FLD_TboxPop.Items)
+            foreach (ma01a_FLD_EnemyPop item in tables.ma01a_FLD_EnemyPop.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_LandmarkPop item in tables.ma01a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma02a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma02a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma02a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma02.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma02a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma02a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma02a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma02a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma02a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma02a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma02a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma02a_FLD_TboxPop item in tables.ma02a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
                 item._itm1ID = tables.GetItem(item.itm1ID);
                 item._itm2ID = tables.GetItem(item.itm2ID);
                 item._itm3ID = tables.GetItem(item.itm3ID);
@@ -8832,15 +9199,856 @@ namespace Xb2.Serialization
                 item._itm6ID = tables.GetItem(item.itm6ID);
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
             }
 
-            foreach (var item in tables.ma13a_FLD_EnemyPop.Items)
+            foreach (ma02a_FLD_AutoTalk item in tables.ma03a_FLD_AutoTalk.Items)
             {
+                item._BeforeID = tables.ma03a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma03a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma03.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma03a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma03a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma04a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma04a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma04a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma02.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma04a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
-            foreach (var item in tables.MIN_TT_Tbox.Items)
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma04a_FLD_LandmarkPop.Items)
             {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma04a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma04a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma05a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma05a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma05a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma05.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma05a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma05a_FLD_EnemyPop item in tables.ma05a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma05a_FLD_LandmarkPop item in tables.ma05a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma05a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma05a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma07a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma07a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma07a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma07.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma07a_FLD_CollectionPopList item in tables.ma07a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma07a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma07a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma07a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma07a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma08a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma08a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma08a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma08.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma08a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma08a_FLD_EnemyPop item in tables.ma08a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma08a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma08a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma08a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma10a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma10a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma10a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma10.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma10a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma10a_FLD_EnemyPop item in tables.ma10a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma10a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma10a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma10a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma11a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma11a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma11a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma11.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma11a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma11a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma11a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma11a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma11a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma13a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma13a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma13a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma13.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma07a_FLD_CollectionPopList item in tables.ma13a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma08a_FLD_EnemyPop item in tables.ma13a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma13a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma13a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma02a_FLD_TboxPop item in tables.ma13a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma15a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma15a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma15a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma15.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma15a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma15a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma15a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma15a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma15a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma16a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma16a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma16a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma16a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma16a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma17a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma08a_FLD_EnemyPop item in tables.ma17a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma17a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma17a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma18a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma05a_FLD_EnemyPop item in tables.ma18a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma18a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma18a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma18a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma20a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma20a_FLD_EnemyPop item in tables.ma20a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma20a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma20a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma20a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma21a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma10a_FLD_EnemyPop item in tables.ma21a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_LandmarkPop item in tables.ma21a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma21a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_LandmarkPop item in tables.ma30a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_LandmarkPop item in tables.ma50a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma02a_FLD_AutoTalk item in tables.ma90a_FLD_AutoTalk.Items)
+            {
+                item._BeforeID = tables.ma90a_FLD_AutoTalk.GetItemOrNull(item.BeforeID);
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._MOBID = tables.ma90a_FLD_MobPop.GetItemOrNull(item.MOBID);
+                item._Text = tables.autotalk_ma02.GetItemOrNull(item.Text);
+            }
+
+            foreach (ma02a_FLD_CollectionPopList item in tables.ma90a_FLD_CollectionPopList.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.ITM_CollectionList.GetItemOrNull(item.itm1ID);
+                item._itm2ID = tables.ITM_CollectionList.GetItemOrNull(item.itm2ID);
+                item._itm3ID = tables.ITM_CollectionList.GetItemOrNull(item.itm3ID);
+                item._itm4ID = tables.ITM_CollectionList.GetItemOrNull(item.itm4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_EnemyPop item in tables.ma90a_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma01a_FLD_LandmarkPop item in tables.ma90a_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma04a_FLD_PreciousPopList item in tables.ma90a_FLD_PreciousPopList.Items)
+            {
+                item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
+            }
+
+            foreach (ma03a_FLD_TboxPop item in tables.ma90a_FLD_TboxPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+                item._itm5ID = tables.GetItem(item.itm5ID);
+                item._itm6ID = tables.GetItem(item.itm6ID);
+                item._itm7ID = tables.GetItem(item.itm7ID);
+                item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (MIN_TT_Stage item in tables.MIN_TT_Stage.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (MIN_TT_Tbox item in tables.MIN_TT_Tbox.Items)
+            {
+                item._cond1 = tables.FLD_ConditionList.GetItemOrNull(item.cond1);
+                item._cond10 = tables.FLD_ConditionList.GetItemOrNull(item.cond10);
+                item._cond2 = tables.FLD_ConditionList.GetItemOrNull(item.cond2);
+                item._cond3 = tables.FLD_ConditionList.GetItemOrNull(item.cond3);
+                item._cond4 = tables.FLD_ConditionList.GetItemOrNull(item.cond4);
+                item._cond5 = tables.FLD_ConditionList.GetItemOrNull(item.cond5);
+                item._cond6 = tables.FLD_ConditionList.GetItemOrNull(item.cond6);
+                item._cond7 = tables.FLD_ConditionList.GetItemOrNull(item.cond7);
+                item._cond8 = tables.FLD_ConditionList.GetItemOrNull(item.cond8);
+                item._cond9 = tables.FLD_ConditionList.GetItemOrNull(item.cond9);
                 item._tdef1 = tables.MIN_TT_Tdef.GetItemOrNull(item.tdef1);
                 item._tdef10 = tables.MIN_TT_Tdef.GetItemOrNull(item.tdef10);
                 item._tdef2 = tables.MIN_TT_Tdef.GetItemOrNull(item.tdef2);
@@ -8853,7 +10061,7 @@ namespace Xb2.Serialization
                 item._tdef9 = tables.MIN_TT_Tdef.GetItemOrNull(item.tdef9);
             }
 
-            foreach (var item in tables.MIN_TT_Tdef.Items)
+            foreach (MIN_TT_Tdef item in tables.MIN_TT_Tdef.Items)
             {
                 item._item1 = tables.GetItem(item.item1);
                 item._item10 = tables.GetItem(item.item10);
@@ -8869,7 +10077,7 @@ namespace Xb2.Serialization
                 item._item9 = tables.GetItem(item.item9);
             }
 
-            foreach (var item in tables.MNU_BtnChallenge2.Items)
+            foreach (MNU_BtnChallenge2 item in tables.MNU_BtnChallenge2.Items)
             {
                 item._BtnType1 = (ButtonType)item.BtnType1;
                 item._BtnType2 = (ButtonType)item.BtnType2;
@@ -8879,7 +10087,7 @@ namespace Xb2.Serialization
                 item._Param3 = tables.MNU_ChallengeParam.GetItemOrNull(item.Param3);
             }
 
-            foreach (var item in tables.MNU_BtnChallengeSeq.Items)
+            foreach (MNU_BtnChallengeSeq item in tables.MNU_BtnChallengeSeq.Items)
             {
                 item._challenge01 = tables.MNU_BtnChallenge2.GetItemOrNull(item.challenge01);
                 item._challenge02 = tables.MNU_BtnChallenge2.GetItemOrNull(item.challenge02);
@@ -8888,22 +10096,225 @@ namespace Xb2.Serialization
                 item._challenge05 = tables.MNU_BtnChallenge2.GetItemOrNull(item.challenge05);
             }
 
-            foreach (var item in tables.MNU_Msg_Attr.Items)
+            foreach (MNU_CharOrder item in tables.MNU_CharBladeOrder.Items)
+            {
+                item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
+            }
+
+            foreach (MNU_CharOrder item in tables.MNU_CharDriverOrder.Items)
+            {
+                item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
+            }
+
+            foreach (MNU_CharOrder item in tables.MNU_CharHanaOrder.Items)
+            {
+                item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
+            }
+
+            foreach (MNU_CmnWindow item in tables.MNU_CmnWindow.Items)
+            {
+                item._text = tables.menu_cmnwindow.GetItemOrNull(item.text);
+                item._title = tables.menu_cmnwindow.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_Condition item in tables.MNU_Condition.Items)
+            {
+                item._cond = tables.FLD_ConditionList.GetItemOrNull(item.cond);
+            }
+
+            foreach (MNU_EventTheater item in tables.MNU_EventTheater.Items)
+            {
+                item._blade_id = tables.CHR_Bl.GetItemOrNull(item.blade_id);
+                item._chapter = tables.MNU_MsgEvthChapter.GetItemOrNull(item.chapter);
+                item._condition = tables.MNU_Condition.GetItemOrNull(item.condition);
+                item._maincast = tables.MNU_MsgEvthCast.GetItemOrNull(item.maincast);
+                item._title = tables.menu_ev_theater_ms.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_MainOrder item in tables.MNU_MainOrder.Items)
+            {
+                item._title = tables.menu_main_contents_ms.GetItemOrNull(item.title);
+                item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
+            }
+
+            foreach (MNU_MapGroup item in tables.MNU_MapGroup.Items)
+            {
+                item._condition = tables.FLD_ConditionList.GetItemOrNull(item.condition);
+                item._disp_name = tables.mnu_map_level_name_ms.GetItemOrNull(item.disp_name);
+            }
+
+            foreach (MNU_MapInfo item in tables.MNU_MapInfo.Items)
+            {
+                item._condition = tables.FLD_ConditionList.GetItemOrNull(item.condition);
+                item._disp_name = tables.mnu_map_level_name_ms.GetItemOrNull(item.disp_name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ArtsRange.Items)
+            {
+                item._name = tables.menu_range_type.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ArtsType.Items)
+            {
+                item._name = tables.menu_arts_type.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ArtsTypeIndex.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Attr.Items)
             {
                 item._name = tables.menu_attr_ms.GetItemOrNull(item.name);
             }
 
-            foreach (var item in tables.MNU_Msg_Gender.Items)
+            foreach (MNU_Name item in tables.MNU_Msg_ErrorInfo.Items)
+            {
+                item._name = tables.menu_error_info_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Gender.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
 
-            foreach (var item in tables.MNU_Msg_Race.Items)
+            foreach (MNU_Name item in tables.MNU_Msg_ItemFilter.Items)
+            {
+                item._name = tables.menu_filter_category.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ItemListFilter.Items)
+            {
+                item._name = tables.menu_filter_category.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ItemSort.Items)
+            {
+                item._name = tables.menu_sort_category.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ItemType.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
 
-            foreach (var item in tables.MNU_ShopChange.Items)
+            foreach (MNU_Name item in tables.MNU_Msg_MenuDescription.Items)
+            {
+                item._name = tables.menu_sub_contents_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Mercenaries.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_PouchFilter.Items)
+            {
+                item._name = tables.menu_filter_category.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Race.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Rarelity.Items)
+            {
+                item._name = tables.menu_rarity.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Msg_SubContents item in tables.MNU_Msg_SubContents.Items)
+            {
+                item._caption = tables.MNU_Msg_MenuDescription.GetItemOrNull(item.caption);
+                item._name = tables.menu_sub_contents_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgBlStatusIndex.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_MsgChapterEnd item in tables.MNU_MsgChapterEnd.Items)
+            {
+                item._index = tables.menu_chapter_end_ms.GetItemOrNull(item.index);
+                item._title = tables.menu_chapter_end_ms.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgDamageBuff.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgDrStatusIndex.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgEvthCast.Items)
+            {
+                item._name = tables.menu_ev_theater_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgEvthChapter.Items)
+            {
+                item._name = tables.menu_ev_theater_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgMapFilter.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgPopup.Items)
+            {
+                item._name = tables.menu_popup_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgPopupSystem.Items)
+            {
+                item._name = tables.menu_popup_system_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_MsgPopupTitle item in tables.MNU_MsgPopupTitle.Items)
+            {
+                item._name = tables.menu_popup_title_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgSelect.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgUniteBonus.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_OptionCamera item in tables.MNU_OptionCamera.Items)
+            {
+                item._cap_id = tables.menu_option_cap_ms.GetItemOrNull(item.cap_id);
+                item._name_id = tables.menu_option_name_ms.GetItemOrNull(item.name_id);
+            }
+
+            foreach (MNU_OptionDisp item in tables.MNU_OptionDisp.Items)
+            {
+                item._cap_id = tables.menu_option_cap_ms.GetItemOrNull(item.cap_id);
+                item._name_id = tables.menu_option_name_ms.GetItemOrNull(item.name_id);
+            }
+
+            foreach (MNU_OptionDisp item in tables.MNU_OptionSound.Items)
+            {
+                item._cap_id = tables.menu_option_cap_ms.GetItemOrNull(item.cap_id);
+                item._name_id = tables.menu_option_name_ms.GetItemOrNull(item.name_id);
+            }
+
+            foreach (MNU_ShopCategoryName item in tables.MNU_ShopCategoryName.Items)
+            {
+                item._name = tables.menu_shop_category.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_ShopChange item in tables.MNU_ShopChange.Items)
             {
                 item._AddCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition1);
                 item._AddCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition2);
@@ -8931,9 +10342,10 @@ namespace Xb2.Serialization
                 item._DefTaskSet8 = tables.MNU_ShopChangeTask.GetItemOrNull(item.DefTaskSet8);
             }
 
-            foreach (var item in tables.MNU_ShopChangeTask.Items)
+            foreach (MNU_ShopChangeTask item in tables.MNU_ShopChangeTask.Items)
             {
                 item._Name = tables.fld_shopchange.GetItemOrNull(item.Name);
+                item._Reward = tables.FLD_QuestReward.GetItemOrNull(item.Reward);
                 item._SetItem1 = tables.GetItem(item.SetItem1);
                 item._SetItem2 = tables.GetItem(item.SetItem2);
                 item._SetItem3 = tables.GetItem(item.SetItem3);
@@ -8941,14 +10353,26 @@ namespace Xb2.Serialization
                 item._SetItem5 = tables.GetItem(item.SetItem5);
             }
 
-            foreach (var item in tables.MNU_ShopList.Items)
+            foreach (MNU_ShopList item in tables.MNU_ShopList.Items)
             {
                 item._Name = tables.fld_shopname.GetItemOrNull(item.Name);
+                item._ShopType = (ShopType)item.ShopType;
             }
 
-            foreach (var item in tables.MNU_ShopNormal.Items)
+            foreach (MNU_ShopNormal item in tables.MNU_ShopNormal.Items)
             {
+                item._AddCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition1);
+                item._AddCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition2);
+                item._AddCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition3);
+                item._AddCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition4);
+                item._AddCondition5 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition5);
+                item._Addtem1 = tables.GetItem(item.Addtem1);
+                item._Addtem2 = tables.GetItem(item.Addtem2);
+                item._Addtem3 = tables.GetItem(item.Addtem3);
+                item._Addtem4 = tables.GetItem(item.Addtem4);
+                item._Addtem5 = tables.GetItem(item.Addtem5);
                 item._DefItem1 = tables.GetItem(item.DefItem1);
+                item._DefItem10 = tables.GetItem(item.DefItem10);
                 item._DefItem2 = tables.GetItem(item.DefItem2);
                 item._DefItem3 = tables.GetItem(item.DefItem3);
                 item._DefItem4 = tables.GetItem(item.DefItem4);
@@ -8957,654 +10381,664 @@ namespace Xb2.Serialization
                 item._DefItem7 = tables.GetItem(item.DefItem7);
                 item._DefItem8 = tables.GetItem(item.DefItem8);
                 item._DefItem9 = tables.GetItem(item.DefItem9);
-                item._DefItem10 = tables.GetItem(item.DefItem10);
-                item._Addtem1 = tables.GetItem(item.Addtem1);
-                item._Addtem2 = tables.GetItem(item.Addtem2);
-                item._Addtem3 = tables.GetItem(item.Addtem3);
-                item._Addtem4 = tables.GetItem(item.Addtem4);
-                item._Addtem5 = tables.GetItem(item.Addtem5);
                 item._PrivilegeItem = tables.GetItem(item.PrivilegeItem);
-                item._AddCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition1);
-                item._AddCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition2);
-                item._AddCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition3);
-                item._AddCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition4);
-                item._AddCondition5 = tables.FLD_ConditionList.GetItemOrNull(item.AddCondition5);
             }
 
-            foreach (var item in tables.MNU_SoundBgm.Items)
+            foreach (MNU_SortTable item in tables.MNU_SortTable.Items)
+            {
+                item._sort_type1 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type1);
+                item._sort_type2 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type2);
+                item._sort_type3 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type3);
+                item._sort_type4 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type4);
+                item._sort_type5 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type5);
+                item._sort_type6 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type6);
+                item._sort_type7 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type7);
+                item._sort_type8 = tables.MNU_Msg_ItemSort.GetItemOrNull(item.sort_type8);
+            }
+
+            foreach (MNU_SoundBgm item in tables.MNU_SoundBgm.Items)
             {
                 item._resource = tables.RSC_BgmList.GetItemOrNull(item.resource);
             }
 
-            foreach (var item in tables.MNU_WorldMapCond.Items)
+            foreach (MNU_WorldMapCond item in tables.MNU_WorldMapCond.Items)
             {
-                item._mapId = tables.FLD_maplist.GetItemOrNull(item.mapId);
                 item._cond1 = tables.FLD_ConditionList.GetItemOrNull(item.cond1);
+                item._cond2 = tables.FLD_ConditionList.GetItemOrNull(item.cond2);
+                item._cond3 = tables.FLD_ConditionList.GetItemOrNull(item.cond3);
                 item._enter = tables.FLD_ConditionList.GetItemOrNull(item.enter);
+                item._mapId = tables.FLD_maplist.GetItemOrNull(item.mapId);
                 item._pos1 = tables.MNU_WorldMap.GetItemOrNull(item.pos1);
+                item._pos2 = tables.MNU_WorldMap.GetItemOrNull(item.pos2);
+                item._pos3 = tables.MNU_WorldMap.GetItemOrNull(item.pos3);
             }
 
-            foreach (var item in tables.mnu001_title_txt.Items)
+            foreach (MNU_txt item in tables.mnu001_title_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu002_balloon_txt.Items)
+            foreach (MNU_txt item in tables.mnu002_balloon_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu003_dropitem_txt.Items)
+            foreach (MNU_txt item in tables.mnu003_dropitem_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu004_gauge_txt.Items)
+            foreach (MNU_txt item in tables.mnu004_gauge_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu004_palette_txt.Items)
+            foreach (MNU_txt item in tables.mnu004_palette_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu004_palette2_txt.Items)
+            foreach (MNU_txt item in tables.mnu004_palette2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu007_buff_txt.Items)
+            foreach (MNU_txt item in tables.mnu007_buff_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu007_damage_txt.Items)
+            foreach (MNU_txt item in tables.mnu007_damage_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu009_expget_txt.Items)
+            foreach (MNU_txt item in tables.mnu009_expget_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu010_jog_character.Items)
-            {
-                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
-            }
-
-            foreach (var item in tables.mnu010_jog_custom.Items)
+            foreach (MNU_jog_txt item in tables.mnu010_jog_character.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu010_jog_setup.Items)
+            foreach (MNU_jog_txt item in tables.mnu010_jog_custom.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu010_jog_story.Items)
+            foreach (MNU_jog_txt item in tables.mnu010_jog_setup.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu010_jog_top.Items)
+            foreach (MNU_jog_txt item in tables.mnu010_jog_story.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu010_mainmenu_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu010_mainmenu2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu011_dr_custom.Items)
+            foreach (MNU_jog_txt item in tables.mnu010_jog_top.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu011_dr_custom_select_txt.Items)
+            foreach (MNU_txt item in tables.mnu010_mainmenu_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu012_bl_custom.Items)
-            {
-                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
-            }
-
-            foreach (var item in tables.mnu012_bl_custom_select_txt.Items)
+            foreach (MNU_txt item in tables.mnu010_mainmenu2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu013_dr_arts_set_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu014_kizuna_ring_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu016_ptform_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu016_ptform2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu018_skip_time_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu018_world_map_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu018_zone_map_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu020_quest_list_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu020_quest_reward_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu020_top_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu021_blade_book_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu022_en_book_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu024_shop_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu025_fade_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu027_info_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu027_list_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu027_text_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu029_fieldskill_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu030_actionwindow_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu030_elem_eff_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu030_enemystatus_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu030_fieldtarget_info_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu032_buttonchallenge_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu032_buttonchallenge2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu033_save_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu033_save2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu034_partystatus_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu034_partystatus2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu035_locationtelop_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu035_locationtelop2_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu036_eventsubtitle_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu037_bladechange_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu038_bladeform_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu039_combo_req_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu040_environmentinfo_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu041_eventskip_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu042_questorder_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu043_questresult_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu045_compass_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu046_popup_window_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu048_item_submenu_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu048_itemlist_main_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu050_chapter_telop_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu051_operation_info_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu052_link_jump_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu053_jog_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (var item in tables.mnu054_jog_top.Items)
+            foreach (MNU_jog_txt item in tables.mnu011_dr_custom.Items)
             {
                 item._txt = tables.menu_ms.GetItemOrNull(item.txt);
             }
 
-            foreach (var item in tables.mnu054_mercenary_txt.Items)
+            foreach (MNU_txt item in tables.mnu011_dr_custom_select_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu055_blade_create_txt.Items)
+            foreach (MNU_jog_txt item in tables.mnu012_bl_custom.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (MNU_txt item in tables.mnu012_bl_custom_select_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu055_blade_name_txt.Items)
+            foreach (MNU_txt item in tables.mnu013_dr_arts_set_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu056_dr_equip_txt.Items)
+            foreach (MNU_txt item in tables.mnu014_kizuna_ring_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu060_blade_set_txt.Items)
+            foreach (MNU_txt item in tables.mnu016_ptform_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu061_inn_main_txt.Items)
+            foreach (MNU_txt item in tables.mnu016_ptform2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu061_inn_txt.Items)
+            foreach (MNU_txt item in tables.mnu018_skip_time_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu061_lv_setup_txt.Items)
+            foreach (MNU_txt item in tables.mnu018_world_map_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu062_battle_telop_txt.Items)
+            foreach (MNU_txt item in tables.mnu018_zone_map_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu063_common_detail_txt.Items)
+            foreach (MNU_txt item in tables.mnu020_quest_list_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu064_cylinderselect_txt.Items)
+            foreach (MNU_txt item in tables.mnu020_quest_reward_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu064_salvage_txt.Items)
+            foreach (MNU_txt item in tables.mnu020_top_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu065_chain_attack_txt.Items)
+            foreach (MNU_txt item in tables.mnu021_blade_book_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu069_tutorial_txt.Items)
+            foreach (MNU_txt item in tables.mnu022_en_book_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu070_pouch_main_txt.Items)
+            foreach (MNU_txt item in tables.mnu024_shop_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu070_pouch_txt.Items)
+            foreach (MNU_txt item in tables.mnu025_fade_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu071_bl_weapon_txt.Items)
+            foreach (MNU_txt item in tables.mnu027_info_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu071_blade_weapon_txt.Items)
+            foreach (MNU_txt item in tables.mnu027_list_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu072_bl_orb_txt.Items)
+            foreach (MNU_txt item in tables.mnu027_text_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu072_blade_orb_txt.Items)
+            foreach (MNU_txt item in tables.mnu029_fieldskill_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu074_comboroot_txt.Items)
+            foreach (MNU_txt item in tables.mnu030_actionwindow_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu075_main_menu_txt.Items)
+            foreach (MNU_txt item in tables.mnu030_elem_eff_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu076_char_menu_txt.Items)
+            foreach (MNU_txt item in tables.mnu030_enemystatus_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu076_hana_submenu_txt.Items)
+            foreach (MNU_txt item in tables.mnu030_fieldtarget_info_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu079_event_theater_txt.Items)
+            foreach (MNU_txt item in tables.mnu032_buttonchallenge_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu080_option_txt.Items)
+            foreach (MNU_txt item in tables.mnu032_buttonchallenge2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu081_quest_log_txt.Items)
+            foreach (MNU_txt item in tables.mnu033_save_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu082_ptform_txt.Items)
+            foreach (MNU_txt item in tables.mnu033_save2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu083_bl_cmn_detail_txt.Items)
+            foreach (MNU_txt item in tables.mnu034_partystatus_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu083_cmn_status_txt.Items)
+            foreach (MNU_txt item in tables.mnu034_partystatus2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu083_dr_cmn_detail_txt.Items)
+            foreach (MNU_txt item in tables.mnu035_locationtelop_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu084_dr_equip_txt.Items)
+            foreach (MNU_txt item in tables.mnu035_locationtelop2_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu085_shop_txt.Items)
+            foreach (MNU_txt item in tables.mnu036_eventsubtitle_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu086_blade_set_txt.Items)
+            foreach (MNU_txt item in tables.mnu037_bladechange_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu087_dialog_txt.Items)
+            foreach (MNU_txt item in tables.mnu038_bladeform_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu088_dr_arts_set_txt.Items)
+            foreach (MNU_txt item in tables.mnu039_combo_req_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu089_bl_kizuna_ring_txt.Items)
+            foreach (MNU_txt item in tables.mnu040_environmentinfo_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu089_dr_kizuna_ring_txt.Items)
+            foreach (MNU_txt item in tables.mnu041_eventskip_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu090_mercenary_form_txt.Items)
+            foreach (MNU_txt item in tables.mnu042_questorder_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu090_mercenary_report_txt.Items)
+            foreach (MNU_txt item in tables.mnu043_questresult_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu090_mercenary_top_txt.Items)
+            foreach (MNU_txt item in tables.mnu045_compass_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu091_hana_main_txt.Items)
+            foreach (MNU_txt item in tables.mnu046_popup_window_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu091_hana_main2_txt.Items)
+            foreach (MNU_txt item in tables.mnu048_item_submenu_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu091_parts_make_txt.Items)
+            foreach (MNU_txt item in tables.mnu048_itemlist_main_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu091_parts_make2_txt.Items)
+            foreach (MNU_txt item in tables.mnu050_chapter_telop_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu091_parts_recrystal_txt.Items)
+            foreach (MNU_txt item in tables.mnu051_operation_info_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu092_zone_telop_txt.Items)
+            foreach (MNU_txt item in tables.mnu052_link_jump_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu094_submenu_book_txt.Items)
+            foreach (MNU_txt item in tables.mnu053_jog_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu094_submenu_crystal_txt.Items)
+            foreach (MNU_jog_txt item in tables.mnu054_jog_top.Items)
+            {
+                item._txt = tables.menu_ms.GetItemOrNull(item.txt);
+            }
+
+            foreach (MNU_txt item in tables.mnu054_mercenary_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu094_submenu_system_txt.Items)
+            foreach (MNU_txt item in tables.mnu055_blade_create_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu095_blade_release_txt.Items)
+            foreach (MNU_txt item in tables.mnu055_blade_name_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu096_blade_switch_txt.Items)
+            foreach (MNU_txt item in tables.mnu056_dr_equip_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu100_bladecreate_txt.Items)
+            foreach (MNU_txt item in tables.mnu060_blade_set_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu100_name_select_txt.Items)
+            foreach (MNU_txt item in tables.mnu061_inn_main_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu101_sort_txt.Items)
+            foreach (MNU_txt item in tables.mnu061_inn_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu103_staffroll_txt.Items)
+            foreach (MNU_txt item in tables.mnu061_lv_setup_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.mnu999_chaincount_txt.Items)
+            foreach (MNU_txt item in tables.mnu062_battle_telop_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
-            foreach (var item in tables.RSC_BgmCondition.Items)
+            foreach (MNU_txt item in tables.mnu063_common_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu064_cylinderselect_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu064_salvage_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu065_chain_attack_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu069_tutorial_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu070_pouch_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu070_pouch_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu071_bl_weapon_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu071_blade_weapon_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu072_bl_orb_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu072_blade_orb_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu074_comboroot_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu075_main_menu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu076_char_menu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu076_hana_submenu_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu079_event_theater_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu080_option_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu081_quest_log_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu082_ptform_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu083_bl_cmn_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu083_cmn_status_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu083_dr_cmn_detail_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu084_dr_equip_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu085_shop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu086_blade_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu087_dialog_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu088_dr_arts_set_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu089_bl_kizuna_ring_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu089_dr_kizuna_ring_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu090_mercenary_form_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu090_mercenary_report_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu090_mercenary_top_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu091_hana_main_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu091_hana_main2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu091_parts_make_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu091_parts_make2_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu091_parts_recrystal_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu092_zone_telop_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu094_submenu_book_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu094_submenu_crystal_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu094_submenu_system_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu095_blade_release_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu096_blade_switch_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu100_bladecreate_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu100_name_select_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu101_sort_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu103_staffroll_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu999_chaincount_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (RSC_AreaBgmList item in tables.RSC_AreaBgmList.Items)
+            {
+                item._bgmCondition = tables.RSC_BgmCondition.GetItemOrNull(item.bgmCondition);
+            }
+
+            foreach (RSC_BgmCondition item in tables.RSC_BgmCondition.Items)
             {
                 item._BgmIDA = tables.RSC_BgmList.GetItemOrNull(item.BgmIDA);
                 item._BgmIDB = tables.RSC_BgmList.GetItemOrNull(item.BgmIDB);
@@ -9616,14 +11050,44 @@ namespace Xb2.Serialization
                 item._ConditionD = tables.FLD_ConditionList.GetItemOrNull(item.ConditionD);
             }
 
-            foreach (var item in tables.RSC_EnGenus.Items)
+            foreach (RSC_EnGenus item in tables.RSC_EnGenus.Items)
             {
                 item._NAME = tables.btl_engenus_ms.GetItemOrNull(item.NAME);
             }
 
-            foreach (var item in tables.RSC_NpcList.Items)
+            foreach (RSC_GmkSetList item in tables.RSC_GmkSetList.Items)
+            {
+                item._mapId = tables.FLD_maplist.GetItemOrNull(item.mapId);
+            }
+
+            foreach (RSC_NpcList item in tables.RSC_NpcList.Items)
             {
                 item._Name = tables.fld_npcname.GetItemOrNull(item.Name);
+            }
+
+            foreach (RSC_PcWpn item in tables.RSC_PcWpn.Items)
+            {
+                item._MenuImageID = tables.MNU_Stream_WpnImg.GetItemOrNull(item.MenuImageID);
+            }
+
+            foreach (SYS_MapJumpEvList item in tables.SYS_MapJumpList.Items)
+            {
+                item._MapList = tables.FLD_maplist.GetItemOrNull(item.MapList);
+            }
+
+            foreach (Vo_Battle_Enemy item in tables.Vo_Battle_Enemy.Items)
+            {
+                item._CondEx = tables.FLD_ConditionList.GetItemOrNull(item.CondEx);
+            }
+
+            foreach (Vo_Field_Filter item in tables.Vo_Field_Filter.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (Vo_WinSp item in tables.Vo_WinSp.Items)
+            {
+                item._FLD_CondID = tables.FLD_ConditionList.GetItemOrNull(item.FLD_CondID);
             }
         }
     }

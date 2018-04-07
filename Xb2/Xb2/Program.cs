@@ -17,9 +17,10 @@ namespace Xb2
     {
         private static void ExtractArchive(string arhFilename, string ardFilename, string outDir)
         {
-            var arh = File.ReadAllBytes(arhFilename);
-            var archive = new FileArchive(arh, ardFilename);
-            FileArchive.Extract(archive, outDir);
+            using (var archive = new FileArchive(arhFilename, ardFilename))
+            {
+                FileArchive.Extract(archive, outDir);
+            }
         }
 
         private static void DecryptBdatFile(string filename)
@@ -38,10 +39,15 @@ namespace Xb2
             }
         }
 
-        private static void RunClassGen(string bdatDir, string csDir)
+        private static void RunClassGen(string arhFilename, string ardFilename, string csDir)
         {
-            BdatTable[] tables = GetBdatMembers(bdatDir, "*");
-            SerializationCode.CreateFiles(tables, csDir);
+            BdatTables bdats;
+            using (var archive = new FileArchive(arhFilename, ardFilename))
+            {
+                bdats = new BdatTables(archive);
+            }
+
+            SerializationCode.CreateFiles(bdats, csDir);
         }
 
         private static BdatCollection DeserializeBdat(string bdatDir, string pattern)
@@ -60,79 +66,51 @@ namespace Xb2
 
         private static BdatCollection DeserializeBdatArchive(string arhFilename, string ardFilename)
         {
-            var header = File.ReadAllBytes(arhFilename);
-            var archive = new FileArchive(header, ardFilename);
-
             var files = new List<byte[]>();
 
-            files.Add(archive.ReadFile("/bdat/common.bdat"));
-            files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
-            foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
+            using (var archive = new FileArchive(arhFilename, ardFilename))
             {
-                byte[] bdat = archive.ReadFile(file);
-                if (bdat == null) continue;
-                files.Add(bdat);
+                files.Add(archive.ReadFile("/bdat/common.bdat"));
+                files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
+                foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
+                {
+                    byte[] bdat = archive.ReadFile(file);
+                    if (bdat == null) continue;
+                    files.Add(bdat);
+                }
             }
 
             BdatCollection tables = Deserialize.ReadBdats(files.ToArray());
             return tables;
         }
 
-        private static BdatStringCollection DeserializeBdatStringArchive(string arhFilename, string ardFilename)
-        {
-            var header = File.ReadAllBytes(arhFilename);
-            var archive = new FileArchive(header, ardFilename);
-
-            var files = new List<byte[]>();
-            var fileNames = new List<string>();
-
-            files.Add(archive.ReadFile("/bdat/common.bdat"));
-            fileNames.Add(Path.GetFileNameWithoutExtension("common.bdat"));
-            files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
-            fileNames.Add(Path.GetFileNameWithoutExtension("common_gmk.bdat"));
-            foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
-            {
-                byte[] bdat = archive.ReadFile(file);
-                if (bdat == null) continue;
-                files.Add(bdat);
-                fileNames.Add(Path.GetFileNameWithoutExtension(file.Filename));
-            }
-
-            BdatStringCollection tables = DeserializeStrings.ReadBdats(files.ToArray(), fileNames.ToArray());
-            return tables;
-        }
-
-        private static BdatTable[] GetBdatMembers(string bdatDir, string pattern)
-        {
-            string[] filenames = Directory.GetFiles(bdatDir, pattern, SearchOption.AllDirectories);
-            byte[][] files = new byte[filenames.Length][];
-            var tables = new BdatTable[filenames.Length][];
-
-            for (int i = 0; i < filenames.Length; i++)
-            {
-                files[i] = File.ReadAllBytes(filenames[i]);
-                tables[i] = new BdatFile(files[i], filenames[i]).Tables;
-            }
-
-            BdatTable[] flat = tables.SelectMany(x => x).ToArray();
-
-            return flat;
-        }
 
         private static void BdatToHtmlArchive(string arhFilename, string ardFilename, string htmlDir)
         {
             var watch = Stopwatch.StartNew();
-            BdatStringCollection tables = DeserializeBdatStringArchive(arhFilename, ardFilename);
+            BdatTables bdats;
+            using (var archive = new FileArchive(arhFilename, ardFilename))
+            {
+                bdats = new BdatTables(archive);
+            }
+
+            watch.PrintAndRestart();
+            BdatStringCollection tables = DeserializeStrings.DeserializeTables(bdats);
+
+            watch.PrintAndRestart();
+            Metadata.ApplyMetadata(tables);
+
+            watch.PrintAndRestart();
+            HtmlGen.PrintSeparateTables(tables, htmlDir);
+
+            watch.PrintAndRestart();
+        }
+
+        public static void PrintAndRestart(this Stopwatch watch)
+        {
             watch.Stop();
             Console.WriteLine(watch.Elapsed.TotalMilliseconds);
-
-            BdatInfo info = BdatInfoImport.GetBdatInfo(tables);
-            BdatStringTools.ProcessReferences(tables, info);
-
             watch.Restart();
-            HtmlGen.OutputHtml(tables, info, htmlDir);
-            watch.Stop();
-            Console.WriteLine(watch.Elapsed.TotalMilliseconds);
         }
 
         public static void PrintData(BdatCollection tables, string dataDir)
@@ -147,9 +125,10 @@ namespace Xb2
 
         public static void ReadWilay(string arhFilename, string ardFilename, string inPath, string outPath)
         {
-            byte[] header = File.ReadAllBytes(arhFilename);
-            var archive = new FileArchive(header, ardFilename);
-            Extract.ExtractTextures(archive, inPath, outPath);
+            using (var archive = new FileArchive(arhFilename, ardFilename))
+            {
+                Extract.ExtractTextures(archive, inPath, outPath);
+            }
         }
 
         public static void Main(string[] args)
@@ -171,8 +150,8 @@ namespace Xb2
                 case "decrypt" when args.Length == 3:
                     DecryptBdatFiles(args[1], args[2]);
                     break;
-                case "classgen" when args.Length == 3:
-                    RunClassGen(args[1], args[2]);
+                case "classgen" when args.Length == 4:
+                    RunClassGen(args[1], args[2], args[3]);
                     break;
                 case "deserializebdat" when args.Length == 3:
                     DeserializeBdat(args[1], args[2]);

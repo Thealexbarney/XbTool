@@ -5,7 +5,7 @@ namespace Xb2.CreateBlade
 {
     public static class Run
     {
-        static bool TryReadInt(int min, int max, out int value)
+        private static bool TryReadInt(int min, int max, out int value)
         {
             var line = Console.ReadLine();
             if (!int.TryParse(line, out value))
@@ -16,7 +16,7 @@ namespace Xb2.CreateBlade
             return value >= min && value <= max;
         }
 
-        static int ReadIntFromConsole(int min, int max, string message)
+        private static int ReadIntFromConsole(int min, int max, string message)
         {
             while (true)
             {

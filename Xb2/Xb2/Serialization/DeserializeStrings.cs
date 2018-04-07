@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Xb2.Bdat;
 using Xb2.BdatString;
 
@@ -7,102 +6,66 @@ namespace Xb2.Serialization
 {
     public static class DeserializeStrings
     {
-        public static BdatStringCollection ReadBdats(byte[][] files, string[] filenames)
+        public static BdatStringCollection DeserializeTables(BdatTables tables)
         {
-            var tables = new BdatStringCollection();
+            var collection = new BdatStringCollection { Bdats = tables };
 
-            for (int i = 0; i < files.Length; i++)
+            foreach (BdatTable table in tables.Tables)
             {
-                ReadBdat(files[i], tables, filenames[i]);
+                var items = new BdatStringItem[table.ItemCount];
+
+                var stringTable = new BdatStringTable
+                {
+                    Collection = collection,
+                    Name = table.Name,
+                    BaseId = table.BaseId,
+                    Members = table.Members,
+                    Items = items,
+                    Filename = table.Filename
+                };
+
+                for (int i = 0; i < table.ItemCount; i++)
+                {
+                    BdatStringItem item = ReadItem(table, i);
+                    item.Table = stringTable;
+                    item.Id = table.BaseId + i;
+
+                    if (tables.DisplayFields.TryGetValue(table.Name, out var fieldName))
+                    {
+                        item.Display = item[fieldName];
+                    }
+
+                    items[i] = item;
+                }
+
+                collection.Add(stringTable);
             }
 
-            return tables;
+            return collection;
         }
 
-        private static void ReadBdat(byte[] file, BdatStringCollection tables, string filename)
+        private static BdatStringItem ReadItem(BdatTable table, int itemIndex)
         {
-            if (file.Length <= 12) throw new InvalidDataException("File is too short");
-            int fileLength = BitConverter.ToInt32(file, 4);
-            if (file.Length != fileLength) throw new InvalidDataException("Incorrect file length field");
+            int itemOffset = table.ItemTableOffset + itemIndex * table.ItemSize;
 
-            BdatTools.DecryptBdat(file);
-
-            int tableCount = BitConverter.ToInt32(file, 0);
-
-            for (int i = 0; i < tableCount; i++)
-            {
-                int offset = BitConverter.ToInt32(file, 8 + 4 * i);
-                var table = ReadTable(file, offset);
-                if (table == null) continue;
-                if (tableCount > 1) table.Filename = filename;
-                tables.Add(table);
-            }
-        }
-
-        private static BdatStringTable ReadTable(byte[] file, int offset)
-        {
-            if (BitConverter.ToUInt32(file, offset) != 0x54414442) return null;
-
-            int namesOffset = BitConverter.ToUInt16(file, offset + 6);
-            var tableName = Stuff.GetUTF8Z(file, offset + namesOffset);
-            var members = BdatTable.ReadTableMembers(file, offset);
-
-            var table = new BdatStringTable
-            {
-                Name = tableName,
-                BaseId = BitConverter.ToUInt16(file, offset + 18),
-                Members = members,
-                Items = ReadItems(file, offset, members)
-            };
-
-            int id = table.BaseId;
-            foreach (BdatStringItem item in table.Items)
-            {
-                item.Table = tableName;
-                item.Id = id++;
-            }
-
-            return table;
-        }
-
-        private static BdatStringItem[] ReadItems(byte[] file, int offset, BdatMember[] members)
-        {
-            int itemSize = BitConverter.ToUInt16(file, offset + 8);
-            int itemTableOffset = BitConverter.ToUInt16(file, offset + 14);
-            int itemCount = BitConverter.ToUInt16(file, offset + 16);
-
-            var items = new BdatStringItem[itemCount];
-
-            for (int i = 0; i < itemCount; i++)
-            {
-                int itemOffset = offset + itemTableOffset + i * itemSize;
-                BdatStringItem item = ReadItem(file, offset, itemOffset, members);
-                items[i] = item;
-            }
-
-            return items;
-        }
-
-        private static BdatStringItem ReadItem(byte[] file, int tableOffset, int itemOffset, BdatMember[] members)
-        {
             var item = new BdatStringItem();
 
-            foreach (var member in members)
+            foreach (var member in table.Members)
             {
                 switch (member.Type)
                 {
                     case BdatMemberType.Scalar:
-                        string v = ReadValue(file, tableOffset, itemOffset + member.MemberPos, member.ValType);
-                        item.Add(member.Name, v);
+                        string v = ReadValue(table.Table, itemOffset + member.MemberPos, member.ValType);
+                        item.AddMember(member.Name, new BdatStringValue(v, item, member));
                         break;
                     case BdatMemberType.Array:
-                        var a = ReadArray(file, tableOffset, itemOffset + member.MemberPos, member);
-                        item.Add(member.Name, a);
+                        var a = ReadArray(table.Table, itemOffset + member.MemberPos, member);
+                        item.AddMember(member.Name, new BdatStringValue(a, item, member));
                         break;
                     case BdatMemberType.Flag:
-                        var flagsMember = members[member.FlagVarIndex];
-                        var f = ReadFlag(file, tableOffset, itemOffset, member, flagsMember);
-                        item.Add(member.Name, f);
+                        var flagsMember = table.Members[member.FlagVarIndex];
+                        var f = ReadFlag(table.Table, itemOffset, member, flagsMember);
+                        item.AddMember(member.Name, new BdatStringValue(f, item, member));
                         break;
                 }
             }
@@ -110,7 +73,7 @@ namespace Xb2.Serialization
             return item;
         }
 
-        private static string ReadValue(byte[] file, int tableOffset, int valueOffset, BdatValueType type)
+        private static string ReadValue(byte[] file, int valueOffset, BdatValueType type)
         {
             switch (type)
             {
@@ -127,7 +90,7 @@ namespace Xb2.Serialization
                 case BdatValueType.Int32:
                     return BitConverter.ToInt32(file, valueOffset).ToString();
                 case BdatValueType.String:
-                    return Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, valueOffset));
+                    return Stuff.GetUTF8Z(file, BitConverter.ToInt32(file, valueOffset));
                 case BdatValueType.FP32:
                     return BitConverter.ToSingle(file, valueOffset).ToString("R");
                 default:
@@ -135,22 +98,22 @@ namespace Xb2.Serialization
             }
         }
 
-        private static string[] ReadArray(byte[] file, int tableOffset, int arrayOffset, BdatMember member)
+        private static string[] ReadArray(byte[] file, int arrayOffset, BdatMember member)
         {
             var values = new string[member.ArrayCount];
             int typeSize = GetTypeSize(member.ValType);
 
             for (int i = 0, offset = arrayOffset; i < member.ArrayCount; i++, offset += typeSize)
             {
-                values[i] = ReadValue(file, tableOffset, offset, member.ValType);
+                values[i] = ReadValue(file, offset, member.ValType);
             }
 
             return values;
         }
 
-        private static string ReadFlag(byte[] file, int tableOffset, int itemOffset, BdatMember member, BdatMember flagsMember)
+        private static string ReadFlag(byte[] file, int itemOffset, BdatMember member, BdatMember flagsMember)
         {
-            uint flags = uint.Parse(ReadValue(file, tableOffset, itemOffset + flagsMember.MemberPos, flagsMember.ValType));
+            uint flags = uint.Parse(ReadValue(file, itemOffset + flagsMember.MemberPos, flagsMember.ValType));
             return ((flags & member.FlagMask) != 0).ToString();
         }
 

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Xb2.Bdat
 {
+    [DebuggerDisplay("{" + nameof(Name) + ", nq}")]
     public class BdatMember
     {
         public string Name { get; }
@@ -13,13 +16,24 @@ namespace Xb2.Bdat
         public int FlagIndex { get; }
         public uint FlagMask { get; }
         public int FlagVarIndex { get; }
+        public BdatFieldInfo Metadata { get; set; }
 
-        public BdatMember(byte[] file, int tableOffset, int offset)
+        public BdatMember(byte[] file, int tableOffset, int offset, HashSet<string> usedNames)
         {
             int infoOffset = tableOffset + BitConverter.ToUInt16(file, offset);
             int nameOffset = tableOffset + BitConverter.ToUInt16(file, offset + 4);
 
-            Name = Stuff.GetUTF8Z(file, nameOffset);
+            var name = Stuff.GetUTF8Z(file, nameOffset);
+            int dupe = 0;
+            Name = name;
+
+            while (usedNames.Contains(Name))
+            {
+                Name = $"{name}_{dupe++}";
+            }
+
+            usedNames.Add(Name);
+
             Type = (BdatMemberType)file[infoOffset];
 
             if (Type == BdatMemberType.Flag)

@@ -1,4 +1,6 @@
 // ReSharper disable InconsistentNaming
+// ReSharper disable UnassignedField.Global
+// ReSharper disable UnusedMember.Global
 
 using System;
 using Xb2.Bdat;

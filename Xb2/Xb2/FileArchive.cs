@@ -6,7 +6,7 @@ using Ionic.Zlib;
 
 namespace Xb2
 {
-    public class FileArchive
+    public class FileArchive : IDisposable
     {
         private Node[] Nodes { get; }
         public FileInfo[] FileInfo { get; }
@@ -20,11 +20,13 @@ namespace Xb2
         public int FileTableOffset { get; }
         public int FileCount { get; }
         public uint Key { get; }
+        private long Length { get; set; }
 
         private FileStream Stream { get; }
 
-        public FileArchive(byte[] headerFile, string dataFilename)
+        public FileArchive(string headerFilename, string dataFilename)
         {
+            var headerFile = File.ReadAllBytes(headerFilename);
             DecryptArh(headerFile);
 
             using (var stream = new MemoryStream(headerFile))
@@ -68,6 +70,7 @@ namespace Xb2
             }
 
             Stream = new FileStream(dataFilename, FileMode.Open, FileAccess.Read);
+            Length = Stream.Length;
         }
 
         public FileInfo GetFileInfo(string filename)
@@ -118,11 +121,11 @@ namespace Xb2
 
         public byte[] ReadFile(FileInfo fileInfo)
         {
-            if (fileInfo.Offset + fileInfo.CompressedSize > Stream.Length) return null;
+            if (fileInfo.Offset + fileInfo.CompressedSize > Length) return null;
 
             int fileSize = fileInfo.Type == 2 ? fileInfo.UncompressedSize : fileInfo.CompressedSize;
             var output = new byte[fileSize];
-            OutputFile(fileInfo, Stream, new MemoryStream(output));
+            OutputFile(fileInfo, new MemoryStream(output));
 
             return output;
         }
@@ -235,6 +238,11 @@ namespace Xb2
         {
             public int Next { get; set; }
             public int Prev { get; set; }
+        }
+
+        public void Dispose()
+        {
+            Stream?.Dispose();
         }
     }
 

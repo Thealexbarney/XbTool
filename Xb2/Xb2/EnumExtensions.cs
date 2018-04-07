@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Xb2
 {
-    static class EnumExtensions
+    public static class EnumExtensions
     {
         public static IEnumerable<Enum> GetFlags(this Enum value)
         {

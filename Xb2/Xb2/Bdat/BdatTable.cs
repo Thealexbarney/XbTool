@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Xb2.Bdat
 {
+    [DebuggerDisplay("{" + nameof(Name) + ", nq}")]
     public class BdatTable
     {
         public string Name { get; }
+        public string Filename { get; set; }
 
         public int EncryptionFlag { get; } // Maybe other flags too?
         public int NamesOffset { get; }
@@ -24,6 +27,7 @@ namespace Xb2.Bdat
         public int MemberCount { get; }
 
         public BdatMember[] Members { get; }
+        public byte[] Table { get; }
 
         public BdatTable(byte[] file, int offset)
         {
@@ -48,16 +52,22 @@ namespace Xb2.Bdat
             Members = ReadTableMembers(file, offset);
         }
 
+        public BdatTable(byte[] table) : this(table, 0)
+        {
+            Table = table;
+        }
+
         public static BdatMember[] ReadTableMembers(byte[] file, int offset)
         {
             int memberTableOffset = BitConverter.ToUInt16(file, offset + 32);
             int memberCount = BitConverter.ToUInt16(file, offset + 34);
             var members = new BdatMember[memberCount];
+            var usedNames = new HashSet<string>();
 
             for (int i = 0; i < memberCount; i++)
             {
                 int memberOffset = offset + memberTableOffset + i * 6;
-                var member = new BdatMember(file, offset, memberOffset);
+                var member = new BdatMember(file, offset, memberOffset, usedNames);
                 members[i] = member;
             }
 

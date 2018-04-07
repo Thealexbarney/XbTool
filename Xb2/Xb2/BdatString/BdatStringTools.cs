@@ -3,123 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Xb2.Bdat;
 using Xb2.Types;
 
 namespace Xb2.BdatString
 {
     public static class BdatStringTools
     {
-        public static (string value, string childTable, string childId) ReadValue(string tableName, int itemId, string memberName, BdatStringCollection tables, BdatInfo info)
+        public static string GetEnhanceCaption(BdatStringValue value)
         {
-            string val = (string)tables[tableName][itemId]?[memberName];
-            string display = val;
-            string childTable = null;
-            string childId = null;
+            BdatStringItem item = value.Parent;
+            BdatStringCollection tables = item.Table.Collection;
 
-            if (val == null || !info.FieldInfo.TryGetValue((tableName, memberName), out var field))
-            {
-                return (display, null, null);
-            }
+            int captionId = int.Parse(value.ValueString);
+            string caption = tables["btl_enhance_cap"][captionId]?["name"].ValueString;
+            if (caption == null) return null;
 
-            int refId = int.Parse(val) + field.Adjust;
+            var sb = new StringBuilder(caption);
 
-            switch (field.Type)
-            {
-                case BdatFieldType.Message:
-
-                    display = (string)tables[field.RefTable][refId]?["name"];
-                    if (display == null && val != "0")
-                    {
-                        display = refId.ToString();
-                    }
-                    break;
-                case BdatFieldType.Reference:
-                    ApplyRef(field.RefTable);
-                    break;
-                case BdatFieldType.Item:
-                    ApplyRef(GetItemTable(refId));
-                    break;
-                case BdatFieldType.Event:
-                    ApplyRef(GetEventTable(refId));
-                    break;
-                case BdatFieldType.Condition:
-                    var conditionType = (ConditionType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
-                    ApplyRef(GetConditionTable(conditionType));
-                    break;
-                case BdatFieldType.Task:
-                    var taskType = (TaskType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
-                    ApplyRef(GetTaskTable(taskType));
-                    break;
-                case BdatFieldType.ShopTable:
-                    var shopType = (ShopType)int.Parse((string)tables[tableName][itemId]?[field.RefField]);
-                    ApplyRef(GetShopTable(shopType));
-                    break;
-                case BdatFieldType.Character:
-                    ApplyRef(GetCharacterTable(refId));
-                    break;
-                case BdatFieldType.Enhance:
-                    display = GetEnhanceCaption(itemId, tables);
-                    break;
-                case BdatFieldType.WeatherIdMap:
-                    display = PrintWeatherIdMap(int.Parse((string)tables[tableName][itemId]?[memberName]), 13, tables);
-                    break;
-                case BdatFieldType.PouchBuff:
-                    display = GetPouchBuffCaption(tables[tableName][itemId], field, tables, info);
-                    break;
-            }
-
-            if (field.EnumType != null)
-            {
-                if (field.EnumType.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0)
-                {
-                    display = PrintEnumFlags(field.EnumType, refId);
-                }
-                else
-                {
-                    display = Enum.GetName(field.EnumType, refId);
-                }
-            }
-
-            return (display, childTable, childId);
-
-
-            void ApplyRef(string refTable)
-            {
-                if (refTable == null || !tables[refTable].ContainsId(refId))
-                {
-                    display = refId == 0 ? null : refId.ToString();
-                    return;
-                }
-
-                var refIdString = refId.ToString();
-                display = refIdString;
-                childTable = refTable;
-                childId = refIdString;
-
-                if (info.DisplayFields.TryGetValue(refTable, out var displayField))
-                {
-                    var child = ReadValue(refTable, refId, displayField, tables, info);
-                    if (!string.IsNullOrWhiteSpace(child.value))
-                    {
-                        display = child.value;
-                    }
-                }
-            }
-        }
-
-        private static string GetEnhanceCaption(int itemId, BdatStringCollection tables)
-        {
-            BdatStringItem item = tables["BTL_Enhance"][itemId];
-            if (item == null) return null;
-
-            int capId = int.Parse((string)item["Caption"]);
-            string cap = (string)tables["btl_enhance_cap"][capId]?["name"];
-            if (cap == null) return null;
-
-            var sb = new StringBuilder(cap);
-
-            var tags = ParseTags(cap);
+            var tags = ParseTags(caption);
 
             foreach (var tag in tags.OrderByDescending(x => x.Start))
             {
@@ -128,41 +29,16 @@ namespace Xb2.BdatString
 
                 if (tag.Values.Count <= 0)
                 {
-                    int effectId = int.Parse((string)item["EnhanceEffect"]);
-                    replace = (string)tables["BTL_EnhanceEff"][effectId]["Param"];
+                    int effectId = int.Parse(item["EnhanceEffect"].ValueString);
+                    replace = tables["BTL_EnhanceEff"][effectId]["Param"].ValueString;
                 }
-                else if (tag.Values.TryGetValue("kind", out var field))
+                else if (tag.Values.TryGetValue("kind", out string field))
                 {
-                    replace = (string)item[field];
+                    replace = item[field].ValueString;
                 }
 
                 sb.Remove(tag.Start, tag.Length);
                 sb.Insert(tag.Start, replace);
-            }
-
-            return sb.ToString();
-        }
-
-        private static string GetPouchBuffCaption(BdatStringItem item, BdatFieldInfo field, BdatStringCollection tables, BdatInfo info)
-        {
-            if (item == null) return null;
-
-            int capId = int.Parse((string)item[field.Field]);
-            var cap = ReadValue("BTL_PouchBuff", capId, "Name", tables, info).value;
-            if (cap == null) return null;
-
-            var sb = new StringBuilder(cap);
-
-            var tags = ParseTags(cap);
-
-            foreach (var tag in tags.OrderByDescending(x => x.Start))
-            {
-                if (tag.SubType != "PouchParam") continue;
-
-                float buffValue = float.Parse((string)item[field.RefField]);
-
-                sb.Remove(tag.Start, tag.Length);
-                sb.Insert(tag.Start, buffValue);
             }
 
             return sb.ToString();
@@ -200,6 +76,16 @@ namespace Xb2.BdatString
             if (id > 20000) return "EVT_listQst01";
             if (id > 19000) return "EVT_listBl";
             return "EVT_listBf";
+        }
+
+        public static string GetQuestListTable(int id)
+        {
+            if (id > 7000) return "FLD_QuestListAchievement";
+            if (id > 6000) return "FLD_QuestListMercenaries";
+            if (id > 5000) return "FLD_QuestListBlade";
+            if (id > 2000) return "FLD_QuestListNormal";
+            if (id > 1000) return "FLD_QuestListMini";
+            return "FLD_QuestList";
         }
 
         public static string GetCharacterTable(int id)
@@ -310,10 +196,10 @@ namespace Xb2.BdatString
 
             Weather[] weathers = new Weather[4];
             BdatStringItem map = tables["FLD_maplist"][mapId];
-            weathers[0] = (Weather)Enum.Parse(typeof(Weather), (string)map["wa_type"]);
-            weathers[1] = (Weather)Enum.Parse(typeof(Weather), (string)map["wb_type"]);
-            weathers[2] = (Weather)Enum.Parse(typeof(Weather), (string)map["wc_type"]);
-            weathers[3] = (Weather)Enum.Parse(typeof(Weather), (string)map["wd_type"]);
+            weathers[0] = (Weather)Enum.Parse(typeof(Weather), map["wa_type"].ValueString);
+            weathers[1] = (Weather)Enum.Parse(typeof(Weather), map["wb_type"].ValueString);
+            weathers[2] = (Weather)Enum.Parse(typeof(Weather), map["wc_type"].ValueString);
+            weathers[3] = (Weather)Enum.Parse(typeof(Weather), map["wd_type"].ValueString);
 
             for (int i = 0; i < 4; i++)
             {
@@ -375,27 +261,6 @@ namespace Xb2.BdatString
             }
 
             return tags;
-        }
-
-        public static void ProcessReferences(BdatStringCollection tables, BdatInfo info)
-        {
-            foreach (BdatStringTable table in tables.Tables.Values)
-            {
-                int id = table.BaseId;
-                foreach (var item in table.Items)
-                {
-                    foreach (BdatMember member in table.Members.Where(x => x.Type == BdatMemberType.Scalar))
-                    {
-                        var val = ReadValue(table.Name, id, member.Name, tables, info);
-                        if (val.childTable != null)
-                        {
-                            BdatStringItem childItem = tables[val.childTable][int.Parse(val.childId)];
-                            childItem.ReferencedBy.Add(item);
-                        }
-                    }
-                    id++;
-                }
-            }
         }
     }
 

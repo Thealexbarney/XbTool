@@ -8,12 +8,7 @@ namespace Xb2
 {
     public static class HtmlGen
     {
-        public static void OutputHtml(BdatStringCollection bdats, BdatInfo info, string htmlDir)
-        {
-            PrintSeparateTables(bdats, info, htmlDir);
-        }
-
-        public static void PrintSeparateTables(BdatStringCollection bdats, BdatInfo info, string htmlDir)
+        public static void PrintSeparateTables(BdatStringCollection bdats, string htmlDir)
         {
             string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
             Directory.CreateDirectory(htmlDir);
@@ -40,10 +35,10 @@ namespace Xb2
                 sb.AppendLine($"<a href=\"{indexPath}\">Return to BDAT index</a><br/>");
                 sb.AppendLine("<input type=\"button\" value=\"Open all references\" onclick=\"openAll(true)\" />");
                 sb.AppendLine("<input type=\"button\" value=\"Close all references\" onclick=\"openAll(false)\" />");
-                PrintTable(bdats, info, tableName, sb);
+                PrintTable(bdats, tableName, sb);
                 sb.DecreaseAndAppendLine("</body>");
                 sb.DecreaseAndAppendLine("</html>");
-                
+
                 if (tableFilename != null)
                 {
                     outDir = Path.Combine(outDir, tableFilename);
@@ -87,7 +82,7 @@ namespace Xb2
             File.WriteAllText(filename, sb.ToString());
         }
 
-        public static void PrintTable(BdatStringCollection tables, BdatInfo info, string tableName, Indenter sb)
+        public static void PrintTable(BdatStringCollection tables, string tableName, Indenter sb)
         {
             BdatStringTable table = tables[tableName];
 
@@ -99,10 +94,8 @@ namespace Xb2
 
             foreach (BdatMember member in table.Members)
             {
-                if (info.FieldInfo.TryGetValue((tableName, member.Name), out var field))
-                {
-                    if (field.Type == BdatFieldType.Hide) continue;
-                }
+                if (member.Metadata?.Type == BdatFieldType.Hide) continue;
+
                 switch (member.Type)
                 {
                     case BdatMemberType.Scalar:
@@ -130,21 +123,17 @@ namespace Xb2
                     sb.AppendLineAndIncrease("<details>");
                     sb.AppendLine($"<summary>{item.ReferencedBy.Count} refs</summary>");
 
-                    foreach (var a in item.ReferencedBy)
+                    foreach (BdatStringItem a in item.ReferencedBy.OrderBy(x => x.Table.Name).ThenBy(x => x.Id))
                     {
-                        var link = GetLink(table, tables[a.Table], a.Id.ToString());
-                        string display = a.Id.ToString();
+                        string link = GetLink(table, a.Table, a.Id.ToString());
+                        string display = (string)a.Display?.Display ?? a.Id.ToString();
 
-                        if (info.DisplayFields.TryGetValue(a.Table, out var displayField))
+                        if (string.IsNullOrWhiteSpace(display))
                         {
-                            var child = BdatStringTools.ReadValue(a.Table, a.Id, displayField, tables, info);
-                            if (!string.IsNullOrWhiteSpace(child.value))
-                            {
-                                display = child.value;
-                            }
+                            display = a.Id.ToString();
                         }
 
-                        sb.AppendLine($"<a href=\"{link}\">{a.Table}#{display}</a>");
+                        sb.AppendLine($"<a href=\"{link}\">{a.Table.Name}#{display}</a>");
                     }
 
                     sb.DecreaseAndAppendLine("</details>");
@@ -152,34 +141,40 @@ namespace Xb2
 
                 sb.DecreaseAndAppendLine("</td>");
 
-                foreach (BdatMember member in table.Members)
+                foreach (BdatStringValue value in item.Values.Values)
                 {
-                    if (info.FieldInfo.TryGetValue((tableName, member.Name), out var field))
-                    {
-                        if (field.Type == BdatFieldType.Hide) continue;
-                    }
+                    BdatMember member = value.Member;
+                    if (member.Metadata?.Type == BdatFieldType.Hide) continue;
 
                     switch (member.Type)
                     {
                         case BdatMemberType.Scalar:
                         case BdatMemberType.Flag:
-                            var val = BdatStringTools.ReadValue(tableName, id, member.Name, tables, info);
-                            if (val.childTable != null)
+                            BdatStringItem child = value.Reference;
+                            if (child != null)
                             {
-                                var link = GetLink(table, tables[val.childTable], val.childId);
-                                sb.AppendLine($"<td><a href=\"{link}\">{val.value}</td></a>");
+                                string display = child.Display?.DisplayString;
+                                if (string.IsNullOrWhiteSpace(display))
+                                {
+                                    display = child.Id.ToString();
+                                }
+
+                                var link = GetLink(table, child.Table, child.Id.ToString());
+                                sb.AppendLine($"<td><a href=\"{link}\">{display}</td></a>");
                             }
                             else
                             {
-                                sb.AppendLine($"<td>{val.value}</td>");
+                                sb.AppendLine($"<td>{value.DisplayString}</td>");
                             }
+
                             break;
                         case BdatMemberType.Array:
-                            var arr = (string[])item.Values[member.Name];
-                            foreach (string value in arr)
+                            var arr = (string[])value.Display;
+                            foreach (string arrValue in arr)
                             {
-                                sb.AppendLine($"<td>{value}</td>");
+                                sb.AppendLine($"<td>{arrValue}</td>");
                             }
+
                             break;
                     }
                 }
