@@ -187,4 +187,20 @@ namespace Xb2.Types
         Category,
         Specific
     }
+
+    public enum ArtType
+    {
+        Physical = 1,
+        Ether,
+        Recovery,
+        Defensive = 11
+    }
+
+    public enum ArtRangeType
+    {
+        OneTarget = 0,
+        CircleBullet = 1,
+        Ahead = 2,
+        CircleUser = 5
+    }
 }

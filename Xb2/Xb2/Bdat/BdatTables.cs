@@ -28,6 +28,7 @@ namespace Xb2.Bdat
             GetBdatRefs();
             ReadArrayInfos();
             GetTableDesc();
+            MarkFlagMembers();
         }
 
         public static BdatTable[] ReadAllBdats(FileArchive archive, string lang = "gb")
@@ -293,6 +294,24 @@ namespace Xb2.Bdat
             }
 
             TableDesc = tables.ToArray();
+        }
+        private void MarkFlagMembers()
+        {
+            foreach (var table in Tables)
+            {
+                foreach (var member in table.Members.Where(x => x.Type == BdatMemberType.Flag))
+                {
+                    var flagVar = table.Members[member.FlagVarIndex];
+
+                    if (flagVar.Metadata == null)
+                    {
+                        flagVar.Metadata = new BdatFieldInfo
+                        {
+                            Type = BdatFieldType.Hide
+                        };
+                    }
+                }
+            }
         }
 
         private static readonly BdatFieldType[] ReadableFieldTypes =

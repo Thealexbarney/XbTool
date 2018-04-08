@@ -1,0 +1,58 @@
+Group,TableName,Display
+Battle,BTL_Arts_Bl,Blade specials
+Battle,BTL_Arts_BlSp,Blade specials Lv 4
+Battle,BTL_Arts_Dr,Driver arts
+Battle,BTL_Arts_En,Enemy arts
+Battle,BTL_BallBreak,Elemental burst bonus
+Battle,BTL_Buff,Blade arts/buffs
+Battle,BTL_Class,Driver classes
+Battle,BTL_ElementalCombo,Blade combos
+Battle,BTL_EnDropItem,Enemy item drop tables
+Battle,BTL_FightCombo,Driver combos
+Battle,BTL_Grow,Base enemy rewards
+Battle,BTL_Kizuna,Affinity effects
+Battle,BTL_Lv_Rev,Level difference effects
+Battle,BTL_Skill_Bl,Blade battle skills
+Battle,BTL_Skill_Dr,Driver battle skills
+Battle,FLD_IdeaTable,Trust effects
+Battle,ITM_PcWpnType,Weapon types
+Blade,BLD_Idea,Idea level effects
+Blade,BLD_RareList,Rare blade base drop rates
+Blade,BLD_ReleaceReward,Release rewards
+Blade,CHR_Bl,Blade list
+Common Blade,BLD_BladeModelList,Model list
+Common Blade,BLD_CommonList,Templates
+Common Blade,BLD_NameList,Names
+Common Blade,BTL_CmnBl_Armor,Defense stat probabilities
+Common Blade,BTL_CmnBl_Capacity,General stat probabilities (based on power)
+Common Blade,BTL_CmnBl_NewBlArts,Blade art probabilities
+Common Blade,BTL_CmnBl_Power,Power probabilities
+Common Blade,BTL_CmnBl_StatusType,Stat mod type probabilities
+Driver,BTL_Skill_Dr_Table01,Affinity chart - Rex
+Driver,BTL_Skill_Dr_Table02,Affinity chart - Nia
+Driver,BTL_Skill_Dr_Table03,Affinity chart - Zeke
+Driver,BTL_Skill_Dr_Table04,Affinity chart - Tora
+Driver,BTL_Skill_Dr_Table05,Affinity chart - Vandham
+Driver,BTL_Skill_Dr_Table06,Affinity chart - Mòrag
+Driver,CHR_Dr,Driver list
+Field,FLD_randomTalk,Character responses
+Items,ITM_BoosterList,Boosters
+Items,ITM_CollectionList,Collectables
+Items,ITM_CrystalList,Core Crystals
+Items,ITM_FavoriteList,Pouch Items
+Items,ITM_InfoList,Info Items
+Items,ITM_Orb,Unrefined Aux Cores
+Items,ITM_OrbEquip,Aux Cores
+Items,ITM_OrbRecipe,Aux Core Recipes
+Items,ITM_PcEquip,Accessories
+Items,ITM_PcWpn,Weapons
+Items,ITM_PcWpnChip,Core Chips
+Items,ITM_PreciousList,Key Items
+Items,ITM_SalvageList,Cylinders
+Items,ITM_TresureList,Treasure
+Menu,BTL_EnBook,Enemy album
+Poppi Items,ITM_HanaArtsEnh,Specials Enhancing RAM
+Poppi Items,ITM_HanaAssist,Skill RAM
+Poppi Items,ITM_HanaAtr,Element Core
+Poppi Items,ITM_HanaNArtsSet,Arts Cards
+Poppi Items,ITM_HanaRole,Role CPU

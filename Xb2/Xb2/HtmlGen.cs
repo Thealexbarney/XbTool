@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
@@ -11,14 +13,15 @@ namespace Xb2
         public static void PrintSeparateTables(BdatStringCollection bdats, string htmlDir)
         {
             string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
-            Directory.CreateDirectory(htmlDir);
+            Directory.CreateDirectory(bdatHtmlDir);
 
             PrintIndex(bdats, htmlDir);
+            PrintBdatIndex(bdats, bdatHtmlDir);
             foreach (string tableName in bdats.Tables.Keys)
             {
                 string outDir = bdatHtmlDir;
                 string tableFilename = bdats[tableName].Filename;
-                var indexPath = tableFilename == null ? "../index.html" : "../../index.html";
+                var indexPath = tableFilename == null ? "index.html" : "../index.html";
 
                 var sb = new Indenter(2);
                 sb.AppendLine("<!DOCTYPE html>");
@@ -50,14 +53,14 @@ namespace Xb2
             }
         }
 
-        public static void PrintIndex(BdatStringCollection bdats, string htmlDir)
+        public static void PrintBdatIndex(BdatStringCollection bdats, string htmlDir)
         {
             var sb = new Indenter(2);
             sb.AppendLine("<!DOCTYPE html>");
             sb.AppendLineAndIncrease("<html>");
             sb.AppendLineAndIncrease("<head>");
             sb.AppendLine("<meta charset=\"utf-8\" />");
-            sb.AppendLine("<title>Xenoblade 2 BDAT Index</title>");
+            sb.AppendLine("<title>Xenoblade 2 Data Tables</title>");
             sb.DecreaseAndAppendLine("</head>");
 
             sb.AppendLineAndIncrease("<body>");
@@ -67,7 +70,7 @@ namespace Xb2
             foreach (var group in grouped)
             {
                 sb.AppendLine($"<h2>{group.Key ?? "Other"}</h2>");
-                var subDir = Path.Combine("bdat", group.Key ?? string.Empty);
+                var subDir = group.Key ?? string.Empty;
                 foreach (var table in group.OrderBy(x => x.Name))
                 {
                     var path = Path.Combine(subDir, table.Name) + ".html";
@@ -75,6 +78,46 @@ namespace Xb2
                 }
             }
 
+            sb.DecreaseAndAppendLine("</body>");
+            sb.DecreaseAndAppendLine("</html>");
+
+            var filename = Path.Combine(htmlDir, "index.html");
+            File.WriteAllText(filename, sb.ToString());
+        }
+
+        public static void PrintIndex(BdatStringCollection bdats, string htmlDir)
+        {
+            var sb = new Indenter(2);
+            sb.AppendLine("<!DOCTYPE html>");
+            sb.AppendLineAndIncrease("<html>");
+            sb.AppendLineAndIncrease("<head>");
+            sb.AppendLine("<meta charset=\"utf-8\" />");
+            sb.AppendLine("<title>Xenoblade 2</title>");
+            sb.DecreaseAndAppendLine("</head>");
+
+            sb.AppendLineAndIncrease("<body>");
+            sb.AppendLine("<h1>Xenoblade 2 data tables</h1>");
+            sb.AppendLine($"<p>{IndexText}</p>");
+            sb.AppendLine($"<h2><a href=\"bdat\\index.html\">Complete table list</a></h2>");
+
+            using (var stream = new FileStream("tableDisplay.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var reader = new StreamReader(stream))
+            {
+                IEnumerable<BdatFriendlyInfo> csv = new CsvReader(reader).GetRecords<BdatFriendlyInfo>();
+                var grouped = csv.GroupBy(x => x.Group).OrderBy(x => x.Key);
+
+                foreach (var group in grouped)
+                {
+                    sb.AppendLine($"<h2>{group.Key ?? "Other"}</h2>");
+
+                    foreach (var tableInfo in group.OrderBy(x => x.Display))
+                    {
+                        var table = bdats[tableInfo.TableName];
+                        var path = Path.Combine("bdat", table.Filename ?? "", table.Name) + ".html";
+                        sb.AppendLine($"<a href=\"{path}\">{tableInfo.Display}</a><br/>");
+                    }
+                }
+            }
             sb.DecreaseAndAppendLine("</body>");
             sb.DecreaseAndAppendLine("</html>");
 
@@ -207,7 +250,15 @@ namespace Xb2
             return $"{path}{childTable.Name}.html#{childId}";
         }
 
+        public static readonly string IndexText = "This is a collection of all the data tables in Xenoblade 2.<br/>A list of commonly-used tables can be found below, along with a link to the complete list of tables.";
         public static readonly string JsOpenAll =
             "function openAll(open) {\r\n    document.querySelectorAll(\"details\").forEach(function(details) {\r\n        details.open = open;\r\n    });\r\n}";
+    }
+
+    public class BdatFriendlyInfo
+    {
+        public string Group { get; set; }
+        public string TableName { get; set; }
+        public string Display { get; set; }
     }
 }
