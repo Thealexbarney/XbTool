@@ -117,6 +117,8 @@ namespace Xb2
         public static void PrintData(BdatCollection tables, string dataDir)
         {
             Directory.CreateDirectory(dataDir);
+            var salvaging = Salvaging.Print(tables);
+            File.WriteAllText(Path.Combine(dataDir, "salvaging.html"), salvaging);
 
             using (var writer = new StreamWriter(Path.Combine(dataDir, "achievements.csv")))
             {
