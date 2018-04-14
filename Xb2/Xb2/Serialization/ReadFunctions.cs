@@ -10092,6 +10092,40 @@ namespace Xb2.Serialization
                 item._itm6ID = tables.GetItem(item.itm6ID);
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
+                item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+                item._itmID = new[]
+                {
+                    item._itm1ID,
+                    item._itm2ID,
+                    item._itm3ID,
+                    item._itm4ID,
+                    item._itm5ID,
+                    item._itm6ID,
+                    item._itm7ID,
+                    item._itm8ID
+                };
+                item._itmNum = new[]
+                {
+                    item.itm1Num,
+                    item.itm2Num,
+                    item.itm3Num,
+                    item.itm4Num,
+                    item.itm5Num,
+                    item.itm6Num,
+                    item.itm7Num,
+                    item.itm8Num
+                };
+                item._itmPer = new[]
+                {
+                    item.itm1Per,
+                    item.itm2Per,
+                    item.itm3Per,
+                    item.itm4Per,
+                    item.itm5Per,
+                    item.itm6Per,
+                    item.itm7Per,
+                    item.itm8Per
+                };
             }
 
             foreach (FLD_SalvagePointList item in tables.FLD_SalvagePointList.Items)
@@ -10106,6 +10140,20 @@ namespace Xb2.Serialization
                 item._SalvageTable3 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable3);
                 item._SalvageTable4 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable4);
                 item._SalvageTable5 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable5);
+                item._BtnChallenge = new[]
+                {
+                    item._BtnChallenge0,
+                    item._BtnChallenge1,
+                    item._BtnChallenge2
+                };
+                item._SalvageTable = new[]
+                {
+                    item._SalvageTable1,
+                    item._SalvageTable2,
+                    item._SalvageTable3,
+                    item._SalvageTable4,
+                    item._SalvageTable5
+                };
             }
 
             foreach (FLD_SalvageTable item in tables.FLD_SalvageTable.Items)
@@ -10119,6 +10167,42 @@ namespace Xb2.Serialization
                 item._TresureTable1 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable1);
                 item._TresureTable2 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable2);
                 item._TresureTable3 = tables.FLD_SalvageItemSet.GetItemOrNull(item.TresureTable3);
+                item._ColleTable = new[]
+                {
+                    item._ColleTable1,
+                    item._ColleTable2,
+                    item._ColleTable3
+                };
+                item._ColleTablePercent = new[]
+                {
+                    item.ColleTablePercent1,
+                    item.ColleTablePercent2,
+                    item.ColleTablePercent3
+                };
+                item._EnemyPopTable = new[]
+                {
+                    item._EnemyPopTable1,
+                    item._EnemyPopTable2,
+                    item._EnemyPopTable3
+                };
+                item._EnemyPopTablePercent = new[]
+                {
+                    item.EnemyPopTablePercent1,
+                    item.EnemyPopTablePercent2,
+                    item.EnemyPopTablePercent3
+                };
+                item._TresureTable = new[]
+                {
+                    item._TresureTable1,
+                    item._TresureTable2,
+                    item._TresureTable3
+                };
+                item._TresureTablePercent = new[]
+                {
+                    item.TresureTablePercent1,
+                    item.TresureTablePercent2,
+                    item.TresureTablePercent3
+                };
             }
 
             foreach (FLD_SePop item in tables.FLD_SePop.Items)

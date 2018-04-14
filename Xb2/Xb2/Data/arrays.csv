@@ -24,3 +24,14 @@ BTL_CmnBl_Capacity,ArtsNumProb,ArtsNum1Prob,ArtsNum2Prob,ArtsNum3Prob
 BLD_BladeModelList,Parts,Parts1,Parts2,Parts3,Parts4
 BTL_CmnBl_StatusType,Status,Status01,Status02,Status03,Status04,Status05,Status06
 BTL_CmnBl_NewBlArts,NBA,NBA_01,NBA_02,NBA_03,NBA_04,NBA_05,NBA_06,NBA_07,NBA_08
+FLD_SalvageTable,ColleTable,ColleTable1,ColleTable2,ColleTable3
+FLD_SalvageTable,ColleTablePercent,ColleTablePercent1,ColleTablePercent2,ColleTablePercent3
+FLD_SalvageTable,TresureTable,TresureTable1,TresureTable2,TresureTable3
+FLD_SalvageTable,TresureTablePercent,TresureTablePercent1,TresureTablePercent2,TresureTablePercent3
+FLD_SalvageTable,EnemyPopTable,EnemyPopTable1,EnemyPopTable2,EnemyPopTable3
+FLD_SalvageTable,EnemyPopTablePercent,EnemyPopTablePercent1,EnemyPopTablePercent2,EnemyPopTablePercent3
+FLD_SalvageItemSet,itmID,itm1ID,itm2ID,itm3ID,itm4ID,itm5ID,itm6ID,itm7ID,itm8ID
+FLD_SalvageItemSet,itmNum,itm1Num,itm2Num,itm3Num,itm4Num,itm5Num,itm6Num,itm7Num,itm8Num
+FLD_SalvageItemSet,itmPer,itm1Per,itm2Per,itm3Per,itm4Per,itm5Per,itm6Per,itm7Per,itm8Per
+FLD_SalvagePointList,BtnChallenge,BtnChallenge0,BtnChallenge1,BtnChallenge2
+FLD_SalvagePointList,SalvageTable,SalvageTable1,SalvageTable2,SalvageTable3,SalvageTable4,SalvageTable5

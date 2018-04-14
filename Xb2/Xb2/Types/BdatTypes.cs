@@ -4878,6 +4878,10 @@ namespace Xb2.Types
         public object _itm6ID;
         public object _itm7ID;
         public object _itm8ID;
+        public RSC_TboxList _RSC_ID;
+        public object[] _itmID;
+        public byte[] _itmNum;
+        public byte[] _itmPer;
     }
 
     [BdatType]
@@ -4910,6 +4914,8 @@ namespace Xb2.Types
         public FLD_SalvageTable _SalvageTable3;
         public FLD_SalvageTable _SalvageTable4;
         public FLD_SalvageTable _SalvageTable5;
+        public MNU_BtnChallenge2[] _BtnChallenge;
+        public FLD_SalvageTable[] _SalvageTable;
     }
 
     [BdatType]
@@ -4947,6 +4953,12 @@ namespace Xb2.Types
         public FLD_SalvageItemSet _TresureTable1;
         public FLD_SalvageItemSet _TresureTable2;
         public FLD_SalvageItemSet _TresureTable3;
+        public FLD_SalvageItemSet[] _ColleTable;
+        public ushort[] _ColleTablePercent;
+        public FLD_SalvageItemSet[] _TresureTable;
+        public ushort[] _TresureTablePercent;
+        public FLD_SalvageEnemySet[] _EnemyPopTable;
+        public ushort[] _EnemyPopTablePercent;
     }
 
     [BdatType]
