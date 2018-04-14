@@ -7,6 +7,7 @@ using System.Text;
 using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
+using Xb2.Scripting;
 using Xb2.Serialization;
 using Xb2.Textures;
 using Xb2.Types;
@@ -131,6 +132,25 @@ namespace Xb2
             }
         }
 
+        private static void DescrambleScript(string filename)
+        {
+            byte[] script = File.ReadAllBytes(filename);
+            ScriptTools.DescrambleScript(script);
+            var s = new Script(script);
+
+            File.WriteAllLines(filename + ".txt", s.Ids.Strings);
+            File.WriteAllBytes(filename, script);
+        }
+
+        private static void DescrambleScript(string directory, string pattern)
+        {
+            string[] filenames = Directory.GetFiles(directory, pattern);
+            foreach (string filename in filenames)
+            {
+                DescrambleScript(filename);
+            }
+        }
+
         public static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -144,10 +164,10 @@ namespace Xb2
                 case "extract" when args.Length == 4:
                     ExtractArchive(args[1], args[2], args[3]);
                     break;
-                case "decrypt" when args.Length == 2:
+                case "decryptbdat" when args.Length == 2:
                     DecryptBdatFile(args[1]);
                     break;
-                case "decrypt" when args.Length == 3:
+                case "decryptbdat" when args.Length == 3:
                     DecryptBdatFiles(args[1], args[2]);
                     break;
                 case "classgen" when args.Length == 4:
@@ -174,6 +194,12 @@ namespace Xb2
                 case "wilay" when args.Length == 5:
                     ReadWilay(args[1], args[2], args[3], args[4]);
                     break;
+                case "descramblescript" when args.Length == 2:
+                    DescrambleScript(args[1]);
+                    break;
+                case "descramblescript" when args.Length == 3:
+                    DescrambleScript(args[1], args[2]);
+                    break;
                 default:
                     PrintUsage();
                     break;
@@ -183,12 +209,14 @@ namespace Xb2
         private static void PrintUsage()
         {
             Console.WriteLine("Xb2 extract <arh filename> <ard filename> <out dir>");
-            Console.WriteLine("Xb2 decrypt <bdat filename>");
-            Console.WriteLine("Xb2 decrypt <directory> <search pattern>");
+            Console.WriteLine("Xb2 decryptbdat <bdat filename>");
+            Console.WriteLine("Xb2 decryptbdat <directory> <search pattern>");
             Console.WriteLine("Xb2 bdat2html <arh filename> <ard filename> <out dir>");
             Console.WriteLine("Xb2 generatedata <arh filename> <ard filename> <out dir>");
             Console.WriteLine("Xb2 createblade <arh filename> <ard filename>");
             Console.WriteLine("Xb2 wilay <arh filename> <ard filename> <wilay dir> <out dir>");
+            Console.WriteLine("Xb2 descramblescript <script filename>");
+            Console.WriteLine("Xb2 descramblescript <directory> <search pattern>");
         }
     }
 

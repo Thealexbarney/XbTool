@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Xb2.Bdat;
 
@@ -26,7 +27,16 @@ namespace Xb2.BdatString
         public int BaseId { get; set; }
         public BdatMember[] Members { get; set; }
         public BdatStringItem[] Items { get; set; }
-        public BdatStringItem this[int itemId] => ContainsId(itemId) ? Items[itemId - BaseId] : null;
+        public BdatStringItem this[int itemId]
+        {
+            get => ContainsId(itemId) ? Items[itemId - BaseId] : null;
+            set
+            {
+                int id = itemId - BaseId;
+                if (!ContainsId(itemId)) throw new IndexOutOfRangeException("Item ID is out of range");
+                Items[id] = value;
+            }
+        }
 
         public bool ContainsId(int itemId)
         {

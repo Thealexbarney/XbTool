@@ -7768,6 +7768,8 @@ namespace Xb2.Serialization
 
             foreach (BLD_BladeModelList item in tables.BLD_BladeModelList.Items)
             {
+                item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
+                item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
                 item._Parts = new[]
                 {
                     item.Parts1,
@@ -7779,15 +7781,27 @@ namespace Xb2.Serialization
 
             foreach (BLD_CommonList item in tables.BLD_CommonList.Items)
             {
+                item._ArtsAchievementSet1 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievementSet1);
+                item._ArtsAchievementSet2 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievementSet2);
+                item._ArtsAchievementSet3 = tables.FLD_AchievementSet.GetItemOrNull(item.ArtsAchievementSet3);
                 item._Fskill = (FieldSkillCategory)item.Fskill;
+                item._FskillAchivementSet1 = tables.FLD_AchievementSet.GetItemOrNull(item.FskillAchivementSet1);
+                item._FskillAchivementSet2 = tables.FLD_AchievementSet.GetItemOrNull(item.FskillAchivementSet2);
+                item._FskillAchivementSet3 = tables.FLD_AchievementSet.GetItemOrNull(item.FskillAchivementSet3);
                 item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
                 item._IdeaType = (IdeaCategoryBits)item.IdeaType;
+                item._KeyAchievementSet = tables.FLD_AchievementSet.GetItemOrNull(item.KeyAchievementSet);
+                item._ModelTable = tables.BLD_BladeModelList.GetItemOrNull(item.ModelTable);
                 item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
+                item._SkillAchievementSet1 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievementSet1);
+                item._SkillAchievementSet2 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievementSet2);
+                item._SkillAchievementSet3 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievementSet3);
             }
 
             foreach (BLD_NameList item in tables.BLD_NameList.Items)
             {
                 item._Category = tables.bld_bladename.GetItemOrNull(item.Category);
+                item._Gender = tables.MNU_Msg_Gender.GetItemOrNull(item.Gender);
             }
 
             foreach (BLD_RareList item in tables.BLD_RareList.Items)
@@ -7798,6 +7812,7 @@ namespace Xb2.Serialization
 
             foreach (BTL_Arts_Bl item in tables.BTL_Arts_Bl.Items)
             {
+                item._ArtsType = (ArtType)item.ArtsType;
                 item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
                 item._Caption = tables.btl_arts_bl_ms.GetItemOrNull(item.Caption);
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
@@ -7807,23 +7822,27 @@ namespace Xb2.Serialization
                 item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
                 item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
                 item._Name = tables.btl_arts_bl_ms.GetItemOrNull(item.Name);
+                item._RangeType = (ArtRangeType)item.RangeType;
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
             foreach (BTL_Arts_BlSp item in tables.BTL_Arts_BlSp.Items)
             {
                 item._AddBl = tables.CHR_Bl.GetItemOrNull(item.AddBl);
+                item._ArtsType = (ArtType)item.ArtsType;
                 item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
                 item._BtnChal2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal2);
                 item._BtnChal3 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal3);
                 item._BtnChal6 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal6);
                 item._Caption = tables.btl_arts_blsp_ms.GetItemOrNull(item.Caption);
+                item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.btl_arts_blsp_ms.GetItemOrNull(item.Name);
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
             foreach (BTL_Arts_Dr item in tables.BTL_Arts_Dr.Items)
             {
+                item._ArtsType = (ArtType)item.ArtsType;
                 item._Caption = tables.btl_arts_dr_cap.GetItemOrNull(item.Caption);
                 item._Driver = tables.CHR_Dr.GetItemOrNull(item.Driver);
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
@@ -7834,6 +7853,7 @@ namespace Xb2.Serialization
                 item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
                 item._Name = tables.btl_arts_dr_ms.GetItemOrNull(item.Name);
                 item._NextArts = tables.BTL_Arts_Dr.GetItemOrNull(item.NextArts);
+                item._RangeType = (ArtRangeType)item.RangeType;
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
@@ -7841,6 +7861,7 @@ namespace Xb2.Serialization
             {
                 item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
                 item._ArtsDeBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsDeBuff);
+                item._ArtsType = (ArtType)item.ArtsType;
                 item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.btl_arts_en_ms.GetItemOrNull(item.Name);
             }
@@ -7976,6 +7997,7 @@ namespace Xb2.Serialization
 
             foreach (BTL_ElementalCombo item in tables.BTL_ElementalCombo.Items)
             {
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Name = tables.btl_elementalcombo_ms.GetItemOrNull(item.Name);
                 item._PreCombo = tables.BTL_ElementalCombo.GetItemOrNull(item.PreCombo);
                 item._Reaction = tables.BTL_Reaction.GetItemOrNull(item.Reaction);
@@ -7983,6 +8005,8 @@ namespace Xb2.Serialization
 
             foreach (BTL_ElementalEffect item in tables.BTL_ElementalEffect.Items)
             {
+                item._Atr1 = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr1 + 1);
+                item._Caption = tables.btl_buff_ms.GetItemOrNull(item.Caption);
                 item._Name = tables.btl_elementaleffect_ms.GetItemOrNull(item.Name);
             }
 
@@ -8025,6 +8049,12 @@ namespace Xb2.Serialization
                 item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
             }
 
+            foreach (BTL_FightCombo item in tables.BTL_FightCombo.Items)
+            {
+                item._Name = tables.btl_fightcombo_ms.GetItemOrNull(item.Name);
+                item._Reaction = tables.BTL_Reaction.GetItemOrNull(item.Reaction);
+            }
+
             foreach (BTL_HanaChipset item in tables.BTL_HanaChipset.Items)
             {
                 item._AtrParts = tables.GetItem(item.AtrParts);
@@ -8037,6 +8067,11 @@ namespace Xb2.Serialization
             foreach (BTL_PouchBuff item in tables.BTL_PouchBuff.Items)
             {
                 item._Name = tables.btl_pouchbuff_ms.GetItemOrNull(item.Name);
+            }
+
+            foreach (BTL_Reaction item in tables.BTL_Reaction.Items)
+            {
+                item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
             }
 
             foreach (BTL_Skill_Bl item in tables.BTL_Skill_Bl.Items)
@@ -8239,6 +8274,7 @@ namespace Xb2.Serialization
 
             foreach (CHR_EnParam item in tables.CHR_EnParam.Items)
             {
+                item._AiID = tables.BTL_Ai.GetItemOrNull(item.AiID);
                 item._ArtsNum1 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum1);
                 item._ArtsNum10 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum10);
                 item._ArtsNum11 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum11);
@@ -8284,6 +8320,1217 @@ namespace Xb2.Serialization
                 item._chgType = tables.EVT_change.GetItemOrNull(item.chgType);
             }
 
+            foreach (FacialConfig item in tables.EVT_facial_AZAMI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_BLADEANIMAL.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_BLADEFEMALE.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_BLADENORMAL.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_BLADESTRONG.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_BYAKKO.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_GUREN.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_HANA_1.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_HIKARI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_HOMURA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_HOTARU.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_IBUKI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_IDATEN.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_KAGUTSUCHI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_KAMUI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_KASANE.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_KOSMOS.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_KUBIRA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_MELEF.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_MIKUMARI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_MUSUBI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NANAKOORI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NIA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP000101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP000301.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP000701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP000801.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP000901.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001301.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001601.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001602.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001801.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP001901.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002301.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002601.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002801.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP002901.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003301.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003601.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003801.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP003901.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP004601.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010002.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010003.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010004.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010005.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010006.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP010007.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP030001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100102.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100301.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP100501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP190002.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP411001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP412001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP413000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP413101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP414000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP417001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP417101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP421001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP422001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423601.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP423701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP424000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP424101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP424201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP424501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP431001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP432001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP433000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP433101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP433201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP434000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP434201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP435001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP436001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP437001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP441001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP442001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP443000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP443101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP444000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP445001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP445101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP446001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP451001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP452001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453202.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453203.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453204.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453401.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP453701.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP454000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP454201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP454501.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP455001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP456001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP457001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP457101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP463000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP463101.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP463201.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP464000.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP465001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP471001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP472001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP473001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP474001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP475001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NP476001.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_NYUTSU.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_OTSUCHI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RAGOU.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RAIKO.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RARE_003.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RARE_025.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RARE_026.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RARE_027.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RARE_028.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_REX.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_RINNE.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_SAIKA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_SEORI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_SHIKI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_SIEG.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_SUZAKU.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_TOKIHA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_TOR.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_UKA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_VAJRA.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_VANDAMME.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_YAEGIRI.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_YUOH.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_ZAKURO.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facial_ZANTETSU.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facialTemplate.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facialTemplateBS.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facialTemplateJ.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
+            foreach (FacialConfig item in tables.EVT_facialTemplateN.Items)
+            {
+                item._brow_type = tables.EVT_browtype.GetItemOrNull(item.brow_type);
+                item._eye_type = tables.EVT_eyetype.GetItemOrNull(item.eye_type);
+                item._lip_type = tables.EVT_liptype.GetItemOrNull(item.lip_type);
+            }
+
             foreach (EVT_listBf item in tables.EVT_listBf.Items)
             {
                 item._chgEdID = tables.EVT_chgBf01.GetItemOrNull(item.chgEdID);
@@ -8293,6 +9540,7 @@ namespace Xb2.Serialization
             foreach (EVT_listFev01 item in tables.EVT_listFev01.Items)
             {
                 item._chgEdID = tables.EVT_chgFev01.GetItemOrNull(item.chgEdID);
+                item._chgStID = tables.EVT_chgFev01.GetItemOrNull(item.chgStID);
             }
 
             foreach (EVT_listQst01 item in tables.EVT_listQst01.Items)
@@ -8618,8 +9866,6 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestList item in tables.FLD_QuestListBlade.Items)
             {
-                item._CallEventA = tables.EVT_listQst01.GetItemOrNull(item.CallEventA);
-                item._CallEventB = tables.EVT_listQst01.GetItemOrNull(item.CallEventB);
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
                 item._NextQuestA = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestB);
@@ -8961,6 +10207,7 @@ namespace Xb2.Serialization
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._Name = tables.itm_hana_narts_set_ms.GetItemOrNull(item.Name);
+                item._NArts = tables.BTL_Buff.GetItemOrNull(item.NArts);
             }
 
             foreach (ITM_HanaRole item in tables.ITM_HanaRole.Items)

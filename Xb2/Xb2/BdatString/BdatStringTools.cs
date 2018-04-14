@@ -78,6 +78,25 @@ namespace Xb2.BdatString
             return "EVT_listBf";
         }
 
+        public static string GetEventSetupTable(int id)
+        {
+            if (id > 60000) return "EVT_setupDeb01";
+            if (id > 50000) return "EVT_setupTlk01";
+            if (id > 40000) return "EVT_setupFev01";
+            if (id > 30000) return "EVT_setupQst01";
+            if (id > 29000) return "EVT_setupBf70";
+            if (id > 20000) return "EVT_setupBf10";
+            if (id > 19000) return "EVT_setupBf09";
+            if (id > 18000) return "EVT_setupBf08";
+            if (id > 17000) return "EVT_setupBf07";
+            if (id > 16000) return "EVT_setupBf06";
+            if (id > 15000) return "EVT_setupBf05";
+            if (id > 14000) return "EVT_setupBf04";
+            if (id > 13000) return "EVT_setupBf03";
+            if (id > 12000) return "EVT_setupBf02";
+            return "EVT_setupBf01";
+        }
+
         public static string GetQuestListTable(int id)
         {
             if (id > 7000) return "FLD_QuestListAchievement";

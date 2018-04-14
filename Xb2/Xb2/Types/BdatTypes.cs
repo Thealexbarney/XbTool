@@ -59,6 +59,8 @@ namespace Xb2.Types
         public byte Parts2;
         public byte Parts3;
         public byte Parts4;
+        public MNU_Name _Gender;
+        public MNU_Name _QuestRace;
         public byte[] _Parts;
     }
 
@@ -130,10 +132,21 @@ namespace Xb2.Types
         public byte KeyAchievementSet;
         public byte FavoriteCategoryMax;
         public byte FavoriteItemMax;
+        public FLD_AchievementSet _ArtsAchievementSet1;
+        public FLD_AchievementSet _ArtsAchievementSet2;
+        public FLD_AchievementSet _ArtsAchievementSet3;
         public FieldSkillCategory _Fskill;
+        public FLD_AchievementSet _FskillAchivementSet1;
+        public FLD_AchievementSet _FskillAchivementSet2;
+        public FLD_AchievementSet _FskillAchivementSet3;
         public MNU_Name _Gender;
         public IdeaCategoryBits _IdeaType;
+        public FLD_AchievementSet _KeyAchievementSet;
+        public BLD_BladeModelList _ModelTable;
         public MNU_Name _QuestRace;
+        public FLD_AchievementSet _SkillAchievementSet1;
+        public FLD_AchievementSet _SkillAchievementSet2;
+        public FLD_AchievementSet _SkillAchievementSet3;
     }
 
     [BdatType]
@@ -177,6 +190,7 @@ namespace Xb2.Types
         public uint sortCN;
         public uint sortTW;
         public Message _Category;
+        public MNU_Name _Gender;
     }
 
     [BdatType]
@@ -375,6 +389,7 @@ namespace Xb2.Types
         public bool NoWpn;
         public bool Return;
         public bool Shoot;
+        public ArtType _ArtsType;
         public MNU_BtnChallenge2 _BtnChal1;
         public Message _Caption;
         public BTL_Enhance _Enhance1;
@@ -384,6 +399,7 @@ namespace Xb2.Types
         public BTL_Enhance _Enhance5;
         public BTL_Enhance _Enhance6;
         public Message _Name;
+        public ArtRangeType _RangeType;
         public ITM_PcWpnType _WpnType;
     }
 
@@ -555,11 +571,13 @@ namespace Xb2.Types
         public bool NoPraise;
         public bool Shoot;
         public CHR_Bl _AddBl;
+        public ArtType _ArtsType;
         public MNU_BtnChallenge2 _BtnChal1;
         public MNU_BtnChallenge2 _BtnChal2;
         public MNU_BtnChallenge2 _BtnChal3;
         public MNU_BtnChallenge2 _BtnChal6;
         public Message _Caption;
+        public BTL_Enhance _Enhance;
         public Message _Name;
         public ITM_PcWpnType _WpnType;
     }
@@ -766,6 +784,7 @@ namespace Xb2.Types
         public bool SArmor1;
         public bool SArmor2;
         public bool NoColli;
+        public ArtType _ArtsType;
         public Message _Caption;
         public CHR_Dr _Driver;
         public BTL_Enhance _Enhance1;
@@ -776,6 +795,7 @@ namespace Xb2.Types
         public BTL_Enhance _Enhance6;
         public Message _Name;
         public BTL_Arts_Dr _NextArts;
+        public ArtRangeType _RangeType;
         public ITM_PcWpnType _WpnType;
     }
 
@@ -904,6 +924,7 @@ namespace Xb2.Types
         public bool CallEnemy;
         public BTL_Buff _ArtsBuff;
         public BTL_Buff _ArtsDeBuff;
+        public ArtType _ArtsType;
         public BTL_Enhance _Enhance;
         public Message _Name;
     }
@@ -1498,6 +1519,7 @@ namespace Xb2.Types
         public byte FusionName4;
         public ushort Icon;
         public byte NeedAtrNum;
+        public MNU_Name _Atr;
         public Message _Name;
         public BTL_ElementalCombo _PreCombo;
         public BTL_Reaction _Reaction;
@@ -1514,6 +1536,8 @@ namespace Xb2.Types
         public byte Atr1;
         public string Effect;
         public byte SE;
+        public MNU_Name _Atr1;
+        public Message _Caption;
         public Message _Name;
     }
 
@@ -1657,6 +1681,8 @@ namespace Xb2.Types
         public byte DamageRate;
         public ushort Icon;
         public byte Caption;
+        public Message _Name;
+        public BTL_Reaction _Reaction;
     }
 
     [BdatType]
@@ -1958,6 +1984,7 @@ namespace Xb2.Types
         public ushort PowLv6_M;
         public ushort PowLv6_L;
         public ushort PowLv6_LL;
+        public Message _Name;
     }
 
     [BdatType]
@@ -2595,6 +2622,7 @@ namespace Xb2.Types
         public bool GrdDirRight;
         public bool GrdDirBack;
         public bool FldDmgType;
+        public BTL_Ai _AiID;
         public BTL_Arts_En _ArtsNum1;
         public BTL_Arts_En _ArtsNum10;
         public BTL_Arts_En _ArtsNum11;
@@ -3185,6 +3213,7 @@ namespace Xb2.Types
         public string scriptName;
         public int scriptStartId;
         public EventChange _chgEdID;
+        public EventChange _chgStID;
     }
 
     [BdatType]
@@ -3415,6 +3444,9 @@ namespace Xb2.Types
         public float talk_lip_weight;
         public float talk_lip_speed;
         public short talk_blend;
+        public BdatStateEnum _brow_type;
+        public EVT_eyetype _eye_type;
+        public EVT_liptype _lip_type;
     }
 
     [BdatType]
@@ -4525,8 +4557,6 @@ namespace Xb2.Types
         public Message _ResultA;
         public Message _ResultB;
         public Message _Summary;
-        public EVT_listQst01 _CallEventA;
-        public EVT_listQst01 _CallEventB;
         public Message _QuestCategory;
     }
 
@@ -5472,6 +5502,7 @@ namespace Xb2.Types
         public bool JD;
         public FLD_ConditionList _Condition;
         public Message _Name;
+        public BTL_Buff _NArts;
     }
 
     [BdatType]

@@ -37,7 +37,10 @@ namespace Xb2.Bdat
         Event,
         ShopTable,
         Enum,
-        QuestFlag
+        QuestFlag,
+        Flag,
+        Change,
+        EventSetup
     }
 
     public class BdatArrayInfo
@@ -91,8 +94,14 @@ namespace Xb2.Bdat
                 case BdatFieldType.Condition:
                     fInfo.RefField = line[col++];
                     break;
+                case BdatFieldType.Change:
+                    fInfo.RefField = line[col++];
+                    break;
                 case BdatFieldType.ShopTable:
                     fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.Flag:
+                    fInfo.RefField = "FLG_" + line[col++];
                     break;
                 case BdatFieldType.Task:
                     fInfo.RefField = line[col++];
@@ -111,6 +120,7 @@ namespace Xb2.Bdat
                 case BdatFieldType.Enhance:
                 case BdatFieldType.WeatherIdMap:
                 case BdatFieldType.Event:
+                case BdatFieldType.EventSetup:
                 case BdatFieldType.QuestFlag:
                     break;
                 default:

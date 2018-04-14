@@ -57,6 +57,9 @@ namespace Xb2.BdatString
                 case BdatFieldType.Event:
                     ApplyRef(BdatStringTools.GetEventTable(refId));
                     break;
+                case BdatFieldType.EventSetup:
+                    ApplyRef(BdatStringTools.GetEventSetupTable(refId));
+                    break;
                 case BdatFieldType.QuestFlag:
                     ApplyRef(BdatStringTools.GetQuestListTable(refId));
                     break;
@@ -83,6 +86,16 @@ namespace Xb2.BdatString
                     break;
                 case BdatFieldType.PouchBuff:
                     value.Display = GetPouchBuffCaption(value);
+                    break;
+                case BdatFieldType.Flag:
+                    AddFlag(tables, field.RefField, refId, value);
+                    break;
+                case BdatFieldType.Change:
+                    var changeType = (ChangeType)int.Parse(item[field.RefField].ValueString);
+                    if (changeType == ChangeType.scenario)
+                    {
+                        AddFlag(tables, "FLG_Scenario", refId, value);
+                    }
                     break;
             }
 
@@ -126,6 +139,47 @@ namespace Xb2.BdatString
                 value.Reference = tables[refTable][refId];
                 tables[refTable][refId].ReferencedBy.Add(value.Parent);
             }
+        }
+
+        public static void AddFlag(BdatStringCollection tables, string flagName, int refId, BdatStringValue value)
+        {
+            if (refId == 0)
+            {
+                value.Display = string.Empty;
+                return;
+            }
+
+            if (!tables.Tables.TryGetValue(flagName, out BdatStringTable flagTable))
+            {
+                flagTable = CreateFlagTable(tables, flagName);
+                tables.Add(flagTable);
+            }
+
+            BdatStringItem flagItem = flagTable[refId];
+
+            if (flagItem == null)
+            {
+                flagItem = new BdatStringItem();
+                flagItem.Id = refId;
+                flagItem.Table = flagTable;
+                flagTable[refId] = flagItem;
+            }
+
+            value.Reference = flagItem;
+            flagItem.ReferencedBy.Add(value.Parent);
+        }
+
+        public static BdatStringTable CreateFlagTable(BdatStringCollection tables, string name)
+        {
+            return new BdatStringTable
+            {
+                Collection = tables,
+                Name = name,
+                BaseId = 1,
+                Members = new BdatMember[0],
+                Items = new BdatStringItem[ushort.MaxValue],
+                Filename = "flags"
+            };
         }
 
         public static string GetPouchBuffCaption(BdatStringValue value)

@@ -153,12 +153,11 @@ namespace Xb2
 
             sb.DecreaseAndAppendLine("</tr>");
             sb.DecreaseAndAppendLine("</thead>");
-            int id = table.BaseId;
 
-            foreach (BdatStringItem item in table.Items)
+            foreach (BdatStringItem item in table.Items.Where(x => x != null))
             {
-                sb.AppendLineAndIncrease($"<tr id=\"{id}\">");
-                sb.AppendLine($"<td>{id}</td>");
+                sb.AppendLineAndIncrease($"<tr id=\"{item.Id}\">");
+                sb.AppendLine($"<td>{item.Id}</td>");
                 sb.AppendLineAndIncrease("<td>");
 
                 if (item.ReferencedBy.Count > 0)
@@ -223,7 +222,6 @@ namespace Xb2
                 }
 
                 sb.DecreaseAndAppendLine("</tr>");
-                id++;
             }
 
             sb.DecreaseAndAppendLine("</table>");
