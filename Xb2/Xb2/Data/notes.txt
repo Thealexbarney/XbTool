@@ -1,0 +1,144 @@
+idea_cat = char's max idea category
+If tie, one of the tied categories is chosen at random
+If using a booster(count doesn't matter), idea_cat is set to the booster's category
+
+For all rare blades
+
+luckMod = (sqrt(luck) * 0.01 * 1.3) + 0.95
+luckMod = max(luckMod, 1.0)
+CrystalMod = (RareBladeRev * 0.01);
+IdeaMod = BLD_IdeaProbRev * 0.01
+
+bladeMod = luckMod * crystalMod
+
+if blade's type == idea_cat
+bladeMod = bladeMod * IdeaMod
+
+If rand number from 0 - 100 < bladeMod, blade gets added to pool
+
+If multiple in pool. Blades not matching idea are removed
+If still multiple, blades with a prob larger than the min are removed
+
+Each opened crystal adds to your assurePoint
+
+Assure count is reset when you qualify for an assured blade but there aren't any left
+
+PRNG uses a Mersenne Twister MT19937
+
+stat = (statlv99 - statlv1) * level / 98 + statLv1
+
+BTL_SystemBalance:
+135: Driver skill level 2 unlock count
+136: Driver skill level 3 unlock count
+
+Driver id 11 Rex has a max blade count of 5
+
+When getting random weather, start with weather ID 4 on the map, roll a number from 0-100
+If number < weather prob, apply weather.
+If not, repeat for ID 3, 2, then 1, then make it sunny
+Weather IDs with a type of 0 are skipped over
+
+EnhanceEffect bitfield
+unsigned short ParamType : 3;			0x07	x & 0x7
+unsigned short ParamIdxA : 4;	0x78	(x >> 3) & 0xF
+unsigned short ParamIdxB : 4;	0x780	(x >> 7) & 0xF
+unsigned short D : 3;			0x3800	(x >> 11) & 0x7
+unsigned short E : 1;			0x4000	(x >> 14) & 0x1
+
+EnhanceEffect flags
+Direct = 1,
+UI = 2,
+PartyGauge = 4,
+BitfieldE = 8
+
+Ursula info
+
+Levels:
+ 0:    1
+ 0-2:  2
+ 3-8:  3
+ 9-16: 4
+17-29: 5
+30-49: 6
+50-74: 7
+75-98: 8
+   99: 9
+   
+#fans = (specialMissionsCleared * 16 + liveMissionsCleared * 12 + lessonMissionsCleared * 3) * levelTotal
+
+Salvaging
+
+Each Salvaging Mastery level results in an additive 8% to the drop rate
+Each successful button challenge level results in an additive 5% to the drop rate
+Miss = 0, Good = 1, Excellent = 2
+3 button challenges, so range of 0-6
+
+Once all those numbers are added up, the game rolls a number between 0 and 1. If the drop rate is less than this number, the function 
+
+
+BTL_Bl_KizunaUpDown events:
+11: Bad button challenge
+12: Good button challenge
+13: Great button challenge
+
+BTL_SpArtsRecast:
+10: Bad button challenge
+11: Good button challenge
+12: Great button challenge
+
+
+A : 11l
+
+
+Arts_Data
+0xFFFFFFFFFFFFF800LL artId : 11
+0xFFFFFFFFFFC007FFLL (Name) << 11 : 11
+0xFFFFFFFFFF0007FFLL (artType << 22) & 0xC00000 : 2
+0xFFFFFFFFE0FFFFFFLL (ArtsType & 0x1F) << 24 : 5
+0xFFFFFFFF1FFFFFFFLL | ((Target & 7) << 29) : 3
+0x1FFF800FFFFFFFFLL & (StartRecast << 57)
+0x1FFF800FFFFFFFFLL | ((Caption & 0x7FF) << 32)
+0xFE0007FFFFFFFFFFLL | ((totalRatio & 0x3FFF) << 43)
+
+8
+0xFFFFFFFFFFFFFFE0LL | ActNo & 0x1F : 5
+0xFFFFFFFFFFFFF81FLL | ((WpnType & 0x3F) << 5) : 6
+0xFFFFFFFFFFF8FFFFLL | ((RangeType & 7) << 16) : 3
+0xFFFFFFFFF07FFFFFLL | ((AtrNum & 0x1F) << 23) : 5
+0xFFFFFFFF0FFFFFFFLL | ((LoopNum & 0xF) << 28) : 4
+0xFFFC0FFFFFFFFFFFLL | ((ArtsBuff & 0x3F) << 44) : 6
+0x0003FFFFFFFFFFFFLL | (VoiceNum << 50) : 8
+
+unsigned long ActNo : 5;
+unsigned long WpnType : 6;
+unsigned long Unk : 5;
+unsigned long RangeType : 3;
+unsigned long Unk : 4;
+unsigned long AtrNum : 5;
+unsigned long LoopNum : 4;
+unsigned long Unk : 12;
+unsigned long ArtsBuff : 6;
+unsigned long VoiceNum : 8;
+
+
+BlSp
+0x3FFFFFFFFFFFFLL | (VoiceSet << 50)
+
+10
+0xFFFFFFFFFFFFF000LL | BulletID & 0xFFF : 12
+0xFFFFFFFFFF800FFFLL | ((BulletEffID & 0x7FF) << 12) : 11
+0xFFFFFFFFF07FFFFFLL | ((BulletNum & 0x1F) << 23) : 5
+0xFFFFFFFF8FFFFFFFLL | ((EfpType & 7) << 28) : 3
+0xFFFFFFFF7FFFFFFFLL | ((Multi != 0) << 31) : 1
+0xFFFFFF00FFFFFFFFLL | (BulletAngle << 32) : 8
+
+unsigned long BulletID : 12;
+unsigned long BulletEffID : 11;
+unsigned long BulletNum : 5;
+unsigned long EfpType : 3;
+unsigned long Multi : 1;
+unsigned long BulletAngle : 8;
+
+18
+0xFFFFFFFFFFE007FFLL | ((HitEff & 0x3FF) << 11) : 10
+0xFFFFF000FFFFFFFFLL | ((Distance & 0xFFF) << 32) : 12

@@ -7,6 +7,7 @@ using System.Text;
 using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
+using Xb2.Salvaging;
 using Xb2.Scripting;
 using Xb2.Serialization;
 using Xb2.Textures;
@@ -117,7 +118,7 @@ namespace Xb2
         public static void PrintData(BdatCollection tables, string dataDir)
         {
             Directory.CreateDirectory(dataDir);
-            var salvaging = Salvaging.Print(tables);
+            var salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(dataDir, "salvaging.html"), salvaging);
 
             using (var writer = new StreamWriter(Path.Combine(dataDir, "achievements.csv")))
@@ -202,6 +203,10 @@ namespace Xb2
                 case "descramblescript" when args.Length == 3:
                     DescrambleScript(args[1], args[2]);
                     break;
+                case "raffle" when args.Length == 3:
+                    var tablesRaf = DeserializeBdatArchive(args[1], args[2]);
+                    RunRaffle.Run(tablesRaf);
+                    break;
                 default:
                     PrintUsage();
                     break;
@@ -219,6 +224,7 @@ namespace Xb2
             Console.WriteLine("Xb2 wilay <arh filename> <ard filename> <wilay dir> <out dir>");
             Console.WriteLine("Xb2 descramblescript <script filename>");
             Console.WriteLine("Xb2 descramblescript <directory> <search pattern>");
+            Console.WriteLine("Xb2 raffle <arh filename> <ard filename>");
         }
     }
 

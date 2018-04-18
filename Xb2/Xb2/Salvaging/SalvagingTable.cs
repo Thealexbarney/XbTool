@@ -2,19 +2,32 @@
 using Xb2.CodeGen;
 using Xb2.Types;
 
-namespace Xb2
+namespace Xb2.Salvaging
 {
-    public static class Salvaging
+    public static class SalvagingTable
     {
         public static string Print(BdatCollection tables)
         {
             var sb = new Indenter();
             var pointList = tables.FLD_SalvagePointList;
 
+            sb.AppendLine("<!DOCTYPE html>");
+            sb.AppendLineAndIncrease("<html>");
+            sb.AppendLineAndIncrease("<head>");
+            sb.AppendLine("<meta charset=\"utf-8\" />");
+            sb.AppendLine("<title>Xenoblade 2 Salvaging Points</title>");
+            sb.AppendLine("<style>.tbox td{vertical-align: top;} table.BtnChallenge td,th{border: 1px solid;}table{margin:0;padding:0;border-collapse: collapse;}</style>");
+            sb.DecreaseAndAppendLine("</head>");
+
+            sb.AppendLineAndIncrease("<body>");
+
             foreach (FLD_SalvagePointList point in pointList.Where(x => x.SalvagePointName > 0))
             {
                 PrintPoint(point, sb);
             }
+
+            sb.DecreaseAndAppendLine("</body>");
+            sb.DecreaseAndAppendLine("</html>");
 
             return sb.ToString();
         }
@@ -25,11 +38,21 @@ namespace Xb2
             sb.AppendLine($"<h2>{point._SalvagePointName.name}</h2>");
             if (point.Condition != 0) sb.AppendLine($"<h3>Condition {point.Condition}</h3>");
 
+            sb.AppendLine("<table class=\"BtnChallenge\">");
+            sb.AppendLine("<tr><th>Button</th><th>Speed</th><th>Outer Ring</th><th>Inner Ring</th></tr>");
+            for (int i = 0; i < 3; i++)
+            {
+                var chal = point._BtnChallenge[i];
+                sb.AppendLine($"<tr><td>{chal._BtnType1}</td><td>{chal.Speed}</td><td>{chal._Param1.PushRange}</td><td>{chal._Param1.PushSweetRange}</td></tr>");
+            }
+
+            sb.AppendLine("</table>");
+
             for (int i = 0; i < 4; i++)
             {
-                sb.AppendLine($"<h4>{GetCylinderQuality(i)} Cylinder</h4>");
+                sb.AppendLine($"<h4>{GetCylinderQuality(i)} Cylinder<br/>");
+                sb.AppendLine($"Base treasure chance: {point._SalvageTable[i].TresureBoxHit / 100.0}%</h4>");
                 PrintSalvageTable(point._SalvageTable[i], sb);
-                sb.AppendLine("<br/>");
             }
 
             sb.DecreaseAndAppendLine("</div>");
@@ -37,11 +60,13 @@ namespace Xb2
 
         public static void PrintSalvageTable(FLD_SalvageTable table, Indenter sb)
         {
-            sb.AppendLineAndIncrease("<table>");
+            sb.AppendLineAndIncrease("<table class=\"tbox\">");
             for (int i = 0; i < 3; i++)
             {
                 if (table._TresureTablePercent[i] == 0) continue;
                 sb.AppendLine("<td>");
+                sb.AppendLineAndIncrease("<table>");
+                sb.AppendLine("<tr><td colspan=\"2\">");
                 sb.AppendLine($"Treasure Box {i + 1} {table._TresureTablePercent[i] / 10000.0:P}<br/>");
                 PrintItemSet(table._TresureTable[i], sb);
                 sb.AppendLine("</td>");
@@ -67,7 +92,8 @@ namespace Xb2
             }
 
             sb.AppendLine("<br/>");
-            sb.AppendLineAndIncrease("<table>");
+            sb.AppendLine("</td></tr>");
+
             for (int i = 0; i < 8; i++)
             {
                 if (table._itmID[i] == null) continue;
@@ -94,7 +120,7 @@ namespace Xb2
         {
             switch (id)
             {
-                case 4: return "Wooden";
+                case 4: return "Silver";
                 case 5: return "Red";
                 case 6: return "White";
                 default: return string.Empty;
