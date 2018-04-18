@@ -54,11 +54,11 @@ namespace Xb2.Bdat
 
     public static class BdatInfoImport
     {
-        public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo()
+        public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
             var info = new Dictionary<(string table, string member), BdatFieldInfo>();
 
-            using (var stream = new FileStream("fieldInfo.csv", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream($"{prefix}_fieldInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)
@@ -135,11 +135,11 @@ namespace Xb2.Bdat
             info.Add((fInfo.Table, fInfo.Field), fInfo);
         }
 
-        public static BdatArrayInfo[] ReadBdatArrayInfo()
+        public static BdatArrayInfo[] ReadBdatArrayInfo(string prefix)
         {
             var info = new List<BdatArrayInfo>();
 
-            using (var stream = new FileStream("arrays.csv", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream($"{prefix}_arrays.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)
@@ -165,11 +165,11 @@ namespace Xb2.Bdat
             return info.ToArray();
         }
 
-        public static Dictionary<string, string> ReadBdatTableInfo()
+        public static Dictionary<string, string> ReadBdatTableInfo(string prefix)
         {
             var display = new Dictionary<string, string>();
 
-            using (var stream = new FileStream("tableInfo.csv", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream($"{prefix}_tableInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)

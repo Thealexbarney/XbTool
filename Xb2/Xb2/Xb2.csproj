@@ -21,4 +21,8 @@
     <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.0' " Include="Iconic.Zlib.Netstandard" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\*.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

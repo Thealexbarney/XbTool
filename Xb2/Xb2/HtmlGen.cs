@@ -15,7 +15,7 @@ namespace Xb2
             string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
             Directory.CreateDirectory(bdatHtmlDir);
 
-            PrintIndex(bdats, htmlDir);
+            if (bdats.Game == Game.XB2) PrintIndex(bdats, htmlDir);
             PrintBdatIndex(bdats, bdatHtmlDir);
             foreach (string tableName in bdats.Tables.Keys)
             {
@@ -60,7 +60,8 @@ namespace Xb2
             sb.AppendLineAndIncrease("<html>");
             sb.AppendLineAndIncrease("<head>");
             sb.AppendLine("<meta charset=\"utf-8\" />");
-            sb.AppendLine("<title>Xenoblade 2 Data Tables</title>");
+            var name = bdats.Game == Game.XB2 ? "2" : "X";
+            sb.AppendLine($"<title>Xenoblade {name} Data Tables</title>");
             sb.DecreaseAndAppendLine("</head>");
 
             sb.AppendLineAndIncrease("<body>");
@@ -100,7 +101,8 @@ namespace Xb2
             sb.AppendLine($"<p>{IndexText}</p>");
             sb.AppendLine($"<h2><a href=\"bdat\\index.html\">Complete table list</a></h2>");
 
-            using (var stream = new FileStream("tableDisplay.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            string prefix = bdats.Game.ToString().ToLower();
+            using (var stream = new FileStream($"{prefix}_tableDisplay.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var reader = new StreamReader(stream))
             {
                 IEnumerable<BdatFriendlyInfo> csv = new CsvReader(reader).GetRecords<BdatFriendlyInfo>();

@@ -4,32 +4,35 @@ namespace Xb2.Bdat
 {
     public static class BdatTools
     {
-        public static void DecryptBdat(byte[] file)
+        public static void DecryptBdat(DataBuffer file)
         {
-            int tableCount = BitConverter.ToInt32(file, 0);
+            int tableCount = file.ReadInt32(0);
 
             for (int i = 0; i < tableCount; i++)
             {
-                int offset = BitConverter.ToInt32(file, 8 + 4 * i);
-                DecryptTable(file, offset);
+                int offset = file.ReadInt32(8 + 4 * i);
+
+                DataBuffer table = file.Slice(offset, file.Length - offset);
+
+                DecryptTable(table);
             }
         }
 
-        public static void DecryptTable(byte[] file, int offset)
+        public static void DecryptTable(DataBuffer table)
         {
-            if (BitConverter.ToUInt32(file, offset) != 0x54414442) return;
-            if ((file[4 + offset] & 2) == 0) return;
+            if (table.ReadUTF8(0, 4) != "BDAT") return;
+            if ((table[4] & 2) == 0) return;
 
-            int namesOffset = BitConverter.ToUInt16(file, offset + 6) + offset;
-            int hashTableOffset = BitConverter.ToUInt16(file, offset + 10) + offset;
-            ushort checksum = BitConverter.ToUInt16(file, offset + 22);
-            int stringsOffset = BitConverter.ToInt32(file, offset + 24) + offset;
-            int stringsLength = BitConverter.ToInt32(file, offset + 28);
+            int namesOffset = table.ReadUInt16(6);
+            int hashTableOffset = table.ReadUInt16(10);
+            ushort checksum = table.ReadUInt16(22);
+            int stringsOffset = table.ReadInt32(24);
+            int stringsLength = table.ReadInt32(28);
 
-            DecryptSection(file, checksum, namesOffset, hashTableOffset - namesOffset);
-            DecryptSection(file, checksum, stringsOffset, stringsLength);
+            DecryptSection(table.File, checksum, table.Start + namesOffset, hashTableOffset - namesOffset);
+            DecryptSection(table.File, checksum, table.Start + stringsOffset, stringsLength);
 
-            file[4 + offset] &= unchecked((byte)~2);
+            table[4] &= unchecked((byte)~2);
         }
 
         public static void DecryptSection(byte[] data, ushort checksum, int start, int length)
@@ -70,23 +73,23 @@ namespace Xb2.Bdat
             return r - r / hashTableSize * hashTableSize;
         }
 
-        public static ushort CalcBdatTableChecksum(byte[] file, int offset)
+        public static ushort CalcBdatTableChecksum(DataBuffer table)
         {
-            int stringsOffset = BitConverter.ToInt32(file, offset + 24);
-            int stringsLength = BitConverter.ToInt32(file, offset + 28);
+            int stringsOffset = table.ReadInt32(24);
+            int stringsLength = table.ReadInt32(28);
 
-            int start = 32 + offset;
-            int end = stringsOffset + stringsLength + offset;
+            int end = stringsOffset + stringsLength;
             ushort checksum = 0;
 
-            for (int i = start; i < end; i++)
+            for (int i = 32; i < end; i++)
             {
-                checksum += (byte)(file[i] << (i & 3));
+                checksum += (byte)(table[i] << (i & 3));
             }
 
             return checksum;
         }
     }
+
     public enum BdatMemberType
     {
         None = 0,

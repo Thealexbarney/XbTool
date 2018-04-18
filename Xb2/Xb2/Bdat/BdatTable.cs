@@ -27,47 +27,43 @@ namespace Xb2.Bdat
         public int MemberCount { get; }
 
         public BdatMember[] Members { get; }
-        public byte[] Table { get; }
+        public DataBuffer Data { get; }
 
-        public BdatTable(byte[] file, int offset)
+        public BdatTable(DataBuffer table)
         {
-            if (BitConverter.ToUInt32(file, offset) != 0x54414442) return;
+            Data = table;
+            if (table.ReadUTF8(0, 4) != "BDAT") return;
 
-            EncryptionFlag = BitConverter.ToUInt16(file, offset + 4);
-            NamesOffset = BitConverter.ToUInt16(file, offset + 6);
-            ItemSize = BitConverter.ToUInt16(file, offset + 8);
-            HashTableOffset = BitConverter.ToUInt16(file, offset + 10);
-            HashTableLength = BitConverter.ToUInt16(file, offset + 12);
-            ItemTableOffset = BitConverter.ToUInt16(file, offset + 14);
-            ItemCount = BitConverter.ToUInt16(file, offset + 16);
-            BaseId = BitConverter.ToUInt16(file, offset + 18);
-            Field14 = BitConverter.ToUInt16(file, offset + 20);
-            Checksum = BitConverter.ToUInt16(file, offset + 22);
-            StringsOffset = BitConverter.ToUInt32(file, offset + 24);
-            StringsLength = BitConverter.ToUInt32(file, offset + 28);
-            MemberTableOffset = BitConverter.ToUInt16(file, offset + 32);
-            MemberCount = BitConverter.ToUInt16(file, offset + 34);
+            EncryptionFlag = table.ReadUInt16(4);
+            NamesOffset = table.ReadUInt16(6);
+            ItemSize = table.ReadUInt16(8);
+            HashTableOffset = table.ReadUInt16(10);
+            HashTableLength = table.ReadUInt16(12);
+            ItemTableOffset = table.ReadUInt16(14);
+            ItemCount = table.ReadUInt16(16);
+            BaseId = table.ReadUInt16(18);
+            Field14 = table.ReadUInt16(20);
+            Checksum = table.ReadUInt16(22);
+            StringsOffset = table.ReadUInt32(24);
+            StringsLength = table.ReadUInt32(28);
+            MemberTableOffset = table.ReadUInt16(32);
+            MemberCount = table.ReadUInt16(34);
 
-            Name = Stuff.GetUTF8Z(file, offset + NamesOffset);
-            Members = ReadTableMembers(file, offset);
+            Name = table.ReadUTF8Z(NamesOffset);
+            Members = ReadTableMembers(table);
         }
 
-        public BdatTable(byte[] table) : this(table, 0)
+        public static BdatMember[] ReadTableMembers(DataBuffer file)
         {
-            Table = table;
-        }
-
-        public static BdatMember[] ReadTableMembers(byte[] file, int offset)
-        {
-            int memberTableOffset = BitConverter.ToUInt16(file, offset + 32);
-            int memberCount = BitConverter.ToUInt16(file, offset + 34);
+            int memberTableOffset = file.ReadUInt16(32);
+            int memberCount = file.ReadUInt16(34);
             var members = new BdatMember[memberCount];
             var usedNames = new HashSet<string>();
 
             for (int i = 0; i < memberCount; i++)
             {
-                int memberOffset = offset + memberTableOffset + i * 6;
-                var member = new BdatMember(file, offset, memberOffset, usedNames);
+                int memberOffset = memberTableOffset + i * 6;
+                var member = new BdatMember(file, memberOffset, usedNames);
                 members[i] = member;
             }
 

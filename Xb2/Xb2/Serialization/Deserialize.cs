@@ -12,11 +12,11 @@ namespace Xb2.Serialization
     {
         public static readonly Dictionary<string, FieldInfo> Fields = typeof(BdatCollection).GetFields().ToDictionary(x => x.Name, x => x);
 
-        public static BdatCollection ReadBdats(byte[][] files)
+        public static BdatCollection ReadBdats(DataBuffer[] files)
         {
             var tables = new BdatCollection();
 
-            foreach (byte[] file in files)
+            foreach (DataBuffer file in files)
             {
                 ReadBdat(file, tables);
             }
@@ -26,55 +26,56 @@ namespace Xb2.Serialization
             return tables;
         }
 
-        private static void ReadBdat(byte[] file, BdatCollection tables)
+        private static void ReadBdat(DataBuffer file, BdatCollection tables)
         {
             if (file.Length <= 12) throw new InvalidDataException("File is too short");
-            int fileLength = BitConverter.ToInt32(file, 4);
+            int fileLength = file.ReadInt32(4);
             if (file.Length != fileLength) throw new InvalidDataException("Incorrect file length field");
 
             BdatTools.DecryptBdat(file);
 
-            int tableCount = BitConverter.ToInt32(file, 0);
+            int tableCount = file.ReadInt32(0);
 
             for (int i = 0; i < tableCount; i++)
             {
-                int offset = BitConverter.ToInt32(file, 8 + 4 * i);
-                ReadTable(file, offset, tables);
+                int offset = file.ReadInt32(8 + 4 * i);
+                DataBuffer tableBuffer = file.Slice(offset, file.Length - offset);
+                ReadTable(tableBuffer, tables);
             }
         }
 
-        private static void ReadTable(byte[] file, int offset, BdatCollection tables)
+        private static void ReadTable(DataBuffer file, BdatCollection tables)
         {
-            if (BitConverter.ToUInt32(file, offset) != 0x54414442) return;
+            if (file.ReadUTF8(0, 4) != "BDAT") return;
 
-            int namesOffset = BitConverter.ToUInt16(file, offset + 6);
-            var tableName = Stuff.GetUTF8Z(file, offset + namesOffset);
+            int namesOffset = file.ReadUInt16(6);
+            var tableName = file.ReadUTF8Z(namesOffset);
 
             var itemType = TypeMap.GetTableType(tableName);
             var tableType = typeof(BdatTable<>).MakeGenericType(itemType);
             var table = (IBdatTable)Activator.CreateInstance(tableType);
             table.Name = tableName;
-            table.BaseId = BitConverter.ToUInt16(file, offset + 18);
-            table.Members = BdatTable.ReadTableMembers(file, offset);
-            table.Items = ReadItems(file, offset, itemType);
+            table.BaseId = file.ReadUInt16(18);
+            table.Members = BdatTable.ReadTableMembers(file);
+            table.Items = ReadItems(file, itemType);
 
             Fields[tableName].SetValue(tables, table);
         }
 
-        private static Array ReadItems(byte[] file, int offset, Type itemType)
+        private static Array ReadItems(DataBuffer table, Type itemType)
         {
-            int itemSize = BitConverter.ToUInt16(file, offset + 8);
-            int itemTableOffset = BitConverter.ToUInt16(file, offset + 14);
-            int itemCount = BitConverter.ToUInt16(file, offset + 16);
-            int baseId = BitConverter.ToUInt16(file, offset + 18);
+            int itemSize = table.ReadUInt16(8);
+            int itemTableOffset = table.ReadUInt16(14);
+            int itemCount = table.ReadUInt16(16);
+            int baseId = table.ReadUInt16(18);
 
             Array items = Array.CreateInstance(itemType, itemCount);
             var func = TypeMap.GetTableReadFunction(itemType);
 
             for (int i = 0; i < itemCount; i++)
             {
-                int itemOffset = offset + itemTableOffset + i * itemSize;
-                object item = func(file, baseId + i, itemOffset, offset);
+                int itemOffset = table.Start + itemTableOffset + i * itemSize;
+                object item = func(table.File, baseId + i, itemOffset, table.Start);
                 items.SetValue(item, i);
             }
 

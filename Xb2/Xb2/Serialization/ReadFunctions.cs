@@ -8268,6 +8268,7 @@ namespace Xb2.Serialization
                 item._EnhanceID3 = tables.BTL_Enhance.GetItemOrNull(item.EnhanceID3);
                 item._Name = tables.fld_enemyname.GetItemOrNull(item.Name);
                 item._ParamID = tables.CHR_EnParam.GetItemOrNull(item.ParamID);
+                item._ParamRev = tables.CHR_EnParam_Rev.GetItemOrNull(item.ParamRev);
                 item._PreciousID = tables.GetItem(item.PreciousID);
                 item._ZoneID = tables.FLD_maplist.GetItemOrNull(item.ZoneID);
             }

@@ -27,9 +27,9 @@ namespace Xb2
 
         private static void DecryptBdatFile(string filename)
         {
-            byte[] bdat = File.ReadAllBytes(filename);
+            var bdat = new DataBuffer(File.ReadAllBytes(filename), Game.XB2, 0);
             BdatTools.DecryptBdat(bdat);
-            File.WriteAllBytes(filename, bdat);
+            File.WriteAllBytes(filename, bdat.File);
         }
 
         private static void DecryptBdatFiles(string directory, string pattern)
@@ -55,11 +55,11 @@ namespace Xb2
         private static BdatCollection DeserializeBdat(string bdatDir, string pattern)
         {
             string[] filenames = Directory.GetFiles(bdatDir, pattern, SearchOption.AllDirectories);
-            byte[][] files = new byte[filenames.Length][];
+            var files = new DataBuffer[filenames.Length];
 
             for (int i = 0; i < filenames.Length; i++)
             {
-                files[i] = File.ReadAllBytes(filenames[i]);
+                files[i] = new DataBuffer(File.ReadAllBytes(filenames[i]), Game.XB2, 0);
             }
 
             BdatCollection tables = Deserialize.ReadBdats(files);
@@ -68,17 +68,15 @@ namespace Xb2
 
         private static BdatCollection DeserializeBdatArchive(string arhFilename, string ardFilename)
         {
-            var files = new List<byte[]>();
+            var files = new List<DataBuffer>();
 
             using (var archive = new FileArchive(arhFilename, ardFilename))
             {
-                files.Add(archive.ReadFile("/bdat/common.bdat"));
-                files.Add(archive.ReadFile("/bdat/common_gmk.bdat"));
+                files.Add(new DataBuffer(archive.ReadFile("/bdat/common.bdat"), Game.XB2, 0));
+                files.Add(new DataBuffer(archive.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0));
                 foreach (var file in archive.GetChildFileInfos("/bdat/gb/"))
                 {
-                    byte[] bdat = archive.ReadFile(file);
-                    if (bdat == null) continue;
-                    files.Add(bdat);
+                    files.Add(new DataBuffer(archive.ReadFile(file), Game.XB2, 0));
                 }
             }
 
@@ -95,6 +93,24 @@ namespace Xb2
             {
                 bdats = new BdatTables(archive);
             }
+
+            watch.PrintAndRestart();
+            BdatStringCollection tables = DeserializeStrings.DeserializeTables(bdats);
+
+            watch.PrintAndRestart();
+            Metadata.ApplyMetadata(tables);
+
+            watch.PrintAndRestart();
+            HtmlGen.PrintSeparateTables(tables, htmlDir);
+
+            watch.PrintAndRestart();
+        }
+
+        private static void BdatToHtml(string directory, string pattern, string htmlDir)
+        {
+            string[] filenames = Directory.GetFiles(directory, pattern);
+            var watch = Stopwatch.StartNew();
+            BdatTables bdats = new BdatTables(filenames);
 
             watch.PrintAndRestart();
             BdatStringCollection tables = DeserializeStrings.DeserializeTables(bdats);
@@ -179,8 +195,11 @@ namespace Xb2
                 case "deserializebdat" when args.Length == 3:
                     DeserializeBdat(args[1], args[2]);
                     break;
-                case "bdat2html" when args.Length == 4:
+                case "bdatarchive2html" when args.Length == 4:
                     BdatToHtmlArchive(args[1], args[2], args[3]);
+                    break;
+                case "bdat2html" when args.Length == 4:
+                    BdatToHtml(args[1], args[2], args[3]);
                     break;
                 case "generatedatabdat" when args.Length == 4:
                     var tables = DeserializeBdat(args[1], args[2]);

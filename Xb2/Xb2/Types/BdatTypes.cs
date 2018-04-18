@@ -2544,6 +2544,7 @@ namespace Xb2.Types
         public BTL_Enhance _EnhanceID3;
         public Message _Name;
         public CHR_EnParam _ParamID;
+        public CHR_EnParam_Rev _ParamRev;
         public object _PreciousID;
         public FLD_maplist _ZoneID;
     }

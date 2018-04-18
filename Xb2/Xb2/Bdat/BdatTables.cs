@@ -11,6 +11,7 @@ namespace Xb2.Bdat
     public class BdatTables
     {
         public BdatTable[] Tables { get; set; }
+        public Game Game { get; }
         public Dictionary<(string table, string member), BdatFieldInfo> BdatFields { get; set; }
         public Dictionary<string, string> DisplayFields { get; set; }
         public BdatArrayInfo[] BdatArrays { get; set; }
@@ -19,7 +20,26 @@ namespace Xb2.Bdat
 
         public BdatTables(FileArchive archive, string lang = "gb")
         {
+            Game = Game.XB2;
             Tables = ReadAllBdats(archive, lang);
+
+            ReadFieldInfo();
+            ReadArrayInfo();
+            ReadTableInfo();
+            Types = CalculateBdatTypes(Tables);
+            GetBdatRefs();
+            ReadArrayInfos();
+            GetTableDesc();
+            MarkFlagMembers();
+        }
+
+        public BdatTables(string[] filenames)
+        {
+            Game = Game.XBX;
+            Tables = ReadAllBdats(filenames);
+
+            BdatFields = new Dictionary<(string table, string member), BdatFieldInfo>();
+            DisplayFields = new Dictionary<string, string>();
 
             ReadFieldInfo();
             ReadArrayInfo();
@@ -35,37 +55,50 @@ namespace Xb2.Bdat
         {
             var tables = new List<BdatTable>();
 
-            tables.AddRange(ReadBdatFile(archive.ReadFile("/bdat/common.bdat"), "/bdat/common.bdat"));
-            tables.AddRange(ReadBdatFile(archive.ReadFile("/bdat/common_gmk.bdat"), "/bdat/common_gmk.bdat"));
+            tables.AddRange(ReadBdatFile(new DataBuffer(archive.ReadFile("/bdat/common.bdat"), Game.XB2, 0), "/bdat/common.bdat"));
+            tables.AddRange(ReadBdatFile(new DataBuffer(archive.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
 
             foreach (var file in archive.GetChildFileInfos($"/bdat/{lang}/"))
             {
-                tables.AddRange(ReadBdatFile(archive.ReadFile(file), file.Filename));
+                DataBuffer buffer = new DataBuffer(archive.ReadFile(file), Game.XB2, 0);
+                tables.AddRange(ReadBdatFile(buffer, file.Filename));
             }
 
             return tables.ToArray();
         }
 
-        private static BdatTable[] ReadBdatFile(byte[] file, string filename)
+        public static BdatTable[] ReadAllBdats(string[] filenames)
+        {
+            var tables = new List<BdatTable>();
+
+            foreach (var file in filenames)
+            {
+                DataBuffer buffer = new DataBuffer(File.ReadAllBytes(file), Game.XBX, 0);
+                tables.AddRange(ReadBdatFile(buffer, file));
+            }
+
+            return tables.ToArray();
+        }
+
+        private static BdatTable[] ReadBdatFile(DataBuffer file, string filename)
         {
             if (file.Length <= 12) throw new InvalidDataException("File is too short");
-            int fileLength = BitConverter.ToInt32(file, 4);
+            int fileLength = file.ReadInt32(4);
             if (file.Length != fileLength) throw new InvalidDataException("Incorrect file length field");
 
             BdatTools.DecryptBdat(file);
-            int tableCount = BitConverter.ToInt32(file, 0);
+            int tableCount = file.ReadInt32(0);
             var tables = new BdatTable[tableCount];
 
             for (int i = 0; i < tableCount; i++)
             {
-                int offset = BitConverter.ToInt32(file, 8 + 4 * i);
-                int nextOffset = i < tableCount - 1 ? BitConverter.ToInt32(file, 8 + 4 * (i + 1)) : file.Length;
+                int offset = file.ReadInt32(8 + 4 * i);
+                int nextOffset = i < tableCount - 1 ? file.ReadInt32(8 + 4 * (i + 1)) : file.Length;
                 int length = nextOffset - offset;
 
-                var tableData = new byte[length];
-                Array.Copy(file, offset, tableData, 0, length);
+                DataBuffer tableBuffer = file.Slice(offset, length);
 
-                var table = new BdatTable(tableData);
+                var table = new BdatTable(tableBuffer);
                 if (tableCount > 1) table.Filename = Path.GetFileNameWithoutExtension(filename);
                 tables[i] = table;
             }
@@ -75,7 +108,7 @@ namespace Xb2.Bdat
 
         public void ReadFieldInfo()
         {
-            BdatFields = BdatInfoImport.ReadBdatFieldInfo();
+            BdatFields = BdatInfoImport.ReadBdatFieldInfo(Game.ToString().ToLower());
             ResolveWildcards();
 
             var tablesDict = Tables.ToDictionary(x => x.Name, x => x);
@@ -85,7 +118,7 @@ namespace Xb2.Bdat
             }
         }
 
-        public void ReadArrayInfo() => BdatArrays = BdatInfoImport.ReadBdatArrayInfo();
+        public void ReadArrayInfo() => BdatArrays = BdatInfoImport.ReadBdatArrayInfo(Game.ToString().ToLower());
 
         public void ReadArrayInfos()
         {
@@ -133,7 +166,7 @@ namespace Xb2.Bdat
 
         public void ReadTableInfo()
         {
-            DisplayFields = BdatInfoImport.ReadBdatTableInfo();
+            DisplayFields = BdatInfoImport.ReadBdatTableInfo(Game.ToString().ToLower());
 
             foreach (var table in Tables)
             {
@@ -192,12 +225,18 @@ namespace Xb2.Bdat
                 {
                     var newInfo = field.Value.Clone();
                     newInfo.Field = match.Value;
-                    BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
 
-                    if (newInfo.RefField?.Contains('*') == true)
+                    if (newInfo.RefTable?.Contains('*') == true)
                     {
-                        newInfo.RefField = newInfo.RefField.Replace("*", match.Groups[1].Value);
+                        newInfo.RefTable = newInfo.RefTable.Replace("*", match.Groups[1].Value);
+
+                        if (!tablesDict.ContainsKey(newInfo.RefTable))
+                        {
+                            continue;
+                        }
                     }
+
+                    BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
                 }
 
                 BdatFields.Remove(field.Key);

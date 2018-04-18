@@ -9,6 +9,7 @@ namespace Xb2.BdatString
     {
         public Dictionary<string, BdatStringTable> Tables { get; } = new Dictionary<string, BdatStringTable>();
         public BdatTables Bdats { get; set; }
+        public Game Game => Bdats.Game;
 
         public BdatStringTable this[string tableName] => Tables[tableName];
 

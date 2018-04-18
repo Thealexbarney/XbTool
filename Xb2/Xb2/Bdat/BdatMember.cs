@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Xb2.Bdat
@@ -18,12 +17,12 @@ namespace Xb2.Bdat
         public int FlagVarIndex { get; }
         public BdatFieldInfo Metadata { get; set; }
 
-        public BdatMember(byte[] file, int tableOffset, int offset, HashSet<string> usedNames)
+        public BdatMember(DataBuffer table, int offset, HashSet<string> usedNames)
         {
-            int infoOffset = tableOffset + BitConverter.ToUInt16(file, offset);
-            int nameOffset = tableOffset + BitConverter.ToUInt16(file, offset + 4);
+            int infoOffset = table.ReadUInt16(offset);
+            int nameOffset = table.ReadUInt16(offset + 4);
 
-            var name = Stuff.GetUTF8Z(file, nameOffset);
+            var name = table.ReadUTF8Z(nameOffset);
             int dupe = 0;
             Name = name;
 
@@ -34,24 +33,24 @@ namespace Xb2.Bdat
 
             usedNames.Add(Name);
 
-            Type = (BdatMemberType)file[infoOffset];
+            Type = (BdatMemberType)table[infoOffset];
 
             if (Type == BdatMemberType.Flag)
             {
-                int memberTableOffset = BitConverter.ToUInt16(file, tableOffset + 32);
-                FlagIndex = file[infoOffset + 1];
-                FlagMask = BitConverter.ToUInt32(file, infoOffset + 2);
-                FlagVarOffset = BitConverter.ToUInt16(file, infoOffset + 6);
+                int memberTableOffset = table.ReadUInt16(32);
+                FlagIndex = table[infoOffset + 1];
+                FlagMask = table.ReadUInt32(infoOffset + 2);
+                FlagVarOffset = table.ReadUInt16(infoOffset + 6);
                 FlagVarIndex = (FlagVarOffset - memberTableOffset) / 6;
             }
             else
             {
-                ValType = (BdatValueType)file[infoOffset + 1];
-                MemberPos = BitConverter.ToUInt16(file, infoOffset + 2);
+                ValType = (BdatValueType)table[infoOffset + 1];
+                MemberPos = table.ReadUInt16(infoOffset + 2);
             }
             if (Type == BdatMemberType.Array)
             {
-                ArrayCount = BitConverter.ToUInt16(file, infoOffset + 4);
+                ArrayCount = table.ReadUInt16(infoOffset + 4);
             }
         }
     }

@@ -55,16 +55,16 @@ namespace Xb2.Serialization
                 switch (member.Type)
                 {
                     case BdatMemberType.Scalar:
-                        string v = ReadValue(table.Table, itemOffset + member.MemberPos, member.ValType);
+                        string v = ReadValue(table.Data, itemOffset + member.MemberPos, member.ValType);
                         item.AddMember(member.Name, new BdatStringValue(v, item, member));
                         break;
                     case BdatMemberType.Array:
-                        var a = ReadArray(table.Table, itemOffset + member.MemberPos, member);
+                        var a = ReadArray(table.Data, itemOffset + member.MemberPos, member);
                         item.AddMember(member.Name, new BdatStringValue(a, item, member));
                         break;
                     case BdatMemberType.Flag:
                         var flagsMember = table.Members[member.FlagVarIndex];
-                        var f = ReadFlag(table.Table, itemOffset, member, flagsMember);
+                        var f = ReadFlag(table.Data, itemOffset, member, flagsMember);
                         item.AddMember(member.Name, new BdatStringValue(f, item, member));
                         break;
                 }
@@ -73,47 +73,52 @@ namespace Xb2.Serialization
             return item;
         }
 
-        private static string ReadValue(byte[] file, int valueOffset, BdatValueType type)
+        private static string ReadValue(DataBuffer table, int valueOffset, BdatValueType type)
         {
             switch (type)
             {
                 case BdatValueType.UInt8:
-                    return file[valueOffset].ToString();
+                    return table[valueOffset].ToString();
                 case BdatValueType.UInt16:
-                    return BitConverter.ToUInt16(file, valueOffset).ToString();
+                    return table.ReadUInt16(valueOffset).ToString();
                 case BdatValueType.UInt32:
-                    return BitConverter.ToUInt32(file, valueOffset).ToString();
+                    return table.ReadUInt32(valueOffset).ToString();
                 case BdatValueType.Int8:
-                    return ((sbyte)file[valueOffset]).ToString();
+                    return ((sbyte)table[valueOffset]).ToString();
                 case BdatValueType.Int16:
-                    return BitConverter.ToInt16(file, valueOffset).ToString();
+                    return table.ReadInt16(valueOffset).ToString();
                 case BdatValueType.Int32:
-                    return BitConverter.ToInt32(file, valueOffset).ToString();
+                    return table.ReadInt32(valueOffset).ToString();
                 case BdatValueType.String:
-                    return Stuff.GetUTF8Z(file, BitConverter.ToInt32(file, valueOffset));
+                    return table.ReadUTF8Z(table.ReadInt32(valueOffset));
                 case BdatValueType.FP32:
-                    return BitConverter.ToSingle(file, valueOffset).ToString("R");
+                    if (table.Game == Game.XBX)
+                    {
+                        uint value = table.ReadUInt32(valueOffset);
+                        return ((float)(value * (1 / 4096.0))).ToString("R");
+                    }
+                    return table.ReadSingle(valueOffset).ToString("R");
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
-        private static string[] ReadArray(byte[] file, int arrayOffset, BdatMember member)
+        private static string[] ReadArray(DataBuffer table, int arrayOffset, BdatMember member)
         {
             var values = new string[member.ArrayCount];
             int typeSize = GetTypeSize(member.ValType);
 
             for (int i = 0, offset = arrayOffset; i < member.ArrayCount; i++, offset += typeSize)
             {
-                values[i] = ReadValue(file, offset, member.ValType);
+                values[i] = ReadValue(table, offset, member.ValType);
             }
 
             return values;
         }
 
-        private static string ReadFlag(byte[] file, int itemOffset, BdatMember member, BdatMember flagsMember)
+        private static string ReadFlag(DataBuffer table, int itemOffset, BdatMember member, BdatMember flagsMember)
         {
-            uint flags = uint.Parse(ReadValue(file, itemOffset + flagsMember.MemberPos, flagsMember.ValType));
+            uint flags = uint.Parse(ReadValue(table, itemOffset + flagsMember.MemberPos, flagsMember.ValType));
             return ((flags & member.FlagMask) != 0).ToString();
         }
 
