@@ -1,3 +1,4 @@
+AMR_PcList,Name,Message,AMR_PcList_ms
 BTL_ArtsList,Caption,Message,BTL_ArtsList_ms
 BTL_ArtsList,Name,Message,BTL_ArtsList_ms
 BTL_ArtsList,WpnType,Message,wpnpc_catlist_ms
@@ -13,12 +14,22 @@ BTL_BuffWeatherList,Name,Message,BTL_BuffWeatherList_ms
 BTL_EnArtsList,Buff,Reference,BTL_BuffList
 BTL_EnArtsList,Name,Message,BTL_EnArtsList_ms
 BTL_Enhance,caption,Message,BTL_Enhance_ms
+BTL_ItemSkill_inner,Name,Message,BattleSkill_ms
 BTL_SoulArts,Name,Message,BTL_SoulArts_ms
 BTL_SoulData,ArtsJob,Reference,BTL_SoulArts
 BTL_SoulData,SoulCode,Reference,BTL_SoulCode
 BTL_SoulData,VoiceID,Reference,BTL_SoulVoice
 BTL_SoulVoice,word_*,Message,BTL_SoulVoice*
 BTL_SoulVoice,word_**,Message,BTL_SoulVoice0*
+CHR_EnList,Name,Message,CHR_EnList_ms
+CHR_EnList,ParamID,Reference,CHR_EnParam
+DRP_AffixTable,AffixID_*,Reference,BTL_ItemSkill_inner
+DRP_ItemTable,AffixLot,Reference,DRP_AffixTable
+DRP_ItemTable,AffixLotGood,Reference,DRP_AffixTable
+DRP_ItemTable,AffixNumLot,Reference,DRP_AffixSlotTable
+DRP_ItemTable,AffixNumLotG,Reference,DRP_AffixSlotTable
+DRP_ItemTable,SlotNumLot,Reference,DRP_AffixSlotTable
+DRP_ItemTable,SlotNumLotG,Reference,DRP_AffixSlotTable
 ITM_*,Caption,Message,ITM_*_ms
 ITM_*,Name,Message,ITM_*_ms
 ITM_CollectList,category,Reference,MNU_CollectItemCategory
@@ -26,3 +37,8 @@ ITM_TradeList,ItemID,Reference,ITM_MaterialList
 Litemlist*,itm*ID,Reference,ITM_CollectList
 MNU_CollectItemCategory,CategoryName,Message,menu_program_ms
 MNU_SegMapInfo*,infoID,Reference,ITM_InfoList
+SCL_SquadProgressList,TaskID*,Reference,SCL_SquadTaskList
+SCL_SquadQuestList,task,Reference,SCL_SquadProgressList
+SCL_SquadQuestList,title,Message,MultiQuest_Title_ms
+SCL_SquadTaskList,enemyID*,Reference,CHR_EnList
+WPN_PcList,Name,Message,WPN_PcList_ms
