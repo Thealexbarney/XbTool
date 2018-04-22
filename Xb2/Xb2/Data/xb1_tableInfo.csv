@@ -1,0 +1,4 @@
+Display,ITM_itemlist,itemID
+Display,MNU_arts_tag,tagStr
+Display,MNU_item_mes_a,comment
+Display,MNU_item_mes_b,comment

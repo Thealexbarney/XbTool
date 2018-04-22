@@ -282,4 +282,20 @@ namespace Xb2.Types
         Change66,
         rinne_gold
     }
+
+    public enum ItemTypeXb1
+    {
+        Weapon = 2,
+        Gem,
+        HeadArmor,
+        BodyArmor,
+        ArmArmor,
+        LegArmor,
+        FootArmor,
+        Crystal,
+        Collectable,
+        Material,
+        KeyItem,
+        ArtBook
+    }
 }

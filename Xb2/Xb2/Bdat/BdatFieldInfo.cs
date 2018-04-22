@@ -40,7 +40,8 @@ namespace Xb2.Bdat
         QuestFlag,
         Flag,
         Change,
-        EventSetup
+        EventSetup,
+        ItemComment
     }
 
     public class BdatArrayInfo
@@ -57,6 +58,7 @@ namespace Xb2.Bdat
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
             var info = new Dictionary<(string table, string member), BdatFieldInfo>();
+            if (!File.Exists($"{prefix}_fieldInfo.csv")) return info;
 
             using (var stream = new FileStream($"{prefix}_fieldInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
@@ -114,14 +116,17 @@ namespace Xb2.Bdat
                     string type = line[col++];
                     fInfo.EnumType = Type.GetType("Xb2.Types." + type);
                     break;
-                case BdatFieldType.Character:
                 case BdatFieldType.Item:
+                    fInfo.RefField = line[col++];
+                    break;
+                case BdatFieldType.Character:
                 case BdatFieldType.Hide:
                 case BdatFieldType.Enhance:
                 case BdatFieldType.WeatherIdMap:
                 case BdatFieldType.Event:
                 case BdatFieldType.EventSetup:
                 case BdatFieldType.QuestFlag:
+                case BdatFieldType.ItemComment:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -138,7 +143,8 @@ namespace Xb2.Bdat
         public static BdatArrayInfo[] ReadBdatArrayInfo(string prefix)
         {
             var info = new List<BdatArrayInfo>();
-
+            if (!File.Exists($"{prefix}_arrays.csv")) return info.ToArray();
+            
             using (var stream = new FileStream($"{prefix}_arrays.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
@@ -168,7 +174,8 @@ namespace Xb2.Bdat
         public static Dictionary<string, string> ReadBdatTableInfo(string prefix)
         {
             var display = new Dictionary<string, string>();
-
+            if (!File.Exists($"{prefix}_tableInfo.csv")) return display;
+            
             using (var stream = new FileStream($"{prefix}_tableInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {

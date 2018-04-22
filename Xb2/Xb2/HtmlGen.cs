@@ -38,7 +38,7 @@ namespace Xb2
                 sb.AppendLine($"<a href=\"{indexPath}\">Return to BDAT index</a><br/>");
                 sb.AppendLine("<input type=\"button\" value=\"Open all references\" onclick=\"openAll(true)\" />");
                 sb.AppendLine("<input type=\"button\" value=\"Close all references\" onclick=\"openAll(false)\" />");
-                PrintTable(bdats, tableName, sb);
+                PrintTable(bdats[tableName], sb);
                 sb.DecreaseAndAppendLine("</body>");
                 sb.DecreaseAndAppendLine("</html>");
 
@@ -102,6 +102,7 @@ namespace Xb2
             sb.AppendLine($"<h2><a href=\"bdat\\index.html\">Complete table list</a></h2>");
 
             string prefix = bdats.Game.ToString().ToLower();
+            if (!File.Exists($"{prefix}_tableDisplay.csv")) return;
             using (var stream = new FileStream($"{prefix}_tableDisplay.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var reader = new StreamReader(stream))
             {
@@ -127,10 +128,8 @@ namespace Xb2
             File.WriteAllText(filename, sb.ToString());
         }
 
-        public static void PrintTable(BdatStringCollection tables, string tableName, Indenter sb)
+        public static void PrintTable(BdatStringTable table, Indenter sb)
         {
-            BdatStringTable table = tables[tableName];
-
             sb.AppendLineAndIncrease("<table border=\"1\">");
             sb.AppendLineAndIncrease("<thead>");
             sb.AppendLineAndIncrease("<tr>");

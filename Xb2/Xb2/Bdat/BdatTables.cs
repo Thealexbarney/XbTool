@@ -18,10 +18,11 @@ namespace Xb2.Bdat
         public BdatType[] Types { get; set; }
         public BdatTableDesc[] TableDesc { get; set; }
 
-        public BdatTables(FileArchive archive, string lang = "gb")
+        public BdatTables(FileArchive archive, bool readMetadata, string lang = "gb")
         {
             Game = Game.XB2;
             Tables = ReadAllBdats(archive, lang);
+            if (!readMetadata) return;
 
             ReadFieldInfo();
             ReadArrayInfo();
@@ -33,10 +34,11 @@ namespace Xb2.Bdat
             MarkFlagMembers();
         }
 
-        public BdatTables(string[] filenames)
+        public BdatTables(string[] filenames, Game game, bool readMetadata)
         {
-            Game = Game.XBX;
-            Tables = ReadAllBdats(filenames);
+            Game = game;
+            Tables = ReadAllBdats(filenames, game);
+            if (!readMetadata) return;
 
             BdatFields = new Dictionary<(string table, string member), BdatFieldInfo>();
             DisplayFields = new Dictionary<string, string>();
@@ -67,13 +69,13 @@ namespace Xb2.Bdat
             return tables.ToArray();
         }
 
-        public static BdatTable[] ReadAllBdats(string[] filenames)
+        public static BdatTable[] ReadAllBdats(string[] filenames, Game game)
         {
             var tables = new List<BdatTable>();
 
             foreach (var file in filenames)
             {
-                DataBuffer buffer = new DataBuffer(File.ReadAllBytes(file), Game.XBX, 0);
+                DataBuffer buffer = new DataBuffer(File.ReadAllBytes(file), game, 0);
                 tables.AddRange(ReadBdatFile(buffer, file));
             }
 
@@ -84,7 +86,7 @@ namespace Xb2.Bdat
         {
             if (file.Length <= 12) throw new InvalidDataException("File is too short");
             int fileLength = file.ReadInt32(4);
-            if (file.Length != fileLength) throw new InvalidDataException("Incorrect file length field");
+            if (file.Length < fileLength) throw new InvalidDataException("Incorrect file length field");
 
             BdatTools.DecryptBdat(file);
             int tableCount = file.ReadInt32(0);

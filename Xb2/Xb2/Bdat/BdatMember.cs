@@ -20,7 +20,7 @@ namespace Xb2.Bdat
         public BdatMember(DataBuffer table, int offset, HashSet<string> usedNames)
         {
             int infoOffset = table.ReadUInt16(offset);
-            int nameOffset = table.ReadUInt16(offset + 4);
+            int nameOffset = table.Game == Game.XB1 ? offset + 4 : table.ReadUInt16(offset + 4);
 
             var name = table.ReadUTF8Z(nameOffset);
             int dupe = 0;

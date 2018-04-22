@@ -1,3 +1,4 @@
+Display,BTL_Ai,Script
 Display,BTL_Enhance,Caption
 Display,EVT_change,grpName
 Display,EVT_randtype,id
@@ -11,4 +12,3 @@ Display,FLD_WeatherInfo,msg
 Display,MNU_MapGroup,disp_name
 Display,MNU_Stream_WpnImg,filename
 Display,RSC_BgmList,filename
-Display,BTL_Ai,Script

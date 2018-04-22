@@ -52,7 +52,13 @@ namespace Xb2.BdatString
                     ApplyRef(field.RefTable);
                     break;
                 case BdatFieldType.Item:
-                    ApplyRef(BdatStringTools.GetItemTable(refId));
+                    if (tables.Game == Game.XB2) ApplyRef(BdatStringTools.GetItemTableXb2(refId));
+                    if (tables.Game == Game.XB1)
+                    {
+                        var itemType = (ItemTypeXb1)int.Parse(item[field.RefField].ValueString);
+                        ApplyRef(BdatStringTools.GetItemTableXb1(itemType));
+                    }
+
                     break;
                 case BdatFieldType.Event:
                     ApplyRef(BdatStringTools.GetEventTable(refId));
@@ -96,6 +102,9 @@ namespace Xb2.BdatString
                     {
                         AddFlag(tables, "FLG_Scenario", refId, value);
                     }
+                    break;
+                case BdatFieldType.ItemComment:
+                    ApplyRef(item.Id >= 1852 ? "MNU_item_mes_b" : "MNU_item_mes_a");
                     break;
             }
 

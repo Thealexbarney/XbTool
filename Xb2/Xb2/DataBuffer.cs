@@ -101,7 +101,7 @@ namespace Xb2
 
     public enum Game
     {
-        XB1,
+        XB1 = 1,
         XBX,
         XB2
     }

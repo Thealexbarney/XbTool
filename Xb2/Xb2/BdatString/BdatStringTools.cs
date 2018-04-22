@@ -44,7 +44,28 @@ namespace Xb2.BdatString
             return sb.ToString();
         }
 
-        public static string GetItemTable(int id)
+        public static string GetItemTableXb1(ItemTypeXb1 id)
+        {
+            switch (id)
+            {
+                case ItemTypeXb1.Weapon: return "ITM_wpnlist";
+                case ItemTypeXb1.Gem: return "BTL_skilllist";
+                case ItemTypeXb1.HeadArmor: return "ITM_equiplist";
+                case ItemTypeXb1.BodyArmor: return "ITM_equiplist";
+                case ItemTypeXb1.ArmArmor: return "ITM_equiplist";
+                case ItemTypeXb1.LegArmor: return "ITM_equiplist";
+                case ItemTypeXb1.FootArmor: return "ITM_equiplist";
+                case ItemTypeXb1.Crystal: return "ITM_crystallist";
+                case ItemTypeXb1.Collectable: return "ITM_collectlist";
+                case ItemTypeXb1.Material: return "ITM_materiallist";
+                case ItemTypeXb1.KeyItem: return "ITM_valuablelist";
+                case ItemTypeXb1.ArtBook: return "ITM_artslist";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(id), id, null);
+            }
+        }
+
+        public static string GetItemTableXb2(int id)
         {
             if (id > 61000) return "ITM_EtherCrystal";
             if (id > 60000) return "ITM_HanaAssist";

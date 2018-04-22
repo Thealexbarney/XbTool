@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Xb2.Bdat
 {
@@ -50,7 +51,21 @@ namespace Xb2.Bdat
             MemberCount = table.ReadUInt16(34);
 
             Name = table.ReadUTF8Z(NamesOffset);
-            Members = ReadTableMembers(table);
+            switch (table.Game)
+            {
+                case Game.XB1:
+                    Members = ReadTableMembersFromHash(table);
+
+                    // Fix incorrectly named table in Xenoblade 1
+                    if (Name == "FLD_GimCamList1202" && ItemCount == 1)
+                        Name = "FLD_GimCamList1201";
+
+                    break;
+                case Game.XBX:
+                case Game.XB2:
+                    Members = ReadTableMembers(table);
+                    break;
+            }
         }
 
         public static BdatMember[] ReadTableMembers(DataBuffer file)
@@ -68,6 +83,28 @@ namespace Xb2.Bdat
             }
 
             return members;
+        }
+
+        public static BdatMember[] ReadTableMembersFromHash(DataBuffer file)
+        {
+            int hashTableOffset = file.ReadUInt16(10);
+            int hashTableLength = file.ReadUInt16(12);
+
+            var members = new List<BdatMember>();
+            var usedNames = new HashSet<string>();
+
+            for (int i = 0; i < hashTableLength; i++)
+            {
+                int nextChain = file.ReadUInt16(hashTableOffset + i * 2);
+                while (nextChain != 0)
+                {
+                    var member = new BdatMember(file, nextChain, usedNames);
+                    members.Add(member);
+                    nextChain = file.ReadUInt16(nextChain + 2);
+                }
+            }
+
+            return members.OrderBy(x => x.MemberPos).ToArray();
         }
     }
 
