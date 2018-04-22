@@ -24,15 +24,20 @@ namespace Xb2.Serialization
                     Filename = table.Filename
                 };
 
+                if (tables.DisplayFields.TryGetValue(table.Name, out string displayMember))
+                {
+                    stringTable.DisplayMember = displayMember;
+                }
+
                 for (int i = 0; i < table.ItemCount; i++)
                 {
                     BdatStringItem item = ReadItem(table, i);
                     item.Table = stringTable;
                     item.Id = table.BaseId + i;
 
-                    if (tables.DisplayFields.TryGetValue(table.Name, out var fieldName))
+                    if (displayMember != null)
                     {
-                        item.Display = item[fieldName];
+                        item.Display = item[displayMember];
                     }
 
                     items[i] = item;

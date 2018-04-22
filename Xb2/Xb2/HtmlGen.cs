@@ -32,6 +32,9 @@ namespace Xb2
                 sb.AppendLineAndIncrease("<script>");
                 sb.AppendLine(JsOpenAll);
                 sb.DecreaseAndAppendLine("</script>");
+                sb.AppendLineAndIncrease("<style>");
+                sb.AppendLine(CssSticky);
+                sb.DecreaseAndAppendLine("</style>");
                 sb.DecreaseAndAppendLine("</head>");
 
                 sb.AppendLineAndIncrease("<body>");
@@ -140,14 +143,17 @@ namespace Xb2
             {
                 if (member.Metadata?.Type == BdatFieldType.Hide) continue;
 
+                var sticky = table.DisplayMember == member.Name;
+                var cellTag = $"<th{(sticky ? " class=\"side\"" : "")}";
+
                 switch (member.Type)
                 {
                     case BdatMemberType.Scalar:
                     case BdatMemberType.Flag:
-                        sb.AppendLine($"<th>{member.Name}</th>");
+                        sb.AppendLine($"{cellTag}>{member.Name}</th>");
                         break;
                     case BdatMemberType.Array:
-                        sb.AppendLine($"<th colspan=\"{member.ArrayCount}\">{member.Name}</th>");
+                        sb.AppendLine($"{cellTag} colspan=\"{member.ArrayCount}\">{member.Name}</th>");
                         break;
                 }
             }
@@ -189,6 +195,8 @@ namespace Xb2
                     BdatMember member = value.Member;
                     if (member.Metadata?.Type == BdatFieldType.Hide) continue;
 
+                    var sticky = value.Parent.Display == value;
+                    var cellTag = $"<td{(sticky ? " class=\"side\"" : "")}>";
                     switch (member.Type)
                     {
                         case BdatMemberType.Scalar:
@@ -203,11 +211,11 @@ namespace Xb2
                                 }
 
                                 var link = GetLink(table, child.Table, child.Id.ToString());
-                                sb.AppendLine($"<td><a href=\"{link}\">{display}</td></a>");
+                                sb.AppendLine($"{cellTag}<a href=\"{link}\">{display}</td></a>");
                             }
                             else
                             {
-                                sb.AppendLine($"<td>{value.DisplayString}</td>");
+                                sb.AppendLine($"{cellTag}{value.DisplayString}</td>");
                             }
 
                             break;
@@ -215,7 +223,7 @@ namespace Xb2
                             var arr = (string[])value.Display;
                             foreach (string arrValue in arr)
                             {
-                                sb.AppendLine($"<td>{arrValue}</td>");
+                                sb.AppendLine($"{cellTag}{arrValue}</td>");
                             }
 
                             break;
@@ -249,9 +257,19 @@ namespace Xb2
             return $"{path}{childTable.Name}.html#{childId}";
         }
 
-        public static readonly string IndexText = "This is a collection of all the data tables in Xenoblade 2.<br/>A list of commonly-used tables can be found below, along with a link to the complete list of tables.";
+        public static readonly string IndexText = "This is a collection of all the data tables in Xenoblade 2.<br/>" +
+                                                  "A list of commonly-used tables can be found below, along with a link to the complete list of tables.";
         public static readonly string JsOpenAll =
-            "function openAll(open) {\r\n    document.querySelectorAll(\"details\").forEach(function(details) {\r\n        details.open = open;\r\n    });\r\n}";
+            "function openAll(open) {" +
+            "\r\n        document.querySelectorAll(\"details\").forEach(function(details) {" +
+            "\r\n          details.open = open;" +
+            "\r\n        });" +
+            "\r\n      }";
+        public static readonly string CssSticky =
+            "th {position:sticky; top:-1px; background-color:#F0F0F0;}" +
+            "\r\n      table,th,td {border:1px solid black; border-collapse:collapse;}" +
+            "\r\n      .side {position:sticky; left:-1px; background-color:#F0F0F0;}" +
+            "\r\n      th.side {z-index:3}";
     }
 
     public class BdatFriendlyInfo

@@ -26,6 +26,7 @@ namespace Xb2.BdatString
         public string Name { get; set; }
         public string Filename { get; set; }
         public int BaseId { get; set; }
+        public string DisplayMember { get; set; }
         public BdatMember[] Members { get; set; }
         public BdatStringItem[] Items { get; set; }
         public BdatStringItem this[int itemId]
