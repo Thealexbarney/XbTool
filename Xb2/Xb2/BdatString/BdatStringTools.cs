@@ -44,9 +44,9 @@ namespace Xb2.BdatString
             return sb.ToString();
         }
 
-        public static string GetItemTableXb1(ItemTypeXb1 id)
+        public static string GetItemTableXb1(ItemTypeXb1 type)
         {
-            switch (id)
+            switch (type)
             {
                 case ItemTypeXb1.Weapon: return "ITM_wpnlist";
                 case ItemTypeXb1.Gem: return "BTL_skilllist";
@@ -61,7 +61,82 @@ namespace Xb2.BdatString
                 case ItemTypeXb1.KeyItem: return "ITM_valuablelist";
                 case ItemTypeXb1.ArtBook: return "ITM_artslist";
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(id), id, null);
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        public static string GetItemTableXbx(ItemTypeXbx type)
+        {
+            switch (type)
+            {
+                case ItemTypeXbx.Lot: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.HeadArmor:
+                case ItemTypeXbx.BodyArmor:
+                case ItemTypeXbx.ArmArmorR:
+                case ItemTypeXbx.ArmArmorL:
+                case ItemTypeXbx.LegArmor: return "AMR_PcList";
+                case ItemTypeXbx.RangedWeapon: return "WPN_PcList";
+                case ItemTypeXbx.MeleeWeapon: return "WPN_PcList";
+                case ItemTypeXbx.Item8: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item9: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.SkellHeadArmor: 
+                case ItemTypeXbx.SkellBodyArmor: 
+                case ItemTypeXbx.SkellArmArmorR:
+                case ItemTypeXbx.SkellArmArmorL: 
+                case ItemTypeXbx.SkellLegArmor: return "AMR_DlList";
+                case ItemTypeXbx.SkellWeaponTypeA:
+                case ItemTypeXbx.SkellWeaponTypeB:
+                case ItemTypeXbx.SkellWeaponTypeC:
+                case ItemTypeXbx.SkellWeaponTypeD:
+                case ItemTypeXbx.SkellWeaponTypeE: return "WPN_DlList";
+                case ItemTypeXbx.Item20: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.AugmentGround: return "BTL_ItemSkill_inner";
+                case ItemTypeXbx.Item22: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item23: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.AugmentSkell: return "BTL_ItemSkill_doll";
+                case ItemTypeXbx.Item25: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item26: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item27: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item28: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item29: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item30: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item31: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item32: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item33: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item34: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item35: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item36: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item37: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item38: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item39: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item40: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item41: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item42: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item43: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item44: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item45: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item46: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item47: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item48: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item49: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item50: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item51: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item52: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item53: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item54: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item55: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item56: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item57: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item58: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item59: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item60: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item61: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item62: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item63: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Holofigure: return "ITM_FigList";
+                case ItemTypeXbx.Schematic: return "ITM_Blueprint";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 

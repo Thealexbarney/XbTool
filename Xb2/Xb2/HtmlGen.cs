@@ -201,29 +201,13 @@ namespace Xb2
                     {
                         case BdatMemberType.Scalar:
                         case BdatMemberType.Flag:
-                            BdatStringItem child = value.Reference;
-                            if (child != null)
-                            {
-                                string display = child.Display?.DisplayString;
-                                if (string.IsNullOrWhiteSpace(display))
-                                {
-                                    display = child.Id.ToString();
-                                }
-
-                                var link = GetLink(table, child.Table, child.Id.ToString());
-                                sb.AppendLine($"{cellTag}<a href=\"{link}\">{display}</td></a>");
-                            }
-                            else
-                            {
-                                sb.AppendLine($"{cellTag}{value.DisplayString}</td>");
-                            }
+                            PrintValue(value, cellTag);
 
                             break;
                         case BdatMemberType.Array:
-                            var arr = (string[])value.Display;
-                            foreach (string arrValue in arr)
+                            foreach (var arrValue in value.Array)
                             {
-                                sb.AppendLine($"{cellTag}{arrValue}</td>");
+                                PrintValue(arrValue, cellTag);
                             }
 
                             break;
@@ -234,6 +218,26 @@ namespace Xb2
             }
 
             sb.DecreaseAndAppendLine("</table>");
+
+            void PrintValue(BdatStringValue value, string cellTag)
+            {
+                BdatStringItem child = value.Reference;
+                if (child != null)
+                {
+                    string display = child.Display?.DisplayString;
+                    if (string.IsNullOrWhiteSpace(display))
+                    {
+                        display = child.Id.ToString();
+                    }
+
+                    var link = GetLink(table, child.Table, child.Id.ToString());
+                    sb.AppendLine($"{cellTag}<a href=\"{link}\">{display}</td></a>");
+                }
+                else
+                {
+                    sb.AppendLine($"{cellTag}{value.DisplayString}</td>");
+                }
+            }
         }
 
         public static string GetLink(BdatStringTable table, BdatStringTable childTable, string childId)

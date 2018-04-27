@@ -74,6 +74,16 @@ namespace Xb2.BdatString
     {
         public BdatStringValue(object value, BdatStringItem parent, BdatMember member)
         {
+            if (value is string[] array)
+            {
+                Array = new BdatStringValue[array.Length];
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Array[i] = new BdatStringValue(array[i], parent, member);
+                }
+            }
+
             Parent = parent;
             Value = value;
             Display = value;
@@ -86,6 +96,7 @@ namespace Xb2.BdatString
         public BdatStringItem Parent { get; }
         public BdatMember Member { get; }
         public BdatStringItem Reference { get; set; }
+        public BdatStringValue[] Array { get; set; }
 
         public string ValueString => (string)Value;
         public string DisplayString => (string)Display;

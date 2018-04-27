@@ -31,6 +31,17 @@ namespace Xb2.BdatString
             BdatMember member = value.Member;
             BdatFieldInfo field = member.Metadata;
 
+            if (value.Array != null)
+            {
+                foreach (var element in value.Array)
+                {
+                    ResolveItemRef(element);
+                }
+
+                value.Resolved = true;
+                return;
+            }
+
             if (field == null)
             {
                 value.Resolved = true;
@@ -57,6 +68,11 @@ namespace Xb2.BdatString
                     {
                         var itemType = (ItemTypeXb1)int.Parse(item[field.RefField].ValueString);
                         ApplyRef(BdatStringTools.GetItemTableXb1(itemType));
+                    }
+                    if (tables.Game == Game.XBX)
+                    {
+                        var itemType = (ItemTypeXbx)int.Parse(item[field.RefField].ValueString);
+                        ApplyRef(BdatStringTools.GetItemTableXbx(itemType));
                     }
 
                     break;

@@ -11,7 +11,7 @@ namespace Xb2
     {
         public static void PrintAllTables(BdatStringCollection bdats, string htmlDir)
         {
-            string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
+            string bdatHtmlDir = Path.Combine(htmlDir, "json");
             Directory.CreateDirectory(bdatHtmlDir);
 
             foreach (string tableName in bdats.Tables.Keys)

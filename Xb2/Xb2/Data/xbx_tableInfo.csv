@@ -1,2 +1,4 @@
 Display,BTL_BufEffList,Caption
+Display,DRP_ItemTable,ItemID
 Display,MNU_CollectItemCategory,CategoryName
+Display,MNU_IconCatATR,MSlabel
