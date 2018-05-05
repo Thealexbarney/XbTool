@@ -142,3 +142,16 @@ unsigned long BulletAngle : 8;
 18
 0xFFFFFFFFFFE007FFLL | ((HitEff & 0x3FF) << 11) : 10
 0xFFFFF000FFFFFFFFLL | ((Distance & 0xFFF) << 32) : 12
+
+Challenge mode:
+Each stage has 3 levels of progressive rewards. A certain amount of Treasure is needed to recieve each stage.
+
+
+Torna DLC:
+
+3 Groups of fighters:
+1. Lora, Jin, Haze
+2. Addam, Mythra, Minochi
+3. Hugo, Brighid, Aegaeon
+
+Class of the group is determined by their average trust rank. Classes are found in BTL_IrGroupRev

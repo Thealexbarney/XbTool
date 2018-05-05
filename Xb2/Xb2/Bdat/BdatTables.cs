@@ -174,7 +174,7 @@ namespace Xb2.Bdat
             {
                 if (DisplayFields.ContainsKey(table.Name)) continue;
 
-                string displayFieldName = table.Members.FirstOrDefault(x => x.Name.ToLower() == "name")?.Name;
+                string displayFieldName = table.Members.FirstOrDefault(x => x.Name.ToLower() == "name" && x.Type == BdatMemberType.Scalar)?.Name;
 
                 if (displayFieldName != null)
                 {
@@ -269,7 +269,7 @@ namespace Xb2.Bdat
                 {
                     if (childType != null && typeRef.ChildType != childType.Name)
                     {
-                        throw new NotSupportedException();
+                        typeRef.ChildType = "object";
                     }
                 }
                 else
@@ -336,6 +336,7 @@ namespace Xb2.Bdat
 
             TableDesc = tables.ToArray();
         }
+
         private void MarkFlagMembers()
         {
             foreach (var table in Tables)

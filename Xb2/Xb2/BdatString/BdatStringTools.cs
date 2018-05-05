@@ -203,6 +203,13 @@ namespace Xb2.BdatString
             return "FLD_QuestList";
         }
 
+        public static string GetLayerTable(int id)
+        {
+            if (id >= 300) return "MNU_Layer_Dlc03";
+            if (id >= 100) return "MNU_Layer_Dlc01";
+            return "MNU_Layer";
+        }
+
         public static string GetCharacterTable(int id)
         {
             if (id > 2000) return "RSC_NpcList";

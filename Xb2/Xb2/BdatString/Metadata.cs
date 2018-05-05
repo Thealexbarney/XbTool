@@ -122,6 +122,9 @@ namespace Xb2.BdatString
                 case BdatFieldType.ItemComment:
                     ApplyRef(item.Id >= 1852 ? "MNU_item_mes_b" : "MNU_item_mes_a");
                     break;
+                case BdatFieldType.Layer:
+                    ApplyRef(BdatStringTools.GetLayerTable(refId));
+                    break;
             }
 
             if (field.EnumType != null)

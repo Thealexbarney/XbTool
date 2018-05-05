@@ -22,6 +22,7 @@
         CreateBlade,
         ExtractWilay,
         DescrambleScript,
-        SalvageRaffle
+        SalvageRaffle,
+        ReadSave
     }
 }

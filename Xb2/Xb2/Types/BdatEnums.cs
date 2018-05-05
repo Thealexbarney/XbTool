@@ -368,4 +368,10 @@ namespace Xb2.Types
         Holofigure,
         Schematic
     }
+
+    public enum IraCharType
+    {
+        Driver,
+        Blade
+    }
 }

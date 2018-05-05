@@ -41,7 +41,8 @@ namespace Xb2.Bdat
         Flag,
         Change,
         EventSetup,
-        ItemComment
+        ItemComment,
+        Layer
     }
 
     public class BdatArrayInfo
@@ -127,6 +128,7 @@ namespace Xb2.Bdat
                 case BdatFieldType.EventSetup:
                 case BdatFieldType.QuestFlag:
                 case BdatFieldType.ItemComment:
+                case BdatFieldType.Layer:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
