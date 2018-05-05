@@ -4,6 +4,7 @@ using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
 using Xb2.Salvaging;
+using Xb2.Save;
 using Xb2.Scripting;
 using Xb2.Serialization;
 using Xb2.Types;
@@ -46,6 +47,9 @@ namespace Xb2
                 case Task.SalvageRaffle:
                     SalvageRaffle(options);
                     break;
+                case Task.ReadSave:
+                    ReadSave(options);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -54,7 +58,7 @@ namespace Xb2
         private static void ExtractArchive(Options options)
         {
             if (options.ArdFilename == null) throw new NullReferenceException("Archive must be specified");
-            
+
             using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
             {
                 FileArchive.Extract(archive, options.Output);
@@ -94,12 +98,7 @@ namespace Xb2
         {
             if (options.Output == null) throw new NullReferenceException("Output file was not specified.");
 
-            BdatTables bdats;
-            using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
-            {
-                bdats = new BdatTables(archive, true);
-            }
-
+            BdatTables bdats = ReadBdatTables(options, true);
             SerializationCode.CreateFiles(bdats, options.Output);
         }
 
@@ -232,6 +231,17 @@ namespace Xb2
         {
             var tables = GetBdatCollection(options);
             RunRaffle.Run(tables);
+        }
+
+        private static void ReadSave(Options options)
+        {
+            if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+
+            byte[] saveFile = File.ReadAllBytes(options.Input);
+            SDataSave saveData = Read.ReadSave(saveFile);
+
+            BdatCollection tables = GetBdatCollection(options);
+            Print.PrintSave(saveData, tables);
         }
     }
 }
