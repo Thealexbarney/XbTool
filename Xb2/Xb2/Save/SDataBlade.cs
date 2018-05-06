@@ -3,6 +3,7 @@
 // ReSharper disable NotAccessedField.Local
 // ReSharper disable UnusedMember.Local
 
+using Xb2.CreateBlade;
 using Xb2.Types;
 
 #pragma warning disable 169
@@ -21,6 +22,8 @@ namespace Xb2.Save
         public char field_30;
         public uint TrustPoints;
         public uint TrustRank;
+        public byte Gender;
+        public CommonBladeType CommonBladeType;
 
         public GfDataBladeArts[] BArts = new GfDataBladeArts[3];
         public GfDataBladeArts[] NArts = new GfDataBladeArts[3];
@@ -39,6 +42,19 @@ namespace Xb2.Save
         public ushort FavoriteItem1;
         public bool FavoriteCategory1Revealed;
         public bool FavoriteItem1Revealed;
+
+        public byte WeaponType;
+        public byte AuxCoreCount;
+        public BladeAttribute Attribute;
+
+        public byte PArmor;
+        public byte EArmor;
+        public byte HpMaxRev;
+        public byte StrengthRev;
+        public byte PowEtherRev;
+        public byte DexRev;
+        public byte AgilityRev;
+        public byte LuckRev;
 
         public ushort RareNameId;
         public ushort CommonNameId;
@@ -90,6 +106,21 @@ namespace Xb2.Save
             FavoriteCategory1Revealed = save.ReadUInt16() != 0;
             FavoriteItem1Revealed = save.ReadUInt16() != 0;
 
+            Gender = save.ReadUInt8(0x709, true);
+
+            WeaponType = save.ReadUInt8(0x821, true);
+            AuxCoreCount = save.ReadUInt8();
+            Attribute = (BladeAttribute)save.ReadUInt8();
+
+            PArmor = save.ReadUInt8(0x83e, true);
+            EArmor = save.ReadUInt8();
+            HpMaxRev = save.ReadUInt8();
+            StrengthRev = save.ReadUInt8();
+            PowEtherRev = save.ReadUInt8();
+            DexRev = save.ReadUInt8();
+            AgilityRev = save.ReadUInt8();
+            LuckRev = save.ReadUInt8();
+
             RareNameId = save.ReadUInt16(0x832);
             CommonNameId = save.ReadUInt16(0x834);
 
@@ -109,14 +140,14 @@ namespace Xb2.Save
 
     public class GfDataBladeArts
     {
-        ushort Id;
-        ushort RecastRev;
-        ushort field_4;
-        byte field_6;
-        byte Level;
-        byte MaxLevel;
-        byte field_9;
-        ushort field_A;
+        public ushort Id;
+        public ushort RecastRev;
+        public ushort field_4;
+        public byte field_6;
+        public byte Level;
+        public byte MaxLevel;
+        public byte field_9;
+        public ushort field_A;
 
         public GfDataBladeArts(DataBuffer save)
         {
@@ -133,11 +164,11 @@ namespace Xb2.Save
 
     public class GfDataBladeSkill
     {
-        ushort Id;
-        byte field_2;
-        byte Level;
-        byte MaxLevel;
-        byte field_5;
+        public ushort Id;
+        public byte field_2;
+        public byte Level;
+        public byte MaxLevel;
+        public byte field_5;
 
         public GfDataBladeSkill(DataBuffer save)
         {

@@ -2933,6 +2933,7 @@ namespace Xb2.Types
         public bool WpnInNonView;
         public ITM_PcEquip _DefWpnAcce;
         public CHR_Dr _driverID;
+        public ITM_PcWpnIr _DriverWpn;
         public BTL_Bl_KizunaLinkSet _LinkSet;
         public IraCharType _Type;
     }
@@ -3898,6 +3899,11 @@ namespace Xb2.Types
         public byte goldPopMin;
         public byte goldPopMax;
         public byte rsc_paramID;
+        public FLD_FieldSkillList _FSID;
+        public object _itm1ID;
+        public object _itm2ID;
+        public object _itm3ID;
+        public object _itm4ID;
     }
 
     [BdatType]
@@ -5720,6 +5726,15 @@ namespace Xb2.Types
         public byte Guest1;
         public byte Guest2;
         public byte Guest3;
+        public CHR_Dr _blade11;
+        public CHR_Dr _blade12;
+        public CHR_Dr _blade21;
+        public CHR_Dr _blade22;
+        public CHR_Dr _blade31;
+        public CHR_Dr _blade32;
+        public CHR_Dr _driver11;
+        public CHR_Dr _driver21;
+        public CHR_Dr _driver31;
     }
 
     [BdatType]

@@ -29,11 +29,9 @@ namespace Xb2
                 sb.AppendLineAndIncrease("<head>");
                 sb.AppendLine("<meta charset=\"utf-8\" />");
                 sb.AppendLine($"<title>{tableName}</title>");
-                sb.AppendLineAndIncrease("<script>");
-                sb.AppendLine(JsOpenAll);
-                sb.DecreaseAndAppendLine("</script>");
                 sb.AppendLineAndIncrease("<style>");
                 sb.AppendLine(CssSticky);
+                sb.AppendLine(CssSortable);
                 sb.DecreaseAndAppendLine("</style>");
                 sb.DecreaseAndAppendLine("</head>");
 
@@ -42,6 +40,11 @@ namespace Xb2
                 sb.AppendLine("<input type=\"button\" value=\"Open all references\" onclick=\"openAll(true)\" />");
                 sb.AppendLine("<input type=\"button\" value=\"Close all references\" onclick=\"openAll(false)\" />");
                 PrintTable(bdats[tableName], sb);
+                sb.AppendLineAndIncrease("<script>");
+                sb.AppendLine(JsOpenAll);
+                sb.AppendLine(JsSortable);
+                sb.AppendLine(JsAnchor);
+                sb.DecreaseAndAppendLine("</script>");
                 sb.DecreaseAndAppendLine("</body>");
                 sb.DecreaseAndAppendLine("</html>");
 
@@ -133,10 +136,10 @@ namespace Xb2
 
         public static void PrintTable(BdatStringTable table, Indenter sb)
         {
-            sb.AppendLineAndIncrease("<table border=\"1\">");
+            sb.AppendLineAndIncrease("<table class=\"sortable\">");
             sb.AppendLineAndIncrease("<thead>");
-            sb.AppendLineAndIncrease("<tr>");
-            sb.AppendLine("<th>ID</th>");
+            sb.AppendLineAndIncrease("<tr id=\"header\">");
+            sb.AppendLine("<th class=\" dir-d \">ID</th>");
             sb.AppendLine("<th>Referenced By</th>");
 
             foreach (BdatMember member in table.Members)
@@ -269,11 +272,25 @@ namespace Xb2
             "\r\n          details.open = open;" +
             "\r\n        });" +
             "\r\n      }";
+
         public static readonly string CssSticky =
             "th {position:sticky; top:-1px; background-color:#F0F0F0;}" +
             "\r\n      table,th,td {border:1px solid black; border-collapse:collapse;}" +
             "\r\n      .side {position:sticky; left:-1px; background-color:#F0F0F0;}" +
             "\r\n      th.side {z-index:3}";
+
+        public static readonly string CssSortable =
+            ".sortable tbody tr:nth-child(odd){background:#F5F5F5}" +
+            "\r\n      .sortable th{background:#e4e4e4;cursor:pointer;white-space:nowrap;vertical-align:middle}" +
+            "\r\n      .sortable th.dir-d::after{content:\" \\025BE\";vertical-align:inherit}" +
+            "\r\n      .sortable th.dir-u::after{content:\" \\025B4\";vertical-align:inherit}" +
+            "\r\n      :target td {background-color:#CCC !important;}";
+
+        public static readonly string JsSortable =
+            "document.addEventListener(\"click\",function(e){var a=\" dir-d \",r=\" dir-u \",n=/ dir-(u|d) /,l=e.target;function o(e,a){e.className=e.className.replace(n,\"\")+(a||\"\")}if(\"TH\"==l.nodeName){var c=l.parentNode.parentNode.parentNode;if(/\\bsortable\\b/.test(c.className)){for(var t=0,d=l.parentNode.cells,i=0;i<d.length&&d[i]!==l;i++)t+=d[i].colSpan,o(d[i]);var s=a;-1!==l.className.indexOf(a)&&(s=r),o(l,s);var N=c.tBodies[0],p=[].slice.call(N.cloneNode(!0).rows,0),f=s==r;p.sort(function(e,a){if(e=e.cells[t].innerText,a=a.cells[t].innerText,f){var r=e;e=a,a=r}return isNaN(e-a)?e.localeCompare(a):e-a});var v=N.cloneNode();for(i in p)v.appendChild(p[i]);c.replaceChild(v,N)}}});";
+
+        public static readonly string JsAnchor =
+            "function offsetAnchor() {\r\n        if(location.hash.length !== 0) {\r\n          window.scrollTo(window.scrollX, window.scrollY - document.getElementById(\'header\').clientHeight);\r\n        }\r\n      }\r\n      window.addEventListener(\"hashchange\", offsetAnchor);\r\n      window.setTimeout(offsetAnchor, 1);";
     }
 
     public class BdatFriendlyInfo

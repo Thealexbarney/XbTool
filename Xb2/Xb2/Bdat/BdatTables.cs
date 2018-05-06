@@ -114,10 +114,30 @@ namespace Xb2.Bdat
             ResolveWildcards();
 
             var tablesDict = Tables.ToDictionary(x => x.Name, x => x);
-            foreach (var field in BdatFields.Values)
+
+            int removed = 0;
+            foreach (var fieldKvp in BdatFields.ToArray())
             {
-                tablesDict[field.Table].Members.First(x => x.Name == field.Field).Metadata = field;
+                BdatFieldInfo field = fieldKvp.Value;
+
+                if (!tablesDict.TryGetValue(field.Table, out var table))
+                {
+                    BdatFields.Remove(fieldKvp.Key);
+                    removed++;
+                    continue;
+                }
+
+                var fieldInfo = table.Members.FirstOrDefault(x => x.Name == field.Field);
+                if (fieldInfo == null)
+                {
+                    BdatFields.Remove(fieldKvp.Key);
+                    removed++;
+                    continue;
+                }
+
+                fieldInfo.Metadata = field;
             }
+            if (removed > 0) Console.WriteLine($"Ignoring {removed} invalid relationships.");
         }
 
         public void ReadArrayInfo() => BdatArrays = BdatInfoImport.ReadBdatArrayInfo(Game.ToString().ToLower());
@@ -222,23 +242,26 @@ namespace Xb2.Bdat
             {
                 var st = "^" + Regex.Escape(field.Value.Field).Replace(@"\*\#", "(.\\d*)").Replace(@"\*", "(.*)") + "$";
                 var regex = new Regex(st);
-                var matches = tablesDict[field.Value.Table].Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
-                foreach (var match in matches)
+                if (tablesDict.TryGetValue(field.Value.Table, out var table))
                 {
-                    var newInfo = field.Value.Clone();
-                    newInfo.Field = match.Value;
-
-                    if (newInfo.RefTable?.Contains('*') == true)
+                    var matches = table.Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
+                    foreach (var match in matches)
                     {
-                        newInfo.RefTable = newInfo.RefTable.Replace("*", match.Groups[1].Value);
+                        var newInfo = field.Value.Clone();
+                        newInfo.Field = match.Value;
 
-                        if (!tablesDict.ContainsKey(newInfo.RefTable))
+                        if (newInfo.RefTable?.Contains('*') == true)
                         {
-                            continue;
-                        }
-                    }
+                            newInfo.RefTable = newInfo.RefTable.Replace("*", match.Groups[1].Value);
 
-                    BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                            if (!tablesDict.ContainsKey(newInfo.RefTable))
+                            {
+                                continue;
+                            }
+                        }
+
+                        BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                    }
                 }
 
                 BdatFields.Remove(field.Key);

@@ -9181,6 +9181,7 @@ namespace Xb2.Serialization
             {
                 item._DefWpnAcce = tables.ITM_PcEquip.GetItemOrNull(item.DefWpnAcce);
                 item._driverID = tables.CHR_Dr.GetItemOrNull(item.driverID);
+                item._DriverWpn = tables.ITM_PcWpnIr.GetItemOrNull(item.DriverWpn);
                 item._LinkSet = tables.BTL_Bl_KizunaLinkSet.GetItemOrNull(item.LinkSet);
                 item._Type = (IraCharType)item.Type;
             }
@@ -10534,6 +10535,15 @@ namespace Xb2.Serialization
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
+            foreach (FLD_CollectionTable item in tables.FLD_CollectionTable.Items)
+            {
+                item._FSID = tables.FLD_FieldSkillList.GetItemOrNull(item.FSID);
+                item._itm1ID = tables.GetItem(item.itm1ID);
+                item._itm2ID = tables.GetItem(item.itm2ID);
+                item._itm3ID = tables.GetItem(item.itm3ID);
+                item._itm4ID = tables.GetItem(item.itm4ID);
+            }
+
             foreach (FLD_ConditionAchievement item in tables.FLD_ConditionAchievement.Items)
             {
                 item._AchievementSetID = tables.FLD_AchievementSet.GetItemOrNull(item.AchievementSetID);
@@ -11209,6 +11219,19 @@ namespace Xb2.Serialization
             foreach (FLD_WeatherInfo item in tables.FLD_WeatherInfo.Items)
             {
                 item._msg = tables.fld_mapinfo.GetItemOrNull(item.msg);
+            }
+
+            foreach (IRA_Party item in tables.IRA_Party.Items)
+            {
+                item._blade11 = tables.CHR_Dr.GetItemOrNull(item.blade11);
+                item._blade12 = tables.CHR_Dr.GetItemOrNull(item.blade12);
+                item._blade21 = tables.CHR_Dr.GetItemOrNull(item.blade21);
+                item._blade22 = tables.CHR_Dr.GetItemOrNull(item.blade22);
+                item._blade31 = tables.CHR_Dr.GetItemOrNull(item.blade31);
+                item._blade32 = tables.CHR_Dr.GetItemOrNull(item.blade32);
+                item._driver11 = tables.CHR_Dr.GetItemOrNull(item.driver11);
+                item._driver21 = tables.CHR_Dr.GetItemOrNull(item.driver21);
+                item._driver31 = tables.CHR_Dr.GetItemOrNull(item.driver31);
             }
 
             foreach (ITM_BoosterList item in tables.ITM_BoosterList.Items)
@@ -12778,6 +12801,11 @@ namespace Xb2.Serialization
             foreach (MNU_Name item in tables.MNU_MsgSelect.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgTrustRank.Items)
+            {
+                item._name = tables.menu_st_congeniality.GetItemOrNull(item.name);
             }
 
             foreach (MNU_Name item in tables.MNU_MsgUniteBonus.Items)
