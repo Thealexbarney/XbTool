@@ -143,6 +143,12 @@ unsigned long BulletAngle : 8;
 0xFFFFFFFFFFE007FFLL | ((HitEff & 0x3FF) << 11) : 10
 0xFFFFF000FFFFFFFFLL | ((Distance & 0xFFF) << 32) : 12
 
+Arts hit damage ratio
+Add up all the values in DmgRt* to get total_ratio
+DmgRt of 255 = no damage
+hit_ratio = DmgRt# / total_ratio
+If additional values are set: hit_ratio = hit_ratio / LoopNum / BulletNum / (BulletId->AddAtkNum + 1)
+
 Challenge mode:
 Each stage has 3 levels of progressive rewards. A certain amount of Treasure is needed to recieve each stage.
 

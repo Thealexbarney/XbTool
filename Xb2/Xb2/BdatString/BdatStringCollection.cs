@@ -91,7 +91,7 @@ namespace Xb2.BdatString
         }
 
         public bool Resolved { get; set; }
-        public object Value { get; }
+        public object Value { get; set; }
         public object Display { get; set; }
         public BdatStringItem Parent { get; }
         public BdatMember Member { get; }

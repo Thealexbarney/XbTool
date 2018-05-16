@@ -204,6 +204,55 @@ namespace Xb2.Types
         Type12
     }
 
+    public enum ReactType
+    {
+        Break = 1,
+        Topple,
+        Launch,
+        Smash,
+        KnockbackLv1,
+        KnockbackLv2,
+        KnockbackLv3,
+        KnockbackLv4,
+        KnockbackLv5,
+        BlowdownLv1,
+        BlowdownLv2,
+        BlowdownLv3,
+        BlowdownLv4,
+        BlowdownLv5,
+        React15,
+        React16,
+        React17,
+        React18,
+        React19,
+        React20,
+        React21,
+        React22,
+        React23,
+        React24,
+        React25,
+        React26,
+        React27,
+        React28,
+        React29,
+        React30,
+        React31,
+        React32,
+        React33,
+        Reduce_Blade_Combo__Attack_Combo_Element,
+        Random_Element_Change,
+        React36,
+        React37,
+        React38,
+        React39,
+        React40,
+        React41,
+        React42,
+        React43,
+        React44,
+        React45
+    }
+
     public enum ArtRangeType
     {
         OneTarget = 0,
@@ -367,6 +416,14 @@ namespace Xb2.Types
         Item63,
         Holofigure,
         Schematic
+    }
+
+    public enum CommonBladeType
+    {
+        Male = 1,
+        Female,
+        Brute,
+        Animal
     }
 
     public enum IraCharType

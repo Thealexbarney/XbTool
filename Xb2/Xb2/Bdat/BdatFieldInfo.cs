@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Xb2.Bdat
 {
@@ -17,6 +20,7 @@ namespace Xb2.Bdat
         public string RefField { get; set; }
         public int Adjust { get; set; }
         public Type EnumType { get; set; }
+        public string EnumTypeString { get; set; }
 
         public BdatFieldInfo Clone() => (BdatFieldInfo)MemberwiseClone();
         private string DebugString => $"Type: {Type} Table: {Table} Member: {Field}";
@@ -58,95 +62,30 @@ namespace Xb2.Bdat
     {
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
-            var info = new Dictionary<(string table, string member), BdatFieldInfo>();
-            if (!File.Exists($"{prefix}_fieldInfo.csv")) return info;
-
-            using (var stream = new FileStream($"{prefix}_fieldInfo.csv", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream($"{prefix}_fieldInfo.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var reader = new StreamReader(stream))
             {
-                while (!reader.EndOfStream)
+                IEnumerable<BdatFieldInfo> csv = new CsvReader(reader, new Configuration { HeaderValidated = null, MissingFieldFound = null }).GetRecords<BdatFieldInfo>();
+                Dictionary<(string, string), BdatFieldInfo> readBdatFieldInfo = csv.ToDictionary(x => (x.Table, x.Field), x => x);
+
+                foreach (var info in readBdatFieldInfo.Values.Where(x => x.EnumTypeString != null))
                 {
-                    string[] line = reader.ReadLine()?.Split(',');
-                    if (line == null || line.Length < 2) continue;
-                    ReadBdatFieldInfoLine(info, line);
+                    info.EnumType = Type.GetType("Xb2.Types." + info.EnumTypeString);
                 }
+
+                foreach (var info in readBdatFieldInfo.Values.Where(x => x.Type == BdatFieldType.Flag))
+                {
+                    info.RefField = "FLG_" + info.RefField;
+                }
+                return readBdatFieldInfo;
             }
-
-            return info;
-        }
-
-        private static void ReadBdatFieldInfoLine(Dictionary<(string table, string member), BdatFieldInfo> info, string[] line)
-        {
-            int col = 0;
-
-            var fInfo = new BdatFieldInfo
-            {
-                Table = line[col++],
-                Field = line[col++],
-                Type = (BdatFieldType)Enum.Parse(typeof(BdatFieldType), line[col++])
-            };
-
-            switch (fInfo.Type)
-            {
-                case BdatFieldType.Message:
-                    fInfo.RefTable = line[col++];
-                    break;
-                case BdatFieldType.Reference:
-                    fInfo.RefTable = line[col++];
-                    break;
-                case BdatFieldType.Condition:
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.Change:
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.ShopTable:
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.Flag:
-                    fInfo.RefField = "FLG_" + line[col++];
-                    break;
-                case BdatFieldType.Task:
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.PouchBuff:
-                    fInfo.RefTable = "BTL_PouchBuff";
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.Enum:
-                    string type = line[col++];
-                    fInfo.EnumType = Type.GetType("Xb2.Types." + type);
-                    break;
-                case BdatFieldType.Item:
-                    fInfo.RefField = line[col++];
-                    break;
-                case BdatFieldType.Character:
-                case BdatFieldType.Hide:
-                case BdatFieldType.Enhance:
-                case BdatFieldType.WeatherIdMap:
-                case BdatFieldType.Event:
-                case BdatFieldType.EventSetup:
-                case BdatFieldType.QuestFlag:
-                case BdatFieldType.ItemComment:
-                case BdatFieldType.Layer:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (line.Length >= col + 1 && int.TryParse(line[col], out int adjust))
-            {
-                fInfo.Adjust = adjust;
-            }
-
-            info.Add((fInfo.Table, fInfo.Field), fInfo);
         }
 
         public static BdatArrayInfo[] ReadBdatArrayInfo(string prefix)
         {
             var info = new List<BdatArrayInfo>();
             if (!File.Exists($"{prefix}_arrays.csv")) return info.ToArray();
-            
+
             using (var stream = new FileStream($"{prefix}_arrays.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
@@ -177,7 +116,7 @@ namespace Xb2.Bdat
         {
             var display = new Dictionary<string, string>();
             if (!File.Exists($"{prefix}_tableInfo.csv")) return display;
-            
+
             using (var stream = new FileStream($"{prefix}_tableInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {

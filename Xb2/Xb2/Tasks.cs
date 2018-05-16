@@ -153,10 +153,15 @@ namespace Xb2
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
             var tables = GetBdatCollection(options);
-
+            
             Directory.CreateDirectory(options.Output);
             var salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(options.Output, "salvaging.html"), salvaging);
+
+            using (var writer = new StreamWriter(Path.Combine(options.Output, "enemies.csv")))
+            {
+                Enemies.PrintEnemies(tables, writer);
+            }
 
             using (var writer = new StreamWriter(Path.Combine(options.Output, "achievements.csv")))
             {

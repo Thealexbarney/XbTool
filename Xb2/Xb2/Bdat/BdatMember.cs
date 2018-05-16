@@ -17,6 +17,13 @@ namespace Xb2.Bdat
         public int FlagVarIndex { get; }
         public BdatFieldInfo Metadata { get; set; }
 
+        public BdatMember(string name, BdatMemberType type, BdatValueType valType)
+        {
+            Name = name;
+            Type = type;
+            ValType = valType;
+        }
+
         public BdatMember(DataBuffer table, int offset, HashSet<string> usedNames)
         {
             int infoOffset = table.ReadUInt16(offset);

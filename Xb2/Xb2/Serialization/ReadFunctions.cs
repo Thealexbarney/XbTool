@@ -8613,43 +8613,119 @@ namespace Xb2.Serialization
 
             foreach (BTL_Arts_Bl item in tables.BTL_Arts_Bl.Items)
             {
+                item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
+                item._ArtsDeBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsDeBuff);
                 item._ArtsType = (ArtType)item.ArtsType;
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
+                item._BulletID = tables.BTL_Bullet.GetItemOrNull(item.BulletID);
                 item._Caption = tables.btl_arts_bl_ms.GetItemOrNull(item.Caption);
+                item._CmnBlType = (CommonBladeType)item.CmnBlType;
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
                 item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
                 item._Enhance4 = tables.BTL_Enhance.GetItemOrNull(item.Enhance4);
                 item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
                 item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
+                item._HitDirID1 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID1);
+                item._HitDirID10 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID10);
+                item._HitDirID11 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID11);
+                item._HitDirID12 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID12);
+                item._HitDirID13 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID13);
+                item._HitDirID14 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID14);
+                item._HitDirID15 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID15);
+                item._HitDirID16 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID16);
+                item._HitDirID2 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID2);
+                item._HitDirID3 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID3);
+                item._HitDirID4 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID4);
+                item._HitDirID5 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID5);
+                item._HitDirID6 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID6);
+                item._HitDirID7 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID7);
+                item._HitDirID8 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID8);
+                item._HitDirID9 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID9);
                 item._HitEff = tables.BTL_HitEffect.GetItemOrNull(item.HitEff);
                 item._Name = tables.btl_arts_bl_ms.GetItemOrNull(item.Name);
                 item._RangeType = (ArtRangeType)item.RangeType;
+                item._ReAct1 = (ReactType)item.ReAct1;
+                item._ReAct10 = (ReactType)item.ReAct10;
+                item._ReAct11 = (ReactType)item.ReAct11;
+                item._ReAct12 = (ReactType)item.ReAct12;
+                item._ReAct13 = (ReactType)item.ReAct13;
+                item._ReAct14 = (ReactType)item.ReAct14;
+                item._ReAct15 = (ReactType)item.ReAct15;
+                item._ReAct16 = (ReactType)item.ReAct16;
+                item._ReAct2 = (ReactType)item.ReAct2;
+                item._ReAct3 = (ReactType)item.ReAct3;
+                item._ReAct4 = (ReactType)item.ReAct4;
+                item._ReAct5 = (ReactType)item.ReAct5;
+                item._ReAct6 = (ReactType)item.ReAct6;
+                item._ReAct7 = (ReactType)item.ReAct7;
+                item._ReAct8 = (ReactType)item.ReAct8;
+                item._ReAct9 = (ReactType)item.ReAct9;
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
             foreach (BTL_Arts_BlSp item in tables.BTL_Arts_BlSp.Items)
             {
                 item._AddBl = tables.CHR_Bl.GetItemOrNull(item.AddBl);
+                item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
                 item._ArtsType = (ArtType)item.ArtsType;
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._BtnChal1 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal1);
                 item._BtnChal2 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal2);
                 item._BtnChal3 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal3);
                 item._BtnChal6 = tables.MNU_BtnChallenge2.GetItemOrNull(item.BtnChal6);
+                item._BulletID = tables.BTL_Bullet.GetItemOrNull(item.BulletID);
                 item._Caption = tables.btl_arts_blsp_ms.GetItemOrNull(item.Caption);
+                item._CmnBlType = (CommonBladeType)item.CmnBlType;
                 item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
+                item._HitDirID1 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID1);
+                item._HitDirID10 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID10);
+                item._HitDirID11 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID11);
+                item._HitDirID12 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID12);
+                item._HitDirID13 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID13);
+                item._HitDirID14 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID14);
+                item._HitDirID15 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID15);
+                item._HitDirID16 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID16);
+                item._HitDirID2 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID2);
+                item._HitDirID3 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID3);
+                item._HitDirID4 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID4);
+                item._HitDirID5 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID5);
+                item._HitDirID6 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID6);
+                item._HitDirID7 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID7);
+                item._HitDirID8 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID8);
+                item._HitDirID9 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID9);
                 item._HitEff = tables.BTL_HitEffect.GetItemOrNull(item.HitEff);
                 item._Name = tables.btl_arts_blsp_ms.GetItemOrNull(item.Name);
                 item._PC01 = tables.BTL_Arts_BlSp.GetItemOrNull(item.PC01);
                 item._PC02 = tables.BTL_Arts_BlSp.GetItemOrNull(item.PC02);
                 item._PC03 = tables.BTL_Arts_BlSp.GetItemOrNull(item.PC03);
                 item._PC06 = tables.BTL_Arts_BlSp.GetItemOrNull(item.PC06);
+                item._ReAct1 = (ReactType)item.ReAct1;
+                item._ReAct10 = (ReactType)item.ReAct10;
+                item._ReAct11 = (ReactType)item.ReAct11;
+                item._ReAct12 = (ReactType)item.ReAct12;
+                item._ReAct13 = (ReactType)item.ReAct13;
+                item._ReAct14 = (ReactType)item.ReAct14;
+                item._ReAct15 = (ReactType)item.ReAct15;
+                item._ReAct16 = (ReactType)item.ReAct16;
+                item._ReAct2 = (ReactType)item.ReAct2;
+                item._ReAct3 = (ReactType)item.ReAct3;
+                item._ReAct4 = (ReactType)item.ReAct4;
+                item._ReAct5 = (ReactType)item.ReAct5;
+                item._ReAct6 = (ReactType)item.ReAct6;
+                item._ReAct7 = (ReactType)item.ReAct7;
+                item._ReAct8 = (ReactType)item.ReAct8;
+                item._ReAct9 = (ReactType)item.ReAct9;
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
             foreach (BTL_Arts_Dr item in tables.BTL_Arts_Dr.Items)
             {
+                item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
+                item._ArtsDeBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsDeBuff);
                 item._ArtsType = (ArtType)item.ArtsType;
+                item._BulletID = tables.BTL_Bullet.GetItemOrNull(item.BulletID);
                 item._Caption = tables.btl_arts_dr_cap.GetItemOrNull(item.Caption);
                 item._Driver = tables.CHR_Dr.GetItemOrNull(item.Driver);
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
@@ -8658,10 +8734,42 @@ namespace Xb2.Serialization
                 item._Enhance4 = tables.BTL_Enhance.GetItemOrNull(item.Enhance4);
                 item._Enhance5 = tables.BTL_Enhance.GetItemOrNull(item.Enhance5);
                 item._Enhance6 = tables.BTL_Enhance.GetItemOrNull(item.Enhance6);
+                item._HitDirID1 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID1);
+                item._HitDirID10 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID10);
+                item._HitDirID11 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID11);
+                item._HitDirID12 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID12);
+                item._HitDirID13 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID13);
+                item._HitDirID14 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID14);
+                item._HitDirID15 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID15);
+                item._HitDirID16 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID16);
+                item._HitDirID2 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID2);
+                item._HitDirID3 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID3);
+                item._HitDirID4 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID4);
+                item._HitDirID5 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID5);
+                item._HitDirID6 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID6);
+                item._HitDirID7 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID7);
+                item._HitDirID8 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID8);
+                item._HitDirID9 = tables.BTL_HitDirection.GetItemOrNull(item.HitDirID9);
                 item._HitEff = tables.BTL_HitEffect.GetItemOrNull(item.HitEff);
                 item._Name = tables.btl_arts_dr_ms.GetItemOrNull(item.Name);
                 item._NextArts = tables.BTL_Arts_Dr.GetItemOrNull(item.NextArts);
                 item._RangeType = (ArtRangeType)item.RangeType;
+                item._ReAct1 = (ReactType)item.ReAct1;
+                item._ReAct10 = (ReactType)item.ReAct10;
+                item._ReAct11 = (ReactType)item.ReAct11;
+                item._ReAct12 = (ReactType)item.ReAct12;
+                item._ReAct13 = (ReactType)item.ReAct13;
+                item._ReAct14 = (ReactType)item.ReAct14;
+                item._ReAct15 = (ReactType)item.ReAct15;
+                item._ReAct16 = (ReactType)item.ReAct16;
+                item._ReAct2 = (ReactType)item.ReAct2;
+                item._ReAct3 = (ReactType)item.ReAct3;
+                item._ReAct4 = (ReactType)item.ReAct4;
+                item._ReAct5 = (ReactType)item.ReAct5;
+                item._ReAct6 = (ReactType)item.ReAct6;
+                item._ReAct7 = (ReactType)item.ReAct7;
+                item._ReAct8 = (ReactType)item.ReAct8;
+                item._ReAct9 = (ReactType)item.ReAct9;
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
@@ -8670,12 +8778,32 @@ namespace Xb2.Serialization
                 item._ArtsBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsBuff);
                 item._ArtsDeBuff = tables.BTL_Buff.GetItemOrNull(item.ArtsDeBuff);
                 item._ArtsType = (ArtType)item.ArtsType;
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
+                item._BulletID = tables.BTL_Bullet.GetItemOrNull(item.BulletID);
                 item._Enhance = tables.BTL_Enhance.GetItemOrNull(item.Enhance);
                 item._Name = tables.btl_arts_en_ms.GetItemOrNull(item.Name);
+                item._ReAct1 = (ReactType)item.ReAct1;
+                item._ReAct10 = (ReactType)item.ReAct10;
+                item._ReAct11 = (ReactType)item.ReAct11;
+                item._ReAct12 = (ReactType)item.ReAct12;
+                item._ReAct13 = (ReactType)item.ReAct13;
+                item._ReAct14 = (ReactType)item.ReAct14;
+                item._ReAct15 = (ReactType)item.ReAct15;
+                item._ReAct16 = (ReactType)item.ReAct16;
+                item._ReAct2 = (ReactType)item.ReAct2;
+                item._ReAct3 = (ReactType)item.ReAct3;
+                item._ReAct4 = (ReactType)item.ReAct4;
+                item._ReAct5 = (ReactType)item.ReAct5;
+                item._ReAct6 = (ReactType)item.ReAct6;
+                item._ReAct7 = (ReactType)item.ReAct7;
+                item._ReAct8 = (ReactType)item.ReAct8;
+                item._ReAct9 = (ReactType)item.ReAct9;
+                item._Summon = tables.BTL_Summon.GetItemOrNull(item.Summon);
             }
 
             foreach (BTL_Aura item in tables.BTL_Aura.Items)
             {
+                item._ChangeAtr = tables.MNU_Msg_Attr.GetItemOrNull(item.ChangeAtr + 1);
                 item._Enhance1 = tables.BTL_Enhance.GetItemOrNull(item.Enhance1);
                 item._Enhance2 = tables.BTL_Enhance.GetItemOrNull(item.Enhance2);
                 item._Enhance3 = tables.BTL_Enhance.GetItemOrNull(item.Enhance3);
@@ -8846,6 +8974,22 @@ namespace Xb2.Serialization
                 item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Name = tables.btl_elementalcombo_ms.GetItemOrNull(item.Name);
                 item._PreCombo = tables.BTL_ElementalCombo.GetItemOrNull(item.PreCombo);
+                item._ReAct1 = (ReactType)item.ReAct1;
+                item._ReAct10 = (ReactType)item.ReAct10;
+                item._ReAct11 = (ReactType)item.ReAct11;
+                item._ReAct12 = (ReactType)item.ReAct12;
+                item._ReAct13 = (ReactType)item.ReAct13;
+                item._ReAct14 = (ReactType)item.ReAct14;
+                item._ReAct15 = (ReactType)item.ReAct15;
+                item._ReAct16 = (ReactType)item.ReAct16;
+                item._ReAct2 = (ReactType)item.ReAct2;
+                item._ReAct3 = (ReactType)item.ReAct3;
+                item._ReAct4 = (ReactType)item.ReAct4;
+                item._ReAct5 = (ReactType)item.ReAct5;
+                item._ReAct6 = (ReactType)item.ReAct6;
+                item._ReAct7 = (ReactType)item.ReAct7;
+                item._ReAct8 = (ReactType)item.ReAct8;
+                item._ReAct9 = (ReactType)item.ReAct9;
                 item._Reaction = tables.BTL_Reaction.GetItemOrNull(item.Reaction);
             }
 
@@ -8996,6 +9140,12 @@ namespace Xb2.Serialization
             foreach (BTL_Skill_Dr_Table item in tables.BTL_Skill_Dr_Table19.Items)
             {
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
+            }
+
+            foreach (BTL_Wpn_En item in tables.BTL_Wpn_En.Items)
+            {
+                item._RscL = tables.RSC_EnWpn.GetItemOrNull(item.RscL);
+                item._RscR = tables.RSC_EnWpn.GetItemOrNull(item.RscR);
             }
 
             foreach (CHR_Bl item in tables.CHR_Bl.Items)
@@ -9173,6 +9323,7 @@ namespace Xb2.Serialization
                 item._ArtsNum7 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum7);
                 item._ArtsNum8 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum8);
                 item._ArtsNum9 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum9);
+                item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Aura = tables.BTL_Aura.GetItemOrNull(item.Aura);
                 item._ResourceID = tables.RSC_En.GetItemOrNull(item.ResourceID);
             }
@@ -10642,6 +10793,7 @@ namespace Xb2.Serialization
 
             foreach (FLD_FieldSkillList item in tables.FLD_FieldSkillList.Items)
             {
+                item._Attirbute = tables.MNU_Msg_Attr.GetItemOrNull(item.Attirbute + 1);
                 item._Caption = tables.fld_fieldskilltxt.GetItemOrNull(item.Caption);
                 item._Category = (FieldSkillCategory)item.Category;
                 item._Name = tables.fld_fieldskilltxt.GetItemOrNull(item.Name);
@@ -12736,6 +12888,16 @@ namespace Xb2.Serialization
                 item._name = tables.menu_rarity.GetItemOrNull(item.name);
             }
 
+            foreach (MNU_Name item in tables.MNU_Msg_Reaction.Items)
+            {
+                item._name = tables.menu_enemy_reaction.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_ReactionAll.Items)
+            {
+                item._name = tables.menu_enemy_reaction.GetItemOrNull(item.name);
+            }
+
             foreach (MNU_Msg_SubContents item in tables.MNU_Msg_SubContents.Items)
             {
                 item._caption = tables.MNU_Msg_MenuDescription.GetItemOrNull(item.caption);
@@ -12761,6 +12923,11 @@ namespace Xb2.Serialization
             foreach (MNU_Name item in tables.MNU_MsgDrStatusIndex.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgEnbFamily.Items)
+            {
+                item._name = tables.menu_enemy_category.GetItemOrNull(item.name);
             }
 
             foreach (MNU_Name item in tables.MNU_MsgEvthCast.Items)
@@ -12796,6 +12963,11 @@ namespace Xb2.Serialization
             foreach (MNU_MsgPopupTitle item in tables.MNU_MsgPopupTitle.Items)
             {
                 item._name = tables.menu_popup_title_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgPouch.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
 
             foreach (MNU_Name item in tables.MNU_MsgSelect.Items)
@@ -13569,6 +13741,12 @@ namespace Xb2.Serialization
                 item._ConditionB = tables.FLD_ConditionList.GetItemOrNull(item.ConditionB);
                 item._ConditionC = tables.FLD_ConditionList.GetItemOrNull(item.ConditionC);
                 item._ConditionD = tables.FLD_ConditionList.GetItemOrNull(item.ConditionD);
+            }
+
+            foreach (RSC_En item in tables.RSC_En.Items)
+            {
+                item._TypeFamily = tables.MNU_MsgEnbFamily.GetItemOrNull(item.TypeFamily + 1);
+                item._TypeGenus = tables.RSC_EnGenus.GetItemOrNull(item.TypeGenus);
             }
 
             foreach (RSC_EnGenus item in tables.RSC_EnGenus.Items)

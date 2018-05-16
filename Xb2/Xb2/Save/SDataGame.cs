@@ -6,6 +6,7 @@
         public ushort IsTimeStop;
         public SDataDriver[] Drivers = new SDataDriver[16];
         public SDataBlade[] Blades = new SDataBlade[422];
+        public short[] CommonBladeIds = new short[192];
 
         public SDataGame(DataBuffer save)
         {
@@ -20,6 +21,12 @@
             for (int i = 0; i < Blades.Length; i++)
             {
                 Blades[i] = new SDataBlade(save.Slice(0x5a2c + i * 0x8a4, 0x8a4));
+            }
+
+            save.Position = 0x1099a8;
+            for (int i = 0; i < CommonBladeIds.Length; i++)
+            {
+                CommonBladeIds[i] = save.ReadInt16();
             }
         }
     }

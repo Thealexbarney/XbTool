@@ -45,4 +45,18 @@
             Year = (int)(time >> 51);
         }
     }
+
+    public class ElapseTime
+    {
+        public int Second;
+        public int Minute;
+        public int Hour;
+
+        public ElapseTime(uint time)
+        {
+            Second = (int)(time & ((1u << 6) - 1));
+            Minute = (int)(time >> 6 & ((1u << 6) - 1));
+            Hour = (int)(time >> 12);
+        }
+    }
 }

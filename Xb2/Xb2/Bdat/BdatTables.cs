@@ -380,7 +380,7 @@ namespace Xb2.Bdat
         }
 
         private static readonly BdatFieldType[] ReadableFieldTypes =
-          {
+        {
             BdatFieldType.Reference,
             BdatFieldType.Message,
             BdatFieldType.Item,

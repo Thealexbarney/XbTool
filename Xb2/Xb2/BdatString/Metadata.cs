@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xb2.Bdat;
@@ -10,6 +11,7 @@ namespace Xb2.BdatString
     {
         public static void ApplyMetadata(BdatStringCollection tables)
         {
+            SetXb2EffectCaptions(tables);
             foreach ((string table, string member) reference in tables.Bdats.BdatFields.Keys)
             {
                 BdatStringTable table = tables[reference.table];
@@ -246,6 +248,48 @@ namespace Xb2.BdatString
             }
 
             return sb.ToString();
+        }
+
+        public static void SetXb2EffectCaptions(BdatStringCollection tables)
+        {
+            if (!tables.Tables.ContainsKey("BTL_Enhance") || !tables.Tables.ContainsKey("BTL_EnhanceEff")) return;
+
+            BdatStringTable enhances = tables["BTL_Enhance"];
+            BdatStringTable effects = tables["BTL_EnhanceEff"];
+
+            List<BdatMember> newMembers = effects.Members.ToList();
+            var captionMember = new BdatMember("Caption", BdatMemberType.Scalar, BdatValueType.String);
+            newMembers.Add(captionMember);
+            effects.Members = newMembers.ToArray();
+
+            foreach (var effect in effects.Items)
+            {
+                effect.AddMember("Caption", new BdatStringValue("0", effect, captionMember));
+                effect["Caption"].Display = "";
+            }
+
+            foreach (var enhance in enhances.Items)
+            {
+                int captionId = int.Parse(enhance["Caption"].ValueString);
+                if (captionId == 0) continue;
+
+                var effect = effects[int.Parse(enhance["EnhanceEffect"].ValueString)]["Caption"];
+
+                string caption = tables["btl_enhance_cap"][captionId]?["name"].ValueString;
+
+                effect.Value = captionId.ToString();
+                effect.Display = caption;
+            }
+
+            foreach (var enhance in enhances.Items)
+            {
+                var effectCaptionId = int.Parse(enhance["EnhanceEffect"].ValueString);
+                int enhanceCaptionId = int.Parse(enhance["Caption"].ValueString);
+                if (enhanceCaptionId != 0 || effectCaptionId == 0) continue;
+
+                var effect = effects[effectCaptionId]["Caption"];
+                enhance["Caption"].Value = effect.ValueString;
+            }
         }
     }
 }

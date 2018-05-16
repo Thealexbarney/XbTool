@@ -390,18 +390,55 @@ namespace Xb2.Types
         public bool Return;
         public bool Shoot;
         public bool HitfD;
+        public BTL_Buff _ArtsBuff;
+        public BTL_Buff _ArtsDeBuff;
         public ArtType _ArtsType;
+        public MNU_Name _Atr;
         public MNU_BtnChallenge2 _BtnChal1;
+        public BTL_Bullet _BulletID;
         public Message _Caption;
+        public CommonBladeType _CmnBlType;
         public BTL_Enhance _Enhance1;
         public BTL_Enhance _Enhance2;
         public BTL_Enhance _Enhance3;
         public BTL_Enhance _Enhance4;
         public BTL_Enhance _Enhance5;
         public BTL_Enhance _Enhance6;
+        public BTL_HitDirection _HitDirID1;
+        public BTL_HitDirection _HitDirID10;
+        public BTL_HitDirection _HitDirID11;
+        public BTL_HitDirection _HitDirID12;
+        public BTL_HitDirection _HitDirID13;
+        public BTL_HitDirection _HitDirID14;
+        public BTL_HitDirection _HitDirID15;
+        public BTL_HitDirection _HitDirID16;
+        public BTL_HitDirection _HitDirID2;
+        public BTL_HitDirection _HitDirID3;
+        public BTL_HitDirection _HitDirID4;
+        public BTL_HitDirection _HitDirID5;
+        public BTL_HitDirection _HitDirID6;
+        public BTL_HitDirection _HitDirID7;
+        public BTL_HitDirection _HitDirID8;
+        public BTL_HitDirection _HitDirID9;
         public BTL_HitEffect _HitEff;
         public Message _Name;
         public ArtRangeType _RangeType;
+        public ReactType _ReAct1;
+        public ReactType _ReAct10;
+        public ReactType _ReAct11;
+        public ReactType _ReAct12;
+        public ReactType _ReAct13;
+        public ReactType _ReAct14;
+        public ReactType _ReAct15;
+        public ReactType _ReAct16;
+        public ReactType _ReAct2;
+        public ReactType _ReAct3;
+        public ReactType _ReAct4;
+        public ReactType _ReAct5;
+        public ReactType _ReAct6;
+        public ReactType _ReAct7;
+        public ReactType _ReAct8;
+        public ReactType _ReAct9;
         public ITM_PcWpnType _WpnType;
     }
 
@@ -575,19 +612,55 @@ namespace Xb2.Types
         public bool Shoot;
         public bool HitfD;
         public CHR_Bl _AddBl;
+        public BTL_Buff _ArtsBuff;
         public ArtType _ArtsType;
+        public MNU_Name _Atr;
         public MNU_BtnChallenge2 _BtnChal1;
         public MNU_BtnChallenge2 _BtnChal2;
         public MNU_BtnChallenge2 _BtnChal3;
         public MNU_BtnChallenge2 _BtnChal6;
+        public BTL_Bullet _BulletID;
         public Message _Caption;
+        public CommonBladeType _CmnBlType;
         public BTL_Enhance _Enhance;
+        public BTL_HitDirection _HitDirID1;
+        public BTL_HitDirection _HitDirID10;
+        public BTL_HitDirection _HitDirID11;
+        public BTL_HitDirection _HitDirID12;
+        public BTL_HitDirection _HitDirID13;
+        public BTL_HitDirection _HitDirID14;
+        public BTL_HitDirection _HitDirID15;
+        public BTL_HitDirection _HitDirID16;
+        public BTL_HitDirection _HitDirID2;
+        public BTL_HitDirection _HitDirID3;
+        public BTL_HitDirection _HitDirID4;
+        public BTL_HitDirection _HitDirID5;
+        public BTL_HitDirection _HitDirID6;
+        public BTL_HitDirection _HitDirID7;
+        public BTL_HitDirection _HitDirID8;
+        public BTL_HitDirection _HitDirID9;
         public BTL_HitEffect _HitEff;
         public Message _Name;
         public BTL_Arts_BlSp _PC01;
         public BTL_Arts_BlSp _PC02;
         public BTL_Arts_BlSp _PC03;
         public BTL_Arts_BlSp _PC06;
+        public ReactType _ReAct1;
+        public ReactType _ReAct10;
+        public ReactType _ReAct11;
+        public ReactType _ReAct12;
+        public ReactType _ReAct13;
+        public ReactType _ReAct14;
+        public ReactType _ReAct15;
+        public ReactType _ReAct16;
+        public ReactType _ReAct2;
+        public ReactType _ReAct3;
+        public ReactType _ReAct4;
+        public ReactType _ReAct5;
+        public ReactType _ReAct6;
+        public ReactType _ReAct7;
+        public ReactType _ReAct8;
+        public ReactType _ReAct9;
         public ITM_PcWpnType _WpnType;
     }
 
@@ -796,7 +869,10 @@ namespace Xb2.Types
         public bool SArmor1;
         public bool SArmor2;
         public bool NoColli;
+        public BTL_Buff _ArtsBuff;
+        public BTL_Buff _ArtsDeBuff;
         public ArtType _ArtsType;
+        public BTL_Bullet _BulletID;
         public Message _Caption;
         public CHR_Dr _Driver;
         public BTL_Enhance _Enhance1;
@@ -805,10 +881,42 @@ namespace Xb2.Types
         public BTL_Enhance _Enhance4;
         public BTL_Enhance _Enhance5;
         public BTL_Enhance _Enhance6;
+        public BTL_HitDirection _HitDirID1;
+        public BTL_HitDirection _HitDirID10;
+        public BTL_HitDirection _HitDirID11;
+        public BTL_HitDirection _HitDirID12;
+        public BTL_HitDirection _HitDirID13;
+        public BTL_HitDirection _HitDirID14;
+        public BTL_HitDirection _HitDirID15;
+        public BTL_HitDirection _HitDirID16;
+        public BTL_HitDirection _HitDirID2;
+        public BTL_HitDirection _HitDirID3;
+        public BTL_HitDirection _HitDirID4;
+        public BTL_HitDirection _HitDirID5;
+        public BTL_HitDirection _HitDirID6;
+        public BTL_HitDirection _HitDirID7;
+        public BTL_HitDirection _HitDirID8;
+        public BTL_HitDirection _HitDirID9;
         public BTL_HitEffect _HitEff;
         public Message _Name;
         public BTL_Arts_Dr _NextArts;
         public ArtRangeType _RangeType;
+        public ReactType _ReAct1;
+        public ReactType _ReAct10;
+        public ReactType _ReAct11;
+        public ReactType _ReAct12;
+        public ReactType _ReAct13;
+        public ReactType _ReAct14;
+        public ReactType _ReAct15;
+        public ReactType _ReAct16;
+        public ReactType _ReAct2;
+        public ReactType _ReAct3;
+        public ReactType _ReAct4;
+        public ReactType _ReAct5;
+        public ReactType _ReAct6;
+        public ReactType _ReAct7;
+        public ReactType _ReAct8;
+        public ReactType _ReAct9;
         public ITM_PcWpnType _WpnType;
     }
 
@@ -939,8 +1047,27 @@ namespace Xb2.Types
         public BTL_Buff _ArtsBuff;
         public BTL_Buff _ArtsDeBuff;
         public ArtType _ArtsType;
+        public MNU_Name _Atr;
+        public BTL_Bullet _BulletID;
         public BTL_Enhance _Enhance;
         public Message _Name;
+        public ReactType _ReAct1;
+        public ReactType _ReAct10;
+        public ReactType _ReAct11;
+        public ReactType _ReAct12;
+        public ReactType _ReAct13;
+        public ReactType _ReAct14;
+        public ReactType _ReAct15;
+        public ReactType _ReAct16;
+        public ReactType _ReAct2;
+        public ReactType _ReAct3;
+        public ReactType _ReAct4;
+        public ReactType _ReAct5;
+        public ReactType _ReAct6;
+        public ReactType _ReAct7;
+        public ReactType _ReAct8;
+        public ReactType _ReAct9;
+        public BTL_Summon _Summon;
     }
 
     [BdatType]
@@ -977,6 +1104,7 @@ namespace Xb2.Types
         public ushort Enhance2;
         public ushort Enhance3;
         public byte ChangeAtr;
+        public MNU_Name _ChangeAtr;
         public BTL_Enhance _Enhance1;
         public BTL_Enhance _Enhance2;
         public BTL_Enhance _Enhance3;
@@ -1707,6 +1835,22 @@ namespace Xb2.Types
         public MNU_Name _Atr;
         public Message _Name;
         public BTL_ElementalCombo _PreCombo;
+        public ReactType _ReAct1;
+        public ReactType _ReAct10;
+        public ReactType _ReAct11;
+        public ReactType _ReAct12;
+        public ReactType _ReAct13;
+        public ReactType _ReAct14;
+        public ReactType _ReAct15;
+        public ReactType _ReAct16;
+        public ReactType _ReAct2;
+        public ReactType _ReAct3;
+        public ReactType _ReAct4;
+        public ReactType _ReAct5;
+        public ReactType _ReAct6;
+        public ReactType _ReAct7;
+        public ReactType _ReAct8;
+        public ReactType _ReAct9;
         public BTL_Reaction _Reaction;
     }
 
@@ -2297,6 +2441,7 @@ namespace Xb2.Types
         public readonly short[] PosA = new short[3];
         public readonly short[] PosB = new short[3];
         public readonly short[] PosC = new short[3];
+        public CHR_EnArrange _EnemyID;
     }
 
     [BdatType]
@@ -2387,6 +2532,8 @@ namespace Xb2.Types
         public byte TypeRange;
         public ushort Damage;
         public byte Stability;
+        public RSC_EnWpn _RscL;
+        public RSC_EnWpn _RscR;
     }
 
     [BdatType]
@@ -2875,6 +3022,7 @@ namespace Xb2.Types
         public BTL_Arts_En _ArtsNum7;
         public BTL_Arts_En _ArtsNum8;
         public BTL_Arts_En _ArtsNum9;
+        public MNU_Name _Atr;
         public BTL_Aura _Aura;
         public RSC_En _ResourceID;
     }
@@ -4353,6 +4501,7 @@ namespace Xb2.Types
         public ushort Icon;
         public ushort VoiceCategory;
         public byte Attirbute;
+        public MNU_Name _Attirbute;
         public Message _Caption;
         public FieldSkillCategory _Category;
         public Message _Name;
@@ -8853,6 +9002,8 @@ namespace Xb2.Types
         public bool WeaponDrawDisp;
         public bool JoinAll;
         public bool DeathMotion;
+        public MNU_Name _TypeFamily;
+        public RSC_EnGenus _TypeGenus;
     }
 
     [BdatType]

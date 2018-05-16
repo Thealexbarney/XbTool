@@ -3,6 +3,7 @@
 // ReSharper disable NotAccessedField.Local
 // ReSharper disable UnusedMember.Local
 
+using System.Linq;
 using Xb2.CreateBlade;
 using Xb2.Types;
 
@@ -16,7 +17,7 @@ namespace Xb2.Save
         public ushort Creator;
         public ushort SetDriver;
         public ushort BladeId;
-        public uint BornTime;
+        public ElapseTime BornTime;
         public SDataIdea IdeaLevels;
         public int field_2C;
         public char field_30;
@@ -66,7 +67,7 @@ namespace Xb2.Save
             Creator = save.ReadUInt16();
             SetDriver = save.ReadUInt16();
             BladeId = save.ReadUInt16();
-            BornTime = save.ReadUInt32();
+            BornTime = new ElapseTime(save.ReadUInt32());
             IdeaLevels = new SDataIdea(save);
 
             TrustPoints = save.ReadUInt32(0x34, true);
@@ -135,6 +136,39 @@ namespace Xb2.Save
             }
 
             return tables.bld_bladename.GetItemOrNull(CommonNameId)?.name ?? Name;
+        }
+
+        public string GetFieldSkillLevel(string name, BdatCollection tables)
+        {
+            FLD_FieldSkillList a = tables.FLD_FieldSkillList.First(x => x?._Name?.name == name);
+            foreach (var skill in FieldSkills)
+            {
+                if (skill.Id == a.Id) return skill.MaxLevel.ToString();
+            }
+
+            return "";
+        }
+
+        public string GetBattleSkillLevel(string name, BdatCollection tables)
+        {
+            BTL_Skill_Bl a = tables.BTL_Skill_Bl.First(x => x?._Name?.name == name);
+            foreach (var skill in BattleSkills)
+            {
+                if (skill.Id == a.Id) return skill.MaxLevel.ToString();
+            }
+
+            return "";
+        }
+
+        public (string type, int percent) GetStatMod(BdatCollection tables)
+        {
+            if (HpMaxRev != 0) return ("Max HP", HpMaxRev);
+            if (StrengthRev != 0) return ("Strength", StrengthRev);
+            if (PowEtherRev != 0) return ("Ether", PowEtherRev);
+            if (DexRev != 0) return ("Dexterity", DexRev);
+            if (AgilityRev != 0) return ("Agility", AgilityRev);
+            if (LuckRev != 0) return ("Luck", LuckRev);
+            return ("None", 0);
         }
     }
 

@@ -122,14 +122,6 @@ namespace Xb2.CreateBlade
         Healer
     }
 
-    public enum CommonBladeType
-    {
-        Male = 1,
-        Female,
-        Brute,
-        Animal
-    }
-
     public enum StatusType
     {
         MaxHP,
