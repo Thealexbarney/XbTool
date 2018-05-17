@@ -60,19 +60,6 @@ namespace Xb2.CreateBlade
         Justice
     }
 
-    public enum BladeAttribute
-    {
-        None = 0,
-        Fire,
-        Water,
-        Wind,
-        Earth,
-        Electric,
-        Ice,
-        Light,
-        Dark
-    }
-
     public enum BladeWeapon
     {
         AegisSword = 1,

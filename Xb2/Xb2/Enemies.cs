@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using Xb2.CreateBlade;
 using Xb2.Types;
 
 namespace Xb2
@@ -49,8 +48,6 @@ namespace Xb2
                 en.Gold = (int)(enemy.GoldRev * 0.01 * tables.BTL_Grow[lv].EnemyGold);
                 en.Wp = (int)(enemy.WPRev * 0.01 * tables.BTL_Grow[lv].EnemyWP);
                 en.Sp = (int)(enemy.SPRev * 0.01 * tables.BTL_Grow[lv].EnemySP);
-
-                //en.Enhance1 = enemy._EnhanceID1.
             }
 
             return enemies;

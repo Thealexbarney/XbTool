@@ -426,6 +426,19 @@ namespace Xb2.Types
         Animal
     }
 
+    public enum BladeAttribute
+    {
+        None = 0,
+        Fire,
+        Water,
+        Wind,
+        Earth,
+        Electric,
+        Ice,
+        Light,
+        Dark
+    }
+
     public enum IraCharType
     {
         Driver,

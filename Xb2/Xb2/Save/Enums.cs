@@ -4,6 +4,6 @@
     {
         Unused = 0,
         Party = 1,
-        MercenaryTeam = 2,
+        MercenaryTeam = 2
     }
 }

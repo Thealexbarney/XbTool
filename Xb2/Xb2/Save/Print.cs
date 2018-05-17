@@ -56,8 +56,8 @@ namespace Xb2.Save
                 if (sk.Id == 0) continue;
                 sb.AppendLine($"Special {i + 1}: {tables.BTL_Arts_Bl.GetItemOrNull(sk.Id)?._Name.name} {sk.Level}/{sk.MaxLevel}");
             }
-            sb.AppendLine($"Special 4: {tables.BTL_Arts_BlSp.GetItemOrNull(blade.BartExId)?._Name.name}");
-            sb.AppendLine($"Special 4 Mod: {blade.BladeArtsExH}%");
+            sb.AppendLine($"Special 4: {tables.BTL_Arts_BlSp.GetItemOrNull(blade.BArtsEx[0].Id)?._Name.name}");
+            sb.AppendLine($"Special 4 Mod: {blade.BArtsEx[0].DamageRev}%");
 
 
             sb.AppendLine();
@@ -113,7 +113,7 @@ namespace Xb2.Save
             sb.Append($"{tables.CHR_Dr.GetItemOrNull(blade.Creator)?._Name.name},");
             sb.Append($"{blade.Attribute},");
             sb.Append($"{tables.ITM_PcWpnType.GetItemOrNull(blade.WeaponType)?._Name.name},");
-            var mod = blade.GetStatMod(tables);
+            var mod = blade.GetStatMod();
             sb.Append($"{mod.type},");
             sb.Append($"{mod.percent},");
             sb.Append($"{tables.MNU_MsgTrustRank.GetItemOrNull(blade.TrustRank)?._name.name},");

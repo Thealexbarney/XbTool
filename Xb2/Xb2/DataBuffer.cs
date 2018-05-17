@@ -116,6 +116,33 @@ namespace Xb2
             return result;
         }
 
+        public byte[] ReadBytes(int index, int length, bool updatePosition = false)
+        {
+            byte[] result = new byte[length];
+            Array.Copy(File, Start + index, result, 0, length);
+            if (updatePosition) Position = index + length;
+            return result;
+        }
+
+        public string ReadUTF8(int index, int length, bool updatePosition = false)
+        {
+            string result = Encoding.UTF8.GetString(File, Start + index, length);
+            if (updatePosition) Position = index + length;
+            return result;
+        }
+
+        public string ReadUTF8Z(int index, bool updatePosition = false)
+        {
+            int end = index;
+
+            while (File[Start + end] != 0)
+            {
+                end++;
+            }
+
+            return ReadUTF8(index, end - index, updatePosition);
+        }
+
         public byte ReadUInt8() => ReadUInt8(Position, true);
         public sbyte ReadInt8() => ReadInt8(Position, true);
         public ushort ReadUInt16() => ReadUInt16(Position, true);
@@ -125,23 +152,9 @@ namespace Xb2
         public ulong ReadUInt64() => ReadUInt64(Position, true);
         public long ReadInt64() => ReadInt64(Position, true);
         public float ReadSingle() => ReadSingle(Position, true);
-
-        public string ReadUTF8Z(int index)
-        {
-            int end = index;
-
-            while (File[Start + end] != 0)
-            {
-                end++;
-            }
-
-            return ReadUTF8(index, end - index);
-        }
-
-        public string ReadUTF8(int index, int length)
-        {
-            return Encoding.UTF8.GetString(File, Start + index, length);
-        }
+        public byte[] ReadBytes(int length) => ReadBytes(Position, length, true);
+        public string ReadUTF8(int length) => ReadUTF8(Position, length, true);
+        public string ReadUTF8Z() => ReadUTF8Z(Position, true);
     }
 
     public enum Endianness
