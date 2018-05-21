@@ -244,6 +244,8 @@ namespace Xb2
 
             byte[] saveFile = File.ReadAllBytes(options.Input);
             SDataSave saveData = Read.ReadSave(saveFile);
+            var newSave = Write.WriteSave(saveData);
+            File.WriteAllBytes(options.Input + "_new.sav", newSave);
 
             BdatCollection tables = GetBdatCollection(options);
             Print.PrintSave(saveData, tables);

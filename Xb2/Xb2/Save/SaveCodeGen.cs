@@ -14,7 +14,7 @@ namespace Xb2.Save
             var sb = new Indenter();
             bool first = true;
 
-            sb.AppendLine("// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global");
+            sb.AppendLine("// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach");
             sb.AppendLine("");
             sb.AppendLine("using Xb2.Types;");
             sb.AppendLine();
@@ -58,9 +58,19 @@ namespace Xb2.Save
                             sb.AppendLine($"public {field.DataType} {value.Name};");
                         }
                         break;
+                    case "BitfieldArray":
+                        sb.AppendLine($"public byte[] {field.Name} = new byte[{field.Length}];");
+                        break;
                 }
             }
 
+            CreateReadFunction(type, sb);
+            CreateWriteFunction(type, sb);
+            sb.DecreaseAndAppendLine("}");
+        }
+
+        private static void CreateReadFunction(SaveType type, Indenter sb)
+        {
             sb.AppendLine();
             sb.AppendLine($"public {type.Name}(DataBuffer save)");
             sb.AppendLineAndIncrease("{");
@@ -99,9 +109,16 @@ namespace Xb2.Save
                         int bit = 0;
                         foreach (var value in field.Bitfield)
                         {
-                            sb.AppendLine($"{value.Name} = ({field.DataType})({field.Name} >> {bit} & ((1u << {value.Size}) - 1));");
+                            sb.AppendLine(
+                                $"{value.Name} = ({field.DataType})({field.Name} >> {bit} & ((1u << {value.Size}) - 1));");
                             bit += int.Parse(value.Size);
                         }
+                        break;
+                    case "BitfieldArray":
+                        sb.AppendLine($"Read.ReadBitfieldArray(save, {field.Name}, {field.Length}, {field.Size});");
+                        break;
+                    case "Padding":
+                        sb.AppendLine($"save.Position += {field.Length};");
                         break;
                 }
 
@@ -109,6 +126,65 @@ namespace Xb2.Save
             }
 
             sb.DecreaseAndAppendLine("}");
+        }
+
+        private static void CreateWriteFunction(SaveType type, Indenter sb)
+        {
+            sb.AppendLine();
+            sb.AppendLine("public void WriteSave(DataBuffer save)");
+            sb.AppendLineAndIncrease("{");
+            bool firstField = true;
+            bool prevWasArray = false;
+
+            foreach (var field in type.Fields)
+            {
+                switch (field.Type)
+                {
+                    case "Scalar":
+                        if (prevWasArray) sb.AppendLine();
+                        if (field.DataType == "string")
+                        {
+                            sb.AppendLine(GetWriteValue(field));
+                        }
+                        else
+                        {
+                            sb.AppendLine(GetWriteValue(field));
+                        }
+
+                        prevWasArray = false;
+
+                        break;
+                    case "Array":
+                        if (!firstField) sb.AppendLine();
+                        sb.AppendLine($"for(int i = 0; i < {field.Name}.Length; i++)");
+                        sb.AppendLineAndIncrease("{");
+                        sb.AppendLine($"{GetWriteValue(field, "[i]")}");
+
+                        sb.DecreaseAndAppendLine("}");
+                        prevWasArray = true;
+                        break;
+                    case "Bitfield":
+                        sb.AppendLine($"{field.DataType} {field.Name} = 0;");
+                        int bit = 0;
+                        foreach (var value in field.Bitfield)
+                        {
+                            sb.AppendLine($"{field.Name} |= ({field.DataType})(({value.Name} & ((1u << {value.Size}) - 1)) << {bit});");
+                            bit += int.Parse(value.Size);
+                        }
+
+                        sb.AppendLine(GetWriteValue(field));
+                        break;
+                    case "BitfieldArray":
+                        sb.AppendLine($"Write.WriteBitfieldArray(save, {field.Name}, {field.Length}, {field.Size});");
+                        break;
+                    case "Padding":
+                        sb.AppendLine($"save.Position += {field.Length};");
+                        break;
+                }
+
+                firstField = false;
+            }
+
             sb.DecreaseAndAppendLine("}");
         }
 
@@ -149,6 +225,50 @@ namespace Xb2.Save
                     break;
                 default:
                     result += $"new {dataType}(save);";
+                    break;
+            }
+
+            return result;
+        }
+
+        public static string GetWriteValue(SaveField field, string append = null)
+        {
+            string result = "";
+            string dataType = field.DataType;
+            string enumCast = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(field.Enum))
+            {
+                dataType = SizeToType[field.Size];
+                enumCast = $"({dataType})";
+            }
+
+            switch (dataType)
+            {
+                case "sbyte":
+                case "byte":
+                case "short":
+                case "ushort":
+                case "int":
+                case "uint":
+                case "long":
+                case "ulong":
+                case "float":
+                    var writeFunc = WriteFunctions[dataType];
+                    result += $"save.{writeFunc}({enumCast}{field.Name}{append});";
+                    break;
+                case "bool":
+                    var writeFuncBool = WriteFunctions[SizeToType[field.Length]];
+                    result += $"save.{writeFuncBool}(({SizeToType[field.Length]})({field.Name} ? 1 : 0));";
+                    break;
+                case "string" when !string.IsNullOrWhiteSpace(field.Size):
+                    result += $"save.WriteSizedUTF8({field.Name}, {field.Length});";
+                    break;
+                case "string":
+                    result += $"save.WriteUTF8({field.Name}{append});";
+                    break;
+                default:
+                    result += $"{field.Name}{append}.WriteSave(save);";
                     break;
             }
 
@@ -207,12 +327,25 @@ namespace Xb2.Save
             ["float"] = "ReadSingle"
         };
 
+        private static readonly Dictionary<string, string> WriteFunctions = new Dictionary<string, string>
+        {
+            ["sbyte"] = "WriteInt8",
+            ["byte"] = "WriteUInt8",
+            ["short"] = "WriteInt16",
+            ["ushort"] = "WriteUInt16",
+            ["int"] = "WriteInt32",
+            ["uint"] = "WriteUInt32",
+            ["long"] = "WriteInt64",
+            ["ulong"] = "WriteUInt64",
+            ["float"] = "WriteSingle"
+        };
+
         private static readonly Dictionary<string, string> SizeToType = new Dictionary<string, string>
         {
             ["8"] = "byte",
             ["16"] = "ushort",
             ["32"] = "uint",
-            ["64"] = "ulong",
+            ["64"] = "ulong"
         };
     }
 

@@ -133,9 +133,14 @@ namespace Xb2
 
         public string ReadUTF8Z(int index, bool updatePosition = false)
         {
+            return ReadUTF8ZLen(index, int.MaxValue, updatePosition);
+        }
+
+        public string ReadUTF8ZLen(int index, int maxLength, bool updatePosition = false)
+        {
             int end = index;
 
-            while (File[Start + end] != 0)
+            while (File[Start + end] != 0 && end - index < maxLength)
             {
                 end++;
             }
@@ -155,6 +160,137 @@ namespace Xb2
         public byte[] ReadBytes(int length) => ReadBytes(Position, length, true);
         public string ReadUTF8(int length) => ReadUTF8(Position, length, true);
         public string ReadUTF8Z() => ReadUTF8Z(Position, true);
+        public string ReadUTF8ZLen(int maxLength = int.MaxValue) => ReadUTF8ZLen(Position, maxLength, true);
+
+        public void WriteUInt8(byte value, int index, bool updatePosition = false)
+        {
+            File[Start + index] = value;
+            if (updatePosition) Position = index + sizeof(byte);
+        }
+
+        public void WriteInt8(sbyte value, int index, bool updatePosition = false)
+        {
+            File[Start + index] = (byte)value;
+            if (updatePosition) Position = index + sizeof(sbyte);
+        }
+
+        public void WriteUInt16(ushort value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            if (updatePosition) Position = index + sizeof(ushort);
+        }
+
+        public void WriteInt16(short value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            if (updatePosition) Position = index + sizeof(short);
+        }
+
+        public void WriteUInt32(uint value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            File[index + 2] = (byte)(value >> (8 * 2));
+            File[index + 3] = (byte)(value >> (8 * 3));
+            if (updatePosition) Position = index + sizeof(uint);
+        }
+
+        public void WriteInt32(int value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            File[index + 2] = (byte)(value >> (8 * 2));
+            File[index + 3] = (byte)(value >> (8 * 3));
+            if (updatePosition) Position = index + sizeof(int);
+        }
+
+        public void WriteUInt64(ulong value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            File[index + 2] = (byte)(value >> (8 * 2));
+            File[index + 3] = (byte)(value >> (8 * 3));
+            File[index + 4] = (byte)(value >> (8 * 4));
+            File[index + 5] = (byte)(value >> (8 * 5));
+            File[index + 6] = (byte)(value >> (8 * 6));
+            File[index + 7] = (byte)(value >> (8 * 7));
+            if (updatePosition) Position = index + sizeof(ulong);
+        }
+
+        public void WriteInt64(long value, int index, bool updatePosition = false)
+        {
+            if (Endianness == Endianness.Big) value = Byte.ByteSwap(value);
+            File[index + 0] = (byte)(value >> (8 * 0));
+            File[index + 1] = (byte)(value >> (8 * 1));
+            File[index + 2] = (byte)(value >> (8 * 2));
+            File[index + 3] = (byte)(value >> (8 * 3));
+            File[index + 4] = (byte)(value >> (8 * 4));
+            File[index + 5] = (byte)(value >> (8 * 5));
+            File[index + 6] = (byte)(value >> (8 * 6));
+            File[index + 7] = (byte)(value >> (8 * 7));
+            if (updatePosition) Position = index + sizeof(long);
+        }
+
+        public void WriteSingle(float value, int index, bool updatePosition = false)
+        {
+            byte[] a = BitConverter.GetBytes(value);
+            if (Endianness == Endianness.Big)
+            {
+                byte t = a[0];
+                a[0] = a[3];
+                a[3] = t;
+                t = a[1];
+                a[1] = a[2];
+                a[2] = t;
+            }
+
+            File[index + 0] = a[0];
+            File[index + 1] = a[1];
+            File[index + 2] = a[2];
+            File[index + 3] = a[3];
+            if (updatePosition) Position = index + sizeof(float);
+        }
+
+        public void WriteBytes(byte[] bytes, int index, bool updatePosition = false)
+        {
+            Array.Copy(bytes, 0, File, index, bytes.Length);
+            if (updatePosition) Position = index + bytes.Length;
+        }
+
+        public void WriteUTF8(string value, int index, bool updatePosition = false)
+        {
+            var bytes = Encoding.UTF8.GetBytes(value);
+            Array.Copy(bytes, 0, File, index, bytes.Length);
+            if (updatePosition) Position = index + bytes.Length;
+        }
+
+        public void WriteUTF8Z(string value, int index, bool updatePosition = false)
+        {
+            var bytes = Encoding.UTF8.GetBytes(value);
+            Array.Copy(bytes, 0, File, index, bytes.Length);
+            File[index + bytes.Length] = 0;
+            if (updatePosition) Position = index + bytes.Length + 1;
+        }
+
+        public void WriteUInt8(byte value) => WriteUInt8(value, Position, true);
+        public void WriteInt8(sbyte value) => WriteInt8(value, Position, true);
+        public void WriteUInt16(ushort value) => WriteUInt16(value, Position, true);
+        public void WriteInt16(short value) => WriteInt16(value, Position, true);
+        public void WriteUInt32(uint value) => WriteUInt32(value, Position, true);
+        public void WriteInt32(int value) => WriteInt32(value, Position, true);
+        public void WriteUInt64(ulong value) => WriteUInt64(value, Position, true);
+        public void WriteInt64(long value) => WriteInt64(value, Position, true);
+        public void WriteSingle(float value) => WriteSingle(value, Position, true);
+        public void WriteBytes(byte[] bytes) => WriteBytes(bytes, Position, true);
+        public void WriteUTF8(string value) => WriteUTF8(value, Position, true);
+        public void WriteUTF8Z(string value) => WriteUTF8Z(value, Position, true);
     }
 
     public enum Endianness

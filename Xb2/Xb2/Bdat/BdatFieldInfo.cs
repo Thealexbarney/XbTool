@@ -43,6 +43,7 @@ namespace Xb2.Bdat
         Enum,
         QuestFlag,
         Flag,
+        GameFlag,
         Change,
         EventSetup,
         ItemComment,

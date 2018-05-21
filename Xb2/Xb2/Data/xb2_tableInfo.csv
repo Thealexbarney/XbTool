@@ -9,6 +9,7 @@ Display,FLD_QuestListMercenaries,QuestTitle
 Display,FLD_QuestListMini,QuestTitle
 Display,FLD_QuestListNormal,QuestTitle
 Display,FLD_WeatherInfo,msg
+Display,MNU_FSMenu,text
 Display,MNU_MapGroup,disp_name
 Display,MNU_Stream_WpnImg,filename
 Display,RSC_BgmList,filename

@@ -112,13 +112,17 @@ namespace Xb2.BdatString
                     value.Display = GetPouchBuffCaption(value);
                     break;
                 case BdatFieldType.Flag:
-                    AddFlag(tables, field.RefField, refId, value);
+                    AddFlag(tables, field.RefTable, refId, value);
+                    break;
+                case BdatFieldType.GameFlag:
+                    var flagType = item[field.RefField].ValueString;
+                    AddFlag(tables, flagType + "bit", refId, value);
                     break;
                 case BdatFieldType.Change:
                     var changeType = (ChangeType)int.Parse(item[field.RefField].ValueString);
                     if (changeType == ChangeType.scenario)
                     {
-                        AddFlag(tables, "FLG_Scenario", refId, value);
+                        AddFlag(tables, "Scenario", refId, value);
                     }
                     break;
                 case BdatFieldType.ItemComment:
@@ -178,6 +182,8 @@ namespace Xb2.BdatString
                 value.Display = string.Empty;
                 return;
             }
+
+            flagName = "FLG_" + flagName;
 
             if (!tables.Tables.TryGetValue(flagName, out BdatStringTable flagTable))
             {
