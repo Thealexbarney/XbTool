@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using Xb2.Types;
 
@@ -7,8 +6,9 @@ namespace Xb2.Save
 {
     public static class Print
     {
-        public static void PrintSave(SDataSave save, BdatCollection tables)
+        public static string PrintSave(SDataSave save, BdatCollection tables)
         {
+            var sb = new StringBuilder();
             var delim = new string('=', 25);
 
             var blades = save.GameSave.CommonBladeIds.Where(x => x > 0).Select(x => save.GameSave.Blades[x - 1001])
@@ -18,21 +18,20 @@ namespace Xb2.Save
             {
                 if (blade.BladeId < 1) continue;
 
-                Console.WriteLine();
-                PrintBlade(blade, tables);
-                Console.WriteLine(delim);
+                sb.AppendLine();
+                PrintBlade(blade, tables, sb);
+                sb.AppendLine(delim);
             }
+
+            return sb.ToString();
         }
 
-        public static void PrintBlade(SDataBlade blade, BdatCollection tables)
+        public static void PrintBlade(SDataBlade blade, BdatCollection tables, StringBuilder sb)
         {
-            var sb = new StringBuilder();
-
             sb.AppendLine($"Blade ID: {blade.BladeId}");
             sb.AppendLine($"Name: {blade.GetName(tables)}");
             sb.AppendLine($"Born Time: {blade.BornTime.Hour}:{blade.BornTime.Minute}:{blade.BornTime.Second} ");
             sb.AppendLine($"Driver: {tables.CHR_Dr.GetItemOrNull(blade.Creator)?._Name.name}");
-            //sb.AppendLine($"Type: {blade.CommonBladeType}");
             sb.AppendLine($"Element: {blade.Attribute}");
             sb.AppendLine($"Weapon Type: {tables.ITM_PcWpnType.GetItemOrNull(blade.WeaponType)?._Name.name}");
             sb.AppendLine($"Trust Points: {blade.TrustPoints}");
@@ -101,14 +100,10 @@ namespace Xb2.Save
             sb.Append($"Favorite Item 2: {tables.ITM_FavoriteList.GetItemOrNull(blade.FavoriteItem1)?._Name.name}");
             if (blade.FavoriteItem1 > 0 && !blade.FavoriteItem1Revealed) sb.Append(" (Hidden)");
             sb.AppendLine();
-
-            Console.WriteLine(sb.ToString());
         }
 
-        public static void PrintBladeCsv(SDataBlade blade, BdatCollection tables)
+        public static void PrintBladeCsv(SDataBlade blade, BdatCollection tables, StringBuilder sb)
         {
-            var sb = new StringBuilder();
-
             sb.Append($"{blade.GetName(tables)},");
             sb.Append($"{tables.CHR_Dr.GetItemOrNull(blade.Creator)?._Name.name},");
             sb.Append($"{blade.Attribute},");
@@ -137,8 +132,6 @@ namespace Xb2.Save
             sb.Append($"{blade.GetBattleSkillLevel("Orb Master", tables)},");
             sb.Append($"{blade.GetBattleSkillLevel("Slamdown", tables)},");
             sb.Append($"{blade.GetBattleSkillLevel("Ultimate Combo", tables)},");
-
-            Console.WriteLine(sb.ToString());
         }
     }
 }

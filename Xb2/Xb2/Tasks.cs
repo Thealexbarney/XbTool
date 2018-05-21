@@ -113,7 +113,7 @@ namespace Xb2
             }
 
             string pattern = options.Filter ?? "*";
-            string[] filenames = Directory.GetFiles(options.Input, pattern);
+            string[] filenames = Directory.GetFiles(options.BdatDir, pattern);
             return new BdatTables(filenames, options.Game, readMetadata);
         }
 
@@ -153,7 +153,7 @@ namespace Xb2
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
             var tables = GetBdatCollection(options);
-            
+
             Directory.CreateDirectory(options.Output);
             var salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(options.Output, "salvaging.html"), salvaging);
@@ -241,6 +241,7 @@ namespace Xb2
         private static void ReadSave(Options options)
         {
             if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output file was specified.");
 
             byte[] saveFile = File.ReadAllBytes(options.Input);
             SDataSave saveData = Read.ReadSave(saveFile);
@@ -248,7 +249,8 @@ namespace Xb2
             File.WriteAllBytes(options.Input + "_new.sav", newSave);
 
             BdatCollection tables = GetBdatCollection(options);
-            Print.PrintSave(saveData, tables);
+            string printout = Print.PrintSave(saveData, tables);
+            File.WriteAllText(options.Output, printout);
         }
     }
 }

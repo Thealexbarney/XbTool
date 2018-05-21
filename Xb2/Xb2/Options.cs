@@ -6,6 +6,7 @@
         public Task Task { get; set; }
         public string ArdFilename { get; set; }
         public string ArhFilename { get; set; }
+        public string BdatDir { get; set; }
         public string Input { get; set; }
         public string Output { get; set; }
         public string Filter { get; set; }

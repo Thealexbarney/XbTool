@@ -143,6 +143,15 @@ unsigned long BulletAngle : 8;
 0xFFFFFFFFFFE007FFLL | ((HitEff & 0x3FF) << 11) : 10
 0xFFFFF000FFFFFFFFLL | ((Distance & 0xFFF) << 32) : 12
 
+arts_slot_data
+ArtLevelTypeAndId
+
+Id : 11;
+B : 3;
+C : 4;
+baseLevel : 3;
+effectiveLevel : 3;
+
 Arts hit damage ratio
 Add up all the values in DmgRt* to get total_ratio
 DmgRt of 255 = no damage

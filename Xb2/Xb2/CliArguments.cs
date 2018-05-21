@@ -64,6 +64,17 @@ namespace Xb2
                             options.ArdFilename = args[i + 2];
                             i += 2;
                             continue;
+                        case "B":
+                        case "-Bdats":
+                            if (i + 1 >= args.Length)
+                            {
+                                PrintWithUsage("No argument after -b switch.");
+                                return null;
+                            }
+
+                            options.BdatDir = args[i + 1];
+                            i++;
+                            continue;
                         case "I":
                             if (i + 1 >= args.Length)
                             {
@@ -139,6 +150,7 @@ namespace Xb2
 
             Console.WriteLine("\nOther Options:");
             Console.WriteLine("  -a, --archive <arh> <ard>   Input Xenoblade 2 archive file");
+            Console.WriteLine("  -b, --bdat <path>           Directory to load BDAT files from");
             Console.WriteLine("  -i <path>                   Input file or directory");
             Console.WriteLine("  -o <path>                   Output file or directory");
             Console.WriteLine("  -f, --filter <pattern>      Search pattern to use when reading a directory");
@@ -153,16 +165,16 @@ namespace Xb2
             Console.WriteLine("    DecryptBdat -i <input_dir>");
 
             Console.WriteLine("\n  BdatCodeGen - Generates code for deserializing BDAT files");
-            Console.WriteLine("    BdatCodeGen (-a <archive> | -i <input_dir>) -o <output_dir>");
+            Console.WriteLine("    BdatCodeGen (-a <archive> | -b <bdat_dir>) -o <output_dir>");
 
             Console.WriteLine("\n  Bdat2Html - Generates HTML tables from BDAT files");
-            Console.WriteLine("    Bdat2Html (-a <archive> | -i <input_dir>) -o <output_dir>");
+            Console.WriteLine("    Bdat2Html (-a <archive> | -b <bdat_dir>) -o <output_dir>");
 
             Console.WriteLine("\n  Bdat2Json - Generates JSON files from BDAT files");
-            Console.WriteLine("    Bdat2Json (-a <archive> | -i <input_dir>) -o <output_dir>");
+            Console.WriteLine("    Bdat2Json (-a <archive> | -b <bdat_dir>) -o <output_dir>");
 
             Console.WriteLine("\n  GenerateData - Generates various data from BDAT files");
-            Console.WriteLine("    GenerateData (-a <archive> | -i <input_dir>) -o <output_dir>");
+            Console.WriteLine("    GenerateData (-a <archive> | -b <bdat_dir>) -o <output_dir>");
 
             Console.WriteLine("\n  DescrambleScript - Descrambles a .sb script file or directory");
             Console.WriteLine("    DescrambleScript -i <input_file> [-o <output_file>]");
@@ -175,7 +187,11 @@ namespace Xb2
             Console.WriteLine("    ExtractWilay -a <archive> [-i <input_path>] -o <output_dir>");
 
             Console.WriteLine("\n  CreateBlade - Runs the Xenoblade 2 common blade generator");
-            Console.WriteLine("    CreateBlade (-a <archive> | -i <bdat_input_dir>)");
+            Console.WriteLine("    CreateBlade (-a <archive> | -b <bdat_input_dir>)");
+
+            Console.WriteLine("\n  ReadSave - XB2 save file reading example");
+            Console.WriteLine("             Outputs common blade information");
+            Console.WriteLine("    ReadSave (-a <archive> | -b <bdat_input_dir>) -i <save_file> -o <out_text_file>");
         }
 
         private static string GetProgramName() => Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly()?.Location ?? "");
