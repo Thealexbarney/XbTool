@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="SaveEditor.View.Items"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:SaveEditor.Controls"
+             DataContext="{Binding Main, Source={StaticResource Locator}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type controls:LabeledField}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        <CollectionViewSource x:Key="ItemNames" Source="{Binding Acc}"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <controls:LabeledField HorizontalAlignment="Left" Label="Money" Value="{Binding SaveFile.GameSave.Money}"/>
+                <controls:LabeledField HorizontalAlignment="Left" Label="Ether Crystals" Value="{Binding SaveFile.GameSave.EtherCrystals}"/>
+            </StackPanel>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Core Chips">
+
+            </TabItem>
+            <TabItem Header="Accessories">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SaveFile.GameSave.ItemBox.PcEquipBox, IsAsync=True}" EnableRowVirtualization="True">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                        <DataGridTextColumn Binding="{Binding Count}" Header="Count"/>
+                        <DataGridComboBoxColumn Header="Name" SelectedValueBinding="{Binding Id}" ItemsSource="{Binding Source={StaticResource ItemNames}}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Aux Cores">
+
+            </TabItem>
+            <TabItem Header="Cylinders">
+
+            </TabItem>
+            <TabItem Header="Key Items">
+
+            </TabItem>
+            <TabItem Header="Info Items">
+
+            </TabItem>
+            <TabItem Header="Collectables">
+
+            </TabItem>
+            <TabItem Header="Treasure">
+
+            </TabItem>
+            <TabItem Header="Unrefined Aux Cores">
+
+            </TabItem>
+            <TabItem Header="Pouch Items">
+
+            </TabItem>
+            <TabItem Header="Core Crystals">
+
+            </TabItem>
+            <TabItem Header="Boosters">
+
+            </TabItem>
+            <TabItem Header="Role CPU">
+
+            </TabItem>
+            <TabItem Header="Element Core">
+
+            </TabItem>
+            <TabItem Header="Specials Enhancing RAM">
+
+            </TabItem>
+            <TabItem Header="Arts Cards">
+
+            </TabItem>
+            <TabItem Header="Skill RAM">
+
+            </TabItem>
+        </TabControl>
+        
+    </Grid>
+</UserControl>

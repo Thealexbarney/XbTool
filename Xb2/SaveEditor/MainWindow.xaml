@@ -1,0 +1,40 @@
+﻿<Window x:Class="SaveEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:SaveEditor.View"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" MaxWidth="1100" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="395*" />
+                <ColumnDefinition Width="184*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" Command="{Binding ReadSaveCommand}" Content="Open Save"  />
+            <Button Grid.Column="1" Margin="5" Command="{Binding LoadBdatsCommand}" Content="Load Bdats" />
+            <Button Grid.Column="2" Margin="5" Command="{Binding WriteSaveCommand}" Content="Write Save" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TabControl>
+                <TabItem Header="Main">
+                    <view:MainSave/>
+                </TabItem>
+                <TabItem Header="Items">
+                    <view:Items/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

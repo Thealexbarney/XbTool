@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="SaveEditor.Controls.RealTimeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SaveEditor.Controls"
+             x:Name="RealTime"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="500">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type local:LabeledField}">
+                    <Setter Property="Margin" Value="0,0,7,0"/>
+                    <Setter Property="Width" Value="50"/>
+                </Style>
+            </StackPanel.Resources>
+            <local:LabeledField Label="Year" Value="{Binding Path=Value.Year, ElementName=RealTime}"/>
+            <local:LabeledField Label="Month" Value="{Binding Path=Value.Month, ElementName=RealTime}"/>
+            <local:LabeledField Label="Day" Value="{Binding Path=Value.Day, ElementName=RealTime}"/>
+            <local:LabeledField Label="Hour" Value="{Binding Path=Value.Hour, ElementName=RealTime}"/>
+            <local:LabeledField Label="Minute" Value="{Binding Path=Value.Minute, ElementName=RealTime}"/>
+            <local:LabeledField Label="Second" Value="{Binding Path=Value.Second, ElementName=RealTime}"/>
+            <local:LabeledField Label="MSecond" Value="{Binding Path=Value.Millisecond, ElementName=RealTime}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

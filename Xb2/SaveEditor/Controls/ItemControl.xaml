@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="SaveEditor.Controls.ItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SaveEditor.Controls"
+             x:Name="ItemCon"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type local:LabeledField}">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Width" Value="50"/>
+                </Style>
+            </StackPanel.Resources>
+            <local:LabeledField Label="Id" Value="{Binding Path=Value.Id, ElementName=ItemCon}"/>
+            <local:LabeledField Label="Count" Value="{Binding Path=Value.Count, ElementName=ItemCon}"/>
+            <local:LabeledField Label="Equipped" Value="{Binding Path=Value.Equipped, ElementName=ItemCon}"/>
+            <local:PlayTimeControl Margin="5"  Value="{Binding Path=Value.Time, ElementName=ItemCon}"/>
+            <local:LabeledField Label="Serial" Value="{Binding Path=Value.Serial, ElementName=ItemCon}"/>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
