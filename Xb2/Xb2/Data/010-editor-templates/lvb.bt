@@ -1,0 +1,157 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+struct XfrmEntry {
+  float field_0;
+  float field_4;
+  float field_8;
+  float field_C;
+  float field_10;
+  float field_14;
+  float field_18;
+  float field_1C;
+  float field_20;
+  float field_24;
+  float field_28;
+  float field_2C;
+  float field_30;
+  float field_34;
+  float field_38;
+  float field_3C;
+};
+
+struct XfrmSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  XfrmEntry Entries[count];
+  FSeek(start + length);
+};
+
+struct InfoEntry {
+  int StringOffset;
+  int field_4;
+  int XfrmIndex;
+  int field_C;
+};
+
+struct InfoSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  InfoEntry Entries[count];
+  FSeek(start + length);
+};
+
+struct ClctEntry {
+  int field_0;
+  float field_4;
+  float field_8;
+};
+
+struct ClctSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  ClctEntry Entries[count];
+  FSeek(start + length);
+};
+
+struct BtlcEntry {
+  short field_0;
+  short field_2;
+};
+
+struct BtlcSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  BtlcEntry Entries[count];
+  FSeek(start + length);
+};
+
+struct StrgEntry {
+  short field_0;
+  short field_2;
+};
+
+struct StrgSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  StrgEntry Entries[count];
+  FSeek(start + length);
+};
+
+struct LdmkEntry {
+  unsigned char field_0;
+};
+
+struct LdmkSection {
+  local int start = FTell() - 4;
+  char ID[4];
+  int length;
+  int Type;
+  int count;  
+  int field_10;
+  FSkip(12);
+  LdmkEntry Entries[count];
+  FSeek(start + length);
+};
+
+char ID[4];
+int length;
+
+FSeek(0x20);
+
+while(FTell() < length) {
+  if(ReadUInt() == 0x4d524658) {
+    XfrmSection xfrm;
+  }
+  if(ReadUInt() == 0x4f464e49) {
+    InfoSection info;
+  }
+  if(ReadUInt() == 0x54434c43) {
+    ClctSection clct;
+  }
+  if(ReadUInt() == 0x434c5442) {
+    BtlcSection btlc;
+  }
+  if(ReadUInt() == 0x47525453) {
+    StrgSection strg;
+  }
+  if(ReadUInt() == 0x4b4d444c) {
+    LdmkSection ldmk;
+  }
+  FSkip(4);
+}

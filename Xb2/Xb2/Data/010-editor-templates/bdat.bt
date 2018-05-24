@@ -1,0 +1,98 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+local int i;
+
+struct TextEntry(int size) {
+    uchar Data[size];
+};
+
+struct BdatMember {
+    short MemberDescOffset;
+    short NextHashCollisionOffset;
+    short NameOffset;
+};
+
+struct BdatMemberDesc {
+    uchar Type;
+    uchar ValType;
+    ushort MemberOffset;
+    if(Type == 2)
+    {
+        ushort ArrayLength;
+    }
+};
+
+struct BdatId(int size){
+    if(size > 0) {
+        uchar Data[size];
+    }
+};
+
+struct BdatFile {
+    local int base = FTell();
+    local int i;
+    SetBackColor(cAqua);
+    char ID[4];
+    uint16 Field4;
+    uint16 NamesOffset;
+    uint16 ItemSize;
+    uint16 HashTableOffset;
+    uint16 HashTableLength;
+    uint16 ItemTableOffset;
+    uint16 ItemCount;
+    uint16 BaseId;
+    uint16 field_14;
+    uint16 Checksum;
+    uint32 StringsOffset;
+    uint32 StringsLength;
+    uint16 MemberTableOffset;
+    uint16 MemberCount;
+
+	Printf("%i\n", BaseId);
+    FSeek(base + HashTableOffset);
+    SetBackColor(cGray);
+    uint16 Hashes[HashTableLength];
+
+    FSeek(base + MemberTableOffset);
+    SetBackColor(cLtRed);
+
+    if(MemberCount > 0) {
+        BdatMember Members[MemberCount];
+    }
+
+
+    for(i = 0; i < MemberCount; i++)
+    {
+        FSeek(base + Members[i].MemberDescOffset);
+        SetBackColor(cLtPurple);
+        BdatMemberDesc MemberDesc;
+    }
+
+    SetBackColor(cSilver);
+    FSeek(base + ItemTableOffset);
+    if(ItemSize > 0) {
+        BdatId Ids(ItemSize)[ItemCount] <optimize=false>;
+    }
+};
+
+
+
+int32 FileCount;
+int32 ArchiveSize;
+int32 FileOffsets[FileCount];
+
+for(i = 0; i < FileCount; i++) {
+    FSeek(FileOffsets[i]);    
+    BdatFile File;    
+}

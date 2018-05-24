@@ -1,0 +1,77 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+struct FileHeader
+{
+    int64 Offset <format=hex>;
+    int32 CompressedSize;
+    int32 UncompressedSize; // 0 if not compressed
+    int32 Type; // 0: uncompressed, 0x00000001 header; 2: compressed, xbc1 header
+    int32 Id;    
+};
+
+typedef struct 
+{
+    char FileName[ReadStringLength(FTell())];
+    int32 unk1;
+} Table1Entry  <read=NameRead>;
+
+struct Table1
+{
+    Table1Entry table1Entries[FileTableEntryCount]<optimize=false>;
+};
+
+typedef struct 
+{
+    int32 A;
+    int32 B;
+} Table2Node <read=NodeRead>;
+
+string NameRead(Table1Entry& node)
+{
+    string s;   
+    SPrintf( s, "%05i %s", node.unk1, node.FileName );
+    return s;
+}
+
+string NodeRead(Table2Node& node)
+{
+    string s;   
+    SPrintf( s, "%i,%i", node.A, node.B );
+    return s;
+}
+
+char Magic[4];
+int32 unk4 <format=hex>;
+int32 Table2EntryCount <format=hex>;
+int32 Table1Offset <format=hex>;
+int32 Table1Length <format=hex>;
+int32 Table2Offset <format=hex>;
+int32 Table2Length <format=hex>;
+int32 FileTableOffset <format=hex>;
+int32 FileTableEntryCount;
+uint32 XorKey <format=hex>; // ??
+
+FSeek(Table1Offset);
+SetBackColor(cLtRed);
+FSkip(4);
+Table1 table1;
+
+
+FSeek(Table2Offset);
+SetBackColor(cLtGreen);
+Table2Node table2[Table2EntryCount];
+
+FSeek(FileTableOffset);
+SetBackColor(cAqua);
+FileHeader Files[FileTableEntryCount];

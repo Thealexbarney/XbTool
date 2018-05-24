@@ -1,0 +1,283 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: *.wilay
+//  ID Bytes: 4C 41 48 44
+//   History: 
+//------------------------------------------------
+
+struct ArrayB0
+{
+    uchar Field0;
+    uchar Field1;
+    uchar Field2;
+    uchar Field3;
+    uint Field4;
+    uint Field8;
+    uint FieldC;
+    uint Field10;
+    uint Field14;
+    uint Field18;
+};
+
+struct ArrayB1
+{
+    uint Field0;
+    uint Field4;
+    uint Field8;
+    uint FieldC;
+};
+
+struct ArrayB2
+{
+    uint Field0;
+    ushort Field4;
+};
+
+struct ArrayC
+{
+    uint Field0;
+    uint Field4;
+    uint Field8;
+    uint FieldC;
+    uint Field10;
+    uint Field14;
+    uint Field18;
+    uint Field1C;
+    uint Field20;
+    uint Field24;
+    uint Field28;
+    uint Field2C;
+    uint Field30;
+    uint Field34;
+    uint Field38;
+    uint Field3C;
+};
+
+struct ArrayD
+{
+    uint Field0;
+    uint Field4;
+};
+
+struct ArrayE
+{
+    ushort ArrayBOffset;
+    ushort Field2;
+};
+
+struct ArrayF
+{
+    uint Field0;
+    uint Offset;
+    uint Length;
+};
+
+struct ArrayG
+{
+    float Field0;
+    float Field4;
+    float Field8;
+    float FieldC;
+    float Field10;
+    float Field14;
+    ushort Field18;
+    ushort Field1A;
+};
+
+struct TextureInfo
+{
+    uint Field0;
+    uint Field4;
+    uint Field8;
+    uint FieldC;
+    uint Field10;
+    uint Field14;
+    uint Width;
+    uint Height;
+    uint Depth;
+    uint Field24;
+    uint Format;
+    uint Levels;
+    uint Field30;
+    char Magic[4];
+};
+
+struct ChunkA
+{
+    float Field0;
+    uint Width;
+    float Field8;
+    uint Height;
+    float Field10;
+    float Field14;
+    uint Field18;
+};
+
+struct ChunkB
+{
+    local uint base = FTell();
+    uint Offset0;
+    uint Length0;
+    uint Offset1;
+    uint Length1;
+    uint Offset2;
+    uint Length2;
+
+    SetBackColor(cBlue);
+    FSeek(base + Offset0);
+    ArrayB0 Array0[Length0];
+
+    SetBackColor(cRed);
+    FSeek(base + Offset1);
+    ArrayB1 Array1[Length1];
+
+    SetBackColor(cGreen);
+    FSeek(base + Offset2);
+    ArrayB2 Array2[Length2];
+};
+
+struct ChunkC
+{
+    local uint base = FTell();
+    uint Field0;
+    uint Offset;
+    uint Length;
+
+    FSeek(base + Offset);
+    ArrayC Array[Length];
+};
+
+struct ChunkD
+{
+    local uint base = FTell();
+    uint Offset;
+    uint Length;
+
+    FSeek(base + Offset);
+    ArrayD Array[Length];
+};
+
+struct ChunkE
+{
+    local uint base = FTell();
+    uint Offset;
+    uint Length;
+
+    FSeek(base + Offset);
+    ArrayE Array[Length];
+    Printf("%d\n", Length);
+};
+
+struct ChunkF
+{
+    local uint base = FTell();
+    local int i;
+    uint Offset;
+    uint Length;
+
+    FSeek(base + Offset);
+    ArrayF Array[Length];
+
+    for(i = 0; i < Length; i++)
+    {
+        FSeek(base + Array[i].Offset + Array[i].Length - 56);
+        TextureInfo Info;
+    }   
+};
+
+struct ChunkG
+{
+    local uint base = FTell();
+    uint Length;
+    uint Field4;
+    uint Field8;
+    uint FieldC;
+    float Field10;
+    float Field14;
+    uint Offset;
+
+    FSeek(base + Offset);
+    ArrayG Array[Length];
+};
+
+struct ChunkH
+{
+    local uint base = FTell();
+    uint Length;
+    uint Offset;
+    uint Field8;
+    uint FieldC;
+    uint Field10;
+
+    FSeek(base + Offset);
+    ArrayG Array[Length];
+};
+
+char Magic[4];
+uint Field4;
+uint Flags;
+uint OffsetA;
+uint Field10;
+uint OffsetB;
+uint OffsetC;
+uint OffsetD;
+uint OffsetE;
+uint OffsetF;
+uint Field28;
+uint OffsetG;
+uint Field30;
+uint OffsetH;
+uint Field38;
+
+if(OffsetA != 0){
+    FSeek(OffsetA);
+    SetBackColor(cLtRed);
+    ChunkA TableA;
+}
+
+if(OffsetB != 0){
+    SetBackColor(cLtGreen);
+    FSeek(OffsetB);
+    ChunkB TableB;
+}
+
+if(OffsetC != 0){
+    SetBackColor(cLtBlue);
+    FSeek(OffsetC);
+    ChunkC TableC;
+}
+
+if(OffsetD != 0){
+    SetBackColor(cLtPurple);
+    FSeek(OffsetD);
+    ChunkD TableD;
+}
+
+if(OffsetE != 0){
+    SetBackColor(cYellow);
+    FSeek(OffsetE);
+    ChunkE TableE;
+}
+
+if(OffsetF != 0){
+    SetBackColor(cGray);
+    FSeek(OffsetF);
+    ChunkF TableF;
+}
+
+if(OffsetG != 0){
+    FSeek(OffsetG);
+    ChunkG TableG;
+}
+
+if(OffsetH != 0){
+    SetBackColor(cLtRed);
+    FSeek(OffsetH);
+    ChunkH TableH;
+}

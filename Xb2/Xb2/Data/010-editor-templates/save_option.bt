@@ -1,0 +1,84 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+
+struct SSoundUiOption
+{
+  uint16 EventVoiceVolume;
+  uint16 EventCsVolume;
+  uint16 EventBgmVolume;
+  uint16 EventSeVolume;
+  uint16 GameBgmVolume;
+  uint16 GameEnvVolume;
+  uint16 GameWeatherVolume;
+  uint16 GameSeVolume;
+  uint16 PlayerVoiceVolume;
+  uint16 EnemyVoiceVolume;
+  uint16 NareVoiceVolume;
+  uint16 SystemVolume;
+  uint16 MenuBgmVolume;
+  uint16 ScreenBrightness;
+  uchar SubtitlesOn;
+  uchar field_1D;
+  uchar field_1E;
+  uchar field_1F;
+  uchar field_20;
+  uchar field_21;
+  uchar field_22;
+  uchar Difficulty;
+  uchar EnemyAttack;
+  uchar EnemyCooldown;
+  uchar EnemyMaxHp;
+  uchar EnemyDebuffDuration;
+  uchar BladeComboTime;
+  uchar PartyGaugeGains;
+  uchar SpecialRecharge;
+  uchar HealingPower;
+  uchar ChainAttackDamage;
+  uchar PneumaPgUse;
+};
+
+
+  uint32 sopt_field_0;
+  uchar InvertUpDown;
+  uchar InvertLeftRight;
+  uchar sopt_field_6;
+  uchar ResetResponseSpeed;
+  uchar AutoResponseSpeed;
+  uchar TurnSpeed;
+  uchar ZoomSpeed;
+  uchar GradientCorrection;
+  uint64 sopt_field_C;
+  uint64 sopt_field_14;
+  uint64 sopt_field_1C;
+  uint64 sopt_field_24;
+  uint64 sopt_field_2C;
+  uint64 sopt_field_34;
+  uint64 sopt_field_3C;
+  uint64 sopt_field_44;
+  SSoundUiOption field_4C;
+  uchar field_7A;
+  uchar field_7B;
+  uchar field_7C;
+  uchar field_7D;
+  uchar field_7E;
+  uchar AutoBattle;
+  uchar AutoButtonChallenge;
+  uchar EnemyAggression;
+  uchar field_82;
+  uchar field_83;
+  uchar field_84;
+  uchar field_85;
+  uchar field_86;
+  uchar field_87;
+

@@ -1,0 +1,650 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: Xenoblade 2 save file
+//   Authors: 
+//   Version: 
+//   Purpose: WIP save file reader
+//  Category: 
+// File Mask: *.sav
+//  ID Bytes: 5B A1 03 00
+//   History: 
+//------------------------------------------------
+
+struct gf_GameTime
+{
+    uint32 Seconds : 6;
+    uint32 Minutes : 6;
+    uint32 Hours : 5;
+    uint32 Days : 15;
+};
+
+struct gf_ElapseTime
+{
+    uint32 Seconds : 6;
+    uint32 Minutes : 6;
+    uint32 Hours : 20;
+};
+
+typedef struct 
+{
+  char String[16];
+  uint32 Length;
+} String16 <read=String16Disp>;
+
+string String16Disp( String16 &in )
+{
+  string s;   
+  SPrintf( s, "%s", in.String );
+  return s;
+}
+
+typedef struct 
+{
+  char String[32];
+  uint32 Length;
+} String32 <read=String32Disp>;
+
+string String32Disp( String32 &in )
+{
+  string s;   
+  SPrintf( s, "%s", in.String );
+  return s;
+}
+
+struct gf_GfDataDriverSkill
+{
+  unsigned short Columns[3];
+  short RowNum;
+  unsigned short Level;
+};
+
+enum <ushort> gf_ActivateType {ActivateUnuse = 0,
+  ActivateParty = 1,
+  ActivateMercenaryTeam = 2, };
+
+struct SDataIdea
+{
+  unsigned int PointCount;
+  int IdeaLevel;
+};
+
+struct gf_SDataIdea
+{
+  SDataIdea IdeaCategories[4];
+};
+
+struct gf_GfDataBladeArts
+{
+  unsigned short Id;
+  unsigned short RecastRev;
+  short field_4;
+  char field_6;
+  unsigned char Level;
+  char MaxLevel;
+  char field_9;
+  short field_A;
+};
+
+struct gf_GfDataBladeArtsEx
+{
+  unsigned short Id;
+  unsigned short DamageRev;
+  ushort field_4;
+  ushort field_6;
+  uchar field_8;
+  uchar field_9;
+  ushort field_A;
+};
+
+struct gf_GfDataBladeArtsN
+{
+  short Id;
+  short RecastRev;
+  short field_4;
+  short field_6;
+  short field_8;
+  short field_A;
+};
+
+struct gf_GfDataBladeSkill
+{
+  short Id;
+  char field_2;
+  unsigned char Level;
+  char MaxLevel;
+  char field_5;
+};
+
+struct gf_GfDataFieldSkill
+{
+  short Id;
+  char field_2;
+  unsigned char Level;
+  char MaxLevel;
+  char field_5;
+};
+
+struct gf_AchievQuest
+{
+  uint16 QuestID;
+  uint16 field_2;
+  int Count;
+  int MaxCount;
+  unsigned short field_C;
+  short StatsID;
+  short TaskType;
+  unsigned short Column;
+  unsigned short Row;
+  unsigned short BladeId;
+  short AchievementId;
+  FSkip(2);
+};
+
+struct gf_AchievInfo
+{
+  unsigned short Id;
+  unsigned short Alignment;
+  gf_AchievQuest AchievQuests[5];
+};
+
+struct DriverArt
+{
+  unsigned int Ids[3];
+  int WeaponPoints;
+  int TotalWeaponPoints;
+};
+
+struct SDataPouch
+{
+  float Time;
+  uint16 ItemId;
+  uint16 IsEnabled;
+};
+
+struct GfItemHandle
+{
+  uint32 Type : 6;
+  uint32 Serial : 26;
+};
+
+struct GfItemHandle16
+{
+  uint16 Type : 6;
+  uint16 Serial : 10;
+};
+
+struct ArtsEnhance
+{
+  ushort EnhanceId;
+  ushort RecastRev;
+  ushort ItemId;
+  ushort field_6;
+  GfItemHandle16 field_8;
+  GfItemHandle16 field_A;
+};
+
+struct HanaCircuits
+{
+  uint16 Specials0 : 1;
+  uint16 Specials1 : 1;
+  uint16 Specials2 : 1;
+  uint16 Skill0 : 1;
+  uint16 Skill1 : 1;
+  uint16 Skill2 : 1;
+};
+
+struct gf_EquipHana
+{
+  unsigned short RoleItem;
+  unsigned short AtrItem;
+  ArtsEnhance BArtsEnhance[3];
+  ArtsEnhance NArts[3];
+  ushort Skills[6];
+  GfItemHandle field_58[8];
+  unsigned short PowerCapacity;
+  HanaCircuits OpenCircuits;
+};
+
+struct ActivateWeapons
+{
+  local int i;
+  for(i = 0; i < 32; i++) {
+    uint32 Type : 1;
+  }
+};
+
+struct gf_SDataDriver
+{
+  gf_SDataIdea IdeaLevels;
+  gf_ActivateType ActivateType;
+  ushort DriverId;
+  short SetBlade;
+  unsigned short EquippedBlades[3];
+  int gap_2C;
+  gf_GfDataDriverSkill SkillsRound1[5];
+  gf_GfDataDriverSkill SkillsRound2[5];
+  ushort Level;
+  unsigned short HpMax;
+  unsigned short Strength;
+  unsigned short PowEther;
+  unsigned short Dex;
+  unsigned short Agility;
+  ushort Luck;
+  ushort PArmor;
+  ushort EArmor;
+  uchar CritRate;
+  unsigned char GuardRate;
+  int field_A8;
+  char gap_AC[3];
+  char field_AF;
+  uint Exp;
+  uint BattleExp;
+  unsigned int SkillPoints;
+  unsigned int TotalSkillPoints;
+  DriverArt Weapons[27];
+  uchar gap_2DC[12];
+  uint16 AccessoryId2;
+  uchar gap_2EA[2];
+  GfItemHandle AccessoryHandle2;
+  unsigned char DriverArtLevels[525];
+  char gap_4FD[119];
+  GfItemHandle AccessoryHandle0;
+  uint16 AccessoryId0;
+  uint16 gap_57A;
+  GfItemHandle AccessoryHandle1;
+  uint16 AccessoryId1;
+  uint16 gap_582;
+  SDataPouch PouchInfo[3];
+  ActivateWeapons ActivatedWeaponTypes;
+};
+
+struct gf_SDataBlade
+{
+  unsigned short DataType;
+  unsigned short Creator;
+  unsigned short SetDriver;
+  unsigned short BladeId;
+  gf_ElapseTime BornTime;
+  gf_SDataIdea IdeaData;
+  int field_2C;
+  char field_30;
+  unsigned char gap31[3];
+  unsigned int TrustPoints;
+  int TrustRank;
+  gf_GfDataBladeArts BArts[3];
+  gf_GfDataBladeArtsN NArts[3];
+  gf_GfDataBladeArtsEx BArtsEx[2];
+  gf_GfDataBladeSkill BladeSkills[3];
+  gf_GfDataBladeSkill FieldSkills[3];
+  unsigned char ExtraParts2[4];
+  gf_AchievInfo BArtsAchieve[3];
+  gf_AchievInfo BSkillsAchievement[3];
+  gf_AchievInfo FSkillsAchievement[3];
+  gf_AchievInfo KeyAchievement;
+  unsigned short KeyReleaseLevel;
+  unsigned short FavoriteCategory0;
+  unsigned short FavoriteItem0;
+  unsigned short FavoriteCategory0Discovered;
+  unsigned short FavoriteItem0Discovered;
+  unsigned short FavoriteCategory1;
+  unsigned short FavoriteItem1;
+  unsigned short FavoriteCategory1Discovered;
+  unsigned short FavoriteItem1Discovered;
+  unsigned short gap676;
+  unsigned ushort EquipOrbs[3];
+  unsigned short gap67E;
+  GfItemHandle EquipOrbHandles[3];
+  gf_EquipHana HanaEquip;
+  unsigned char Race;
+  unsigned char Gender;
+  short Still;
+  String16 ModelResourceName;
+  String16 Model2Name;
+  String16 MotionResourceName;
+  String16 Motion2Name;
+  String16 AddMotionName;
+  String16 VoiceName;
+  String16 ClipEvent;
+  String16 Com_SE;
+  String16 EffectResourceName;
+  String16 Com_Vo;
+  String16 CenterBone;
+  String16 CamBone;
+  String32 SeResourceName;
+  char BladeSize;
+  unsigned char WeaponType;
+  unsigned char OrbNum;
+  char Atr;
+  char Personality;
+  char ExtraParts;
+  char EyeRot;
+  char gap_827;
+  short CoolTime;
+  short Condition;
+  unsigned short DefWeapon;
+  short ChestHeight;
+  short LandingHeight;
+  short RareNameId;
+  unsigned short CommonNameId;
+  short Scale;
+  short WpnScale;
+  short OffsetID;
+  short CollisionId;
+  unsigned char PArmor;
+  char EArmor;
+  char HpMaxRev;
+  char StrengthRev;
+  char PowEtherRev;
+  char DexRev;
+  unsigned char AgilityRev;
+  unsigned char LuckRev;
+  char QuestRace;
+  char ReleaseLock;
+  char FootStep;
+  char FootStepEffect;
+  ushort KizunaLinkSet;
+  ushort NormalTalk;
+  short gap_84E;
+  int CreateEventID;
+  ushort MountPoint;
+  ushort MountObject;
+  char Name[64];
+  int NameLength;
+  ushort CommonBladeIndex;
+  char EnableEngageRex;
+  char BladeReleaseStatus;
+  unsigned char isUnselect;
+  char AffinityChartStatus;
+  FSkip(2);
+ // if(EnableEngageRex != 0){
+  //  Printf("%d, %d, %d\n",BladeId, EnableEngageRex, BladeReleaseStatus); 
+  //}
+ // Printf("%d, %d, %d, %s\n",BladeId, RareNameId, CommonNameId, Name); 
+      //Printf("%d, %s, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", BladeId, Name, TrustPoints, WeaponType, Atr, FieldSkills[0].Id, FieldSkills[1].Id, FieldSkills[2].Id, Race, Gender, OrbNum, CoolTime, PArmor, EArmor, HpMaxRev, StrengthRev, PowEtherRev, DexRev, AgilityRev, LuckRev, Condition);
+};
+
+struct gf_RealTime
+{
+  uint64 A : 6;
+  uint64 MSecond : 10;
+  uint64 Second : 6;
+  uint64 Minute : 6;
+  uint64 Hour : 5;
+  uint64 Day : 5;
+  uint64 B : 9;
+  uint64 Month : 4;
+  uint64 Year : 11;
+};
+
+struct gf_SDataParty_member
+{
+  uint16 DriverId;
+  uint16 field_2;
+  uint16 field_4;
+};
+
+struct gf_SDataParty
+{
+  gf_SDataParty_member Members[10];
+  uchar gap3C[4];
+  int PartyLeader;
+  int field_44;
+  int field_48;
+  uint16 PartyGauge;
+  uint16 field_4E;
+  uint32 field_50;
+};
+
+struct SDataDrivers
+{
+    gf_SDataDriver Driver[16]<optimize=false>;
+};
+
+struct SDataBlades
+{
+    gf_SDataBlade Blade[422]<optimize=false>;
+};
+
+struct gf_GfItemInfo
+{
+    uint32 Id : 13;
+    uint32 Type : 6;
+    uint32 Count : 10;
+    uint32 Unk1 : 1;
+    uint32 Equipped : 1;
+    uint32 Unk2 : 1;
+	gf_ElapseTime Time;
+	uint32 Serial : 26;
+	uint32 Unk3 : 6;
+};
+
+struct gf_ItemBox
+{
+    gf_GfItemInfo PcWpnChipBox[200];
+    gf_GfItemInfo PcEquipBox[900];
+    gf_GfItemInfo EquipOrbBox[500];
+    gf_GfItemInfo SalvageBox[200];
+    gf_GfItemInfo PreciousBox[500];
+    gf_GfItemInfo InfoBox[200];
+    gf_GfItemInfo EventBox[100];
+    gf_GfItemInfo CollectionListBox[500];
+    gf_GfItemInfo TresureBox[200];
+    gf_GfItemInfo EmptyOrbBox[500];
+    gf_GfItemInfo FavoriteBox[500];
+    gf_GfItemInfo CrystalListBox[200];
+    gf_GfItemInfo BoosterBox[200];
+    gf_GfItemInfo HanaRoleBox[200];
+    gf_GfItemInfo HanaAtrBox[200];
+    gf_GfItemInfo HanaArtsBox[200];
+    gf_GfItemInfo HanaNArtsBox[200];
+    gf_GfItemInfo HanaAssistBox[700];
+	uint32 Serials [19];
+};
+
+struct GameFlag1Bit
+{
+  local int i = 0;
+  for(i = 0; i < 65536; i++)
+  {
+    char Flags : 1;
+  }
+};
+
+struct GameFlag2Bit
+{
+  local int i = 0;
+  for(i = 0; i < 65536; i++)
+  {
+    char Flags : 2;
+  }
+};
+
+struct GameFlag4Bit
+{
+  local int i = 0;
+  for(i = 0; i < 8192; i++)
+  {
+    char Flags : 4;
+  }
+};
+
+struct GameFlag
+{
+    GameFlag1Bit Flags_1bit;
+    GameFlag2Bit Flags_2bit;
+    GameFlag4Bit Flags_4bit;
+    uchar Flags_8bit[8192];
+    uint16 Flags_16bit[3072];
+    uint32 Flags_32bit[3336];
+};
+
+struct Vec3Padded
+{
+    float X;
+    float Y;
+    float Z;
+	float Padding;
+};
+
+struct SDataMap
+{
+    Vec3Padded DriverPositions[3];
+    Vec3Padded BladePositions[3];
+    Vec3Padded DriverRotations[3];
+    Vec3Padded BladeRotations[3];
+	uint32 MapJumpId;
+};
+
+struct MercenaryTeam
+{
+  uint16 MemberIds[6];
+  uint32 field_C;
+  uint32 TeamId;
+  uint32 MissionId;
+  uint32 field_18;
+  uint32 MissionTime;
+  uint32 MissionTimeOriginal;
+  uint32 field_24;
+};
+
+struct FixedVector_MercenaryTeam_3
+{
+  MercenaryTeam Data[3];
+  uint64 Length;
+};
+
+struct FixedVector_QuestId_256
+{
+  uint32 Data[256];
+  uint32 Length;
+};
+
+struct MercenaryTeamPreset
+{
+  uint16 Members[6];
+};
+
+struct TaskAchieve
+{
+  uint16 taska_field_0;
+  uint16 taska_field_2;
+  uint16 taska_field_4;
+  uint16 taska_field_6;
+  uint32 taska_field_8;
+};
+
+struct FixedVector_TaskAchieve_128
+{
+  TaskAchieve Data[128];
+  uint64 Length;
+};
+
+struct SDataWeather
+{
+  char Name[4];
+  uint32 field_4;
+  uint32 field_8;
+  uint32 field_C;
+  float field_10;
+  float field_14;
+  uint32 field_18;
+  uint32 field_1C;  
+};
+
+struct Vec3
+{
+  float X;
+  float Y;
+  float Z;
+};
+
+struct ToraMinigame
+{
+
+};
+
+struct Event
+{
+  local int Base = FTell();
+  uint16 EventId;
+  uint16 Creator;
+  uint16 PlayBladeId;
+  uint16 VoiceID;
+  uint16 Attribute;
+  uint16 ExtraParts;
+  uint16 A;
+  uint16 Weapons[10];
+  uint16 B[6];
+  uint16 Blades[10];
+  uint16 C[5];
+  gf_GameTime GameTime;
+  uint16 CurrentMapWeatherID;
+  uint16 CurrentWtrType;
+  uint16 D[8];
+  FSeek(Base + 100);
+};
+
+uint32 Magic;
+uint32 ss_field_4;
+gf_RealTime Time;
+uint32 Money;
+uint32 LandmarkPoint;
+FSkip(8);
+Vec3 LandmarkPos;
+FSkip(4);
+float LandmarkRotY;
+uint16 isTimeStop;
+uint16 ChapterSaveScenarioFlag;
+uint16 ChapterSaveEventId;
+uint16 sg_field_2A;
+SDataDrivers Drivers;
+SDataBlades Blades;
+gf_SDataParty Party;
+gf_ItemBox ItemBox;
+GameFlag Flags;
+uint32 ScenarioQuest;
+uint32 CurrentQuest;
+FSkip(4);
+SDataMap Map;
+FSkip(12);
+gf_GameTime GameTime;
+gf_ElapseTime ElapseTime;
+FixedVector_MercenaryTeam_3 MercTeams;
+MercenaryTeamPreset MercPresets[8];
+uint16 CommonBladeIds[192];
+float PlayerCameraDistance;
+uint32 GameClearCount;
+FixedVector_TaskAchieve_128 AchievementTasks;
+FixedVector_QuestId_256 Quests;
+SDataWeather Weather[64];
+uint32 EtherCrystals;
+float MoveDistance;
+float MoveDistanceB;
+uint32 AssurePoint;
+uint32 AssureCount;
+uint16 RareBladeAppearType;
+uint16 field_10AD52;
+uint32 CoinCount;
+uint32 SavedEnemyHp[3];
+FSkip(4);
+gf_RealTime Time2;
+float CameraHeight;
+unsigned char Minigame[256];
+float CameraYaw;
+float CameraPitch;
+unsigned char CameraFreeMode;
+unsigned char IsHikariCurrent;
+uint16 AutoEventAfterLoad;
+unsigned char IsCollectFlagNewVersion;
+unsigned char IsEndGameSave;
+unsigned char CameraSide;
+unsigned char gap_10AE83;
+Event Events[500];
+uint32 EventsLength;
+unsigned char sg_gap1171D8[400];
+float sg_field_117368;
+uint32 ContentVersions[5];
+unsigned char sg_gap_117380[776];
+uint32 sg_field_117688;
+FSkip(4);
