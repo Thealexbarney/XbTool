@@ -24,6 +24,7 @@
         ExtractWilay,
         DescrambleScript,
         SalvageRaffle,
-        ReadSave
+        ReadSave,
+        CombineBdat
     }
 }

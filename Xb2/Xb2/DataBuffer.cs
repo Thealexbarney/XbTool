@@ -12,6 +12,13 @@ namespace Xb2
         public int Length { get; }
         public int Position { get; set; }
 
+        public byte[] ToArray()
+        {
+            var arr = new byte[Length];
+            Array.Copy(File, Start, arr, 0, Length);
+            return arr;
+        }
+
         public DataBuffer(byte[] file, Game game, int start)
         {
             File = file;

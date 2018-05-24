@@ -6,14 +6,14 @@ namespace Xb2.Save
 {
     public class GfEquipHana
     {
-        public ushort RoleItem;
-        public ushort AtrItem;
-        public ArtsEnhance[] BArtsEnhance = new ArtsEnhance[3];
-        public ArtsEnhance[] NArts = new ArtsEnhance[3];
-        public ushort[] Skills = new ushort[6];
-        public GfItemHandle[] field_58 = new GfItemHandle[8];
-        public ushort PowerCapacity;
-        public HanaCircuits OpenCircuits;
+        public ushort RoleItem { get; set; }
+        public ushort AtrItem { get; set; }
+        public ArtsEnhance[] BArtsEnhance { get; set; } = new ArtsEnhance[3];
+        public ArtsEnhance[] NArts { get; set; } = new ArtsEnhance[3];
+        public ushort[] Skills { get; set; } = new ushort[6];
+        public GfItemHandle[] field_58 { get; set; } = new GfItemHandle[8];
+        public ushort PowerCapacity { get; set; }
+        public HanaCircuits OpenCircuits { get; set; }
 
         public GfEquipHana(DataBuffer save)
         {
@@ -76,12 +76,12 @@ namespace Xb2.Save
 
     public class ArtsEnhance
     {
-        public ushort EnhanceId;
-        public ushort RecastRev;
-        public ushort ItemId;
-        public ushort field_6;
-        public GfItemHandle16 field_8;
-        public GfItemHandle16 field_A;
+        public ushort EnhanceId { get; set; }
+        public ushort RecastRev { get; set; }
+        public ushort ItemId { get; set; }
+        public ushort field_6 { get; set; }
+        public GfItemHandle16 field_8 { get; set; }
+        public GfItemHandle16 field_A { get; set; }
 
         public ArtsEnhance(DataBuffer save)
         {
@@ -106,11 +106,11 @@ namespace Xb2.Save
 
     public class GfDataBladeSkill
     {
-        public ushort Id;
-        public byte field_2;
-        public byte Level;
-        public byte MaxLevel;
-        public byte field_5;
+        public ushort Id { get; set; }
+        public byte field_2 { get; set; }
+        public byte Level { get; set; }
+        public byte MaxLevel { get; set; }
+        public byte field_5 { get; set; }
 
         public GfDataBladeSkill(DataBuffer save)
         {
@@ -133,14 +133,14 @@ namespace Xb2.Save
 
     public class GfDataBladeArts
     {
-        public ushort Id;
-        public ushort RecastRev;
-        public ushort field_4;
-        public byte field_6;
-        public byte Level;
-        public byte MaxLevel;
-        public byte field_9;
-        public ushort field_A;
+        public ushort Id { get; set; }
+        public ushort RecastRev { get; set; }
+        public ushort field_4 { get; set; }
+        public byte field_6 { get; set; }
+        public byte Level { get; set; }
+        public byte MaxLevel { get; set; }
+        public byte field_9 { get; set; }
+        public ushort field_A { get; set; }
 
         public GfDataBladeArts(DataBuffer save)
         {
@@ -169,12 +169,12 @@ namespace Xb2.Save
 
     public class GfDataBladeArtsN
     {
-        public ushort Id;
-        public ushort RecastRev;
-        public ushort field_4;
-        public ushort field_6;
-        public ushort field_8;
-        public ushort field_A;
+        public ushort Id { get; set; }
+        public ushort RecastRev { get; set; }
+        public ushort field_4 { get; set; }
+        public ushort field_6 { get; set; }
+        public ushort field_8 { get; set; }
+        public ushort field_A { get; set; }
 
         public GfDataBladeArtsN(DataBuffer save)
         {
@@ -199,13 +199,13 @@ namespace Xb2.Save
 
     public class GfDataBladeArtsEx
     {
-        public ushort Id;
-        public ushort DamageRev;
-        public ushort field_4;
-        public ushort field_6;
-        public byte field_8;
-        public byte field_9;
-        public ushort field_A;
+        public ushort Id { get; set; }
+        public ushort DamageRev { get; set; }
+        public ushort field_4 { get; set; }
+        public ushort field_6 { get; set; }
+        public byte field_8 { get; set; }
+        public byte field_9 { get; set; }
+        public ushort field_A { get; set; }
 
         public GfDataBladeArtsEx(DataBuffer save)
         {
@@ -232,100 +232,100 @@ namespace Xb2.Save
 
     public class SDataBlade
     {
-        public ushort DataType;
-        public ushort Creator;
-        public ushort SetDriver;
-        public ushort BladeId;
-        public ElapseTime BornTime;
-        public SDataIdea IdeaLevels;
-        public uint field_2C;
-        public byte field_30;
-        public byte[] gap31 = new byte[3];
-        public uint TrustPoints;
-        public uint TrustRank;
-        public GfDataBladeArts[] BArts = new GfDataBladeArts[3];
-        public GfDataBladeArtsN[] NArts = new GfDataBladeArtsN[3];
-        public GfDataBladeArtsEx[] BArtsEx = new GfDataBladeArtsEx[2];
-        public GfDataBladeSkill[] BattleSkills = new GfDataBladeSkill[3];
-        public GfDataBladeSkill[] FieldSkills = new GfDataBladeSkill[3];
-        public byte[] ExtraParts2 = new byte[4];
-        public GfAchievInfo[] BArtsAchievement = new GfAchievInfo[3];
-        public GfAchievInfo[] BSkillsAchievement = new GfAchievInfo[3];
-        public GfAchievInfo[] FSkillsAchievement = new GfAchievInfo[3];
-        public GfAchievInfo KeyAchievement;
-        public ushort KeyReleaseLevel;
-        public ushort FavoriteCategory0;
-        public ushort FavoriteItem0;
-        public bool FavoriteCategory0Revealed;
-        public bool FavoriteItem0Revealed;
-        public ushort FavoriteCategory1;
-        public ushort FavoriteItem1;
-        public bool FavoriteCategory1Revealed;
-        public bool FavoriteItem1Revealed;
-        public ushort gap676;
-        public ushort[] EquippedOrbs = new ushort[3];
-        public ushort gap67E;
-        public GfItemHandle[] EquippedOrbHandles = new GfItemHandle[3];
-        public GfEquipHana Poppiswap;
-        public byte Race;
-        public byte Gender;
-        public ushort Still;
-        public string ModelResourceName;
-        public string Model2Name;
-        public string MotionResourceName;
-        public string Motion2Name;
-        public string AddMotionName;
-        public string VoiceName;
-        public string ClipEvent;
-        public string Com_SE;
-        public string EffectResourceName;
-        public string Com_Vo;
-        public string CenterBone;
-        public string CamBone;
-        public string SeResourceName;
-        public byte BladeSize;
-        public byte WeaponType;
-        public byte AuxCoreCount;
-        public BladeAttribute Attribute;
-        public byte Personality;
-        public byte ExtraParts;
-        public byte EyeRot;
-        public byte gap_827;
-        public ushort Cooldown;
-        public ushort Condition;
-        public ushort DefWeapon;
-        public ushort ChestHeight;
-        public ushort LandingHeight;
-        public ushort RareNameId;
-        public ushort CommonNameId;
-        public ushort Scale;
-        public ushort WpnScale;
-        public ushort OffsetID;
-        public ushort CollisionId;
-        public byte PArmor;
-        public byte EArmor;
-        public byte HpMaxRev;
-        public byte StrengthRev;
-        public byte PowEtherRev;
-        public byte DexRev;
-        public byte AgilityRev;
-        public byte LuckRev;
-        public byte QuestRace;
-        public byte ReleaseLock;
-        public byte FootStep;
-        public byte FootStepEffect;
-        public ushort KizunaLinkSet;
-        public ushort NormalTalk;
-        public ushort gap_84E;
-        public uint CreateEventID;
-        public ushort MountPoint;
-        public ushort MountObject;
-        public string Name;
-        public ushort CommonBladeIndex;
-        public byte EnableEngageRex;
-        public byte BladeReleaseStatus;
-        public byte isUnselect;
-        public byte AffinityChartStatus;
+        public ushort DataType { get; set; }
+        public ushort Creator { get; set; }
+        public ushort SetDriver { get; set; }
+        public ushort BladeId { get; set; }
+        public ElapseTime BornTime { get; set; }
+        public SDataIdea IdeaLevels { get; set; }
+        public uint field_2C { get; set; }
+        public byte field_30 { get; set; }
+        public byte[] gap31 { get; set; } = new byte[3];
+        public uint TrustPoints { get; set; }
+        public uint TrustRank { get; set; }
+        public GfDataBladeArts[] BArts { get; set; } = new GfDataBladeArts[3];
+        public GfDataBladeArtsN[] NArts { get; set; } = new GfDataBladeArtsN[3];
+        public GfDataBladeArtsEx[] BArtsEx { get; set; } = new GfDataBladeArtsEx[2];
+        public GfDataBladeSkill[] BattleSkills { get; set; } = new GfDataBladeSkill[3];
+        public GfDataBladeSkill[] FieldSkills { get; set; } = new GfDataBladeSkill[3];
+        public byte[] ExtraParts2 { get; set; } = new byte[4];
+        public GfAchievInfo[] BArtsAchievement { get; set; } = new GfAchievInfo[3];
+        public GfAchievInfo[] BSkillsAchievement { get; set; } = new GfAchievInfo[3];
+        public GfAchievInfo[] FSkillsAchievement { get; set; } = new GfAchievInfo[3];
+        public GfAchievInfo KeyAchievement { get; set; }
+        public ushort KeyReleaseLevel { get; set; }
+        public ushort FavoriteCategory0 { get; set; }
+        public ushort FavoriteItem0 { get; set; }
+        public bool FavoriteCategory0Revealed { get; set; }
+        public bool FavoriteItem0Revealed { get; set; }
+        public ushort FavoriteCategory1 { get; set; }
+        public ushort FavoriteItem1 { get; set; }
+        public bool FavoriteCategory1Revealed { get; set; }
+        public bool FavoriteItem1Revealed { get; set; }
+        public ushort gap676 { get; set; }
+        public ushort[] EquippedOrbs { get; set; } = new ushort[3];
+        public ushort gap67E { get; set; }
+        public GfItemHandle[] EquippedOrbHandles { get; set; } = new GfItemHandle[3];
+        public GfEquipHana Poppiswap { get; set; }
+        public byte Race { get; set; }
+        public byte Gender { get; set; }
+        public ushort Still { get; set; }
+        public string ModelResourceName { get; set; }
+        public string Model2Name { get; set; }
+        public string MotionResourceName { get; set; }
+        public string Motion2Name { get; set; }
+        public string AddMotionName { get; set; }
+        public string VoiceName { get; set; }
+        public string ClipEvent { get; set; }
+        public string Com_SE { get; set; }
+        public string EffectResourceName { get; set; }
+        public string Com_Vo { get; set; }
+        public string CenterBone { get; set; }
+        public string CamBone { get; set; }
+        public string SeResourceName { get; set; }
+        public byte BladeSize { get; set; }
+        public byte WeaponType { get; set; }
+        public byte AuxCoreCount { get; set; }
+        public BladeAttribute Attribute { get; set; }
+        public byte Personality { get; set; }
+        public byte ExtraParts { get; set; }
+        public byte EyeRot { get; set; }
+        public byte gap_827 { get; set; }
+        public ushort Cooldown { get; set; }
+        public ushort Condition { get; set; }
+        public ushort DefWeapon { get; set; }
+        public ushort ChestHeight { get; set; }
+        public ushort LandingHeight { get; set; }
+        public ushort RareNameId { get; set; }
+        public ushort CommonNameId { get; set; }
+        public ushort Scale { get; set; }
+        public ushort WpnScale { get; set; }
+        public ushort OffsetID { get; set; }
+        public ushort CollisionId { get; set; }
+        public byte PArmor { get; set; }
+        public byte EArmor { get; set; }
+        public byte HpMaxRev { get; set; }
+        public byte StrengthRev { get; set; }
+        public byte PowEtherRev { get; set; }
+        public byte DexRev { get; set; }
+        public byte AgilityRev { get; set; }
+        public byte LuckRev { get; set; }
+        public byte QuestRace { get; set; }
+        public byte ReleaseLock { get; set; }
+        public byte FootStep { get; set; }
+        public byte FootStepEffect { get; set; }
+        public ushort KizunaLinkSet { get; set; }
+        public ushort NormalTalk { get; set; }
+        public ushort gap_84E { get; set; }
+        public uint CreateEventID { get; set; }
+        public ushort MountPoint { get; set; }
+        public ushort MountObject { get; set; }
+        public string Name { get; set; }
+        public ushort CommonBladeIndex { get; set; }
+        public byte EnableEngageRex { get; set; }
+        public byte BladeReleaseStatus { get; set; }
+        public byte isUnselect { get; set; }
+        public byte AffinityChartStatus { get; set; }
 
         public SDataBlade(DataBuffer save)
         {
@@ -632,47 +632,47 @@ namespace Xb2.Save
 
     public class SDataDriver
     {
-        public SDataIdea IdeaLevels;
-        public ActivateType ActivateType;
-        public ushort DriverId;
-        public ushort SetBlade;
-        public ushort[] EquippedBlades = new ushort[3];
-        public uint gap2C;
-        public GfDataDriverSkill[] SkillsRound1 = new GfDataDriverSkill[5];
-        public GfDataDriverSkill[] SkillsRound2 = new GfDataDriverSkill[5];
-        public ushort Level;
-        public ushort HpMax;
-        public ushort Strength;
-        public ushort Ether;
-        public ushort Dex;
-        public ushort Agility;
-        public ushort Luck;
-        public ushort PArmor;
-        public ushort EArmor;
-        public byte CritRate;
-        public byte GuardRate;
-        public uint field_A8;
-        public byte[] gap_AC = new byte[3];
-        public byte field_AF;
-        public uint Exp;
-        public uint BattleExp;
-        public uint SkillPoints;
-        public uint TotalSkillPoints;
-        public DriverWeapon[] Weapons = new DriverWeapon[27];
-        public byte[] gap_2DC = new byte[12];
-        public ushort AccessoryId2;
-        public byte[] gap_2EA = new byte[2];
-        public GfItemHandle AccessoryHandle2;
-        public byte[] DriverArtLevels = new byte[525];
-        public byte[] gap_4FD = new byte[119];
-        public GfItemHandle AccessoryHandle0;
-        public ushort AccessoryId0;
-        public ushort gap_57A;
-        public GfItemHandle AccessoryHandle1;
-        public ushort AccessoryId1;
-        public ushort gap_582;
-        public SDataPouch[] PouchInfo = new SDataPouch[3];
-        public byte[] ActivatedWeaponTypes = new byte[32];
+        public SDataIdea IdeaLevels { get; set; }
+        public ActivateType ActivateType { get; set; }
+        public ushort DriverId { get; set; }
+        public ushort SetBlade { get; set; }
+        public ushort[] EquippedBlades { get; set; } = new ushort[3];
+        public uint gap2C { get; set; }
+        public GfDataDriverSkill[] SkillsRound1 { get; set; } = new GfDataDriverSkill[5];
+        public GfDataDriverSkill[] SkillsRound2 { get; set; } = new GfDataDriverSkill[5];
+        public ushort Level { get; set; }
+        public ushort HpMax { get; set; }
+        public ushort Strength { get; set; }
+        public ushort Ether { get; set; }
+        public ushort Dex { get; set; }
+        public ushort Agility { get; set; }
+        public ushort Luck { get; set; }
+        public ushort PArmor { get; set; }
+        public ushort EArmor { get; set; }
+        public byte CritRate { get; set; }
+        public byte GuardRate { get; set; }
+        public uint field_A8 { get; set; }
+        public byte[] gap_AC { get; set; } = new byte[3];
+        public byte field_AF { get; set; }
+        public uint Exp { get; set; }
+        public uint BattleExp { get; set; }
+        public uint SkillPoints { get; set; }
+        public uint TotalSkillPoints { get; set; }
+        public DriverWeapon[] Weapons { get; set; } = new DriverWeapon[27];
+        public byte[] gap_2DC { get; set; } = new byte[12];
+        public ushort AccessoryId2 { get; set; }
+        public byte[] gap_2EA { get; set; } = new byte[2];
+        public GfItemHandle AccessoryHandle2 { get; set; }
+        public byte[] DriverArtLevels { get; set; } = new byte[525];
+        public byte[] gap_4FD { get; set; } = new byte[119];
+        public GfItemHandle AccessoryHandle0 { get; set; }
+        public ushort AccessoryId0 { get; set; }
+        public ushort gap_57A { get; set; }
+        public GfItemHandle AccessoryHandle1 { get; set; }
+        public ushort AccessoryId1 { get; set; }
+        public ushort gap_582 { get; set; }
+        public SDataPouch[] PouchInfo { get; set; } = new SDataPouch[3];
+        public byte[] ActivatedWeaponTypes { get; set; } = new byte[32];
 
         public SDataDriver(DataBuffer save)
         {
@@ -859,14 +859,14 @@ namespace Xb2.Save
 
     public class SDataIdea
     {
-        public uint BraveryPoints;
-        public uint BraveryLevel;
-        public uint TruthPoints;
-        public uint TruthLevel;
-        public uint CompassionPoints;
-        public uint CompassionLevel;
-        public uint JusticePoints;
-        public uint JusticeLevel;
+        public uint BraveryPoints { get; set; }
+        public uint BraveryLevel { get; set; }
+        public uint TruthPoints { get; set; }
+        public uint TruthLevel { get; set; }
+        public uint CompassionPoints { get; set; }
+        public uint CompassionLevel { get; set; }
+        public uint JusticePoints { get; set; }
+        public uint JusticeLevel { get; set; }
 
         public SDataIdea(DataBuffer save)
         {
@@ -895,9 +895,9 @@ namespace Xb2.Save
 
     public class GfDataDriverSkill
     {
-        public ushort[] Columns = new ushort[3];
-        public ushort Row;
-        public ushort LevelUnlocked;
+        public ushort[] Columns { get; set; } = new ushort[3];
+        public ushort Row { get; set; }
+        public ushort LevelUnlocked { get; set; }
 
         public GfDataDriverSkill(DataBuffer save)
         {
@@ -924,9 +924,9 @@ namespace Xb2.Save
 
     public class DriverWeapon
     {
-        public uint[] Ids = new uint[3];
-        public uint WeaponPoints;
-        public uint TotalWeaponPoints;
+        public uint[] Ids { get; set; } = new uint[3];
+        public uint WeaponPoints { get; set; }
+        public uint TotalWeaponPoints { get; set; }
 
         public DriverWeapon(DataBuffer save)
         {
@@ -953,9 +953,9 @@ namespace Xb2.Save
 
     public class SDataPouch
     {
-        public float Time;
-        public ushort ItemId;
-        public ushort IsEnabled;
+        public float Time { get; set; }
+        public ushort ItemId { get; set; }
+        public ushort IsEnabled { get; set; }
 
         public SDataPouch(DataBuffer save)
         {
@@ -974,8 +974,8 @@ namespace Xb2.Save
 
     public class SDataSave
     {
-        public SDataSystem SystemSave;
-        public SDataGame GameSave;
+        public SDataSystem SystemSave { get; set; }
+        public SDataGame GameSave { get; set; }
 
         public SDataSave(DataBuffer save)
         {
@@ -992,9 +992,9 @@ namespace Xb2.Save
 
     public class SDataSystem
     {
-        public uint Magic;
-        public uint field_4;
-        public RealTime SaveTime;
+        public uint Magic { get; set; }
+        public uint field_4 { get; set; }
+        public RealTime SaveTime { get; set; }
 
         public SDataSystem(DataBuffer save)
         {
@@ -1013,9 +1013,9 @@ namespace Xb2.Save
 
     public class Vec3
     {
-        public float X;
-        public float Y;
-        public float Z;
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
 
         public Vec3(DataBuffer save)
         {
@@ -1034,10 +1034,10 @@ namespace Xb2.Save
 
     public class Vec3Padded
     {
-        public float X;
-        public float Y;
-        public float Z;
-        public float Padding;
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
+        public float Padding { get; set; }
 
         public Vec3Padded(DataBuffer save)
         {
@@ -1058,15 +1058,15 @@ namespace Xb2.Save
 
     public class RealTime
     {
-        public ulong UnkA;
-        public ulong Millisecond;
-        public ulong Second;
-        public ulong Minute;
-        public ulong Hour;
-        public ulong Day;
-        public ulong UnkB;
-        public ulong Month;
-        public ulong Year;
+        public ulong UnkA { get; set; }
+        public ulong Millisecond { get; set; }
+        public ulong Second { get; set; }
+        public ulong Minute { get; set; }
+        public ulong Hour { get; set; }
+        public ulong Day { get; set; }
+        public ulong UnkB { get; set; }
+        public ulong Month { get; set; }
+        public ulong Year { get; set; }
 
         public RealTime(DataBuffer save)
         {
@@ -1100,36 +1100,36 @@ namespace Xb2.Save
 
     public class GameTime
     {
-        public uint Seconds;
-        public uint Minutes;
-        public uint Hours;
-        public uint Days;
+        public uint Second { get; set; }
+        public uint Minute { get; set; }
+        public uint Hour { get; set; }
+        public uint Day { get; set; }
 
         public GameTime(DataBuffer save)
         {
             uint time = save.ReadUInt32();
-            Seconds = (uint)(time >> 0 & ((1u << 6) - 1));
-            Minutes = (uint)(time >> 6 & ((1u << 6) - 1));
-            Hours = (uint)(time >> 12 & ((1u << 5) - 1));
-            Days = (uint)(time >> 17 & ((1u << 15) - 1));
+            Second = (uint)(time >> 0 & ((1u << 6) - 1));
+            Minute = (uint)(time >> 6 & ((1u << 6) - 1));
+            Hour = (uint)(time >> 12 & ((1u << 5) - 1));
+            Day = (uint)(time >> 17 & ((1u << 15) - 1));
         }
 
         public void WriteSave(DataBuffer save)
         {
             uint time = 0;
-            time |= (uint)((Seconds & ((1u << 6) - 1)) << 0);
-            time |= (uint)((Minutes & ((1u << 6) - 1)) << 6);
-            time |= (uint)((Hours & ((1u << 5) - 1)) << 12);
-            time |= (uint)((Days & ((1u << 15) - 1)) << 17);
+            time |= (uint)((Second & ((1u << 6) - 1)) << 0);
+            time |= (uint)((Minute & ((1u << 6) - 1)) << 6);
+            time |= (uint)((Hour & ((1u << 5) - 1)) << 12);
+            time |= (uint)((Day & ((1u << 15) - 1)) << 17);
             save.WriteUInt32(time);
         }
     }
 
     public class ElapseTime
     {
-        public uint Second;
-        public uint Minute;
-        public uint Hour;
+        public uint Second { get; set; }
+        public uint Minute { get; set; }
+        public uint Hour { get; set; }
 
         public ElapseTime(DataBuffer save)
         {
@@ -1151,17 +1151,17 @@ namespace Xb2.Save
 
     public class GfAchievQuest
     {
-        public ushort QuestID;
-        public ushort field_2;
-        public uint Count;
-        public uint MaxCount;
-        public ushort field_C;
-        public ushort StatsID;
-        public ushort TaskType;
-        public ushort Column;
-        public ushort Row;
-        public ushort BladeId;
-        public ushort AchievementId;
+        public ushort QuestID { get; set; }
+        public ushort field_2 { get; set; }
+        public uint Count { get; set; }
+        public uint MaxCount { get; set; }
+        public ushort field_C { get; set; }
+        public ushort StatsID { get; set; }
+        public ushort TaskType { get; set; }
+        public ushort Column { get; set; }
+        public ushort Row { get; set; }
+        public ushort BladeId { get; set; }
+        public ushort AchievementId { get; set; }
 
         public GfAchievQuest(DataBuffer save)
         {
@@ -1198,9 +1198,9 @@ namespace Xb2.Save
 
     public class GfAchievInfo
     {
-        public ushort Id;
-        public ushort Alignment;
-        public GfAchievQuest[] AchievQuests = new GfAchievQuest[5];
+        public ushort Id { get; set; }
+        public ushort Alignment { get; set; }
+        public GfAchievQuest[] AchievQuests { get; set; } = new GfAchievQuest[5];
 
         public GfAchievInfo(DataBuffer save)
         {
@@ -1227,8 +1227,8 @@ namespace Xb2.Save
 
     public class GfItemHandle
     {
-        public uint Type;
-        public uint Serial;
+        public uint Type { get; set; }
+        public uint Serial { get; set; }
 
         public GfItemHandle(DataBuffer save)
         {
@@ -1248,8 +1248,8 @@ namespace Xb2.Save
 
     public class GfItemHandle16
     {
-        public ushort Type;
-        public ushort Serial;
+        public ushort Type { get; set; }
+        public ushort Serial { get; set; }
 
         public GfItemHandle16(DataBuffer save)
         {
@@ -1269,12 +1269,12 @@ namespace Xb2.Save
 
     public class HanaCircuits
     {
-        public ushort Specials0;
-        public ushort Specials1;
-        public ushort Specials2;
-        public ushort Skill0;
-        public ushort Skill1;
-        public ushort Skill2;
+        public ushort Specials0 { get; set; }
+        public ushort Specials1 { get; set; }
+        public ushort Specials2 { get; set; }
+        public ushort Skill0 { get; set; }
+        public ushort Skill1 { get; set; }
+        public ushort Skill2 { get; set; }
 
         public HanaCircuits(DataBuffer save)
         {
@@ -1302,9 +1302,9 @@ namespace Xb2.Save
 
     public class GfSDataPartyMember
     {
-        public ushort DriverId;
-        public ushort field_2;
-        public ushort field_4;
+        public ushort DriverId { get; set; }
+        public ushort field_2 { get; set; }
+        public ushort field_4 { get; set; }
 
         public GfSDataPartyMember(DataBuffer save)
         {
@@ -1323,14 +1323,14 @@ namespace Xb2.Save
 
     public class GfSDataParty
     {
-        public GfSDataPartyMember[] Members = new GfSDataPartyMember[10];
-        public byte[] gap3C = new byte[4];
-        public uint PartyLeader;
-        public uint field_44;
-        public uint field_48;
-        public ushort PartyGauge;
-        public ushort field_4E;
-        public uint field_50;
+        public GfSDataPartyMember[] Members { get; set; } = new GfSDataPartyMember[10];
+        public byte[] gap3C { get; set; } = new byte[4];
+        public uint PartyLeader { get; set; }
+        public uint field_44 { get; set; }
+        public uint field_48 { get; set; }
+        public ushort PartyGauge { get; set; }
+        public ushort field_4E { get; set; }
+        public uint field_50 { get; set; }
 
         public GfSDataParty(DataBuffer save)
         {
@@ -1375,15 +1375,15 @@ namespace Xb2.Save
 
     public class GfItemInfo
     {
-        public uint Id;
-        public uint Type;
-        public uint Count;
-        public uint Unk1;
-        public uint Equipped;
-        public uint Unk2;
-        public ElapseTime Time;
-        public uint Serial;
-        public uint Unk3;
+        public uint Id { get; set; }
+        public uint Type { get; set; }
+        public uint Count { get; set; }
+        public uint Unk1 { get; set; }
+        public uint Equipped { get; set; }
+        public uint Unk2 { get; set; }
+        public ElapseTime Time { get; set; }
+        public uint Serial { get; set; }
+        public uint Unk3 { get; set; }
 
         public GfItemInfo(DataBuffer save)
         {
@@ -1420,25 +1420,25 @@ namespace Xb2.Save
 
     public class GfItemBox
     {
-        public GfItemInfo[] PcWpnChipBox = new GfItemInfo[200];
-        public GfItemInfo[] PcEquipBox = new GfItemInfo[900];
-        public GfItemInfo[] EquipOrbBox = new GfItemInfo[500];
-        public GfItemInfo[] SalvageBox = new GfItemInfo[200];
-        public GfItemInfo[] PreciousBox = new GfItemInfo[500];
-        public GfItemInfo[] InfoBox = new GfItemInfo[200];
-        public GfItemInfo[] EventBox = new GfItemInfo[100];
-        public GfItemInfo[] CollectionListBox = new GfItemInfo[500];
-        public GfItemInfo[] TresureBox = new GfItemInfo[200];
-        public GfItemInfo[] EmptyOrbBox = new GfItemInfo[500];
-        public GfItemInfo[] FavoriteBox = new GfItemInfo[500];
-        public GfItemInfo[] CrystalListBox = new GfItemInfo[200];
-        public GfItemInfo[] BoosterBox = new GfItemInfo[200];
-        public GfItemInfo[] HanaRoleBox = new GfItemInfo[200];
-        public GfItemInfo[] HanaAtrBox = new GfItemInfo[200];
-        public GfItemInfo[] HanaArtsBox = new GfItemInfo[200];
-        public GfItemInfo[] HanaNArtsBox = new GfItemInfo[200];
-        public GfItemInfo[] HanaAssistBox = new GfItemInfo[700];
-        public uint[] Serials = new uint[19];
+        public GfItemInfo[] PcWpnChipBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] PcEquipBox { get; set; } = new GfItemInfo[900];
+        public GfItemInfo[] EquipOrbBox { get; set; } = new GfItemInfo[500];
+        public GfItemInfo[] SalvageBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] PreciousBox { get; set; } = new GfItemInfo[500];
+        public GfItemInfo[] InfoBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] EventBox { get; set; } = new GfItemInfo[100];
+        public GfItemInfo[] CollectionListBox { get; set; } = new GfItemInfo[500];
+        public GfItemInfo[] TresureBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] EmptyOrbBox { get; set; } = new GfItemInfo[500];
+        public GfItemInfo[] FavoriteBox { get; set; } = new GfItemInfo[500];
+        public GfItemInfo[] CrystalListBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] BoosterBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] HanaRoleBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] HanaAtrBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] HanaArtsBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] HanaNArtsBox { get; set; } = new GfItemInfo[200];
+        public GfItemInfo[] HanaAssistBox { get; set; } = new GfItemInfo[700];
+        public uint[] Serials { get; set; } = new uint[19];
 
         public GfItemBox(DataBuffer save)
         {
@@ -1639,12 +1639,12 @@ namespace Xb2.Save
 
     public class GameFlag
     {
-        public byte[] Flags1Bit = new byte[65536];
-        public byte[] Flags2Bit = new byte[65536];
-        public byte[] Flags4Bit = new byte[8192];
-        public byte[] Flags8Bit = new byte[8192];
-        public ushort[] Flags16Bit = new ushort[3072];
-        public uint[] Flags32Bit = new uint[3336];
+        public byte[] Flags1Bit { get; set; } = new byte[65536];
+        public byte[] Flags2Bit { get; set; } = new byte[65536];
+        public byte[] Flags4Bit { get; set; } = new byte[8192];
+        public byte[] Flags8Bit { get; set; } = new byte[8192];
+        public ushort[] Flags16Bit { get; set; } = new ushort[3072];
+        public uint[] Flags32Bit { get; set; } = new uint[3336];
 
         public GameFlag(DataBuffer save)
         {
@@ -1693,11 +1693,11 @@ namespace Xb2.Save
 
     public class SDataMap
     {
-        public Vec3Padded[] DriverPositions = new Vec3Padded[3];
-        public Vec3Padded[] BladePositions = new Vec3Padded[3];
-        public Vec3Padded[] DriverRotations = new Vec3Padded[3];
-        public Vec3Padded[] BladeRotations = new Vec3Padded[3];
-        public uint MapJumpId;
+        public Vec3Padded[] DriverPositions { get; set; } = new Vec3Padded[3];
+        public Vec3Padded[] BladePositions { get; set; } = new Vec3Padded[3];
+        public Vec3Padded[] DriverRotations { get; set; } = new Vec3Padded[3];
+        public Vec3Padded[] BladeRotations { get; set; } = new Vec3Padded[3];
+        public uint MapJumpId { get; set; }
 
         public SDataMap(DataBuffer save)
         {
@@ -1752,14 +1752,14 @@ namespace Xb2.Save
 
     public class MercenaryTeam
     {
-        public ushort[] MemberIds = new ushort[6];
-        public uint field_C;
-        public uint TeamId;
-        public uint MissionId;
-        public uint field_18;
-        public uint MissionTime;
-        public uint MissionTimeOriginal;
-        public uint field_24;
+        public ushort[] MemberIds { get; set; } = new ushort[6];
+        public uint field_C { get; set; }
+        public uint TeamId { get; set; }
+        public uint MissionId { get; set; }
+        public uint field_18 { get; set; }
+        public uint MissionTime { get; set; }
+        public uint MissionTimeOriginal { get; set; }
+        public uint field_24 { get; set; }
 
         public MercenaryTeam(DataBuffer save)
         {
@@ -1796,8 +1796,8 @@ namespace Xb2.Save
 
     public class FixedVector3MercenaryTeam
     {
-        public MercenaryTeam[] Data = new MercenaryTeam[3];
-        public ulong Length;
+        public MercenaryTeam[] Data { get; set; } = new MercenaryTeam[3];
+        public ulong Length { get; set; }
 
         public FixedVector3MercenaryTeam(DataBuffer save)
         {
@@ -1822,8 +1822,8 @@ namespace Xb2.Save
 
     public class FixedVector256QuestId
     {
-        public uint[] Data = new uint[256];
-        public uint Length;
+        public uint[] Data { get; set; } = new uint[256];
+        public uint Length { get; set; }
 
         public FixedVector256QuestId(DataBuffer save)
         {
@@ -1848,7 +1848,7 @@ namespace Xb2.Save
 
     public class MercenaryTeamPreset
     {
-        public ushort[] Members = new ushort[6];
+        public ushort[] Members { get; set; } = new ushort[6];
 
         public MercenaryTeamPreset(DataBuffer save)
         {
@@ -1869,11 +1869,11 @@ namespace Xb2.Save
 
     public class TaskAchieve
     {
-        public ushort field_0;
-        public ushort field_2;
-        public ushort field_4;
-        public ushort field_6;
-        public uint field_8;
+        public ushort field_0 { get; set; }
+        public ushort field_2 { get; set; }
+        public ushort field_4 { get; set; }
+        public ushort field_6 { get; set; }
+        public uint field_8 { get; set; }
 
         public TaskAchieve(DataBuffer save)
         {
@@ -1896,8 +1896,8 @@ namespace Xb2.Save
 
     public class FixedVector128TaskAchieve
     {
-        public TaskAchieve[] Data = new TaskAchieve[128];
-        public ulong Length;
+        public TaskAchieve[] Data { get; set; } = new TaskAchieve[128];
+        public ulong Length { get; set; }
 
         public FixedVector128TaskAchieve(DataBuffer save)
         {
@@ -1922,14 +1922,14 @@ namespace Xb2.Save
 
     public class SDataWeather
     {
-        public string Name;
-        public uint field_4;
-        public uint field_8;
-        public uint field_C;
-        public float field_10;
-        public float field_14;
-        public uint field_18;
-        public uint field_1C;
+        public string Name { get; set; }
+        public uint field_4 { get; set; }
+        public uint field_8 { get; set; }
+        public uint field_C { get; set; }
+        public float field_10 { get; set; }
+        public float field_14 { get; set; }
+        public uint field_18 { get; set; }
+        public uint field_1C { get; set; }
 
         public SDataWeather(DataBuffer save)
         {
@@ -1958,21 +1958,21 @@ namespace Xb2.Save
 
     public class SDataEvent
     {
-        public ushort EventId;
-        public ushort Creator;
-        public ushort PlayBladeId;
-        public ushort VoiceID;
-        public ushort Attribute;
-        public ushort ExtraParts;
-        public ushort A;
-        public ushort[] Weapons = new ushort[10];
-        public ushort[] B = new ushort[6];
-        public ushort[] Blades = new ushort[10];
-        public ushort[] C = new ushort[5];
-        public GameTime GameTime;
-        public ushort CurrentMapWeatherID;
-        public ushort CurrentWtrType;
-        public ushort[] D = new ushort[8];
+        public ushort EventId { get; set; }
+        public ushort Creator { get; set; }
+        public ushort PlayBladeId { get; set; }
+        public ushort VoiceID { get; set; }
+        public ushort Attribute { get; set; }
+        public ushort ExtraParts { get; set; }
+        public ushort A { get; set; }
+        public ushort[] Weapons { get; set; } = new ushort[10];
+        public ushort[] B { get; set; } = new ushort[6];
+        public ushort[] Blades { get; set; } = new ushort[10];
+        public ushort[] C { get; set; } = new ushort[5];
+        public GameTime GameTime { get; set; }
+        public ushort CurrentMapWeatherID { get; set; }
+        public ushort CurrentWtrType { get; set; }
+        public ushort[] D { get; set; } = new ushort[8];
 
         public SDataEvent(DataBuffer save)
         {
@@ -2057,67 +2057,67 @@ namespace Xb2.Save
 
     public class SDataGame
     {
-        public uint Money;
-        public uint MapJumpId;
-        public Vec3 MapPosition;
-        public float LandmarkRotY;
-        public ushort isTimeStop;
-        public ushort ChapterSaveScenarioFlag;
-        public ushort ChapterSaveEventId;
-        public ushort field_2A;
-        public SDataDriver[] Drivers = new SDataDriver[16];
-        public SDataBlade[] Blades = new SDataBlade[422];
-        public GfSDataParty Party;
-        public GfItemBox ItemBox;
-        public GameFlag Flags;
-        public uint ScenarioQuest;
-        public uint CurrentQuest;
-        public SDataMap Map;
-        public GameTime GameTime;
-        public ElapseTime ElapseTime;
-        public FixedVector3MercenaryTeam MercTeams;
-        public MercenaryTeamPreset[] MercPresets = new MercenaryTeamPreset[8];
-        public ushort[] CommonBladeIds = new ushort[192];
-        public float PlayerCameraDistance;
-        public uint GameClearCount;
-        public FixedVector128TaskAchieve AchievementTasks;
-        public FixedVector256QuestId Quests;
-        public SDataWeather[] Weather = new SDataWeather[64];
-        public uint EtherCrystals;
-        public float MoveDistance;
-        public float MoveDistanceB;
-        public uint AssurePoint;
-        public uint AssureCount;
-        public ushort RareBladeAppearType;
-        public ushort field_10AD52;
-        public uint CoinCount;
-        public uint[] SavedEnemyHp = new uint[3];
-        public RealTime Time;
-        public float CameraHeight;
-        public byte[] Minigame = new byte[256];
-        public float CameraYaw;
-        public float CameraPitch;
-        public byte CameraFreeMode;
-        public byte IsHikariCurrent;
-        public ushort AutoEventAfterLoad;
-        public byte IsCollectFlagNewVersion;
-        public byte IsEndGameSave;
-        public byte CameraSide;
-        public byte gap_10AE83;
-        public SDataEvent[] Events = new SDataEvent[500];
-        public uint EventsLength;
-        public byte[] gap1171D8 = new byte[400];
-        public float field_117368;
-        public uint[] ContentVersions = new uint[5];
-        public byte[] gap_117380 = new byte[776];
-        public uint field_117688;
+        public uint Money { get; set; }
+        public uint LandmarkPoint { get; set; }
+        public Vec3 LandmarkPos { get; set; }
+        public float LandmarkRotY { get; set; }
+        public ushort isTimeStop { get; set; }
+        public ushort ChapterSaveScenarioFlag { get; set; }
+        public ushort ChapterSaveEventId { get; set; }
+        public ushort field_2A { get; set; }
+        public SDataDriver[] Drivers { get; set; } = new SDataDriver[16];
+        public SDataBlade[] Blades { get; set; } = new SDataBlade[422];
+        public GfSDataParty Party { get; set; }
+        public GfItemBox ItemBox { get; set; }
+        public GameFlag Flags { get; set; }
+        public uint ScenarioQuest { get; set; }
+        public uint CurrentQuest { get; set; }
+        public SDataMap Map { get; set; }
+        public GameTime GameTime { get; set; }
+        public ElapseTime ElapseTime { get; set; }
+        public FixedVector3MercenaryTeam MercTeams { get; set; }
+        public MercenaryTeamPreset[] MercPresets { get; set; } = new MercenaryTeamPreset[8];
+        public ushort[] CommonBladeIds { get; set; } = new ushort[192];
+        public float PlayerCameraDistance { get; set; }
+        public uint GameClearCount { get; set; }
+        public FixedVector128TaskAchieve AchievementTasks { get; set; }
+        public FixedVector256QuestId Quests { get; set; }
+        public SDataWeather[] Weather { get; set; } = new SDataWeather[64];
+        public uint EtherCrystals { get; set; }
+        public float MoveDistance { get; set; }
+        public float MoveDistanceB { get; set; }
+        public uint AssurePoint { get; set; }
+        public uint AssureCount { get; set; }
+        public ushort RareBladeAppearType { get; set; }
+        public ushort field_10AD52 { get; set; }
+        public uint CoinCount { get; set; }
+        public uint[] SavedEnemyHp { get; set; } = new uint[3];
+        public RealTime Time { get; set; }
+        public float CameraHeight { get; set; }
+        public byte[] Minigame { get; set; } = new byte[256];
+        public float CameraYaw { get; set; }
+        public float CameraPitch { get; set; }
+        public byte CameraFreeMode { get; set; }
+        public byte IsHikariCurrent { get; set; }
+        public ushort AutoEventAfterLoad { get; set; }
+        public byte IsCollectFlagNewVersion { get; set; }
+        public byte IsEndGameSave { get; set; }
+        public byte CameraSide { get; set; }
+        public byte gap_10AE83 { get; set; }
+        public SDataEvent[] Events { get; set; } = new SDataEvent[500];
+        public uint EventsLength { get; set; }
+        public byte[] gap1171D8 { get; set; } = new byte[400];
+        public float field_117368 { get; set; }
+        public uint[] ContentVersions { get; set; } = new uint[5];
+        public byte[] gap_117380 { get; set; } = new byte[776];
+        public uint field_117688 { get; set; }
 
         public SDataGame(DataBuffer save)
         {
             Money = save.ReadUInt32();
-            MapJumpId = save.ReadUInt32();
+            LandmarkPoint = save.ReadUInt32();
             save.Position += 8;
-            MapPosition = new Vec3(save);
+            LandmarkPos = new Vec3(save);
             save.Position += 4;
             LandmarkRotY = save.ReadSingle();
             isTimeStop = save.ReadUInt16();
@@ -2231,9 +2231,9 @@ namespace Xb2.Save
         public void WriteSave(DataBuffer save)
         {
             save.WriteUInt32(Money);
-            save.WriteUInt32(MapJumpId);
+            save.WriteUInt32(LandmarkPoint);
             save.Position += 8;
-            MapPosition.WriteSave(save);
+            LandmarkPos.WriteSave(save);
             save.Position += 4;
             save.WriteSingle(LandmarkRotY);
             save.WriteUInt16(isTimeStop);

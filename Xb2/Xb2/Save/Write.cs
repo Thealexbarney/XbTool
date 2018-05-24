@@ -8,7 +8,6 @@ namespace Xb2.Save
     {
         public static byte[] WriteSave(SDataSave saveFile)
         {
-            SaveCodeGen.GenerateSaveCode();
             var saveBytes = new byte[0x1176A0];
             var save = new DataBuffer(saveBytes, Game.XB2, 0);
             saveFile.WriteSave(save);

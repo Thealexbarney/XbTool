@@ -50,6 +50,9 @@ namespace Xb2
                 case Task.ReadSave:
                     ReadSave(options);
                     break;
+                case Task.CombineBdat:
+                    CombineBdat(options);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -125,7 +128,7 @@ namespace Xb2
             return tables;
         }
 
-        private static BdatCollection GetBdatCollection(Options options)
+        public static BdatCollection GetBdatCollection(Options options)
         {
             BdatTables bdats = ReadBdatTables(options, false);
             BdatCollection tables = Deserialize.DeserializeTables(bdats);
@@ -251,6 +254,16 @@ namespace Xb2
             BdatCollection tables = GetBdatCollection(options);
             string printout = Print.PrintSave(saveData, tables);
             File.WriteAllText(options.Output, printout);
+        }
+
+        private static void CombineBdat(Options options)
+        {
+            //if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output file was specified.");
+
+            var tables = ReadBdatTables(options, false).Tables;
+            var combined = BdatTools.Combine(tables);
+            File.WriteAllBytes(options.Output, combined);
         }
     }
 }

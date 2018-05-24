@@ -87,6 +87,9 @@ namespace Xb2.BdatString
                 case BdatFieldType.QuestFlag:
                     ApplyRef(BdatStringTools.GetQuestListTable(refId));
                     break;
+                case BdatFieldType.QuestFlagIra:
+                    ApplyRef(BdatStringTools.GetQuestListIraTable(refId));
+                    break;
                 case BdatFieldType.Condition:
                     var conditionType = (ConditionType)int.Parse(item[field.RefField].ValueString);
                     ApplyRef(BdatStringTools.GetConditionTable(conditionType));

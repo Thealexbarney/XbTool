@@ -42,6 +42,7 @@ namespace Xb2.Bdat
         ShopTable,
         Enum,
         QuestFlag,
+        QuestFlagIra,
         Flag,
         GameFlag,
         Change,

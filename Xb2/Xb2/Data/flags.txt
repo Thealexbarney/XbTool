@@ -1,0 +1,54 @@
+1-bit:
+13266+: Map complete flags
+13281+: Zone complete flags
+35323: Pneuma name. 1 - Mythra, 0 - Pyra
+39474+100: Menu flags
+39487: Event Theater enabled
+39533 - 39553: Item box of type x has been setup:
+46285+: Merc mission complete
+46786+: Blade quest events watched
+46987+: Blade create events watched
+48590+: Enemy album unlocked enemies
+50960+: Tutorial menu flags
+51161+: Landmark x is found
+55169: AOC #1 version > 0
+55170: AOC #1 version > 1
+55171: AOC #1 version > 2
+55172: AOC #1 version > 3
+55173: AOC #3 version > 0
+55175: AOC #2 version > 0
+
+2-bit:
+0+: H2H gimmick state
+11804+: Salvage gimmick state
+29020+: Collection gimmick state
+31648+100: Menu flags
+31765+: TBox gimmick state
+38070+: Door gimmick state
+43878+: Map gimmick state
+45640+: Elevator gimmick state
+47087+: Precious gimmick state
+51161+: Landmark gimmick state
+54162+: Tutorial gimmick state
+55190+: Enemy wave gimmick state
+
+4-bit:
+5+: Merc mission state
+652: Hitonowa level
+
+8-bit:
+534+100: Menu flags
+2127: Ursula vocal level
+2128: Ursula looks level
+2129: Ursula soul level
+2132: Salvager points
+
+3980: Driver favorites unlocked start
+
+16-bit:
+1: Scenario flag
+1550: Ursula fan count
+2892+: Enemy album unlock order
+
+32-bit:
+2+: Store bought item tracker

@@ -53,6 +53,26 @@ namespace Xb2.Bdat
             MarkFlagMembers();
         }
 
+        public BdatTables(byte[] tables, Game game, bool readMetadata)
+        {
+            Game = game;
+            DataBuffer buffer = new DataBuffer(tables, game, 0);
+            Tables = ReadBdatFile(buffer, "");
+            if (!readMetadata) return;
+
+            BdatFields = new Dictionary<(string table, string member), BdatFieldInfo>();
+            DisplayFields = new Dictionary<string, string>();
+
+            ReadFieldInfo();
+            ReadArrayInfo();
+            ReadTableInfo();
+            Types = CalculateBdatTypes(Tables);
+            GetBdatRefs();
+            ReadArrayInfos();
+            GetTableDesc();
+            MarkFlagMembers();
+        }
+
         public static BdatTable[] ReadAllBdats(FileArchive archive, string lang = "gb")
         {
             var tables = new List<BdatTable>();
@@ -230,7 +250,10 @@ namespace Xb2.Bdat
                         if (!tablesDict.ContainsKey(newInfo.RefTable)) continue;
                     }
 
-                    BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                    if (!BdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
+                    {
+                        BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                    }
                 }
 
                 BdatFields.Remove(field.Key);
@@ -260,7 +283,10 @@ namespace Xb2.Bdat
                             }
                         }
 
-                        BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                        if (!BdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
+                        {
+                            BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                        }
                     }
                 }
 

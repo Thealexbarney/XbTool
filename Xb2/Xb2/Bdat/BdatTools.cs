@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Xb2.Bdat
 {
@@ -87,6 +88,33 @@ namespace Xb2.Bdat
             }
 
             return checksum;
+        }
+
+        public static byte[] Combine(BdatTable[] tables)
+        {
+            int count = tables.Length;
+            int headerLength = 8 + count * 4;
+            int bodyLength = tables.Sum(x => x.Data.Length);
+            int length = headerLength + bodyLength;
+
+            var combined = new byte[length];
+            var buffer = new DataBuffer(combined, Game.XB2, 0);
+            buffer.WriteInt32(count);
+            buffer.WriteInt32(length);
+
+            int offset = headerLength;
+            foreach (BdatTable table in tables)
+            {
+                buffer.WriteInt32(offset);
+                offset += table.Data.Length;
+            }
+
+            foreach (BdatTable table in tables)
+            {
+                buffer.WriteBytes(table.Data.ToArray());
+            }
+
+            return combined;
         }
     }
 

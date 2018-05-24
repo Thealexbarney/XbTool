@@ -181,6 +181,8 @@ namespace Xb2.BdatString
             if (id > 40000) return "EVT_setupFev01";
             if (id > 30000) return "EVT_setupQst01";
             if (id > 29000) return "EVT_setupBf70";
+            if (id > 28000) return "EVT_setupBf71";
+            if (id > 21000) return "EVT_setupBf11";
             if (id > 20000) return "EVT_setupBf10";
             if (id > 19000) return "EVT_setupBf09";
             if (id > 18000) return "EVT_setupBf08";
@@ -193,6 +195,16 @@ namespace Xb2.BdatString
             return "EVT_setupBf01";
         }
 
+        public static string GetChangeTable(int id)
+        {
+            if (id > 60000) return "EVT_listDeb01";
+            if (id > 40000) return "EVT_listTlk01";
+            if (id > 30000) return "EVT_listFev01";
+            if (id > 20000) return "EVT_listQst01";
+            if (id > 19000) return "EVT_listBl";
+            return "EVT_listBf";
+        }
+
         public static string GetQuestListTable(int id)
         {
             if (id > 7000) return "FLD_QuestListAchievement";
@@ -201,6 +213,12 @@ namespace Xb2.BdatString
             if (id > 2000) return "FLD_QuestListNormal";
             if (id > 1000) return "FLD_QuestListMini";
             return "FLD_QuestList";
+        }
+
+        public static string GetQuestListIraTable(int id)
+        {
+            if (id > 2000) return "FLD_QuestListNormalIra";
+            return "FLD_QuestListIra";
         }
 
         public static string GetLayerTable(int id)

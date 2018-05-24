@@ -444,4 +444,14 @@ namespace Xb2.Types
         Driver,
         Blade
     }
+
+    public enum EventCategory
+    {
+        None,
+        TEV,
+        FEV,
+        SEV,
+        CS,
+        MOV
+    }
 }

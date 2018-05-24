@@ -47,19 +47,19 @@ namespace Xb2.Save
                 switch (field.Type)
                 {
                     case "Scalar":
-                        sb.AppendLine($"public {field.DataType} {field.Name};");
+                        sb.AppendLine($"public {field.DataType} {field.Name} {{ get; set; }}");
                         break;
                     case "Array":
-                        sb.AppendLine($"public {field.DataType}[] {field.Name} = new {field.DataType}[{field.Length}];");
+                        sb.AppendLine($"public {field.DataType}[] {field.Name} {{ get; set; }} = new {field.DataType}[{field.Length}];");
                         break;
                     case "Bitfield":
                         foreach (var value in field.Bitfield)
                         {
-                            sb.AppendLine($"public {field.DataType} {value.Name};");
+                            sb.AppendLine($"public {field.DataType} {value.Name} {{ get; set; }}");
                         }
                         break;
                     case "BitfieldArray":
-                        sb.AppendLine($"public byte[] {field.Name} = new byte[{field.Length}];");
+                        sb.AppendLine($"public byte[] {field.Name} {{ get; set; }} = new byte[{field.Length}];");
                         break;
                 }
             }
