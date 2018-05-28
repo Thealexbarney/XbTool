@@ -18,10 +18,10 @@ namespace Xb2.Bdat
         public BdatType[] Types { get; set; }
         public BdatTableDesc[] TableDesc { get; set; }
 
-        public BdatTables(FileArchive archive, bool readMetadata, string lang = "gb")
+        public BdatTables(IFileReader fs, bool readMetadata, string lang = "gb")
         {
             Game = Game.XB2;
-            Tables = ReadAllBdats(archive, lang);
+            Tables = ReadAllBdats(fs, lang);
             if (!readMetadata) return;
 
             ReadFieldInfo();
@@ -73,17 +73,17 @@ namespace Xb2.Bdat
             MarkFlagMembers();
         }
 
-        public static BdatTable[] ReadAllBdats(FileArchive archive, string lang = "gb")
+        public static BdatTable[] ReadAllBdats(IFileReader fs, string lang = "gb")
         {
             var tables = new List<BdatTable>();
 
-            tables.AddRange(ReadBdatFile(new DataBuffer(archive.ReadFile("/bdat/common.bdat"), Game.XB2, 0), "/bdat/common.bdat"));
-            tables.AddRange(ReadBdatFile(new DataBuffer(archive.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
+            tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/common.bdat"), Game.XB2, 0), "/bdat/common.bdat"));
+            tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
 
-            foreach (var file in archive.GetChildFileInfos($"/bdat/{lang}/"))
+            foreach (var filename in fs.FindFiles($"/bdat/{lang}/*"))
             {
-                DataBuffer buffer = new DataBuffer(archive.ReadFile(file), Game.XB2, 0);
-                tables.AddRange(ReadBdatFile(buffer, file.Filename));
+                DataBuffer buffer = new DataBuffer(fs.ReadFile(filename), Game.XB2, 0);
+                tables.AddRange(ReadBdatFile(buffer, filename));
             }
 
             return tables.ToArray();

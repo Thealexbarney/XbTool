@@ -8770,6 +8770,7 @@ namespace Xb2.Serialization
                 item._ReAct7 = (ReactType)item.ReAct7;
                 item._ReAct8 = (ReactType)item.ReAct8;
                 item._ReAct9 = (ReactType)item.ReAct9;
+                item._UI = tables.MNU_IconList.GetItemOrNull(item.UI);
                 item._WpnType = tables.ITM_PcWpnType.GetItemOrNull(item.WpnType);
             }
 
@@ -9188,6 +9189,7 @@ namespace Xb2.Serialization
                 item._SkillAchievement1 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement1);
                 item._SkillAchievement2 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement2);
                 item._SkillAchievement3 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement3);
+                item._Still = tables.MNU_IconList.GetItemOrNull(item.Still);
                 item._WeaponType = tables.ITM_PcWpnType.GetItemOrNull(item.WeaponType);
                 item._Achievement = new[]
                 {
@@ -10625,20 +10627,66 @@ namespace Xb2.Serialization
 
             foreach (EVT_listBf item in tables.EVT_listBf.Items)
             {
+                item._category = (EventCategory)item.category;
                 item._chgEdID = tables.EVT_chgBf01.GetItemOrNull(item.chgEdID);
                 item._chgStID = tables.EVT_chgBf01.GetItemOrNull(item.chgStID);
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
+                item._envSeam = tables.EVT_listBf.GetItemOrNull(item.envSeam);
+                item._linkID = tables.EVT_listBf.GetItemOrNull(item.linkID);
+                item._nextIDtheater = tables.EVT_listBf.GetItemOrNull(item.nextIDtheater);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
+            }
+
+            foreach (EVT_listBl item in tables.EVT_listBl.Items)
+            {
+                item._category = (EventCategory)item.category;
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
+            }
+
+            foreach (EVT_listDeb01 item in tables.EVT_listDeb01.Items)
+            {
+                item._category = (EventCategory)item.category;
+                item._chgEdID = tables.EVT_chgDeb01.GetItemOrNull(item.chgEdID);
+                item._chgStID = tables.EVT_chgDeb01.GetItemOrNull(item.chgStID);
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
+                item._setupID = tables.EVT_setupDeb01.GetItemOrNull(item.setupID);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
             }
 
             foreach (EVT_listFev01 item in tables.EVT_listFev01.Items)
             {
+                item._category = (EventCategory)item.category;
                 item._chgEdID = tables.EVT_chgFev01.GetItemOrNull(item.chgEdID);
                 item._chgStID = tables.EVT_chgFev01.GetItemOrNull(item.chgStID);
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
+                item._setupID = tables.EVT_setupFev01.GetItemOrNull(item.setupID);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
             }
 
             foreach (EVT_listQst01 item in tables.EVT_listQst01.Items)
             {
-                item._category = tables.menu_quest_cate_ms.GetItemOrNull(item.category);
+                item._category = (EventCategory)item.category;
+                item._chgEdID = tables.EVT_chgQst01.GetItemOrNull(item.chgEdID);
+                item._chgStID = tables.EVT_chgQst01.GetItemOrNull(item.chgStID);
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
                 item._setupID = tables.EVT_setupQst01.GetItemOrNull(item.setupID);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
+                item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
+            }
+
+            foreach (EVT_listTlk01 item in tables.EVT_listTlk01.Items)
+            {
+                item._category = (EventCategory)item.category;
+                item._chgEdID = tables.EVT_chgTlk01.GetItemOrNull(item.chgEdID);
+                item._chgStID = tables.EVT_chgTlk01.GetItemOrNull(item.chgStID);
+                item._edFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.edFormID);
+                item._setupID = tables.EVT_setupTlk01.GetItemOrNull(item.setupID);
+                item._stFormID = tables.SYS_MapJumpEvList.GetItemOrNull(item.stFormID);
                 item._zoneID = tables.FLD_maplist.GetItemOrNull(item.zoneID);
             }
 
@@ -10679,6 +10727,13 @@ namespace Xb2.Serialization
             foreach (FLD_BladePop item in tables.FLD_BladePop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (FLD_CampPop item in tables.FLD_CampPop.Items)
+            {
+                item._CampPointName = tables.fld_camppoint.GetItemOrNull(item.CampPointName);
+                item._ConditionID = tables.FLD_ConditionList.GetItemOrNull(item.ConditionID);
             }
 
             foreach (FLD_ClimbingPOP item in tables.FLD_ClimbingPOP.Items)
@@ -10758,6 +10813,7 @@ namespace Xb2.Serialization
             foreach (FLD_DoorGimmick item in tables.FLD_DoorGimmick.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._LODmodel = tables.FLD_LODList.GetItemOrNull(item.LODmodel);
             }
 
             foreach (FLD_EffectPop item in tables.FLD_EffectPop.Items)
@@ -10784,6 +10840,16 @@ namespace Xb2.Serialization
                 item._EnemyID7 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID7);
                 item._EnemyID8 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID8);
                 item._EnemyID9 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID9);
+            }
+
+            foreach (FLD_EnemyWave item in tables.FLD_EnemyWave.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (FLD_EnemyWaveIra item in tables.FLD_EnemyWaveIra.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (FLD_FieldLockGimmick item in tables.FLD_FieldLockGimmick.Items)
@@ -10815,6 +10881,7 @@ namespace Xb2.Serialization
             foreach (FLD_JumpGimmick item in tables.FLD_JumpGimmick.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
             }
 
             foreach (FLD_KizunaTalk item in tables.FLD_KizunaTalk.Items)
@@ -10896,6 +10963,7 @@ namespace Xb2.Serialization
             foreach (FLD_NpcGroupId item in tables.FLD_NpcGroupId.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (FLD_OwnerBonus item in tables.FLD_OwnerBonus.Items)
@@ -10947,6 +11015,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestList.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestList.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestList.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestList.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestList.GetItemOrNull(item.PRTQuestID);
@@ -10958,6 +11027,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListAchievement.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListAchievement.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListAchievement.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListAchievement.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListAchievement.GetItemOrNull(item.PRTQuestID);
@@ -10973,11 +11043,11 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListBlade.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListBlade.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListBlade.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListBlade.GetItemOrNull(item.PRTQuestID);
                 item._PurposeID = tables.FLD_QuestTaskBlade.GetItemOrNull(item.PurposeID);
-                item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_blade.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_blade.GetItemOrNull(item.ResultA);
                 item._ResultB = tables.fld_quest_blade.GetItemOrNull(item.ResultB);
@@ -10989,6 +11059,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListIra.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListIra.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListIra.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListIra.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListIra.GetItemOrNull(item.PRTQuestID);
@@ -11000,6 +11071,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListMercenaries.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListMercenaries.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListMercenaries.GetItemOrNull(item.PRTQuestID);
@@ -11015,6 +11087,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListMini.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListMini.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListMini.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListMini.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListMini.GetItemOrNull(item.PRTQuestID);
@@ -11030,11 +11103,11 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListNormal.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListNormal.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListNormal.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListNormal.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListNormal.GetItemOrNull(item.PRTQuestID);
                 item._PurposeID = tables.FLD_QuestTaskNormal.GetItemOrNull(item.PurposeID);
-                item._QuestCategory = tables.menu_quest_cate_ms.GetItemOrNull(item.QuestCategory);
                 item._QuestTitle = tables.fld_quest_normal.GetItemOrNull(item.QuestTitle);
                 item._ResultA = tables.fld_quest_normal.GetItemOrNull(item.ResultA);
                 item._ResultB = tables.fld_quest_normal.GetItemOrNull(item.ResultB);
@@ -11046,6 +11119,7 @@ namespace Xb2.Serialization
             foreach (FLD_QuestList item in tables.FLD_QuestListNormalIra.Items)
             {
                 item._HintsID = tables.FLD_QuestHints.GetItemOrNull(item.HintsID);
+                item._LinkedQuestID = tables.FLD_QuestListNormalIra.GetItemOrNull(item.LinkedQuestID);
                 item._NextQuestA = tables.FLD_QuestListNormalIra.GetItemOrNull(item.NextQuestA);
                 item._NextQuestB = tables.FLD_QuestListNormalIra.GetItemOrNull(item.NextQuestB);
                 item._PRTQuestID = tables.FLD_QuestListNormalIra.GetItemOrNull(item.PRTQuestID);
@@ -11094,6 +11168,10 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestTask item in tables.FLD_QuestTask.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -11150,6 +11228,10 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestTask item in tables.FLD_QuestTaskIra.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -11166,6 +11248,10 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestTask item in tables.FLD_QuestTaskMercenaries.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -11178,6 +11264,10 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestTask item in tables.FLD_QuestTaskMini.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -11194,6 +11284,30 @@ namespace Xb2.Serialization
 
             foreach (FLD_QuestTask item in tables.FLD_QuestTaskNormal.Items)
             {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
+                item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
+                item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
+                item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
+                item._TaskID4 = tables.GetTask((TaskType)item.TaskType4, item.TaskID4);
+                item._TaskLog1 = tables.fld_quest_normal.GetItemOrNull(item.TaskLog1);
+                item._TaskLog2 = tables.fld_quest_normal.GetItemOrNull(item.TaskLog2);
+                item._TaskLog3 = tables.fld_quest_normal.GetItemOrNull(item.TaskLog3);
+                item._TaskLog4 = tables.fld_quest_normal.GetItemOrNull(item.TaskLog4);
+                item._TaskType1 = (TaskType)item.TaskType1;
+                item._TaskType2 = (TaskType)item.TaskType2;
+                item._TaskType3 = (TaskType)item.TaskType3;
+                item._TaskType4 = (TaskType)item.TaskType4;
+            }
+
+            foreach (FLD_QuestTask item in tables.FLD_QuestTaskNormalIra.Items)
+            {
+                item._TaskCondition1 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition1);
+                item._TaskCondition2 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition2);
+                item._TaskCondition3 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition3);
+                item._TaskCondition4 = tables.FLD_ConditionList.GetItemOrNull(item.TaskCondition4);
                 item._TaskID1 = tables.GetTask((TaskType)item.TaskType1, item.TaskID1);
                 item._TaskID2 = tables.GetTask((TaskType)item.TaskType2, item.TaskID2);
                 item._TaskID3 = tables.GetTask((TaskType)item.TaskType3, item.TaskID3);
@@ -11288,6 +11402,7 @@ namespace Xb2.Serialization
                 item._SalvageTable3 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable3);
                 item._SalvageTable4 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable4);
                 item._SalvageTable5 = tables.FLD_SalvageTable.GetItemOrNull(item.SalvageTable5);
+                item._SpecialItem = tables.GetItem(item.SpecialItem);
                 item._BtnChallenge = new[]
                 {
                     item._BtnChallenge0,
@@ -11356,6 +11471,7 @@ namespace Xb2.Serialization
             foreach (FLD_SePop item in tables.FLD_SePop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._SEpopTime = (TimeRange)item.SEpopTime;
             }
 
             foreach (FLD_TimeInfo item in tables.FLD_TimeInfo.Items)
@@ -11366,6 +11482,7 @@ namespace Xb2.Serialization
             foreach (FLD_WarpGimmick item in tables.FLD_WarpGimmick.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
             }
 
             foreach (FLD_WeatherInfo item in tables.FLD_WeatherInfo.Items)
@@ -11619,6 +11736,7 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
@@ -11629,6 +11747,25 @@ namespace Xb2.Serialization
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma01a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma01a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma02a_FLD_AutoTalk.Items)
@@ -11657,6 +11794,7 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
@@ -11684,13 +11822,20 @@ namespace Xb2.Serialization
             foreach (ma02a_FLD_MobPop item in tables.ma02a_FLD_MobPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
                 item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
                 item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma01a_FLD_NpcPop item in tables.ma02a_FLD_NpcPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
                 item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
                 item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
                 item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
@@ -11721,6 +11866,11 @@ namespace Xb2.Serialization
                 item._Text = tables.autotalk_ma03.GetItemOrNull(item.Text);
             }
 
+            foreach (ma02a_FLD_EventPop item in tables.ma03a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
             foreach (ma02a_FLD_LandmarkPop item in tables.ma03a_FLD_LandmarkPop.Items)
             {
                 item._category = (LandmarkType)item.category;
@@ -11729,6 +11879,35 @@ namespace Xb2.Serialization
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma03a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma03a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma03a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma03a_FLD_TboxPop item in tables.ma03a_FLD_TboxPop.Items)
@@ -11762,7 +11941,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma04a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma04a_FLD_LandmarkPop.Items)
@@ -11775,8 +11960,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma04a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma04a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma04a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma04a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -11822,7 +12037,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma05a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma05a_FLD_LandmarkPop item in tables.ma05a_FLD_LandmarkPop.Items)
@@ -11835,8 +12056,40 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma05a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma05a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma05a_FLD_NpcPop item in tables.ma05a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._FSID4 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID4);
+                item._FSID5 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID5);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma05a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -11854,6 +12107,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma05c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma07a_FLD_AutoTalk.Items)
@@ -11882,7 +12146,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma07a_FLD_EventPop item in tables.ma07a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma07a_FLD_LandmarkPop.Items)
@@ -11895,8 +12165,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma07a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma07a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma07a_FLD_NpcPop item in tables.ma07a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma07a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -11914,6 +12214,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma07c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma08a_FLD_AutoTalk.Items)
@@ -11942,7 +12253,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma08a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma08a_FLD_LandmarkPop.Items)
@@ -11955,8 +12272,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma08a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma08a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma08a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma08a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -11974,6 +12321,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma08c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma10a_FLD_AutoTalk.Items)
@@ -12002,7 +12360,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma10a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma10a_FLD_LandmarkPop.Items)
@@ -12015,8 +12379,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma10a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma10a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma10a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma10a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12034,6 +12428,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma10c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma11a_FLD_AutoTalk.Items)
@@ -12062,7 +12467,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma11a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma11a_FLD_LandmarkPop.Items)
@@ -12075,8 +12486,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma11a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma11a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma11a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma11a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12122,7 +12563,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma13a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma13a_FLD_LandmarkPop.Items)
@@ -12135,8 +12582,40 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma13a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma13a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma05a_FLD_NpcPop item in tables.ma13a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._FSID4 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID4);
+                item._FSID5 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID5);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma13a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12154,6 +12633,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma13c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma15a_FLD_AutoTalk.Items)
@@ -12182,7 +12672,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma15a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma15a_FLD_LandmarkPop.Items)
@@ -12195,8 +12691,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma15a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma15a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma15a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma15a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12214,6 +12740,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma15c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_CollectionPopList item in tables.ma16a_FLD_CollectionPopList.Items)
@@ -12234,7 +12771,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma16a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma16a_FLD_LandmarkPop.Items)
@@ -12247,8 +12790,32 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma02a_FLD_MobPop item in tables.ma16a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma16a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma16a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12286,7 +12853,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma17a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma17a_FLD_LandmarkPop.Items)
@@ -12297,6 +12870,25 @@ namespace Xb2.Serialization
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma17a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma17a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma03a_FLD_TboxPop item in tables.ma17a_FLD_TboxPop.Items)
@@ -12313,6 +12905,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma17c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_CollectionPopList item in tables.ma18a_FLD_CollectionPopList.Items)
@@ -12333,7 +12936,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma18a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma18a_FLD_LandmarkPop.Items)
@@ -12346,8 +12955,28 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma18a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma18a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma18a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12365,6 +12994,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma18c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_CollectionPopList item in tables.ma20a_FLD_CollectionPopList.Items)
@@ -12385,7 +13025,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma20a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma20a_FLD_LandmarkPop.Items)
@@ -12398,8 +13044,28 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma20a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma20a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma20a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12417,6 +13083,17 @@ namespace Xb2.Serialization
                 item._itm7ID = tables.GetItem(item.itm7ID);
                 item._itm8ID = tables.GetItem(item.itm8ID);
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma05c_FLD_EnemyPop item in tables.ma20c_FLD_EnemyPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
+                item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
+                item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
+                item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
+                item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
             foreach (ma02a_FLD_CollectionPopList item in tables.ma21a_FLD_CollectionPopList.Items)
@@ -12437,7 +13114,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma21a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma02a_FLD_LandmarkPop item in tables.ma21a_FLD_LandmarkPop.Items)
@@ -12448,6 +13131,25 @@ namespace Xb2.Serialization
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma21a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma21a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma03a_FLD_TboxPop item in tables.ma21a_FLD_TboxPop.Items)
@@ -12466,6 +13168,11 @@ namespace Xb2.Serialization
                 item._RSC_ID = tables.RSC_TboxList.GetItemOrNull(item.RSC_ID);
             }
 
+            foreach (ma02a_FLD_EventPop item in tables.ma30a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
             foreach (ma01a_FLD_LandmarkPop item in tables.ma30a_FLD_LandmarkPop.Items)
             {
                 item._category = (LandmarkType)item.category;
@@ -12473,6 +13180,19 @@ namespace Xb2.Serialization
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma30a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma40a_FLD_AutoTalk.Items)
@@ -12496,7 +13216,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma40a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma05a_FLD_LandmarkPop item in tables.ma40a_FLD_LandmarkPop.Items)
@@ -12509,8 +13235,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma40a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma40a_FLD_MobPop item in tables.ma40a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma40a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma40a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12551,7 +13307,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma41a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma05a_FLD_LandmarkPop item in tables.ma41a_FLD_LandmarkPop.Items)
@@ -12562,6 +13324,35 @@ namespace Xb2.Serialization
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma41a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma40a_FLD_MobPop item in tables.ma41a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma41a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma02a_FLD_TboxPop item in tables.ma41a_FLD_TboxPop.Items)
@@ -12587,7 +13378,36 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma49c_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+            }
+
+            foreach (ma05a_FLD_LandmarkPop item in tables.ma49c_FLD_LandmarkPop.Items)
+            {
+                item._category = (LandmarkType)item.category;
+                item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
+                item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
+                item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma49c_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma01a_FLD_LandmarkPop item in tables.ma50a_FLD_LandmarkPop.Items)
@@ -12597,6 +13417,25 @@ namespace Xb2.Serialization
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
+            }
+
+            foreach (ma01a_FLD_MapObjPop item in tables.ma50a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma50a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
             }
 
             foreach (ma02a_FLD_AutoTalk item in tables.ma90a_FLD_AutoTalk.Items)
@@ -12625,7 +13464,13 @@ namespace Xb2.Serialization
                 item._ene2ID = tables.CHR_EnArrange.GetItemOrNull(item.ene2ID);
                 item._ene3ID = tables.CHR_EnArrange.GetItemOrNull(item.ene3ID);
                 item._ene4ID = tables.CHR_EnArrange.GetItemOrNull(item.ene4ID);
+                item._muteki_Condition = tables.FLD_ConditionList.GetItemOrNull(item.muteki_Condition);
                 item._POP_TIME = (TimeRange)item.POP_TIME;
+            }
+
+            foreach (ma02a_FLD_EventPop item in tables.ma90a_FLD_EventPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
             }
 
             foreach (ma01a_FLD_LandmarkPop item in tables.ma90a_FLD_LandmarkPop.Items)
@@ -12637,8 +13482,38 @@ namespace Xb2.Serialization
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
 
+            foreach (ma01a_FLD_MapObjPop item in tables.ma90a_FLD_MapObjPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._RSC_ID = tables.RSC_MapObjList.GetItemOrNull(item.RSC_ID);
+            }
+
+            foreach (ma02a_FLD_MobPop item in tables.ma90a_FLD_MobPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._MOBGroupID = tables.FLD_MobGroupList.GetItemOrNull(item.MOBGroupID);
+                item._MobID = tables.RSC_MobList.GetItemOrNull(item.MobID);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
+            foreach (ma01a_FLD_NpcPop item in tables.ma90a_FLD_NpcPop.Items)
+            {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
+                item._FSID2 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID2);
+                item._FSID3 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID3);
+                item._Group = tables.FLD_NpcGroupId.GetItemOrNull(item.Group);
+                item._Mot = tables.FLD_NpcMobMotionId.GetItemOrNull(item.Mot);
+                item._NpcID = tables.RSC_NpcList.GetItemOrNull(item.NpcID);
+                item._ShopID = tables.MNU_ShopList.GetItemOrNull(item.ShopID);
+                item._TimeRange = (TimeRange)item.TimeRange;
+            }
+
             foreach (ma04a_FLD_PreciousPopList item in tables.ma90a_FLD_PreciousPopList.Items)
             {
+                item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._itmID = tables.ITM_PreciousList.GetItemOrNull(item.itmID);
             }
 
@@ -12703,6 +13578,24 @@ namespace Xb2.Serialization
                 item._item9 = tables.GetItem(item.item9);
             }
 
+            foreach (MNU_AnnouncePage item in tables.MNU_AnnouncePage.Items)
+            {
+                item._summary = tables.menu_announce.GetItemOrNull(item.summary);
+                item._title = tables.menu_announce.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_AnnounceSchedule item in tables.MNU_AnnounceSchedule.Items)
+            {
+                item._schedule = tables.menu_announce.GetItemOrNull(item.schedule);
+                item._summary = tables.menu_announce.GetItemOrNull(item.summary);
+                item._title = tables.menu_announce.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_BladeCreate item in tables.MNU_BladeCreate.Items)
+            {
+                item._limited_item = tables.GetItem(item.limited_item);
+            }
+
             foreach (MNU_BtnChallenge2 item in tables.MNU_BtnChallenge2.Items)
             {
                 item._BtnType1 = (ButtonType)item.BtnType1;
@@ -12729,33 +13622,45 @@ namespace Xb2.Serialization
                 item._summary_msg = tables.menu_camp_ms.GetItemOrNull(item.summary_msg);
             }
 
+            foreach (MNU_ChallengeResult item in tables.MNU_ChallengeResult.Items)
+            {
+                item._Text = tables.menu_ms.GetItemOrNull(item.Text);
+            }
+
             foreach (MNU_CharOrder item in tables.MNU_CharBladeOrder.Items)
             {
+                item._layer = tables.MNU_FSMenu.GetItemOrNull(item.layer);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_CharOrder item in tables.MNU_CharBladeOrder_ira.Items)
             {
+                item._layer = tables.MNU_FSMenu.GetItemOrNull(item.layer);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_CharOrder item in tables.MNU_CharDriverOrder.Items)
             {
+                item._layer = tables.MNU_FSMenu.GetItemOrNull(item.layer);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_CharOrder item in tables.MNU_CharDriverOrder_ira.Items)
             {
+                item._layer = tables.MNU_FSMenu.GetItemOrNull(item.layer);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_CharOrder item in tables.MNU_CharHanaOrder.Items)
             {
+                item._layer = tables.MNU_FSMenu.GetItemOrNull(item.layer);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_CmnWindow item in tables.MNU_CmnWindow.Items)
             {
+                item._select_cancel_txt = tables.menu_cmnwindow.GetItemOrNull(item.select_cancel_txt);
+                item._select_ok_txt = tables.menu_cmnwindow.GetItemOrNull(item.select_ok_txt);
                 item._text = tables.menu_cmnwindow.GetItemOrNull(item.text);
                 item._title = tables.menu_cmnwindow.GetItemOrNull(item.title);
             }
@@ -12765,11 +13670,17 @@ namespace Xb2.Serialization
                 item._cond = tables.FLD_ConditionList.GetItemOrNull(item.cond);
             }
 
+            foreach (MNU_DlcGift item in tables.MNU_DlcGift.Items)
+            {
+                item._condition = tables.FLD_ConditionList.GetItemOrNull(item.condition);
+                item._item_id = tables.GetItem(item.item_id);
+                item._title = tables.menu_dlc_gift.GetItemOrNull(item.title);
+            }
+
             foreach (MNU_EventTheater item in tables.MNU_EventTheater.Items)
             {
                 item._blade_id = tables.CHR_Bl.GetItemOrNull(item.blade_id);
                 item._chapter = tables.MNU_MsgEvthChapter.GetItemOrNull(item.chapter);
-                item._condition = tables.MNU_Condition.GetItemOrNull(item.condition);
                 item._maincast = tables.MNU_MsgEvthCast.GetItemOrNull(item.maincast);
                 item._map_id = tables.FLD_maplist.GetItemOrNull(item.map_id);
                 item._title = tables.menu_ev_theater_ms.GetItemOrNull(item.title);
@@ -12779,19 +13690,34 @@ namespace Xb2.Serialization
             {
                 item._blade_id = tables.CHR_Bl.GetItemOrNull(item.blade_id);
                 item._chapter = tables.MNU_MsgEvthChapter.GetItemOrNull(item.chapter);
-                item._condition = tables.MNU_Condition.GetItemOrNull(item.condition);
                 item._maincast = tables.MNU_MsgEvthCast.GetItemOrNull(item.maincast);
+                item._map_id = tables.FLD_maplist.GetItemOrNull(item.map_id);
                 item._title = tables.menu_ev_theater_ms.GetItemOrNull(item.title);
+            }
+
+            foreach (MNU_FSMenu item in tables.MNU_FSMenu.Items)
+            {
+                item._desc = tables.MNU_Msg_MenuDescription.GetItemOrNull(item.desc);
+                item._text = tables.menu_sub_contents_ms.GetItemOrNull(item.text);
+            }
+
+            foreach (MNU_HanaSet item in tables.MNU_HanaSet.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
 
             foreach (MNU_MainOrder item in tables.MNU_MainOrder.Items)
             {
+                item._guide = tables.MNU_Msg_OperationGuide.GetItemOrNull(item.guide);
+                item._subTitle = tables.MNU_Msg_SubContents.GetItemOrNull(item.subTitle);
                 item._title = tables.menu_main_contents_ms.GetItemOrNull(item.title);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
 
             foreach (MNU_MainOrder item in tables.MNU_MainOrder_ira.Items)
             {
+                item._guide = tables.MNU_Msg_OperationGuide.GetItemOrNull(item.guide);
+                item._subTitle = tables.MNU_Msg_SubContents.GetItemOrNull(item.subTitle);
                 item._title = tables.menu_main_contents_ms.GetItemOrNull(item.title);
                 item._useCond = tables.MNU_Condition.GetItemOrNull(item.useCond);
             }
@@ -12831,6 +13757,11 @@ namespace Xb2.Serialization
             foreach (MNU_Name item in tables.MNU_Msg_Attr.Items)
             {
                 item._name = tables.menu_attr_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_CollectionItem.Items)
+            {
+                item._name = tables.menu_collectionitemtype.GetItemOrNull(item.name);
             }
 
             foreach (MNU_Name item in tables.MNU_Msg_ErrorInfo.Items)
@@ -12873,6 +13804,16 @@ namespace Xb2.Serialization
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
 
+            foreach (MNU_Name item in tables.MNU_Msg_OperationGuide.Items)
+            {
+                item._name = tables.menu_operation_guide.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_OptList.Items)
+            {
+                item._name = tables.menu_option_name_ms.GetItemOrNull(item.name);
+            }
+
             foreach (MNU_Name item in tables.MNU_Msg_PouchFilter.Items)
             {
                 item._name = tables.menu_filter_category.GetItemOrNull(item.name);
@@ -12902,6 +13843,11 @@ namespace Xb2.Serialization
             {
                 item._caption = tables.MNU_Msg_MenuDescription.GetItemOrNull(item.caption);
                 item._name = tables.menu_sub_contents_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_Msg_Weapon_Type.Items)
+            {
+                item._name = tables.itm_pcwpntype_ms.GetItemOrNull(item.name);
             }
 
             foreach (MNU_Name item in tables.MNU_MsgBlStatusIndex.Items)
@@ -12945,6 +13891,11 @@ namespace Xb2.Serialization
                 item._name = tables.menu_dlc_gift.GetItemOrNull(item.name);
             }
 
+            foreach (MNU_Name item in tables.MNU_MsgKeyAchieve.Items)
+            {
+                item._name = tables.fld_quest_achievement.GetItemOrNull(item.name);
+            }
+
             foreach (MNU_Name item in tables.MNU_MsgMapFilter.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
@@ -12963,6 +13914,7 @@ namespace Xb2.Serialization
             foreach (MNU_MsgPopupTitle item in tables.MNU_MsgPopupTitle.Items)
             {
                 item._name = tables.menu_popup_title_ms.GetItemOrNull(item.name);
+                item._name2 = tables.menu_popup_title_ms.GetItemOrNull(item.name2);
             }
 
             foreach (MNU_Name item in tables.MNU_MsgPouch.Items)
@@ -12971,6 +13923,11 @@ namespace Xb2.Serialization
             }
 
             foreach (MNU_Name item in tables.MNU_MsgSelect.Items)
+            {
+                item._name = tables.menu_ms.GetItemOrNull(item.name);
+            }
+
+            foreach (MNU_Name item in tables.MNU_MsgSelectTitle.Items)
             {
                 item._name = tables.menu_ms.GetItemOrNull(item.name);
             }
@@ -13094,6 +14051,24 @@ namespace Xb2.Serialization
                 item._DefItem8 = tables.GetItem(item.DefItem8);
                 item._DefItem9 = tables.GetItem(item.DefItem9);
                 item._PrivilegeItem = tables.GetItem(item.PrivilegeItem);
+            }
+
+            foreach (MNU_SortEnhance item in tables.MNU_SortEnhance.Items)
+            {
+                item._enhance1 = tables.menu_sort_category.GetItemOrNull(item.enhance1 + 13);
+                item._enhance2 = tables.menu_sort_category.GetItemOrNull(item.enhance2 + 13);
+                item._enhance3 = tables.menu_sort_category.GetItemOrNull(item.enhance3 + 13);
+                item._enhance4 = tables.menu_sort_category.GetItemOrNull(item.enhance4 + 13);
+            }
+
+            foreach (MNU_SortFieldSkill item in tables.MNU_SortFieldSkill.Items)
+            {
+                item._fs1 = tables.FLD_FieldSkillList.GetItemOrNull(item.fs1);
+            }
+
+            foreach (MNU_SortRole item in tables.MNU_SortRole.Items)
+            {
+                item._role1 = tables.menu_role_name_ms.GetItemOrNull(item.role1);
             }
 
             foreach (MNU_SortTable item in tables.MNU_SortTable.Items)
@@ -13767,6 +14742,12 @@ namespace Xb2.Serialization
             foreach (RSC_PcWpn item in tables.RSC_PcWpn.Items)
             {
                 item._MenuImageID = tables.MNU_Stream_WpnImg.GetItemOrNull(item.MenuImageID);
+            }
+
+            foreach (SYS_MapJumpEvList item in tables.SYS_MapJumpEvList.Items)
+            {
+                item._FormationId = tables.EVT_formation.GetItemOrNull(item.FormationId);
+                item._MapList = tables.FLD_maplist.GetItemOrNull(item.MapList);
             }
 
             foreach (SYS_MapJumpEvList item in tables.SYS_MapJumpList.Items)

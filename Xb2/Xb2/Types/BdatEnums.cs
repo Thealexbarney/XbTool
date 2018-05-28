@@ -454,4 +454,24 @@ namespace Xb2.Types
         CS,
         MOV
     }
+
+    public enum NpcRoot
+    {
+        None,
+        Ardainian,
+        Urayan,
+        Indoline,
+        Nopon,
+        Gormotti,
+        Tantalese
+    }
+
+    public enum Gender
+    {
+        None,
+        Male,
+        Female,
+        Gender3,
+        Animal
+    }
 }

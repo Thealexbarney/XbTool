@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DotNet.Globbing;
 using Ionic.Zlib;
 
 namespace Xb2
 {
-    public class FileArchive : IDisposable
+    public class FileArchive : IDisposable, IFileReader
     {
         private Node[] Nodes { get; }
         public FileInfo[] FileInfo { get; }
@@ -82,7 +83,7 @@ namespace Xb2
             {
                 if (curNode.Next < 0) break;
 
-                int next = curNode.Next ^ filename[i];
+                int next = curNode.Next ^ char.ToLower(filename[i]);
                 Node nextNode = Nodes[next];
                 if (nextNode.Prev != cur) return null;
                 cur = next;
@@ -112,6 +113,27 @@ namespace Xb2
             }
 
             return fileInfos.ToArray();
+        }
+
+        public IEnumerable<string> FindFiles(string pattern)
+        {
+            Glob glob = Glob.Parse(pattern,
+                new GlobOptions {Evaluation = new EvaluationOptions {CaseInsensitive = true}});
+            var fileInfos = new List<string>();
+            foreach (var file in FileInfo)
+            {
+                if (file.Filename != null && glob.IsMatch(file.Filename))
+                {
+                    fileInfos.Add(file.Filename);
+                }
+            }
+
+            return fileInfos;
+        }
+
+        public bool Exists(string filename)
+        {
+            return GetFileInfo(filename) != null;
         }
 
         public byte[] ReadFile(string filename)
