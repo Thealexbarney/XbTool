@@ -3,6 +3,7 @@ using System.IO;
 using Xb2.Bdat;
 using Xb2.BdatString;
 using Xb2.CodeGen;
+using Xb2.Gimmick;
 using Xb2.Salvaging;
 using Xb2.Save;
 using Xb2.Scripting;
@@ -52,6 +53,9 @@ namespace Xb2
                     break;
                 case Task.CombineBdat:
                     CombineBdat(options);
+                    break;
+                case Task.ReadGimmick:
+                    ReadGimmick(options);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -264,6 +268,22 @@ namespace Xb2
             var tables = ReadBdatTables(options, false).Tables;
             var combined = BdatTools.Combine(tables);
             File.WriteAllBytes(options.Output, combined);
+        }
+
+        private static void ReadGimmick(Options options)
+        {
+            using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
+            {
+                if (options.ArdFilename == null) throw new NullReferenceException("Archive must be specified");
+                if (options.Output == null) throw new NullReferenceException("No output file was specified.");
+
+                BdatCollection tables = GetBdatCollection(options);
+
+                var gimmicks = ReadGmk.ReadAll(archive, tables);
+                ExportMap.ExportCsv(gimmicks, options.Output);
+
+                ExportMap.Export(archive, gimmicks, options.Output);
+            }
         }
     }
 }

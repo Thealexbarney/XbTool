@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -9,12 +10,19 @@ namespace Xb2.Textures
     {
         public static byte[] ToPng(this Texture texture)
         {
-            byte[] image = DecodeTexture(texture);
+            byte[] image = texture.DecodeTexture();
             if (image == null) return null;
             return CreatePng(image, texture.Width, texture.Height);
         }
 
-        public static byte[] DecodeTexture(Texture texture)
+        public static Bitmap ToBitmap(this Texture texture)
+        {
+            byte[] image = texture.DecodeTexture();
+            if (image == null) return null;
+            return ToBitmap(image, texture.Width, texture.Height);
+        }
+
+        public static byte[] DecodeTexture(this Texture texture)
         {
             byte[] decoded = null;
 
@@ -48,6 +56,31 @@ namespace Xb2.Textures
                 PixelFormat.Format32bppArgb,
                 gchPixels.AddrOfPinnedObject());
 
+            byte[] png = bitmap.ToPng();
+
+            gchPixels.Free();
+            return png;
+        }
+
+        public static Bitmap ToBitmap(byte[] image, int width, int height)
+        {
+            var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+
+            var boundsRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            BitmapData bmpData = bitmap.LockBits(boundsRect,
+                ImageLockMode.WriteOnly,
+                bitmap.PixelFormat);
+
+            IntPtr ptr = bmpData.Scan0;
+            int bytes = bmpData.Stride * bitmap.Height;
+            Marshal.Copy(image, 0, ptr, bytes);
+            bitmap.UnlockBits(bmpData);
+
+            return bitmap;
+        }
+
+        public static byte[] ToPng(this Bitmap bitmap)
+        {
             byte[] png;
             using (var stream = new MemoryStream())
             {
@@ -55,7 +88,6 @@ namespace Xb2.Textures
                 png = stream.ToArray();
             }
 
-            gchPixels.Free();
             return png;
         }
     }
