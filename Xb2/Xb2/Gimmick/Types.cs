@@ -1,4 +1,6 @@
-﻿namespace Xb2.Gimmick
+﻿using System.Collections.Generic;
+
+namespace Xb2.Gimmick
 {
     public static class Types
     {
@@ -67,6 +69,69 @@
             "npc",
             "campPop",
             "sealedStone"
+        };
+
+        public static Dictionary<string, string> GimmickIds = new Dictionary<string, string>
+        {
+            ["ABLA"] = "GmkAntiBladeArea",
+            ["AWTR"] = "GmkAreaWeather",
+            ["BCRP"] = "GmkBattleChallengePortal",
+            ["BCRW"] = "GmkBattleChallengeReward",
+            ["BGAR"] = "GmkAreaBgm",
+            ["BLAD"] = "GmkBlade",
+            ["BTCL"] = "GmkBattleChallenge",
+            ["BTLC"] = "GmkBattleLock",
+            ["CAMP"] = "GmkCamp",
+            ["CLCT"] = "GmkCollection",
+            ["CLMB"] = "GmkClimbing",
+            ["CTPT"] = "GmkRoutePoint",
+            ["CURV"] = "GmkRoute",
+            ["DMEF"] = "GmkDmgEffect",
+            ["DMGM"] = "GmkDmgGimmick",
+            ["DMPH"] = "GmkDmgPhantom",
+            ["DMSE"] = "GmkDmgSe",
+            ["DOOR"] = "GmkDoor",
+            ["EFCT"] = "GmkEffect",
+            ["EFLC"] = "GmkEffectLocator",
+            ["ELLC"] = "GmkElevatorLocator",
+            ["ELVT"] = "GmkElevator",
+            ["ENEM"] = "GmkEnemy",
+            ["ENEW"] = "GmkEnemyWave",
+            ["ENRP"] = "GmkRoutedEnemyPoint",
+            ["EVNT"] = "GmkEvent",
+            ["FDLC"] = "GmkFieldLock",
+            ["FRNP"] = "TGmkFormPcnpc",
+            ["FRPC"] = "TGmkFormPc",
+            ["FVLM"] = "GmkFieldVolume",
+            ["GRAV"] = "GmkGrave",
+            ["JUMP"] = "GmkJump",
+            ["KZNT"] = "GmkKizunaTalk",
+            ["LDMK"] = "GmkLandmark",
+            ["MAPG"] = "GmkMapGimmick",
+            ["MAPO"] = "GmkMapObj",
+            ["MOB"] = "GmkMob",
+            ["MPJP"] = "GmkMapJump",
+            ["NPC"] = "GmkNpc",
+            ["PRCS"] = "GmkPrecious",
+            ["RENM"] = "GmkRoutedEnemy",
+            ["RFPP"] = "GmkRoutedFootPrintPoint",
+            ["RFPT"] = "GmkRoutedFootPrint",
+            ["RMOB"] = "GmkRoutedMob",
+            ["RMPO"] = "GmkRoutedMapObj",
+            ["RNPC"] = "GmkRoutedNpc",
+            ["SALV"] = "GmkSalvage",
+            ["SELN"] = "GmkSeLine",
+            ["SLDS"] = "GmkSealedStone",
+            ["SLLC"] = "GmkSalvageLocator",
+            ["SLPT"] = "GmkSeLinePoint",
+            ["SNDE"] = "GmkSe",
+            ["SQLD"] = "GmkSquadLeader",
+            ["SQMB"] = "GmkSquadMember",
+            ["TBOX"] = "GmkTbox",
+            ["TGPT"] = "GmkTargetPoint",
+            ["TRGR"] = "GmkTrigger",
+            ["TUTO"] = "GmkTutorial",
+            ["WARP"] = "GmkWarp",
         };
     }
 

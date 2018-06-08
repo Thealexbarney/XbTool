@@ -12,6 +12,13 @@
             Y = y;
             Z = z;
         }
+
+        public Point3(DataBuffer data)
+        {
+            X = data.ReadSingle();
+            Y = data.ReadSingle();
+            Z = data.ReadSingle();
+        }
     }
 
     public class Point2

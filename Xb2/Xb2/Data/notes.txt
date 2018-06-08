@@ -158,6 +158,30 @@ DmgRt of 255 = no damage
 hit_ratio = DmgRt# / total_ratio
 If additional values are set: hit_ratio = hit_ratio / LoopNum / BulletNum / (BulletId->AddAtkNum + 1)
 
+
+gmk::TGmkList<TGmk,TBdat,TId,TUnk,TUnk2>{
+bool initGmkBdatInfo(TBdat bdatInfoOut, int* gmkIdOut, const gmk::AGmkBase* gmkBase);
+TGmk* getInst(unsigned int id);
+unsigned int getInstNum();
+unsigned int getGmkType();
+void* getCreateInfo();
+BdatFile* getBindedBdatFp();
+void disposeGmk();
+void dispose();
+void debugUpdateMmf();
+void debugDraw();
+void createGmk(LvlbFile *lvlbFile);
+void create(gmk::IGmkList::CreateInfo *createInfo);
+void onResetUpdateGmkIndex();
+void seqUpdate(float);
+void seqWaitResourceLoaded(float);
+void setUpdateGmkNumPerFrame(unsigned int count);
+void update();
+bool updateImmediate();
+}
+
+
+
 Challenge mode:
 Each stage has 3 levels of progressive rewards. A certain amount of Treasure is needed to recieve each stage.
 

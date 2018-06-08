@@ -1,93 +1,112 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace Xb2.Gimmick
 {
     public class Lvb
     {
+        public List<LvlbSection> Sections = new List<LvlbSection>();
         public Transform[] Xfrm { get; set; }
         public InfoEntry[] Info { get; set; }
         public ClctEntry[] Clct { get; set; }
         public BtlcEntry[] Btlc { get; set; }
         public byte[] Strings { get; set; }
 
-        public Lvb(byte[] data)
+        public string Filename { get; set; }
+        public string BdatName { get; set; }
+
+        public Lvb(DataBuffer data)
         {
-            int length = BitConverter.ToInt32(data, 4);
-            int pos = 0x20;
+            int length = data.ReadInt32(4);
+            data.Position = 0x20;
 
-            while (pos < length)
+            while (data.Position + 0x20 < length)
             {
-                int sectionLength = BitConverter.ToInt32(data, pos + 4);
-                int count = BitConverter.ToInt32(data, pos + 0xc);
+                var sectionStart = data.Position;
+                var section = new LvlbSection(data);
+                Sections.Add(section);
+                data.Position += 8;
 
-                string sectionType = Encoding.UTF8.GetString(data, pos, 4);
-                switch (sectionType)
+                switch (section.Id)
                 {
                     case "XFRM":
-                        Xfrm = new Transform[count];
+                        Xfrm = new Transform[section.ItemCount];
 
-                        for (int i = 0; i < count; i++)
+                        for (int i = 0; i < Xfrm.Length; i++)
                         {
-                            Xfrm[i] = new Transform(data, pos + 0x20 + 0x40 * i);
+                            Xfrm[i] = new Transform(data);
                         }
                         break;
                     case "INFO":
-                        Info = new InfoEntry[count];
+                        Info = new InfoEntry[section.ItemCount];
 
-                        for (int i = 0; i < count; i++)
+                        for (int i = 0; i < Info.Length; i++)
                         {
-                            Info[i] = new InfoEntry(data, pos + 0x20 + 0x10 * i);
+                            Info[i] = new InfoEntry(data);
                         }
                         break;
                     case "CLCT":
-                        Clct = new ClctEntry[count];
+                        Clct = new ClctEntry[section.ItemCount];
 
-                        for (int i = 0; i < count; i++)
+                        for (int i = 0; i < Clct.Length; i++)
                         {
-                            Clct[i] = new ClctEntry(data, pos + 0x20 + 12 * i);
+                            Clct[i] = new ClctEntry(data);
                         }
                         break;
                     case "BTLC":
-                        Btlc = new BtlcEntry[count];
+                        Btlc = new BtlcEntry[section.ItemCount];
 
-                        for (int i = 0; i < count; i++)
+                        for (int i = 0; i < Btlc.Length; i++)
                         {
-                            Btlc[i] = new BtlcEntry(data, pos + 0x20 + 4 * i);
+                            Btlc[i] = new BtlcEntry(data);
                         }
                         break;
                     case "STRG":
-                        Strings = new byte[sectionLength - 0x20];
-                        Array.Copy(data, pos + 0x20, Strings, 0, sectionLength - 0x20);
+                        Strings = new byte[section.SectionLength - 0x20];
+                        Strings = data.ReadBytes(section.SectionLength - 0x20);
                         break;
                 }
 
-                pos += sectionLength;
+                data.Position = sectionStart + section.SectionLength;
             }
 
             foreach (var info in Info)
             {
-                info.String = Stuff.GetUTF8Z(Strings, info.StringOffset);
+                info.Name = Stuff.GetUTF8Z(Strings, info.StringOffset);
                 info.Xfrm = Xfrm[info.XfrmId];
+            }
+
+            for (int i = 2; i < Sections.Count; i++)
+            {
+                if (Sections[i].Id == "STRG") continue;
+                var start = Sections[i].BaseId;
+                var end = Sections[i].BaseId + Sections[i].ItemCount;
+                var gmkType = Types.GimmickIds[Sections[i].Id];
+
+                for (int j = start, k = 0; j < end; j++, k++)
+                {
+                    if (j < Info.Length)
+                    {
+                        Info[j].Id = k;
+                        Info[j].IdInFile = j;
+                        Info[j].GmkType = gmkType;
+                    }
+                }
             }
         }
 
         public string Print()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Name,X,Y,Z,Unk");
+            sb.AppendLine("Name,X,Y,Z");
 
             for (int i = 0; i < Info.Length; i++)
             {
                 var xfrm = Xfrm[Info[i].XfrmId];
-                sb.Append(Info[i].String + ",");
+                sb.Append(Info[i].Name + ",");
                 sb.Append(xfrm.Position.X + ",");
                 sb.Append(xfrm.Position.Y + ",");
                 sb.Append(xfrm.Position.Z + ",");
-                sb.Append(xfrm.Field20 + ",");
-                sb.Append(xfrm.Field24 + ",");
-                sb.Append(xfrm.Field28 + ",");
-                sb.Append(xfrm.Field14);
                 sb.AppendLine();
             }
 
@@ -95,42 +114,55 @@ namespace Xb2.Gimmick
         }
     }
 
+    public class LvlbSection
+    {
+        public string Id;
+        public int SectionLength;
+        public int Type;
+        public int ItemCount;
+        public int ItemLength;
+        public int BaseId;
+
+        public LvlbSection(DataBuffer data)
+        {
+            int start = data.Position;
+            Id = data.ReadUTF8ZLen(4);
+            data.Position = start + 4;
+            SectionLength = data.ReadInt32();
+            Type = data.ReadInt32();
+            ItemCount = data.ReadInt32();
+            ItemLength = data.ReadInt32();
+            BaseId = data.ReadInt32();
+        }
+    }
+
     public class Transform
     {
         public Point3 Position;
         public float FieldC;
-        public float Field10;
-        public float Field14;
-        public float Field18;
+        public Point3 Rotation;
         public float Field1C;
-        public float Field20;
-        public float Field24;
-        public float Field28;
+        public Point3 Scale;
         public float Field2C;
-        public float Field30;
+        public ushort Field30;
+        public ushort Field32;
         public float Field34;
         public float Field38;
         public float Field3C;
 
-        public Transform(byte[] data, int offset)
+        public Transform(DataBuffer data)
         {
-            var x = BitConverter.ToSingle(data, offset);
-            var y = BitConverter.ToSingle(data, offset + 4);
-            var z = BitConverter.ToSingle(data, offset + 8);
-            Position = new Point3(x, y, z);
-            FieldC = BitConverter.ToSingle(data, offset + 0xC);
-            Field10 = BitConverter.ToSingle(data, offset + 0x10);
-            Field14 = BitConverter.ToSingle(data, offset + 0x14);
-            Field18 = BitConverter.ToSingle(data, offset + 0x18);
-            Field1C = BitConverter.ToSingle(data, offset + 0x1C);
-            Field20 = BitConverter.ToSingle(data, offset + 0x20);
-            Field24 = BitConverter.ToSingle(data, offset + 0x24);
-            Field28 = BitConverter.ToSingle(data, offset + 0x28);
-            Field2C = BitConverter.ToSingle(data, offset + 0x2C);
-            Field30 = BitConverter.ToSingle(data, offset + 0x30);
-            Field34 = BitConverter.ToSingle(data, offset + 0x34);
-            Field38 = BitConverter.ToSingle(data, offset + 0x38);
-            Field3C = BitConverter.ToSingle(data, offset + 0x3C);
+            Position = new Point3(data);
+            FieldC = data.ReadSingle();
+            Rotation = new Point3(data);
+            Field1C = data.ReadSingle();
+            Scale = new Point3(data);
+            Field2C = data.ReadSingle();
+            Field30 = data.ReadUInt16();
+            Field32 = data.ReadUInt16();
+            Field34 = data.ReadSingle();
+            Field38 = data.ReadSingle();
+            Field3C = data.ReadSingle();
         }
     }
 
@@ -139,16 +171,20 @@ namespace Xb2.Gimmick
         public int StringOffset;
         public int Field4;
         public int XfrmId;
-        public Transform Xfrm;
-        public int FieldC;
-        public string String;
+        public int Type;
 
-        public InfoEntry(byte[] data, int offset)
+        public Transform Xfrm;
+        public string Name;
+        public string GmkType;
+        public int Id;
+        public int IdInFile;
+
+        public InfoEntry(DataBuffer data)
         {
-            StringOffset = BitConverter.ToInt32(data, offset);
-            Field4 = BitConverter.ToInt32(data, offset + 4);
-            XfrmId = BitConverter.ToInt32(data, offset + 8);
-            FieldC = BitConverter.ToInt32(data, offset + 0xC);
+            StringOffset = data.ReadInt32();
+            Field4 = data.ReadInt32();
+            XfrmId = data.ReadInt32();
+            Type = data.ReadInt32();
         }
     }
 
@@ -158,11 +194,11 @@ namespace Xb2.Gimmick
         public int Field4;
         public int Field8;
 
-        public ClctEntry(byte[] data, int offset)
+        public ClctEntry(DataBuffer data)
         {
-            Field0 = BitConverter.ToInt32(data, offset);
-            Field4 = BitConverter.ToInt32(data, offset + 4);
-            Field8 = BitConverter.ToInt32(data, offset + 8);
+            Field0 = data.ReadInt32();
+            Field4 = data.ReadInt32();
+            Field8 = data.ReadInt32();
         }
     }
 
@@ -171,24 +207,14 @@ namespace Xb2.Gimmick
         public short Field0;
         public short Field2;
 
-        public BtlcEntry(byte[] data, int offset)
+        public BtlcEntry(DataBuffer data)
         {
-            Field0 = BitConverter.ToInt16(data, offset);
-            Field2 = BitConverter.ToInt16(data, offset + 2);
+            Field0 = data.ReadInt16();
+            Field2 = data.ReadInt16();
         }
     }
 
     public class StrgEntry
     {
-    }
-
-    public class LvlbSection
-    {
-        public string Id;
-        public int Length;
-        public int Field8;
-        public int Count;
-        public int Field10;
-        public int Field14;
     }
 }

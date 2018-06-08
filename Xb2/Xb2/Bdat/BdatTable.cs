@@ -28,6 +28,7 @@ namespace Xb2.Bdat
         public int MemberCount { get; }
 
         public BdatMember[] Members { get; }
+        private Dictionary<string, BdatMember> MembersDict { get; }
         public DataBuffer Data { get; }
 
         public BdatTable(DataBuffer table)
@@ -66,6 +67,41 @@ namespace Xb2.Bdat
                     Members = ReadTableMembers(table);
                     break;
             }
+
+            MembersDict = Members.ToDictionary(x => x.Name, x => x);
+        }
+
+        public long ReadInt(int itemId, string memberName)
+        {
+            var member = MembersDict[memberName];
+            var itemIndex = itemId - BaseId;
+            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            var valueOffset = itemOffset + member.MemberPos;
+
+            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            return ReadIntValue(valueOffset, member.ValType);
+        }
+
+        public float ReadFloat(int itemId, string memberName)
+        {
+            var member = MembersDict[memberName];
+            var itemIndex = itemId - BaseId;
+            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            var valueOffset = itemOffset + member.MemberPos;
+
+            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            return ReadFloatValue(valueOffset, member.ValType);
+        }
+
+        public string ReadString(int itemId, string memberName)
+        {
+            var member = MembersDict[memberName];
+            var itemIndex = itemId - BaseId;
+            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            var valueOffset = itemOffset + member.MemberPos;
+
+            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            return ReadStringValue(valueOffset, member.ValType);
         }
 
         public static BdatMember[] ReadTableMembers(DataBuffer file)
@@ -105,6 +141,54 @@ namespace Xb2.Bdat
             }
 
             return members.OrderBy(x => x.MemberPos).ToArray();
+        }
+
+        private long ReadIntValue(int valueOffset, BdatValueType type)
+        {
+            switch (type)
+            {
+                case BdatValueType.UInt8:
+                    return Data[valueOffset];
+                case BdatValueType.UInt16:
+                    return Data.ReadUInt16(valueOffset);
+                case BdatValueType.UInt32:
+                    return Data.ReadUInt32(valueOffset);
+                case BdatValueType.Int8:
+                    return ((sbyte)Data[valueOffset]);
+                case BdatValueType.Int16:
+                    return Data.ReadInt16(valueOffset);
+                case BdatValueType.Int32:
+                    return Data.ReadInt32(valueOffset);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        private float ReadFloatValue(int valueOffset, BdatValueType type)
+        {
+            switch (type)
+            {
+                case BdatValueType.FP32:
+                    if (Data.Game == Game.XBX)
+                    {
+                        uint value = Data.ReadUInt32(valueOffset);
+                        return (float)(value * (1 / 4096.0));
+                    }
+                    return Data.ReadSingle(valueOffset);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        private string ReadStringValue(int valueOffset, BdatValueType type)
+        {
+            switch (type)
+            {
+                case BdatValueType.String:
+                    return Data.ReadUTF8Z(Data.ReadInt32(valueOffset));
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 

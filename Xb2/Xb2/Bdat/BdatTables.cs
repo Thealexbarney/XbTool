@@ -11,6 +11,7 @@ namespace Xb2.Bdat
     public class BdatTables
     {
         public BdatTable[] Tables { get; set; }
+        private Dictionary<string, BdatTable> TablesDict { get; set; }
         public Game Game { get; }
         public Dictionary<(string table, string member), BdatFieldInfo> BdatFields { get; set; }
         public Dictionary<string, string> DisplayFields { get; set; }
@@ -22,35 +23,16 @@ namespace Xb2.Bdat
         {
             Game = Game.XB2;
             Tables = ReadAllBdats(fs, lang);
-            if (!readMetadata) return;
-
-            ReadFieldInfo();
-            ReadArrayInfo();
-            ReadTableInfo();
-            Types = CalculateBdatTypes(Tables);
-            GetBdatRefs();
-            ReadArrayInfos();
-            GetTableDesc();
-            MarkFlagMembers();
+            TablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            if (readMetadata) ReadMetadata();
         }
 
         public BdatTables(string[] filenames, Game game, bool readMetadata)
         {
             Game = game;
             Tables = ReadAllBdats(filenames, game);
-            if (!readMetadata) return;
-
-            BdatFields = new Dictionary<(string table, string member), BdatFieldInfo>();
-            DisplayFields = new Dictionary<string, string>();
-
-            ReadFieldInfo();
-            ReadArrayInfo();
-            ReadTableInfo();
-            Types = CalculateBdatTypes(Tables);
-            GetBdatRefs();
-            ReadArrayInfos();
-            GetTableDesc();
-            MarkFlagMembers();
+            TablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            if (readMetadata) ReadMetadata();
         }
 
         public BdatTables(byte[] tables, Game game, bool readMetadata)
@@ -58,8 +40,17 @@ namespace Xb2.Bdat
             Game = game;
             DataBuffer buffer = new DataBuffer(tables, game, 0);
             Tables = ReadBdatFile(buffer, "");
-            if (!readMetadata) return;
+            TablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            if (readMetadata) ReadMetadata();
+        }
 
+        public BdatTable GetTable(string tableName)
+        {
+            return TablesDict.TryGetValue(tableName, out var table) ? table : null;
+        }
+
+        private void ReadMetadata()
+        {
             BdatFields = new Dictionary<(string table, string member), BdatFieldInfo>();
             DisplayFields = new Dictionary<string, string>();
 

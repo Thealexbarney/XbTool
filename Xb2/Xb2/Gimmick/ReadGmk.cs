@@ -61,8 +61,8 @@ namespace Xb2.Gimmick
         public static Dictionary<string, Lvb> ReadGimmickSet(IFileReader fs, BdatCollection tables, int mapId)
         {
             RSC_GmkSetList setBdat = tables.RSC_GmkSetList.First(x => x.mapId == mapId);
-            var fields = setBdat.GetType().GetFields()
-                .Where(x => x.FieldType == typeof(string) && !x.Name.Contains("_bdat"));
+            var fieldsDict = setBdat.GetType().GetFields().ToDictionary(x => x.Name, x => x);
+            var fields = fieldsDict.Values.Where(x => x.FieldType == typeof(string) && !x.Name.Contains("_bdat"));
             var gimmicks = new Dictionary<string, Lvb>();
 
             foreach (FieldInfo field in fields)
@@ -73,7 +73,15 @@ namespace Xb2.Gimmick
                 if (!fs.Exists(filename)) continue;
 
                 byte[] file = fs.ReadFile(filename);
-                var lvb = new Lvb(file);
+                var lvb = new Lvb(new DataBuffer(file, Game.XB2, 0)) { Filename = field.Name };
+
+                string bdatField = field.Name + "_bdat";
+                if (fieldsDict.ContainsKey(bdatField))
+                {
+                    var bdatName = (string)fieldsDict[bdatField].GetValue(setBdat);
+                    if (!string.IsNullOrWhiteSpace(bdatName)) lvb.BdatName = bdatName;
+                }
+
                 gimmicks.Add(field.Name, lvb);
             }
 
