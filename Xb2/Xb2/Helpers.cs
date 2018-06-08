@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Xb2
 {
@@ -20,8 +21,23 @@ namespace Xb2
             {
                 array.SetValue(InitializeJaggedArray(elementType, index + 1, lengths), i);
             }
-
             return array;
+        }
+
+        public static string GetRelativePath(string path, string basePath)
+        {
+            var directory = new DirectoryInfo(basePath);
+            var file = new System.IO.FileInfo(path);
+
+            string fullDirectory = directory.FullName;
+            string fullFile = file.FullName;
+
+            if (!fullFile.StartsWith(fullDirectory))
+            {
+                throw new ArgumentException($"{nameof(path)} is not a subpath of {nameof(basePath)}");
+            }
+
+            return fullFile.Substring(fullDirectory.Length + 1);
         }
     }
 }

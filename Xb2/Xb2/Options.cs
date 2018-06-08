@@ -26,6 +26,7 @@
         SalvageRaffle,
         ReadSave,
         CombineBdat,
-        ReadGimmick
+        ReadGimmick,
+        ReadScript
     }
 }

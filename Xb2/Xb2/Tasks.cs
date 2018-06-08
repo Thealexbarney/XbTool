@@ -57,6 +57,9 @@ namespace Xb2
                 case Task.ReadGimmick:
                     ReadGimmick(options);
                     break;
+                case Task.ReadScript:
+                    ReadScript(options);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -233,9 +236,9 @@ namespace Xb2
 
             void DescrambleFile(string input, string output)
             {
-                var script = File.ReadAllBytes(input);
+                var script = new DataBuffer(File.ReadAllBytes(input), options.Game, 0);
                 ScriptTools.DescrambleScript(script);
-                File.WriteAllBytes(output, script);
+                File.WriteAllBytes(output, script.ToArray());
             }
         }
 
@@ -283,6 +286,26 @@ namespace Xb2
                 ExportMap.ExportCsv(gimmicks, options.Output);
 
                 ExportMap.Export(archive, gimmicks, options.Output);
+            }
+        }
+
+        private static void ReadScript(Options options)
+        {
+            if (options.Input == null) throw new NullReferenceException("No input directory was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output directory was specified.");
+
+            var files = Directory.GetFiles(options.Input, "*.sb", SearchOption.AllDirectories);
+            Directory.CreateDirectory(options.Output);
+            foreach (var name in files)
+            {
+                var file = File.ReadAllBytes(name);
+                var script = new Script(new DataBuffer(file, options.Game, 0));
+                var dump = Export.PrintScript(script);
+                var relativePath = Helpers.GetRelativePath(name, options.Input);
+
+                var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
+                Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
+                File.WriteAllText(output, dump);
             }
         }
     }

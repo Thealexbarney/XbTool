@@ -1,104 +1,464 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Xb2.Scripting
 {
     public class Script
     {
-        public byte Field4;
+        public byte Version;
         public byte Field5;
-        public byte Field6;
-        public byte Field7;
-        public int Field8;
-        public int FieldC;
-        public int Field10;
-        public int Field14;
-        public int Field18;
-        public int Field1C;
-        public int Field20;
-        public int Field24;
-        public int Field28;
-        public int Field2C;
-        public int Field30;
-        public int Field34;
+        public byte Flags;
+        public byte IsLoaded;
+        public int CodeOffset;
+        public int IdPoolOffset;
+        public int IntPoolOffset;
+        public int FixedPoolOffset;
+        public int StringPoolOffset;
+        public int FunctionPoolOffset;
+        public int PluginsOffset;
+        public int OcImportsOffset;
+        public int FuncImportsOffset;
+        public int StaticVarsOffset;
+        public int LocalPoolOffset;
+        public int SysAtrPoolOffset;
+        public int UsrAtrPoolOffset;
+        public int Offset3C;
 
-        public StringArray Ids;
-        public ScriptArray Array24;
+        public List<Section> Sections = new List<Section>();
+        public Instruction[] Code;
+        public string[] IdPool;
+        public int[] IntPool;
+        public float[] FixedPool;
+        public string[] StringPool;
+        public LocalFunction[] FunctionPool;
+        public PluginFunction[] Plugins;
+        public string[] OcImports;
+        public PluginFunction[] ImportFuncs;
+        public VmObject[] StaticVars;
+        public VmObject[][] LocalPool;
+        public string[] SysAtrPool;
+        public string[] UsrAtrPool;
 
-        public Script(byte[] file)
+        public readonly bool IsLongObject;
+
+        public Script(DataBuffer data)
         {
-            ScriptTools.DescrambleScript(file);
+            ScriptTools.DescrambleScript(data);
 
-            Field4 = file[4];
-            Field5 = file[5];
-            Field6 = file[6];
-            Field7 = file[7];
-            Field8 = BitConverter.ToInt32(file, 8);
-            FieldC = BitConverter.ToInt32(file, 0xC);
-            Field10 = BitConverter.ToInt32(file, 0x10);
-            Field14 = BitConverter.ToInt32(file, 0x14);
-            Field18 = BitConverter.ToInt32(file, 0x18);
-            Field1C = BitConverter.ToInt32(file, 0x1C);
-            Field20 = BitConverter.ToInt32(file, 0x20);
-            Field24 = BitConverter.ToInt32(file, 0x24);
-            Field28 = BitConverter.ToInt32(file, 0x28);
-            Field2C = BitConverter.ToInt32(file, 0x2C);
-            Field30 = BitConverter.ToInt32(file, 0x30);
-            Field34 = BitConverter.ToInt32(file, 0x34);
+            Version = data.ReadUInt8(4, true);
+            Field5 = data.ReadUInt8();
+            Flags = data.ReadUInt8();
+            IsLongObject = (Flags & 4) != 0;
+            IsLoaded = data.ReadUInt8();
+            CodeOffset = data.ReadInt32();
+            IdPoolOffset = data.ReadInt32();
+            IntPoolOffset = data.ReadInt32();
+            FixedPoolOffset = data.ReadInt32();
+            StringPoolOffset = data.ReadInt32();
+            FunctionPoolOffset = data.ReadInt32();
+            PluginsOffset = data.ReadInt32();
+            OcImportsOffset = data.ReadInt32();
+            FuncImportsOffset = data.ReadInt32();
+            StaticVarsOffset = data.ReadInt32();
+            LocalPoolOffset = data.ReadInt32();
+            SysAtrPoolOffset = data.ReadInt32();
+            UsrAtrPoolOffset = data.ReadInt32();
+            Offset3C = data.ReadInt32();
 
-            Ids = new StringArray(file, FieldC);
-            Array24 = new ScriptArray(file, Field24);
+            ReadCodeSection(data);
+            ReadIdPool(data);
+            ReadIntPool(data);
+            ReadFixedPool(data);
+            ReadStringPool(data);
+            ReadFunctionPool(data);
+            ReadPluginImports(data);
+            ReadOcImports(data);
+            ReadFuncImports(data);
+            ReadStaticVars(data);
+            ReadLocalPool(data);
+            ReadSysAtrPool(data);
+            ReadUsrAtrPool(data);
+            ReadSection3C(data);
         }
-    }
 
-    public class ScriptArray
-    {
-        public int Length { get; set; }
-        public int[] Values { get; set; }
-
-        public ScriptArray(byte[] file, int offset)
+        private void ReadCodeSection(DataBuffer data)
         {
-            int tableOffset = offset + BitConverter.ToInt32(file, offset);
-            Length = BitConverter.ToInt32(file, offset + 4);
-            int size = BitConverter.ToInt32(file, offset + 8);
-            Values = new int[Length];
+            data.Position = CodeOffset;
+            var start = CodeOffset + data.ReadInt32();
+            data.Position += 4;
+            var codeSize = data.ReadInt32();
+            var length = IdPoolOffset - CodeOffset;
+            data.Position = start;
 
-            for (int i = 0; i < Length; i++)
+            var section = new Section("Code", CodeOffset, codeSize, length);
+            Sections.Add(section);
+
+            //var instructions = new List<Instruction>();
+            //while (data.Position - start < codeSize)
+            //{
+            //    var inst = new Instruction(data);
+            //    instructions.Add(inst);
+            //}
+
+            //Code = instructions.ToArray();
+        }
+
+        private void ReadIdPool(DataBuffer data)
+        {
+            IdPool = ReadStringSection(data, IdPoolOffset);
+            var length = IntPoolOffset - IdPoolOffset;
+            var section = new Section("ID Pool", IdPoolOffset, IdPool.Length, length);
+            Sections.Add(section);
+        }
+
+        private void ReadIntPool(DataBuffer data)
+        {
+            data.Position = IntPoolOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            var length = FixedPoolOffset - IntPoolOffset;
+            data.Position = IntPoolOffset + offset;
+
+            IntPool = new int[count];
+            var section = new Section("Int Pool", IntPoolOffset, count, length);
+            Sections.Add(section);
+
+            for (int i = 0; i < count; i++)
+            {
+                IntPool[i] = data.ReadInt32();
+            }
+        }
+
+        private void ReadFixedPool(DataBuffer data)
+        {
+            data.Position = FixedPoolOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            var length = StringPoolOffset - FixedPoolOffset;
+            data.Position = FixedPoolOffset + offset;
+
+            FixedPool = new float[count];
+            var section = new Section("Fixed Pool", FixedPoolOffset, count, length);
+            Sections.Add(section);
+
+            for (int i = 0; i < count; i++)
+            {
+                FixedPool[i] = data.ReadSingle();
+            }
+        }
+
+        private void ReadStringPool(DataBuffer data)
+        {
+            StringPool = ReadStringSection(data, StringPoolOffset);
+            var length = FunctionPoolOffset - StringPoolOffset;
+            var section = new Section("String Pool", StringPoolOffset, StringPool.Length, length);
+            Sections.Add(section);
+        }
+
+        private void ReadFunctionPool(DataBuffer data)
+        {
+            data.Position = FunctionPoolOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            var length = PluginsOffset - FunctionPoolOffset;
+            data.Position = FunctionPoolOffset + offset;
+
+            var section = new Section("Function Pool", FunctionPoolOffset, count, length);
+            Sections.Add(section);
+
+            FunctionPool = new LocalFunction[count];
+            {
+                for (int i = 0; i < FunctionPool.Length; i++)
+                {
+                    FunctionPool[i] = new LocalFunction(data);
+                    FunctionPool[i].Name = IdPool[FunctionPool[i].NameIndex];
+                }
+            }
+        }
+
+        private void ReadPluginImports(DataBuffer data)
+        {
+            data.Position = PluginsOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            var length = OcImportsOffset - PluginsOffset;
+            data.Position = PluginsOffset + offset;
+
+            var section = new Section("Plugin Imports", PluginsOffset, count, length);
+            Sections.Add(section);
+
+            Plugins = new PluginFunction[count];
+            for (int i = 0; i < Plugins.Length; i++)
+            {
+                Plugins[i] = new PluginFunction();
+                Plugins[i].Plugin = IdPool[data.ReadUInt16()];
+                Plugins[i].Function = IdPool[data.ReadUInt16()];
+            }
+        }
+
+        private void ReadOcImports(DataBuffer data)
+        {
+            data.Position = OcImportsOffset;
+            var indexes = ReadIntTable(data, OcImportsOffset);
+            var length = FuncImportsOffset - OcImportsOffset;
+
+            var section = new Section("OC Imports", OcImportsOffset, indexes.Length, length);
+            Sections.Add(section);
+
+            OcImports = new string[indexes.Length];
+            for (int i = 0; i < indexes.Length; i++)
+            {
+                OcImports[i] = IdPool[indexes[i]];
+            }
+        }
+
+        private void ReadFuncImports(DataBuffer data)
+        {
+            data.Position = FuncImportsOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            int length = StaticVarsOffset - FuncImportsOffset;
+            data.Position = FuncImportsOffset + offset;
+
+            Sections.Add(new Section("Function Imports", FuncImportsOffset, count, length));
+
+            ImportFuncs = new PluginFunction[count];
+            for (int i = 0; i < ImportFuncs.Length; i++)
+            {
+                ImportFuncs[i] = new PluginFunction();
+                ImportFuncs[i].Plugin = IdPool[data.ReadUInt16()];
+                ImportFuncs[i].Function = IdPool[data.ReadUInt16()];
+            }
+        }
+
+        private void ReadStaticVars(DataBuffer data)
+        {
+            data.Position = StaticVarsOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            int length = LocalPoolOffset - StaticVarsOffset;
+            data.Position = StaticVarsOffset + offset;
+
+            Sections.Add(new Section("Static Vars", StaticVarsOffset, count, length));
+
+            StaticVars = new VmObject[count];
+            for (int i = 0; i < StaticVars.Length; i++)
+            {
+                StaticVars[i] = new VmObject(data, IsLongObject);
+            }
+        }
+
+        private void ReadLocalPool(DataBuffer data)
+        {
+            data.Position = LocalPoolOffset;
+            int length = SysAtrPoolOffset - LocalPoolOffset;
+            var tableOffset = LocalPoolOffset + data.ReadInt32();
+            var offsets = ReadIntTable(data, LocalPoolOffset);
+            Sections.Add(new Section("Local Pool", LocalPoolOffset, offsets.Length, length));
+
+            LocalPool = new VmObject[offsets.Length][];
+            for (int i = 0; i < offsets.Length; i++)
+            {
+                data.Position = tableOffset + offsets[i];
+                int offset = data.ReadInt32();
+                int count = data.ReadInt32();
+                data.Position += offset - 8;
+                var entries = new VmObject[count];
+
+                for (int j = 0; j < count; j++)
+                {
+                    entries[j] = new VmObject(data, IsLongObject);
+                }
+
+                LocalPool[i] = entries;
+            }
+        }
+
+        private void ReadSysAtrPool(DataBuffer data)
+        {
+            data.Position = SysAtrPoolOffset;
+            int length = UsrAtrPoolOffset - SysAtrPoolOffset;
+            var values = ReadIntTable(data, SysAtrPoolOffset);
+
+            Sections.Add(new Section("Sys Atr Pool", SysAtrPoolOffset, values.Length, length));
+
+            SysAtrPool = new string[values.Length];
+            for (int j = 0; j < values.Length; j++)
+            {
+                SysAtrPool[j] = values[j] == ushort.MaxValue ? "" : IdPool[values[j]];
+            }
+        }
+
+        private void ReadUsrAtrPool(DataBuffer data)
+        {
+            data.Position = Offset3C;
+            int length = (Offset3C == 0 ? data.Length : Offset3C) - UsrAtrPoolOffset;
+            var values = ReadIntTable(data, UsrAtrPoolOffset);
+
+            Sections.Add(new Section("User Atr Pool", UsrAtrPoolOffset, values.Length, length));
+
+            UsrAtrPool = values.Where(x => x != ushort.MaxValue).Select(x => IdPool[x]).ToArray();
+
+        }
+
+        private void ReadSection3C(DataBuffer data)
+        {
+            data.Position = UsrAtrPoolOffset;
+            int length = data.Length - Offset3C;
+            Sections.Add(new Section("Section 38", Offset3C, 0, length));
+        }
+
+        private static string[] ReadStringSection(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            var offsets = new ValueArray(data);
+            var strings = new string[offsets.ItemCount];
+
+            for (int i = 0; i < offsets.Values.Length; i++)
+            {
+                var offset = sectionOffset + offsets.TableOffset + offsets.Values[i];
+                strings[i] = data.ReadTextZ("shift-jis", offset);
+            }
+
+            return strings;
+        }
+
+        private static int[] ReadIntTable(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            var offset = data.ReadInt32();
+            var count = data.ReadInt32();
+            var size = data.ReadInt32();
+
+            data.Position = sectionOffset + offset;
+            var values = new int[count];
+
+            for (int i = 0; i < count; i++)
             {
                 switch (size)
                 {
                     case 2:
-                        Values[i] = BitConverter.ToUInt16(file, tableOffset + i * size);
+                        values[i] = data.ReadUInt16();
+                        break;
+                    case 4:
+                        values[i] = data.ReadInt32();
+                        break;
+                }
+            }
+
+            return values;
+        }
+    }
+
+    public class ValueArray
+    {
+        public int ItemCount { get; set; }
+        public int Length { get; set; }
+        public int TableOffset { get; set; }
+        public int[] Values { get; set; }
+
+        public ValueArray(DataBuffer data)
+        {
+            var start = data.Position;
+            TableOffset = data.ReadInt32();
+            ItemCount = data.ReadInt32();
+            int itemSize = data.ReadInt32();
+
+            Length = TableOffset + ItemCount * itemSize;
+            data.Position = start + TableOffset;
+            Values = new int[ItemCount];
+
+            for (int i = 0; i < ItemCount; i++)
+            {
+                switch (itemSize)
+                {
+                    case 2:
+                        Values[i] = data.ReadUInt16();
+                        break;
+                    case 4:
+                        Values[i] = data.ReadInt32();
                         break;
                 }
             }
         }
     }
 
-    public class StringArray
+    public class PluginFunction
     {
-        public int Length { get; set; }
-        public int[] Values { get; set; }
-        public string[] Strings { get; set; }
+        public string Plugin { get; set; }
+        public string Function { get; set; }
+    }
 
-        public StringArray(byte[] file, int offset)
+    public class LocalFunction
+    {
+        public string Name { get; set; }
+        public int NameIndex { get; set; }
+        public int Field2 { get; set; }
+        public int Field4 { get; set; }
+        public int Field6 { get; set; }
+        public int LocalPoolIndex { get; set; }
+        public int FieldA { get; set; }
+        public int Start { get; set; }
+        public int End { get; set; }
+
+        public LocalFunction(DataBuffer data)
         {
-            int tableOffset = offset + BitConverter.ToInt32(file, offset);
-            Length = BitConverter.ToInt32(file, offset + 4);
-            int size = BitConverter.ToInt32(file, offset + 8);
-            Values = new int[Length];
-            Strings = new string[Length];
+            NameIndex = data.ReadUInt16();
+            Field2 = data.ReadUInt16();
+            Field4 = data.ReadUInt16();
+            Field6 = data.ReadUInt16();
+            LocalPoolIndex = data.ReadUInt16();
+            FieldA = data.ReadUInt16();
+            Start = data.ReadInt32();
+            End = data.ReadInt32();
+        }
+    }
 
-            for (int i = 0; i < Length; i++)
-            {
-                switch (size)
-                {
-                    case 2:
-                        Values[i] = BitConverter.ToUInt16(file, tableOffset + i * size);
-                        break;
-                }
+    public class Section
+    {
+        public Section(string name, int offset, int count, int length)
+        {
+            Name = name;
+            Offset = offset;
+            Count = count;
+            Length = length;
+        }
 
-                Strings[i] = Stuff.GetUTF8Z(file, tableOffset + Values[i]);
-            }
+        public string Name { get; set; }
+        public int Offset { get; set; }
+        public int Count { get; set; }
+        public int Length { get; set; }
+    }
+
+    public enum ScTypes
+    {
+        Nil = 0,
+        True = 1,
+        False = 2,
+        Int = 3,
+        Fixed = 4,
+        String = 5,
+        Array = 6,
+        Function = 7,
+        Plugin = 8,
+        OC = 9,
+        Sys = 10
+    }
+
+    public class VmObject
+    {
+        public ScTypes Type { get; set; }
+        public int Length { get; set; }
+        public int Value { get; set; }
+        public int Field8 { get; set; }
+
+        public VmObject(DataBuffer data, bool isLongObject)
+        {
+            Type = (ScTypes)data.ReadUInt8();
+            data.Position++;
+            Length = data.ReadUInt16();
+            Value = data.ReadInt32();
+            if (isLongObject) Field8 = data.ReadInt32();
         }
     }
 }

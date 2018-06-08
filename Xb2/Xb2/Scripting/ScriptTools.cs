@@ -1,62 +1,58 @@
-﻿using System;
-
-namespace Xb2.Scripting
+﻿namespace Xb2.Scripting
 {
     public static class ScriptTools
     {
-        public static void DescrambleScript(byte[] file)
+        public static void DescrambleScript(DataBuffer script)
         {
-            if ((file[6] & 2) == 0) return;
+            script.GuessEndianness32(8, x => x > 0 && x < 100000);
 
-            int idsOffset = BitConverter.ToInt32(file, 0xC);
-            int offset10 = BitConverter.ToInt32(file, 0x10);
-            int offset18 = BitConverter.ToInt32(file, 0x18);
-            int offset1C = BitConverter.ToInt32(file, 0x1C);
+            var flags = script.ReadUInt8(6);
+            if ((flags & 2) == 0) return;
 
-            int idTableOffset = BitConverter.ToInt32(file, idsOffset);
-            int idCount = BitConverter.ToInt32(file, idsOffset + 4);
-            int idSize = BitConverter.ToInt32(file, idsOffset + 8);
+            int idPoolOffset = script.ReadInt32(0xC, true);
+            int intPoolOffset = script.ReadInt32();
+            int stringPoolOffset = script.ReadInt32(0x18, true);
+            int functionPoolOffset = script.ReadInt32();
 
-            int arr18TableOffset = BitConverter.ToInt32(file, offset18);
-            int arr18Count = BitConverter.ToInt32(file, offset18 + 4);
-            int arr18Size = BitConverter.ToInt32(file, offset18 + 8);
+            int idTableOffset = script.ReadInt32(idPoolOffset, true);
+            int idCount = script.ReadInt32();
+            int idSize = script.ReadInt32();
 
-            int idStringOffset = idsOffset + idTableOffset + idCount * idSize;
-            int idStringLength = offset10 - idStringOffset;
+            int stringTableOffset = script.ReadInt32(stringPoolOffset, true);
+            int stringCount = script.ReadInt32();
+            int stringSize = script.ReadInt32();
 
-            int arr18DataOffset = offset18 + arr18TableOffset + arr18Count * arr18Size;
-            int arr18DataLength = offset1C - arr18DataOffset;
+            int idStringOffset = idPoolOffset + idTableOffset + idCount * idSize;
+            int idStringLength = intPoolOffset - idStringOffset;
 
-            DescrambleSection(file, idStringOffset, idStringLength);
-            DescrambleSection(file, arr18DataOffset, arr18DataLength);
+            int stringDataOffset = stringPoolOffset + stringTableOffset + stringCount * stringSize;
+            int stringDataLength = functionPoolOffset - stringDataOffset;
 
-            file[6] &= unchecked((byte)~2);
+            DescrambleSection(script.Slice(idStringOffset, idStringLength));
+            DescrambleSection(script.Slice(stringDataOffset, stringDataLength));
+
+            flags &= unchecked((byte)~2);
+            script.WriteUInt8(flags, 6);
         }
 
-        private static void DescrambleSection(byte[] data, int offset, int length)
+        private static void DescrambleSection(DataBuffer data)
         {
-            uint[] temp = new uint[length / 4];
-            Buffer.BlockCopy(data, offset, temp, 0, temp.Length * sizeof(uint));
+            var originalEndianness = data.Endianness;
+            data.Endianness = Endianness.Big;
 
-            for (int i = 0; i < temp.Length; i++)
+            for (int i = 0; i < data.Length / 4; i++)
             {
-                uint scr = ByteSwap(temp[i]);
+                uint scr = data.ReadUInt32(i * 4);
                 scr = RotateRight(scr, 2);
-                temp[i] = ByteSwap(scr);
+                data.WriteUInt32(scr, i * 4);
             }
 
-            Buffer.BlockCopy(temp, 0, data, offset, temp.Length * sizeof(uint));
+            data.Endianness = originalEndianness;
         }
 
         private static uint RotateRight(uint value, int count)
         {
             return (value >> count) | (value << (32 - count));
-        }
-
-        private static uint ByteSwap(uint value)
-        {
-            value = (value >> 16) | (value << 16);
-            return ((value & 0xFF00FF00) >> 8) | ((value & 0x00FF00FF) << 8);
         }
     }
 }
