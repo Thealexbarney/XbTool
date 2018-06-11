@@ -23,7 +23,7 @@ Offsets to the section data are always relative to the start of the section head
 |Local Pool Offset|48|4||
 |System Attribute Pool Offset|52|4||
 |User Attribute Pool Offset|56|4||
-|Section 60 Offset|60|4||
+|Debug Symbols Offset|60|4||
 
 ## Code
 
@@ -146,10 +146,10 @@ Contains a list of global script variables.
 |Type|0|1|The object type|
 |Length|2|2|Used for objects like arrays|
 |Value|4|4|The object value|
-|Field 8|8|4||
+|Field 8|8|4|Only exists in 64-bit scripts. Used for pointer storage space|
 
 ## Local Pool
-Contains local variables to load onto the stack when a function is called.
+Contains local variables used for individual functions.
 
 |Field|Offset|Length|Contents|
 |:-:|:-:|:-:|:-:|
@@ -185,3 +185,15 @@ Contains a list of user attributes.
 |Count|4|4|Number of elements in the array|
 |Size|8|4|Size in bytes of elements in the array|
 |OC Names|`Offset`|`Count` * `Size`|Array of attribute name IDs|
+
+## Debug Symbols (Optional)
+Contains debug symbols for the script.
+
+|Field|Offset|Length|Contents|
+|:-:|:-:|:-:|:-:|
+|Static Variable Symbols Offset|0|4|Symbols for global variables|
+|Local Variable Symbols Offset|4|4|Symbols for local variables|
+|Argument Symbols Offset|8|4|Symbols for function arguments|
+|Filename Symbols Offset|12|4|A list of files used in compiling the script|
+|Line Info Symbols Offset|16|4|Contains line number information|
+

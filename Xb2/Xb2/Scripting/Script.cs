@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Xb2.Scripting
 {
@@ -22,11 +21,12 @@ namespace Xb2.Scripting
         public int LocalPoolOffset;
         public int SysAtrPoolOffset;
         public int UsrAtrPoolOffset;
-        public int Offset3C;
+        public int SymbolSectionOffset;
 
         public List<Section> Sections = new List<Section>();
-        public Instruction[] Code;
+        public Instruction[][] Code;
         public string[] IdPool;
+        public string[] IdPoolRefs;
         public int[] IntPool;
         public float[] FixedPool;
         public string[] StringPool;
@@ -38,8 +38,13 @@ namespace Xb2.Scripting
         public VmObject[][] LocalPool;
         public string[] SysAtrPool;
         public string[] UsrAtrPool;
+        public Symbol[] StaticSymbols;
+        public Symbol[][] LocalSymbols;
+        public Symbol[][] ArgsSymbols;
+        public string[] FilenameSymbols;
+        public SymbolLine[] LineSymbols;
 
-        public readonly bool IsLongObject;
+        public readonly bool Is64Bit;
 
         public Script(DataBuffer data)
         {
@@ -48,7 +53,7 @@ namespace Xb2.Scripting
             Version = data.ReadUInt8(4, true);
             Field5 = data.ReadUInt8();
             Flags = data.ReadUInt8();
-            IsLongObject = (Flags & 4) != 0;
+            Is64Bit = (Flags & 4) != 0;
             IsLoaded = data.ReadUInt8();
             CodeOffset = data.ReadInt32();
             IdPoolOffset = data.ReadInt32();
@@ -63,9 +68,8 @@ namespace Xb2.Scripting
             LocalPoolOffset = data.ReadInt32();
             SysAtrPoolOffset = data.ReadInt32();
             UsrAtrPoolOffset = data.ReadInt32();
-            Offset3C = data.ReadInt32();
+            SymbolSectionOffset = data.ReadInt32();
 
-            ReadCodeSection(data);
             ReadIdPool(data);
             ReadIntPool(data);
             ReadFixedPool(data);
@@ -78,7 +82,14 @@ namespace Xb2.Scripting
             ReadLocalPool(data);
             ReadSysAtrPool(data);
             ReadUsrAtrPool(data);
-            ReadSection3C(data);
+            ReadSymbolSection(data);
+            ReadCodeSection(data);
+        }
+
+        private string GetId(int id, string user)
+        {
+            IdPoolRefs[id] += $"; {user}";
+            return IdPool[id];
         }
 
         private void ReadCodeSection(DataBuffer data)
@@ -88,24 +99,37 @@ namespace Xb2.Scripting
             data.Position += 4;
             var codeSize = data.ReadInt32();
             var length = IdPoolOffset - CodeOffset;
-            data.Position = start;
 
             var section = new Section("Code", CodeOffset, codeSize, length);
-            Sections.Add(section);
+            Sections.Insert(0, section);
 
-            //var instructions = new List<Instruction>();
-            //while (data.Position - start < codeSize)
-            //{
-            //    var inst = new Instruction(data);
-            //    instructions.Add(inst);
-            //}
+            Code = new Instruction[FunctionPool.Length][];
+            var code = data.Slice(start, codeSize);
+            
+            for (int i = 0; i < FunctionPool.Length; i++)
+            {
+                var instructions = new List<Instruction>();
+                code.Position = FunctionPool[i].Start;
 
-            //Code = instructions.ToArray();
+                while (code.Position < FunctionPool[i].End)
+                {
+                    var inst = new Instruction(this, code, i);
+                    instructions.Add(inst);
+                }
+
+                Code[i] = instructions.ToArray();
+            }
         }
 
         private void ReadIdPool(DataBuffer data)
         {
             IdPool = ReadStringSection(data, IdPoolOffset);
+            IdPoolRefs = new string[IdPool.Length];
+            for (int i = 0; i < IdPoolRefs.Length; i++)
+            {
+                IdPoolRefs[i] = string.Empty;
+            }
+
             var length = IntPoolOffset - IdPoolOffset;
             var section = new Section("ID Pool", IdPoolOffset, IdPool.Length, length);
             Sections.Add(section);
@@ -171,7 +195,7 @@ namespace Xb2.Scripting
                 for (int i = 0; i < FunctionPool.Length; i++)
                 {
                     FunctionPool[i] = new LocalFunction(data);
-                    FunctionPool[i].Name = IdPool[FunctionPool[i].NameIndex];
+                    FunctionPool[i].Name = GetId(FunctionPool[i].NameIndex, $"Function #{i}");
                 }
             }
         }
@@ -191,8 +215,10 @@ namespace Xb2.Scripting
             for (int i = 0; i < Plugins.Length; i++)
             {
                 Plugins[i] = new PluginFunction();
-                Plugins[i].Plugin = IdPool[data.ReadUInt16()];
-                Plugins[i].Function = IdPool[data.ReadUInt16()];
+                var pluginId = data.ReadUInt16();
+                var functionId = data.ReadUInt16();
+                Plugins[i].Plugin = GetId(pluginId, $"Plugin Name #{i}");
+                Plugins[i].Function = GetId(functionId, $"Plugin Function Name #{i}");
             }
         }
 
@@ -208,7 +234,7 @@ namespace Xb2.Scripting
             OcImports = new string[indexes.Length];
             for (int i = 0; i < indexes.Length; i++)
             {
-                OcImports[i] = IdPool[indexes[i]];
+                OcImports[i] = GetId(indexes[i], $"OC Name #{i}");
             }
         }
 
@@ -226,8 +252,10 @@ namespace Xb2.Scripting
             for (int i = 0; i < ImportFuncs.Length; i++)
             {
                 ImportFuncs[i] = new PluginFunction();
-                ImportFuncs[i].Plugin = IdPool[data.ReadUInt16()];
-                ImportFuncs[i].Function = IdPool[data.ReadUInt16()];
+                var pluginId = data.ReadUInt16();
+                var functionId = data.ReadUInt16();
+                ImportFuncs[i].Plugin = GetId(pluginId, $"Import Script Name #{i}");
+                ImportFuncs[i].Function = GetId(functionId, $"Import Function Name #{i}");
             }
         }
 
@@ -244,7 +272,7 @@ namespace Xb2.Scripting
             StaticVars = new VmObject[count];
             for (int i = 0; i < StaticVars.Length; i++)
             {
-                StaticVars[i] = new VmObject(data, IsLongObject);
+                StaticVars[i] = new VmObject(data, Is64Bit);
             }
         }
 
@@ -267,7 +295,7 @@ namespace Xb2.Scripting
 
                 for (int j = 0; j < count; j++)
                 {
-                    entries[j] = new VmObject(data, IsLongObject);
+                    entries[j] = new VmObject(data, Is64Bit);
                 }
 
                 LocalPool[i] = entries;
@@ -285,38 +313,167 @@ namespace Xb2.Scripting
             SysAtrPool = new string[values.Length];
             for (int j = 0; j < values.Length; j++)
             {
-                SysAtrPool[j] = values[j] == ushort.MaxValue ? "" : IdPool[values[j]];
+                SysAtrPool[j] = values[j] == ushort.MaxValue ? "" : GetId(values[j], $"System Attribute #{j}");
             }
         }
 
         private void ReadUsrAtrPool(DataBuffer data)
         {
-            data.Position = Offset3C;
-            int length = (Offset3C == 0 ? data.Length : Offset3C) - UsrAtrPoolOffset;
+            data.Position = UsrAtrPoolOffset;
+            int length = (SymbolSectionOffset == 0 ? data.Length : SymbolSectionOffset) - UsrAtrPoolOffset;
             var values = ReadIntTable(data, UsrAtrPoolOffset);
 
             Sections.Add(new Section("User Atr Pool", UsrAtrPoolOffset, values.Length, length));
 
-            UsrAtrPool = values.Where(x => x != ushort.MaxValue).Select(x => IdPool[x]).ToArray();
-
+            UsrAtrPool = new string[values.Length];
+            for (int j = 0; j < values.Length; j++)
+            {
+                UsrAtrPool[j] = values[j] == ushort.MaxValue ? "" : GetId(values[j], $"User Attribute #{j}");
+            }
         }
 
-        private void ReadSection3C(DataBuffer data)
+        private void ReadSymbolSection(DataBuffer data)
         {
-            data.Position = UsrAtrPoolOffset;
-            int length = data.Length - Offset3C;
-            Sections.Add(new Section("Section 38", Offset3C, 0, length));
+            if (SymbolSectionOffset == 0) return;
+            data.Position = SymbolSectionOffset;
+            int length = data.Length - SymbolSectionOffset;
+            Sections.Add(new Section("Debug Symbols", SymbolSectionOffset, 5, length));
+
+            int staticOffset = data.ReadInt32();
+            int localOffset = data.ReadInt32();
+            int argsOffset = data.ReadInt32();
+            int filenamesOffset = data.ReadInt32();
+            int linesOffset = data.ReadInt32();
+
+            ReadStaticSymbols(data, SymbolSectionOffset + staticOffset);
+            ReadLocalSymbols(data, SymbolSectionOffset + localOffset);
+            ReadArgsSymbols(data, SymbolSectionOffset + argsOffset);
+            ReadFilenameSymbols(data, SymbolSectionOffset + filenamesOffset);
+            ReadLineSymbols(data, SymbolSectionOffset + linesOffset);
+        }
+
+        private void ReadStaticSymbols(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            data.Position = sectionOffset + offset;
+
+            StaticSymbols = new Symbol[count];
+            for (int i = 0; i < count; i++)
+            {
+                var sym = new Symbol(data);
+                sym.Name = GetId(sym.IdIndex, $"Static Symbol #{i}");
+                StaticVars[sym.Var].Name = sym.Name;
+
+                StaticSymbols[i] = sym;
+            }
+        }
+
+        private void ReadLocalSymbols(DataBuffer data, int sectionOffset)
+        {
+            var symbols = ReadSymbolSets(data, sectionOffset);
+
+            for (int set = 0; set < symbols.Length; set++)
+            {
+                int localPoolIndex = FunctionPool[set].LocalPoolIndex;
+                foreach (var sym in symbols[set])
+                {
+                    sym.Name = GetId(sym.IdIndex, $"Local Symbol #{localPoolIndex}.{sym.Var}");
+                    LocalPool[localPoolIndex][sym.Var].Name = sym.Name;
+                }
+            }
+
+            LocalSymbols = symbols;
+        }
+
+        private void ReadArgsSymbols(DataBuffer data, int sectionOffset)
+        {
+            var symbols = ReadSymbolSets(data, sectionOffset);
+
+            for (int set = 0; set < symbols.Length; set++)
+            {
+                int localPoolIndex = FunctionPool[set].LocalPoolIndex;
+                foreach (var sym in symbols[set])
+                {
+                    sym.Name = GetId(sym.IdIndex, $"Args Symbol #{localPoolIndex}.{sym.Var}");
+                }
+            }
+
+            ArgsSymbols = symbols;
+        }
+
+        private void ReadFilenameSymbols(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            int tableOffset = data.ReadInt32() + sectionOffset;
+            int count = data.ReadInt32();
+            data.Position = tableOffset;
+
+            var symbols = new string[count];
+            for (int i = 0; i < count; i++)
+            {
+                int offset = data.ReadUInt16() + tableOffset;
+                symbols[i] = data.ReadTextZ("shift-jis", offset);
+            }
+
+            FilenameSymbols = symbols;
+        }
+
+        private void ReadLineSymbols(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            data.Position = sectionOffset + offset;
+
+            LineSymbols = new SymbolLine[count];
+            for (int i = 0; i < count; i++)
+            {
+                var sym = new SymbolLine(data);
+                LineSymbols[i] = sym;
+            }
+        }
+
+        private Symbol[][] ReadSymbolSets(DataBuffer data, int sectionOffset)
+        {
+            data.Position = sectionOffset;
+            int tableOffset = data.ReadInt32() + sectionOffset;
+            int count = data.ReadInt32();
+            data.Position = tableOffset;
+
+            var symbols = new Symbol[count][];
+
+            var sets = new(int offset, int count)[count];
+            for (int i = 0; i < count; i++)
+            {
+                sets[i] = (data.ReadUInt16(), data.ReadUInt16());
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                var (setOffset, setCount) = sets[i];
+                data.Position = tableOffset + setOffset;
+                symbols[i] = new Symbol[setCount];
+
+                for (int j = 0; j < setCount; j++)
+                {
+                    symbols[i][j] = new Symbol(data);
+                }
+            }
+
+            return symbols;
         }
 
         private static string[] ReadStringSection(DataBuffer data, int sectionOffset)
         {
-            data.Position = sectionOffset;
-            var offsets = new ValueArray(data);
-            var strings = new string[offsets.ItemCount];
+            var tableOffset = sectionOffset + data.ReadInt32(sectionOffset);
+            var offsets = ReadIntTable(data, sectionOffset);
+            var strings = new string[offsets.Length];
 
-            for (int i = 0; i < offsets.Values.Length; i++)
+            for (int i = 0; i < offsets.Length; i++)
             {
-                var offset = sectionOffset + offsets.TableOffset + offsets.Values[i];
+                var offset = tableOffset + offsets[i];
                 strings[i] = data.ReadTextZ("shift-jis", offset);
             }
 
@@ -350,39 +507,6 @@ namespace Xb2.Scripting
         }
     }
 
-    public class ValueArray
-    {
-        public int ItemCount { get; set; }
-        public int Length { get; set; }
-        public int TableOffset { get; set; }
-        public int[] Values { get; set; }
-
-        public ValueArray(DataBuffer data)
-        {
-            var start = data.Position;
-            TableOffset = data.ReadInt32();
-            ItemCount = data.ReadInt32();
-            int itemSize = data.ReadInt32();
-
-            Length = TableOffset + ItemCount * itemSize;
-            data.Position = start + TableOffset;
-            Values = new int[ItemCount];
-
-            for (int i = 0; i < ItemCount; i++)
-            {
-                switch (itemSize)
-                {
-                    case 2:
-                        Values[i] = data.ReadUInt16();
-                        break;
-                    case 4:
-                        Values[i] = data.ReadInt32();
-                        break;
-                }
-            }
-        }
-    }
-
     public class PluginFunction
     {
         public string Plugin { get; set; }
@@ -393,9 +517,9 @@ namespace Xb2.Scripting
     {
         public string Name { get; set; }
         public int NameIndex { get; set; }
-        public int Field2 { get; set; }
+        public int ArgsCount { get; set; }
         public int Field4 { get; set; }
-        public int Field6 { get; set; }
+        public int LocalVarCount { get; set; }
         public int LocalPoolIndex { get; set; }
         public int FieldA { get; set; }
         public int Start { get; set; }
@@ -404,13 +528,46 @@ namespace Xb2.Scripting
         public LocalFunction(DataBuffer data)
         {
             NameIndex = data.ReadUInt16();
-            Field2 = data.ReadUInt16();
+            ArgsCount = data.ReadUInt16();
             Field4 = data.ReadUInt16();
-            Field6 = data.ReadUInt16();
+            LocalVarCount = data.ReadUInt16();
             LocalPoolIndex = data.ReadUInt16();
             FieldA = data.ReadUInt16();
             Start = data.ReadInt32();
             End = data.ReadInt32();
+        }
+    }
+
+    public class Symbol
+    {
+        public string Name { get; set; }
+        public int IdIndex { get; set; }
+        public int Field2 { get; set; }
+        public int Var { get; set; }
+        public int Field6 { get; set; }
+        public int Field8 { get; set; }
+
+        public Symbol(DataBuffer data)
+        {
+            IdIndex = data.ReadUInt16();
+            Field2 = data.ReadUInt16();
+            Var = data.ReadUInt16();
+            Field6 = data.ReadUInt16();
+            Field8 = data.ReadUInt16();
+        }
+    }
+
+    public class SymbolLine
+    {
+        public int Field0 { get; set; }
+        public int Field2 { get; set; }
+        public int Address { get; set; }
+
+        public SymbolLine(DataBuffer data)
+        {
+            Field0 = data.ReadUInt16();
+            Field2 = data.ReadUInt16();
+            Address = data.ReadInt32();
         }
     }
 
@@ -451,6 +608,7 @@ namespace Xb2.Scripting
         public int Length { get; set; }
         public int Value { get; set; }
         public int Field8 { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public VmObject(DataBuffer data, bool isLongObject)
         {

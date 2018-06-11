@@ -296,16 +296,22 @@ namespace Xb2
 
             var files = Directory.GetFiles(options.Input, "*.sb", SearchOption.AllDirectories);
             Directory.CreateDirectory(options.Output);
-            foreach (var name in files)
-            {
-                var file = File.ReadAllBytes(name);
-                var script = new Script(new DataBuffer(file, options.Game, 0));
-                var dump = Export.PrintScript(script);
-                var relativePath = Helpers.GetRelativePath(name, options.Input);
 
-                var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
-                Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
-                File.WriteAllText(output, dump);
+            using (var progress = new ProgressBar())
+            {
+                progress.SetTotal(files.Length);
+                foreach (var name in files)
+                {
+                    var file = File.ReadAllBytes(name);
+                    var script = new Script(new DataBuffer(file, options.Game, 0));
+                    var dump = Export.PrintScript(script);
+                    var relativePath = Helpers.GetRelativePath(name, options.Input);
+
+                    var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
+                    Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
+                    File.WriteAllText(output, dump);
+                    progress.ReportAdd(1);
+                }
             }
         }
     }

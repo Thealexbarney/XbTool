@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Xb2.Scripting
 {
@@ -7,16 +8,53 @@ namespace Xb2.Scripting
     public class Instruction
     {
         private string DebugString => Opcode.ToString();
+        public int Address { get; set; }
         public Opcode Opcode { get; set; }
+        public string Operand { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
-        public Instruction(DataBuffer data)
+        public Instruction() { }
+
+        public Instruction(Script script, DataBuffer data, int funcIndex)
         {
-            Opcode = (Opcode)data.ReadUInt8();
-            data.Position += Opcode.GetInfo().Size;
+            ReadInstruction(script, data, funcIndex);
         }
 
-        public void ReadInstruction(DataBuffer data, Opcode opcode)
+        public int ReadOperand(DataBuffer data, int size)
         {
+            var original = data.Endianness;
+            data.Endianness = Endianness.Big;
+            int result;
+            switch (size)
+            {
+                case 0:
+                    result = 0;
+                    break;
+                case 1:
+                    result = data.ReadUInt8();
+                    break;
+                case 2:
+                    result = data.ReadUInt16();
+                    break;
+                case 4:
+                    result = data.ReadInt32();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(size));
+            }
+
+            data.Endianness = original;
+            return result;
+        }
+
+        public void ReadInstruction(Script script, DataBuffer data, int funcIndex)
+        {
+            Address = data.Position;
+            var opcode = (Opcode)data.ReadUInt8();
+            Opcode = opcode;
+            var opcodeInfo = Opcode.GetInfo();
+            var operand = ReadOperand(data, opcodeInfo.Size);
+
             switch (opcode)
             {
                 case Opcode.NOP:
@@ -36,69 +74,61 @@ namespace Xb2.Scripting
                 case Opcode.CONST_I_W:
                     break;
                 case Opcode.POOL_INT:
-                    break;
                 case Opcode.POOL_INT_W:
+                    Comment = script.IntPool[operand].ToString();
                     break;
                 case Opcode.POOL_FIXED:
-                    break;
                 case Opcode.POOL_FIXED_W:
+                    Comment = script.FixedPool[operand].ToString(CultureInfo.InvariantCulture);
                     break;
                 case Opcode.POOL_STR:
-                    break;
                 case Opcode.POOL_STR_W:
+                    Comment = script.StringPool[operand];
                     break;
                 case Opcode.LD:
-                    break;
                 case Opcode.ST:
+                    Comment = script.LocalPool[script.FunctionPool[funcIndex].LocalPoolIndex][operand].Name;
                     break;
                 case Opcode.LD_ARG:
-                    break;
                 case Opcode.ST_ARG:
+                    Comment = script.ArgsSymbols?[funcIndex][operand].Name ?? string.Empty;
                     break;
                 case Opcode.ST_ARG_OMIT:
+                    Comment = script.ArgsSymbols?[funcIndex][operand].Name ?? string.Empty;
                     break;
                 case Opcode.LD_0:
-                    break;
                 case Opcode.LD_1:
-                    break;
                 case Opcode.LD_2:
-                    break;
                 case Opcode.LD_3:
+                    Comment = script.LocalPool[script.FunctionPool[funcIndex].LocalPoolIndex][opcode - Opcode.LD_0].Name;
                     break;
                 case Opcode.ST_0:
-                    break;
                 case Opcode.ST_1:
-                    break;
                 case Opcode.ST_2:
-                    break;
                 case Opcode.ST_3:
+                    Comment = script.LocalPool[script.FunctionPool[funcIndex].LocalPoolIndex][opcode - Opcode.ST_0].Name;
                     break;
                 case Opcode.LD_ARG_0:
-                    break;
                 case Opcode.LD_ARG_1:
-                    break;
                 case Opcode.LD_ARG_2:
-                    break;
                 case Opcode.LD_ARG_3:
+                    Comment = script.ArgsSymbols?[funcIndex][opcode - Opcode.LD_ARG_0].Name ?? string.Empty;
                     break;
                 case Opcode.ST_ARG_0:
-                    break;
                 case Opcode.ST_ARG_1:
-                    break;
                 case Opcode.ST_ARG_2:
-                    break;
                 case Opcode.ST_ARG_3:
+                    Comment = script.ArgsSymbols?[funcIndex][opcode - Opcode.ST_ARG_0].Name ?? string.Empty;
                     break;
                 case Opcode.LD_STATIC:
-                    break;
                 case Opcode.LD_STATIC_W:
+                    Comment = script.StaticVars[operand].Name;
                     break;
                 case Opcode.ST_STATIC:
-                    break;
                 case Opcode.ST_STATIC_W:
+                    Comment = script.StaticVars[operand].Name;
                     break;
                 case Opcode.LD_AR:
-                    break;
                 case Opcode.ST_AR:
                     break;
                 case Opcode.LD_NIL:
@@ -108,15 +138,12 @@ namespace Xb2.Scripting
                 case Opcode.LD_FALSE:
                     break;
                 case Opcode.LD_FUNC:
-                    break;
                 case Opcode.LD_FUNC_W:
                     break;
                 case Opcode.LD_PLUGIN:
-                    break;
                 case Opcode.LD_PLUGIN_W:
                     break;
                 case Opcode.LD_FUNC_FAR:
-                    break;
                 case Opcode.LD_FUNC_FAR_W:
                     break;
                 case Opcode.MINUS:
@@ -160,12 +187,14 @@ namespace Xb2.Scripting
                 case Opcode.L_AND:
                     break;
                 case Opcode.JMP:
-                    break;
                 case Opcode.JPF:
+                    operand = (short)operand;
+                    Comment = (Address + operand).ToString("x");
+                    Operand = ((ushort)operand).ToString("x");
                     break;
                 case Opcode.CALL:
-                    break;
                 case Opcode.CALL_W:
+                    Comment = script.FunctionPool[operand].Name;
                     break;
                 case Opcode.CALL_IND:
                     break;
@@ -174,16 +203,17 @@ namespace Xb2.Scripting
                 case Opcode.NEXT:
                     break;
                 case Opcode.PLUGIN:
-                    break;
                 case Opcode.PLUGIN_W:
+                    var plugin = script.Plugins[operand];
+                    Comment = $"{plugin.Plugin}::{plugin.Function}";
                     break;
                 case Opcode.CALL_FAR:
                     break;
                 case Opcode.CALL_FAR_W:
                     break;
                 case Opcode.GET_OC:
-                    break;
                 case Opcode.GET_OC_W:
+                    Comment = script.OcImports[operand];
                     break;
                 case Opcode.GETTER:
                     break;
@@ -194,14 +224,24 @@ namespace Xb2.Scripting
                 case Opcode.SETTER_W:
                     break;
                 case Opcode.SEND:
-                    break;
                 case Opcode.SEND_W:
+                    Comment = script.IdPool[operand];
                     break;
                 case Opcode.TYPEOF:
                     break;
                 case Opcode.SIZEOF:
                     break;
                 case Opcode.SWITCH:
+                    var values = new int[operand];
+                    var addresses = new int[operand];
+                    if (operand > 0) data.Position += 4;
+                    for (int i = 0; i < operand; i++)
+                    {
+                        values[i] = ReadOperand(data, 4);
+                        addresses[i] = ReadOperand(data, 4);
+                        Comment += $"case {values[i]}: {addresses[i] + Address:x}\n";
+                    }
+
                     break;
                 case Opcode.INC:
                     break;
@@ -214,6 +254,8 @@ namespace Xb2.Scripting
                 default:
                     throw new ArgumentOutOfRangeException(nameof(opcode), opcode, null);
             }
+
+            if (Operand == null) Operand = opcodeInfo.Size > 0 ? operand.ToString() : string.Empty;
         }
     }
 }
