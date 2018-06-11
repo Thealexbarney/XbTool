@@ -14,7 +14,7 @@ namespace Xb2.Save
             var sb = new Indenter();
             bool first = true;
 
-            sb.AppendLine("// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach");
+            sb.AppendLine("// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach PartialTypeWithSinglePart");
             sb.AppendLine("");
             sb.AppendLine("using Xb2.Types;");
             sb.AppendLine();
@@ -39,7 +39,7 @@ namespace Xb2.Save
 
         public static void GenerateClass(SaveType type, Indenter sb)
         {
-            sb.AppendLine($"public class {type.Name}");
+            sb.AppendLine($"public partial class {type.Name}");
             sb.AppendLineAndIncrease("{");
 
             foreach (var field in type.Fields)
@@ -97,7 +97,7 @@ namespace Xb2.Save
                         break;
                     case "Array":
                         if (!firstField) sb.AppendLine();
-                        sb.AppendLine($"for(int i = 0; i < {field.Name}.Length; i++)");
+                        sb.AppendLine($"for (int i = 0; i < {field.Name}.Length; i++)");
                         sb.AppendLineAndIncrease("{");
                         sb.AppendLine($"{field.Name}[i] = {GetReadValue(field)}");
 
@@ -156,7 +156,7 @@ namespace Xb2.Save
                         break;
                     case "Array":
                         if (!firstField) sb.AppendLine();
-                        sb.AppendLine($"for(int i = 0; i < {field.Name}.Length; i++)");
+                        sb.AppendLine($"for (int i = 0; i < {field.Name}.Length; i++)");
                         sb.AppendLineAndIncrease("{");
                         sb.AppendLine($"{GetWriteValue(field, "[i]")}");
 

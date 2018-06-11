@@ -1,10 +1,10 @@
-﻿// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach
+// ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach PartialTypeWithSinglePart
 
 using Xb2.Types;
 
 namespace Xb2.Save
 {
-    public class GfEquipHana
+    public partial class GfEquipHana
     {
         public ushort RoleItem { get; set; }
         public ushort AtrItem { get; set; }
@@ -74,7 +74,7 @@ namespace Xb2.Save
         }
     }
 
-    public class ArtsEnhance
+    public partial class ArtsEnhance
     {
         public ushort EnhanceId { get; set; }
         public ushort RecastRev { get; set; }
@@ -104,7 +104,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfDataBladeSkill
+    public partial class GfDataBladeSkill
     {
         public ushort Id { get; set; }
         public byte field_2 { get; set; }
@@ -131,7 +131,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfDataBladeArts
+    public partial class GfDataBladeArts
     {
         public ushort Id { get; set; }
         public ushort RecastRev { get; set; }
@@ -167,7 +167,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfDataBladeArtsN
+    public partial class GfDataBladeArtsN
     {
         public ushort Id { get; set; }
         public ushort RecastRev { get; set; }
@@ -197,7 +197,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfDataBladeArtsEx
+    public partial class GfDataBladeArtsEx
     {
         public ushort Id { get; set; }
         public ushort DamageRev { get; set; }
@@ -230,7 +230,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataBlade
+    public partial class SDataBlade
     {
         public ushort DataType { get; set; }
         public ushort Creator { get; set; }
@@ -630,7 +630,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataDriver
+    public partial class SDataDriver
     {
         public SDataIdea IdeaLevels { get; set; }
         public ActivateType ActivateType { get; set; }
@@ -857,7 +857,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataIdea
+    public partial class SDataIdea
     {
         public uint BraveryPoints { get; set; }
         public uint BraveryLevel { get; set; }
@@ -893,7 +893,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfDataDriverSkill
+    public partial class GfDataDriverSkill
     {
         public ushort[] Columns { get; set; } = new ushort[3];
         public ushort Row { get; set; }
@@ -922,7 +922,7 @@ namespace Xb2.Save
         }
     }
 
-    public class DriverWeapon
+    public partial class DriverWeapon
     {
         public uint[] Ids { get; set; } = new uint[3];
         public uint WeaponPoints { get; set; }
@@ -951,7 +951,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataPouch
+    public partial class SDataPouch
     {
         public float Time { get; set; }
         public ushort ItemId { get; set; }
@@ -972,7 +972,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataSave
+    public partial class SDataSave
     {
         public SDataSystem SystemSave { get; set; }
         public SDataGame GameSave { get; set; }
@@ -990,7 +990,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataSystem
+    public partial class SDataSystem
     {
         public uint Magic { get; set; }
         public uint field_4 { get; set; }
@@ -1011,7 +1011,7 @@ namespace Xb2.Save
         }
     }
 
-    public class Vec3
+    public partial class Vec3
     {
         public float X { get; set; }
         public float Y { get; set; }
@@ -1032,7 +1032,7 @@ namespace Xb2.Save
         }
     }
 
-    public class Vec3Padded
+    public partial class Vec3Padded
     {
         public float X { get; set; }
         public float Y { get; set; }
@@ -1056,7 +1056,7 @@ namespace Xb2.Save
         }
     }
 
-    public class RealTime
+    public partial class RealTime
     {
         public ulong UnkA { get; set; }
         public ulong Millisecond { get; set; }
@@ -1098,7 +1098,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GameTime
+    public partial class GameTime
     {
         public uint Second { get; set; }
         public uint Minute { get; set; }
@@ -1125,7 +1125,7 @@ namespace Xb2.Save
         }
     }
 
-    public class ElapseTime
+    public partial class ElapseTime
     {
         public uint Second { get; set; }
         public uint Minute { get; set; }
@@ -1149,7 +1149,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfAchievQuest
+    public partial class GfAchievQuest
     {
         public ushort QuestID { get; set; }
         public ushort field_2 { get; set; }
@@ -1196,16 +1196,15 @@ namespace Xb2.Save
         }
     }
 
-    public class GfAchievInfo
+    public partial class GfAchievInfo
     {
         public ushort Id { get; set; }
-        public ushort Alignment { get; set; }
         public GfAchievQuest[] AchievQuests { get; set; } = new GfAchievQuest[5];
 
         public GfAchievInfo(DataBuffer save)
         {
             Id = save.ReadUInt16();
-            Alignment = save.ReadUInt16();
+            save.Position += 2;
 
             for (int i = 0; i < AchievQuests.Length; i++)
             {
@@ -1216,7 +1215,7 @@ namespace Xb2.Save
         public void WriteSave(DataBuffer save)
         {
             save.WriteUInt16(Id);
-            save.WriteUInt16(Alignment);
+            save.Position += 2;
 
             for (int i = 0; i < AchievQuests.Length; i++)
             {
@@ -1225,7 +1224,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfItemHandle
+    public partial class GfItemHandle
     {
         public uint Type { get; set; }
         public uint Serial { get; set; }
@@ -1246,7 +1245,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfItemHandle16
+    public partial class GfItemHandle16
     {
         public ushort Type { get; set; }
         public ushort Serial { get; set; }
@@ -1267,7 +1266,7 @@ namespace Xb2.Save
         }
     }
 
-    public class HanaCircuits
+    public partial class HanaCircuits
     {
         public ushort Specials0 { get; set; }
         public ushort Specials1 { get; set; }
@@ -1300,7 +1299,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfSDataPartyMember
+    public partial class GfSDataPartyMember
     {
         public ushort DriverId { get; set; }
         public ushort field_2 { get; set; }
@@ -1321,7 +1320,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfSDataParty
+    public partial class GfSDataParty
     {
         public GfSDataPartyMember[] Members { get; set; } = new GfSDataPartyMember[10];
         public byte[] gap3C { get; set; } = new byte[4];
@@ -1373,7 +1372,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfItemInfo
+    public partial class GfItemInfo
     {
         public uint Id { get; set; }
         public uint Type { get; set; }
@@ -1418,7 +1417,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GfItemBox
+    public partial class GfItemBox
     {
         public GfItemInfo[] PcWpnChipBox { get; set; } = new GfItemInfo[200];
         public GfItemInfo[] PcEquipBox { get; set; } = new GfItemInfo[900];
@@ -1637,7 +1636,7 @@ namespace Xb2.Save
         }
     }
 
-    public class GameFlag
+    public partial class GameFlag
     {
         public byte[] Flags1Bit { get; set; } = new byte[65536];
         public byte[] Flags2Bit { get; set; } = new byte[65536];
@@ -1691,7 +1690,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataMap
+    public partial class SDataMap
     {
         public Vec3Padded[] DriverPositions { get; set; } = new Vec3Padded[3];
         public Vec3Padded[] BladePositions { get; set; } = new Vec3Padded[3];
@@ -1750,7 +1749,7 @@ namespace Xb2.Save
         }
     }
 
-    public class MercenaryTeam
+    public partial class MercenaryTeam
     {
         public ushort[] MemberIds { get; set; } = new ushort[6];
         public uint field_C { get; set; }
@@ -1794,7 +1793,7 @@ namespace Xb2.Save
         }
     }
 
-    public class FixedVector3MercenaryTeam
+    public partial class FixedVector3MercenaryTeam
     {
         public MercenaryTeam[] Data { get; set; } = new MercenaryTeam[3];
         public ulong Length { get; set; }
@@ -1820,7 +1819,7 @@ namespace Xb2.Save
         }
     }
 
-    public class FixedVector256QuestId
+    public partial class FixedVector256QuestId
     {
         public uint[] Data { get; set; } = new uint[256];
         public uint Length { get; set; }
@@ -1846,7 +1845,7 @@ namespace Xb2.Save
         }
     }
 
-    public class MercenaryTeamPreset
+    public partial class MercenaryTeamPreset
     {
         public ushort[] Members { get; set; } = new ushort[6];
 
@@ -1867,7 +1866,7 @@ namespace Xb2.Save
         }
     }
 
-    public class TaskAchieve
+    public partial class TaskAchieve
     {
         public ushort field_0 { get; set; }
         public ushort field_2 { get; set; }
@@ -1894,7 +1893,7 @@ namespace Xb2.Save
         }
     }
 
-    public class FixedVector128TaskAchieve
+    public partial class FixedVector128TaskAchieve
     {
         public TaskAchieve[] Data { get; set; } = new TaskAchieve[128];
         public ulong Length { get; set; }
@@ -1920,7 +1919,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataWeather
+    public partial class SDataWeather
     {
         public string Name { get; set; }
         public uint field_4 { get; set; }
@@ -1956,7 +1955,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataEvent
+    public partial class SDataEvent
     {
         public ushort EventId { get; set; }
         public ushort Creator { get; set; }
@@ -2055,7 +2054,7 @@ namespace Xb2.Save
         }
     }
 
-    public class SDataGame
+    public partial class SDataGame
     {
         public uint Money { get; set; }
         public uint LandmarkPoint { get; set; }

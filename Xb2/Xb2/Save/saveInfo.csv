@@ -155,7 +155,7 @@ Scalar,byte,EnableEngageRex,,,
 Scalar,byte,BladeReleaseStatus,,,
 Scalar,byte,isUnselect,,,
 Scalar,byte,AffinityChartStatus,,,
-Scalar,ushort,field_8A2,,,
+Padding,,,2,,
 
 Class,,SDataDriver,,,
 Scalar,SDataIdea,IdeaLevels,,,
@@ -198,8 +198,7 @@ Scalar,GfItemHandle,AccessoryHandle1,,,
 Scalar,ushort,AccessoryId1,,,
 Scalar,ushort,gap_582,,,
 Array,SDataPouch,PouchInfo,3,,
-Array,byte,gap_field_59A,3,,
-Scalar,byte,field_59F,,,
+BitfieldArray,,ActivatedWeaponTypes,32,,1
 
 Class,,SDataIdea,,,
 Scalar,uint,BraveryPoints,,,
@@ -260,10 +259,10 @@ BitfieldValue,,Year,,,11
 
 Class,,GameTime,,,
 Bitfield,uint,time,,,
-BitfieldValue,,Seconds,,,6
-BitfieldValue,,Minutes,,,6
-BitfieldValue,,Hours,,,5
-BitfieldValue,,Days,,,15
+BitfieldValue,,Second,,,6
+BitfieldValue,,Minute,,,6
+BitfieldValue,,Hour,,,5
+BitfieldValue,,Day,,,15
 
 Class,,ElapseTime,,,
 Bitfield,uint,time,,,
@@ -283,11 +282,11 @@ Scalar,ushort,Column,,,
 Scalar,ushort,Row,,,
 Scalar,ushort,BladeId,,,
 Scalar,ushort,AchievementId,,,
-Scalar,ushort,Alignment,,,
+Padding,,,2,,
 
 Class,,GfAchievInfo,,,
 Scalar,ushort,Id,,,
-Scalar,ushort,Alignment,,,
+Padding,,,2,,
 Array,GfAchievQuest,AchievQuests,5,,
 
 Class,,GfItemHandle,,,
@@ -359,9 +358,9 @@ Array,GfItemInfo,HanaAssistBox,700,,
 Array,uint,Serials,19,,
 
 Class,,GameFlag,,,
-Array,byte,Flags1Bit,8192,,
-Array,byte,Flags2Bit,16384,,
-Array,byte,Flags4Bit,4096,,
+BitfieldArray,,Flags1Bit,65536,,1
+BitfieldArray,,Flags2Bit,65536,,2
+BitfieldArray,,Flags4Bit,8192,,4
 Array,byte,Flags8Bit,8192,,
 Array,ushort,Flags16Bit,3072,,
 Array,uint,Flags32Bit,3336,,
@@ -434,11 +433,10 @@ Array,ushort,D,8,,
 
 Class,,SDataGame,,,
 Scalar,uint,Money,,,
-Scalar,uint,MapJumpId,,,
-Scalar,uint,field_8,,,
-Scalar,uint,field_C,,,
-Scalar,Vec3,MapPosition,,,
-Scalar,float,field_1C,,,
+Scalar,uint,LandmarkPoint,,,
+Padding,,,8,,
+Scalar,Vec3,LandmarkPos,,,
+Padding,,,4,,
 Scalar,float,LandmarkRotY,,,
 Scalar,ushort,isTimeStop,,,
 Scalar,ushort,ChapterSaveScenarioFlag,,,
@@ -451,9 +449,9 @@ Scalar,GfItemBox,ItemBox,,,
 Scalar,GameFlag,Flags,,,
 Scalar,uint,ScenarioQuest,,,
 Scalar,uint,CurrentQuest,,,
-Scalar,uint,field_1097EC,,,
+Padding,,,4,,
 Scalar,SDataMap,Map,,,
-Array,byte,gap_1098B4,12,,
+Padding,,,12,,
 Scalar,GameTime,GameTime,,,
 Scalar,ElapseTime,ElapseTime,,,
 Scalar,FixedVector3MercenaryTeam,MercTeams,,,
@@ -473,7 +471,7 @@ Scalar,ushort,RareBladeAppearType,,,
 Scalar,ushort,field_10AD52,,,
 Scalar,uint,CoinCount,,,
 Array,uint,SavedEnemyHp,3,,
-Scalar,uint,field_10AD64,,,
+Padding,,,4,,
 Scalar,RealTime,Time,,,
 Scalar,float,CameraHeight,,,
 Array,byte,Minigame,256,,
@@ -493,4 +491,4 @@ Scalar,float,field_117368,,,
 Array,uint,ContentVersions,5,,
 Array,byte,gap_117380,776,,
 Scalar,uint,field_117688,,,
-Scalar,uint,field_11768C,,,
+Padding,,,4,,
