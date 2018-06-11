@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XbTool", "XbTool\XbTool.csproj", "{85E9CB41-5EED-4125-BACD-C97051427B14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveEditor", "SaveEditor\SaveEditor.csproj", "{9C7548B6-8CF1-4CD6-A679-A90DB898D61F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85E9CB41-5EED-4125-BACD-C97051427B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E9CB41-5EED-4125-BACD-C97051427B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E9CB41-5EED-4125-BACD-C97051427B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E9CB41-5EED-4125-BACD-C97051427B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7548B6-8CF1-4CD6-A679-A90DB898D61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7548B6-8CF1-4CD6-A679-A90DB898D61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B41D131-835B-4F62-ABA6-3FC07A453FF6}
+	EndGlobalSection
+EndGlobal

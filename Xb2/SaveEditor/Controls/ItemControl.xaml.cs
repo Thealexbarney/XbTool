@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Xb2.Save;
+using XbTool.Save;
 
 namespace SaveEditor.Controls
 {

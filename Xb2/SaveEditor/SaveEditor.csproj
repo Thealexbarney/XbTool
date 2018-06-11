@@ -160,9 +160,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Xb2\Xb2.csproj">
+    <ProjectReference Include="..\XbTool\XbTool.csproj">
       <Project>{85e9cb41-5eed-4125-bacd-c97051427b14}</Project>
-      <Name>Xb2</Name>
+      <Name>XbTool</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

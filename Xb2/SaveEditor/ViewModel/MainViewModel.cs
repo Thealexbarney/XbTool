@@ -6,13 +6,13 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Xb2;
-using Xb2.Save;
-using Xb2.Types;
 using System.IO.Compression;
 using System.Linq;
-using Xb2.Bdat;
-using Xb2.Serialization;
+using XbTool;
+using XbTool.Bdat;
+using XbTool.Save;
+using XbTool.Serialization;
+using XbTool.Types;
 
 namespace SaveEditor.ViewModel
 {
