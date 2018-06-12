@@ -4,7 +4,7 @@ namespace XbTool.Textures
 {
     public static class Swizzle
     {
-        public static void Deswizzle(Texture texture, int bppPower)
+        public static void Deswizzle(ITexture texture, int bppPower)
         {
             int bpp = 1 << bppPower;
 

@@ -61,6 +61,12 @@ namespace XbTool
                 case Task.ReadScript:
                     ReadScript(options);
                     break;
+                case Task.DecodeCatex:
+                    DecodeCatex(options);
+                    break;
+                case Task.ExtractMinimap:
+                    ExtractMinimap(options);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -314,6 +320,34 @@ namespace XbTool
                     progress.ReportAdd(1);
                 }
             }
+        }
+
+        private static void DecodeCatex(Options options)
+        {
+            if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+
+            if (File.Exists(options.Input))
+            {
+                Xbx.Textures.Extract.ExtractTextures(new[] { options.Input }, options.Output);
+            }
+
+            if (Directory.Exists(options.Input))
+            {
+                string pattern = options.Filter ?? "*";
+                string[] filenames = Directory.GetFiles(options.Input, pattern);
+                Xbx.Textures.Extract.ExtractTextures(filenames, options.Output);
+            }
+        }
+
+        private static void ExtractMinimap(Options options)
+        {
+            if (options.Game != Game.XBX) throw new NotImplementedException("Xenoblade X minimap only.");
+            if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+            if (!Directory.Exists(options.Input)) throw new DirectoryNotFoundException($"{options.Input} is not a valid directory.");
+
+            Xbx.Textures.Minimap.ExtractMinimap(options.Input, options.Output);
         }
     }
 }

@@ -8,26 +8,30 @@ namespace XbTool.Textures
 {
     public static class Decode
     {
-        public static byte[] ToPng(this Texture texture)
+        public static byte[] ToPng(this ITexture texture)
         {
             byte[] image = texture.DecodeTexture();
             if (image == null) return null;
             return CreatePng(image, texture.Width, texture.Height);
         }
 
-        public static Bitmap ToBitmap(this Texture texture)
+        public static Bitmap ToBitmap(this ITexture texture)
         {
             byte[] image = texture.DecodeTexture();
             if (image == null) return null;
             return ToBitmap(image, texture.Width, texture.Height);
         }
 
-        public static byte[] DecodeTexture(this Texture texture)
+        public static byte[] DecodeTexture(this ITexture texture)
         {
             byte[] decoded = null;
 
             switch (texture.Format)
             {
+                case TextureFormat.BC1 when texture is Xbx.Textures.Texture tex:
+                    Xbx.Textures.Swizzle.Deswizzle(tex, 6);
+                    decoded = Dxt.DecompressDxt1(texture);
+                    break;
                 case TextureFormat.BC1:
                     Swizzle.Deswizzle(texture, 3);
                     decoded = Dxt.DecompressDxt1(texture);

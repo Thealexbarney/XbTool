@@ -56,7 +56,7 @@ namespace XbTool.Textures
         public int Length { get; set; }
     }
 
-    public class Texture
+    public class Texture : ITexture
     {
         public int Field0 { get; }
         public int Field4 { get; }

@@ -27,6 +27,8 @@
         ReadSave,
         CombineBdat,
         ReadGimmick,
-        ReadScript
+        ReadScript,
+        DecodeCatex,
+        ExtractMinimap
     }
 }

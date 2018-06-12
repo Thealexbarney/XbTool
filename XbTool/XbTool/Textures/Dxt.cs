@@ -4,7 +4,7 @@ namespace XbTool.Textures
 {
     public static class Dxt
     {
-        public static byte[] DecompressDxt1(Texture texture)
+        public static byte[] DecompressDxt1(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
             var widthBlocks = texture.Width / 4;
@@ -23,7 +23,7 @@ namespace XbTool.Textures
             return image;
         }
 
-        public static void DecompressDxt1Block(Texture texture, int pos, byte[] output, int xPos, int yPos)
+        public static void DecompressDxt1Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
             if (pos >= texture.Data.Length) return;
             Color[] c = new Color[4];
@@ -82,7 +82,7 @@ namespace XbTool.Textures
             }
         }
 
-        public static byte[] DecompressDxt5(Texture texture)
+        public static byte[] DecompressDxt5(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
             var widthBlocks = texture.Width / 4;
@@ -101,7 +101,7 @@ namespace XbTool.Textures
             return image;
         }
 
-        public static void DecompressDxt5Block(Texture texture, int pos, byte[] output, int xPos, int yPos)
+        public static void DecompressDxt5Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
             if (pos >= texture.Data.Length) return;
             Color[] c = new Color[4];
