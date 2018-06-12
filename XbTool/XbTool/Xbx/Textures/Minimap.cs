@@ -13,6 +13,7 @@ namespace XbTool.Xbx.Textures
         public static void ExtractMinimap(string inDir, string outDir)
         {
             var filenames = Directory.GetFiles(inDir, "map_???_???_???.catex");
+            Directory.CreateDirectory(outDir);
             var segmentGroups = filenames.Select(x => new Segment(x)).GroupBy(x => x.MapId);
             var maps = new List<Map>();
 
