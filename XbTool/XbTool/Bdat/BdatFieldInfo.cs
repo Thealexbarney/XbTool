@@ -48,7 +48,8 @@ namespace XbTool.Bdat
         Change,
         EventSetup,
         ItemComment,
-        Layer
+        Layer,
+        Place
     }
 
     public class BdatArrayInfo

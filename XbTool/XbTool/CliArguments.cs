@@ -106,6 +106,16 @@ namespace XbTool
                             options.Filter = args[i + 1];
                             i++;
                             continue;
+                        case "-XB2DIR":
+                            if (i + 1 >= args.Length)
+                            {
+                                PrintWithUsage("No argument after -xb2dir flag.");
+                                return null;
+                            }
+
+                            options.Xb2Dir = args[i + 1];
+                            i++;
+                            continue;
                     }
                 }
 

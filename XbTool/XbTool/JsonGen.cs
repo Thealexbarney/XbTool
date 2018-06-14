@@ -9,9 +9,11 @@ namespace XbTool
 {
     public static class JsonGen
     {
-        public static void PrintAllTables(BdatStringCollection bdats, string htmlDir)
+        public static void PrintAllTables(BdatStringCollection bdats, string jsonDir, IProgressReport progress = null)
         {
-            string bdatHtmlDir = Path.Combine(htmlDir, "json");
+            progress?.LogMessage("Writing BDAT tables as JSON");
+            progress?.SetTotal(bdats.Tables.Count);
+            string bdatHtmlDir = Path.Combine(jsonDir, "json");
             Directory.CreateDirectory(bdatHtmlDir);
 
             foreach (string tableName in bdats.Tables.Keys)
@@ -29,6 +31,7 @@ namespace XbTool
                 string filename = Path.Combine(outDir, tableName + ".json");
                 Directory.CreateDirectory(outDir);
                 File.WriteAllText(filename, json);
+                progress?.ReportAdd(1);
             }
         }
 

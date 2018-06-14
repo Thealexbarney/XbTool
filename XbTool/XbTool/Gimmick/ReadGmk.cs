@@ -8,8 +8,9 @@ namespace XbTool.Gimmick
 {
     public static class ReadGmk
     {
-        public static MapInfo[] ReadAll(IFileReader fs, BdatCollection tables)
+        public static MapInfo[] ReadAll(IFileReader fs, BdatCollection tables, IProgressReport progress = null)
         {
+            progress?.LogMessage("Reading map info and gimmick sets");
             Dictionary<string, MapInfo> maps = MapInfo.ReadAll(fs);
 
             var mapList = tables.FLD_maplist;

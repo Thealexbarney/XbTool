@@ -134,6 +134,10 @@ namespace XbTool.BdatString
                 case BdatFieldType.Layer:
                     ApplyRef(BdatStringTools.GetLayerTable(refId));
                     break;
+                case BdatFieldType.Place:
+                    var placeCat = (PlaceCategory)int.Parse(item[field.RefField].ValueString);
+                    ApplyRef(BdatStringTools.GetPlaceTable(placeCat, refId));
+                    break;
             }
 
             if (field.EnumType != null)

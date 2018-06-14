@@ -10,8 +10,10 @@ namespace XbTool
 {
     public static class HtmlGen
     {
-        public static void PrintSeparateTables(BdatStringCollection bdats, string htmlDir)
+        public static void PrintSeparateTables(BdatStringCollection bdats, string htmlDir, IProgressReport progress = null)
         {
+            progress?.LogMessage("Writing BDAT tables as HTML");
+            progress?.SetTotal(bdats.Tables.Count);
             string bdatHtmlDir = Path.Combine(htmlDir, "bdat");
             Directory.CreateDirectory(bdatHtmlDir);
 
@@ -56,6 +58,7 @@ namespace XbTool
                 string filename = Path.Combine(outDir, tableName + ".html");
                 Directory.CreateDirectory(outDir);
                 File.WriteAllText(filename, sb.ToString());
+                progress?.ReportAdd(1);
             }
         }
 

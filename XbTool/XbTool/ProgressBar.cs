@@ -49,6 +49,7 @@ namespace XbTool
         public void SetTotal(int value)
         {
             Interlocked.Exchange(ref _total, value);
+            Report(0);
         }
 
         private void TimerHandler(object state)

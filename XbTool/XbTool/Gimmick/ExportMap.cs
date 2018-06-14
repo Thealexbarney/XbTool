@@ -24,13 +24,13 @@ namespace XbTool.Gimmick
                     var wilay = new WilayRead(texBytes);
                     Texture texture = wilay.Textures[0];
                     var bitmapBase = texture.ToBitmap();
-                    float scale = 2;
+                    float scale = 1;
                     bitmapBase = ResizeImage(bitmapBase, (int)(bitmapBase.Width * scale), (int)(bitmapBase.Height * scale));
 
-                    //var outerBrush = new SolidBrush(System.Drawing.Color.Black);
+                    var outerBrush = new SolidBrush(System.Drawing.Color.Black);
                     //var backing = new SolidBrush(System.Drawing.Color.White);
                     var innerBrush = new SolidBrush(System.Drawing.Color.GreenYellow);
-                    Pen pen = new Pen(innerBrush, 1 * scale);
+                    Pen pen = new Pen(outerBrush, 1 * scale);
 
                     bitmapBase.RotateFlip(RotateFlipType.Rotate180FlipNone);
 
@@ -44,8 +44,8 @@ namespace XbTool.Gimmick
                             foreach (InfoEntry gmk in gmkType.Value)
                             {
                                 var point = area.Get2DPosition(gmk.Xfrm.Position);
-                                graphics.FillCircle(innerBrush, point.X, point.Y, 8);
-                                graphics.DrawCircle(pen, point.X, point.Y, 8);
+                                graphics.FillCircle(innerBrush, point.X * scale, point.Y * scale, 8 * scale);
+                                graphics.DrawCircle(pen, point.X * scale, point.Y * scale, 8 * scale);
                             }
                             //foreach (InfoEntry gmk in gmkType.Value)
                             //{

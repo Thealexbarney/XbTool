@@ -6,10 +6,12 @@ namespace XbTool.Serialization
 {
     public static class DeserializeStrings
     {
-        public static BdatStringCollection DeserializeTables(BdatTables tables)
+        public static BdatStringCollection DeserializeTables(BdatTables tables, IProgressReport progress = null)
         {
             var collection = new BdatStringCollection { Bdats = tables };
-
+            progress?.LogMessage("Parsing BDAT tables");
+            progress?.SetTotal(tables.Tables.Length);
+            
             foreach (BdatTable table in tables.Tables)
             {
                 var items = new BdatStringItem[table.ItemCount];
@@ -44,6 +46,7 @@ namespace XbTool.Serialization
                 }
 
                 collection.Add(stringTable);
+                progress?.ReportAdd(1);
             }
 
             return collection;

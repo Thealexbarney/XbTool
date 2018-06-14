@@ -474,4 +474,12 @@ namespace XbTool.Types
         Gender3,
         Animal
     }
+
+    public enum PlaceCategory
+    {
+        None,
+        Cat1,
+        Landmark,
+        Event
+    }
 }

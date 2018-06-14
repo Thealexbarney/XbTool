@@ -11,13 +11,16 @@ namespace XbTool.Serialization
     {
         public static readonly Dictionary<string, FieldInfo> Fields = typeof(BdatCollection).GetFields().ToDictionary(x => x.Name, x => x);
 
-        public static BdatCollection DeserializeTables(BdatTables files)
+        public static BdatCollection DeserializeTables(BdatTables files, IProgressReport progress = null)
         {
+            progress?.LogMessage("Deserializing BDAT tables");
+            progress?.SetTotal(files.Tables.Length);
             var tables = new BdatCollection();
 
             foreach (BdatTable table in files.Tables)
             {
                 ReadTable(table, tables);
+                progress?.ReportAdd(1);
             }
 
             ReadFunctions.SetReferences(tables);

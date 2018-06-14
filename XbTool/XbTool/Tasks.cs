@@ -67,6 +67,9 @@ namespace XbTool
                 case Task.ExtractMinimap:
                     ExtractMinimap(options);
                     break;
+                case Task.GenerateSite:
+                    GenerateSite(options);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -348,6 +351,22 @@ namespace XbTool
             if (!Directory.Exists(options.Input)) throw new DirectoryNotFoundException($"{options.Input} is not a valid directory.");
 
             Xbx.Textures.Minimap.ExtractMinimap(options.Input, options.Output);
+        }
+
+        private static void GenerateSite(Options options)
+        {
+            if (options.Xb2Dir == null) throw new NullReferenceException("Must specify XB2 Directory.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+            if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
+
+            using (var progress = new ProgressBar())
+            {
+                progress.LogMessage("Reading XB2 directories");
+                using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
+                {
+                    Website.Generate.GenerateSite(xb2Fs, options.Output, progress);
+                }
+            }
         }
     }
 }

@@ -10,6 +10,7 @@
         public string Input { get; set; }
         public string Output { get; set; }
         public string Filter { get; set; }
+        public string Xb2Dir { get; set; }
     }
 
     public enum Task
@@ -29,6 +30,7 @@
         ReadGimmick,
         ReadScript,
         DecodeCatex,
-        ExtractMinimap
+        ExtractMinimap,
+        GenerateSite
     }
 }
