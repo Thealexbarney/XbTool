@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using CsvHelper;
 using XbTool.CodeGen;
@@ -294,17 +293,17 @@ namespace XbTool.Save
                             types.Add(type);
                             break;
                         case "Bitfield":
+                            if (type == null) throw new InvalidDataException("Encountered a Bitfield without a preceding Class");
                             bitfield = field;
                             field.Bitfield = new List<SaveField>();
-                            Debug.Assert(type != null, nameof(type) + " != null");
                             type.Fields.Add(field);
                             break;
                         case "BitfieldValue":
-                            Debug.Assert(bitfield != null, nameof(bitfield) + " != null");
+                            if (bitfield == null) throw new InvalidDataException("Encountered a BitfieldValue without a preceding Bitfield");
                             bitfield.Bitfield.Add(field);
                             break;
                         default:
-                            Debug.Assert(type != null, nameof(type) + " != null");
+                            if (type == null) throw new InvalidDataException($"Encountered a {field.Type} without a preceding Class");
                             type.Fields.Add(field);
                             break;
                     }

@@ -1,9 +1,10 @@
 ﻿using System;
-using XbTool.Textures;
+using XbTool.Common;
+using XbTool.Common.Textures;
 
 namespace XbTool.Xbx.Textures
 {
-    public class Texture : ITexture
+    public class MtxtTexture : ITexture
     {
         public int Swizzle { get; set; }
         public int Dimension { get; set; }
@@ -22,7 +23,7 @@ namespace XbTool.Xbx.Textures
         public TextureFormat Format { get; set; }
         public byte[] Data { get; set; }
 
-        public Texture(DataBuffer data)
+        public MtxtTexture(DataBuffer data)
         {
             Swizzle = data.ReadInt32(data.Length - 0x70, true);
             Dimension = data.ReadInt32();

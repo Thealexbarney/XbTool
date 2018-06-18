@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public static class Byte
     {

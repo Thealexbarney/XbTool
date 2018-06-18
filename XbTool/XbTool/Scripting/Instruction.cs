@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using XbTool.Common;
 
 namespace XbTool.Scripting
 {

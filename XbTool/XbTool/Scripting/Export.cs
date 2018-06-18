@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using XbTool.Common;
 
 namespace XbTool.Scripting
 {

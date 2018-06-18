@@ -5,6 +5,7 @@ using CsvHelper;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.CodeGen;
+using XbTool.Common;
 
 namespace XbTool
 {

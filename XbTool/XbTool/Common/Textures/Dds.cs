@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using XbTool.Xb2.Textures;
 
-namespace XbTool.Textures
+namespace XbTool.Common.Textures
 {
     public static class Dds
     {
-        public static byte[] CreateHeader(Texture tex)
+        public static byte[] CreateHeader(LahdTexture tex)
         {
             int bpp;
             uint flags = 0;
@@ -86,7 +87,7 @@ namespace XbTool.Textures
             return ((MemoryStream)writer.BaseStream).ToArray();
         }
 
-        public static byte[] CreateDds(Texture tex)
+        public static byte[] CreateDds(LahdTexture tex)
         {
             var header = CreateHeader(tex);
             var bodyLength = BitConverter.ToInt32(header, 20);

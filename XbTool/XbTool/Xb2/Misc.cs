@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XbTool
+namespace XbTool.Xb2
 {
     public static class Misc
     {

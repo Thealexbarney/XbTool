@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using XbTool.Common;
 
 namespace XbTool
 {

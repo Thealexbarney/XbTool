@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using DotNet.Globbing;
 using Ionic.Zlib;
+using XbTool.Common;
 
-namespace XbTool
+namespace XbTool.Xb2
 {
     public class FileArchive : IDisposable, IFileReader
     {
@@ -241,9 +242,13 @@ namespace XbTool
             Buffer.BlockCopy(filei, 0, file, 0, file.Length);
         }
 
-        public static void Extract(FileArchive archive, string outDir)
+        public static void Extract(FileArchive archive, string outDir, IProgressReport progress = null)
         {
-            foreach (FileInfo fileInfo in archive.FileInfo.Where(x => !string.IsNullOrWhiteSpace(x.Filename)))
+            var fileInfos = archive.FileInfo.Where(x => !string.IsNullOrWhiteSpace(x.Filename)).ToArray();
+            progress?.SetTotal(fileInfos.Length);
+            progress?.LogMessage("Extracting ARD archive");
+
+            foreach (FileInfo fileInfo in fileInfos)
             {
                 string filename = Path.Combine(outDir, fileInfo.Filename.TrimStart('/'));
                 string dir = Path.GetDirectoryName(filename) ?? throw new InvalidOperationException();
@@ -253,6 +258,7 @@ namespace XbTool
                 {
                     archive.OutputFile(fileInfo, outStream);
                 }
+                progress?.ReportAdd(1);
             }
         }
 

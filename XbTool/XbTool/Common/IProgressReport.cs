@@ -1,4 +1,4 @@
-﻿namespace XbTool
+﻿namespace XbTool.Common
 {
     public interface IProgressReport
     {
@@ -6,19 +6,19 @@
         /// Sets the current value of the <see cref="IProgressReport"/> to <paramref name="value"/>.
         /// </summary>
         /// <param name="value">The value to set.</param>
-        void Report(int value);
+        void Report(long value);
 
         /// <summary>
         /// Adds <paramref name="value"/> to the current value of the <see cref="IProgressReport"/>.
         /// </summary>
         /// <param name="value">The amount to add.</param>
-        void ReportAdd(int value);
+        void ReportAdd(long value);
 
         /// <summary>
         /// Sets the maximum value of the <see cref="IProgressReport"/> to <paramref name="value"/>.
         /// </summary>
         /// <param name="value">The maximum value to set.</param>
-        void SetTotal(int value);
+        void SetTotal(long value);
 
         /// <summary>
         /// Logs a message to the <see cref="IProgressReport"/> object.

@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using XbTool.Xb2.Textures;
 
-namespace XbTool.Textures
+namespace XbTool.Common.Textures
 {
     public static class Decode
     {
@@ -28,7 +29,7 @@ namespace XbTool.Textures
 
             switch (texture.Format)
             {
-                case TextureFormat.BC1 when texture is Xbx.Textures.Texture tex:
+                case TextureFormat.BC1 when texture is Xbx.Textures.MtxtTexture tex:
                     Xbx.Textures.Swizzle.Deswizzle(tex, 6);
                     decoded = Dxt.DecompressDxt1(texture);
                     break;
@@ -42,10 +43,15 @@ namespace XbTool.Textures
                     break;
                 case TextureFormat.BC4:
                     Swizzle.Deswizzle(texture, 3);
+                    decoded = Dxt.DecompressDxt4(texture);
                     break;
                 case TextureFormat.BC6H_UF16:
+                    Swizzle.Deswizzle(texture, 4);
+                    decoded = Dxt.DecompressBc6(texture);
+                    break;
                 case TextureFormat.BC7:
                     Swizzle.Deswizzle(texture, 4);
+                    decoded = Dxt.DecompressBc7(texture);
                     break;
             }
 

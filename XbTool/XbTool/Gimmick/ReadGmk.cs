@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using XbTool.Common;
 using XbTool.Types;
 
 namespace XbTool.Gimmick
@@ -26,7 +26,11 @@ namespace XbTool.Gimmick
                 {
                     MNU_MapInfo area = areaList.FirstOrDefault(x =>
                         x.level_name == areaInfo.Name || x.level_name2 == areaInfo.Name);
-                    Debug.Assert(area != null, "Area does not exist");
+                    if (area == null)
+                    {
+                        progress?.LogMessage($"Found area {areaInfo.Name} that is not in the BDAT tables");
+                        continue;
+                    }
 
                     // Some areas use one of 2 maps depending on the game state.
                     // These 2 maps are always the same except one has a small addition or removal.

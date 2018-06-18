@@ -5,7 +5,7 @@ using System.Linq;
 using CsvHelper;
 using XbTool.Types;
 
-namespace XbTool
+namespace XbTool.Xb2
 {
     public static class Enemies
     {
@@ -32,13 +32,13 @@ namespace XbTool
                 en.Family = enemy._ParamID._ResourceID._TypeFamily?._name.name;
 
                 CHR_EnParamTable lvParam = tables.CHR_EnParamTable[en.Level];
-                en.Strength = (int)(enemy._ParamID.StrengthRev * 0.001 * lvParam.StrengthBase * ((enemy._ParamRev?.StrengthRev ?? 0) * 0.001));
-                en.Ether = (int)(enemy._ParamID.PowEtherRev * 0.001 * lvParam.PowEtherBase * ((enemy._ParamRev?.PowEtherRev ?? 0) * 0.001));
-                en.Dexterity = (int)(enemy._ParamID.DexRev * 0.001 * lvParam.DexBase * ((enemy._ParamRev?.DexRev ?? 0) * 0.001));
-                en.Agility = (int)(enemy._ParamID.AiID * 0.001 * lvParam.AgilityBase * ((enemy._ParamRev?.AgilityRev ?? 0) * 0.001));
-                en.Strength = (int)(enemy._ParamID.StrengthRev * 0.001 * lvParam.StrengthBase * ((enemy._ParamRev?.StrengthRev ?? 0) * 0.001));
-                en.Luck = (int)(enemy._ParamID.LuckRev * 0.001 * lvParam.LuckBase * ((enemy._ParamRev?.LuckRev ?? 0) * 0.001));
-                en.MaxHp = (int)(enemy._ParamID.HpMaxRev * 0.001 * lvParam.HpMaxBase * ((enemy._ParamRev?.HpMaxRev ?? 0) * 0.001));
+                en.Strength = (int)(enemy._ParamID.StrengthRev * 0.001 * lvParam.StrengthBase * ((enemy._ParamRev?.StrengthRev ?? 1000) * 0.001));
+                en.Ether = (int)(enemy._ParamID.PowEtherRev * 0.001 * lvParam.PowEtherBase * ((enemy._ParamRev?.PowEtherRev ?? 1000) * 0.001));
+                en.Dexterity = (int)(enemy._ParamID.DexRev * 0.001 * lvParam.DexBase * ((enemy._ParamRev?.DexRev ?? 1000) * 0.001));
+                en.Agility = (int)(enemy._ParamID.AiID * 0.001 * lvParam.AgilityBase * ((enemy._ParamRev?.AgilityRev ?? 1000) * 0.001));
+                en.Strength = (int)(enemy._ParamID.StrengthRev * 0.001 * lvParam.StrengthBase * ((enemy._ParamRev?.StrengthRev ?? 1000) * 0.001));
+                en.Luck = (int)(enemy._ParamID.LuckRev * 0.001 * lvParam.LuckBase * ((enemy._ParamRev?.LuckRev ?? 1000) * 0.001));
+                en.MaxHp = (int)(enemy._ParamID.HpMaxRev * 0.001 * lvParam.HpMaxBase * ((enemy._ParamRev?.HpMaxRev ?? 1000) * 0.001));
                 en.PhyRst = enemy._ParamID.RstPower;
                 en.EtherRst = enemy._ParamID.RstEther;
                 en.Element = (BladeAttribute)enemy._ParamID.Atr;

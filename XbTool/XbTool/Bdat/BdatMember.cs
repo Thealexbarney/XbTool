@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using XbTool.Common;
 
 namespace XbTool.Bdat
 {

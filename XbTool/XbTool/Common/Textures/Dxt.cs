@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XbTool.Textures
+namespace XbTool.Common.Textures
 {
     public static class Dxt
     {
@@ -78,6 +78,74 @@ namespace XbTool.Textures
                     output[offset + 1] = col.G;
                     output[offset + 2] = col.R;
                     output[offset + 3] = col.A;
+                }
+            }
+        }
+
+        public static byte[] DecompressDxt4(ITexture texture)
+        {
+            var image = new byte[texture.Height * texture.Width * 4];
+            var widthBlocks = texture.Width / 4;
+            var heightBlocks = texture.Height / 4;
+            int pos = 0;
+
+            for (int y = 0; y < heightBlocks; y++)
+            {
+                for (int x = 0; x < widthBlocks; x++)
+                {
+                    DecompressDxt4Block(texture, pos, image, x * 4, y * 4);
+                    pos += 8;
+                }
+            }
+
+            return image;
+        }
+
+        public static void DecompressDxt4Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
+        {
+            if (pos >= texture.Data.Length) return;
+            byte[] alpha = new byte[8];
+
+            var alpha0 = texture.Data[pos];
+            var alpha1 = texture.Data[pos + 1];
+            var alphaMask = BitConverter.ToUInt64(texture.Data, pos) >> 16;
+
+            alpha[0] = alpha0;
+            alpha[1] = alpha1;
+            if (alpha[0] > alpha[1])
+            {
+                alpha[2] = (byte)((6 * alpha[0] + 1 * alpha[1] + 3) / 7);
+                alpha[3] = (byte)((5 * alpha[0] + 2 * alpha[1] + 3) / 7);
+                alpha[4] = (byte)((4 * alpha[0] + 3 * alpha[1] + 3) / 7);
+                alpha[5] = (byte)((3 * alpha[0] + 4 * alpha[1] + 3) / 7);
+                alpha[6] = (byte)((2 * alpha[0] + 5 * alpha[1] + 3) / 7);
+                alpha[7] = (byte)((1 * alpha[0] + 6 * alpha[1] + 3) / 7);
+            }
+            else
+            {
+                alpha[2] = (byte)((4 * alpha[0] + 1 * alpha[1] + 2) / 5);
+                alpha[3] = (byte)((3 * alpha[0] + 2 * alpha[1] + 2) / 5);
+                alpha[4] = (byte)((2 * alpha[0] + 3 * alpha[1] + 2) / 5);
+                alpha[5] = (byte)((1 * alpha[0] + 4 * alpha[1] + 2) / 5);
+                alpha[6] = 0;
+                alpha[7] = 255;
+            }
+
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    var alphaIndex = alphaMask & 7;
+                    alphaMask >>= 3;
+
+                    var x2 = xPos + x;
+                    var y2 = yPos + y;
+
+                    var offset = (x2 + y2 * texture.Width) * 4;
+                    output[offset] = alpha[alphaIndex];
+                    output[offset + 1] = alpha[alphaIndex];
+                    output[offset + 2] = alpha[alphaIndex];
+                    output[offset + 3] = 0xFF;
                 }
             }
         }
@@ -168,6 +236,56 @@ namespace XbTool.Textures
                     output[offset + 3] = alpha[alphaIndex];
                 }
             }
+        }
+
+        public static byte[] DecompressBc7(ITexture texture)
+        {
+            var image = new byte[texture.Height * texture.Width * 4];
+            var widthBlocks = texture.Width / 4;
+            var heightBlocks = texture.Height / 4;
+            int pos = 0;
+
+            for (int y = 0; y < heightBlocks; y++)
+            {
+                for (int x = 0; x < widthBlocks; x++)
+                {
+                    DecompressBC7Block(texture, pos, image, x * 4, y * 4);
+                    pos += 16;
+                }
+            }
+
+            return image;
+        }
+
+        internal static void DecompressBC7Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
+        {
+            var colours = BC7.DecompressBC7(texture.Data, pos);
+            BC7.SetColoursFromDX10(colours, output, xPos, yPos, texture.Width);
+        }
+
+        public static byte[] DecompressBc6(ITexture texture)
+        {
+            var image = new byte[texture.Height * texture.Width * 4];
+            var widthBlocks = texture.Width / 4;
+            var heightBlocks = texture.Height / 4;
+            int pos = 0;
+
+            for (int y = 0; y < heightBlocks; y++)
+            {
+                for (int x = 0; x < widthBlocks; x++)
+                {
+                    DecompressBC6Block(texture, pos, image, x * 4, y * 4);
+                    pos += 16;
+                }
+            }
+
+            return image;
+        }
+
+        internal static void DecompressBC6Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
+        {
+            var colours = BC6.DecompressBC6(texture.Data, pos, texture.Format != TextureFormat.BC6H_UF16);
+            BC7.SetColoursFromDX10(colours, output, xPos, yPos, texture.Width);
         }
 
         public static void Color(ushort color, ref Color c)

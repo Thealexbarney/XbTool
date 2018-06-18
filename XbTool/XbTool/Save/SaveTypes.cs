@@ -1,5 +1,6 @@
 // ReSharper disable InconsistentNaming RedundantCast MemberCanBePrivate.Global NotAccessedField.Global FieldCanBeMadeReadOnly.Global ForCanBeConvertedToForeach PartialTypeWithSinglePart
 
+using XbTool.Common;
 using XbTool.Types;
 
 namespace XbTool.Save

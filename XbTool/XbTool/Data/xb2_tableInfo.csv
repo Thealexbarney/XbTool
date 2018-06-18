@@ -11,6 +11,7 @@ Display,FLD_QuestListNormal,QuestTitle
 Display,FLD_WeatherInfo,msg
 Display,MNU_FSMenu,text
 Display,MNU_MapGroup,disp_name
+Display,MNU_MapInfo,level_name
 Display,MNU_Stream_WpnImg,filename
 Display,RSC_BgmList,filename
 Display,RSC_EnWpn,Model

@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using XbTool.Bdat;
 using XbTool.BdatString;
+using XbTool.Common;
 
 namespace XbTool
 {

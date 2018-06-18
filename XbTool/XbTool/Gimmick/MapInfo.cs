@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using XbTool.Common;
 
 namespace XbTool.Gimmick
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public static class EnumExtensions
     {

@@ -3,6 +3,8 @@ using System.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.CodeGen;
+using XbTool.Common;
+using XbTool.Common.Textures;
 using XbTool.CreateBlade;
 using XbTool.Gimmick;
 using XbTool.Salvaging;
@@ -10,6 +12,7 @@ using XbTool.Save;
 using XbTool.Scripting;
 using XbTool.Serialization;
 using XbTool.Types;
+using XbTool.Xb2;
 
 namespace XbTool
 {
@@ -17,61 +20,68 @@ namespace XbTool
     {
         internal static void RunTask(Options options)
         {
-            switch (options.Task)
+            using (var progress = new ProgressBar())
             {
-                case Task.ExtractArchive:
-                    ExtractArchive(options);
-                    break;
-                case Task.DecryptBdat:
-                    DecryptBdat(options);
-                    break;
-                case Task.BdatCodeGen:
-                    BdatCodeGen(options);
-                    break;
-                case Task.Bdat2Html:
-                    Bdat2Html(options);
-                    break;
-                case Task.Bdat2Json:
-                    Bdat2Json(options);
-                    break;
-                case Task.GenerateData:
-                    GenerateData(options);
-                    break;
-                case Task.CreateBlade:
-                    CreateBlade(options);
-                    break;
-                case Task.ExtractWilay:
-                    ExtractWilay(options);
-                    break;
-                case Task.DescrambleScript:
-                    DescrambleScript(options);
-                    break;
-                case Task.SalvageRaffle:
-                    SalvageRaffle(options);
-                    break;
-                case Task.ReadSave:
-                    ReadSave(options);
-                    break;
-                case Task.CombineBdat:
-                    CombineBdat(options);
-                    break;
-                case Task.ReadGimmick:
-                    ReadGimmick(options);
-                    break;
-                case Task.ReadScript:
-                    ReadScript(options);
-                    break;
-                case Task.DecodeCatex:
-                    DecodeCatex(options);
-                    break;
-                case Task.ExtractMinimap:
-                    ExtractMinimap(options);
-                    break;
-                case Task.GenerateSite:
-                    GenerateSite(options);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                options.Progress = progress;
+                switch (options.Task)
+                {
+                    case Task.ExtractArchive:
+                        ExtractArchive(options);
+                        break;
+                    case Task.DecryptBdat:
+                        DecryptBdat(options);
+                        break;
+                    case Task.BdatCodeGen:
+                        BdatCodeGen(options);
+                        break;
+                    case Task.Bdat2Html:
+                        Bdat2Html(options);
+                        break;
+                    case Task.Bdat2Json:
+                        Bdat2Json(options);
+                        break;
+                    case Task.GenerateData:
+                        GenerateData(options);
+                        break;
+                    case Task.CreateBlade:
+                        CreateBlade(options);
+                        break;
+                    case Task.ExtractWilay:
+                        ExtractWilay(options);
+                        break;
+                    case Task.DescrambleScript:
+                        DescrambleScript(options);
+                        break;
+                    case Task.SalvageRaffle:
+                        SalvageRaffle(options);
+                        break;
+                    case Task.ReadSave:
+                        ReadSave(options);
+                        break;
+                    case Task.CombineBdat:
+                        CombineBdat(options);
+                        break;
+                    case Task.ReadGimmick:
+                        ReadGimmick(options);
+                        break;
+                    case Task.ReadScript:
+                        ReadScript(options);
+                        break;
+                    case Task.DecodeCatex:
+                        DecodeCatex(options);
+                        break;
+                    case Task.ExtractMinimap:
+                        ExtractMinimap(options);
+                        break;
+                    case Task.GenerateSite:
+                        GenerateSite(options);
+                        break;
+                    case Task.ExportQuests:
+                        ExportQuests(options);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
 
@@ -81,7 +91,7 @@ namespace XbTool
 
             using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
             {
-                FileArchive.Extract(archive, options.Output);
+                FileArchive.Extract(archive, options.Output, options.Progress);
             }
         }
 
@@ -157,7 +167,7 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
             var tables = GetBdatStringCollection(options);
-            HtmlGen.PrintSeparateTables(tables, options.Output);
+            HtmlGen.PrintSeparateTables(tables, options.Output, options.Progress);
         }
 
         private static void Bdat2Json(Options options)
@@ -165,7 +175,7 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
             var tables = GetBdatStringCollection(options);
-            JsonGen.PrintAllTables(tables, options.Output);
+            JsonGen.PrintAllTables(tables, options.Output, options.Progress);
         }
 
         private static void GenerateData(Options options)
@@ -205,21 +215,21 @@ namespace XbTool
                 string input = options.Input ?? "/menu/image/";
                 using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
                 {
-                    Textures.Extract.ExtractTextures(archive, input, options.Output);
+                    Extract.ExtractTextures(archive, input, options.Output, options.Progress);
                 }
             }
             else
             {
                 if (File.Exists(options.Input))
                 {
-                    Textures.Extract.ExtractTextures(new[] { options.Input }, options.Output);
+                    Extract.ExtractTextures(new[] { options.Input }, options.Output, options.Progress);
                 }
 
                 if (Directory.Exists(options.Input))
                 {
                     string pattern = options.Filter ?? "*";
                     string[] filenames = Directory.GetFiles(options.Input, pattern);
-                    Textures.Extract.ExtractTextures(filenames, options.Output);
+                    Extract.ExtractTextures(filenames, options.Output, options.Progress);
                 }
             }
         }
@@ -307,21 +317,18 @@ namespace XbTool
             var files = Directory.GetFiles(options.Input, "*.sb", SearchOption.AllDirectories);
             Directory.CreateDirectory(options.Output);
 
-            using (var progress = new ProgressBar())
+            options.Progress.SetTotal(files.Length);
+            foreach (var name in files)
             {
-                progress.SetTotal(files.Length);
-                foreach (var name in files)
-                {
-                    var file = File.ReadAllBytes(name);
-                    var script = new Script(new DataBuffer(file, options.Game, 0));
-                    var dump = Export.PrintScript(script);
-                    var relativePath = Helpers.GetRelativePath(name, options.Input);
+                var file = File.ReadAllBytes(name);
+                var script = new Script(new DataBuffer(file, options.Game, 0));
+                var dump = Export.PrintScript(script);
+                var relativePath = Helpers.GetRelativePath(name, options.Input);
 
-                    var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
-                    Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
-                    File.WriteAllText(output, dump);
-                    progress.ReportAdd(1);
-                }
+                var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
+                Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
+                File.WriteAllText(output, dump);
+                options.Progress.ReportAdd(1);
             }
         }
 
@@ -359,14 +366,20 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("No output path was specified.");
             if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
 
-            using (var progress = new ProgressBar())
+            options.Progress.LogMessage("Reading XB2 directories");
+            using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
             {
-                progress.LogMessage("Reading XB2 directories");
-                using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
-                {
-                    Website.Generate.GenerateSite(xb2Fs, options.Output, progress);
-                }
+                Website.Generate.GenerateSite(xb2Fs, options.Output, options.Progress);
             }
+        }
+
+        private static void ExportQuests(Options options)
+        {
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+
+            var tables = GetBdatCollection(options);
+
+            Xb2.Quest.Read.ExportQuests(tables, options.Output);
         }
     }
 }

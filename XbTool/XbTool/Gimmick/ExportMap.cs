@@ -3,7 +3,9 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using XbTool.Textures;
+using XbTool.Common;
+using XbTool.Common.Textures;
+using XbTool.Xb2.Textures;
 
 namespace XbTool.Gimmick
 {
@@ -22,7 +24,7 @@ namespace XbTool.Gimmick
                     string texPath = $"/menu/image/{area.Name}_map.wilay";
                     var texBytes = fs.ReadFile(texPath);
                     var wilay = new WilayRead(texBytes);
-                    Texture texture = wilay.Textures[0];
+                    LahdTexture texture = wilay.Textures[0];
                     var bitmapBase = texture.ToBitmap();
                     float scale = 1;
                     bitmapBase = ResizeImage(bitmapBase, (int)(bitmapBase.Width * scale), (int)(bitmapBase.Height * scale));

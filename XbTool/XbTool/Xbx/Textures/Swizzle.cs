@@ -402,7 +402,7 @@ namespace XbTool.Xbx.Textures
             return bankBits | pipeBits | offsetLow | offsetHigh;
         }
 
-        public static void Deswizzle(Texture texture, int bppPower)
+        public static void Deswizzle(MtxtTexture texture, int bppPower)
         {
             uint bpp = (uint) (1 << bppPower);
             uint bypp = bpp / 8;

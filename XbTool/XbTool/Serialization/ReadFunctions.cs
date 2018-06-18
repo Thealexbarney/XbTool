@@ -591,157 +591,159 @@ namespace XbTool.Serialization
             item.Name = BitConverter.ToUInt16(file, itemOffset);
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.Caption = BitConverter.ToUInt16(file, itemOffset + 6);
-            item.Driver = file[itemOffset + 8];
-            item.WpnType = file[itemOffset + 9];
-            item.IrType = file[itemOffset + 10];
-            item.Condition = file[itemOffset + 11];
-            item.ActNo = file[itemOffset + 12];
-            item.ActSpeed = file[itemOffset + 13];
-            item.MoveRev = file[itemOffset + 14];
-            item.LoopNum = file[itemOffset + 15];
-            item.IKStNo = file[itemOffset + 16];
-            item.IKStf = file[itemOffset + 17];
-            item.IKEndNo = file[itemOffset + 18];
-            item.IKEndf = file[itemOffset + 19];
-            item.ArtsType = file[itemOffset + 20];
-            item.ArtsBuff = file[itemOffset + 21];
-            item.ArtsDeBuff = file[itemOffset + 22];
-            item.AtrType = file[itemOffset + 23];
-            item.Flag = file[itemOffset + 24];
-            item.NextArts = BitConverter.ToUInt16(file, itemOffset + 25);
-            item.Target = file[itemOffset + 27];
-            item.Distance = BitConverter.ToUInt16(file, itemOffset + 28);
-            item.Multi = file[itemOffset + 30];
-            item.RangeType = file[itemOffset + 31];
-            item.Radius = BitConverter.ToUInt16(file, itemOffset + 32);
-            item.Length = BitConverter.ToUInt16(file, itemOffset + 34);
-            item.Hate = (sbyte)file[itemOffset + 36];
-            item.HitRevise = (sbyte)file[itemOffset + 37];
-            item.CriRevise = (sbyte)file[itemOffset + 38];
-            item.BulletID = BitConverter.ToUInt16(file, itemOffset + 39);
-            item.BulletEffID = BitConverter.ToUInt16(file, itemOffset + 41);
-            item.EfpType = file[itemOffset + 43];
-            item.BulletNum = file[itemOffset + 44];
-            item.BulletAngle = file[itemOffset + 45];
-            item.HitFrm1 = file[itemOffset + 46];
-            item.HitFrm2 = file[itemOffset + 47];
-            item.HitFrm3 = file[itemOffset + 48];
-            item.HitFrm4 = file[itemOffset + 49];
-            item.HitFrm5 = file[itemOffset + 50];
-            item.HitFrm6 = file[itemOffset + 51];
-            item.HitFrm7 = file[itemOffset + 52];
-            item.HitFrm8 = file[itemOffset + 53];
-            item.HitFrm9 = file[itemOffset + 54];
-            item.HitFrm10 = file[itemOffset + 55];
-            item.HitFrm11 = file[itemOffset + 56];
-            item.HitFrm12 = file[itemOffset + 57];
-            item.HitFrm13 = file[itemOffset + 58];
-            item.HitFrm14 = file[itemOffset + 59];
-            item.HitFrm15 = file[itemOffset + 60];
-            item.HitFrm16 = file[itemOffset + 61];
-            item.Efp1 = file[itemOffset + 62];
-            item.Efp2 = file[itemOffset + 63];
-            item.Efp3 = file[itemOffset + 64];
-            item.Efp4 = file[itemOffset + 65];
-            item.Efp5 = file[itemOffset + 66];
-            item.Efp6 = file[itemOffset + 67];
-            item.Efp7 = file[itemOffset + 68];
-            item.Efp8 = file[itemOffset + 69];
-            item.Efp9 = file[itemOffset + 70];
-            item.Efp10 = file[itemOffset + 71];
-            item.Efp11 = file[itemOffset + 72];
-            item.Efp12 = file[itemOffset + 73];
-            item.Efp13 = file[itemOffset + 74];
-            item.Efp14 = file[itemOffset + 75];
-            item.Efp15 = file[itemOffset + 76];
-            item.Efp16 = file[itemOffset + 77];
-            item.HitDirID1 = file[itemOffset + 78];
-            item.HitDirID2 = file[itemOffset + 79];
-            item.HitDirID3 = file[itemOffset + 80];
-            item.HitDirID4 = file[itemOffset + 81];
-            item.HitDirID5 = file[itemOffset + 82];
-            item.HitDirID6 = file[itemOffset + 83];
-            item.HitDirID7 = file[itemOffset + 84];
-            item.HitDirID8 = file[itemOffset + 85];
-            item.HitDirID9 = file[itemOffset + 86];
-            item.HitDirID10 = file[itemOffset + 87];
-            item.HitDirID11 = file[itemOffset + 88];
-            item.HitDirID12 = file[itemOffset + 89];
-            item.HitDirID13 = file[itemOffset + 90];
-            item.HitDirID14 = file[itemOffset + 91];
-            item.HitDirID15 = file[itemOffset + 92];
-            item.HitDirID16 = file[itemOffset + 93];
-            item.DmgRt1 = file[itemOffset + 94];
-            item.DmgRt2 = file[itemOffset + 95];
-            item.DmgRt3 = file[itemOffset + 96];
-            item.DmgRt4 = file[itemOffset + 97];
-            item.DmgRt5 = file[itemOffset + 98];
-            item.DmgRt6 = file[itemOffset + 99];
-            item.DmgRt7 = file[itemOffset + 100];
-            item.DmgRt8 = file[itemOffset + 101];
-            item.DmgRt9 = file[itemOffset + 102];
-            item.DmgRt10 = file[itemOffset + 103];
-            item.DmgRt11 = file[itemOffset + 104];
-            item.DmgRt12 = file[itemOffset + 105];
-            item.DmgRt13 = file[itemOffset + 106];
-            item.DmgRt14 = file[itemOffset + 107];
-            item.DmgRt15 = file[itemOffset + 108];
-            item.DmgRt16 = file[itemOffset + 109];
-            item.ReAct1 = file[itemOffset + 110];
-            item.ReAct2 = file[itemOffset + 111];
-            item.ReAct3 = file[itemOffset + 112];
-            item.ReAct4 = file[itemOffset + 113];
-            item.ReAct5 = file[itemOffset + 114];
-            item.ReAct6 = file[itemOffset + 115];
-            item.ReAct7 = file[itemOffset + 116];
-            item.ReAct8 = file[itemOffset + 117];
-            item.ReAct9 = file[itemOffset + 118];
-            item.ReAct10 = file[itemOffset + 119];
-            item.ReAct11 = file[itemOffset + 120];
-            item.ReAct12 = file[itemOffset + 121];
-            item.ReAct13 = file[itemOffset + 122];
-            item.ReAct14 = file[itemOffset + 123];
-            item.ReAct15 = file[itemOffset + 124];
-            item.ReAct16 = file[itemOffset + 125];
-            item.MoveCancelFrm = file[itemOffset + 126];
-            item.DmgMgn1 = BitConverter.ToUInt16(file, itemOffset + 127);
-            item.DmgMgn2 = BitConverter.ToUInt16(file, itemOffset + 129);
-            item.DmgMgn3 = BitConverter.ToUInt16(file, itemOffset + 131);
-            item.DmgMgn4 = BitConverter.ToUInt16(file, itemOffset + 133);
-            item.DmgMgn5 = BitConverter.ToUInt16(file, itemOffset + 135);
-            item.DmgMgn6 = BitConverter.ToUInt16(file, itemOffset + 137);
-            item.Recast1 = BitConverter.ToUInt16(file, itemOffset + 139);
-            item.Recast2 = BitConverter.ToUInt16(file, itemOffset + 141);
-            item.Recast3 = BitConverter.ToUInt16(file, itemOffset + 143);
-            item.Recast4 = BitConverter.ToUInt16(file, itemOffset + 145);
-            item.Recast5 = BitConverter.ToUInt16(file, itemOffset + 147);
-            item.Recast6 = BitConverter.ToUInt16(file, itemOffset + 149);
-            item.AtrNum = file[itemOffset + 151];
-            item.Enhance1 = BitConverter.ToUInt16(file, itemOffset + 152);
-            item.Enhance2 = BitConverter.ToUInt16(file, itemOffset + 154);
-            item.Enhance3 = BitConverter.ToUInt16(file, itemOffset + 156);
-            item.Enhance4 = BitConverter.ToUInt16(file, itemOffset + 158);
-            item.Enhance5 = BitConverter.ToUInt16(file, itemOffset + 160);
-            item.Enhance6 = BitConverter.ToUInt16(file, itemOffset + 162);
-            item.ReleaseLv1 = file[itemOffset + 164];
-            item.ReleaseLv2 = file[itemOffset + 165];
-            item.ReleaseLv3 = file[itemOffset + 166];
-            item.ReleaseLv4 = file[itemOffset + 167];
-            item.ReleaseLv5 = file[itemOffset + 168];
-            item.NeedWP2 = BitConverter.ToUInt16(file, itemOffset + 169);
-            item.NeedWP3 = BitConverter.ToUInt16(file, itemOffset + 171);
-            item.NeedWP4 = BitConverter.ToUInt16(file, itemOffset + 173);
-            item.NeedWP5 = BitConverter.ToUInt16(file, itemOffset + 175);
-            item.HitEff = BitConverter.ToUInt16(file, itemOffset + 177);
-            item.VoiceNum = file[itemOffset + 179];
-            item.VoiceNum2 = BitConverter.ToUInt16(file, itemOffset + 180);
-            item.VoiceDelay = BitConverter.ToUInt16(file, itemOffset + 182);
-            item.UI = BitConverter.ToUInt16(file, itemOffset + 184);
-            item.Priority = file[itemOffset + 186];
-            item.GravOffNum = file[itemOffset + 187];
-            item.GravOffF = BitConverter.ToUInt16(file, itemOffset + 188);
-            item.GravOnNum = file[itemOffset + 190];
-            item.GravOnF = BitConverter.ToUInt16(file, itemOffset + 191);
+            item.CondCap = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.TalentCap = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.Driver = file[itemOffset + 12];
+            item.WpnType = file[itemOffset + 13];
+            item.IrType = file[itemOffset + 14];
+            item.Condition = file[itemOffset + 15];
+            item.ActNo = file[itemOffset + 16];
+            item.ActSpeed = file[itemOffset + 17];
+            item.MoveRev = file[itemOffset + 18];
+            item.LoopNum = file[itemOffset + 19];
+            item.IKStNo = file[itemOffset + 20];
+            item.IKStf = file[itemOffset + 21];
+            item.IKEndNo = file[itemOffset + 22];
+            item.IKEndf = file[itemOffset + 23];
+            item.ArtsType = file[itemOffset + 24];
+            item.ArtsBuff = file[itemOffset + 25];
+            item.ArtsDeBuff = file[itemOffset + 26];
+            item.AtrType = file[itemOffset + 27];
+            item.Flag = file[itemOffset + 28];
+            item.NextArts = BitConverter.ToUInt16(file, itemOffset + 29);
+            item.Target = file[itemOffset + 31];
+            item.Distance = BitConverter.ToUInt16(file, itemOffset + 32);
+            item.Multi = file[itemOffset + 34];
+            item.RangeType = file[itemOffset + 35];
+            item.Radius = BitConverter.ToUInt16(file, itemOffset + 36);
+            item.Length = BitConverter.ToUInt16(file, itemOffset + 38);
+            item.Hate = (sbyte)file[itemOffset + 40];
+            item.HitRevise = (sbyte)file[itemOffset + 41];
+            item.CriRevise = (sbyte)file[itemOffset + 42];
+            item.BulletID = BitConverter.ToUInt16(file, itemOffset + 43);
+            item.BulletEffID = BitConverter.ToUInt16(file, itemOffset + 45);
+            item.EfpType = file[itemOffset + 47];
+            item.BulletNum = file[itemOffset + 48];
+            item.BulletAngle = file[itemOffset + 49];
+            item.HitFrm1 = file[itemOffset + 50];
+            item.HitFrm2 = file[itemOffset + 51];
+            item.HitFrm3 = file[itemOffset + 52];
+            item.HitFrm4 = file[itemOffset + 53];
+            item.HitFrm5 = file[itemOffset + 54];
+            item.HitFrm6 = file[itemOffset + 55];
+            item.HitFrm7 = file[itemOffset + 56];
+            item.HitFrm8 = file[itemOffset + 57];
+            item.HitFrm9 = file[itemOffset + 58];
+            item.HitFrm10 = file[itemOffset + 59];
+            item.HitFrm11 = file[itemOffset + 60];
+            item.HitFrm12 = file[itemOffset + 61];
+            item.HitFrm13 = file[itemOffset + 62];
+            item.HitFrm14 = file[itemOffset + 63];
+            item.HitFrm15 = file[itemOffset + 64];
+            item.HitFrm16 = file[itemOffset + 65];
+            item.Efp1 = file[itemOffset + 66];
+            item.Efp2 = file[itemOffset + 67];
+            item.Efp3 = file[itemOffset + 68];
+            item.Efp4 = file[itemOffset + 69];
+            item.Efp5 = file[itemOffset + 70];
+            item.Efp6 = file[itemOffset + 71];
+            item.Efp7 = file[itemOffset + 72];
+            item.Efp8 = file[itemOffset + 73];
+            item.Efp9 = file[itemOffset + 74];
+            item.Efp10 = file[itemOffset + 75];
+            item.Efp11 = file[itemOffset + 76];
+            item.Efp12 = file[itemOffset + 77];
+            item.Efp13 = file[itemOffset + 78];
+            item.Efp14 = file[itemOffset + 79];
+            item.Efp15 = file[itemOffset + 80];
+            item.Efp16 = file[itemOffset + 81];
+            item.HitDirID1 = file[itemOffset + 82];
+            item.HitDirID2 = file[itemOffset + 83];
+            item.HitDirID3 = file[itemOffset + 84];
+            item.HitDirID4 = file[itemOffset + 85];
+            item.HitDirID5 = file[itemOffset + 86];
+            item.HitDirID6 = file[itemOffset + 87];
+            item.HitDirID7 = file[itemOffset + 88];
+            item.HitDirID8 = file[itemOffset + 89];
+            item.HitDirID9 = file[itemOffset + 90];
+            item.HitDirID10 = file[itemOffset + 91];
+            item.HitDirID11 = file[itemOffset + 92];
+            item.HitDirID12 = file[itemOffset + 93];
+            item.HitDirID13 = file[itemOffset + 94];
+            item.HitDirID14 = file[itemOffset + 95];
+            item.HitDirID15 = file[itemOffset + 96];
+            item.HitDirID16 = file[itemOffset + 97];
+            item.DmgRt1 = file[itemOffset + 98];
+            item.DmgRt2 = file[itemOffset + 99];
+            item.DmgRt3 = file[itemOffset + 100];
+            item.DmgRt4 = file[itemOffset + 101];
+            item.DmgRt5 = file[itemOffset + 102];
+            item.DmgRt6 = file[itemOffset + 103];
+            item.DmgRt7 = file[itemOffset + 104];
+            item.DmgRt8 = file[itemOffset + 105];
+            item.DmgRt9 = file[itemOffset + 106];
+            item.DmgRt10 = file[itemOffset + 107];
+            item.DmgRt11 = file[itemOffset + 108];
+            item.DmgRt12 = file[itemOffset + 109];
+            item.DmgRt13 = file[itemOffset + 110];
+            item.DmgRt14 = file[itemOffset + 111];
+            item.DmgRt15 = file[itemOffset + 112];
+            item.DmgRt16 = file[itemOffset + 113];
+            item.ReAct1 = file[itemOffset + 114];
+            item.ReAct2 = file[itemOffset + 115];
+            item.ReAct3 = file[itemOffset + 116];
+            item.ReAct4 = file[itemOffset + 117];
+            item.ReAct5 = file[itemOffset + 118];
+            item.ReAct6 = file[itemOffset + 119];
+            item.ReAct7 = file[itemOffset + 120];
+            item.ReAct8 = file[itemOffset + 121];
+            item.ReAct9 = file[itemOffset + 122];
+            item.ReAct10 = file[itemOffset + 123];
+            item.ReAct11 = file[itemOffset + 124];
+            item.ReAct12 = file[itemOffset + 125];
+            item.ReAct13 = file[itemOffset + 126];
+            item.ReAct14 = file[itemOffset + 127];
+            item.ReAct15 = file[itemOffset + 128];
+            item.ReAct16 = file[itemOffset + 129];
+            item.MoveCancelFrm = file[itemOffset + 130];
+            item.DmgMgn1 = BitConverter.ToUInt16(file, itemOffset + 131);
+            item.DmgMgn2 = BitConverter.ToUInt16(file, itemOffset + 133);
+            item.DmgMgn3 = BitConverter.ToUInt16(file, itemOffset + 135);
+            item.DmgMgn4 = BitConverter.ToUInt16(file, itemOffset + 137);
+            item.DmgMgn5 = BitConverter.ToUInt16(file, itemOffset + 139);
+            item.DmgMgn6 = BitConverter.ToUInt16(file, itemOffset + 141);
+            item.Recast1 = BitConverter.ToUInt16(file, itemOffset + 143);
+            item.Recast2 = BitConverter.ToUInt16(file, itemOffset + 145);
+            item.Recast3 = BitConverter.ToUInt16(file, itemOffset + 147);
+            item.Recast4 = BitConverter.ToUInt16(file, itemOffset + 149);
+            item.Recast5 = BitConverter.ToUInt16(file, itemOffset + 151);
+            item.Recast6 = BitConverter.ToUInt16(file, itemOffset + 153);
+            item.AtrNum = file[itemOffset + 155];
+            item.Enhance1 = BitConverter.ToUInt16(file, itemOffset + 156);
+            item.Enhance2 = BitConverter.ToUInt16(file, itemOffset + 158);
+            item.Enhance3 = BitConverter.ToUInt16(file, itemOffset + 160);
+            item.Enhance4 = BitConverter.ToUInt16(file, itemOffset + 162);
+            item.Enhance5 = BitConverter.ToUInt16(file, itemOffset + 164);
+            item.Enhance6 = BitConverter.ToUInt16(file, itemOffset + 166);
+            item.ReleaseLv1 = file[itemOffset + 168];
+            item.ReleaseLv2 = file[itemOffset + 169];
+            item.ReleaseLv3 = file[itemOffset + 170];
+            item.ReleaseLv4 = file[itemOffset + 171];
+            item.ReleaseLv5 = file[itemOffset + 172];
+            item.NeedWP2 = BitConverter.ToUInt16(file, itemOffset + 173);
+            item.NeedWP3 = BitConverter.ToUInt16(file, itemOffset + 175);
+            item.NeedWP4 = BitConverter.ToUInt16(file, itemOffset + 177);
+            item.NeedWP5 = BitConverter.ToUInt16(file, itemOffset + 179);
+            item.HitEff = BitConverter.ToUInt16(file, itemOffset + 181);
+            item.VoiceNum = file[itemOffset + 183];
+            item.VoiceNum2 = BitConverter.ToUInt16(file, itemOffset + 184);
+            item.VoiceDelay = BitConverter.ToUInt16(file, itemOffset + 186);
+            item.UI = BitConverter.ToUInt16(file, itemOffset + 188);
+            item.Priority = file[itemOffset + 190];
+            item.GravOffNum = file[itemOffset + 191];
+            item.GravOffF = BitConverter.ToUInt16(file, itemOffset + 192);
+            item.GravOnNum = file[itemOffset + 194];
+            item.GravOnF = BitConverter.ToUInt16(file, itemOffset + 195);
             item.Normal = (item.Flag & 1) != 0;
             item.Pierce = (item.Flag & 2) != 0;
             item.NoRepelled = (item.Flag & 4) != 0;
@@ -921,6 +923,9 @@ namespace XbTool.Serialization
             item.DamageRate = BitConverter.ToUInt16(file, itemOffset);
             item.FBGauge = BitConverter.ToUInt16(file, itemOffset + 2);
             item.FBBonus = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.DamageRate2 = BitConverter.ToUInt16(file, itemOffset + 6);
+            item.FBGauge2 = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.FBBonus2 = BitConverter.ToUInt16(file, itemOffset + 10);
             return item;
         }
 
@@ -1135,6 +1140,15 @@ namespace XbTool.Serialization
             item.Wpn17 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 64));
             item.Wpn18 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 68));
             item.Wpn19 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 72));
+            item.Wpn90 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 76));
+            item.Wpn91 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 80));
+            item.Wpn92 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 84));
+            item.Wpn93 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 88));
+            item.Wpn94 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 92));
+            item.Wpn95 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 96));
+            item.Wpn96 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 100));
+            item.Wpn97 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 104));
+            item.Wpn98 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 108));
             return item;
         }
 
@@ -1200,36 +1214,37 @@ namespace XbTool.Serialization
             item.DebugName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.ListNum = file[itemOffset + 6];
             item.Difficult = file[itemOffset + 7];
-            item.Caption = BitConverter.ToUInt16(file, itemOffset + 8);
-            item.MapJump = BitConverter.ToUInt16(file, itemOffset + 10);
-            item.Weather = file[itemOffset + 12];
-            item.Type = file[itemOffset + 13];
-            item.NeedDefeat = BitConverter.ToUInt16(file, itemOffset + 14);
-            item.MaxLevel = file[itemOffset + 16];
-            item.MaxWpnRank = file[itemOffset + 17];
-            item.WpnRevTable = BitConverter.ToUInt16(file, itemOffset + 18);
-            item.TimeLimit = BitConverter.ToUInt16(file, itemOffset + 20);
-            item.JoinNumber = file[itemOffset + 22];
-            item.Driver1 = file[itemOffset + 23];
-            item.Driver2 = file[itemOffset + 24];
-            item.Driver3 = file[itemOffset + 25];
-            item.Condition = BitConverter.ToUInt16(file, itemOffset + 26);
-            item.ConditionCap = BitConverter.ToUInt16(file, itemOffset + 28);
-            item.Flag = file[itemOffset + 30];
-            item.ClearReward = BitConverter.ToUInt16(file, itemOffset + 31);
-            item.TresureSet1 = BitConverter.ToUInt16(file, itemOffset + 33);
-            item.TresureSet2 = BitConverter.ToUInt16(file, itemOffset + 35);
-            item.TresureSet3 = BitConverter.ToUInt16(file, itemOffset + 37);
-            item.TresureNeed1 = BitConverter.ToUInt16(file, itemOffset + 39);
-            item.TresureNeed2 = BitConverter.ToUInt16(file, itemOffset + 41);
-            item.TresureNeed3 = BitConverter.ToUInt16(file, itemOffset + 43);
-            item.TresureResource1 = BitConverter.ToUInt16(file, itemOffset + 45);
-            item.TresureResource2 = BitConverter.ToUInt16(file, itemOffset + 47);
-            item.TresureResource3 = BitConverter.ToUInt16(file, itemOffset + 49);
-            item.Voice1 = BitConverter.ToUInt32(file, itemOffset + 51);
-            item.Voice2 = BitConverter.ToUInt32(file, itemOffset + 55);
-            item.Voice3 = BitConverter.ToUInt32(file, itemOffset + 59);
-            item.Voice4 = BitConverter.ToUInt32(file, itemOffset + 63);
+            item.Wave = file[itemOffset + 8];
+            item.Caption = BitConverter.ToUInt16(file, itemOffset + 9);
+            item.MapJump = BitConverter.ToUInt16(file, itemOffset + 11);
+            item.Weather = file[itemOffset + 13];
+            item.Type = file[itemOffset + 14];
+            item.NeedDefeat = BitConverter.ToUInt16(file, itemOffset + 15);
+            item.MaxLevel = file[itemOffset + 17];
+            item.MaxWpnRank = file[itemOffset + 18];
+            item.WpnRevTable = BitConverter.ToUInt16(file, itemOffset + 19);
+            item.TimeLimit = BitConverter.ToUInt16(file, itemOffset + 21);
+            item.JoinNumber = file[itemOffset + 23];
+            item.Driver1 = file[itemOffset + 24];
+            item.Driver2 = file[itemOffset + 25];
+            item.Driver3 = file[itemOffset + 26];
+            item.Condition = BitConverter.ToUInt16(file, itemOffset + 27);
+            item.ConditionCap = BitConverter.ToUInt16(file, itemOffset + 29);
+            item.Flag = file[itemOffset + 31];
+            item.ClearReward = BitConverter.ToUInt16(file, itemOffset + 32);
+            item.TresureSet1 = BitConverter.ToUInt16(file, itemOffset + 34);
+            item.TresureSet2 = BitConverter.ToUInt16(file, itemOffset + 36);
+            item.TresureSet3 = BitConverter.ToUInt16(file, itemOffset + 38);
+            item.TresureNeed1 = BitConverter.ToUInt16(file, itemOffset + 40);
+            item.TresureNeed2 = BitConverter.ToUInt16(file, itemOffset + 42);
+            item.TresureNeed3 = BitConverter.ToUInt16(file, itemOffset + 44);
+            item.TresureResource1 = BitConverter.ToUInt16(file, itemOffset + 46);
+            item.TresureResource2 = BitConverter.ToUInt16(file, itemOffset + 48);
+            item.TresureResource3 = BitConverter.ToUInt16(file, itemOffset + 50);
+            item.Voice1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 52));
+            item.Voice2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 56));
+            item.Voice3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 60));
+            item.Voice4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 64));
             item.Hide = (item.Flag & 1) != 0;
             return item;
         }
@@ -1259,18 +1274,19 @@ namespace XbTool.Serialization
             item.ItemValueMin2 = BitConverter.ToUInt16(file, itemOffset + 16);
             item.ItemValueMax2 = BitConverter.ToUInt16(file, itemOffset + 18);
             item.AppointItem = BitConverter.ToUInt16(file, itemOffset + 20);
-            item.UpCategory1 = file[itemOffset + 22];
-            item.UpCategory2 = file[itemOffset + 23];
-            item.DownCategory1 = file[itemOffset + 24];
-            item.DownCategory2 = file[itemOffset + 25];
-            item.UpItemID1 = BitConverter.ToUInt16(file, itemOffset + 26);
-            item.UpItemID2 = BitConverter.ToUInt16(file, itemOffset + 28);
-            item.UpItemID3 = BitConverter.ToUInt16(file, itemOffset + 30);
-            item.UpItemID4 = BitConverter.ToUInt16(file, itemOffset + 32);
-            item.DownItemID1 = BitConverter.ToUInt16(file, itemOffset + 34);
-            item.DownItemID2 = BitConverter.ToUInt16(file, itemOffset + 36);
-            item.DownItemID3 = BitConverter.ToUInt16(file, itemOffset + 38);
-            item.DownItemID4 = BitConverter.ToUInt16(file, itemOffset + 40);
+            item.AppointItemNum = BitConverter.ToUInt16(file, itemOffset + 22);
+            item.UpCategory1 = file[itemOffset + 24];
+            item.UpCategory2 = file[itemOffset + 25];
+            item.DownCategory1 = file[itemOffset + 26];
+            item.DownCategory2 = file[itemOffset + 27];
+            item.UpItemID1 = BitConverter.ToUInt16(file, itemOffset + 28);
+            item.UpItemID2 = BitConverter.ToUInt16(file, itemOffset + 30);
+            item.UpItemID3 = BitConverter.ToUInt16(file, itemOffset + 32);
+            item.UpItemID4 = BitConverter.ToUInt16(file, itemOffset + 34);
+            item.DownItemID1 = BitConverter.ToUInt16(file, itemOffset + 36);
+            item.DownItemID2 = BitConverter.ToUInt16(file, itemOffset + 38);
+            item.DownItemID3 = BitConverter.ToUInt16(file, itemOffset + 40);
+            item.DownItemID4 = BitConverter.ToUInt16(file, itemOffset + 42);
             return item;
         }
 
@@ -1324,10 +1340,12 @@ namespace XbTool.Serialization
             item.Point = file[itemOffset];
             item.Radius = file[itemOffset + 1];
             item.Damage = BitConverter.ToUInt16(file, itemOffset + 2);
-            item.Target = file[itemOffset + 4];
-            item.Interval = file[itemOffset + 5];
-            item.Lifespan = BitConverter.ToUInt16(file, itemOffset + 6);
-            item.Effect = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 8));
+            item.SubType = file[itemOffset + 4];
+            item.SubParam = BitConverter.ToUInt16(file, itemOffset + 5);
+            item.Target = file[itemOffset + 7];
+            item.Interval = file[itemOffset + 8];
+            item.Lifespan = BitConverter.ToUInt16(file, itemOffset + 9);
+            item.Effect = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 11));
             return item;
         }
 
@@ -1460,6 +1478,8 @@ namespace XbTool.Serialization
             item.Id = itemId;
             item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset);
             item.Param01 = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.FLD_CondID2 = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.Param02 = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
         }
 
@@ -1475,6 +1495,11 @@ namespace XbTool.Serialization
             item.Easy = BitConverter.ToUInt16(file, itemOffset + 10);
             item.Hard = BitConverter.ToUInt16(file, itemOffset + 12);
             item.Ult = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.ConditionOri = BitConverter.ToUInt16(file, itemOffset + 16);
+            item.ConditionIra = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.Flag = file[itemOffset + 20];
+            item.Ori = (item.Flag & 1) != 0;
+            item.Ira = (item.Flag & 2) != 0;
             return item;
         }
 
@@ -1628,6 +1653,20 @@ namespace XbTool.Serialization
             item.BaseEnemyID = BitConverter.ToUInt16(file, itemOffset);
             item.BOOK_POP_TIME = BitConverter.ToUInt32(file, itemOffset + 2);
             item.BOOK_popWeather = file[itemOffset + 6];
+            return item;
+        }
+
+        public static BTL_EndEvent ReadBTL_EndEvent(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new BTL_EndEvent();
+            item.Id = itemId;
+            item.Condition = BitConverter.ToUInt16(file, itemOffset);
+            item.StandDeadVoice = file[itemOffset + 2];
+            item.StandBossID = BitConverter.ToUInt16(file, itemOffset + 3);
+            item.StandState = file[itemOffset + 5];
+            item.EnemyCall = file[itemOffset + 6];
+            item.CallRadius = BitConverter.ToUInt16(file, itemOffset + 7);
+            item.BlackOut = BitConverter.ToUInt16(file, itemOffset + 9);
             return item;
         }
 
@@ -2072,6 +2111,44 @@ namespace XbTool.Serialization
             item.PackName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
             item.tag = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 4));
             item.delivered = file[itemOffset + 8];
+            return item;
+        }
+
+        public static BTL_Siren ReadBTL_Siren(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new BTL_Siren();
+            item.Id = itemId;
+            item.ArrangeID = BitConverter.ToUInt16(file, itemOffset);
+            item.Gun = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.Lance = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.DamageLV1 = BitConverter.ToUInt16(file, itemOffset + 6);
+            item.DamageLV2 = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.DamageLV3 = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.DamageLV4 = BitConverter.ToUInt16(file, itemOffset + 12);
+            item.GaugeLV1 = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.GaugeLV2 = BitConverter.ToUInt16(file, itemOffset + 16);
+            item.GaugeLV3 = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.GaugeLV4 = BitConverter.ToUInt16(file, itemOffset + 20);
+            item.GaugeBonus = BitConverter.ToUInt16(file, itemOffset + 22);
+            item.DownLV1 = file[itemOffset + 24];
+            item.DownLV2 = file[itemOffset + 25];
+            item.DownLV3 = file[itemOffset + 26];
+            item.DownLV4 = file[itemOffset + 27];
+            item.ShotNumLV1 = file[itemOffset + 28];
+            item.ShotNumLV2 = file[itemOffset + 29];
+            item.ShotNumLV3 = file[itemOffset + 30];
+            item.ShotNumLV4 = file[itemOffset + 31];
+            return item;
+        }
+
+        public static BTL_SirenPos ReadBTL_SirenPos(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new BTL_SirenPos();
+            item.Id = itemId;
+            item.situation = file[itemOffset];
+            item.camera = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 1));
+            item.Wpos = BitConverter.ToUInt16(file, itemOffset + 5);
+            item.Bpos = BitConverter.ToUInt16(file, itemOffset + 7);
             return item;
         }
 
@@ -2567,6 +2644,8 @@ namespace XbTool.Serialization
             item.AlwaysAttack = (item.Flag & 65536) != 0;
             item.PGMax = (item.Flag & 131072) != 0;
             item.Salvage = (item.Flag & 262144) != 0;
+            item.Serious = (item.Flag & 524288) != 0;
+            item.NoChgBtl = (item.Flag & 1048576) != 0;
             return item;
         }
 
@@ -2698,6 +2777,11 @@ namespace XbTool.Serialization
             item.DefWpnAcce = BitConverter.ToUInt16(file, itemOffset + 5);
             item.Flag = file[itemOffset + 7];
             item.LinkSet = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.SeDriver = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
+            item.SeBlade = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 14));
+            item.TeamName = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.KizunaReward1 = BitConverter.ToUInt16(file, itemOffset + 20);
+            item.KizunaReward2 = BitConverter.ToUInt16(file, itemOffset + 22);
             item.WpnInNonView = (item.Flag & 1) != 0;
             return item;
         }
@@ -2708,6 +2792,9 @@ namespace XbTool.Serialization
             item.Id = itemId;
             item.Radius = BitConverter.ToUInt16(file, itemOffset);
             item.Height = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.X = BitConverter.ToInt16(file, itemOffset + 4);
+            item.Y = BitConverter.ToInt16(file, itemOffset + 6);
+            item.Z = BitConverter.ToInt16(file, itemOffset + 8);
             return item;
         }
 
@@ -3638,6 +3725,8 @@ namespace XbTool.Serialization
             item.goldPopMin = file[itemOffset + 24];
             item.goldPopMax = file[itemOffset + 25];
             item.rsc_paramID = file[itemOffset + 26];
+            item.categoryName = BitConverter.ToUInt16(file, itemOffset + 27);
+            item.ZoneID = BitConverter.ToUInt16(file, itemOffset + 29);
             return item;
         }
 
@@ -3997,17 +4086,19 @@ namespace XbTool.Serialization
             item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 8);
             item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 10);
             item.Condition = BitConverter.ToUInt16(file, itemOffset + 12);
-            item.POP_TIME = BitConverter.ToUInt32(file, itemOffset + 14);
-            item.popWeather = file[itemOffset + 18];
-            item.instanceMax = file[itemOffset + 19];
-            item.onlyOnce = file[itemOffset + 20];
-            item.gimmick = BitConverter.ToUInt16(file, itemOffset + 21);
-            item.waitTime = BitConverter.ToUInt16(file, itemOffset + 23);
-            item.nameRadius = BitConverter.ToUInt16(file, itemOffset + 25);
-            item.offsetID = BitConverter.ToUInt16(file, itemOffset + 27);
-            item.tgtMSG_ID = BitConverter.ToUInt16(file, itemOffset + 29);
-            item.actionwindowID = BitConverter.ToUInt16(file, itemOffset + 31);
-            item.sealedStonePopID = BitConverter.ToUInt16(file, itemOffset + 33);
+            item.OP_Condition = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.POP_TIME = BitConverter.ToUInt32(file, itemOffset + 16);
+            item.popWeather = file[itemOffset + 20];
+            item.instanceMax = file[itemOffset + 21];
+            item.onlyOnce = file[itemOffset + 22];
+            item.gimmick = BitConverter.ToUInt16(file, itemOffset + 23);
+            item.waitTime = BitConverter.ToUInt16(file, itemOffset + 25);
+            item.nameRadius = BitConverter.ToUInt16(file, itemOffset + 27);
+            item.offsetID = BitConverter.ToUInt16(file, itemOffset + 29);
+            item.tgtMSG_ID = BitConverter.ToUInt16(file, itemOffset + 31);
+            item.missMSG_ID = BitConverter.ToUInt16(file, itemOffset + 33);
+            item.actionwindowID = BitConverter.ToUInt16(file, itemOffset + 35);
+            item.sealedStonePopID = BitConverter.ToUInt16(file, itemOffset + 37);
             return item;
         }
 
@@ -4471,6 +4562,7 @@ namespace XbTool.Serialization
             item.TimeCountFlag = file[itemOffset + 15];
             item.ReduceEnemyHP = BitConverter.ToUInt16(file, itemOffset + 16);
             item.ReducePCHP = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.TargetOff = file[itemOffset + 20];
             return item;
         }
 
@@ -5035,6 +5127,15 @@ namespace XbTool.Serialization
             item.Driver4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 12));
             item.Driver5 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 16));
             item.Driver6 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 20));
+            item.Ira1 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 24));
+            item.Ira2 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 28));
+            item.Ira3 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 32));
+            item.Ira4 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 36));
+            item.Ira5 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 40));
+            item.Ira6 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 44));
+            item.Ira7 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 48));
+            item.Ira8 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 52));
+            item.Ira9 = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 56));
             return item;
         }
 
@@ -5171,7 +5272,8 @@ namespace XbTool.Serialization
             item.msg = BitConverter.ToUInt16(file, itemOffset);
             item.eff = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 2));
             item.snd = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 6));
-            item.sndBegin = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
+            item.snd_ira = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 10));
+            item.sndBegin = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 14));
             return item;
         }
 
@@ -5421,6 +5523,8 @@ namespace XbTool.Serialization
             item.sortGB = BitConverter.ToUInt32(file, itemOffset + 42);
             item.sortCN = BitConverter.ToUInt32(file, itemOffset + 46);
             item.sortTW = BitConverter.ToUInt32(file, itemOffset + 50);
+            item.Blade = BitConverter.ToUInt16(file, itemOffset + 54);
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 56));
             item.JS = (item.Flag & 1) != 0;
             item.JK = (item.Flag & 2) != 0;
             item.JD = (item.Flag & 4) != 0;
@@ -5578,6 +5682,8 @@ namespace XbTool.Serialization
             item.sortGB = BitConverter.ToUInt32(file, itemOffset + 35);
             item.sortCN = BitConverter.ToUInt32(file, itemOffset + 39);
             item.sortTW = BitConverter.ToUInt32(file, itemOffset + 43);
+            item.Blade = BitConverter.ToUInt16(file, itemOffset + 47);
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 49));
             item.NoSell = (item.Flag & 1) != 0;
             return item;
         }
@@ -5633,14 +5739,18 @@ namespace XbTool.Serialization
             item.Icon = file[itemOffset + 35];
             item.Zone = BitConverter.ToUInt16(file, itemOffset + 36);
             item.Zone2 = BitConverter.ToUInt16(file, itemOffset + 38);
-            item.sortJP = BitConverter.ToUInt32(file, itemOffset + 40);
-            item.sortGE = BitConverter.ToUInt32(file, itemOffset + 44);
-            item.sortFR = BitConverter.ToUInt32(file, itemOffset + 48);
-            item.sortSP = BitConverter.ToUInt32(file, itemOffset + 52);
-            item.sortIT = BitConverter.ToUInt32(file, itemOffset + 56);
-            item.sortGB = BitConverter.ToUInt32(file, itemOffset + 60);
-            item.sortCN = BitConverter.ToUInt32(file, itemOffset + 64);
-            item.sortTW = BitConverter.ToUInt32(file, itemOffset + 68);
+            item.IraZone = BitConverter.ToUInt16(file, itemOffset + 40);
+            item.IraZone2 = BitConverter.ToUInt16(file, itemOffset + 42);
+            item.sortJP = BitConverter.ToUInt32(file, itemOffset + 44);
+            item.sortGE = BitConverter.ToUInt32(file, itemOffset + 48);
+            item.sortFR = BitConverter.ToUInt32(file, itemOffset + 52);
+            item.sortSP = BitConverter.ToUInt32(file, itemOffset + 56);
+            item.sortIT = BitConverter.ToUInt32(file, itemOffset + 60);
+            item.sortGB = BitConverter.ToUInt32(file, itemOffset + 64);
+            item.sortCN = BitConverter.ToUInt32(file, itemOffset + 68);
+            item.sortTW = BitConverter.ToUInt32(file, itemOffset + 72);
+            item.Driver = file[itemOffset + 76];
+            item.Model = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 77));
             item.NoSell = (item.Flag & 1) != 0;
             item.EqPC01 = (item.Flag & 2) != 0;
             item.EqPC02 = (item.Flag & 4) != 0;
@@ -5651,6 +5761,9 @@ namespace XbTool.Serialization
             item.EqPC07 = (item.Flag & 128) != 0;
             item.EqPC08 = (item.Flag & 256) != 0;
             item.EqPC09 = (item.Flag & 512) != 0;
+            item.EqPC10 = (item.Flag & 1024) != 0;
+            item.EqPC11 = (item.Flag & 2048) != 0;
+            item.EqPC12 = (item.Flag & 4096) != 0;
             return item;
         }
 
@@ -5724,14 +5837,16 @@ namespace XbTool.Serialization
             item.Flag = file[itemOffset + 80];
             item.Zone = BitConverter.ToUInt16(file, itemOffset + 81);
             item.Zone2 = BitConverter.ToUInt16(file, itemOffset + 83);
-            item.sortJP = BitConverter.ToUInt32(file, itemOffset + 85);
-            item.sortGE = BitConverter.ToUInt32(file, itemOffset + 89);
-            item.sortFR = BitConverter.ToUInt32(file, itemOffset + 93);
-            item.sortSP = BitConverter.ToUInt32(file, itemOffset + 97);
-            item.sortIT = BitConverter.ToUInt32(file, itemOffset + 101);
-            item.sortGB = BitConverter.ToUInt32(file, itemOffset + 105);
-            item.sortCN = BitConverter.ToUInt32(file, itemOffset + 109);
-            item.sortTW = BitConverter.ToUInt32(file, itemOffset + 113);
+            item.IraZone = BitConverter.ToUInt16(file, itemOffset + 85);
+            item.IraZone2 = BitConverter.ToUInt16(file, itemOffset + 87);
+            item.sortJP = BitConverter.ToUInt32(file, itemOffset + 89);
+            item.sortGE = BitConverter.ToUInt32(file, itemOffset + 93);
+            item.sortFR = BitConverter.ToUInt32(file, itemOffset + 97);
+            item.sortSP = BitConverter.ToUInt32(file, itemOffset + 101);
+            item.sortIT = BitConverter.ToUInt32(file, itemOffset + 105);
+            item.sortGB = BitConverter.ToUInt32(file, itemOffset + 109);
+            item.sortCN = BitConverter.ToUInt32(file, itemOffset + 113);
+            item.sortTW = BitConverter.ToUInt32(file, itemOffset + 117);
             item.NoSell = (item.Flag & 1) != 0;
             return item;
         }
@@ -6672,6 +6787,65 @@ namespace XbTool.Serialization
             return item;
         }
 
+        public static ma40a_FLD_EnemyPop Readma40a_FLD_EnemyPop(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new ma40a_FLD_EnemyPop();
+            item.Id = itemId;
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
+            item.tagetpoint_name = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 6);
+            item.QuestFlagMin = file[itemOffset + 8];
+            item.QuestFlagMax = file[itemOffset + 9];
+            item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 12);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.POP_TIME = BitConverter.ToUInt32(file, itemOffset + 16);
+            item.popWeather = file[itemOffset + 20];
+            item.ene1ID = BitConverter.ToUInt16(file, itemOffset + 21);
+            item.ene1Lv = (sbyte)file[itemOffset + 23];
+            item.ene1Per = file[itemOffset + 24];
+            item.ene1num = file[itemOffset + 25];
+            item.ene1move = file[itemOffset + 26];
+            item.ene2ID = BitConverter.ToUInt16(file, itemOffset + 27);
+            item.ene2Lv = (sbyte)file[itemOffset + 29];
+            item.ene2Per = file[itemOffset + 30];
+            item.ene2num = file[itemOffset + 31];
+            item.ene2move = file[itemOffset + 32];
+            item.ene3ID = BitConverter.ToUInt16(file, itemOffset + 33);
+            item.ene3Lv = (sbyte)file[itemOffset + 35];
+            item.ene3Per = file[itemOffset + 36];
+            item.ene3num = file[itemOffset + 37];
+            item.ene3move = file[itemOffset + 38];
+            item.ene4ID = BitConverter.ToUInt16(file, itemOffset + 39);
+            item.ene4Lv = (sbyte)file[itemOffset + 41];
+            item.ene4Per = file[itemOffset + 42];
+            item.ene4num = file[itemOffset + 43];
+            item.ene4move = file[itemOffset + 44];
+            item.party_flag = file[itemOffset + 45];
+            item.flag = file[itemOffset + 46];
+            item.pop_act_type = file[itemOffset + 47];
+            item.form_range = file[itemOffset + 48];
+            item.squadId = BitConverter.ToUInt16(file, itemOffset + 49);
+            item.squadScale = BitConverter.ToUInt16(file, itemOffset + 51);
+            item.ene_disp_r = file[itemOffset + 53];
+            item.ene_disp_h = file[itemOffset + 54];
+            item.battlelockname = BitConverter.ToUInt16(file, itemOffset + 55);
+            item.muteki_QuestFlag = BitConverter.ToUInt16(file, itemOffset + 57);
+            item.muteki_QuestFlagMin = file[itemOffset + 59];
+            item.muteki_QuestFlagMax = file[itemOffset + 60];
+            item.muteki_Condition = BitConverter.ToUInt16(file, itemOffset + 61);
+            item.Wpop_Priority = file[itemOffset + 63];
+            item.Wpop_TimerCond = BitConverter.ToUInt16(file, itemOffset + 64);
+            item.Wpop_PopNumCond = file[itemOffset + 66];
+            item.ene_priority = (item.flag & 1) != 0;
+            item.pop_smn = (item.flag & 2) != 0;
+            item.pop_smn2 = (item.flag & 4) != 0;
+            item.pop_smn3 = (item.flag & 8) != 0;
+            item.pop_smn4 = (item.flag & 16) != 0;
+            item.popCloud = (item.flag & 32) != 0;
+            return item;
+        }
+
         public static ma40a_FLD_MobPop Readma40a_FLD_MobPop(byte[] file, int itemId, int itemOffset, int tableOffset)
         {
             var item = new ma40a_FLD_MobPop();
@@ -6710,6 +6884,51 @@ namespace XbTool.Serialization
             item.Invisible_Y = BitConverter.ToUInt16(file, itemOffset + 55);
             item.squadId = BitConverter.ToUInt16(file, itemOffset + 57);
             item.CloseRange = BitConverter.ToUInt16(file, itemOffset + 59);
+            return item;
+        }
+
+        public static ma40a_FLD_NpcPop Readma40a_FLD_NpcPop(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new ma40a_FLD_NpcPop();
+            item.Id = itemId;
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
+            item.NpcID = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.ScenarioFlagMin = BitConverter.ToUInt16(file, itemOffset + 6);
+            item.ScenarioFlagMax = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.QuestFlag = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.QuestFlagMin = file[itemOffset + 12];
+            item.QuestFlagMax = file[itemOffset + 13];
+            item.TimeRange = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset + 16);
+            item.Group = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.Mot = BitConverter.ToUInt16(file, itemOffset + 20);
+            item.MountPoint = BitConverter.ToUInt16(file, itemOffset + 22);
+            item.MountObject = BitConverter.ToUInt16(file, itemOffset + 24);
+            item.MountPoint2 = BitConverter.ToUInt16(file, itemOffset + 26);
+            item.MountObject2 = BitConverter.ToUInt16(file, itemOffset + 28);
+            item.flag = file[itemOffset + 30];
+            item.EventID = BitConverter.ToUInt16(file, itemOffset + 31);
+            item.NpcTurn = file[itemOffset + 33];
+            item.LookAt = file[itemOffset + 34];
+            item.LookAtRange = BitConverter.ToUInt16(file, itemOffset + 35);
+            item.QuestID = BitConverter.ToUInt16(file, itemOffset + 37);
+            item.ShopID = BitConverter.ToUInt16(file, itemOffset + 39);
+            item.CloseRange = BitConverter.ToUInt16(file, itemOffset + 41);
+            item.MoveSpeed = BitConverter.ToUInt16(file, itemOffset + 43);
+            item.ReactionRange = BitConverter.ToUInt16(file, itemOffset + 45);
+            item.ReactionPercent = BitConverter.ToUInt16(file, itemOffset + 47);
+            item.ReactionMot = BitConverter.ToUInt16(file, itemOffset + 49);
+            item.BattleReaction = BitConverter.ToUInt16(file, itemOffset + 51);
+            item.BattleMot = BitConverter.ToUInt16(file, itemOffset + 53);
+            item.Visible_XZ = BitConverter.ToUInt16(file, itemOffset + 55);
+            item.Visible_Y = BitConverter.ToUInt16(file, itemOffset + 57);
+            item.Invisible_XZ = BitConverter.ToUInt16(file, itemOffset + 59);
+            item.Invisible_Y = BitConverter.ToUInt16(file, itemOffset + 61);
+            item.FSID1 = BitConverter.ToUInt16(file, itemOffset + 63);
+            item.FSID2 = BitConverter.ToUInt16(file, itemOffset + 65);
+            item.FSID3 = BitConverter.ToUInt16(file, itemOffset + 67);
+            item.Talkable = (item.flag & 1) != 0;
+            item.HITONOWAGET = (item.flag & 2) != 0;
             return item;
         }
 
@@ -6759,6 +6978,7 @@ namespace XbTool.Serialization
             item.menuMapImage = BitConverter.ToUInt16(file, itemOffset + 60);
             item.Digflg = (item.flag & 1) != 0;
             item.DigPopflg = (item.flag & 2) != 0;
+            item.NoponBarrel = (item.flag & 4) != 0;
             return item;
         }
 
@@ -6776,6 +6996,56 @@ namespace XbTool.Serialization
             item.rsc_paramID = file[itemOffset + 17];
             item.initWaitTime = BitConverter.ToSingle(file, itemOffset + 18);
             item.initWaitTimeRand = BitConverter.ToSingle(file, itemOffset + 22);
+            item.rarity = file[itemOffset + 26];
+            return item;
+        }
+
+        public static ma41a_FLD_TboxPop Readma41a_FLD_TboxPop(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new ma41a_FLD_TboxPop();
+            item.Id = itemId;
+            item.name = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
+            item.RSC_ID = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset + 6);
+            item.FSID = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.FSID2 = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.flag = file[itemOffset + 12];
+            item.msgVisible = file[itemOffset + 13];
+            item.goldMin = BitConverter.ToUInt32(file, itemOffset + 14);
+            item.goldMax = BitConverter.ToUInt32(file, itemOffset + 18);
+            item.goldPopMin = file[itemOffset + 22];
+            item.goldPopMax = file[itemOffset + 23];
+            item.itm1ID = BitConverter.ToUInt16(file, itemOffset + 24);
+            item.itm1Num = file[itemOffset + 26];
+            item.itm1Per = file[itemOffset + 27];
+            item.itm2ID = BitConverter.ToUInt16(file, itemOffset + 28);
+            item.itm2Num = file[itemOffset + 30];
+            item.itm2Per = file[itemOffset + 31];
+            item.itm3ID = BitConverter.ToUInt16(file, itemOffset + 32);
+            item.itm3Num = file[itemOffset + 34];
+            item.itm3Per = file[itemOffset + 35];
+            item.itm4ID = BitConverter.ToUInt16(file, itemOffset + 36);
+            item.itm4Num = file[itemOffset + 38];
+            item.itm4Per = file[itemOffset + 39];
+            item.itm5ID = BitConverter.ToUInt16(file, itemOffset + 40);
+            item.itm5Num = file[itemOffset + 42];
+            item.itm5Per = file[itemOffset + 43];
+            item.itm6ID = BitConverter.ToUInt16(file, itemOffset + 44);
+            item.itm6Num = file[itemOffset + 46];
+            item.itm6Per = file[itemOffset + 47];
+            item.itm7ID = BitConverter.ToUInt16(file, itemOffset + 48);
+            item.itm7Num = file[itemOffset + 50];
+            item.itm7Per = file[itemOffset + 51];
+            item.itm8ID = BitConverter.ToUInt16(file, itemOffset + 52);
+            item.itm8Num = file[itemOffset + 54];
+            item.itm8Per = file[itemOffset + 55];
+            item.randitmPopMin = file[itemOffset + 56];
+            item.randitmPopMax = file[itemOffset + 57];
+            item.rsc_paramID = file[itemOffset + 58];
+            item.msgdigVisible = file[itemOffset + 59];
+            item.menuMapImage = BitConverter.ToUInt16(file, itemOffset + 60);
+            item.Digflg = (item.flag & 1) != 0;
+            item.NoponBarrel = (item.flag & 2) != 0;
             return item;
         }
 
@@ -7585,6 +7855,15 @@ namespace XbTool.Serialization
             return item;
         }
 
+        public static MNU_ShopChangeNopon ReadMNU_ShopChangeNopon(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new MNU_ShopChangeNopon();
+            item.Id = itemId;
+            item.TaskSet = BitConverter.ToUInt16(file, itemOffset);
+            item.Condition = BitConverter.ToUInt16(file, itemOffset + 2);
+            return item;
+        }
+
         public static MNU_ShopChangeTask ReadMNU_ShopChangeTask(byte[] file, int itemId, int itemOffset, int tableOffset)
         {
             var item = new MNU_ShopChangeTask();
@@ -7604,6 +7883,8 @@ namespace XbTool.Serialization
             item.Reward = BitConverter.ToUInt16(file, itemOffset + 24);
             item.HideRewardFlag = BitConverter.ToUInt16(file, itemOffset + 26);
             item.AddFlagValue = file[itemOffset + 28];
+            item.forcequit = file[itemOffset + 29];
+            item.IraCraftIndex = BitConverter.ToUInt16(file, itemOffset + 30);
             return item;
         }
 
@@ -7773,7 +8054,55 @@ namespace XbTool.Serialization
             var item = new MNU_Tutorial();
             item.Id = itemId;
             item.script_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
-            item.param1 = BitConverter.ToUInt32(file, itemOffset + 4);
+            item.start_id = file[itemOffset + 4];
+            item.param1 = BitConverter.ToUInt32(file, itemOffset + 5);
+            return item;
+        }
+
+        public static MNU_Tutorial_Chbtl ReadMNU_Tutorial_Chbtl(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new MNU_Tutorial_Chbtl();
+            item.Id = itemId;
+            item.title = BitConverter.ToUInt16(file, itemOffset);
+            item.condition = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.bg_type = file[itemOffset + 4];
+            item.use_telop = file[itemOffset + 5];
+            item.use_hud_time = file[itemOffset + 6];
+            item.use_hud_cube = file[itemOffset + 7];
+            item.window_y1 = BitConverter.ToInt16(file, itemOffset + 8);
+            item.message1 = BitConverter.ToUInt16(file, itemOffset + 10);
+            item.window_y2 = BitConverter.ToInt16(file, itemOffset + 12);
+            item.message2 = BitConverter.ToUInt16(file, itemOffset + 14);
+            item.window_y3 = BitConverter.ToInt16(file, itemOffset + 16);
+            item.message3 = BitConverter.ToUInt16(file, itemOffset + 18);
+            return item;
+        }
+
+        public static MNU_Tutorial_Ira ReadMNU_Tutorial_Ira(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new MNU_Tutorial_Ira();
+            item.Id = itemId;
+            item.script_file = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset));
+            item.start_id = file[itemOffset + 4];
+            item.param1 = BitConverter.ToUInt32(file, itemOffset + 5);
+            item.param2 = file[itemOffset + 9];
+            return item;
+        }
+
+        public static MNU_Tutorial_Tips ReadMNU_Tutorial_Tips(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new MNU_Tutorial_Tips();
+            item.Id = itemId;
+            item.title = BitConverter.ToUInt16(file, itemOffset);
+            item.condition = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.page = file[itemOffset + 4];
+            item.bg_type = file[itemOffset + 5];
+            item.window_y1 = BitConverter.ToInt16(file, itemOffset + 6);
+            item.message1 = BitConverter.ToUInt16(file, itemOffset + 8);
+            item.window_y2 = BitConverter.ToInt16(file, itemOffset + 10);
+            item.message2 = BitConverter.ToUInt16(file, itemOffset + 12);
+            item.window_y3 = BitConverter.ToInt16(file, itemOffset + 14);
+            item.message3 = BitConverter.ToUInt16(file, itemOffset + 16);
             return item;
         }
 
@@ -7956,7 +8285,9 @@ namespace XbTool.Serialization
             item.ExtraParts2 = file[itemOffset + 137];
             item.ExtraParts3 = file[itemOffset + 138];
             item.ExtraParts4 = file[itemOffset + 139];
-            item.DeadSeNum = file[itemOffset + 140];
+            item.ExtraParts5 = file[itemOffset + 140];
+            item.ExtraParts6 = file[itemOffset + 141];
+            item.DeadSeNum = file[itemOffset + 142];
             item.NoEcSkip = (item.Flag & 1) != 0;
             item.Map = (item.Flag & 2) != 0;
             item.Evt = (item.Flag & 4) != 0;
@@ -8461,6 +8792,7 @@ namespace XbTool.Serialization
             item.NoDir = (item.Flag & 8) != 0;
             item.NoChain = (item.Flag & 16) != 0;
             item.NoReplyOK = (item.Flag & 32) != 0;
+            item.SeriousOff = (item.Flag & 64) != 0;
             return item;
         }
 
@@ -8554,6 +8886,27 @@ namespace XbTool.Serialization
                 item.Voice[i] = BitConverter.ToUInt32(file, offset);
             }
             for (int i = 0, offset = itemOffset + 22; i < 3; i++, offset += 2)
+            {
+                item.Timer[i] = BitConverter.ToUInt16(file, offset);
+            }
+            return item;
+        }
+
+        public static Vo_WinSpIra ReadVo_WinSpIra(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new Vo_WinSpIra();
+            item.Id = itemId;
+            item.FLD_CondID = BitConverter.ToUInt16(file, itemOffset);
+            item.NeedChrID = BitConverter.ToUInt16(file, itemOffset + 2);
+            for (int i = 0, offset = itemOffset + 4; i < 4; i++, offset += 2)
+            {
+                item.ChrID[i] = BitConverter.ToUInt16(file, offset);
+            }
+            for (int i = 0, offset = itemOffset + 12; i < 4; i++, offset += 4)
+            {
+                item.Voice[i] = BitConverter.ToUInt32(file, offset);
+            }
+            for (int i = 0, offset = itemOffset + 28; i < 4; i++, offset += 2)
             {
                 item.Timer[i] = BitConverter.ToUInt16(file, offset);
             }
@@ -8854,6 +9207,11 @@ namespace XbTool.Serialization
 
             foreach (BTL_ChBtlRewardSet item in tables.BTL_ChBtlRewardSet.Items)
             {
+                item._AppointItem = tables.GetItem(item.AppointItem);
+                item._DownCategory1 = (ItemType)item.DownCategory1;
+                item._DownCategory2 = (ItemType)item.DownCategory2;
+                item._UpCategory1 = (ItemType)item.UpCategory1;
+                item._UpCategory2 = (ItemType)item.UpCategory2;
                 item._UpItemID1 = tables.GetItem(item.UpItemID1);
                 item._UpItemID2 = tables.GetItem(item.UpItemID2);
                 item._UpItemID3 = tables.GetItem(item.UpItemID3);
@@ -9143,6 +9501,14 @@ namespace XbTool.Serialization
                 item._SkillID = tables.BTL_Skill_Dr.GetItemOrNull(item.SkillID);
             }
 
+            foreach (BTL_Summon item in tables.BTL_Summon.Items)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    item._EnemyID[i] = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID[i]);
+                }
+            }
+
             foreach (BTL_Wpn_En item in tables.BTL_Wpn_En.Items)
             {
                 item._RscL = tables.RSC_EnWpn.GetItemOrNull(item.RscL);
@@ -9185,6 +9551,10 @@ namespace XbTool.Serialization
                 item._NArts2 = tables.BTL_Buff.GetItemOrNull(item.NArts2);
                 item._NArts3 = tables.BTL_Buff.GetItemOrNull(item.NArts3);
                 item._Personality = tables.BTL_Bl_Personality.GetItemOrNull(item.Personality);
+                item._PrivateWpnL = tables.RSC_PcWpn.GetItemOrNull(item.PrivateWpnL);
+                item._PrivateWpnL_Driver = tables.RSC_PcWpn.GetItemOrNull(item.PrivateWpnL_Driver);
+                item._PrivateWpnR = tables.RSC_PcWpn.GetItemOrNull(item.PrivateWpnR);
+                item._PrivateWpnR_Driver = tables.RSC_PcWpn.GetItemOrNull(item.PrivateWpnR_Driver);
                 item._QuestRace = tables.MNU_Msg_Race.GetItemOrNull(item.QuestRace);
                 item._SkillAchievement1 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement1);
                 item._SkillAchievement2 = tables.FLD_AchievementSet.GetItemOrNull(item.SkillAchievement2);
@@ -9339,21 +9709,6 @@ namespace XbTool.Serialization
                 item._Type = (IraCharType)item.Type;
             }
 
-            foreach (MNU_txt item in tables.dlc100_btl_time_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (MNU_txt item in tables.dlc101_named_dialog_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
-            foreach (MNU_txt item in tables.dlc102_named_list_txt.Items)
-            {
-                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
-            }
-
             foreach (MNU_txt item in tables.dlc103_btlch_order_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
@@ -9365,6 +9720,11 @@ namespace XbTool.Serialization
             }
 
             foreach (MNU_txt item in tables.dlc107_vision_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.dlc108_btlch_tutorial_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
@@ -9385,6 +9745,11 @@ namespace XbTool.Serialization
             }
 
             foreach (MNU_txt item in tables.dlc304_char_change_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.dlc305_tips_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
@@ -10840,6 +11205,21 @@ namespace XbTool.Serialization
                 item._EnemyID7 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID7);
                 item._EnemyID8 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID8);
                 item._EnemyID9 = tables.CHR_EnArrange.GetItemOrNull(item.EnemyID9);
+                item._EnemyID = new[]
+                {
+                    item._EnemyID1,
+                    item._EnemyID2,
+                    item._EnemyID3,
+                    item._EnemyID4,
+                    item._EnemyID5,
+                    item._EnemyID6,
+                    item._EnemyID7,
+                    item._EnemyID8,
+                    item._EnemyID9,
+                    item._EnemyID10,
+                    item._EnemyID11,
+                    item._EnemyID12
+                };
             }
 
             foreach (FLD_EnemyWave item in tables.FLD_EnemyWave.Items)
@@ -10855,6 +11235,7 @@ namespace XbTool.Serialization
             foreach (FLD_FieldLockGimmick item in tables.FLD_FieldLockGimmick.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
+                item._txtID = tables.fld_helpms.GetItemOrNull(item.txtID);
             }
 
             foreach (FLD_FieldSkillList item in tables.FLD_FieldSkillList.Items)
@@ -11134,6 +11515,7 @@ namespace XbTool.Serialization
 
             foreach (FLD_QuestReach item in tables.FLD_QuestReach.Items)
             {
+                item._Category = (PlaceCategory)item.Category;
                 item._MapID = tables.FLD_maplist.GetItemOrNull(item.MapID);
             }
 
@@ -11809,6 +12191,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -11877,6 +12260,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -11956,6 +12340,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12052,6 +12437,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12161,6 +12547,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12268,6 +12655,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12375,6 +12763,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12482,6 +12871,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12578,6 +12968,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12687,6 +13078,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12786,6 +13178,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12868,6 +13261,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -12951,6 +13345,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -13040,6 +13435,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -13129,6 +13525,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -13209,7 +13606,7 @@ namespace XbTool.Serialization
                 item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
-            foreach (ma01a_FLD_EnemyPop item in tables.ma40a_FLD_EnemyPop.Items)
+            foreach (ma40a_FLD_EnemyPop item in tables.ma40a_FLD_EnemyPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
@@ -13231,6 +13628,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -13251,7 +13649,7 @@ namespace XbTool.Serialization
                 item._TimeRange = (TimeRange)item.TimeRange;
             }
 
-            foreach (ma01a_FLD_NpcPop item in tables.ma40a_FLD_NpcPop.Items)
+            foreach (ma40a_FLD_NpcPop item in tables.ma40a_FLD_NpcPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
@@ -13300,7 +13698,7 @@ namespace XbTool.Serialization
                 item._POP_TIME = (TimeRange)item.POP_TIME;
             }
 
-            foreach (ma01a_FLD_EnemyPop item in tables.ma41a_FLD_EnemyPop.Items)
+            foreach (ma05c_FLD_EnemyPop item in tables.ma41a_FLD_EnemyPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._ene1ID = tables.CHR_EnArrange.GetItemOrNull(item.ene1ID);
@@ -13322,6 +13720,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -13342,7 +13741,7 @@ namespace XbTool.Serialization
                 item._TimeRange = (TimeRange)item.TimeRange;
             }
 
-            foreach (ma01a_FLD_NpcPop item in tables.ma41a_FLD_NpcPop.Items)
+            foreach (ma40a_FLD_NpcPop item in tables.ma41a_FLD_NpcPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._FSID1 = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID1);
@@ -13355,7 +13754,7 @@ namespace XbTool.Serialization
                 item._TimeRange = (TimeRange)item.TimeRange;
             }
 
-            foreach (ma02a_FLD_TboxPop item in tables.ma41a_FLD_TboxPop.Items)
+            foreach (ma41a_FLD_TboxPop item in tables.ma41a_FLD_TboxPop.Items)
             {
                 item._Condition = tables.FLD_ConditionList.GetItemOrNull(item.Condition);
                 item._FSID = tables.FLD_FieldSkillSetting.GetItemOrNull(item.FSID);
@@ -13393,6 +13792,7 @@ namespace XbTool.Serialization
                 item._cndID = tables.FLD_ConditionList.GetItemOrNull(item.cndID);
                 item._MAPJUMPID = tables.SYS_MapJumpList.GetItemOrNull(item.MAPJUMPID);
                 item._menuGroup = tables.MNU_MapGroup.GetItemOrNull(item.menuGroup);
+                item._menuMapImage = tables.MNU_MapInfo.GetItemOrNull(item.menuMapImage);
                 item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
                 item._stoff_cndID = tables.FLD_ConditionList.GetItemOrNull(item.stoff_cndID);
             }
@@ -14696,6 +15096,21 @@ namespace XbTool.Serialization
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }
 
+            foreach (MNU_txt item in tables.mnu106_named_dialog_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu107_named_list_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.mnu108_btl_time_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
             foreach (MNU_txt item in tables.mnu999_chaincount_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
@@ -14736,7 +15151,9 @@ namespace XbTool.Serialization
 
             foreach (RSC_NpcList item in tables.RSC_NpcList.Items)
             {
+                item._Gender = (Gender)item.Gender;
                 item._Name = tables.fld_npcname.GetItemOrNull(item.Name);
+                item._Roots = (NpcRoot)item.Roots;
             }
 
             foreach (RSC_PcWpn item in tables.RSC_PcWpn.Items)

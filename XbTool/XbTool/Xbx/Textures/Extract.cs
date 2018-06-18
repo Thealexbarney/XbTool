@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-using XbTool.Textures;
+using XbTool.Common;
+using XbTool.Common.Textures;
 
 namespace XbTool.Xbx.Textures
 {
@@ -26,7 +27,7 @@ namespace XbTool.Xbx.Textures
 
         public static void ReadMtxt(DataBuffer file, string name, string outDir)
         {
-            var texture = new Texture(file);
+            var texture = new MtxtTexture(file);
             byte[] png = texture.ToPng();
 
             if (png == null)

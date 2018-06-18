@@ -93,6 +93,7 @@ namespace XbTool.Types
         public BdatTable<BTL_ElementalEffect> BTL_ElementalEffect;
         public BdatTable<BTL_EnAwake> BTL_EnAwake;
         public BdatTable<BTL_EnBook> BTL_EnBook;
+        public BdatTable<BTL_EndEvent> BTL_EndEvent;
         public BdatTable<BTL_EnDropItem> BTL_EnDropItem;
         public BdatTable<BTL_EnDropQuest> BTL_EnDropQuest;
         public BdatTable<BTL_Enhance> BTL_Enhance;
@@ -122,6 +123,8 @@ namespace XbTool.Types
         public BdatTable<BTL_PouchBuffSet> BTL_PouchBuffSet;
         public BdatTable<BTL_Reaction> BTL_Reaction;
         public BdatTable<BTL_SE> BTL_SE;
+        public BdatTable<BTL_Siren> BTL_Siren;
+        public BdatTable<BTL_SirenPos> BTL_SirenPos;
         public BdatTable<BTL_Skill_Bl> BTL_Skill_Bl;
         public BdatTable<BTL_Skill_Dr> BTL_Skill_Dr;
         public BdatTable<BTL_Skill_Dr_Table> BTL_Skill_Dr_Table01;
@@ -414,6 +417,7 @@ namespace XbTool.Types
         public BdatTable<FLD_DoorGimmick> FLD_DoorGimmick;
         public BdatTable<FLD_EffectPop> FLD_EffectPop;
         public BdatTable<FLD_ElevatorGimmick> FLD_ElevatorGimmick;
+        public BdatTable<FLD_ElevatorGimmick> FLD_ma40a_ElevatorGimmick;
         public BdatTable<FLD_ENActMove> FLD_ENActMove;
         public BdatTable<FLD_EnemyGroup> FLD_EnemyGroup;
         public BdatTable<FLD_EnemyWave> FLD_EnemyWave;
@@ -499,6 +503,7 @@ namespace XbTool.Types
         public BdatTable<Fx_Act_Surface_Table> Fx_Act_Surface_Table;
         public BdatTable<Fx_FileName> Fx_FileName;
         public BdatTable<Fx_FileName> MNU_MapInfoFile;
+        public BdatTable<Fx_FileName> MNU_MapInfoFile_ira;
         public BdatTable<Fx_Surface_Chara_Table> Fx_Surface_Chara_Table;
         public BdatTable<IRA_Party> IRA_Party;
         public BdatTable<ITM_BoosterList> ITM_BoosterList;
@@ -2533,6 +2538,7 @@ namespace XbTool.Types
         public BdatTable<LabeledMessage> qst560210_ms;
         public BdatTable<LabeledMessage> qst560211_ms;
         public BdatTable<LabeledMessage> qst560212_ms;
+        public BdatTable<LabeledMessage> qst560213_ms;
         public BdatTable<LabeledMessage> qst610101_ms;
         public BdatTable<LabeledMessage> qst610102_ms;
         public BdatTable<LabeledMessage> qst610103_ms;
@@ -2621,6 +2627,18 @@ namespace XbTool.Types
         public BdatTable<LabeledMessage> qst650207_ms;
         public BdatTable<LabeledMessage> qst650208_ms;
         public BdatTable<LabeledMessage> qst650209_ms;
+        public BdatTable<LabeledMessage> qst660101_ms;
+        public BdatTable<LabeledMessage> qst660102_ms;
+        public BdatTable<LabeledMessage> qst660103_ms;
+        public BdatTable<LabeledMessage> qst660104_ms;
+        public BdatTable<LabeledMessage> qst660105_ms;
+        public BdatTable<LabeledMessage> qst660106_ms;
+        public BdatTable<LabeledMessage> qst660107_ms;
+        public BdatTable<LabeledMessage> qst660108_ms;
+        public BdatTable<LabeledMessage> qst660109_ms;
+        public BdatTable<LabeledMessage> qst660110_ms;
+        public BdatTable<LabeledMessage> qst660111_ms;
+        public BdatTable<LabeledMessage> qst660112_ms;
         public BdatTable<LabeledMessage> tlk000001_ms;
         public BdatTable<LabeledMessage> tlk0000021301_ms;
         public BdatTable<LabeledMessage> tlk0000021302_ms;
@@ -4101,8 +4119,6 @@ namespace XbTool.Types
         public BdatTable<ma01a_FLD_EnemyPop> ma11a_FLD_EnemyPop;
         public BdatTable<ma01a_FLD_EnemyPop> ma15a_FLD_EnemyPop;
         public BdatTable<ma01a_FLD_EnemyPop> ma16a_FLD_EnemyPop;
-        public BdatTable<ma01a_FLD_EnemyPop> ma40a_FLD_EnemyPop;
-        public BdatTable<ma01a_FLD_EnemyPop> ma41a_FLD_EnemyPop;
         public BdatTable<ma01a_FLD_EnemyPop> ma42a_FLD_EnemyPop;
         public BdatTable<ma01a_FLD_EnemyPop> ma90a_FLD_EnemyPop;
         public BdatTable<ma01a_FLD_EnemyPop> ma90a_FLD_EnemyPop_moveTest;
@@ -4144,8 +4160,6 @@ namespace XbTool.Types
         public BdatTable<ma01a_FLD_NpcPop> ma20a_FLD_NpcPop;
         public BdatTable<ma01a_FLD_NpcPop> ma21a_FLD_NpcPop;
         public BdatTable<ma01a_FLD_NpcPop> ma30a_FLD_NpcPop;
-        public BdatTable<ma01a_FLD_NpcPop> ma40a_FLD_NpcPop;
-        public BdatTable<ma01a_FLD_NpcPop> ma41a_FLD_NpcPop;
         public BdatTable<ma01a_FLD_NpcPop> ma49c_FLD_NpcPop;
         public BdatTable<ma01a_FLD_NpcPop> ma50a_FLD_NpcPop;
         public BdatTable<ma01a_FLD_NpcPop> ma90a_FLD_NpcPop;
@@ -4222,7 +4236,6 @@ namespace XbTool.Types
         public BdatTable<ma02a_FLD_MobPop> ma90a_FLD_MobPop;
         public BdatTable<ma02a_FLD_TboxPop> ma02a_FLD_TboxPop;
         public BdatTable<ma02a_FLD_TboxPop> ma13a_FLD_TboxPop;
-        public BdatTable<ma02a_FLD_TboxPop> ma41a_FLD_TboxPop;
         public BdatTable<ma03a_FLD_TboxPop> ma03a_FLD_TboxPop;
         public BdatTable<ma03a_FLD_TboxPop> ma04a_FLD_TboxPop;
         public BdatTable<ma03a_FLD_TboxPop> ma05a_FLD_TboxPop;
@@ -4267,6 +4280,7 @@ namespace XbTool.Types
         public BdatTable<ma05c_FLD_EnemyPop> ma17c_FLD_EnemyPop;
         public BdatTable<ma05c_FLD_EnemyPop> ma18c_FLD_EnemyPop;
         public BdatTable<ma05c_FLD_EnemyPop> ma20c_FLD_EnemyPop;
+        public BdatTable<ma05c_FLD_EnemyPop> ma41a_FLD_EnemyPop;
         public BdatTable<ma07a_FLD_CollectionPopList> ma07a_FLD_CollectionPopList;
         public BdatTable<ma07a_FLD_CollectionPopList> ma13a_FLD_CollectionPopList;
         public BdatTable<ma07a_FLD_EventPop> ma07a_FLD_EventPop;
@@ -4278,10 +4292,14 @@ namespace XbTool.Types
         public BdatTable<ma10a_FLD_EnemyPop> ma21a_FLD_EnemyPop;
         public BdatTable<ma20a_FLD_EnemyPop> ma20a_FLD_EnemyPop;
         public BdatTable<ma40a_FLD_CollectionPopList> ma40a_FLD_CollectionPopList;
+        public BdatTable<ma40a_FLD_EnemyPop> ma40a_FLD_EnemyPop;
         public BdatTable<ma40a_FLD_MobPop> ma40a_FLD_MobPop;
         public BdatTable<ma40a_FLD_MobPop> ma41a_FLD_MobPop;
+        public BdatTable<ma40a_FLD_NpcPop> ma40a_FLD_NpcPop;
+        public BdatTable<ma40a_FLD_NpcPop> ma41a_FLD_NpcPop;
         public BdatTable<ma40a_FLD_TboxPop> ma40a_FLD_TboxPop;
         public BdatTable<ma41a_FLD_CollectionPopList> ma41a_FLD_CollectionPopList;
+        public BdatTable<ma41a_FLD_TboxPop> ma41a_FLD_TboxPop;
         public BdatTable<Message> autotalk_ma02;
         public BdatTable<Message> autotalk_ma03;
         public BdatTable<Message> autotalk_ma05;
@@ -4446,6 +4464,8 @@ namespace XbTool.Types
         public BdatTable<MNU_Filename> MNU_Stream_full_glow_dr;
         public BdatTable<MNU_Filename> MNU_Stream_Help;
         public BdatTable<MNU_Filename> MNU_Stream_Ira_Npc;
+        public BdatTable<MNU_Filename> MNU_Stream_MainBg_ira_a;
+        public BdatTable<MNU_Filename> MNU_Stream_MainBg_ira_b;
         public BdatTable<MNU_Filename> MNU_Stream_MainBg00;
         public BdatTable<MNU_Filename> MNU_Stream_MainBg01;
         public BdatTable<MNU_Filename> MNU_Stream_MainBg02;
@@ -4463,6 +4483,7 @@ namespace XbTool.Types
         public BdatTable<MNU_Filename> MNU_Stream_OpeningC;
         public BdatTable<MNU_Filename> MNU_Stream_OpeningL;
         public BdatTable<MNU_Filename> MNU_Stream_OpeningR;
+        public BdatTable<MNU_Filename> MNU_Stream_OpeningRHalf;
         public BdatTable<MNU_Filename> MNU_Stream_Submenu;
         public BdatTable<MNU_Filename> MNU_Stream_thumb_ev;
         public BdatTable<MNU_Filename> MNU_Stream_thumb_qt;
@@ -4505,6 +4526,7 @@ namespace XbTool.Types
         public BdatTable<MNU_MsgPopupTitle> MNU_MsgPopupTitle;
         public BdatTable<MNU_MsgQListTab> MNU_MsgQListTab;
         public BdatTable<MNU_Name> MNU_Msg_ANGInfo;
+        public BdatTable<MNU_Name> MNU_Msg_ANGInfo_Ira;
         public BdatTable<MNU_Name> MNU_Msg_ArtsRange;
         public BdatTable<MNU_Name> MNU_Msg_ArtsType;
         public BdatTable<MNU_Name> MNU_Msg_ArtsTypeIndex;
@@ -4521,6 +4543,7 @@ namespace XbTool.Types
         public BdatTable<MNU_Name> MNU_Msg_OperationGuide;
         public BdatTable<MNU_Name> MNU_Msg_OptList;
         public BdatTable<MNU_Name> MNU_Msg_PouchFilter;
+        public BdatTable<MNU_Name> MNU_Msg_PouchFilter_Ira;
         public BdatTable<MNU_Name> MNU_Msg_Race;
         public BdatTable<MNU_Name> MNU_Msg_Rarelity;
         public BdatTable<MNU_Name> MNU_Msg_Reaction;
@@ -4548,6 +4571,7 @@ namespace XbTool.Types
         public BdatTable<MNU_OptionDisp> MNU_OptionDisp;
         public BdatTable<MNU_OptionDisp> MNU_OptionGame;
         public BdatTable<MNU_OptionDisp> MNU_OptionGameDlc;
+        public BdatTable<MNU_OptionDisp> MNU_OptionGameIra;
         public BdatTable<MNU_OptionDisp> MNU_OptionSound;
         public BdatTable<MNU_OptionGameDif> MNU_OptionGameDif;
         public BdatTable<MNU_ResFont> MNU_ResFont;
@@ -4560,6 +4584,7 @@ namespace XbTool.Types
         public BdatTable<MNU_ScriptList> MNU_ScriptList;
         public BdatTable<MNU_ShopCategoryName> MNU_ShopCategoryName;
         public BdatTable<MNU_ShopChange> MNU_ShopChange;
+        public BdatTable<MNU_ShopChangeNopon> MNU_ShopChangeNopon;
         public BdatTable<MNU_ShopChangeTask> MNU_ShopChangeTask;
         public BdatTable<MNU_ShopInn> MNU_ShopInn;
         public BdatTable<MNU_ShopList> MNU_ShopList;
@@ -4575,16 +4600,18 @@ namespace XbTool.Types
         public BdatTable<MNU_Stream_full_bl> MNU_Stream_full_bl;
         public BdatTable<MNU_TextProperty> MNU_TextProperty;
         public BdatTable<MNU_Tutorial> MNU_Tutorial;
-        public BdatTable<MNU_txt> dlc100_btl_time_txt;
-        public BdatTable<MNU_txt> dlc101_named_dialog_txt;
-        public BdatTable<MNU_txt> dlc102_named_list_txt;
+        public BdatTable<MNU_Tutorial_Chbtl> MNU_Tutorial_Chbtl;
+        public BdatTable<MNU_Tutorial_Ira> MNU_Tutorial_Ira;
+        public BdatTable<MNU_Tutorial_Tips> MNU_Tutorial_Tips;
         public BdatTable<MNU_txt> dlc103_btlch_order_txt;
         public BdatTable<MNU_txt> dlc105_btlch_telop_txt;
         public BdatTable<MNU_txt> dlc107_vision_txt;
+        public BdatTable<MNU_txt> dlc108_btlch_tutorial_txt;
         public BdatTable<MNU_txt> dlc3_mnu076_char_menu_txt;
         public BdatTable<MNU_txt> dlc302_npc_telop_txt;
         public BdatTable<MNU_txt> dlc303_camp_menu_txt;
         public BdatTable<MNU_txt> dlc304_char_change_txt;
+        public BdatTable<MNU_txt> dlc305_tips_txt;
         public BdatTable<MNU_txt> mnu001_title_txt;
         public BdatTable<MNU_txt> mnu002_balloon_txt;
         public BdatTable<MNU_txt> mnu003_dropitem_txt;
@@ -4702,6 +4729,9 @@ namespace XbTool.Types
         public BdatTable<MNU_txt> mnu103_staffroll_txt;
         public BdatTable<MNU_txt> mnu104_gift_box_txt;
         public BdatTable<MNU_txt> mnu105_announce_txt;
+        public BdatTable<MNU_txt> mnu106_named_dialog_txt;
+        public BdatTable<MNU_txt> mnu107_named_list_txt;
+        public BdatTable<MNU_txt> mnu108_btl_time_txt;
         public BdatTable<MNU_txt> mnu999_chaincount_txt;
         public BdatTable<MNU_txt> test_txt;
         public BdatTable<MNU_UioReplace> MNU_UioReplace;
@@ -4710,6 +4740,7 @@ namespace XbTool.Types
         public BdatTable<RSC_AreaBgmList> RSC_AreaBgmList;
         public BdatTable<RSC_BgmCondition> RSC_BgmCondition;
         public BdatTable<RSC_dropitemList> RSC_dropitemList;
+        public BdatTable<RSC_dropitemList> RSC_dropitemListIra;
         public BdatTable<RSC_dropitemParam> RSC_dropitemParam;
         public BdatTable<RSC_En> RSC_En;
         public BdatTable<RSC_EnGenus> RSC_EnGenus;
@@ -4740,5 +4771,6 @@ namespace XbTool.Types
         public BdatTable<Vo_Filter> Vo_Filter;
         public BdatTable<Vo_Group> Vo_Group;
         public BdatTable<Vo_WinSp> Vo_WinSp;
+        public BdatTable<Vo_WinSpIra> Vo_WinSpIra;
     }
 }

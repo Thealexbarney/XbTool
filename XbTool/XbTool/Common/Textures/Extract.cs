@@ -1,13 +1,17 @@
 ﻿using System;
 using System.IO;
+using XbTool.Xb2;
+using XbTool.Xb2.Textures;
+using FileInfo = XbTool.Xb2.FileInfo;
 
-namespace XbTool.Textures
+namespace XbTool.Common.Textures
 {
     public static class Extract
     {
-        public static void ExtractTextures(FileArchive archive, string texDir, string outDir)
+        public static void ExtractTextures(FileArchive archive, string texDir, string outDir, IProgressReport progress = null)
         {
             FileInfo[] fileInfos = archive.GetChildFileInfos(texDir);
+            progress?.SetTotal(fileInfos.Length);
 
             foreach (FileInfo info in fileInfos)
             {
@@ -16,17 +20,20 @@ namespace XbTool.Textures
                     byte[] file = archive.ReadFile(info);
                     string filename = Path.GetFileNameWithoutExtension(info.Filename);
 
-                    ExportWilayTextures(file, filename, outDir);
+                    ExportWilayTextures(file, filename, outDir, progress);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message} {info.Filename}");
+                    progress?.LogMessage($"{ex.Message} {info.Filename}");
                 }
+                progress?.ReportAdd(1);
             }
         }
 
-        public static void ExtractTextures(string[] filenames, string outDir)
+        public static void ExtractTextures(string[] filenames, string outDir, IProgressReport progress = null)
         {
+            progress?.SetTotal(filenames.Length);
+
             foreach (var filename in filenames)
             {
                 try
@@ -34,16 +41,17 @@ namespace XbTool.Textures
                     byte[] file = File.ReadAllBytes(filename);
                     string name = Path.GetFileNameWithoutExtension(filename);
 
-                    ExportWilayTextures(file, name, outDir);
+                    ExportWilayTextures(file, name, outDir, progress);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message} {filename}");
+                    progress?.LogMessage($"{ex.Message} {filename}");
                 }
+                progress?.ReportAdd(1);
             }
         }
 
-        private static void ExportWilayTextures(byte[] file, string name, string outDir)
+        private static void ExportWilayTextures(byte[] file, string name, string outDir, IProgressReport progress = null)
         {
             var wilay = new WilayRead(file);
 
@@ -54,7 +62,7 @@ namespace XbTool.Textures
 
                 if (png == null)
                 {
-                    Console.WriteLine($"{wilay.Textures[i].Format} decoding not implemented. Converting to DDS.");
+                    progress?.LogMessage($"{wilay.Textures[i].Format} decoding not implemented. Converting to DDS.");
 
                     byte[] dds = Dds.CreateDds(wilay.Textures[i]);
                     File.WriteAllBytes(Path.Combine(outDir, name + "_" + i + ".dds"), dds);

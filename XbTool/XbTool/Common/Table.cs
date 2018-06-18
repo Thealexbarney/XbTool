@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public class Table
     {

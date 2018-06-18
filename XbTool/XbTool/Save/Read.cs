@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using XbTool.Common;
 
 namespace XbTool.Save
 {

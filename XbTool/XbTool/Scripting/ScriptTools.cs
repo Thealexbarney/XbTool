@@ -1,4 +1,6 @@
-﻿namespace XbTool.Scripting
+﻿using XbTool.Common;
+
+namespace XbTool.Scripting
 {
     public static class ScriptTools
     {

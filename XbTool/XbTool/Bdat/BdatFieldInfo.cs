@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using CsvHelper;
 using CsvHelper.Configuration;
+using XbTool.Common;
 
 namespace XbTool.Bdat
 {
@@ -12,6 +13,7 @@ namespace XbTool.Bdat
     public class BdatFieldInfo
     {
         public BdatFieldType Type { get; set; }
+        public BdatMember Member { get; set; }
         public string Table { get; set; }
         public string TableType { get; set; }
         public string Field { get; set; }
@@ -65,7 +67,7 @@ namespace XbTool.Bdat
     {
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
-            using (var stream = new FileStream($"{prefix}_fieldInfo.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var stream = Helpers.OpenDataFile($"{prefix}_fieldInfo.csv"))
             using (var reader = new StreamReader(stream))
             {
                 IEnumerable<BdatFieldInfo> csv = new CsvReader(reader, new Configuration { HeaderValidated = null, MissingFieldFound = null }).GetRecords<BdatFieldInfo>();
@@ -87,9 +89,9 @@ namespace XbTool.Bdat
         public static BdatArrayInfo[] ReadBdatArrayInfo(string prefix)
         {
             var info = new List<BdatArrayInfo>();
-            if (!File.Exists($"{prefix}_arrays.csv")) return info.ToArray();
+            FileStream stream = Helpers.TryOpenDataFile($"{prefix}_arrays.csv");
+            if (stream == null) return info.ToArray();
 
-            using (var stream = new FileStream($"{prefix}_arrays.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)
@@ -118,9 +120,9 @@ namespace XbTool.Bdat
         public static Dictionary<string, string> ReadBdatTableInfo(string prefix)
         {
             var display = new Dictionary<string, string>();
-            if (!File.Exists($"{prefix}_tableInfo.csv")) return display;
+            FileStream stream = Helpers.TryOpenDataFile($"{prefix}_tableinfo.csv");
+            if (stream == null) return display;
 
-            using (var stream = new FileStream($"{prefix}_tableInfo.csv", FileMode.Open, FileAccess.Read))
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)

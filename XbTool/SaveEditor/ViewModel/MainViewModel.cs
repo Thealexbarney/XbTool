@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Linq;
 using XbTool;
 using XbTool.Bdat;
+using XbTool.Common;
 using XbTool.Save;
 using XbTool.Serialization;
 using XbTool.Types;

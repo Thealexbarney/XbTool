@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DotNet.Globbing;
+using XbTool.Common;
 
-namespace XbTool
+namespace XbTool.Xb2
 {
     public class Xb2Fs : IDisposable, IFileReader
     {

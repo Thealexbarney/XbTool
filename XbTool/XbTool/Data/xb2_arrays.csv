@@ -35,3 +35,4 @@ FLD_SalvageItemSet,itmNum,itm1Num,itm2Num,itm3Num,itm4Num,itm5Num,itm6Num,itm7Nu
 FLD_SalvageItemSet,itmPer,itm1Per,itm2Per,itm3Per,itm4Per,itm5Per,itm6Per,itm7Per,itm8Per
 FLD_SalvagePointList,BtnChallenge,BtnChallenge0,BtnChallenge1,BtnChallenge2
 FLD_SalvagePointList,SalvageTable,SalvageTable1,SalvageTable2,SalvageTable3,SalvageTable4,SalvageTable5
+FLD_EnemyGroup,EnemyID,EnemyID1,EnemyID2,EnemyID3,EnemyID4,EnemyID5,EnemyID6,EnemyID7,EnemyID8,EnemyID9,EnemyID10,EnemyID11,EnemyID12

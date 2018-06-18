@@ -4,13 +4,13 @@ using System;
 using System.Text;
 using System.Threading;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public class ProgressBar : IDisposable, IProgressReport
     {
         private const int BlockCount = 20;
-        private int _progress;
-        private int _total;
+        private long _progress;
+        private long _total;
         private readonly Timer _timer;
 
         private readonly TimeSpan _animationInterval = TimeSpan.FromSeconds(1.0 / 30);
@@ -28,12 +28,12 @@ namespace XbTool
             _timer = new Timer(timerCallBack, 0, 0, 0);
         }
 
-        public void Report(int value)
+        public void Report(long value)
         {
             Interlocked.Exchange(ref _progress, value);
         }
 
-        public void ReportAdd(int value)
+        public void ReportAdd(long value)
         {
             Interlocked.Add(ref _progress, value);
         }
@@ -46,7 +46,7 @@ namespace XbTool
             }
         }
 
-        public void SetTotal(int value)
+        public void SetTotal(long value)
         {
             Interlocked.Exchange(ref _total, value);
             Report(0);

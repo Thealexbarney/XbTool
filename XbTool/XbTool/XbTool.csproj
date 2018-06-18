@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data\*.csv" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

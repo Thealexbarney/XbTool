@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using XbTool.Bdat;
+using XbTool.Common;
 using XbTool.Types;
 
 namespace XbTool.Serialization

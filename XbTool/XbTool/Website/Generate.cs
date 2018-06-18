@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
+using XbTool.Common;
 using XbTool.Gimmick;
 using XbTool.Salvaging;
 using XbTool.Serialization;
 using XbTool.Types;
+using XbTool.Xb2;
 
 namespace XbTool.Website
 {

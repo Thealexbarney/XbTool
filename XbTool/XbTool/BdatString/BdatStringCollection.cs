@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using XbTool.Bdat;
+using XbTool.Common;
 
 namespace XbTool.BdatString
 {

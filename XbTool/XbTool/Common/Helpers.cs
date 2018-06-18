@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public static class Helpers
     {
@@ -27,7 +27,7 @@ namespace XbTool
         public static string GetRelativePath(string path, string basePath)
         {
             var directory = new DirectoryInfo(basePath);
-            var file = new System.IO.FileInfo(path);
+            var file = new FileInfo(path);
 
             string fullDirectory = directory.FullName;
             string fullFile = file.FullName;
@@ -38,6 +38,23 @@ namespace XbTool
             }
 
             return fullFile.Substring(fullDirectory.Length + 1);
+        }
+
+        public static FileStream TryOpenDataFile(string filename)
+        {
+            string path = null;
+            if (File.Exists(filename)) path = filename;
+
+            var localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", filename);
+            if (File.Exists(localPath)) path = localPath;
+
+            if (path == null) return null;
+            return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        }
+
+        public static FileStream OpenDataFile(string filename)
+        {
+            return TryOpenDataFile(filename) ?? throw new FileNotFoundException($"Could not find data file {filename}", filename);
         }
     }
 }

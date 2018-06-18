@@ -38,7 +38,7 @@ namespace XbTool.CodeGen
             sb.AppendLine();
             sb.AppendLine("using System;");
             sb.AppendLine();
-            sb.AppendLine("using XbTool.Types");
+            sb.AppendLine("namespace XbTool.Types");
             sb.AppendLineAndIncrease("{");
 
             for (int i = 0; i < info.Types.Length; i++)
@@ -88,26 +88,42 @@ namespace XbTool.CodeGen
 
             foreach (var bdatRef in type.TableRefs)
             {
+                bdatRef.Member = type.Members.First(x => x.Name == bdatRef.Field);
+                string itemType = "";
+                string itemName = bdatRef.Field;
+
                 switch (bdatRef.Type)
                 {
                     case BdatFieldType.Reference:
                     case BdatFieldType.Message:
-                        sb.AppendLine($"public {bdatRef.ChildType} _{bdatRef.Field};");
+                        itemType = bdatRef.ChildType;
                         break;
                     case BdatFieldType.Item:
                     case BdatFieldType.Task:
                     case BdatFieldType.Condition:
-                        sb.AppendLine($"public object _{bdatRef.Field};");
+                        itemType = "object";
                         break;
                     case BdatFieldType.Enum:
-                        sb.AppendLine($"public {bdatRef.EnumType.Name} _{bdatRef.Field};");
+                        itemType = bdatRef.EnumType.Name;
                         break;
                     default:
                         if (bdatRef.EnumType != null)
                         {
-                            sb.AppendLine($"public {bdatRef.EnumType.Name} _{bdatRef.Field};");
+                            itemType = bdatRef.EnumType.Name;
                         }
                         break;
+                }
+
+                switch (bdatRef.Member.Type)
+                {
+                    case BdatMemberType.Scalar:
+                        sb.AppendLine($"public {itemType} _{itemName};");
+                        break;
+                    case BdatMemberType.Array:
+                        sb.AppendLine($"public {itemType}[] _{itemName} = new {itemType}[{bdatRef.Member.ArrayCount}];");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
@@ -128,7 +144,7 @@ namespace XbTool.CodeGen
             sb.AppendLine("// ReSharper disable UseObjectOrCollectionInitializer");
             sb.AppendLine("// ReSharper disable UnusedParameter.Global").AppendLine();
             sb.AppendLine("using System;");
-            sb.AppendLine("using XbTool.Types").AppendLine();
+            sb.AppendLine("using XbTool.Types;").AppendLine();
             sb.AppendLine("namespace XbTool.Serialization");
             sb.AppendLineAndIncrease("{");
             sb.AppendLine("public static class ReadFunctions");
@@ -200,32 +216,58 @@ namespace XbTool.CodeGen
             sb.AppendLineAndIncrease("{");
             foreach (var fieldRef in table.TableRefs.OrderBy(x => x.Field))
             {
-                switch (fieldRef.Type)
+                if (fieldRef.Member?.Type == BdatMemberType.Array)
                 {
-                    case BdatFieldType.Reference:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
-                        break;
-                    case BdatFieldType.Message:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
-                        break;
-                    case BdatFieldType.Item:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetItem(item.{PrintFieldRefId(fieldRef)});");
-                        break;
-                    case BdatFieldType.Task:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetTask((TaskType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
-                        break;
-                    case BdatFieldType.Condition:
-                        sb.AppendLine($"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
-                        break;
-                    case BdatFieldType.Enum:
-                        sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{fieldRef.Field};");
-                        break;
-                    default:
-                        if (fieldRef.EnumType != null)
-                        {
-                            sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{PrintFieldRefId(fieldRef)};");
-                        }
-                        break;
+                    sb.AppendLine($"for (int i = 0; i < {fieldRef.Member.ArrayCount}; i++)");
+                    sb.AppendLineAndIncrease("{");
+
+                    switch (fieldRef.Type)
+                    {
+                        case BdatFieldType.Reference:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field}[i] = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)}[i]);");
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                    sb.DecreaseAndAppendLine("}");
+                }
+                else
+                {
+                    switch (fieldRef.Type)
+                    {
+                        case BdatFieldType.Reference:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
+                            break;
+                        case BdatFieldType.Message:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
+                            break;
+                        case BdatFieldType.Item:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field} = tables.GetItem(item.{PrintFieldRefId(fieldRef)});");
+                            break;
+                        case BdatFieldType.Task:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field} = tables.GetTask((TaskType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
+                            break;
+                        case BdatFieldType.Condition:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field} = tables.GetCondition((ConditionType)item.{fieldRef.RefField}, item.{PrintFieldRefId(fieldRef)});");
+                            break;
+                        case BdatFieldType.Enum:
+                            sb.AppendLine($"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{fieldRef.Field};");
+                            break;
+                        default:
+                            if (fieldRef.EnumType != null)
+                            {
+                                sb.AppendLine(
+                                    $"item._{fieldRef.Field} = ({fieldRef.EnumType.Name})item.{PrintFieldRefId(fieldRef)};");
+                            }
+
+                            break;
+                    }
                 }
             }
 
@@ -289,7 +331,7 @@ namespace XbTool.CodeGen
             sb.AppendLine("// ReSharper disable UnusedMember.Global").AppendLine();
             sb.AppendLine("using System;");
             sb.AppendLine("using XbTool.Bdat;").AppendLine();
-            sb.AppendLine("using XbTool.Types");
+            sb.AppendLine("namespace XbTool.Types");
             sb.AppendLineAndIncrease("{");
             sb.AppendLine("[Serializable]");
             sb.AppendLine("public class BdatCollection");

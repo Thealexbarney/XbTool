@@ -7,7 +7,7 @@ using CsvHelper.Configuration;
 using XbTool.Bdat;
 using XbTool.Types;
 
-namespace XbTool
+namespace XbTool.Xb2
 {
     public static class Achievements
     {
@@ -42,8 +42,8 @@ namespace XbTool
                 if (quest == null) continue;
 
                 FLD_QuestTask task = quest._NextQuestA._PurposeID;
-                int ideaPoints = quest._RewardSetA.IdeaValue;
-                var ideaCategory = (IdeaCategory)quest._RewardSetA.IdeaCategory;
+                int ideaPoints = quest._RewardSetA?.IdeaValue ?? 0;
+                var ideaCategory = (IdeaCategory)(quest._RewardSetA?.IdeaCategory ?? 0);
 
                 output.IdeaCategory = ideaPoints > 0 ? ideaCategory.ToString() : "";
                 output.IdeaPoints = ideaPoints > 0 ? ideaPoints.ToString() : "";

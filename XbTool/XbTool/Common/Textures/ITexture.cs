@@ -1,4 +1,4 @@
-﻿namespace XbTool.Textures
+﻿namespace XbTool.Common.Textures
 {
     public interface ITexture
     {

@@ -1,4 +1,6 @@
-﻿namespace XbTool
+﻿using XbTool.Common;
+
+namespace XbTool
 {
     public class Options
     {
@@ -11,6 +13,7 @@
         public string Output { get; set; }
         public string Filter { get; set; }
         public string Xb2Dir { get; set; }
+        public IProgressReport Progress { get; set; }
     }
 
     public enum Task
@@ -31,6 +34,7 @@
         ReadScript,
         DecodeCatex,
         ExtractMinimap,
-        GenerateSite
+        GenerateSite,
+        ExportQuests
     }
 }

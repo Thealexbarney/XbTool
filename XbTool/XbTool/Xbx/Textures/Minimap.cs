@@ -4,7 +4,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using XbTool.Textures;
+using XbTool.Common;
+using XbTool.Common.Textures;
 
 namespace XbTool.Xbx.Textures
 {
@@ -54,7 +55,7 @@ namespace XbTool.Xbx.Textures
         private static byte[] StitchMap(Map map)
         {
             var defaultSegFile = File.ReadAllBytes(map.DefaultSegment.Filename);
-            var defaultSeg = new Texture(new DataBuffer(defaultSegFile, Game.XBX, 0)).ToBitmap();
+            var defaultSeg = new MtxtTexture(new DataBuffer(defaultSegFile, Game.XBX, 0)).ToBitmap();
 
             using (var bitmap = new Bitmap(map.Width * 256, map.Height * 256, PixelFormat.Format32bppArgb))
             using (Graphics img = Graphics.FromImage(bitmap))
@@ -70,7 +71,7 @@ namespace XbTool.Xbx.Textures
                 foreach (var seg in map.Segments)
                 {
                     var segFile = File.ReadAllBytes(seg.Filename);
-                    var segmentTex = new Texture(new DataBuffer(segFile, Game.XBX, 0));
+                    var segmentTex = new MtxtTexture(new DataBuffer(segFile, Game.XBX, 0));
                     var segBitmap = segmentTex.ToBitmap();
                     img.DrawImage(segBitmap, seg.X * 256, seg.Y * 256);
                 }

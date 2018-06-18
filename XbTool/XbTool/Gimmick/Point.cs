@@ -1,4 +1,6 @@
-﻿namespace XbTool.Gimmick
+﻿using XbTool.Common;
+
+namespace XbTool.Gimmick
 {
     public class Point3
     {

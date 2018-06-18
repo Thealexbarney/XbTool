@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public class DataBuffer
     {

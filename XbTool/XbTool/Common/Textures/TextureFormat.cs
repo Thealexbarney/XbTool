@@ -1,5 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
-namespace XbTool.Textures
+namespace XbTool.Common.Textures
 {
     public enum TextureFormat
     {

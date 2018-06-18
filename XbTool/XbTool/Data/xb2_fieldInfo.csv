@@ -79,6 +79,9 @@ BTL_ChBtl,TresureResource*,Reference,RSC_TboxList,,0,
 BTL_ChBtl,TresureSet*,Reference,BTL_ChBtlRewardSet,,0,
 BTL_ChBtl,WpnRevTable,Reference,BTL_ChBtlWpnRev,,0,
 BTL_ChBtlRewardItem,ItemID,Item,,,0,
+BTL_ChBtlRewardSet,AppointItem,Item,,,0,
+BTL_ChBtlRewardSet,DownCategory*,Enum,,,0,ItemType
+BTL_ChBtlRewardSet,UpCategory*,Enum,,,0,ItemType
 BTL_ChBtlRewardSet,UpItemID*,Item,,,0,
 BTL_Class,Name,Message,btl_class_ms,,0,
 BTL_Class,Role*,Message,menu_role_name_ms,,0,
@@ -536,6 +539,7 @@ ma*_FLD_LandmarkPop,category,Enum,,,0,LandmarkType
 ma*_FLD_LandmarkPop,cndID,Reference,FLD_ConditionList,,0,
 ma*_FLD_LandmarkPop,MAPJUMPID,Reference,SYS_MapJumpList,,0,
 ma*_FLD_LandmarkPop,menuGroup,Reference,MNU_MapGroup,,0,
+ma*_FLD_LandmarkPop,menuMapImage,Reference,MNU_MapInfo,,0,
 ma*_FLD_LandmarkPop,MSGID,Message,fld_landmark,,0,
 ma*_FLD_LandmarkPop,stoff_cndID,Reference,FLD_ConditionList,,0,
 ma*_FLD_MobPop,Condition,Reference,FLD_ConditionList,,0,

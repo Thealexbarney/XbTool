@@ -1,6 +1,7 @@
 ﻿using System;
+using XbTool.Common.Textures;
 
-namespace XbTool.Textures
+namespace XbTool.Xb2.Textures
 {
     public static class Swizzle
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using XbTool.Bdat;
 using XbTool.BdatString;
+using XbTool.Common;
 
 namespace XbTool.Serialization
 {

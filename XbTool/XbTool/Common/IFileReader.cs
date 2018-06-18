@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XbTool
+namespace XbTool.Common
 {
     public interface IFileReader
     {

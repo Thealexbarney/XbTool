@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using XbTool.Common;
 
 namespace XbTool.Bdat
 {

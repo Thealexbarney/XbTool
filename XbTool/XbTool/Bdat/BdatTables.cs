@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using XbTool.CodeGen;
+using XbTool.Common;
 
 namespace XbTool.Bdat
 {
