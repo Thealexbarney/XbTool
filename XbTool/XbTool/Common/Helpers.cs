@@ -43,10 +43,15 @@ namespace XbTool.Common
         public static FileStream TryOpenDataFile(string filename)
         {
             string path = null;
-            if (File.Exists(filename)) path = filename;
-
-            var localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", filename);
-            if (File.Exists(localPath)) path = localPath;
+            if (File.Exists(filename))
+            {
+                path = filename;
+            }
+            else
+            {
+                var localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", filename);
+                if (File.Exists(localPath)) path = localPath;
+            }
 
             if (path == null) return null;
             return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

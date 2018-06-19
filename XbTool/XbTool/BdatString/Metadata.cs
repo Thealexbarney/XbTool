@@ -157,7 +157,7 @@ namespace XbTool.BdatString
 
             void ApplyRef(string refTable)
             {
-                if (refTable == null || !tables[refTable].ContainsId(refId))
+                if (refTable == null || !tables.Tables.ContainsKey(refTable) || !tables[refTable].ContainsId(refId))
                 {
                     value.Display = refId == 0 ? null : refId.ToString();
                     return;

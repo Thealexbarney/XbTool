@@ -79,7 +79,7 @@ namespace XbTool.Bdat
             var itemOffset = ItemTableOffset + itemIndex * ItemSize;
             var valueOffset = itemOffset + member.MemberPos;
 
-            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadIntValue(valueOffset, member.ValType);
         }
 
@@ -90,7 +90,7 @@ namespace XbTool.Bdat
             var itemOffset = ItemTableOffset + itemIndex * ItemSize;
             var valueOffset = itemOffset + member.MemberPos;
 
-            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadFloatValue(valueOffset, member.ValType);
         }
 
@@ -101,7 +101,7 @@ namespace XbTool.Bdat
             var itemOffset = ItemTableOffset + itemIndex * ItemSize;
             var valueOffset = itemOffset + member.MemberPos;
 
-            if(member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
+            if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadStringValue(valueOffset, member.ValType);
         }
 
@@ -193,17 +193,19 @@ namespace XbTool.Bdat
         }
     }
 
-    public class BdatTable<T> : IBdatTable, IReadOnlyList<T> where T : class
+    public class BdatTable<T> : IBdatTable, IReadOnlyList<T> where T : BdatItem
     {
         public string Name { get; set; }
         public int BaseId { get; set; }
         public BdatMember[] Members { get; set; }
         public T[] Items { get; set; }
+
         public T this[int itemId] => Items[itemId - BaseId];
         public T GetItemOrNull(int itemId) => ContainsId(itemId) ? this[itemId] : null;
         public T GetItemOrNull(uint itemId) => GetItemOrNull((int)itemId);
         public Type ItemType { get; } = typeof(T);
         Array IBdatTable.Items { get => Items; set => Items = (T[])value; }
+        public BdatItem GetBdatItem(int itemId) => this[itemId];
 
         public bool ContainsId(int itemId)
         {
@@ -223,5 +225,16 @@ namespace XbTool.Bdat
         BdatMember[] Members { get; set; }
         Type ItemType { get; }
         Array Items { get; set; }
+        BdatItem GetBdatItem(int itemId);
+    }
+
+    public abstract class BdatItem
+    {
+        public int Id { get; set; }
+
+        public T Read<T>(string member) => (T)GetType().GetField(member).GetValue(this);
+        public long ReadInt(string member) => (long)GetType().GetField(member).GetValue(this);
+        public float ReadFloat(string member) => (float)GetType().GetField(member).GetValue(this);
+        public string ReadString(string member) => (string)GetType().GetField(member).GetValue(this);
     }
 }

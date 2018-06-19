@@ -9198,6 +9198,30 @@ namespace XbTool.Serialization
                 item._TresureSet2 = tables.BTL_ChBtlRewardSet.GetItemOrNull(item.TresureSet2);
                 item._TresureSet3 = tables.BTL_ChBtlRewardSet.GetItemOrNull(item.TresureSet3);
                 item._WpnRevTable = tables.BTL_ChBtlWpnRev.GetItemOrNull(item.WpnRevTable);
+                item._Driver = new[]
+                {
+                    item._Driver1,
+                    item._Driver2,
+                    item._Driver3
+                };
+                item._TresureNeed = new[]
+                {
+                    item.TresureNeed1,
+                    item.TresureNeed2,
+                    item.TresureNeed3
+                };
+                item._TresureResource = new[]
+                {
+                    item._TresureResource1,
+                    item._TresureResource2,
+                    item._TresureResource3
+                };
+                item._TresureSet = new[]
+                {
+                    item._TresureSet1,
+                    item._TresureSet2,
+                    item._TresureSet3
+                };
             }
 
             foreach (BTL_ChBtlRewardItem item in tables.BTL_ChBtlRewardItem.Items)

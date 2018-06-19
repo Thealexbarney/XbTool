@@ -2,23 +2,22 @@
 // ReSharper disable NotAccessedField.Global
 
 using System;
+using XbTool.Bdat;
 
 namespace XbTool.Types
 {
     [BdatType]
     [Serializable]
-    public class BdatEnum
+    public class BdatEnum : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
     }
 
     [BdatType]
     [Serializable]
-    public class BdatStateEnum
+    public class BdatStateEnum : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string stat;
@@ -26,17 +25,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BdatValue
+    public class BdatValue : BdatItem
     {
-        public int Id;
         public uint Value;
     }
 
     [BdatType]
     [Serializable]
-    public class BLD_BladeList
+    public class BLD_BladeList : BdatItem
     {
-        public int Id;
         public byte Category;
         public ushort StatusID;
         public CHR_Bl _StatusID;
@@ -44,9 +41,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_BladeModelList
+    public class BLD_BladeModelList : BdatItem
     {
-        public int Id;
         public byte QuestRace;
         public byte Gender;
         public byte IdeaMin;
@@ -66,9 +62,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_BladeTable
+    public class BLD_BladeTable : BdatItem
     {
-        public int Id;
         public ushort CharaID1;
         public byte CharID1Percent;
         public ushort CharaID2;
@@ -105,9 +100,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_CommonList
+    public class BLD_CommonList : BdatItem
     {
-        public int Id;
         public byte QuestRace;
         public byte Gender;
         public uint Weapon;
@@ -151,9 +145,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_Idea
+    public class BLD_Idea : BdatItem
     {
-        public int Id;
         public uint NeedPoint;
         public ushort ProbRev;
         public ushort AtrDamRev;
@@ -161,9 +154,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_IdeaTable
+    public class BLD_IdeaTable : BdatItem
     {
-        public int Id;
         public ushort Item;
         public byte IdeaBlue;
         public byte IdeaRed;
@@ -175,9 +167,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_NameList
+    public class BLD_NameList : BdatItem
     {
-        public int Id;
         public ushort Category;
         public byte Race;
         public byte Gender;
@@ -195,9 +186,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_RareList
+    public class BLD_RareList : BdatItem
     {
-        public int Id;
         public ushort Blade;
         public ushort Condition;
         public float Prob1;
@@ -216,9 +206,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BLD_ReleaceReward
+    public class BLD_ReleaceReward : BdatItem
     {
-        public int Id;
         public ushort Releace001;
         public ushort Releace002;
         public ushort Releace003;
@@ -230,17 +219,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Ai
+    public class BTL_Ai : BdatItem
     {
-        public int Id;
         public string Script;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_Bl
+    public class BTL_Arts_Bl : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Caption;
@@ -444,9 +431,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_Bl_Cam
+    public class BTL_Arts_Bl_Cam : BdatItem
     {
-        public int Id;
         public byte Camera1;
         public byte Camera2;
         public byte Camera3;
@@ -460,9 +446,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_BlSp
+    public class BTL_Arts_BlSp : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Caption;
@@ -666,9 +651,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_BlSpVo
+    public class BTL_Arts_BlSpVo : BdatItem
     {
-        public int Id;
         public byte Talker1;
         public byte MotionNum1;
         public short Motionf1;
@@ -705,9 +689,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_Dr
+    public class BTL_Arts_Dr : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Caption;
@@ -925,9 +908,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Arts_En
+    public class BTL_Arts_En : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte WpnNo;
@@ -1075,9 +1057,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ArtsDirection
+    public class BTL_ArtsDirection : BdatItem
     {
-        public int Id;
         public byte MotionNo1;
         public ushort Startf1;
         public ushort Keepf1;
@@ -1098,9 +1079,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Aura
+    public class BTL_Aura : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Enhance1;
@@ -1116,9 +1096,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_BallBreak
+    public class BTL_BallBreak : BdatItem
     {
-        public int Id;
         public ushort DamageRate;
         public ushort FBGauge;
         public ushort FBBonus;
@@ -1129,9 +1108,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bl_KizunaBase
+    public class BTL_Bl_KizunaBase : BdatItem
     {
-        public int Id;
         public ushort KizunaDef;
         public sbyte KizunaUpRev;
         public sbyte KizunaDownRev;
@@ -1139,9 +1117,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bl_KizunaLink
+    public class BTL_Bl_KizunaLink : BdatItem
     {
-        public int Id;
         public ushort LinkNum;
         public ushort DeadNum;
         public ushort AppStNum;
@@ -1157,9 +1134,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bl_KizunaLinkSet
+    public class BTL_Bl_KizunaLinkSet : BdatItem
     {
-        public int Id;
         public ushort KizunaLink1;
         public ushort KizunaLink2;
         public ushort LinkChType;
@@ -1171,9 +1147,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bl_KizunaUpDown
+    public class BTL_Bl_KizunaUpDown : BdatItem
     {
-        public int Id;
         public short ParamE;
         public short ParamD;
         public short ParamC;
@@ -1195,9 +1170,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bl_Personality
+    public class BTL_Bl_Personality : BdatItem
     {
-        public int Id;
         public byte Flag;
         public byte KizunaBase;
         public byte VoiceID;
@@ -1219,9 +1193,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_BtnChallenge
+    public class BTL_BtnChallenge : BdatItem
     {
-        public int Id;
         public ushort Speed;
         public ushort GSuccess;
         public ushort Success;
@@ -1230,9 +1203,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Buff
+    public class BTL_Buff : BdatItem
     {
-        public int Id;
         public byte Name;
         public string DebugName;
         public byte Caption;
@@ -1253,9 +1225,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Bullet
+    public class BTL_Bullet : BdatItem
     {
-        public int Id;
         public byte MoveType;
         public ushort SpdFirst;
         public ushort SpdLast;
@@ -1275,9 +1246,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_BulletEffect
+    public class BTL_BulletEffect : BdatItem
     {
-        public int Id;
         public byte Flag;
         public byte EffPack;
         public byte WpnType;
@@ -1296,9 +1266,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChainAttackCam
+    public class BTL_ChainAttackCam : BdatItem
     {
-        public int Id;
         public byte CamType;
         public byte EnSize;
         public byte SpeedType;
@@ -1322,9 +1291,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChainAttackFull
+    public class BTL_ChainAttackFull : BdatItem
     {
-        public int Id;
         public string Wpn01;
         public string Wpn02;
         public string Wpn03;
@@ -1357,9 +1325,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChainAttackStart
+    public class BTL_ChainAttackStart : BdatItem
     {
-        public int Id;
         public string Wpn01;
         public string Wpn01b;
         public string Wpn02;
@@ -1411,9 +1378,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChBtl
+    public class BTL_ChBtl : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte ListNum;
@@ -1465,13 +1431,16 @@ namespace XbTool.Types
         public BTL_ChBtlRewardSet _TresureSet2;
         public BTL_ChBtlRewardSet _TresureSet3;
         public BTL_ChBtlWpnRev _WpnRevTable;
+        public CHR_Dr[] _Driver;
+        public BTL_ChBtlRewardSet[] _TresureSet;
+        public ushort[] _TresureNeed;
+        public RSC_TboxList[] _TresureResource;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_ChBtlRewardItem
+    public class BTL_ChBtlRewardItem : BdatItem
     {
-        public int Id;
         public ushort ItemID;
         public ushort ItemValue;
         public ushort Param1;
@@ -1480,9 +1449,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChBtlRewardSet
+    public class BTL_ChBtlRewardSet : BdatItem
     {
-        public int Id;
         public uint GoldMin;
         public uint GoldMax;
         public byte GoldPopMin;
@@ -1520,9 +1488,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChBtlScore
+    public class BTL_ChBtlScore : BdatItem
     {
-        public int Id;
         public ushort Score;
         public ushort Cube;
         public byte CubeDiv;
@@ -1530,9 +1497,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ChBtlWpnRev
+    public class BTL_ChBtlWpnRev : BdatItem
     {
-        public int Id;
         public ushort WpnDmg1;
         public ushort WpnDmg2;
         public ushort WpnDmg3;
@@ -1563,9 +1529,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Circle
+    public class BTL_Circle : BdatItem
     {
-        public int Id;
         public byte Point;
         public byte Radius;
         public ushort Damage;
@@ -1579,9 +1544,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Class
+    public class BTL_Class : BdatItem
     {
-        public int Id;
         public ushort Name;
         public byte Role1;
         public byte Role2;
@@ -1607,9 +1571,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_CmnBl_Armor
+    public class BTL_CmnBl_Armor : BdatItem
     {
-        public int Id;
         public byte WpnType;
         public byte PArmorCon;
         public byte PArmorRand;
@@ -1620,9 +1583,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_CmnBl_Capacity
+    public class BTL_CmnBl_Capacity : BdatItem
     {
-        public int Id;
         public byte ArtsLv1Prob;
         public byte ArtsLv2Prob;
         public byte ArtsLv3Prob;
@@ -1664,9 +1626,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_CmnBl_NewBlArts
+    public class BTL_CmnBl_NewBlArts : BdatItem
     {
-        public int Id;
         public byte WpnType;
         public byte NBA_01;
         public byte NBA_02;
@@ -1682,9 +1643,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_CmnBl_Power
+    public class BTL_CmnBl_Power : BdatItem
     {
-        public int Id;
         public byte MinLv;
         public byte MaxLv;
         public ushort Pow01;
@@ -1702,9 +1662,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_CmnBl_StatusType
+    public class BTL_CmnBl_StatusType : BdatItem
     {
-        public int Id;
         public byte WpnType;
         public byte Status01;
         public byte Status02;
@@ -1718,9 +1677,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Condition
+    public class BTL_Condition : BdatItem
     {
-        public int Id;
         public ushort FLD_CondID;
         public ushort Param01;
         public ushort FLD_CondID2;
@@ -1730,9 +1688,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_DifSetting
+    public class BTL_DifSetting : BdatItem
     {
-        public int Id;
         public string DebugName;
         public byte ParamMin;
         public ushort ParamMax;
@@ -1750,9 +1707,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Dr_IdeaUpType
+    public class BTL_Dr_IdeaUpType : BdatItem
     {
-        public int Id;
         public byte IdeaBlue;
         public byte IdeaRed;
         public byte IdeaWhite;
@@ -1761,9 +1717,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Drop_Heal
+    public class BTL_Drop_Heal : BdatItem
     {
-        public int Id;
         public byte RatioDeath;
         public byte PotNumMin1;
         public byte PotNumMax1;
@@ -1788,9 +1743,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ElementalCombo
+    public class BTL_ElementalCombo : BdatItem
     {
-        public int Id;
         public byte Name;
         public string DebugName;
         public byte Caption;
@@ -1887,9 +1841,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_ElementalEffect
+    public class BTL_ElementalEffect : BdatItem
     {
-        public int Id;
         public byte Name;
         public string DebugName;
         public byte Caption;
@@ -1903,9 +1856,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnAwake
+    public class BTL_EnAwake : BdatItem
     {
-        public int Id;
         public ushort Name;
         public byte NormalProb;
         public byte AngryProb;
@@ -1916,9 +1868,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnBook
+    public class BTL_EnBook : BdatItem
     {
-        public int Id;
         public ushort BaseEnemyID;
         public uint BOOK_POP_TIME;
         public byte BOOK_popWeather;
@@ -1927,9 +1878,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EndEvent
+    public class BTL_EndEvent : BdatItem
     {
-        public int Id;
         public ushort Condition;
         public byte StandDeadVoice;
         public ushort StandBossID;
@@ -1941,9 +1891,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnDropItem
+    public class BTL_EnDropItem : BdatItem
     {
-        public int Id;
         public byte LimitNum;
         public byte SelectType;
         public ushort ItemID1;
@@ -1990,9 +1939,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnDropQuest
+    public class BTL_EnDropQuest : BdatItem
     {
-        public int Id;
         public ushort ItemID1;
         public ushort DropProb1;
         public ushort GetConditon1;
@@ -2017,9 +1965,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Enhance
+    public class BTL_Enhance : BdatItem
     {
-        public int Id;
         public ushort EnhanceEffect;
         public float Param1;
         public float Param2;
@@ -2029,9 +1976,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnhanceEff
+    public class BTL_EnhanceEff : BdatItem
     {
-        public int Id;
         public byte Category;
         public byte Icon;
         public byte Flag;
@@ -2047,17 +1993,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_EnhanceMax
+    public class BTL_EnhanceMax : BdatItem
     {
-        public int Id;
         public ushort Max;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_FightCombo
+    public class BTL_FightCombo : BdatItem
     {
-        public int Id;
         public byte Name;
         public string DebugName;
         public byte ComboStage;
@@ -2075,9 +2019,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Grow
+    public class BTL_Grow : BdatItem
     {
-        public int Id;
         public uint LevelExp;
         public uint LevelExp2;
         public ushort EnemyExp;
@@ -2089,9 +2032,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HanaBase
+    public class BTL_HanaBase : BdatItem
     {
-        public int Id;
         public byte NCondNum;
         public byte ECondNum;
         public byte NArtsNum;
@@ -2106,9 +2048,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HanaChipset
+    public class BTL_HanaChipset : BdatItem
     {
-        public int Id;
         public ushort RoleParts;
         public ushort AtrParts;
         public ushort NArtsParts1;
@@ -2127,9 +2068,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HanaPower
+    public class BTL_HanaPower : BdatItem
     {
-        public int Id;
         public ushort PowerNum1;
         public ushort PowerNum2;
         public ushort PowerNum3;
@@ -2140,9 +2080,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HealPot
+    public class BTL_HealPot : BdatItem
     {
-        public int Id;
         public byte DropRsc;
         public byte HpRatio;
         public string Category;
@@ -2150,9 +2089,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HitCameraParam
+    public class BTL_HitCameraParam : BdatItem
     {
-        public int Id;
         public byte type;
         public byte sub_type;
         public byte param01;
@@ -2163,9 +2101,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HitDirection
+    public class BTL_HitDirection : BdatItem
     {
-        public int Id;
         public byte DirectType;
         public byte DirectFrm;
         public byte CamType;
@@ -2174,9 +2111,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HitEffect
+    public class BTL_HitEffect : BdatItem
     {
-        public int Id;
         public short x0;
         public short y0;
         public short z0;
@@ -2231,17 +2167,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_HitEffectRim
+    public class BTL_HitEffectRim : BdatItem
     {
-        public int Id;
         public string RimName;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_IrGroupRev
+    public class BTL_IrGroupRev : BdatItem
     {
-        public int Id;
         public byte GroupRev1;
         public byte GroupRev2;
         public byte GroupRev3;
@@ -2252,9 +2186,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Kizuna
+    public class BTL_Kizuna : BdatItem
     {
-        public int Id;
         public ushort KizunaMin;
         public ushort KizunaMax;
         public ushort BArtsProbRev;
@@ -2266,9 +2199,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Lv_Rev
+    public class BTL_Lv_Rev : BdatItem
     {
-        public int Id;
         public ushort ExpRevHigh;
         public ushort ExpRevLow;
         public ushort DamageRevHigh;
@@ -2279,9 +2211,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_MapRev
+    public class BTL_MapRev : BdatItem
     {
-        public int Id;
         public ushort Flag;
         public ushort KizunaCap;
         public byte ArtSp;
@@ -2317,34 +2248,30 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_NamedList
+    public class BTL_NamedList : BdatItem
     {
-        public int Id;
         public ushort EnemyID;
         public CHR_EnArrange _EnemyID;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_PartyGauge
+    public class BTL_PartyGauge : BdatItem
     {
-        public int Id;
         public short Param;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_Points
+    public class BTL_Points : BdatItem
     {
-        public int Id;
         public ushort Point;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_PouchBuff
+    public class BTL_PouchBuff : BdatItem
     {
-        public int Id;
         public ushort Max;
         public byte Name;
         public Message _Name;
@@ -2352,9 +2279,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_PouchBuffSet
+    public class BTL_PouchBuffSet : BdatItem
     {
-        public int Id;
         public byte PBuff1;
         public float PBuffParam1;
         public byte PBuff2;
@@ -2365,9 +2291,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Reaction
+    public class BTL_Reaction : BdatItem
     {
-        public int Id;
         public byte Name;
         public string DebugName;
         public byte Priority;
@@ -2400,9 +2325,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_SE
+    public class BTL_SE : BdatItem
     {
-        public int Id;
         public string PackName;
         public string tag;
         public byte delivered;
@@ -2410,9 +2334,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Siren
+    public class BTL_Siren : BdatItem
     {
-        public int Id;
         public ushort ArrangeID;
         public ushort Gun;
         public ushort Lance;
@@ -2437,9 +2360,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_SirenPos
+    public class BTL_SirenPos : BdatItem
     {
-        public int Id;
         public byte situation;
         public string camera;
         public ushort Wpos;
@@ -2448,9 +2370,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Skill_Bl
+    public class BTL_Skill_Bl : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Enhance1;
@@ -2477,9 +2398,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Skill_Dr
+    public class BTL_Skill_Dr : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Enhance;
@@ -2490,9 +2410,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Skill_Dr_Table
+    public class BTL_Skill_Dr_Table : BdatItem
     {
-        public int Id;
         public ushort SkillID;
         public ushort NeedSp;
         public byte Round;
@@ -2503,18 +2422,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_SpArtsRecast
+    public class BTL_SpArtsRecast : BdatItem
     {
-        public int Id;
         public byte Param;
         public byte Param2;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_Summon
+    public class BTL_Summon : BdatItem
     {
-        public int Id;
         public byte SummonType;
         public ushort LimitRad;
         public byte Num;
@@ -2529,18 +2446,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_SystemBalance
+    public class BTL_SystemBalance : BdatItem
     {
-        public int Id;
         public short Param;
         public byte Decimal;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_TestSetting
+    public class BTL_TestSetting : BdatItem
     {
-        public int Id;
         public byte Dr1;
         public byte Dr1Lv;
         public ushort Dr1Bl1;
@@ -2560,9 +2475,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_UCDirect
+    public class BTL_UCDirect : BdatItem
     {
-        public int Id;
         public byte Slow;
         public byte Slowf;
         public byte Camera;
@@ -2575,9 +2489,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_UniteCombo
+    public class BTL_UniteCombo : BdatItem
     {
-        public int Id;
         public byte StageSum;
         public byte NorDamageBonus;
         public byte NorTimeBonus;
@@ -2591,25 +2504,22 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_VolumeFade
+    public class BTL_VolumeFade : BdatItem
     {
-        public int Id;
         public string VolumeName;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_VtxParticle
+    public class BTL_VtxParticle : BdatItem
     {
-        public int Id;
         public string Name;
     }
 
     [BdatType]
     [Serializable]
-    public class BTL_Wpn_En
+    public class BTL_Wpn_En : BdatItem
     {
-        public int Id;
         public ushort RscR;
         public ushort RscL;
         public byte TypeRange;
@@ -2621,9 +2531,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CAM_MaxLevel
+    public class CAM_MaxLevel : BdatItem
     {
-        public int Id;
         public byte RevReset;
         public byte RevAuto;
         public byte RotSpeed;
@@ -2632,9 +2541,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CAM_Params
+    public class CAM_Params : BdatItem
     {
-        public int Id;
         public byte RevReset;
         public byte RevAuto;
         public byte YawRotSpeed;
@@ -2644,9 +2552,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_Bl
+    public class CHR_Bl : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte Race;
@@ -2824,9 +2731,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_Dr
+    public class CHR_Dr : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte Race;
@@ -2910,9 +2816,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_DriverParam
+    public class CHR_DriverParam : BdatItem
     {
-        public int Id;
         public ushort ExtMountNpc;
         public string ExtMountBone;
         public ushort ExtMountCond;
@@ -2922,9 +2827,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_EnArrange
+    public class CHR_EnArrange : BdatItem
     {
-        public int Id;
         public ushort ParamID;
         public ushort EnemyBladeID;
         public ushort BladeID;
@@ -3021,9 +2925,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_EnParam
+    public class CHR_EnParam : BdatItem
     {
-        public int Id;
         public string Debug_Name;
         public ushort ResourceID;
         public ushort AiID;
@@ -3119,9 +3022,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_EnParam_Rev
+    public class CHR_EnParam_Rev : BdatItem
     {
-        public int Id;
         public ushort HpMaxRev;
         public ushort StrengthRev;
         public ushort PowEtherRev;
@@ -3132,9 +3034,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_EnParamTable
+    public class CHR_EnParamTable : BdatItem
     {
-        public int Id;
         public uint HpMaxBase;
         public ushort StrengthBase;
         public ushort PowEtherBase;
@@ -3145,9 +3046,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_EnRstDebuff_Rev
+    public class CHR_EnRstDebuff_Rev : BdatItem
     {
-        public int Id;
         public byte RevType;
         public ushort RstFiCombo;
         public ushort IvdFiCombo;
@@ -3158,9 +3058,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class CHR_Ir
+    public class CHR_Ir : BdatItem
     {
-        public int Id;
         public ushort driverID;
         public byte Type;
         public byte GroupID;
@@ -3183,9 +3082,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class COL_CharList
+    public class COL_CharList : BdatItem
     {
-        public int Id;
         public ushort Radius;
         public ushort Height;
         public short X;
@@ -3195,9 +3093,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EFF_KizunaLink
+    public class EFF_KizunaLink : BdatItem
     {
-        public int Id;
         public short WavePower;
         public short WaveInterval;
         public short WaveSpeed;
@@ -3219,9 +3116,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EventChange
+    public class EventChange : BdatItem
     {
-        public int Id;
         public string chgName;
         public sbyte chgType;
         public int id;
@@ -3233,9 +3129,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EventGroup
+    public class EventGroup : BdatItem
     {
-        public int Id;
         public string grpName;
         public string grpNameJP;
         public byte atrDisp;
@@ -3249,9 +3144,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_acttype
+    public class EVT_acttype : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string stat0;
@@ -3265,18 +3159,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_assetList
+    public class EVT_assetList : BdatItem
     {
-        public int Id;
         public string facialSeat;
         public short lensID;
     }
 
     [BdatType]
     [Serializable]
-    public class EVT_bgm
+    public class EVT_bgm : BdatItem
     {
-        public int Id;
         public string nodeName;
         public string nodeNameJP;
         public byte nodeExtra;
@@ -3296,18 +3188,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_cutscene_bl
+    public class EVT_cutscene_bl : BdatItem
     {
-        public int Id;
         public string resource;
         public short id;
     }
 
     [BdatType]
     [Serializable]
-    public class EVT_cutscene_pc
+    public class EVT_cutscene_pc : BdatItem
     {
-        public int Id;
         public string resource;
         public short id;
         public int scenarioMin;
@@ -3316,9 +3206,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_cutscene_wp
+    public class EVT_cutscene_wp : BdatItem
     {
-        public int Id;
         public short id;
         public short blade;
         public string resourceR;
@@ -3329,9 +3218,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_dof
+    public class EVT_dof : BdatItem
     {
-        public int Id;
         public string name;
         public float dist;
         public float range;
@@ -3346,9 +3234,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_eyetype
+    public class EVT_eyetype : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string stat;
@@ -3357,17 +3244,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_facialtype
+    public class EVT_facialtype : BdatItem
     {
-        public int Id;
         public string name;
     }
 
     [BdatType]
     [Serializable]
-    public class EVT_formation
+    public class EVT_formation : BdatItem
     {
-        public int Id;
         public string name;
         public float ofsX;
         public float ofsZ;
@@ -3376,9 +3261,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_headtype
+    public class EVT_headtype : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string stat;
@@ -3388,9 +3272,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_lens
+    public class EVT_lens : BdatItem
     {
-        public int Id;
         public short thMin;
         public short thMax;
         public short tvMin;
@@ -3403,9 +3286,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_liptype
+    public class EVT_liptype : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string stat;
@@ -3414,9 +3296,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listBf
+    public class EVT_listBf : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3498,9 +3379,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listBl
+    public class EVT_listBl : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3575,9 +3455,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listDeb01
+    public class EVT_listDeb01 : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3662,9 +3541,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listFev01
+    public class EVT_listFev01 : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3747,9 +3625,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listList
+    public class EVT_listList : BdatItem
     {
-        public int Id;
         public byte type;
         public byte chap;
         public string listSeat;
@@ -3760,9 +3637,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listQst01
+    public class EVT_listQst01 : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3846,9 +3722,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_listTlk01
+    public class EVT_listTlk01 : BdatItem
     {
-        public int Id;
         public string evtName;
         public string mstxt;
         public ushort setupID;
@@ -3924,9 +3799,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_nearfar
+    public class EVT_nearfar : BdatItem
     {
-        public int Id;
         public string name;
         public float near;
         public float far;
@@ -3934,9 +3808,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_randtype
+    public class EVT_randtype : BdatItem
     {
-        public int Id;
         public string name;
         public short value;
         public string id;
@@ -3944,9 +3817,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_setup
+    public class EVT_setup : BdatItem
     {
-        public int Id;
         public string setupName;
         public string objName;
         public sbyte objType;
@@ -3957,9 +3829,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class EVT_setupB
+    public class EVT_setupB : BdatItem
     {
-        public int Id;
         public string setupName;
         public string objName;
         public byte objType;
@@ -3970,9 +3841,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FacialConfig
+    public class FacialConfig : BdatItem
     {
-        public int Id;
         public string name;
         public short brow_type;
         public float brow_weight;
@@ -3993,9 +3863,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_Achievement
+    public class FLD_Achievement : BdatItem
     {
-        public int Id;
         public ushort StatsID;
         public uint Count;
         public string DebugName;
@@ -4003,9 +3872,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_AchievementList
+    public class FLD_AchievementList : BdatItem
     {
-        public int Id;
         public ushort Title;
         public byte Category;
         public ushort Icon;
@@ -4020,9 +3888,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_AchievementSet
+    public class FLD_AchievementSet : BdatItem
     {
-        public int Id;
         public byte Category;
         public byte AbilityLevel;
         public ushort AchievementID1;
@@ -4040,9 +3907,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_actorSE
+    public class FLD_actorSE : BdatItem
     {
-        public int Id;
         public string LOD;
         public byte se_type;
         public ushort seName;
@@ -4057,9 +3923,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_AddItem
+    public class FLD_AddItem : BdatItem
     {
-        public int Id;
         public ushort ItemID1;
         public sbyte ItemNumber1;
         public ushort ItemID2;
@@ -4073,9 +3938,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_AntiBladeArea
+    public class FLD_AntiBladeArea : BdatItem
     {
-        public int Id;
         public string name;
         public ushort BTL_MapRevId;
         public BTL_MapRev _BTL_MapRevId;
@@ -4083,9 +3947,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_BattleChallange
+    public class FLD_BattleChallange : BdatItem
     {
-        public int Id;
         public string name;
         public ushort QuestFlag;
         public byte QuestFlagMin;
@@ -4097,9 +3960,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_BladePop
+    public class FLD_BladePop : BdatItem
     {
-        public int Id;
         public string name;
         public byte BladeSizeCheck;
         public ushort ScenarioFlagMin;
@@ -4122,9 +3984,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_BtnChallenge
+    public class FLD_BtnChallenge : BdatItem
     {
-        public int Id;
         public ushort Start;
         public ushort Speed;
         public ushort Gsuccess;
@@ -4133,9 +3994,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_CampPop
+    public class FLD_CampPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ConditionID;
         public ushort CampPointName;
@@ -4145,9 +4005,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ClimbingPOP
+    public class FLD_ClimbingPOP : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -4163,9 +4022,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_CollectionTable
+    public class FLD_CollectionTable : BdatItem
     {
-        public int Id;
         public ushort FSID;
         public byte randitmPopMin;
         public byte randitmPopMax;
@@ -4193,9 +4051,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionAchievement
+    public class FLD_ConditionAchievement : BdatItem
     {
-        public int Id;
         public ushort AchievementSetID;
         public byte Value;
         public FLD_AchievementSet _AchievementSetID;
@@ -4203,9 +4060,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionEnv
+    public class FLD_ConditionEnv : BdatItem
     {
-        public int Id;
         public uint TimeRange;
         public uint Weather;
         public byte CloudHeight;
@@ -4216,9 +4072,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionFieldSkiiLevel
+    public class FLD_ConditionFieldSkiiLevel : BdatItem
     {
-        public int Id;
         public ushort FieldSkillID;
         public byte Level;
         public FLD_FieldSkillList _FieldSkillID;
@@ -4226,9 +4081,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionFlag
+    public class FLD_ConditionFlag : BdatItem
     {
-        public int Id;
         public byte FlagType;
         public ushort FlagID;
         public ushort FlagMin;
@@ -4237,9 +4091,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionIdea
+    public class FLD_ConditionIdea : BdatItem
     {
-        public int Id;
         public ushort PCID;
         public byte IdeaLevelBlue;
         public byte IdeaLevelRed;
@@ -4251,9 +4104,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionItem
+    public class FLD_ConditionItem : BdatItem
     {
-        public int Id;
         public byte ItemCategory;
         public ushort ItemID;
         public byte Number;
@@ -4262,18 +4114,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionLevel
+    public class FLD_ConditionLevel : BdatItem
     {
-        public int Id;
         public ushort PCID;
         public byte Level;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionList
+    public class FLD_ConditionList : BdatItem
     {
-        public int Id;
         public byte Premise;
         public byte ConditionType1;
         public ushort Condition1;
@@ -4312,27 +4162,24 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionMapGimmick
+    public class FLD_ConditionMapGimmick : BdatItem
     {
-        public int Id;
         public ushort MapGimmickID;
         public byte EndCheck;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionNamed
+    public class FLD_ConditionNamed : BdatItem
     {
-        public int Id;
         public ushort Named;
         public byte Difficult;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionPT
+    public class FLD_ConditionPT : BdatItem
     {
-        public int Id;
         public byte Category;
         public ushort PCID1;
         public ushort PCID2;
@@ -4342,9 +4189,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionQuest
+    public class FLD_ConditionQuest : BdatItem
     {
-        public int Id;
         public ushort QuestFlag1;
         public byte QuestFlagMin1;
         public byte QuestFlagMax1;
@@ -4361,9 +4207,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ConditionScenario
+    public class FLD_ConditionScenario : BdatItem
     {
-        public int Id;
         public ushort ScenarioMin;
         public ushort ScenarioMax;
         public ushort NotScenarioMin;
@@ -4372,9 +4217,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_DMGFloor
+    public class FLD_DMGFloor : BdatItem
     {
-        public int Id;
         public ushort Condition;
         public ushort MAPID;
         public ushort attributeID;
@@ -4387,9 +4231,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_DMGGimmick
+    public class FLD_DMGGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort Condition;
         public byte DEPOP_gimmickType;
@@ -4411,9 +4254,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_DoorGimmick
+    public class FLD_DoorGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort Condition;
         public byte gimmickType;
@@ -4452,9 +4294,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_EffectPop
+    public class FLD_EffectPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -4467,9 +4308,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ElevatorGimmick
+    public class FLD_ElevatorGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort OP_Condition;
         public ushort tgt_callswitchMSG_ID;
@@ -4504,9 +4344,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_ENActMove
+    public class FLD_ENActMove : BdatItem
     {
-        public int Id;
         public byte actIDL_Per;
         public byte actMove_Per;
         public byte IDL_Per;
@@ -4531,9 +4370,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_EnemyGroup
+    public class FLD_EnemyGroup : BdatItem
     {
-        public int Id;
         public ushort EnemyID1;
         public ushort EnemyID2;
         public ushort EnemyID3;
@@ -4563,9 +4401,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_EnemyWave
+    public class FLD_EnemyWave : BdatItem
     {
-        public int Id;
         public string name;
         public ushort QuestFlag;
         public byte QuestFlagMin;
@@ -4584,9 +4421,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_EnemyWaveIra
+    public class FLD_EnemyWaveIra : BdatItem
     {
-        public int Id;
         public string name;
         public ushort QuestFlag;
         public byte QuestFlagMin;
@@ -4612,9 +4448,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_FieldLockGimmick
+    public class FLD_FieldLockGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -4631,9 +4466,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_FieldSkillList
+    public class FLD_FieldSkillList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Type;
@@ -4654,9 +4488,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_FieldSkillRandom
+    public class FLD_FieldSkillRandom : BdatItem
     {
-        public int Id;
         public byte Level1Chance;
         public byte Level2Chance;
         public byte Level3Chance;
@@ -4664,9 +4497,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_FieldSkillSetting
+    public class FLD_FieldSkillSetting : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort FieldSkillID1;
         public byte FieldSkillLevel1;
@@ -4681,9 +4513,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_FootPrintsRoutes
+    public class FLD_FootPrintsRoutes : BdatItem
     {
-        public int Id;
         public string name;
         public string FootEffect;
         public ushort ScenarioFlagMin;
@@ -4697,9 +4528,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_GravePopList
+    public class FLD_GravePopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public ushort en_popID;
@@ -4707,9 +4537,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_IdeaTable
+    public class FLD_IdeaTable : BdatItem
     {
-        public int Id;
         public uint TrustPoint;
         public ushort WpnRatio;
         public byte NArtsProbRev;
@@ -4720,9 +4549,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_InnEvent
+    public class FLD_InnEvent : BdatItem
     {
-        public int Id;
         public ushort Condition;
         public ushort EventID;
         public ushort KizunaTalkID;
@@ -4730,9 +4558,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_JumpGimmick
+    public class FLD_JumpGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort Condition;
         public ushort FSID;
@@ -4748,9 +4575,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_KizunaTalk
+    public class FLD_KizunaTalk : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ConditionID;
         public ushort Title;
@@ -4765,9 +4591,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_LODList
+    public class FLD_LODList : BdatItem
     {
-        public int Id;
         public ushort LODID;
         public uint flag;
         public ushort ScenarioFlagMin1;
@@ -4821,9 +4646,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_LookSetBl
+    public class FLD_LookSetBl : BdatItem
     {
-        public int Id;
         public ushort RefID;
         public ushort LookType;
         public ushort Chara;
@@ -4831,18 +4655,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_LookSetEn
+    public class FLD_LookSetEn : BdatItem
     {
-        public int Id;
         public ushort RefID;
         public ushort Chara;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_LookType000
+    public class FLD_LookType000 : BdatItem
     {
-        public int Id;
         public ushort Chara;
         public float Radius;
         public float UpperHeight;
@@ -4854,9 +4676,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_MapGimmick
+    public class FLD_MapGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public uint popTime;
         public byte popWeather;
@@ -4937,9 +4758,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_MapJump
+    public class FLD_MapJump : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MapJumpId;
         public ushort ScenarioFlagMin;
@@ -4953,9 +4773,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_maplist
+    public class FLD_maplist : BdatItem
     {
-        public int Id;
         public string resource;
         public string select;
         public uint rscGmkId;
@@ -5045,9 +4864,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_MercenariesMission
+    public class FLD_MercenariesMission : BdatItem
     {
-        public int Id;
         public ushort QuestID;
         public byte Category;
         public ushort RequestPerformance;
@@ -5059,9 +4877,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_MobGroupList
+    public class FLD_MobGroupList : BdatItem
     {
-        public int Id;
         public ushort MOBID1;
         public ushort MOBID2;
         public ushort MOBID3;
@@ -5082,9 +4899,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_NpcGroupId
+    public class FLD_NpcGroupId : BdatItem
     {
-        public int Id;
         public byte memberNum;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -5099,9 +4915,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_NpcMobMotionId
+    public class FLD_NpcMobMotionId : BdatItem
     {
-        public int Id;
         public string cmdName;
         public byte flag;
         public bool notEyeBlink;
@@ -5109,9 +4924,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_OwnerBonus
+    public class FLD_OwnerBonus : BdatItem
     {
-        public int Id;
         public ushort Caption;
         public ushort Type;
         public ushort Value;
@@ -5120,9 +4934,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestBattle
+    public class FLD_QuestBattle : BdatItem
     {
-        public int Id;
         public byte Refer;
         public ushort EnemyID;
         public ushort EnemyGroupID;
@@ -5143,9 +4956,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestCollect
+    public class FLD_QuestCollect : BdatItem
     {
-        public int Id;
         public byte Refer;
         public ushort ItemID;
         public byte Category;
@@ -5164,9 +4976,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestCondition
+    public class FLD_QuestCondition : BdatItem
     {
-        public int Id;
         public ushort ConditionID;
         public ushort MapID;
         public ushort NpcID;
@@ -5177,17 +4988,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestEvent
+    public class FLD_QuestEvent : BdatItem
     {
-        public int Id;
         public ushort EventID;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestFieldSkillCount
+    public class FLD_QuestFieldSkillCount : BdatItem
     {
-        public int Id;
         public byte FieldSkillID;
         public ushort Count;
         public FLD_FieldSkillList _FieldSkillID;
@@ -5195,9 +5004,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestGimmick
+    public class FLD_QuestGimmick : BdatItem
     {
-        public int Id;
         public ushort MapID;
         public ushort DoorGimmickID;
         public ushort ElevatorGimmickID;
@@ -5217,9 +5025,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestHints
+    public class FLD_QuestHints : BdatItem
     {
-        public int Id;
         public ushort MainChar1;
         public ushort MainChar2;
         public ushort MainChar3;
@@ -5238,9 +5045,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestList
+    public class FLD_QuestList : BdatItem
     {
-        public int Id;
         public ushort QuestTitle;
         public byte QuestCategory;
         public byte Visible;
@@ -5284,9 +5090,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestReach
+    public class FLD_QuestReach : BdatItem
     {
-        public int Id;
         public byte Category;
         public ushort MapID;
         public ushort PlaceID;
@@ -5296,9 +5101,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestReward
+    public class FLD_QuestReward : BdatItem
     {
-        public int Id;
         public uint Gold;
         public uint EXP;
         public ushort Sp;
@@ -5328,9 +5132,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestRewardRandom
+    public class FLD_QuestRewardRandom : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort ItemCategory1;
         public ushort ItemID1;
@@ -5351,9 +5154,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestTalk
+    public class FLD_QuestTalk : BdatItem
     {
-        public int Id;
         public ushort MapID;
         public ushort NpcID;
         public ushort DummyGroup;
@@ -5363,9 +5165,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestTalkDummyGroup
+    public class FLD_QuestTalkDummyGroup : BdatItem
     {
-        public int Id;
         public ushort NpcID1;
         public ushort NpcID2;
         public ushort NpcID3;
@@ -5378,9 +5179,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestTask
+    public class FLD_QuestTask : BdatItem
     {
-        public int Id;
         public byte PreCondition;
         public byte TaskType1;
         public ushort TaskID1;
@@ -5426,9 +5226,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_QuestUse
+    public class FLD_QuestUse : BdatItem
     {
-        public int Id;
         public ushort ItemID;
         public byte Category;
         public byte ItemNumber;
@@ -5441,9 +5240,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_randomTalk
+    public class FLD_randomTalk : BdatItem
     {
-        public int Id;
         public sbyte type;
         public short talk0;
         public short text0;
@@ -5458,9 +5256,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_RequestBlade
+    public class FLD_RequestBlade : BdatItem
     {
-        public int Id;
         public byte RequestCategory;
         public byte RequestAtr;
         public ushort RequestPerformance;
@@ -5475,9 +5272,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_RequestItemSet
+    public class FLD_RequestItemSet : BdatItem
     {
-        public int Id;
         public ushort ItemID1;
         public byte Count1;
         public ushort ItemID2;
@@ -5495,9 +5291,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvageClimbLotTable
+    public class FLD_SalvageClimbLotTable : BdatItem
     {
-        public int Id;
         public byte NoTBox;
         public byte TBox;
         public byte RTBox;
@@ -5512,9 +5307,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvageEnemySet
+    public class FLD_SalvageEnemySet : BdatItem
     {
-        public int Id;
         public ushort ene1ID;
         public sbyte ene1Lv;
         public byte ene1Per;
@@ -5536,9 +5330,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvageEvent
+    public class FLD_SalvageEvent : BdatItem
     {
-        public int Id;
         public ushort EventID1;
         public byte Percent1;
         public ushort EventID2;
@@ -5555,9 +5348,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvageItemSet
+    public class FLD_SalvageItemSet : BdatItem
     {
-        public int Id;
         public ushort RSC_ID;
         public byte flag;
         public byte msgVisible;
@@ -5609,9 +5401,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvagePointList
+    public class FLD_SalvagePointList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort SalvagePointName;
         public ushort Condition;
@@ -5644,9 +5435,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SalvageTable
+    public class FLD_SalvageTable : BdatItem
     {
-        public int Id;
         public ushort ColleTable1;
         public ushort ColleTablePercent1;
         public ushort ColleTable2;
@@ -5687,9 +5477,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SealedStone
+    public class FLD_SealedStone : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public string FeedbackEffectName;
@@ -5709,9 +5498,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_SePop
+    public class FLD_SePop : BdatItem
     {
-        public int Id;
         public string name;
         public byte flag;
         public ushort seName;
@@ -5738,18 +5526,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_TimeInfo
+    public class FLD_TimeInfo : BdatItem
     {
-        public int Id;
         public ushort msg;
         public Message _msg;
     }
 
     [BdatType]
     [Serializable]
-    public class FLD_Tutorial
+    public class FLD_Tutorial : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort QuestFlag;
@@ -5760,9 +5546,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_UniquePreset
+    public class FLD_UniquePreset : BdatItem
     {
-        public int Id;
         public ushort Frequency;
         public ushort Chara0;
         public byte Motion0;
@@ -5786,9 +5571,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_UniqueTable
+    public class FLD_UniqueTable : BdatItem
     {
-        public int Id;
         public ushort RefID;
         public ushort Probability;
         public float DelayMin;
@@ -5800,9 +5584,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_VoiceTable
+    public class FLD_VoiceTable : BdatItem
     {
-        public int Id;
         public string Driver1;
         public string Driver2;
         public string Driver3;
@@ -5822,9 +5605,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_VoiceTableBlade
+    public class FLD_VoiceTableBlade : BdatItem
     {
-        public int Id;
         public string Blade1;
         public string Blade2;
         public string Blade3;
@@ -5840,9 +5622,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_VoiceTableCommon
+    public class FLD_VoiceTableCommon : BdatItem
     {
-        public int Id;
         public string CommonBlade1;
         public string CommonBlade2;
         public string CommonBlade3;
@@ -5879,9 +5660,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_VoiceTableRare
+    public class FLD_VoiceTableRare : BdatItem
     {
-        public int Id;
         public string RareBlade1;
         public string RareBlade2;
         public string RareBlade3;
@@ -5929,9 +5709,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_WarpGimmick
+    public class FLD_WarpGimmick : BdatItem
     {
-        public int Id;
         public string name;
         public ushort Condition;
         public byte gimmickType;
@@ -5950,9 +5729,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_WeatherInfo
+    public class FLD_WeatherInfo : BdatItem
     {
-        public int Id;
         public ushort msg;
         public string eff;
         public string snd;
@@ -5963,18 +5741,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class FLD_wildcardData
+    public class FLD_wildcardData : BdatItem
     {
-        public int Id;
         public float valueF4;
         public ushort valueU2;
     }
 
     [BdatType]
     [Serializable]
-    public class Fx_Act_Surface_Table
+    public class Fx_Act_Surface_Table : BdatItem
     {
-        public int Id;
         public byte SolidDefault;
         public byte SolidWater;
         public byte SolidSoil;
@@ -5998,17 +5774,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Fx_FileName
+    public class Fx_FileName : BdatItem
     {
-        public int Id;
         public string file_name;
     }
 
     [BdatType]
     [Serializable]
-    public class Fx_Surface_Chara_Table
+    public class Fx_Surface_Chara_Table : BdatItem
     {
-        public int Id;
         public byte TYPE_HUMAN;
         public byte TYPE_HUMAN_HEELS;
         public byte TYPE_HUMAN_GETA;
@@ -6021,9 +5795,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class IRA_Party
+    public class IRA_Party : BdatItem
     {
-        public int Id;
         public ushort driver11;
         public ushort blade11;
         public ushort blade12;
@@ -6049,9 +5822,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_BoosterList
+    public class ITM_BoosterList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Category;
@@ -6074,9 +5846,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_CollectionList
+    public class ITM_CollectionList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Category;
@@ -6099,9 +5870,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_CrystalList
+    public class ITM_CrystalList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public byte Rarity;
         public uint Price;
@@ -6134,17 +5904,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_EtherCrystal
+    public class ITM_EtherCrystal : BdatItem
     {
-        public int Id;
         public ushort Score;
     }
 
     [BdatType]
     [Serializable]
-    public class ITM_EventList
+    public class ITM_EventList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public uint sortJP;
@@ -6161,9 +5929,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_FavoriteList
+    public class ITM_FavoriteList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Category;
@@ -6191,9 +5958,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_HanaArtsEnh
+    public class ITM_HanaArtsEnh : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Enhance;
         public byte Flag;
@@ -6220,9 +5986,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_HanaAssist
+    public class ITM_HanaAssist : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Enhance;
         public byte EnhanceCategory;
@@ -6252,9 +6017,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_HanaAtr
+    public class ITM_HanaAtr : BdatItem
     {
-        public int Id;
         public byte Name;
         public byte Caption;
         public byte Atr;
@@ -6283,9 +6047,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_HanaNArtsSet
+    public class ITM_HanaNArtsSet : BdatItem
     {
-        public int Id;
         public byte Name;
         public byte NArts;
         public byte NArtsRecastRev;
@@ -6313,9 +6076,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_HanaRole
+    public class ITM_HanaRole : BdatItem
     {
-        public int Id;
         public byte Name;
         public byte Role;
         public byte PArmor;
@@ -6352,9 +6114,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_InfoList
+    public class ITM_InfoList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public uint Price;
@@ -6373,9 +6134,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_Orb
+    public class ITM_Orb : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Recipe;
@@ -6400,9 +6160,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_OrbEquip
+    public class ITM_OrbEquip : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public ushort Enhance;
@@ -6428,9 +6187,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_OrbRecipe
+    public class ITM_OrbRecipe : BdatItem
     {
-        public int Id;
         public byte RecipeType;
         public byte Rarity;
         public byte RscCat;
@@ -6466,9 +6224,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PcEquip
+    public class ITM_PcEquip : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte ArmorType;
@@ -6524,9 +6281,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PcWpn
+    public class ITM_PcWpn : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte Rank;
@@ -6554,9 +6310,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PcWpnChip
+    public class ITM_PcWpnChip : BdatItem
     {
-        public int Id;
         public ushort Name;
         public string DebugName;
         public byte Rank;
@@ -6654,9 +6409,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PcWpnIr
+    public class ITM_PcWpnIr : BdatItem
     {
-        public int Id;
         public ushort AtkLv1;
         public ushort AtkLv99;
         public byte StbLv1;
@@ -6669,9 +6423,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PcWpnType
+    public class ITM_PcWpnType : BdatItem
     {
-        public int Id;
         public ushort Name;
         public byte Role;
         public byte EffType;
@@ -6686,9 +6439,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_PreciousList
+    public class ITM_PreciousList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Category;
@@ -6712,9 +6464,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_SalvageList
+    public class ITM_SalvageList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Rarity;
@@ -6737,9 +6488,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ITM_TresureList
+    public class ITM_TresureList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort Caption;
         public byte Category;
@@ -6765,9 +6515,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class LabeledMessage
+    public class LabeledMessage : BdatItem
     {
-        public int Id;
         public string label;
         public ushort style;
         public string name;
@@ -6775,9 +6524,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma01a_FLD_EnemyPop
+    public class ma01a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -6835,9 +6583,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma01a_FLD_LandmarkPop
+    public class ma01a_FLD_LandmarkPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MSGID;
         public byte category;
@@ -6859,9 +6606,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma01a_FLD_MapObjPop
+    public class ma01a_FLD_MapObjPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort Condition;
         public ushort RSC_ID;
@@ -6879,9 +6625,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma01a_FLD_NpcPop
+    public class ma01a_FLD_NpcPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort NpcID;
         public ushort ScenarioFlagMin;
@@ -6932,9 +6677,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_AutoTalk
+    public class ma02a_FLD_AutoTalk : BdatItem
     {
-        public int Id;
         public ushort MOBID;
         public ushort Range;
         public ushort Condition;
@@ -6949,9 +6693,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_CollectionPopList
+    public class ma02a_FLD_CollectionPopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort gimmickID;
         public ushort Condition;
@@ -6987,9 +6730,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_EventPop
+    public class ma02a_FLD_EventPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -7006,9 +6748,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_LandmarkPop
+    public class ma02a_FLD_LandmarkPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MSGID;
         public byte category;
@@ -7037,9 +6778,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_MobPop
+    public class ma02a_FLD_MobPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MobID;
         public ushort MOBGroupID;
@@ -7083,9 +6823,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma02a_FLD_TboxPop
+    public class ma02a_FLD_TboxPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public ushort Condition;
@@ -7143,9 +6882,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma03a_FLD_TboxPop
+    public class ma03a_FLD_TboxPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public ushort Condition;
@@ -7202,9 +6940,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma04a_FLD_PreciousPopList
+    public class ma04a_FLD_PreciousPopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort QuestFlag;
         public byte QuestFlagMin;
@@ -7222,9 +6959,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma05a_FLD_EnemyPop
+    public class ma05a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7283,9 +7019,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma05a_FLD_LandmarkPop
+    public class ma05a_FLD_LandmarkPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MSGID;
         public byte category;
@@ -7314,9 +7049,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma05a_FLD_NpcPop
+    public class ma05a_FLD_NpcPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort NpcID;
         public ushort ScenarioFlagMin;
@@ -7371,9 +7105,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma05c_FLD_EnemyPop
+    public class ma05c_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7434,9 +7167,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma07a_FLD_CollectionPopList
+    public class ma07a_FLD_CollectionPopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort gimmickID;
         public ushort Condition;
@@ -7473,9 +7205,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma07a_FLD_EventPop
+    public class ma07a_FLD_EventPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort ScenarioFlagMin;
         public ushort ScenarioFlagMax;
@@ -7493,9 +7224,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma07a_FLD_NpcPop
+    public class ma07a_FLD_NpcPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort NpcID;
         public ushort ScenarioFlagMin;
@@ -7547,9 +7277,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma08a_FLD_EnemyPop
+    public class ma08a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7607,9 +7336,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma10a_FLD_EnemyPop
+    public class ma10a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7668,9 +7396,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma20a_FLD_EnemyPop
+    public class ma20a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7729,9 +7456,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma40a_FLD_CollectionPopList
+    public class ma40a_FLD_CollectionPopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort gimmickID;
         public ushort Condition;
@@ -7748,9 +7474,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma40a_FLD_EnemyPop
+    public class ma40a_FLD_EnemyPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort tagetpoint_name;
         public ushort QuestFlag;
@@ -7814,9 +7539,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma40a_FLD_MobPop
+    public class ma40a_FLD_MobPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort MobID;
         public ushort MOBGroupID;
@@ -7861,9 +7585,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma40a_FLD_NpcPop
+    public class ma40a_FLD_NpcPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort NpcID;
         public ushort ScenarioFlagMin;
@@ -7915,9 +7638,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma40a_FLD_TboxPop
+    public class ma40a_FLD_TboxPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public ushort Condition;
@@ -7977,9 +7699,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma41a_FLD_CollectionPopList
+    public class ma41a_FLD_CollectionPopList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort gimmickID;
         public ushort Condition;
@@ -7997,9 +7718,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class ma41a_FLD_TboxPop
+    public class ma41a_FLD_TboxPop : BdatItem
     {
-        public int Id;
         public string name;
         public ushort RSC_ID;
         public ushort Condition;
@@ -8058,27 +7778,24 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Message
+    public class Message : BdatItem
     {
-        public int Id;
         public ushort style;
         public string name;
     }
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_Crystal
+    public class MIN_TT_Crystal : BdatItem
     {
-        public int Id;
         public ushort Score;
         public string Res;
     }
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_Enemy
+    public class MIN_TT_Enemy : BdatItem
     {
-        public int Id;
         public string Name;
         public byte MoveType;
         public byte HitType;
@@ -8098,9 +7815,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_PC
+    public class MIN_TT_PC : BdatItem
     {
-        public int Id;
         public ushort Hp;
         public byte HitW;
         public byte HitH;
@@ -8113,9 +7829,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_Stage
+    public class MIN_TT_Stage : BdatItem
     {
-        public int Id;
         public ushort SpdD;
         public ushort SpdU;
         public ushort AccU;
@@ -8136,9 +7851,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_Tbox
+    public class MIN_TT_Tbox : BdatItem
     {
-        public int Id;
         public byte Type;
         public ushort tdef1;
         public ushort cond1;
@@ -8184,9 +7898,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MIN_TT_Tdef
+    public class MIN_TT_Tdef : BdatItem
     {
-        public int Id;
         public ushort item1;
         public byte rate1;
         public ushort item2;
@@ -8227,9 +7940,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_AnnouncePage
+    public class MNU_AnnouncePage : BdatItem
     {
-        public int Id;
         public ushort title;
         public ushort summary;
         public ushort image;
@@ -8239,9 +7951,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_AnnounceSchedule
+    public class MNU_AnnounceSchedule : BdatItem
     {
-        public int Id;
         public ushort title;
         public ushort summary;
         public ushort schedule;
@@ -8255,9 +7966,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_BladeCreate
+    public class MNU_BladeCreate : BdatItem
     {
-        public int Id;
         public ushort limited_item;
         public byte after_pt_in;
         public object _limited_item;
@@ -8265,17 +7975,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_BlCoolTimeLv
+    public class MNU_BlCoolTimeLv : BdatItem
     {
-        public int Id;
         public uint value;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_BlImageID
+    public class MNU_BlImageID : BdatItem
     {
-        public int Id;
         public ushort icon_id;
         public short offs_x;
         public short offs_y;
@@ -8296,9 +8004,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_BtnChallenge2
+    public class MNU_BtnChallenge2 : BdatItem
     {
-        public int Id;
         public byte Speed;
         public ushort Wait;
         public byte Type;
@@ -8330,9 +8037,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_BtnChallengeSeq
+    public class MNU_BtnChallengeSeq : BdatItem
     {
-        public int Id;
         public ushort challenge01;
         public ushort challenge02;
         public ushort challenge03;
@@ -8347,9 +8053,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CampCraft
+    public class MNU_CampCraft : BdatItem
     {
-        public int Id;
         public ushort driver_id;
         public ushort shop_id;
         public ushort summary_msg;
@@ -8360,9 +8065,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ChallengeParam
+    public class MNU_ChallengeParam : BdatItem
     {
-        public int Id;
         public byte InputType;
         public ushort PushRange;
         public ushort PushSweetRange;
@@ -8373,9 +8077,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ChallengeResult
+    public class MNU_ChallengeResult : BdatItem
     {
-        public int Id;
         public byte Point;
         public uint Text;
         public Message _Text;
@@ -8383,9 +8086,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CharOrder
+    public class MNU_CharOrder : BdatItem
     {
-        public int Id;
         public ushort layer;
         public ushort useCond;
         public MNU_FSMenu _layer;
@@ -8394,9 +8096,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CmnJog
+    public class MNU_CmnJog : BdatItem
     {
-        public int Id;
         public ushort angle_range;
         public ushort start_angle;
         public byte def_select;
@@ -8406,17 +8107,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CmnList
+    public class MNU_CmnList : BdatItem
     {
-        public int Id;
         public readonly ushort[] item = new ushort[9];
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_CmnWindow
+    public class MNU_CmnWindow : BdatItem
     {
-        public int Id;
         public byte type;
         public byte select;
         public ushort text;
@@ -8431,9 +8130,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ColorList
+    public class MNU_ColorList : BdatItem
     {
-        public int Id;
         public string name;
         public byte col_r;
         public byte col_g;
@@ -8442,26 +8140,23 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Condition
+    public class MNU_Condition : BdatItem
     {
-        public int Id;
         public ushort cond;
         public FLD_ConditionList _cond;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_DamageValue
+    public class MNU_DamageValue : BdatItem
     {
-        public int Id;
         public float value;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_DlcGift
+    public class MNU_DlcGift : BdatItem
     {
-        public int Id;
         public byte releasecount;
         public ushort title;
         public ushort condition;
@@ -8477,9 +8172,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_EventTheater
+    public class MNU_EventTheater : BdatItem
     {
-        public int Id;
         public ushort title;
         public ushort event_id;
         public ushort condition;
@@ -8506,26 +8200,23 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_FacePatternList
+    public class MNU_FacePatternList : BdatItem
     {
-        public int Id;
         public string name;
         public byte image_no;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_Filename
+    public class MNU_Filename : BdatItem
     {
-        public int Id;
         public string filename;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_FontSet01
+    public class MNU_FontSet01 : BdatItem
     {
-        public int Id;
         public byte type;
         public uint resource;
         public byte image_type;
@@ -8533,9 +8224,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_FSMenu
+    public class MNU_FSMenu : BdatItem
     {
-        public int Id;
         public ushort next_jog;
         public ushort layer_id;
         public ushort icon;
@@ -8547,9 +8237,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_HanaMode
+    public class MNU_HanaMode : BdatItem
     {
-        public int Id;
         public ushort JS_SET;
         public ushort JK_SET;
         public ushort JD_SET;
@@ -8562,9 +8251,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_HanaSet
+    public class MNU_HanaSet : BdatItem
     {
-        public int Id;
         public ushort name;
         public ushort icon;
         public ushort slotIcon;
@@ -8573,17 +8261,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_IconList
+    public class MNU_IconList : BdatItem
     {
-        public int Id;
         public byte icon_index;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_InputAct
+    public class MNU_InputAct : BdatItem
     {
-        public int Id;
         public byte act_id;
         public ushort text;
         public ushort text2;
@@ -8594,9 +8280,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_InputPad
+    public class MNU_InputPad : BdatItem
     {
-        public int Id;
         public string name;
         public sbyte pad_select;
         public ushort select_text;
@@ -8634,9 +8319,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_InputPointer
+    public class MNU_InputPointer : BdatItem
     {
-        public int Id;
         public string name;
         public sbyte pointer_speed;
         public byte snap;
@@ -8662,9 +8346,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_InputWheel
+    public class MNU_InputWheel : BdatItem
     {
-        public int Id;
         public string name;
         public ushort start_angle;
         public ushort angle_range;
@@ -8685,9 +8368,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_jog_txt
+    public class MNU_jog_txt : BdatItem
     {
-        public int Id;
         public ushort fs_menu_id;
         public ushort txt;
         public ushort lock_flag;
@@ -8695,9 +8377,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_KeyOrder
+    public class MNU_KeyOrder : BdatItem
     {
-        public int Id;
         public ushort key;
         public ushort order;
         public ushort order2;
@@ -8705,9 +8386,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Layer
+    public class MNU_Layer : BdatItem
     {
-        public int Id;
         public byte group;
         public string sheet01;
         public byte prio01;
@@ -8726,9 +8406,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MainOrder
+    public class MNU_MainOrder : BdatItem
     {
-        public int Id;
         public ushort layer;
         public ushort useCond;
         public ushort guide;
@@ -8744,9 +8423,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MapGroup
+    public class MNU_MapGroup : BdatItem
     {
-        public int Id;
         public string include_map;
         public ushort disp_name;
         public byte under_water;
@@ -8757,9 +8435,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MapInfo
+    public class MNU_MapInfo : BdatItem
     {
-        public int Id;
         public string level_name;
         public ushort disp_name;
         public byte under_water;
@@ -8772,9 +8449,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ModelView
+    public class MNU_ModelView : BdatItem
     {
-        public int Id;
         public string camera_file;
         public string efp_file;
         public ushort obj_model01;
@@ -8783,9 +8459,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Msg_SubContents
+    public class MNU_Msg_SubContents : BdatItem
     {
-        public int Id;
         public ushort name;
         public ushort caption;
         public MNU_Name _caption;
@@ -8794,9 +8469,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MsgChapterEnd
+    public class MNU_MsgChapterEnd : BdatItem
     {
-        public int Id;
         public ushort index;
         public ushort title;
         public Message _index;
@@ -8805,9 +8479,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MsgGiftFilter
+    public class MNU_MsgGiftFilter : BdatItem
     {
-        public int Id;
         public ushort name;
         public byte number;
         public Message _name;
@@ -8815,9 +8488,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MsgPopupTitle
+    public class MNU_MsgPopupTitle : BdatItem
     {
-        public int Id;
         public ushort name;
         public string color;
         public ushort name2;
@@ -8827,9 +8499,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_MsgQListTab
+    public class MNU_MsgQListTab : BdatItem
     {
-        public int Id;
         public ushort item01;
         public ushort item02;
         public ushort item03;
@@ -8838,18 +8509,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Name
+    public class MNU_Name : BdatItem
     {
-        public int Id;
         public ushort name;
         public Message _name;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_OffsetList
+    public class MNU_OffsetList : BdatItem
     {
-        public int Id;
         public float offs_x;
         public float offs_y;
         public float offs_z;
@@ -8858,9 +8527,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_OptionCamera
+    public class MNU_OptionCamera : BdatItem
     {
-        public int Id;
         public ushort name_id;
         public ushort cap_id;
         public string setting_name;
@@ -8871,9 +8539,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_OptionDisp
+    public class MNU_OptionDisp : BdatItem
     {
-        public int Id;
         public ushort name_id;
         public ushort cap_id;
         public byte max_level;
@@ -8884,9 +8551,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_OptionGameDif
+    public class MNU_OptionGameDif : BdatItem
     {
-        public int Id;
         public ushort name_id;
         public ushort cap_id;
         public Message _cap_id;
@@ -8895,26 +8561,23 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ResFont
+    public class MNU_ResFont : BdatItem
     {
-        public int Id;
         public string file;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_ScriptList
+    public class MNU_ScriptList : BdatItem
     {
-        public int Id;
         public string name;
         public string script;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopCategoryName
+    public class MNU_ShopCategoryName : BdatItem
     {
-        public int Id;
         public ushort icon_id;
         public ushort name;
         public Message _name;
@@ -8922,9 +8585,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopChange
+    public class MNU_ShopChange : BdatItem
     {
-        public int Id;
         public ushort DefTaskSet1;
         public ushort DefTaskSet2;
         public ushort DefTaskSet3;
@@ -8980,18 +8642,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopChangeNopon
+    public class MNU_ShopChangeNopon : BdatItem
     {
-        public int Id;
         public ushort TaskSet;
         public ushort Condition;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopChangeTask
+    public class MNU_ShopChangeTask : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort SetItem1;
         public ushort SetNumber1;
@@ -9020,17 +8680,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopInn
+    public class MNU_ShopInn : BdatItem
     {
-        public int Id;
         public ushort Price;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopList
+    public class MNU_ShopList : BdatItem
     {
-        public int Id;
         public ushort Name;
         public ushort ShopIcon;
         public byte ShopType;
@@ -9046,9 +8704,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_ShopNormal
+    public class MNU_ShopNormal : BdatItem
     {
-        public int Id;
         public ushort DefItem1;
         public ushort DefItem2;
         public ushort DefItem3;
@@ -9101,17 +8758,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_SortBuff
+    public class MNU_SortBuff : BdatItem
     {
-        public int Id;
         public ushort buff1;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_SortEnhance
+    public class MNU_SortEnhance : BdatItem
     {
-        public int Id;
         public ushort enhance1;
         public ushort enhance2;
         public ushort enhance3;
@@ -9124,27 +8779,24 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_SortFieldSkill
+    public class MNU_SortFieldSkill : BdatItem
     {
-        public int Id;
         public ushort fs1;
         public FLD_FieldSkillList _fs1;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_SortRole
+    public class MNU_SortRole : BdatItem
     {
-        public int Id;
         public ushort role1;
         public Message _role1;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_SortTable
+    public class MNU_SortTable : BdatItem
     {
-        public int Id;
         public ushort sort_type1;
         public ushort sort_type2;
         public ushort sort_type3;
@@ -9177,9 +8829,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_SoundBgm
+    public class MNU_SoundBgm : BdatItem
     {
-        public int Id;
         public ushort resource;
         public float time;
         public MNU_Filename _resource;
@@ -9187,17 +8838,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_SoundSe
+    public class MNU_SoundSe : BdatItem
     {
-        public int Id;
         public ushort resource_id;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_SpecialShop
+    public class MNU_SpecialShop : BdatItem
     {
-        public int Id;
         public ushort shop_id;
         public ushort scenario_flag;
         public MNU_ShopList _shop_id;
@@ -9205,18 +8854,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Stream_full_bl
+    public class MNU_Stream_full_bl : BdatItem
     {
-        public int Id;
         public string filename;
         public string filename_2nd;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_TextProperty
+    public class MNU_TextProperty : BdatItem
     {
-        public int Id;
         public string name;
         public byte col_r;
         public byte col_g;
@@ -9226,9 +8873,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Tutorial
+    public class MNU_Tutorial : BdatItem
     {
-        public int Id;
         public string script_file;
         public byte start_id;
         public uint param1;
@@ -9236,9 +8882,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Tutorial_Chbtl
+    public class MNU_Tutorial_Chbtl : BdatItem
     {
-        public int Id;
         public ushort title;
         public ushort condition;
         public byte bg_type;
@@ -9255,9 +8900,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Tutorial_Ira
+    public class MNU_Tutorial_Ira : BdatItem
     {
-        public int Id;
         public string script_file;
         public byte start_id;
         public uint param1;
@@ -9266,9 +8910,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_Tutorial_Tips
+    public class MNU_Tutorial_Tips : BdatItem
     {
-        public int Id;
         public ushort title;
         public ushort condition;
         public byte page;
@@ -9283,9 +8926,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_txt
+    public class MNU_txt : BdatItem
     {
-        public int Id;
         public string obj_name;
         public uint text_id;
         public Message _text_id;
@@ -9293,27 +8935,24 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_UioReplace
+    public class MNU_UioReplace : BdatItem
     {
-        public int Id;
         public string file;
         public string replace01;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_WorldMap
+    public class MNU_WorldMap : BdatItem
     {
-        public int Id;
         public short posX;
         public short posY;
     }
 
     [BdatType]
     [Serializable]
-    public class MNU_WorldMapCond
+    public class MNU_WorldMapCond : BdatItem
     {
-        public int Id;
         public ushort mapId;
         public ushort cond1;
         public ushort pos1;
@@ -9334,9 +8973,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_AreaBgmList
+    public class RSC_AreaBgmList : BdatItem
     {
-        public int Id;
         public string name;
         public ushort bgmCondition;
         public RSC_BgmCondition _bgmCondition;
@@ -9344,9 +8982,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_BgmCondition
+    public class RSC_BgmCondition : BdatItem
     {
-        public int Id;
         public ushort ConditionA;
         public ushort BgmIDA;
         public ushort ConditionB;
@@ -9368,9 +9005,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_dropitemList
+    public class RSC_dropitemList : BdatItem
     {
-        public int Id;
         public string mdo;
         public ushort paramid0;
         public ushort paramid1;
@@ -9383,9 +9019,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_dropitemParam
+    public class RSC_dropitemParam : BdatItem
     {
-        public int Id;
         public float height;
         public float heightRand;
         public float distance;
@@ -9413,9 +9048,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_En
+    public class RSC_En : BdatItem
     {
-        public int Id;
         public string DebugName;
         public byte TypeFamily;
         public byte TypeGenus;
@@ -9499,9 +9133,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_EnGenus
+    public class RSC_EnGenus : BdatItem
     {
-        public int Id;
         public byte NAME;
         public byte CAPTION;
         public byte Flag;
@@ -9511,9 +9144,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_EnUnd
+    public class RSC_EnUnd : BdatItem
     {
-        public int Id;
         public byte Flag;
         public sbyte UndMinX;
         public sbyte UndMaxX;
@@ -9526,9 +9158,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_EnWpn
+    public class RSC_EnWpn : BdatItem
     {
-        public int Id;
         public string Model;
         public ushort Scale;
         public string Motion;
@@ -9540,9 +9171,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_GmkSetList
+    public class RSC_GmkSetList : BdatItem
     {
-        public int Id;
         public ushort mapId;
         public string enemy;
         public string enemy_bdat;
@@ -9620,9 +9250,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_MapObjList
+    public class RSC_MapObjList : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
         public string Comp_Eff;
@@ -9635,9 +9264,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_MobList
+    public class RSC_MobList : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
         public string AddMotion;
@@ -9659,9 +9287,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_NpcList
+    public class RSC_NpcList : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
         public string AddMotion;
@@ -9697,18 +9324,16 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_NpcWpn
+    public class RSC_NpcWpn : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
     }
 
     [BdatType]
     [Serializable]
-    public class RSC_PcWpn
+    public class RSC_PcWpn : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
         public string Effpack;
@@ -9720,9 +9345,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_PcWpnMount
+    public class RSC_PcWpnMount : BdatItem
     {
-        public int Id;
         public string Wpn01rIn;
         public string Wpn01rOut;
         public string Wpn02rIn;
@@ -9833,9 +9457,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_TboxList
+    public class RSC_TboxList : BdatItem
     {
-        public int Id;
         public string Model;
         public string Motion;
         public string Effect;
@@ -9861,9 +9484,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class RSC_TypeWpn
+    public class RSC_TypeWpn : BdatItem
     {
-        public int Id;
         public string rex;
         public string nia;
         public string sieg;
@@ -9876,9 +9498,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class SYS_BasicFormation
+    public class SYS_BasicFormation : BdatItem
     {
-        public int Id;
         public float OffsetDr1X;
         public float OffsetDr1Z;
         public float OffsetDr1RotY;
@@ -9889,9 +9510,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class SYS_BladeOffset
+    public class SYS_BladeOffset : BdatItem
     {
-        public int Id;
         public float OffsetBlX;
         public float OffsetBlZ;
         public float OffsetBlRotY;
@@ -9899,9 +9519,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class SYS_MapJumpEvList
+    public class SYS_MapJumpEvList : BdatItem
     {
-        public int Id;
         public byte MapList;
         public ushort FormationId;
         public string InfoPict;
@@ -9914,9 +9533,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class SYS_PcBtlKeyList
+    public class SYS_PcBtlKeyList : BdatItem
     {
-        public int Id;
         public byte Shift;
         public byte Type1;
         public byte Button1;
@@ -9941,9 +9559,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Battle_Blade
+    public class Vo_Battle_Blade : BdatItem
     {
-        public int Id;
         public byte Priority;
         public byte Group;
         public ushort CTDriver;
@@ -9964,9 +9581,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Battle_Driver
+    public class Vo_Battle_Driver : BdatItem
     {
-        public int Id;
         public byte Priority;
         public byte Group;
         public ushort CTDriver;
@@ -9989,9 +9605,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Battle_Enemy
+    public class Vo_Battle_Enemy : BdatItem
     {
-        public int Id;
         public byte Priority;
         public byte Group;
         public ushort EnemyVC;
@@ -10013,24 +9628,21 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Condition
+    public class Vo_Condition : BdatItem
     {
-        public int Id;
     }
 
     [BdatType]
     [Serializable]
-    public class Vo_Field
+    public class Vo_Field : BdatItem
     {
-        public int Id;
         public byte Priority;
     }
 
     [BdatType]
     [Serializable]
-    public class Vo_Field_Filter
+    public class Vo_Field_Filter : BdatItem
     {
-        public int Id;
         public string TargetFile;
         public ushort Condition;
         public string ChangeFile;
@@ -10039,9 +9651,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Filter
+    public class Vo_Filter : BdatItem
     {
-        public int Id;
         public string TargetFile;
         public byte Condition;
         public ushort Param1;
@@ -10052,17 +9663,15 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_Group
+    public class Vo_Group : BdatItem
     {
-        public int Id;
         public byte Interval;
     }
 
     [BdatType]
     [Serializable]
-    public class Vo_WinSp
+    public class Vo_WinSp : BdatItem
     {
-        public int Id;
         public ushort FLD_CondID;
         public ushort NeedChrID;
         public readonly ushort[] ChrID = new ushort[3];
@@ -10073,9 +9682,8 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class Vo_WinSpIra
+    public class Vo_WinSpIra : BdatItem
     {
-        public int Id;
         public ushort FLD_CondID;
         public ushort NeedChrID;
         public readonly ushort[] ChrID = new ushort[4];

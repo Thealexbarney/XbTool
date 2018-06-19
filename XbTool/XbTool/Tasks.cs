@@ -183,8 +183,11 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
             var tables = GetBdatCollection(options);
-
             Directory.CreateDirectory(options.Output);
+
+            var chBtlRewards = ChBtlRewards.Print(tables);
+            File.WriteAllText(Path.Combine(options.Output, "chbtlrewards.html"), chBtlRewards);
+
             var salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(options.Output, "salvaging.html"), salvaging);
 

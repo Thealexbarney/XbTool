@@ -8,7 +8,7 @@ using XbTool.Bdat;
 namespace XbTool.Types
 {
     [Serializable]
-    public class BdatCollection
+    public partial class BdatCollection
     {
         public BdatTable<BdatEnum> EVT_aimtype;
         public BdatTable<BdatEnum> EVT_andortype;

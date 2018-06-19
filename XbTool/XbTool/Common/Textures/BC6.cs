@@ -11,7 +11,7 @@ namespace XbTool.Common.Textures
     public static class BC6
     {
 
-        static int[] ModeToInfo = { 0, 1, 2, 10, -1, -1, 3, 11, -1, -1, 4, 12, -1, -1, 5, 13, -1, -1, 6, -1, -1, -1, 7, -1, -1, -1, 8, -1, -1, -1, 9, -1 };
+        static readonly int[] ModeToInfo = { 0, 1, 2, 10, -1, -1, 3, 11, -1, -1, 4, 12, -1, -1, 5, 13, -1, -1, 6, -1, -1, -1, 7, -1, -1, -1, 8, -1, -1, -1, 9, -1 };
 
         const int BC6H_MAX_REGIONS = 2;
         const ushort HALF_FLOAT_MASK = 32768;
@@ -112,16 +112,34 @@ namespace XbTool.Common.Textures
                 var g = IntToFloatIsh(G, isSigned);
                 var b = IntToFloatIsh(B, isSigned);
 
-                var c = System.Windows.Media.Color.FromScRgb(1f, r, g, b);
-
                 DX10_Helpers.LDRColour colour = new DX10_Helpers.LDRColour
                 {
-                    R = c.R,
-                    G = c.G,
-                    B = c.B
+                    R = ScRgbTosRgb(r),
+                    G = ScRgbTosRgb(g),
+                    B = ScRgbTosRgb(b)
                 };
 
                 return colour;
+            }
+
+            private static byte ScRgbTosRgb(float val)
+            {
+                if (!(val > 0.0))       // Handles NaN case too
+                {
+                    return (0);
+                }
+
+                if (val <= 0.0031308)
+                {
+                    return ((byte)((255.0f * val * 12.92f) + 0.5f));
+                }
+
+                if (val < 1.0)
+                {
+                    return ((byte)((255.0f * ((1.055f * (float)Math.Pow(val, (1.0 / 2.4))) - 0.055f)) + 0.5f));
+                }
+
+                return (255);
             }
 
             static float IntToFloatIsh(int input, bool isSigned)
@@ -176,14 +194,14 @@ namespace XbTool.Common.Textures
                 {
                     unchecked
                     {
-                        exponent = (uint)(-112);    
+                        exponent = (uint)(-112);
                     }
                 }
 
                 uint longResult = ((halfFloat & FloatSignMask) << 16) | // Sign
                                 ((exponent + 112) << 23) |  // Exponent
                                 (mantissa << 13);  // Mantissa
-                
+
 
                 // Reinterpret cast
                 var bytes = BitConverter.GetBytes(longResult);
@@ -200,7 +218,7 @@ namespace XbTool.Common.Textures
 
 
         #region Tables
-        static List<List<ModeDescriptor>> ms_aDesc = new List<List<ModeDescriptor>>
+        static readonly List<List<ModeDescriptor>> ms_aDesc = new List<List<ModeDescriptor>>
         {
             // Mode 1 (0x00) - 10 5 5 5
             new List<ModeDescriptor>
@@ -399,7 +417,7 @@ namespace XbTool.Common.Textures
             }
         };
 
-        static ModeInfo[] ms_aInfo = {
+        static readonly ModeInfo[] ms_aInfo = {
             new ModeInfo(1, true,  3, new[] { new DX10_Helpers.LDRColour(10,10,10,0), new DX10_Helpers.LDRColour( 5, 5, 5,0) },    new[] { new DX10_Helpers.LDRColour( 5, 5, 5,0), new DX10_Helpers.LDRColour( 5, 5, 5,0) }),
             new ModeInfo(1, true,  3, new[] { new DX10_Helpers.LDRColour(7,7,7,0),    new DX10_Helpers.LDRColour( 6, 6, 6,0) },    new[] { new DX10_Helpers.LDRColour( 6, 6, 6,0), new DX10_Helpers.LDRColour( 6, 6, 6,0) }),
             new ModeInfo(1, true,  3, new[] { new DX10_Helpers.LDRColour(11,11,11,0), new DX10_Helpers.LDRColour( 5, 4, 4,0) },    new[] { new DX10_Helpers.LDRColour( 5, 4, 4,0), new DX10_Helpers.LDRColour( 5, 4, 4,0) }),
@@ -460,14 +478,14 @@ namespace XbTool.Common.Textures
                             default:
                                 Debugger.Break();
                                 break;
-                        }               
+                        }
                     }
                 }
 
                 // Sign extend necessary end points
                 if (isSigned)
                     endPoints[0].A = SignExtend(endPoints[0].A, info.RGBAPrec[0][0]);
-                
+
                 if (isSigned || info.Transformed)
                 {
                     for (int p = 0; p <= info.Partitions; p++)

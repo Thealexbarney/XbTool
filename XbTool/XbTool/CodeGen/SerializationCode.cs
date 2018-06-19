@@ -37,6 +37,7 @@ namespace XbTool.CodeGen
             sb.AppendLine("// ReSharper disable NotAccessedField.Global");
             sb.AppendLine();
             sb.AppendLine("using System;");
+            sb.AppendLine("using XbTool.Bdat;");
             sb.AppendLine();
             sb.AppendLine("namespace XbTool.Types");
             sb.AppendLineAndIncrease("{");
@@ -57,9 +58,8 @@ namespace XbTool.CodeGen
 
             sb.AppendLine("[BdatType]");
             sb.AppendLine("[Serializable]");
-            sb.AppendLine($"public class {type.Name}");
+            sb.AppendLine($"public class {type.Name} : BdatItem");
             sb.AppendLineAndIncrease("{");
-            sb.AppendLine("public int Id;");
 
             foreach (var member in type.Members)
             {
@@ -334,7 +334,7 @@ namespace XbTool.CodeGen
             sb.AppendLine("namespace XbTool.Types");
             sb.AppendLineAndIncrease("{");
             sb.AppendLine("[Serializable]");
-            sb.AppendLine("public class BdatCollection");
+            sb.AppendLine("public partial class BdatCollection");
             sb.AppendLineAndIncrease("{");
 
             foreach (var type in info.Types)
