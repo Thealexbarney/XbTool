@@ -9232,10 +9232,10 @@ namespace XbTool.Serialization
             foreach (BTL_ChBtlRewardSet item in tables.BTL_ChBtlRewardSet.Items)
             {
                 item._AppointItem = tables.GetItem(item.AppointItem);
-                item._DownCategory1 = (ItemType)item.DownCategory1;
-                item._DownCategory2 = (ItemType)item.DownCategory2;
-                item._UpCategory1 = (ItemType)item.UpCategory1;
-                item._UpCategory2 = (ItemType)item.UpCategory2;
+                item._DownCategory1 = (ItemTypeXb2)item.DownCategory1;
+                item._DownCategory2 = (ItemTypeXb2)item.DownCategory2;
+                item._UpCategory1 = (ItemTypeXb2)item.UpCategory1;
+                item._UpCategory2 = (ItemTypeXb2)item.UpCategory2;
                 item._UpItemID1 = tables.GetItem(item.UpItemID1);
                 item._UpItemID2 = tables.GetItem(item.UpItemID2);
                 item._UpItemID3 = tables.GetItem(item.UpItemID3);

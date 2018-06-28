@@ -185,8 +185,11 @@ namespace XbTool
             var tables = GetBdatCollection(options);
             Directory.CreateDirectory(options.Output);
 
-            var chBtlRewards = ChBtlRewards.Print(tables);
+            var chBtlRewards = ChBtlRewards.PrintHtml(tables);
             File.WriteAllText(Path.Combine(options.Output, "chbtlrewards.html"), chBtlRewards);
+
+            var chBtlRewardsCsv = ChBtlRewards.PrintCsv(tables);
+            File.WriteAllText(Path.Combine(options.Output, "chbtlrewards.csv"), chBtlRewardsCsv);
 
             var salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(options.Output, "salvaging.html"), salvaging);

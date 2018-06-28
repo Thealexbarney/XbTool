@@ -105,7 +105,7 @@ namespace XbTool.Types
         AuxCore
     }
 
-    public enum ItemType
+    public enum ItemTypeXb2
     {
         PcWpnChip = 1,
         PcEquip = 2,

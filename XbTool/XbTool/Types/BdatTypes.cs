@@ -1476,10 +1476,10 @@ namespace XbTool.Types
         public ushort DownItemID3;
         public ushort DownItemID4;
         public object _AppointItem;
-        public ItemType _DownCategory1;
-        public ItemType _DownCategory2;
-        public ItemType _UpCategory1;
-        public ItemType _UpCategory2;
+        public ItemTypeXb2 _DownCategory1;
+        public ItemTypeXb2 _DownCategory2;
+        public ItemTypeXb2 _UpCategory1;
+        public ItemTypeXb2 _UpCategory2;
         public object _UpItemID1;
         public object _UpItemID2;
         public object _UpItemID3;

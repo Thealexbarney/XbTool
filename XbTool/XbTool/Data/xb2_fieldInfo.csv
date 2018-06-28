@@ -80,8 +80,8 @@ BTL_ChBtl,TresureSet*,Reference,BTL_ChBtlRewardSet,,0,
 BTL_ChBtl,WpnRevTable,Reference,BTL_ChBtlWpnRev,,0,
 BTL_ChBtlRewardItem,ItemID,Item,,,0,
 BTL_ChBtlRewardSet,AppointItem,Item,,,0,
-BTL_ChBtlRewardSet,DownCategory*,Enum,,,0,ItemType
-BTL_ChBtlRewardSet,UpCategory*,Enum,,,0,ItemType
+BTL_ChBtlRewardSet,DownCategory*,Enum,,,0,ItemTypeXb2
+BTL_ChBtlRewardSet,UpCategory*,Enum,,,0,ItemTypeXb2
 BTL_ChBtlRewardSet,UpItemID*,Item,,,0,
 BTL_Class,Name,Message,btl_class_ms,,0,
 BTL_Class,Role*,Message,menu_role_name_ms,,0,
@@ -117,6 +117,9 @@ BTL_PouchBuffSet,PBuff1,PouchBuff,BTL_PouchBuff,PBuffParam1,0,
 BTL_PouchBuffSet,PBuff2,PouchBuff,BTL_PouchBuff,PBuffParam2,0,
 BTL_PouchBuffSet,PBuff3,PouchBuff,BTL_PouchBuff,PBuffParam3,0,
 BTL_Reaction,Name,Message,btl_buff_ms,,0,
+BTL_Siren,ArrangeID,Reference,CHR_EnArrange,,0,
+BTL_Siren,Gun,Reference,CHR_EnArrange,,0,
+BTL_Siren,Lance,Reference,CHR_EnArrange,,0,
 BTL_Skill_Bl,Enhance*,Reference,BTL_Enhance,,0,
 BTL_Skill_Bl,Name,Message,btl_skill_bl_name,,0,
 BTL_Skill_Dr,Enhance,Reference,BTL_Enhance,,0,

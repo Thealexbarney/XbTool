@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using XbTool.CodeGen;
 using XbTool.Common;
 using XbTool.Types;
@@ -9,16 +10,10 @@ namespace XbTool.Xb2
 {
     public static class ChBtlRewards
     {
-        public static string Print(BdatCollection tables)
+        public static string PrintHtml(BdatCollection tables)
         {
             var sb = new Indenter();
-            var rewards = new List<RewardSet>();
-
-            foreach (var chBtl in tables.BTL_ChBtl)
-            {
-                var a = ReadRewardSet(tables, chBtl.Id);
-                rewards.Add(a);
-            }
+            List<RewardSet> rewards = ReadAllRewards(tables);
 
             sb.AppendLine("<!DOCTYPE html>");
             sb.AppendLine("<html>");
@@ -55,7 +50,39 @@ namespace XbTool.Xb2
             return sb.ToString();
         }
 
+        public static string PrintCsv(BdatCollection tables)
+        {
+            var sb = new StringBuilder();
+            List<RewardSet> rewards = ReadAllRewards(tables);
 
+            sb.AppendLine("Challenge,Challenge Name,Box,Item,Item Name,Prob");
+
+            foreach (var chBtl in rewards)
+            {
+                foreach (var set in chBtl.Rewards)
+                {
+                    foreach (var item in set.Items)
+                    {
+                        sb.AppendLine(
+                            $"{chBtl.Id},\"{chBtl.Name}\",{set.BoxNum},{item.Id},\"{item.Name}\",{item.Percent:R}");
+                    }
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static List<RewardSet> ReadAllRewards(BdatCollection tables)
+        {
+            var rewards = new List<RewardSet>();
+
+            foreach (var chBtl in tables.BTL_ChBtl)
+            {
+                rewards.Add(ReadRewardSet(tables, chBtl.Id));
+            }
+
+            return rewards;
+        }
 
         public static RewardSet ReadRewardSet(BdatCollection tables, int chBtlId)
         {

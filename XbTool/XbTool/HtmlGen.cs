@@ -109,7 +109,8 @@ namespace XbTool
             sb.AppendLineAndIncrease("<body>");
             sb.AppendLine("<h1>Xenoblade 2 data tables</h1>");
             sb.AppendLine($"<p>{IndexText}</p>");
-            sb.AppendLine($"<h2><a href=\"bdat\\index.html\">Complete table list</a></h2>");
+            sb.AppendLine("<a href=\"chbtlrewards.html\">Challenge Battle Rewards</a><br/>");
+            sb.AppendLine("<h2><a href=\"bdat\\index.html\">Complete table list</a></h2>");
 
             string prefix = bdats.Game.ToString().ToLower();
             if (!File.Exists($"{prefix}_tableDisplay.csv")) return;
