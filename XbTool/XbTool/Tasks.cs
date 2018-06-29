@@ -40,6 +40,9 @@ namespace XbTool
                     case Task.Bdat2Json:
                         Bdat2Json(options);
                         break;
+                    case Task.Bdat2Psql:
+                        Bdat2Psql(options);
+                        break;
                     case Task.GenerateData:
                         GenerateData(options);
                         break;
@@ -176,6 +179,14 @@ namespace XbTool
 
             var tables = GetBdatStringCollection(options);
             JsonGen.PrintAllTables(tables, options.Output, options.Progress);
+        }
+
+        private static void Bdat2Psql(Options options)
+        {
+            if (options.Schema == null) throw new NullReferenceException("Schema was not specified.");
+
+            var tables = GetBdatStringCollection(options);
+            DBGen.PrintAllTables(tables, options.Schema, options.Progress);
         }
 
         private static void GenerateData(Options options)

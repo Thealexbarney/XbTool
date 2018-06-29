@@ -11,6 +11,7 @@ namespace XbTool
         public string BdatDir { get; set; }
         public string Input { get; set; }
         public string Output { get; set; }
+        public string Schema { get; set; }
         public string Filter { get; set; }
         public string Xb2Dir { get; set; }
         public IProgressReport Progress { get; set; }
@@ -23,6 +24,7 @@ namespace XbTool
         BdatCodeGen,
         Bdat2Html,
         Bdat2Json,
+        Bdat2Psql,
         GenerateData,
         CreateBlade,
         ExtractWilay,
