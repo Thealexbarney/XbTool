@@ -1,4 +1,7 @@
 Display,BTL_BufEffList,Caption
+Display,BTL_Enhance,caption
 Display,DRP_ItemTable,ItemID
+Display,FLD_SkipTravel,loc_name
 Display,MNU_CollectItemCategory,CategoryName
 Display,MNU_IconCatATR,MSlabel
+Display,RSC_BgmList,filename

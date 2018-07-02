@@ -45,6 +45,24 @@ namespace XbTool.BdatString
             return sb.ToString();
         }
 
+        public static string GetEnhanceCaptionXbx(BdatStringValue value)
+        {
+            BdatStringItem item = value.Parent;
+            BdatStringCollection tables = item.Table.Collection;
+
+            int captionId = int.Parse(value.ValueString);
+            string caption = tables["BTL_Enhance_ms"][captionId]?["name"].ValueString;
+
+            if (caption == null) return null;
+
+            caption = caption
+                .Replace("<<enp0>>", item["ratio"].DisplayString)
+                .Replace("<<enp1>>", item["param1"].DisplayString)
+                .Replace("<<enp2>>", item["param2"].DisplayString);
+
+            return caption;
+        }
+
         public static string GetItemTableXb1(ItemTypeXb1 type)
         {
             switch (type)
@@ -78,8 +96,8 @@ namespace XbTool.BdatString
                 case ItemTypeXbx.LegArmor: return "AMR_PcList";
                 case ItemTypeXbx.RangedWeapon: return "WPN_PcList";
                 case ItemTypeXbx.MeleeWeapon: return "WPN_PcList";
-                case ItemTypeXbx.Item8: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item9: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item8: return null;
+                case ItemTypeXbx.Item9: return null;
                 case ItemTypeXbx.SkellHeadArmor:
                 case ItemTypeXbx.SkellBodyArmor:
                 case ItemTypeXbx.SkellArmArmorR:
@@ -90,52 +108,53 @@ namespace XbTool.BdatString
                 case ItemTypeXbx.SkellWeaponTypeC:
                 case ItemTypeXbx.SkellWeaponTypeD:
                 case ItemTypeXbx.SkellWeaponTypeE: return "WPN_DlList";
-                case ItemTypeXbx.Item20: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item20: return null;
                 case ItemTypeXbx.AugmentGround: return "BTL_ItemSkill_inner";
-                case ItemTypeXbx.Item22: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item23: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item22: return null;
+                case ItemTypeXbx.Item23: return null;
                 case ItemTypeXbx.AugmentSkell: return "BTL_ItemSkill_doll";
-                case ItemTypeXbx.Item25: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item26: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item27: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item28: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item29: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item30: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item31: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item32: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item33: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item34: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item35: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item36: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item37: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item38: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item39: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item40: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item41: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item42: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item43: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item44: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item45: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item46: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item47: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item48: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item49: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item50: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item51: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item52: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item53: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item54: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item55: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item56: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item57: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item58: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item59: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item60: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item61: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item62: return "DRP_PcWpnLotTable";
-                case ItemTypeXbx.Item63: return "DRP_PcWpnLotTable";
+                case ItemTypeXbx.Item25: return null;
+                case ItemTypeXbx.Item26: return null;
+                case ItemTypeXbx.Item27: return null;
+                case ItemTypeXbx.Item28: return null;
+                case ItemTypeXbx.Item29: return null;
+                case ItemTypeXbx.Item30: return null;
+                case ItemTypeXbx.Item31: return null;
+                case ItemTypeXbx.Item32: return null;
+                case ItemTypeXbx.Item33: return null;
+                case ItemTypeXbx.Item34: return null;
+                case ItemTypeXbx.Item35: return null;
+                case ItemTypeXbx.Item36: return null;
+                case ItemTypeXbx.Item37: return null;
+                case ItemTypeXbx.Item38: return null;
+                case ItemTypeXbx.Item39: return null;
+                case ItemTypeXbx.Item40: return null;
+                case ItemTypeXbx.Item41: return null;
+                case ItemTypeXbx.Item42: return null;
+                case ItemTypeXbx.Item43: return null;
+                case ItemTypeXbx.Item44: return null;
+                case ItemTypeXbx.Item45: return null;
+                case ItemTypeXbx.Item46: return null;
+                case ItemTypeXbx.Item47: return null;
+                case ItemTypeXbx.Item48: return null;
+                case ItemTypeXbx.Item49: return null;
+                case ItemTypeXbx.Item50: return null;
+                case ItemTypeXbx.Item51: return null;
+                case ItemTypeXbx.Item52: return null;
+                case ItemTypeXbx.Item53: return null;
+                case ItemTypeXbx.Item54: return null;
+                case ItemTypeXbx.Item55: return null;
+                case ItemTypeXbx.Item56: return null;
+                case ItemTypeXbx.Item57: return null;
+                case ItemTypeXbx.Item58: return null;
+                case ItemTypeXbx.Item59: return null;
+                case ItemTypeXbx.Item60: return null;
+                case ItemTypeXbx.Item61: return null;
+                case ItemTypeXbx.Item62: return null;
+                case ItemTypeXbx.Item63: return null;
                 case ItemTypeXbx.Holofigure: return "ITM_FigList";
                 case ItemTypeXbx.Schematic: return "ITM_Blueprint";
+                case ItemTypeXbx.Item66: return null;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -260,6 +279,57 @@ namespace XbTool.BdatString
                     return "FLD_ConditionAchievement";
                 case ConditionType.FieldSkill:
                     return "FLD_ConditionFieldSkiiLevel";
+            }
+
+            return null;
+        }
+
+        public static string GetConditionTableXbx(ConditionTypeXbx conditionType)
+        {
+            switch (conditionType)
+            {
+                case ConditionTypeXbx.Scenario:
+                    return "FLD_ConditionList_Scenario";
+                case ConditionTypeXbx.Quest:
+                    return "FLD_ConditionList_Quest";
+                case ConditionTypeXbx.GameEnv:
+                    return "FLD_ConditionList_GameEnv";
+                case ConditionTypeXbx.Flag:
+                    return "FLD_ConditionList_Flag";
+                case ConditionTypeXbx.PartyIn:
+                    return "FLD_ConditionList_PTin";
+                case ConditionTypeXbx.PartyOut:
+                    return "FLD_ConditionList_PTout";
+                case ConditionTypeXbx.FriendPoint:
+                    return "FLD_ConditionList_FriendPoint";
+                case ConditionTypeXbx.GameStat:
+                    return "FLD_ConditionList_GameStat";
+                case ConditionTypeXbx.Segment:
+                    return "FLD_ConditionList_Segment";
+                case ConditionTypeXbx.FnStat:
+                    return "FLD_ConditionList_FNStat";
+                case ConditionTypeXbx.Probe:
+                    return "FLD_ConditionList_Probe";
+                case ConditionTypeXbx.Type12:
+                    break;
+                case ConditionTypeXbx.Item:
+                    return "FLD_ConditionList_Item";
+                case ConditionTypeXbx.Party:
+                    return "FLD_ConditionList_Party";
+                case ConditionTypeXbx.SquadFlag:
+                    return "FLD_ConditionList_SquadFlag";
+                case ConditionTypeXbx.Type16:
+                    break;
+                case ConditionTypeXbx.SquadQuest:
+                    return "FLD_ConditionList_SquadQuest";
+                case ConditionTypeXbx.SquadMission:
+                    return "FLD_ConditionList_SquadMission";
+                case ConditionTypeXbx.Type19:
+                    break;
+                case ConditionTypeXbx.Type20:
+                    break;
+                case ConditionTypeXbx.Type21:
+                    break;
             }
 
             return null;

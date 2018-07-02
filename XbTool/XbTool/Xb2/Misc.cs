@@ -263,7 +263,14 @@ namespace XbTool.Xb2
                 (412, 8, "DoomResistanceUp"),
                 (413, 8, "PartyGaugeDrainAttacksUp"),
                 (414, 264, "DealAndTakeMoreDamage"),
-                (415, 264, "DealAndTakeLessDamage")
+                (415, 264, "DealAndTakeLessDamage"),
+                (416, 8, ""),
+                (417, 8, ""),
+                (418, 8, ""),
+                (419, 1032, ""),
+                (420, 8, ""),
+                (421, 8, ""),
+                (422, 8, "")
             };
 
             for (int i = 0; i < arr.Length; i++)

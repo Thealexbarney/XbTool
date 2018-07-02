@@ -92,8 +92,17 @@ namespace XbTool.BdatString
                     ApplyRef(BdatStringTools.GetQuestListIraTable(refId));
                     break;
                 case BdatFieldType.Condition:
-                    var conditionType = (ConditionType)int.Parse(item[field.RefField].ValueString);
-                    ApplyRef(BdatStringTools.GetConditionTable(conditionType));
+                    if (tables.Game == Game.XB2)
+                    {
+                        var conditionType = (ConditionType) int.Parse(item[field.RefField].ValueString);
+                        ApplyRef(BdatStringTools.GetConditionTable(conditionType));
+                    }
+                    if (tables.Game == Game.XBX)
+                    {
+                        var conditionType = (ConditionTypeXbx) int.Parse(item[field.RefField].ValueString);
+                        ApplyRef(BdatStringTools.GetConditionTableXbx(conditionType));
+                    }
+
                     break;
                 case BdatFieldType.Task:
                     var taskType = (TaskType)int.Parse(item[field.RefField].ValueString);
@@ -107,7 +116,8 @@ namespace XbTool.BdatString
                     ApplyRef(BdatStringTools.GetCharacterTable(refId));
                     break;
                 case BdatFieldType.Enhance:
-                    value.Display = BdatStringTools.GetEnhanceCaption(value);
+                    if(tables.Game == Game.XB2) value.Display = BdatStringTools.GetEnhanceCaption(value);
+                    if(tables.Game == Game.XBX) value.Display = BdatStringTools.GetEnhanceCaptionXbx(value);
                     break;
                 case BdatFieldType.WeatherIdMap:
                     value.Display = BdatStringTools.PrintWeatherIdMap(refId, 13, tables);

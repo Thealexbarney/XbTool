@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using CsvHelper;
 using XbTool.Bdat;
 using XbTool.BdatString;
@@ -239,11 +240,11 @@ namespace XbTool
                     }
 
                     var link = GetLink(table, child.Table, child.Id.ToString());
-                    sb.AppendLine($"{cellTag}<a href=\"{link}\">{display}</td></a>");
+                    sb.AppendLine($"{cellTag}<a href=\"{link}\">{WebUtility.HtmlEncode(display)}</td></a>");
                 }
                 else
                 {
-                    sb.AppendLine($"{cellTag}{value.DisplayString}</td>");
+                    sb.AppendLine($"{cellTag}{WebUtility.HtmlEncode(value.DisplayString)}</td>");
                 }
             }
         }

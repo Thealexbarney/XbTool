@@ -415,7 +415,8 @@ namespace XbTool.Types
         Item62,
         Item63,
         Holofigure,
-        Schematic
+        Schematic,
+        Item66
     }
 
     public enum CommonBladeType
@@ -481,5 +482,30 @@ namespace XbTool.Types
         Cat1,
         Landmark,
         Event
+    }
+
+    public enum ConditionTypeXbx
+    {
+        Scenario = 1,
+        Quest,
+        GameEnv,
+        Flag,
+        PartyIn,
+        PartyOut,
+        FriendPoint,
+        GameStat,
+        Segment,
+        FnStat,
+        Probe,
+        Type12,
+        Item,
+        Party,
+        SquadFlag,
+        Type16,
+        SquadQuest,
+        SquadMission,
+        Type19,
+        Type20,
+        Type21
     }
 }
