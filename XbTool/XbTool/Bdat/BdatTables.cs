@@ -19,6 +19,7 @@ namespace XbTool.Bdat
         public BdatArrayInfo[] BdatArrays { get; set; }
         public BdatType[] Types { get; set; }
         public BdatTableDesc[] TableDesc { get; set; }
+        public byte[] FileData { get; }
 
         public BdatTables(IFileReader fs, bool readMetadata, IProgressReport progress = null, string lang = "gb")
         {
@@ -34,6 +35,19 @@ namespace XbTool.Bdat
         {
             Game = game;
             Tables = ReadAllBdats(filenames, game);
+            TablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            if (readMetadata) ReadMetadata();
+        }
+
+        public BdatTables(string filename, Game game, bool readMetadata)
+        {
+            Game = game;
+            FileData = File.ReadAllBytes(filename);
+            var tables = new List<BdatTable>();
+
+            DataBuffer buffer = new DataBuffer(FileData, game, 0);
+            tables.AddRange(ReadBdatFile(buffer, filename));
+            Tables = tables.ToArray();
             TablesDict = Tables.ToDictionary(x => x.Name, x => x);
             if (readMetadata) ReadMetadata();
         }

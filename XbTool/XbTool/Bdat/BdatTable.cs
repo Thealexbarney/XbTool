@@ -72,6 +72,43 @@ namespace XbTool.Bdat
             MembersDict = Members.ToDictionary(x => x.Name, x => x);
         }
 
+        public string ReadValue(int itemId, string memberName)
+        {
+            var member = MembersDict[memberName];
+            var itemIndex = itemId - BaseId;
+            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            var valueOffset = itemOffset + member.MemberPos;
+
+            if (member.Type == BdatMemberType.Array) return "Array";
+            if (member.Type == BdatMemberType.Flag) return "Flag";
+            switch (member.ValType)
+            {
+                case BdatValueType.UInt8:
+                    return Data[valueOffset].ToString();
+                case BdatValueType.UInt16:
+                    return Data.ReadUInt16(valueOffset).ToString();
+                case BdatValueType.UInt32:
+                    return Data.ReadUInt32(valueOffset).ToString();
+                case BdatValueType.Int8:
+                    return ((sbyte)Data[valueOffset]).ToString();
+                case BdatValueType.Int16:
+                    return Data.ReadInt16(valueOffset).ToString();
+                case BdatValueType.Int32:
+                    return Data.ReadInt32(valueOffset).ToString();
+                case BdatValueType.String:
+                    return Data.ReadUTF8Z(Data.ReadInt32(valueOffset));
+                case BdatValueType.FP32:
+                    if (Data.Game == Game.XBX)
+                    {
+                        uint value = Data.ReadUInt32(valueOffset);
+                        return ((float)(value * (1 / 4096.0))).ToString("R");
+                    }
+                    return Data.ReadSingle(valueOffset).ToString("R");
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+        }
+
         public long ReadInt(int itemId, string memberName)
         {
             var member = MembersDict[memberName];
