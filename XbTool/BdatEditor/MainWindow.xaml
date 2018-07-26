@@ -15,8 +15,6 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open" Command="{Binding OpenBdatCommand}"/>
-                    <MenuItem Header="_Close"/>
-                    <MenuItem Header="_Save"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -40,7 +38,7 @@
             </Grid>
             <GridSplitter Grid.Column="1" ShowsPreview="true" HorizontalAlignment="Stretch" Width="5"/>
             <Grid Grid.Column="2">
-                <DataGrid AutoGenerateColumns="true" EnableColumnVirtualization="true"
+                <DataGrid AutoGenerateColumns="true" CanUserAddRows="False" EnableColumnVirtualization="true"
                           EnableRowVirtualization="true" ItemsSource="{Binding Path=EditingTable, Mode=TwoWay, IsAsync=True}" />
             </Grid>
         </Grid>
