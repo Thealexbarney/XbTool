@@ -109,6 +109,44 @@ namespace XbTool.Bdat
             }
         }
 
+        public void WriteValue(int itemId, string memberName, string value)
+        {
+            var member = MembersDict[memberName];
+            var itemIndex = itemId - BaseId;
+            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            var valueOffset = itemOffset + member.MemberPos;
+
+            if (member.Type != BdatMemberType.Scalar || member.ValType == BdatValueType.String)
+                return;
+
+            switch (member.ValType)
+            {
+                case BdatValueType.UInt8:
+                    Data.WriteUInt8(byte.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.UInt16:
+                    Data.WriteUInt16(ushort.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.UInt32:
+                    Data.WriteUInt32(uint.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.Int8:
+                    Data.WriteInt8(sbyte.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.Int16:
+                    Data.WriteInt16(short.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.Int32:
+                    Data.WriteInt32(int.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.FP32:
+                    Data.WriteSingle(float.Parse(value), valueOffset);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+        }
+
         public long ReadInt(int itemId, string memberName)
         {
             var member = MembersDict[memberName];

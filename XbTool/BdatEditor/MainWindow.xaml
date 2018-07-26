@@ -8,7 +8,7 @@
         Title="Xenoblade 2 BDAT Editor" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
@@ -19,9 +19,8 @@
                     <MenuItem Header="_Save"/>
                 </MenuItem>
             </Menu>
-            <StackPanel></StackPanel>
         </DockPanel>
-        
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -31,15 +30,18 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <ListBox Grid.Row="0" ItemsSource="{Binding TableNames}" SelectedIndex="{Binding SelectedTable}"/>
-                <Button Grid.Row="1" Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top"/>
+                <StackPanel Grid.Row="1">
+                <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top"/>
+                <Button Command="{Binding SaveTableCommand}" Content="Save Table" VerticalAlignment="Top"/>
+                </StackPanel>
             </Grid>
             <GridSplitter Grid.Column="1" ShowsPreview="true" HorizontalAlignment="Stretch" Width="5"/>
             <Grid Grid.Column="2">
-                <DataGrid AutoGenerateColumns="true" EnableColumnVirtualization = "true"
-                          EnableRowVirtualization = "true" ItemsSource="{Binding Path=EditingTable, Mode=TwoWay, IsAsync=True}" />
+                <DataGrid AutoGenerateColumns="true" EnableColumnVirtualization="true"
+                          EnableRowVirtualization="true" ItemsSource="{Binding Path=EditingTable, Mode=TwoWay, IsAsync=True}" />
             </Grid>
         </Grid>
 
