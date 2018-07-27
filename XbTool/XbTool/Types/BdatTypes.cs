@@ -382,6 +382,7 @@ namespace XbTool.Types
         public ArtType _ArtsType;
         public MNU_Name _Atr;
         public MNU_BtnChallenge2 _BtnChal1;
+        public BTL_BulletEffect _BulletEffID;
         public BTL_Bullet _BulletID;
         public Message _Caption;
         public CommonBladeType _CmnBlType;
@@ -604,6 +605,7 @@ namespace XbTool.Types
         public MNU_BtnChallenge2 _BtnChal2;
         public MNU_BtnChallenge2 _BtnChal3;
         public MNU_BtnChallenge2 _BtnChal6;
+        public BTL_BulletEffect _BulletEffID;
         public BTL_Bullet _BulletID;
         public Message _Caption;
         public CommonBladeType _CmnBlType;
@@ -857,6 +859,7 @@ namespace XbTool.Types
         public BTL_Buff _ArtsBuff;
         public BTL_Buff _ArtsDeBuff;
         public ArtType _ArtsType;
+        public BTL_BulletEffect _BulletEffID;
         public BTL_Bullet _BulletID;
         public Message _Caption;
         public CHR_Dr _Driver;
@@ -1033,6 +1036,7 @@ namespace XbTool.Types
         public BTL_Buff _ArtsDeBuff;
         public ArtType _ArtsType;
         public MNU_Name _Atr;
+        public BTL_BulletEffect _BulletEffID;
         public BTL_Bullet _BulletID;
         public BTL_Enhance _Enhance;
         public Message _Name;
@@ -1398,9 +1402,13 @@ namespace XbTool.Types
         public byte Driver1;
         public byte Driver2;
         public byte Driver3;
+        public ushort NeedItem;
         public ushort Condition;
         public ushort ConditionCap;
+        public ushort Condition2;
+        public ushort ConditionCap2;
         public byte Flag;
+        public ushort HideCondition;
         public ushort ClearReward;
         public ushort TresureSet1;
         public ushort TresureSet2;
@@ -1415,6 +1423,7 @@ namespace XbTool.Types
         public string Voice2;
         public string Voice3;
         public string Voice4;
+        public ushort Event;
         public bool Hide;
         public Message _Caption;
         public object _ClearReward;
@@ -1463,6 +1472,8 @@ namespace XbTool.Types
         public ushort ItemValueMax2;
         public ushort AppointItem;
         public ushort AppointItemNum;
+        public ushort AppointItem2;
+        public ushort AppointItemNum2;
         public byte UpCategory1;
         public byte UpCategory2;
         public byte DownCategory1;
@@ -1750,6 +1761,8 @@ namespace XbTool.Types
         public byte Caption;
         public byte Atr;
         public byte ComboStage;
+        public byte Route;
+        public byte RouteIra;
         public byte PreCombo;
         public byte Range;
         public ushort BaseTime;
@@ -1810,6 +1823,7 @@ namespace XbTool.Types
         public byte ReAct16;
         public string Effect;
         public byte SE;
+        public byte NaID;
         public byte DamageRate;
         public byte FusionName1;
         public byte FusionName2;
@@ -1971,6 +1985,7 @@ namespace XbTool.Types
         public float Param1;
         public float Param2;
         public ushort Caption;
+        public ushort Caption2;
         public BTL_EnhanceEff _EnhanceEffect;
     }
 
@@ -2084,6 +2099,7 @@ namespace XbTool.Types
     {
         public byte DropRsc;
         public byte HpRatio;
+        public byte HpRatioIra;
         public string Category;
     }
 
@@ -2203,6 +2219,7 @@ namespace XbTool.Types
     {
         public ushort ExpRevHigh;
         public ushort ExpRevLow;
+        public ushort ExpRevLow2;
         public ushort DamageRevHigh;
         public ushort DamageRevLow;
         public ushort HitRevLow;
@@ -2334,42 +2351,6 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class BTL_Siren : BdatItem
-    {
-        public ushort ArrangeID;
-        public ushort Gun;
-        public ushort Lance;
-        public ushort DamageLV1;
-        public ushort DamageLV2;
-        public ushort DamageLV3;
-        public ushort DamageLV4;
-        public ushort GaugeLV1;
-        public ushort GaugeLV2;
-        public ushort GaugeLV3;
-        public ushort GaugeLV4;
-        public ushort GaugeBonus;
-        public byte DownLV1;
-        public byte DownLV2;
-        public byte DownLV3;
-        public byte DownLV4;
-        public byte ShotNumLV1;
-        public byte ShotNumLV2;
-        public byte ShotNumLV3;
-        public byte ShotNumLV4;
-    }
-
-    [BdatType]
-    [Serializable]
-    public class BTL_SirenPos : BdatItem
-    {
-        public byte situation;
-        public string camera;
-        public ushort Wpos;
-        public ushort Bpos;
-    }
-
-    [BdatType]
-    [Serializable]
     public class BTL_Skill_Bl : BdatItem
     {
         public ushort Name;
@@ -2426,6 +2407,78 @@ namespace XbTool.Types
     {
         public byte Param;
         public byte Param2;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class BTL_SpBtl : BdatItem
+    {
+        public ushort ArrangeID;
+        public ushort Gun;
+        public ushort Lance;
+        public ushort DamageLV1;
+        public ushort DamageLV2;
+        public ushort DamageLV3;
+        public ushort DamageLV4;
+        public ushort GaugeLV1;
+        public ushort GaugeLV2;
+        public ushort GaugeLV3;
+        public ushort GaugeLV4;
+        public ushort GaugeBonus;
+        public byte DownLV1;
+        public byte DownLV2;
+        public byte DownLV3;
+        public byte DownLV4;
+        public byte ShotNumLV1;
+        public byte ShotNumLV2;
+        public byte ShotNumLV3;
+        public byte ShotNumLV4;
+        public byte ShotFrame;
+        public CHR_EnArrange _ArrangeID;
+        public CHR_EnArrange _Gun;
+        public CHR_EnArrange _Lance;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class BTL_SpBtlPos : BdatItem
+    {
+        public byte situation;
+        public string camera;
+        public ushort Wpos;
+        public ushort Bpos;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class BTL_SpSkill : BdatItem
+    {
+        public float AddTimeBC1;
+        public float AddTimeBC2;
+        public float AddTimeBC3;
+        public float AddTimeDC1;
+        public float AddTimeDC2;
+        public float AddTimeDC3;
+        public float AddTimeDC4;
+        public float AddTimeFC2;
+        public float AddTimeFC3;
+        public float AddTimeFC4;
+        public float AddTimeFC5;
+        public float AddTimeFC6;
+        public float AddTimeFC7;
+        public ushort AddTimeMax;
+        public float AddTimeRe;
+        public float AddTimeDecrease;
+        public ushort AddTimeMin;
+        public float DmgNum1;
+        public ushort DmgNum2;
+        public ushort RecastNum1;
+        public float RecastNum2;
+        public ushort RecastNum3;
+        public ushort ResistNum1;
+        public float ResistNum2;
+        public ushort ResistNum3;
+        public ushort PTGRev;
     }
 
     [BdatType]
@@ -2782,8 +2835,8 @@ namespace XbTool.Types
         public ushort DexLv99;
         public ushort AgilityLv99;
         public ushort LuckLv99;
-        public readonly byte[] WpnType = new byte[34];
-        public readonly byte[] WpRate = new byte[34];
+        public readonly byte[] WpnType = new byte[36];
+        public readonly byte[] WpRate = new byte[36];
         public ushort FavoriteCategory1;
         public ushort FavoriteItem1;
         public ushort FavoriteCategory2;
@@ -2906,7 +2959,9 @@ namespace XbTool.Types
         public bool Salvage;
         public bool Serious;
         public bool NoChgBtl;
-        public MNU_Filename _BGMID;
+        public bool NoKasumi;
+        public RSC_BgmList _BGMID;
+        public MNU_Name _BladeAtr;
         public CHR_Bl _BladeID;
         public BTL_EnBook _BookID;
         public BTL_EnDropItem _DropTableID;
@@ -4533,6 +4588,7 @@ namespace XbTool.Types
         public string name;
         public ushort RSC_ID;
         public ushort en_popID;
+        public ushort menuMapImage;
     }
 
     [BdatType]
@@ -4741,6 +4797,7 @@ namespace XbTool.Types
         public byte camGim_ATR;
         public ushort menuMapImage;
         public ushort effectID;
+        public ushort menuMapImage_0;
         public bool MSG_ray;
         public bool mapobj_fadeOUT_collision;
         public bool gmkCamPos;
@@ -5705,6 +5762,7 @@ namespace XbTool.Types
         public string RareBlade41;
         public string RareBlade42;
         public string RareBlade43;
+        public string RareBlade44;
     }
 
     [BdatType]
@@ -6349,7 +6407,10 @@ namespace XbTool.Types
         public ushort CreateWpn32;
         public ushort CreateWpn33;
         public ushort CreateWpn34;
+        public ushort CreateWpn35;
+        public ushort CreateWpn36;
         public uint Price;
+        public uint PriceIra;
         public byte Rarity;
         public byte Flag;
         public ushort Zone;
@@ -6393,6 +6454,8 @@ namespace XbTool.Types
         public ITM_PcWpn _CreateWpn32;
         public ITM_PcWpn _CreateWpn33;
         public ITM_PcWpn _CreateWpn34;
+        public ITM_PcWpn _CreateWpn35;
+        public ITM_PcWpn _CreateWpn36;
         public ITM_PcWpn _CreateWpn4;
         public ITM_PcWpn _CreateWpn5;
         public ITM_PcWpn _CreateWpn6;
@@ -7468,6 +7531,7 @@ namespace XbTool.Types
         public float initWaitTime;
         public float initWaitTimeRand;
         public byte rarity;
+        public ushort menuMapImage;
         public FLD_ConditionList _Condition;
         public TimeRange _POP_TIME;
     }
@@ -8053,18 +8117,6 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
-    public class MNU_CampCraft : BdatItem
-    {
-        public ushort driver_id;
-        public ushort shop_id;
-        public ushort summary_msg;
-        public CHR_Dr _driver_id;
-        public MNU_ShopList _shop_id;
-        public Message _summary_msg;
-    }
-
-    [BdatType]
-    [Serializable]
     public class MNU_ChallengeParam : BdatItem
     {
         public byte InputType;
@@ -8172,6 +8224,18 @@ namespace XbTool.Types
 
     [BdatType]
     [Serializable]
+    public class MNU_DriverInfo : BdatItem
+    {
+        public ushort driver_id;
+        public ushort shop_id;
+        public ushort summary_msg;
+        public CHR_Dr _driver_id;
+        public MNU_ShopList _shop_id;
+        public Message _summary_msg;
+    }
+
+    [BdatType]
+    [Serializable]
     public class MNU_EventTheater : BdatItem
     {
         public ushort title;
@@ -8275,6 +8339,7 @@ namespace XbTool.Types
         public ushort text2;
         public ushort text3;
         public ushort text4;
+        public ushort text5;
         public byte repeat;
     }
 
@@ -8493,6 +8558,7 @@ namespace XbTool.Types
         public ushort name;
         public string color;
         public ushort name2;
+        public ushort name3;
         public Message _name;
         public Message _name2;
     }
@@ -8513,6 +8579,24 @@ namespace XbTool.Types
     {
         public ushort name;
         public Message _name;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class MNU_NpcChange : BdatItem
+    {
+        public ushort base_npc;
+        public ushort cond_a;
+        public ushort npc_a;
+        public ushort cond_b;
+        public ushort npc_b;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class MNU_NpcFace : BdatItem
+    {
+        public ushort base_npc;
     }
 
     [BdatType]
@@ -8646,6 +8730,7 @@ namespace XbTool.Types
     {
         public ushort TaskSet;
         public ushort Condition;
+        public ushort Condition2;
     }
 
     [BdatType]
@@ -8833,7 +8918,7 @@ namespace XbTool.Types
     {
         public ushort resource;
         public float time;
-        public MNU_Filename _resource;
+        public RSC_BgmList _resource;
     }
 
     [BdatType]
@@ -8858,6 +8943,15 @@ namespace XbTool.Types
     {
         public string filename;
         public string filename_2nd;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class MNU_Stream_Ira_Npc : BdatItem
+    {
+        public string filename;
+        public string filename_2nd;
+        public string filename_3rd;
     }
 
     [BdatType]
@@ -8906,6 +9000,7 @@ namespace XbTool.Types
         public byte start_id;
         public uint param1;
         public byte param2;
+        public byte HpRatio;
     }
 
     [BdatType]
@@ -8993,14 +9088,22 @@ namespace XbTool.Types
         public ushort ConditionD;
         public ushort BgmIDD;
         public byte Priority;
-        public MNU_Filename _BgmIDA;
-        public MNU_Filename _BgmIDB;
-        public MNU_Filename _BgmIDC;
-        public MNU_Filename _BgmIDD;
+        public RSC_BgmList _BgmIDA;
+        public RSC_BgmList _BgmIDB;
+        public RSC_BgmList _BgmIDC;
+        public RSC_BgmList _BgmIDD;
         public FLD_ConditionList _ConditionA;
         public FLD_ConditionList _ConditionB;
         public FLD_ConditionList _ConditionC;
         public FLD_ConditionList _ConditionD;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class RSC_BgmList : BdatItem
+    {
+        public string filename;
+        public byte NoExchange;
     }
 
     [BdatType]
@@ -9129,6 +9232,11 @@ namespace XbTool.Types
         public bool DeathMotion;
         public MNU_Name _TypeFamily;
         public RSC_EnGenus _TypeGenus;
+        public BTL_Wpn_En _WeaponNum1;
+        public BTL_Wpn_En _WeaponNum2;
+        public BTL_Wpn_En _WeaponNum3;
+        public BTL_Wpn_En _WeaponNum4;
+        public BTL_Wpn_En _WeaponNum5;
     }
 
     [BdatType]
@@ -9317,6 +9425,14 @@ namespace XbTool.Types
         public ushort HitonowaFlag;
         public ushort NpcMeetFlag;
         public ushort MSGID;
+        public ushort AreaNumber1;
+        public ushort Condition1;
+        public ushort MSGID2;
+        public ushort AreaNumber2;
+        public ushort Condition2;
+        public ushort MSGID3;
+        public ushort AreaNumber3;
+        public ushort result;
         public Gender _Gender;
         public Message _Name;
         public NpcRoot _Roots;
@@ -9453,6 +9569,12 @@ namespace XbTool.Types
         public string Wpn34rOut;
         public string Wpn34lIn;
         public string Wpn34lOut;
+        public string Wpn35rIn;
+        public string Wpn35rOut;
+        public string Wpn35lIn;
+        public string Wpn35lOut;
+        public string Wpn36rIn;
+        public string Wpn36rOut;
     }
 
     [BdatType]
@@ -9571,12 +9693,14 @@ namespace XbTool.Types
         public byte Flag;
         public byte Interval;
         public readonly string[] Voice = new string[4];
+        public bool RepBuddy;
         public bool LotNum;
         public bool NoOverwrite;
         public bool Dead;
         public bool NoDir;
         public bool NoChain;
         public bool NoReplyOK;
+        public bool SeriousOff;
     }
 
     [BdatType]
@@ -9594,6 +9718,7 @@ namespace XbTool.Types
         public byte Interval;
         public byte SoloMode;
         public readonly string[] Voice = new string[4];
+        public bool RepBuddy;
         public bool LotNum;
         public bool NoOverwrite;
         public bool Dead;
@@ -9686,8 +9811,8 @@ namespace XbTool.Types
     {
         public ushort FLD_CondID;
         public ushort NeedChrID;
-        public readonly ushort[] ChrID = new ushort[4];
-        public readonly uint[] Voice = new uint[4];
-        public readonly ushort[] Timer = new ushort[4];
+        public readonly ushort[] ChrID = new ushort[5];
+        public readonly uint[] Voice = new uint[5];
+        public readonly ushort[] Timer = new ushort[5];
     }
 }
