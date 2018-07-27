@@ -79,6 +79,9 @@ namespace XbTool
                     case Task.ExportQuests:
                         ExportQuests(options);
                         break;
+                    case Task.ReplaceArchive:
+                        ReplaceArchive(options);
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -92,6 +95,19 @@ namespace XbTool
             using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
             {
                 FileArchive.Extract(archive, options.Output, options.Progress);
+            }
+        }
+
+        private static void ReplaceArchive(Options options)
+        {
+            if (options.ArdFilename == null) throw new NullReferenceException("Archive must be specified");
+            if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output file was specified.");
+
+            using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
+            {
+                var replacement = File.ReadAllBytes(options.Input);
+                archive.ReplaceFile(options.Output, replacement);
             }
         }
 

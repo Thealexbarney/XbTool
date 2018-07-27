@@ -61,5 +61,16 @@ namespace XbTool.Common
         {
             return TryOpenDataFile(filename) ?? throw new FileNotFoundException($"Could not find data file {filename}", filename);
         }
+
+        public static int GetNextMultiple(int value, int multiple)
+        {
+            if (multiple <= 0)
+                return value;
+
+            if (value % multiple == 0)
+                return value;
+
+            return value + multiple - value % multiple;
+        }
     }
 }

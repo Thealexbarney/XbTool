@@ -35,6 +35,7 @@ namespace XbTool
         DecodeCatex,
         ExtractMinimap,
         GenerateSite,
-        ExportQuests
+        ExportQuests,
+        ReplaceArchive
     }
 }

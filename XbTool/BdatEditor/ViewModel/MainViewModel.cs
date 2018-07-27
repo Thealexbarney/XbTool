@@ -112,7 +112,6 @@ namespace BdatEditor.ViewModel
             File.WriteAllBytes(Filename, BdatTables.FileData);
 
             EditingTable.AcceptChanges();
-            ;
         }
 
         public void OpenBdat(string filename)

@@ -171,6 +171,9 @@ namespace XbTool
             Console.WriteLine("  ExtractArchive - Extracts Xenoblade 2's file archive");
             Console.WriteLine("    ExtractArchive -a <archive> -o <output_path>");
 
+            Console.WriteLine("\n  ReplaceArchive - Replaces a file in Xenoblade 2's file archive");
+            Console.WriteLine("    ReplaceArchive -a <archive> -i <new_file> -o <filename_to_replace>");
+
             Console.WriteLine("\n  DecryptBdat - Decrypts a BDAT file or directory");
             Console.WriteLine("    DecryptBdat -i <input_file> [-o <output_file>]");
             Console.WriteLine("    DecryptBdat -i <input_dir>");

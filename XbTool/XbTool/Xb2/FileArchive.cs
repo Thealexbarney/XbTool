@@ -25,10 +25,18 @@ namespace XbTool.Xb2
         private long Length { get; set; }
 
         private FileStream Stream { get; }
+        private string HeaderFilename { get; }
+        private byte[] HeaderFile { get; }
+        private DataBuffer HeaderFileData { get; }
 
         public FileArchive(string headerFilename, string dataFilename)
         {
-            var headerFile = File.ReadAllBytes(headerFilename);
+            HeaderFilename = headerFilename;
+            HeaderFile = File.ReadAllBytes(headerFilename);
+            HeaderFileData = new DataBuffer(HeaderFile, Game.XB2, 0);
+
+            var headerFile = new byte[HeaderFile.Length];
+            Array.Copy(HeaderFile, headerFile, HeaderFile.Length);
             DecryptArh(headerFile);
 
             using (var stream = new MemoryStream(headerFile))
@@ -71,7 +79,7 @@ namespace XbTool.Xb2
                 AddAllFilenames();
             }
 
-            Stream = new FileStream(dataFilename, FileMode.Open, FileAccess.Read);
+            Stream = new FileStream(dataFilename, FileMode.Open, FileAccess.ReadWrite);
             Length = Stream.Length;
         }
 
@@ -119,7 +127,7 @@ namespace XbTool.Xb2
         public IEnumerable<string> FindFiles(string pattern)
         {
             Glob glob = Glob.Parse(pattern,
-                new GlobOptions {Evaluation = new EvaluationOptions {CaseInsensitive = true}});
+                new GlobOptions { Evaluation = new EvaluationOptions { CaseInsensitive = true } });
             var fileInfos = new List<string>();
             foreach (var file in FileInfo)
             {
@@ -140,6 +148,11 @@ namespace XbTool.Xb2
         public byte[] ReadFile(string filename)
         {
             return ReadFile(GetFileInfo(filename));
+        }
+
+        public void ReplaceFile(string filename, byte[] file)
+        {
+            ReplaceFile(GetFileInfo(filename), file);
         }
 
         public byte[] ReadFile(FileInfo fileInfo)
@@ -175,6 +188,44 @@ namespace XbTool.Xb2
                 case 0:
                     input.CopyStream(output, fileInfo.CompressedSize);
                     break;
+            }
+        }
+
+        private void CompressFile(Stream input, Stream output)
+        {
+            using (var deflate = new ZlibStream(input, CompressionMode.Compress, CompressionLevel.BestCompression, true))
+            {
+                deflate.CopyTo(output, (int)input.Length);
+            }
+        }
+
+        public void ReplaceFile(FileInfo fileInfo, byte[] data)
+        {
+            if (fileInfo.Type == 2)
+            {
+                var compressed = new MemoryStream();
+                CompressFile(new MemoryStream(data), compressed);
+                int compressedLength = (int)compressed.Length;
+
+                if (compressedLength > fileInfo.CompressedSize)
+                {
+                    throw new NotImplementedException("Compressed input file is larger than the original");
+                }
+
+                // Do we need to update the arh?
+                //HeaderFileData.WriteInt32(compressedLength, fileInfo.HeaderOffset + 8);
+                HeaderFileData.WriteInt32(data.Length, fileInfo.HeaderOffset + 12);
+                File.WriteAllBytes(HeaderFilename, HeaderFile);
+
+                using (var writer = new BinaryWriter(Stream))
+                {
+                    Stream.Position = fileInfo.Offset + 8;
+                    writer.Write(data.Length);
+                    writer.Write(compressedLength);
+                    Stream.Position = fileInfo.Offset + 0x30;
+                    compressed.Position = 0;
+                    compressed.CopyTo(Stream);
+                }
             }
         }
 
@@ -278,6 +329,7 @@ namespace XbTool.Xb2
     {
         public FileInfo(BinaryReader reader)
         {
+            HeaderOffset = (int)reader.BaseStream.Position;
             Offset = reader.ReadInt64();
             CompressedSize = reader.ReadInt32();
             UncompressedSize = reader.ReadInt32();
@@ -285,11 +337,20 @@ namespace XbTool.Xb2
             Id = reader.ReadInt32();
         }
 
+        public int HeaderOffset { get; }
         public string Filename { get; set; }
         public long Offset { get; }
         public int CompressedSize { get; }
         public int UncompressedSize { get; }
         public int Type { get; }
         public int Id { get; }
+
+        public int GetDataLength()
+        {
+            var length = CompressedSize;
+            if (Type == 2) length += 0x30;
+            length = Helpers.GetNextMultiple(length, 0x10);
+            return length;
+        }
     }
 }
