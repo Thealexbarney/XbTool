@@ -13,27 +13,27 @@ namespace XbTool.Xb2.Quest
             Directory.CreateDirectory(outDir);
 
             var quests = ReadQuests(tables.FLD_QuestListNormal);
-            var export = Export.ExportQuests(quests);
+            var export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests normal.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestListBlade);
-            export = Export.ExportQuests(quests);
+            export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests blade.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestListMini);
-            export = Export.ExportQuests(quests);
+            export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests mini.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestList);
-            export = Export.ExportQuests(quests);
+            export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestListIra);
-            export = Export.ExportQuests(quests);
+            export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests ira.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestListNormalIra);
-            export = Export.ExportQuests(quests);
+            export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests normal ira.txt"), export);
         }
 

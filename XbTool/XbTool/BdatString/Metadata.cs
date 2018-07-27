@@ -5,6 +5,7 @@ using System.Text;
 using XbTool.Bdat;
 using XbTool.Common;
 using XbTool.Types;
+using XbTool.Xb2.GameData;
 
 namespace XbTool.BdatString
 {
@@ -147,7 +148,8 @@ namespace XbTool.BdatString
                     break;
                 case BdatFieldType.Place:
                     var placeCat = (PlaceCategory)int.Parse(item[field.RefField].ValueString);
-                    ApplyRef(BdatStringTools.GetPlaceTable(placeCat, refId));
+                    var placeTable = GimmickData.GetPlaceTable(placeCat, refId);
+                    if(placeTable != null) ApplyRef(placeTable);
                     break;
             }
 
