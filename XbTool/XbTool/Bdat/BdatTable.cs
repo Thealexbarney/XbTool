@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using XbTool.Common;
 
 namespace XbTool.Bdat
@@ -116,7 +117,7 @@ namespace XbTool.Bdat
             var itemOffset = ItemTableOffset + itemIndex * ItemSize;
             var valueOffset = itemOffset + member.MemberPos;
 
-            if (member.Type != BdatMemberType.Scalar || member.ValType == BdatValueType.String)
+            if (member.Type != BdatMemberType.Scalar)
                 return;
 
             switch (member.ValType)
@@ -141,6 +142,14 @@ namespace XbTool.Bdat
                     break;
                 case BdatValueType.FP32:
                     Data.WriteSingle(float.Parse(value), valueOffset);
+                    break;
+                case BdatValueType.String:
+                    int offset = Data.ReadInt32(valueOffset);
+                    var oldValue = Data.ReadUTF8Z(offset);
+                    var oldLength = Encoding.UTF8.GetByteCount(oldValue);
+                    var length = Encoding.UTF8.GetByteCount(value);
+                    if (length > oldLength) throw new ArgumentOutOfRangeException(nameof(value), "String is too long");
+                    Data.WriteUTF8Z(value, offset);
                     break;
                 default:
                     throw new IndexOutOfRangeException();

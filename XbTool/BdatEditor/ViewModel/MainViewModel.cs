@@ -56,7 +56,7 @@ namespace BdatEditor.ViewModel
             foreach (var col in editTable.Columns)
             {
                 DataColumn column = new DataColumn();
-                if (col.Type != BdatMemberType.Scalar || col.ValType == BdatValueType.String)
+                if (col.Type != BdatMemberType.Scalar)
                 {
                     column.ReadOnly = true;
                 }
@@ -93,7 +93,7 @@ namespace BdatEditor.ViewModel
                 var itemId = int.Parse((string)row.ItemArray[0]);
                 for (int m = 0; m < members.Length; m++)
                 {
-                    if (members[m].Type != BdatMemberType.Scalar || members[m].ValType == BdatValueType.String) continue;
+                    if (members[m].Type != BdatMemberType.Scalar) continue;
                     var value = (string)row.ItemArray[m + 1];
                     try
                     {
@@ -101,9 +101,20 @@ namespace BdatEditor.ViewModel
                     }
                     catch (Exception ex)
                     {
-                        if (!(ex is FormatException || ex is OverflowException)) throw;
-                        var caption = $"Error parsing \"{value}\" as a {members[m].ValType} " +
+                        string caption = null;
+                        if (ex is ArgumentOutOfRangeException)
+                        {
+                            caption = "Replacement string was too large to fit in the original space.";
+                        }
+
+                        if (ex is FormatException || ex is OverflowException)
+                        {
+                            caption = $"Error parsing \"{value}\" as a {members[m].ValType} " +
                                       $"from Item \"{itemId}\" Column \"{members[m].Name}\".";
+                        }
+
+                        if (caption == null) throw;
+
                         MessageBox.Show(caption, "Format Error");
                     }
                 }

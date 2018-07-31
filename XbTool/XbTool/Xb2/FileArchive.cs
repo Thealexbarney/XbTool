@@ -213,7 +213,7 @@ namespace XbTool.Xb2
                 }
 
                 // Do we need to update the arh?
-                //HeaderFileData.WriteInt32(compressedLength, fileInfo.HeaderOffset + 8);
+                HeaderFileData.WriteInt32(compressedLength, fileInfo.HeaderOffset + 8);
                 HeaderFileData.WriteInt32(data.Length, fileInfo.HeaderOffset + 12);
                 File.WriteAllBytes(HeaderFilename, HeaderFile);
 
