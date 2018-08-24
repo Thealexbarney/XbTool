@@ -2244,13 +2244,15 @@ namespace XbTool.Serialization
             item.AddTimeMin = BitConverter.ToUInt16(file, itemOffset + 62);
             item.DmgNum1 = BitConverter.ToSingle(file, itemOffset + 64);
             item.DmgNum2 = BitConverter.ToUInt16(file, itemOffset + 68);
-            item.RecastNum1 = BitConverter.ToUInt16(file, itemOffset + 70);
-            item.RecastNum2 = BitConverter.ToSingle(file, itemOffset + 72);
-            item.RecastNum3 = BitConverter.ToUInt16(file, itemOffset + 76);
-            item.ResistNum1 = BitConverter.ToUInt16(file, itemOffset + 78);
-            item.ResistNum2 = BitConverter.ToSingle(file, itemOffset + 80);
-            item.ResistNum3 = BitConverter.ToUInt16(file, itemOffset + 84);
-            item.PTGRev = BitConverter.ToUInt16(file, itemOffset + 86);
+            item.DmgNum3 = BitConverter.ToUInt16(file, itemOffset + 70);
+            item.RecastNum1 = BitConverter.ToUInt16(file, itemOffset + 72);
+            item.RecastNum2 = BitConverter.ToSingle(file, itemOffset + 74);
+            item.RecastNum3 = BitConverter.ToUInt16(file, itemOffset + 78);
+            item.ResistNum1 = BitConverter.ToUInt16(file, itemOffset + 80);
+            item.ResistNum2 = BitConverter.ToSingle(file, itemOffset + 82);
+            item.ResistNum3 = BitConverter.ToUInt16(file, itemOffset + 86);
+            item.PTGRev = BitConverter.ToUInt16(file, itemOffset + 88);
+            item.SpRev = file[itemOffset + 90];
             return item;
         }
 
@@ -3136,6 +3138,7 @@ namespace XbTool.Serialization
             item.scriptStartId = BitConverter.ToInt32(file, itemOffset + 133);
             item.nextIDtheater = BitConverter.ToUInt16(file, itemOffset + 137);
             item.toneMap = BitConverter.ToSingle(file, itemOffset + 139);
+            item.noRetarget = file[itemOffset + 143];
             return item;
         }
 
@@ -3209,6 +3212,7 @@ namespace XbTool.Serialization
             item.scriptName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 127));
             item.scriptStartId = BitConverter.ToInt32(file, itemOffset + 131);
             item.toneMap = BitConverter.ToSingle(file, itemOffset + 135);
+            item.noRetarget = file[itemOffset + 139];
             return item;
         }
 
@@ -3367,6 +3371,7 @@ namespace XbTool.Serialization
             item.scriptName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 146));
             item.scriptStartId = BitConverter.ToInt32(file, itemOffset + 150);
             item.toneMap = BitConverter.ToSingle(file, itemOffset + 154);
+            item.noRetarget = file[itemOffset + 158];
             return item;
         }
 
@@ -3459,6 +3464,7 @@ namespace XbTool.Serialization
             item.scriptStartId = BitConverter.ToInt32(file, itemOffset + 150);
             item.nextIDtheater = BitConverter.ToUInt16(file, itemOffset + 154);
             item.toneMap = BitConverter.ToSingle(file, itemOffset + 156);
+            item.noRetarget = file[itemOffset + 160];
             return item;
         }
 
@@ -3530,6 +3536,7 @@ namespace XbTool.Serialization
             item.voice = file[itemOffset + 125];
             item.scriptName = Stuff.GetUTF8Z(file, tableOffset + BitConverter.ToInt32(file, itemOffset + 126));
             item.scriptStartId = BitConverter.ToInt32(file, itemOffset + 130);
+            item.noRetarget = file[itemOffset + 134];
             return item;
         }
 
@@ -8192,6 +8199,13 @@ namespace XbTool.Serialization
             item.message2 = BitConverter.ToUInt16(file, itemOffset + 12);
             item.window_y3 = BitConverter.ToInt16(file, itemOffset + 14);
             item.message3 = BitConverter.ToUInt16(file, itemOffset + 16);
+            item.change_cond = BitConverter.ToUInt16(file, itemOffset + 18);
+            item.cond_window_y1 = BitConverter.ToInt16(file, itemOffset + 20);
+            item.cond_message1 = BitConverter.ToUInt16(file, itemOffset + 22);
+            item.cond_window_y2 = BitConverter.ToInt16(file, itemOffset + 24);
+            item.cond_message2 = BitConverter.ToUInt16(file, itemOffset + 26);
+            item.cond_window_y3 = BitConverter.ToInt16(file, itemOffset + 28);
+            item.cond_message3 = BitConverter.ToUInt16(file, itemOffset + 30);
             return item;
         }
 
@@ -9876,6 +9890,11 @@ namespace XbTool.Serialization
             }
 
             foreach (MNU_txt item in tables.dlc108_btlch_tutorial_txt.Items)
+            {
+                item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
+            }
+
+            foreach (MNU_txt item in tables.dlc240_special_txt.Items)
             {
                 item._text_id = tables.menu_ms.GetItemOrNull(item.text_id);
             }

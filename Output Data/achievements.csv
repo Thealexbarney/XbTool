@@ -514,7 +514,7 @@ in big power increase."
 1007,Poppi QTπ,Reflection,Battle Skill,5,2,2,Truth,200,Perform a Blade Combo.,5,Aim for enemy weakness!
 1007,Poppi QTπ,Reflection,Battle Skill,5,3,3,Truth,300,Perform a Blade Combo.,7,Taste power of science!
 1007,Poppi QTπ,Reflection,Battle Skill,5,4,4,Truth,500,Perform a Blade Combo.,10,Poppi exterminate target.
-1007,Poppi QTπ,Reflection,Battle Skill,5,5,5,Truth,800,"Finish with a Blade Combo.
+1007,Poppi QTπ,Reflection,Battle Skill,5,5,5,Truth,800,"Perform a Blade Combo finisher.
 (Previous instances count toward total.)",600,"Poppi do good job, yes?"
 1007,Poppi QTπ,Nanomachine Repair,Battle Skill,6,1,1,,,,,
 1007,Poppi QTπ,Nanomachine Repair,Battle Skill,6,2,2,Truth,200,"Perform a Driver Combo.
@@ -905,8 +905,8 @@ we needed."
 for the next battle!"
 1011,Nia,Instant Regen,Battle Skill,6,4,4,Truth,500,"At Rex's Secret Base in Leftheria,
 view the Heart-to-Heart
-""Little Rex"".",,"So, Rex was the same even he was
-little. Makes sense..."
+""Little Rex"".",,"So, Rex was the same even when
+he was little. Makes sense..."
 1011,Nia,Instant Regen,Battle Skill,6,5,5,Truth,800,"Fall from a high place.
 (unit in peds).",250,"Hey, you know I hate heights!
 I hope no one broke anything!"
@@ -991,7 +991,7 @@ the Cliffs of Morytha.",4,"I am not fond of these Heidl Taos.
 But I feel I am growing better at
 fighting them."
 1014,Aegaeon,Midnight Mist,Special,4,5,5,Justice,800,"Defeat Machine-Gun Julio
-in Tantal.",1,"This was a fearsome enemy indeed.
+at the Cliffs of Morytha.",1,"This was a fearsome enemy indeed.
 But we were the stronger in the end!"
 1014,Aegaeon,Serene Heart,Battle Skill,5,1,1,,,,,
 1014,Aegaeon,Serene Heart,Battle Skill,5,2,2,Justice,200,Raise Affinity in combat.,2,"The bond we share gives me strength.
@@ -1183,7 +1183,7 @@ at the Cliffs of Morytha.",4,I am improving?
 1016,Wulfric,Hellbound,Special,4,2,2,Bravery,200,Perform a Blade Combo.,5,I still have much to learn.
 1016,Wulfric,Hellbound,Special,4,3,3,Bravery,300,Perform a Blade Combo.,7,I will not fail.
 1016,Wulfric,Hellbound,Special,4,4,4,Bravery,500,Perform a Blade Combo.,10,Witness the power...of earth!
-1016,Wulfric,Hellbound,Special,4,5,5,Bravery,800,Finish with a Blade Combo.,3,Tremble before my might!
+1016,Wulfric,Hellbound,Special,4,5,5,Bravery,800,Perform a Blade Combo finisher.,3,Tremble before my might!
 1016,Wulfric,The Preternatural,Battle Skill,5,1,1,Justice,100,Perform a Blade Combo.,2,I have...more power now!
 1016,Wulfric,The Preternatural,Battle Skill,5,2,2,Justice,200,"Perform a Driver Combo.
 (It's enough to just be present.)",5,You show promise too...
@@ -1801,7 +1801,7 @@ I will spare no effort!"
 1022,Dagas,,Field Skill,10,5,,,,,,
 1023,Kasandra,,Key,1,1,1,,,,,
 1023,Kasandra,,Key,1,2,2,Compassion,200,Increase Trust.,100,"Do you believe in fortune-telling?
-""Cos I'm really, really good at it!"
+'Cos I'm really, really good at it!"
 1023,Kasandra,,Key,1,3,3,Compassion,300,Increase Trust.,1300,"Can I read your fortune too?
 I'm sure it'll turn out great!"
 1023,Kasandra,,Key,1,4,4,Compassion,500,Increase Trust.,3800,"So I read your fortune, and guess
@@ -2120,7 +2120,7 @@ clear dangers that present themselves."
 1026,Perun,Cold Sever,Special,2,4,4,Justice,500,"Perform a Driver Combo.
 (It's enough to just be present.)",10,"I must train harder to ensure
 I can match you in strength!"
-1026,Perun,Cold Sever,Special,2,5,5,Justice,800,"Defeat Runaway Train
+1026,Perun,Cold Sever,Special,2,5,5,Justice,800,"Defeat Runaway Train Bool
 in Temperantia.",1,"Runaway Train, fighting you was
 an excellent training experience!
 Um, no pun intended. Honest."
@@ -3311,7 +3311,7 @@ But oh well! There's always next time!"
 1036,Zenobia,Wind Mastery,Field Skill,8,3,3,Truth,300,"Defeat Judicial Kollin
 in Mor Ardain.",1,"Over already? What an anticlimax.
 C'mon, let's go find a different one."
-1036,Zenobia,Wind Mastery,Field Skill,8,4,4,Truth,500,"Defeat Runaway Train
+1036,Zenobia,Wind Mastery,Field Skill,8,4,4,Truth,500,"Defeat Runaway Train Bool
 in Temperantia.",1,"I'm not really feeling it...
 Sometimes I start to wonder if the
 opponent I'm seeking even exists."
@@ -3937,7 +3937,7 @@ Don't take my word for it... Here!"
 what's what."
 1044,Patroka,Great Garland,Special,3,4,4,Bravery,500,Use Great Garland.,9,"I'm feeling pretty chilled today.
 Everything's going to be A-OK!"
-1044,Patroka,Great Garland,Special,3,5,5,Bravery,800,Finish with a Blade Combo.,3,Can't wait to try it out on someone...
+1044,Patroka,Great Garland,Special,3,5,5,Bravery,800,Perform a Blade Combo finisher.,3,Can't wait to try it out on someone...
 1044,Patroka,Dragonfly Slash,Special,4,1,1,,,,,
 1044,Patroka,Dragonfly Slash,Special,4,2,2,Compassion,200,Use Dragonfly Slash.,5,"That was nicely done, don't you think?"
 1044,Patroka,Dragonfly Slash,Special,4,3,3,Compassion,300,"Engage in combat alongside a Blade
@@ -4168,7 +4168,7 @@ Sometimes."
 from the Staple Foods category.",4,"Ooh, that's so sweet of you! Thanks!"
 1046,Obrona,Leaping,Field Skill,9,4,,,,,,
 1046,Obrona,Leaping,Field Skill,9,5,3,Compassion,800,"Use Obrona's favorite pouch items.
-(Literature category)",2,"Oh, that's nice. I like these."
+(Instruments category)",2,"Oh, that's nice. I like these."
 1046,Obrona,Ichthyology,Field Skill,10,1,1,Compassion,100,"Acquire Fish items from
 the Collectible list.",5,"Fishy-fishy-fishin', fishy-fishy-fish!"
 1046,Obrona,Ichthyology,Field Skill,10,2,,,,,,
@@ -4903,7 +4903,7 @@ Sometimes."
 from the Staple Foods category.",4,"Ooh, that's so sweet of you! Thanks!"
 1078,Obrona,Leaping,Field Skill,9,4,,,,,,
 1078,Obrona,Leaping,Field Skill,9,5,3,Compassion,800,"Use Obrona's favorite pouch items.
-(Literature category)",2,"Oh, that's nice. I like these."
+(Instruments category)",2,"Oh, that's nice. I like these."
 1078,Obrona,Ichthyology,Field Skill,10,1,1,Compassion,100,"Acquire Fish items from
 the Collectible list.",5,"Fishy-fishy-fishin', fishy-fishy-fish!"
 1078,Obrona,Ichthyology,Field Skill,10,2,,,,,,
@@ -4985,7 +4985,7 @@ Sometimes."
 from the Staple Foods category.",4,"Ooh, that's so sweet of you! Thanks!"
 1079,Obrona,Leaping,Field Skill,9,4,,,,,,
 1079,Obrona,Leaping,Field Skill,9,5,3,Compassion,800,"Use Obrona's favorite pouch items.
-(Literature category)",2,"Oh, that's nice. I like these."
+(Instruments category)",2,"Oh, that's nice. I like these."
 1079,Obrona,Ichthyology,Field Skill,10,1,1,Compassion,100,"Acquire Fish items from
 the Collectible list.",5,"Fishy-fishy-fishin', fishy-fishy-fish!"
 1079,Obrona,Ichthyology,Field Skill,10,2,,,,,,
@@ -5344,3 +5344,1524 @@ fascinated I am."
 1103,Brighid,Mineralogy,Field Skill,10,5,3,Justice,800,"Acquire Ore items from
 the Collectibles list.",30,"Perhaps my knowledge
 will be of use now."
+1104,T-elos,,Key,1,1,1,,,,,
+1104,T-elos,,Key,1,2,2,Bravery,200,Increase Trust.,500,There's still more... MORE!
+1104,T-elos,,Key,1,3,3,Bravery,300,Increase Trust.,2000,"I'm still not the best I can be.
+Work harder."
+1104,T-elos,,Key,1,4,4,Bravery,500,Increase Trust.,5000,My true power is soon to be awakened.
+1104,T-elos,,Key,1,5,5,Bravery,800,"Go to Olethro Ruins in Uraya
+and complete the quest
+""Lingering Resentment"".",,"I understand your thinking now, and
+it means little to me... Yet, there is a
+sliver of value I cannot overlook."
+1104,T-elos,ECHIDNA,Special,2,1,1,,,,,
+1104,T-elos,ECHIDNA,Special,2,2,2,Compassion,200,Use ECHIDNA.,15,Now this should add a sting to it.
+1104,T-elos,ECHIDNA,Special,2,3,3,Compassion,300,Defeat Slasher Buffon in Mor Ardain.,1,Hmph. Don't get on my bad side...
+1104,T-elos,ECHIDNA,Special,2,4,4,Compassion,500,Use ECHIDNA.,25,"Heheh... Our next fight should prove
+entertaining."
+1104,T-elos,ECHIDNA,Special,2,5,5,Compassion,800,Use a Chain Attack.,50,Joining forces...? I'll allow it.
+1104,T-elos,MAGDALENE 16,Special,3,1,1,,,,,
+1104,T-elos,MAGDALENE 16,Special,3,2,2,Bravery,200,Defeat Nitpicking Beru in Gormott.,1,"I'm happy to take out that Driver as
+many times as it takes."
+1104,T-elos,MAGDALENE 16,Special,3,3,3,Bravery,300,Use MAGDALENE 16.,15,"I've worked out some kinks...
+I'll use it even better now."
+1104,T-elos,MAGDALENE 16,Special,3,4,4,Bravery,500,Use MAGDALENE 16.,30,"They can try all they want,
+but they won't win."
+1104,T-elos,MAGDALENE 16,Special,3,5,5,Bravery,800,"Deal a certain amount
+of total damage.",3000000,"This is nowhere near enough
+to satisfy me."
+1104,T-elos,T-SKYLLA,Special,4,1,1,,,,,
+1104,T-elos,T-SKYLLA,Special,4,2,2,Bravery,200,Use T-SKYLLA.,5,"Growing stronger is such
+a delicious feeling."
+1104,T-elos,T-SKYLLA,Special,4,3,3,Bravery,300,"Deal a certain amount
+of damage in one hit.",6000,My power knows no bounds!
+1104,T-elos,T-SKYLLA,Special,4,4,4,Bravery,500,Use T-SKYLLA.,10,"I will show you the true extent
+of my powers."
+1104,T-elos,T-SKYLLA,Special,4,5,5,Bravery,800,Defeat Soothsayer Gerald in Uraya.,1,Standing against me? Heh... Unlucky.
+1104,T-elos,Phase Transition Tech,Battle Skill,5,1,1,Bravery,100,"Defeat a Night Ruga Quadwing in
+Gormott.",3,I didn't even break a sweat.
+1104,T-elos,Phase Transition Tech,Battle Skill,5,2,2,Bravery,200,Defeat a Prom Piranhax in Uraya.,4,"I'll die of boredom if you don't find me
+something stronger to fight."
+1104,T-elos,Phase Transition Tech,Battle Skill,5,3,3,Bravery,300,Defeat a Nant Buloofo in Tantal.,3,The bigger they are...
+1104,T-elos,Phase Transition Tech,Battle Skill,5,4,4,Bravery,500,"Defeat a Bolc Vang at the Cliffs of
+Morytha.",4,I'll take it to the edge of infinity!
+1104,T-elos,Phase Transition Tech,Battle Skill,5,5,5,Bravery,800,"Defeat a Gerolf Sovereign at the
+World Tree.",2,"Did they really think they could
+face me and live?"
+1104,T-elos,Heaven's Tracker,Battle Skill,6,1,1,,,,,
+1104,T-elos,Heaven's Tracker,Battle Skill,6,2,2,Justice,200,Defeat a Meldl Skwaror in Gormott.,4,"Fine, I'll deign to help you sometimes."
+1104,T-elos,Heaven's Tracker,Battle Skill,6,3,3,Justice,300,Defeat a Gulnid Aspid in Leftheria.,2,Hmph. That? That's nothing.
+1104,T-elos,Heaven's Tracker,Battle Skill,6,4,4,Justice,500,"Defeat a Radyo Marrin in Spirit
+Crucible Elpys.",2,"I'll crush my foes like the pitiful
+worms they are..."
+1104,T-elos,Heaven's Tracker,Battle Skill,6,5,5,Justice,800,"Defeat a Sting Runner at the
+World Tree.",2,A Blade's life is a battlefield.
+1104,T-elos,Heartbreaker,Battle Skill,7,1,1,,,,,
+1104,T-elos,Heartbreaker,Battle Skill,7,2,2,Compassion,200,Defeat a Meson Griffox in Mor Ardain.,3,Nothing can match my power.
+1104,T-elos,Heartbreaker,Battle Skill,7,3,3,Compassion,300,Defeat a Froga Gyanna in Temperantia.,3,"Ugh, disgusting creatures.
+I'll exterminate them all! Every last one!"
+1104,T-elos,Heartbreaker,Battle Skill,7,4,4,Compassion,500,"Defeat a Mabluk Aspar at the Cliffs of
+Morytha.",3,Extermination complete!
+1104,T-elos,Heartbreaker,Battle Skill,7,5,5,Compassion,800,"Defeat a Belgio Sovereign in the Land
+of Morytha.",4,"It could have avoided being turned to
+scrap if it had accepted my superiority."
+1104,T-elos,Dark Mastery,Field Skill,8,1,1,,,,,
+1104,T-elos,Dark Mastery,Field Skill,8,2,2,Justice,200,Finish an enemy.,5,None may stand against me and live.
+1104,T-elos,Dark Mastery,Field Skill,8,3,3,Justice,300,Finish an enemy.,10,"They'll rue the day when they dared
+lay eyes on me."
+1104,T-elos,Dark Mastery,Field Skill,8,4,4,Justice,500,Finish an enemy.,20,No problem. I'll just kill them all.
+1104,T-elos,Dark Mastery,Field Skill,8,5,5,Justice,800,Finish an enemy.,30,"They're all bound for the same fate:
+oblivion."
+1104,T-elos,Salvaging Mastery,Field Skill,9,1,1,,,,,
+1104,T-elos,Salvaging Mastery,Field Skill,9,2,,,,,,
+1104,T-elos,Salvaging Mastery,Field Skill,9,3,2,Justice,300,"Salvage.
+(Previous instances count toward total.)",100,"You keep going down there.
+Is it really that interesting?"
+1104,T-elos,Salvaging Mastery,Field Skill,9,4,,,,,,
+1104,T-elos,Salvaging Mastery,Field Skill,9,5,3,Justice,800,"Salvage.
+(Previous instances count toward total.)",150,"Fine, I may as well help you with
+your little hobby..."
+1104,T-elos,Leaping,Field Skill,10,1,1,,,,,
+1104,T-elos,Leaping,Field Skill,10,2,2,Justice,200,"Fall from a high place.
+(unit in peds)",305,"Such folly. You can leap from great
+heights, but you will never soar..."
+1104,T-elos,Leaping,Field Skill,10,3,3,Justice,300,"Jump.
+(Previous instances count toward total.)",6000,"You know you'll never learn to fly
+just by hopping like an idiot...right?"
+1104,T-elos,Leaping,Field Skill,10,4,,,,,,
+1104,T-elos,Leaping,Field Skill,10,5,,,,,,
+1105,Poppibuster,,Key,1,1,1,,,,,
+1105,Poppibuster,,Key,1,2,2,Truth,200,Increase Trust.,100,I will be able to deploy extra measures.
+1105,Poppibuster,,Key,1,3,3,Truth,300,Increase Trust.,1500,New capabilities are now authorized.
+1105,Poppibuster,,Key,1,4,4,Truth,500,Increase Trust.,3000,Maximum output is now within reach.
+1105,Poppibuster,,Key,1,5,5,Truth,800,Increase Trust.,5000,"I have reached maximum output!
+Make my day."
+1105,Poppibuster,Buster Cyclone,Special,2,1,1,,,,,
+1105,Poppibuster,Buster Cyclone,Special,2,2,2,Bravery,200,Use Buster Cyclone.,15,Damage coefficient increased.
+1105,Poppibuster,Buster Cyclone,Special,2,3,3,Bravery,300,Use a Chain Attack.,20,"Bravo, everyone. You did well.
+Not as well as me, naturally..."
+1105,Poppibuster,Buster Cyclone,Special,2,4,4,Bravery,500,Use Buster Cyclone.,25,"Attack power has risen.
+The following engagement should
+prove an enjoyable one."
+1105,Poppibuster,Buster Cyclone,Special,2,5,5,Bravery,800,Use a Chain Attack.,40,"Impressive teamwork. One day you may
+even become half as proficient as me."
+1105,Poppibuster,Buster Cannon,Special,3,1,1,,,,,
+1105,Poppibuster,Buster Cannon,Special,3,2,2,Justice,200,Use Buster Cannon.,10,This move could be improved further.
+1105,Poppibuster,Buster Cannon,Special,3,3,3,Justice,300,"Deal a certain amount
+of total damage.",100000,"Great work, but we must not rest on
+our laurels."
+1105,Poppibuster,Buster Cannon,Special,3,4,4,Justice,500,Use Buster Cannon.,20,"You seem to have come to grips with it.
+Very well. I shall increase the output."
+1105,Poppibuster,Buster Cannon,Special,3,5,5,Justice,800,"Deal a certain amount
+of total damage.",5000000,"I've unthrottled the weapon's power
+output. Have fun."
+1105,Poppibuster,Buster Mirage,Special,4,1,1,,,,,
+1105,Poppibuster,Buster Mirage,Special,4,2,2,Justice,200,Use Buster Mirage.,5,"Impressive. This technique may actually
+be worth the effort."
+1105,Poppibuster,Buster Mirage,Special,4,3,3,Justice,300,Perform a Blade Combo.,5,"You have my permission to study my
+effortlessly graceful moves."
+1105,Poppibuster,Buster Mirage,Special,4,4,4,Justice,500,Use Buster Mirage.,15,"It's not arrogance if it's warranted.
+Let's keep aiming upward, shall we?"
+1105,Poppibuster,Buster Mirage,Special,4,5,5,Justice,800,Perform a Blade Combo.,15,It looks like I came out on top. Again.
+1105,Poppibuster,Hyperaffinity Circuit,Battle Skill,5,1,1,,,,,
+1105,Poppibuster,Hyperaffinity Circuit,Battle Skill,5,2,2,Bravery,200,Raise Affinity in combat.,5,"We're beginning to trust each other.
+How nice."
+1105,Poppibuster,Hyperaffinity Circuit,Battle Skill,5,3,3,Bravery,300,"Watch Heart-to-Hearts.
+(Previous instances count toward total.)",20,I have collected some fascinating data.
+1105,Poppibuster,Hyperaffinity Circuit,Battle Skill,5,4,4,Bravery,500,Raise Affinity in combat.,20,"Feel free to lean on me as much as
+you like."
+1105,Poppibuster,Hyperaffinity Circuit,Battle Skill,5,5,5,Bravery,800,"Watch Heart-to-Hearts.
+(Previous instances count toward total.)",70,"Ah, siblings-in-arms... So this is the
+essence of affinity. We must make
+many happy memories together."
+1105,Poppibuster,Hardware Acceleration,Battle Skill,6,1,1,Truth,100,Overkill a monster in a Chain Attack.,1,"Oh, look. What a surprise."
+1105,Poppibuster,Hardware Acceleration,Battle Skill,6,2,2,Truth,200,Overkill a monster in a Chain Attack.,5,"You all made a commendable effort
+on my behalf."
+1105,Poppibuster,Hardware Acceleration,Battle Skill,6,3,3,Truth,300,Overkill a monster in a Chain Attack.,10,I'm beginning to feel bad for our foes.
+1105,Poppibuster,Hardware Acceleration,Battle Skill,6,4,4,Truth,500,Overkill a monster in a Chain Attack.,15,I'll give you credit where it's due.
+1105,Poppibuster,Hardware Acceleration,Battle Skill,6,5,5,Truth,800,Overkill a monster in a Chain Attack.,20,It certainly seems I'm indispensable.
+1105,Poppibuster,Reconstitute,Battle Skill,7,1,1,,,,,
+1105,Poppibuster,Reconstitute,Battle Skill,7,2,2,Justice,200,"Receive a certain amount
+of total damage.",10000,I have faith in my structural integrity.
+1105,Poppibuster,Reconstitute,Battle Skill,7,3,3,Justice,300,"Receive a certain amount
+of total damage.",50000,"My material resistance is second
+to none."
+1105,Poppibuster,Reconstitute,Battle Skill,7,4,4,Justice,500,"Receive a certain amount
+of total damage.",150000,"I couldn't look Professor Soosoo in
+the eye if I wasn't able to take this
+much punishment."
+1105,Poppibuster,Reconstitute,Battle Skill,7,5,5,Justice,800,"Receive a certain amount
+of total damage.",400000,"Severe damage, you say? Pfft.
+It's... *bzzt* It's no-thing."
+1105,Poppibuster,Entomology,Field Skill,8,1,1,,,,,
+1105,Poppibuster,Entomology,Field Skill,8,2,2,Bravery,200,"Collect insects. (Currently held items
+count toward total.)",30,"I will require more items to refine
+my algorithms."
+1105,Poppibuster,Entomology,Field Skill,8,3,3,Bravery,300,"Collect insects. (Currently held items
+count toward total.)",75,"Database updated. New inferences
+and hypotheses logged."
+1105,Poppibuster,Entomology,Field Skill,8,4,,,,,,
+1105,Poppibuster,Entomology,Field Skill,8,5,,,,,,
+1105,Poppibuster,Salvaging Mastery,Field Skill,9,1,1,,,,,
+1105,Poppibuster,Salvaging Mastery,Field Skill,9,2,,,,,,
+1105,Poppibuster,Salvaging Mastery,Field Skill,9,3,,,,,,
+1105,Poppibuster,Salvaging Mastery,Field Skill,9,4,2,Bravery,500,Complete Stage 4 in Tiger! Tiger!.,1,"Not as good as my high score, but
+good enough."
+1105,Poppibuster,Salvaging Mastery,Field Skill,9,5,3,Bravery,800,Complete Stage 5 in Tiger! Tiger!.,1,"You show considerable skill.
+Though it took me only five seconds
+to achieve that result..."
+1105,Poppibuster,Superstrength,Field Skill,10,1,1,,,,,
+1105,Poppibuster,Superstrength,Field Skill,10,2,2,Bravery,200,Defeat a Levma Bunnit in Leftheria.,4,"I have no interest in low-level
+opponents."
+1105,Poppibuster,Superstrength,Field Skill,10,3,3,Bravery,300,Defeat Muscley Damian in Tantal.,1,"Starting indifference subroutine...
+Loop until: some real challenge."
+1105,Poppibuster,Superstrength,Field Skill,10,4,4,Bravery,500,Defeat Mk. VI Gerolf at the World Tree.,1,My feature-set proved superior.
+1105,Poppibuster,Superstrength,Field Skill,10,5,5,Bravery,800,Defeat Immovable Gonzalez in Gormott.,1,"The enemy had size, but we had me."
+1106,Shulk,,Key,1,1,1,,,,,
+1106,Shulk,,Key,1,2,2,Bravery,200,Increase Trust.,100,"It's an unfamiliar fighting style, but
+I think I've got the hang of it."
+1106,Shulk,,Key,1,3,3,Bravery,300,Increase Trust.,700,I feel I can get stronger.
+1106,Shulk,,Key,1,4,4,Bravery,500,Increase Trust.,2000,"We have to keep getting better.
+*I* have to keep getting better."
+1106,Shulk,,Key,1,5,5,Bravery,800,Increase Trust.,4000,I feel strong enough to do anything!
+1106,Shulk,Monado Purge,Special,2,1,1,,,,,
+1106,Shulk,Monado Purge,Special,2,2,2,Bravery,200,Use Monado Purge.,15,I think I'm getting used to this one.
+1106,Shulk,Monado Purge,Special,2,3,3,Bravery,300,Finish an enemy.,30,"Sometimes, losing is not an option."
+1106,Shulk,Monado Purge,Special,2,4,4,Bravery,500,Use Monado Purge.,25,I've honed it almost to perfection.
+1106,Shulk,Monado Purge,Special,2,5,5,Bravery,800,"Complete the Challenge Battle
+""Mk. VIII"".",1,"That was a strong foe! It probably
+would've gotten even stronger if we'd
+left it alone..."
+1106,Shulk,Monado Cyclone,Special,3,1,1,,,,,
+1106,Shulk,Monado Cyclone,Special,3,2,2,Justice,200,Finish an enemy.,10,"I have to fight harder than ever before
+if I want to keep everyone safe."
+1106,Shulk,Monado Cyclone,Special,3,3,3,Justice,300,Use Monado Cyclone.,15,"I'm sure I'll hold my own the next time
+things come to a head."
+1106,Shulk,Monado Cyclone,Special,3,4,4,Justice,500,Use Monado Cyclone.,20,"I'm looking forward to showing off
+more of this!"
+1106,Shulk,Monado Cyclone,Special,3,5,5,Justice,800,"Complete the Challenge Battle
+""9th Imp. Armored Div."".",1,"It was our mortal bodies against
+heavy armor, and we won... Hats
+off to you, everyone!"
+1106,Shulk,Monado Buster,Special,4,1,1,,,,,
+1106,Shulk,Monado Buster,Special,4,2,2,Compassion,200,Use Monado Buster.,5,I've gotten a little stronger.
+1106,Shulk,Monado Buster,Special,4,3,3,Compassion,300,Use Monado Buster.,10,"No one's coming to any harm, not
+while I'm around."
+1106,Shulk,Monado Buster,Special,4,4,4,Compassion,500,Finish an enemy.,100,"I can't stop yet. There's so much more
+left to learn."
+1106,Shulk,Monado Buster,Special,4,5,5,Compassion,800,"Complete the Challenge Battle
+""Call the Exterminators"".",1,"Let's get an even higher score
+next time!"
+1106,Shulk,Vision,Battle Skill,5,1,1,,,,,
+1106,Shulk,Vision,Battle Skill,5,2,2,Compassion,200,Evade an attack.,10,I've got your back. Trust me.
+1106,Shulk,Vision,Battle Skill,5,3,3,Compassion,300,Block an attack.,50,"I'll try my hardest, don't you worry."
+1106,Shulk,Vision,Battle Skill,5,4,4,Compassion,500,Evade an attack.,30,"If you need me to back you up,
+I'll give it everything I've got!"
+1106,Shulk,Vision,Battle Skill,5,5,5,Compassion,800,Block an attack.,100,This power should benefit everyone.
+1106,Shulk,Monado Enchant,Battle Skill,6,1,1,Justice,100,"Collect a lot of Ether Cubes during
+a single Challenge Battle.",1000,"Sure, this'll do."
+1106,Shulk,Monado Enchant,Battle Skill,6,2,2,Justice,200,"Complete the Challenge Battle
+""Think of the Soldiers"".",1,I almost feel sorry for them.
+1106,Shulk,Monado Enchant,Battle Skill,6,3,3,Justice,300,"Collect a lot of Ether Cubes during
+a single Challenge Battle.",1800,Nice one! That's a new high score!
+1106,Shulk,Monado Enchant,Battle Skill,6,4,4,Justice,500,"Complete the Challenge Battle
+""Torna's Finest"".",1,"That was a real challenge...
+But we were more than up to it."
+1106,Shulk,Monado Enchant,Battle Skill,6,5,5,Justice,800,"Collect a lot of Ether Cubes during
+a single Challenge Battle.",3600,"I don't think that record will be broken
+for a good long while."
+1106,Shulk,Monado Speed,Battle Skill,7,1,1,,,,,
+1106,Shulk,Monado Speed,Battle Skill,7,2,2,Bravery,200,Complete Challenge Battles.,10,There will be more challenges ahead.
+1106,Shulk,Monado Speed,Battle Skill,7,3,3,Bravery,300,Attack from behind.,30,"Attacking from behind. One of my
+tried and tested tactics."
+1106,Shulk,Monado Speed,Battle Skill,7,4,4,Bravery,500,Complete Challenge Battles.,30,"We've been really pushing ourselves.
+I'd say we've earned a break!"
+1106,Shulk,Monado Speed,Battle Skill,7,5,5,Bravery,800,Attack from behind.,100,"Don't worry, I'll support you."
+1106,Shulk,Salvaging Mastery,Field Skill,8,1,,,,,,
+1106,Shulk,Salvaging Mastery,Field Skill,8,2,,,,,,
+1106,Shulk,Salvaging Mastery,Field Skill,8,3,1,Bravery,300,"Acquire Mechanical items from
+the Collectibles list.",10,"I'm really curious about this
+salvaging business."
+1106,Shulk,Salvaging Mastery,Field Skill,8,4,2,Bravery,500,"Acquire Mechanical items from
+the Collectibles list.",20,"So...how is it, deep down in the
+Cloud Sea?"
+1106,Shulk,Salvaging Mastery,Field Skill,8,5,3,Bravery,800,"Acquire Mechanical items from
+the Collectibles list.",40,"I think I'd like to try salvaging
+sometime, just to see what it's like."
+1106,Shulk,Keen Eye,Field Skill,9,1,,,,,,
+1106,Shulk,Keen Eye,Field Skill,9,2,,,,,,
+1106,Shulk,Keen Eye,Field Skill,9,3,1,Justice,300,"Succeed in a button challenge
+during a battle.",40,Perfect timing there!
+1106,Shulk,Keen Eye,Field Skill,9,4,2,Justice,500,Help an incapacitated ally.,20,Let's stay on our toes next time.
+1106,Shulk,Keen Eye,Field Skill,9,5,3,Justice,800,Swap Blades during battle.,100,I know how to wait my turn.
+1106,Shulk,Ancient Wisdom,Field Skill,10,1,,,,,,
+1106,Shulk,Ancient Wisdom,Field Skill,10,2,,,,,,
+1106,Shulk,Ancient Wisdom,Field Skill,10,3,1,Justice,300,"Acquire Treasure items through
+salvaging.",5,Could my expertise come in useful too?
+1106,Shulk,Ancient Wisdom,Field Skill,10,4,2,Justice,500,"Acquire Treasure items through
+salvaging.",10,"There's so much here that I've never
+seen before."
+1106,Shulk,Ancient Wisdom,Field Skill,10,5,3,Justice,800,"Acquire Treasure items through
+salvaging.",20,If we find more...we might learn more!
+1107,Fiora,,Key,1,1,1,,,,,
+1107,Fiora,,Key,1,2,2,Compassion,200,Increase Trust.,100,I guess I got stronger?
+1107,Fiora,,Key,1,3,3,Compassion,300,Increase Trust.,700,There's still progress to be made!
+1107,Fiora,,Key,1,4,4,Compassion,500,Increase Trust.,2000,"I'll stand by my friends through thick
+and thin."
+1107,Fiora,,Key,1,5,5,Compassion,800,Increase Trust.,4000,"When it comes to protecting those
+you love, there's no such thing as
+""too much power""!"
+1107,Fiora,Hidden Thorn,Special,2,1,1,,,,,
+1107,Fiora,Hidden Thorn,Special,2,2,2,Compassion,200,"Complete the Challenge Battle
+""Bewitching Dance"".",1,"Pests eliminated! ...Though I do feel
+a little bad for the poor things..."
+1107,Fiora,Hidden Thorn,Special,2,3,3,Compassion,300,Use Hidden Thorn.,20,Well isn't this fancy?
+1107,Fiora,Hidden Thorn,Special,2,4,4,Compassion,500,Use Hidden Thorn.,25,"More power for me! I'll test it out
+in the next skirmish."
+1107,Fiora,Hidden Thorn,Special,2,5,5,Compassion,800,"Complete the Challenge Battle
+""Reinventing the Gogol"".",1,You know I'd never lose to a novice.
+1107,Fiora,Power Smash,Special,3,1,1,,,,,
+1107,Fiora,Power Smash,Special,3,2,2,Justice,200,Use Power Smash.,10,"This move should pack some
+extra punch now."
+1107,Fiora,Power Smash,Special,3,3,3,Justice,300,Use Power Smash.,15,"Ah, I think I know the trick now!"
+1107,Fiora,Power Smash,Special,3,4,4,Justice,500,"Complete the Challenge Battle
+""Fiercest Faction"".",1,"Victory is ours! I guess that makes
+*us* the fiercest faction, huh?"
+1107,Fiora,Power Smash,Special,3,5,5,Justice,800,"Complete the Challenge Battle
+""Serious Showdown"".",1,"There were two of them, and they
+went all in, and we still won! Go us!"
+1107,Fiora,Lacerate,Special,4,1,1,,,,,
+1107,Fiora,Lacerate,Special,4,2,2,Justice,200,Use Lacerate.,5,This'll come in handy next time.
+1107,Fiora,Lacerate,Special,4,3,3,Justice,300,"Complete the Challenge Battle
+""Temperantian Standoff"".",1,"Power isn't everything, you know.
+Sometimes you need wiles, too."
+1107,Fiora,Lacerate,Special,4,4,4,Justice,500,Use Lacerate.,10,Aren't I something?
+1107,Fiora,Lacerate,Special,4,5,5,Justice,800,"Complete the Challenge Battle
+""Attack of the Aspar"".",1,"If Aspar can keep growing, so can we!
+In power, I mean. Obviously!"
+1107,Fiora,Warrior Valkyrie,Battle Skill,5,1,1,Truth,100,"Complete the Challenge Battle
+""Pest Control"".",1,"Thanks to us, the fields can keep
+growing things in peace."
+1107,Fiora,Warrior Valkyrie,Battle Skill,5,2,2,Truth,200,Use a Blade Art.,20,"You do your best, and I'll make sure
+you succeed."
+1107,Fiora,Warrior Valkyrie,Battle Skill,5,3,3,Truth,300,"Complete Challenge Battles.
+(Previous instances count toward total.)",5,"All right, what's the next challenge?
+There's still plenty to go around."
+1107,Fiora,Warrior Valkyrie,Battle Skill,5,4,4,Truth,500,Use a Blade Art.,40,"I'll protect everyone, or my name
+isn't ""Fiora""."
+1107,Fiora,Warrior Valkyrie,Battle Skill,5,5,5,Truth,800,"Complete Challenge Battles.
+(Previous instances count toward total.)",10,That should be all of them. Congrats!
+1107,Fiora,Explosion of Energy,Battle Skill,6,1,1,,,,,
+1107,Fiora,Explosion of Energy,Battle Skill,6,2,2,Justice,200,"Collect a lot of Ether Cubes in
+Challenge Battles.
+(Previous instances count toward total.)",4000,I feel like we can do better.
+1107,Fiora,Explosion of Energy,Battle Skill,6,3,3,Justice,300,"Collect a lot of Ether Cubes in
+Challenge Battles.
+(Previous instances count toward total.)",11000,That's a fair few we've collected!
+1107,Fiora,Explosion of Energy,Battle Skill,6,4,4,Justice,500,"Collect a lot of Ether Cubes in
+Challenge Battles.
+(Previous instances count toward total.)",21000,We're in the home stretch now!
+1107,Fiora,Explosion of Energy,Battle Skill,6,5,5,Justice,800,"Collect a lot of Ether Cubes in
+Challenge Battles.
+(Previous instances count toward total.)",34000,There. I think that should be enough.
+1107,Fiora,Unwavering Courage,Battle Skill,7,1,1,,,,,
+1107,Fiora,Unwavering Courage,Battle Skill,7,2,2,Compassion,200,"Receive a certain amount
+of total damage.",5000,"Some things in life you just have to...
+wait out, I guess."
+1107,Fiora,Unwavering Courage,Battle Skill,7,3,3,Compassion,300,Collect an HP Potion.,20,"Heal early and heal often,
+that's my motto."
+1107,Fiora,Unwavering Courage,Battle Skill,7,4,4,Compassion,500,"Receive a certain amount
+of total damage.",50000,"Tougher than you thought, eh?"
+1107,Fiora,Unwavering Courage,Battle Skill,7,5,5,Compassion,800,Collect an HP Potion.,50,"Shore up our defenses! And if things
+get dicey, don't forget to heal."
+1107,Fiora,Ichthyology,Field Skill,8,1,,,,,,
+1107,Fiora,Ichthyology,Field Skill,8,2,,,,,,
+1107,Fiora,Ichthyology,Field Skill,8,3,1,Truth,300,Use Cloud Sea Crab Sticks.,1,"Mythra likes these too, right?
+Girl's got good taste! Yum!"
+1107,Fiora,Ichthyology,Field Skill,8,4,2,Truth,500,Use a Bagna Oyster Roll.,1,"I'm learning a lot from you all!
+Though a lot of it seems to be
+about food...."
+1107,Fiora,Ichthyology,Field Skill,8,5,3,Truth,800,"Use Fiora's favorite pouch item
+from the Seafood category.",1,"I'd never had that fish before,
+but I kinda like it!"
+1107,Fiora,Fortitude,Field Skill,9,1,,,,,,
+1107,Fiora,Fortitude,Field Skill,9,2,,,,,,
+1107,Fiora,Fortitude,Field Skill,9,3,1,Compassion,300,Walk a lot.,5000,"It's a great big new world out there!
+Let's tread carefully."
+1107,Fiora,Fortitude,Field Skill,9,4,2,Compassion,500,Swim a lot.,100,"Swimming in the Cloud Sea feels like...
+It feels like nothing else!"
+1107,Fiora,Fortitude,Field Skill,9,5,3,Compassion,800,Walk a lot.,10000,"It's so much fun having a whole new
+world to explore!"
+1107,Fiora,Nopon Wisdom,Field Skill,10,1,,,,,,
+1107,Fiora,Nopon Wisdom,Field Skill,10,2,,,,,,
+1107,Fiora,Nopon Wisdom,Field Skill,10,3,1,Truth,300,"Collect Fusty Funguses. (Currently held
+items count toward required total.)",10,So this is what Nopon like? Hmm...
+1107,Fiora,Nopon Wisdom,Field Skill,10,4,2,Truth,500,"Collect Nopopomouli. (Currently held
+items count toward required total.)",5,It looks just like a Nopon! Cute!
+1107,Fiora,Nopon Wisdom,Field Skill,10,5,3,Truth,800,Use Honey au Lait.,1,"Nopon look cute, but they certainly
+have a dark side to them..."
+1108,Corvin,,Key,1,1,1,,,,,
+1108,Corvin,,Key,1,2,2,Justice,200,Increase Trust.,100,"Glad to see we get on well with each
+other!"
+1108,Corvin,,Key,1,3,3,Justice,300,Increase Trust.,700,We really have to share more stories.
+1108,Corvin,,Key,1,4,4,Justice,500,Increase Trust.,2000,"Oh, hey!
+We're pretty tight friends now, huh?"
+1108,Corvin,,Key,1,5,5,Justice,800,Increase Trust.,4000,"We have absolute faith in each other
+now, right? Not just a one-way dealio?"
+1108,Corvin,Fuga Daemonum,Special,2,1,1,,,,,
+1108,Corvin,Fuga Daemonum,Special,2,2,2,Justice,200,"Defeat a Nomad Rhinon at
+Farlaine Wells in Uraya, etc.",2,"Those Nomad Rhinon were
+a rowdy bunch!"
+1108,Corvin,Fuga Daemonum,Special,2,3,3,Justice,300,"Defeat a Flow Bunnit at
+Rigitte Harbor in Leftheria, etc.",2,"I could make an incredible pot
+roast with this Flow Bunnit meat.
+Look forward to that!"
+1108,Corvin,Fuga Daemonum,Special,2,4,4,Justice,500,"Defeat a Grad Gogol at the
+Genbu Drifts in Tantal, etc.",2,"Grad Gogol... Now that's one enemy
+I won't be forgetting any time soon."
+1108,Corvin,Fuga Daemonum,Special,2,5,5,Justice,800,"Defeat a Organl Griffox at the
+Chansagh Wastes in Mor Ardain.",2,"The Organl Griffox must be breeding
+like Bunnits!"
+1108,Corvin,Lacerna Noctis,Special,3,1,1,,,,,
+1108,Corvin,Lacerna Noctis,Special,3,2,2,Justice,200,"Defeat a Bobbile Brog at
+Farlaine Wells in Uraya, etc.",2,"Bobbile Brogs are giving folk hassle,
+are they? Shame. Their expressions
+are hilarious!"
+1108,Corvin,Lacerna Noctis,Special,3,3,3,Justice,300,"Defeat a Sloam Runner on
+Daram Isle in Leftheria, etc.",2,"You know, come to think of it, how are
+Sloam Runners and Chituk Rapchors
+different, exactly? They look identical!"
+1108,Corvin,Lacerna Noctis,Special,3,4,4,Justice,500,"Defeat a Vint Griffox at the
+Genbu Drifts in Tantal, etc.",2,"There was no way we were leaving
+those Vint Griffox unchecked."
+1108,Corvin,Lacerna Noctis,Special,3,5,5,Justice,800,"Defeat a Berserker Mammut at the
+Chansagh Wastes in Mor Ardain.",2,"Remind me never to get on a Berserker
+Mammut's bad side again."
+1108,Corvin,Ex Tenebris Lux,Special,4,1,1,,,,,
+1108,Corvin,Ex Tenebris Lux,Special,4,2,2,Justice,200,"Defeat a Massido Ardun at the
+Sternum Arch in Uraya, etc.",2,"Poor Massido Ardun.
+It knew no wrong..."
+1108,Corvin,Ex Tenebris Lux,Special,4,3,3,Justice,300,"Defeat a Segel Ansel on
+Daram Isle in Leftheria, etc.",2,"Someday, I'll find a way to tame a
+Segel Ansel and fly around Alrest!"
+1108,Corvin,Ex Tenebris Lux,Special,4,4,4,Justice,500,"Defeat a Bland Upa at the
+Genbu Drifts in Tantal, etc.",2,"Bland Upa are tenacious lil' critters.
+You've gotta be to live in these harsh
+conditions."
+1108,Corvin,Ex Tenebris Lux,Special,4,5,5,Justice,800,"Go to Theoscaldia Palace in Tantal
+and complete the quest
+""Corvin's Approach"".",,"I can tell this is going to be the
+beginning of a beautiful friendship!"
+1108,Corvin,Ensis Lucis,Battle Skill,5,1,1,,,,,
+1108,Corvin,Ensis Lucis,Battle Skill,5,2,2,Compassion,200,"Defeat a River Bunnit at the
+Cleansing Spring in Uraya, etc.",2,"I reckon Pyra could make something
+delicious out of this River Bunnit meat!"
+1108,Corvin,Ensis Lucis,Battle Skill,5,3,3,Compassion,300,"Defeat a Buma Hiln in
+Fonsett, Leftheria, etc.",2,"I wonder where Buma Hiln get those
+funny objects they carry in their beaks?"
+1108,Corvin,Ensis Lucis,Battle Skill,5,4,4,Compassion,500,"Collect Broom Icicles in Tantal.
+(Previous instances count toward total.)",10,"I thought you might be able use
+a Broom Icicle as an actual broom.
+Alas, it was not to be..."
+1108,Corvin,Ensis Lucis,Battle Skill,5,5,5,Compassion,800,"Defeat a Tempest Pterix at the
+Chansagh Wastes in Mor Ardain.",2,"We really would have been better off
+letting Mor Ardain take that Tempest
+Pterix down with one of their gunships."
+1108,Corvin,Alae Custodiae,Battle Skill,6,1,1,,,,,
+1108,Corvin,Alae Custodiae,Battle Skill,6,2,2,Compassion,200,"Defeat a Nuruba Upa at
+Farlaine Wells in Uraya, etc.",2,"No more Nuruba Upa! Uraya should
+probably thank us for that."
+1108,Corvin,Alae Custodiae,Battle Skill,6,3,3,Compassion,300,"Collect Stream Navy in Leftheria
+(Previous instances count toward total.)",10,"Stream Navy swim around so quickly.
+They kept slipping through my hands!"
+1108,Corvin,Alae Custodiae,Battle Skill,6,4,4,Compassion,500,"Defeat an Arno Kapiba at
+the Genbu Drifts in Tantal, etc.",2,"Arno Kapiba look so warm and cozy...
+"
+1108,Corvin,Alae Custodiae,Battle Skill,6,5,5,Compassion,800,"Defeat a Sarabashi Ropl at the
+Chansagh Wastes in Mor Ardain.",2,Whew. Sarabashi Ropl mean business!
+1108,Corvin,Ictus,Battle Skill,7,1,1,,,,,
+1108,Corvin,Ictus,Battle Skill,7,2,2,Compassion,200,"Collect Rainbow Bugs in Uraya.
+(Previous instances count toward total.)",3,"I can't imagine what you'd use
+Rainbow Bugs for..."
+1108,Corvin,Ictus,Battle Skill,7,3,3,Compassion,300,"Defeat a Yurem Puffot in
+Fonsett, Leftheria, etc.",2,"Yurem Puffot plumage is just
+spectacular. Just...wow."
+1108,Corvin,Ictus,Battle Skill,7,4,4,Compassion,500,"Defeat a Klim Anlood at the
+Genbu Drifts in Tantal, etc.",2,"I bet Klim Anlood are lovely and soft
+to the touch."
+1108,Corvin,Ictus,Battle Skill,7,5,5,Compassion,800,"Defeat a Growsa Aspar at the
+Chansagh Wastes in Mor Ardain.",2,"Can't say I enjoy the whole skin-
+shedding thing Growsa Aspar do.
+They really make life difficult!"
+1108,Corvin,Light Mastery,Field Skill,8,1,1,,,,,
+1108,Corvin,Light Mastery,Field Skill,8,2,2,Compassion,200,"Hear out Elaria near Waypoint Market,
+Uraya. (Requires Nia.)",,"Come on, Nia, there's people in need.
+We've gotta do our part!"
+1108,Corvin,Light Mastery,Field Skill,8,3,3,Compassion,300,"Hear out Kitson near Messet Point,
+Leftherian Archipelago. (Requires Rex.)",,"We could never turn down a request
+from Fonsett now, could we, Rex?"
+1108,Corvin,Light Mastery,Field Skill,8,4,4,Compassion,500,"Hear out Phyllistrata near Theospiti
+Temple Ruins, Tantal. (Requires Zeke.)",,"Seems like a hard life, living in Tantal,
+Zeke. I'll do whatever I can to make it
+a little easier!"
+1108,Corvin,Light Mastery,Field Skill,8,5,5,Compassion,800,"Hear out the 8th Decade Sergeant near
+Hardhaigh Palace, Mor Ardain.
+(Requires Mòrag.)",,"Mor Ardain's future's not looking too
+bright, is it, Mòrag? If there's anything
+I can help you with, just tell me."
+1108,Corvin,Forestry,Field Skill,9,1,,,,,,
+1108,Corvin,Forestry,Field Skill,9,2,1,Compassion,200,"Collect Blue Ladybirds in Uraya.
+(Previous instances count toward total.)",10,"Yeah, I think I'm pretty keen on bugs!"
+1108,Corvin,Forestry,Field Skill,9,3,2,Compassion,300,"Collect Killi-Killi Killifish in Leftheria.
+(Previous instances count toward total.)",3,"Killi-Killi Killifish...
+Do I want to know what you use
+those for?"
+1108,Corvin,Forestry,Field Skill,9,4,,,,,,
+1108,Corvin,Forestry,Field Skill,9,5,3,Compassion,800,"Collect Nitrotoluite in Mor Ardain.
+(Previous instances count toward total.)",5,"Nitrotoluite's used to make bullets,
+as I recall. Useful stuff!"
+1108,Corvin,Ancient Wisdom,Field Skill,10,1,1,,,,,
+1108,Corvin,Ancient Wisdom,Field Skill,10,2,,,,,,
+1108,Corvin,Ancient Wisdom,Field Skill,10,3,,,,,,
+1108,Corvin,Ancient Wisdom,Field Skill,10,4,2,Compassion,500,"Collect Emerald Snow in Tantal.
+(Previous instances count toward total.)",5,"Is Emerald Snow pretty, or is it pretty?!
+Makes me want to start hunting for
+precious stones..."
+1108,Corvin,Ancient Wisdom,Field Skill,10,5,3,Compassion,800,"Collect Sand Salmon in Mor Ardain.
+(Previous instances count toward total.)",10,"Sand Salmon is a prized commodity
+to the Ardainians, you know."
+1109,Crossette,,Key,1,1,1,,,,,
+1109,Crossette,,Key,1,2,2,Bravery,200,Increase Trust.,100,"As soon as I make up my mind to do
+something, I just forge ahead and do it.
+I hope I don't cause too much trouble..."
+1109,Crossette,,Key,1,3,3,Bravery,300,Increase Trust.,700,"If I grow closer to everyone, that means
+I'll grow closer to Pyra!"
+1109,Crossette,,Key,1,4,4,Bravery,500,Increase Trust.,2000,"I feel like I've really gotten to know
+everyone. Is the feeling mutual?"
+1109,Crossette,,Key,1,5,5,Bravery,800,Increase Trust.,4000,"I respect you almost as much as
+I respect Pyra!"
+1109,Crossette,Go! Great Star!,Special,2,1,1,,,,,
+1109,Crossette,Go! Great Star!,Special,2,2,2,Bravery,200,Use Go! Great Star.,5,"Attack is the best form of defense!
+Isn't that right?"
+1109,Crossette,Go! Great Star!,Special,2,3,3,Bravery,300,Use Go! Great Star.,10,"I'll try and brighten things
+up even more!"
+1109,Crossette,Go! Great Star!,Special,2,4,4,Bravery,500,Use Go! Great Star.,20,I'm really getting the hang of things!
+1109,Crossette,Go! Great Star!,Special,2,5,5,Bravery,800,Use Go! Great Star.,30,"I might not measure up to Pyra,
+but I'm not doing too badly if
+I say so myself!"
+1109,Crossette,Go! Shooting Star!,Special,3,1,1,,,,,
+1109,Crossette,Go! Shooting Star!,Special,3,2,2,Bravery,200,Use Go! Shooting Star.,2,"Practice makes perfect!
+Right?"
+1109,Crossette,Go! Shooting Star!,Special,3,3,3,Bravery,300,Use Go! Shooting Star.,5,"Intensive training is hard work...
+Pyra, tell me your secrets!"
+1109,Crossette,Go! Shooting Star!,Special,3,4,4,Bravery,500,Use Go! Shooting Star.,10,"I think slow and steady is more
+my style than some kind of
+intensive all-in-one-go approach."
+1109,Crossette,Go! Shooting Star!,Special,3,5,5,Bravery,800,Use Go! Shooting Star.,15,"Huh. Well, I guess even slow and
+steady improvement isn't going
+to do much for this anymore."
+1109,Crossette,Go! Lucky Star!,Special,4,1,1,,,,,
+1109,Crossette,Go! Lucky Star!,Special,4,2,2,Bravery,200,Use Go! Lucky Star.,2,"You mess with fire, you get burned!"
+1109,Crossette,Go! Lucky Star!,Special,4,3,3,Bravery,300,Use Go! Lucky Star.,3,"Practice, practice, practice! That's the
+only route to success!"
+1109,Crossette,Go! Lucky Star!,Special,4,4,4,Bravery,500,Use Go! Lucky Star.,6,"Actually, I'm trying to work on
+hiding my flames so I don't set
+fire to quite as many things."
+1109,Crossette,Go! Lucky Star!,Special,4,5,5,Bravery,800,Use Go! Lucky Star.,10,"Ah, forget it. There's no hiding
+this fire!"
+1109,Crossette,Pyrotechnics,Battle Skill,5,1,1,,,,,
+1109,Crossette,Pyrotechnics,Battle Skill,5,2,2,Truth,200,Finish an enemy.,5,"I think I'm better at attacking
+than healing, to be honest!"
+1109,Crossette,Pyrotechnics,Battle Skill,5,3,3,Truth,300,Finish an enemy.,10,"You don't need to heal if the enemy
+is already dead before they hit you!"
+1109,Crossette,Pyrotechnics,Battle Skill,5,4,4,Truth,500,Finish an enemy.,15,"Finishing off an enemy really gets
+the blood pumping. Or should that
+be ""boiling""?"
+1109,Crossette,Pyrotechnics,Battle Skill,5,5,5,Truth,800,Finish an enemy.,20,"One day I want to hold a big fireworks
+festival and invite Pyra. Imagine if she
+came! I think I'd explode with joy!"
+1109,Crossette,Gathering Sparks,Battle Skill,6,1,1,,,,,
+1109,Crossette,Gathering Sparks,Battle Skill,6,2,2,Truth,200,Engage in combat.,5,"I wish I could fight alongside
+Pyra forever..."
+1109,Crossette,Gathering Sparks,Battle Skill,6,3,3,Truth,300,"Engage in combat alongside Pyra
+or Mythra.",10,"Pyra is my hero. I admire her so much!
+Mythra? Who's that...?
+...Oh, *her*..."
+1109,Crossette,Gathering Sparks,Battle Skill,6,4,4,Truth,500,"Engage in combat alongside Pyra
+or Mythra.",15,"When I'm around Pyra, I worry about
+disappointing her. When I'm around
+Mythra, I worry about making her mad."
+1109,Crossette,Gathering Sparks,Battle Skill,6,5,5,Truth,800,"Engage in combat alongside Pyra
+or Mythra.",20,"Mythra is pretty sharp around the
+edges, but actually I think she might
+be quite kind at heart... Maybe?"
+1109,Crossette,Alchemy Adept,Battle Skill,7,1,1,,,,,
+1109,Crossette,Alchemy Adept,Battle Skill,7,2,2,Truth,200,"Receive a certain amount
+of total damage.",10000,"Even though I've got this ball thing,
+I'm so bad at healing... Maybe I'm just
+a dumb stupid weirdo..."
+1109,Crossette,Alchemy Adept,Battle Skill,7,3,3,Truth,300,Raise Affinity in combat.,10,"I wonder what my Affinity is
+with Pyra..."
+1109,Crossette,Alchemy Adept,Battle Skill,7,4,4,Truth,500,Get hit by a critical attack.,30,"If you're stubborn enough, you can
+take any hit. You just say ""I don't
+wanna die today!"""
+1109,Crossette,Alchemy Adept,Battle Skill,7,5,5,Truth,800,"Use Specials to participate in
+a Chain Attack.",10,"When everyone combines their power,
+we're like an unstoppable rocket!
+I'm giving it all I've got!"
+1109,Crossette,Ardent Cooking,Field Skill,8,1,1,Truth,100,"Speak to Lenka in Galad Residential
+Zone, Gormott.
+(Requires Nia and Pyra.)",,"Pyra is my idea of the perfect Blade.
+I want to be just like her!"
+1109,Crossette,Ardent Cooking,Field Skill,8,2,2,Truth,200,"Speak to Rami in Admar Storage Zone,
+Mor Ardain.
+(Requires Mòrag and Pyra.)",,"I may have messed up before, but
+I want to keep trying to become as
+strong and as kind as my hero Pyra!"
+1109,Crossette,Ardent Cooking,Field Skill,8,3,3,Truth,300,"Speak to Nascion in Fonsett Village's
+residential area, Leftheria.
+(Requires Mythra.)",,"Mythra is...well, she's mean. That's
+all there is to it. I don't respect her
+at all!"
+1109,Crossette,Ardent Cooking,Field Skill,8,4,4,Truth,500,"Speak to Elvira in Theosoir's
+Residential Area, Tantal.
+(Requires Zeke and Pyra.)",,"I'm sorry for always acting on impulse.
+It's just that when my emotions start to
+burn, there's nothing I can do!"
+1109,Crossette,Ardent Cooking,Field Skill,8,5,5,Truth,800,"Go to Fonsett Village in Leftheria and
+complete the quest ""Bright Spark"".",,"I'm still growing, but I'm hot on
+Pyra's tail, believe me!"
+1109,Crossette,Agronomy,Field Skill,9,1,1,,,,,
+1109,Crossette,Agronomy,Field Skill,9,2,2,Truth,200,"Acquire Vegetable items from
+the Collectibles list.",10,"Having someone around to look up to
+really helps your personal growth!"
+1109,Crossette,Agronomy,Field Skill,9,3,,,,,,
+1109,Crossette,Agronomy,Field Skill,9,4,3,Truth,500,"Acquire Vegetable items from
+the Collectibles list.",30,"Yes, yes, I get it. Don't set off fireworks
+where veggies and fruit could be hurt...
+I won't, I promise!"
+1109,Crossette,Agronomy,Field Skill,9,5,,,,,,
+1109,Crossette,Fortitude,Field Skill,10,1,1,,,,,
+1109,Crossette,Fortitude,Field Skill,10,2,2,Truth,200,Use a Meatball Pot-au-Feu.,2,"Eating Pyra's cooking makes me feel
+like I can take on the world!"
+1109,Crossette,Fortitude,Field Skill,10,3,3,Truth,300,Use an Acqua Pearl Pazza.,2,Pyra's cooking really energizes me!
+1109,Crossette,Fortitude,Field Skill,10,4,4,Truth,500,Use Addam's Supercakes.,2,"So these are Addam's Supercakes...
+Eating them makes me feel like
+I've gone up in the world somehow!"
+1109,Crossette,Fortitude,Field Skill,10,5,5,Truth,800,Use a Sunshine Pie.,2,"Now this is a true Pyra masterpiece!
+So sweet and tasty! Her greatest
+creation! ...Oh, it's from a recipe?"
+1111,Elma,,Key,1,1,1,,,,,
+1111,Elma,,Key,1,2,2,Bravery,200,Increase Trust.,100,"You use some fascinating techniques,
+I'll give you that."
+1111,Elma,,Key,1,3,3,Bravery,300,Increase Trust.,700,"I think I understand the role that
+Blades play in this world..."
+1111,Elma,,Key,1,4,4,Bravery,500,Increase Trust.,2000,"What do you think?
+From BLADE to Blade, eh?"
+1111,Elma,,Key,1,5,5,Bravery,800,Increase Trust.,4000,"Meeting you all has taught me a lot.
+I'll never forget this. Thank you."
+1111,Elma,Sliding Slinger,Special,2,1,1,,,,,
+1111,Elma,Sliding Slinger,Special,2,2,2,Compassion,200,Use Sliding Slinger.,5,I'll have to work harder than this.
+1111,Elma,Sliding Slinger,Special,2,3,3,Compassion,300,Use Sliding Slinger.,10,Repetition is at the heart of learning.
+1111,Elma,Sliding Slinger,Special,2,4,4,Compassion,500,Use Sliding Slinger.,20,I can still squeeze more out of it...
+1111,Elma,Sliding Slinger,Special,2,5,5,Compassion,800,Use Sliding Slinger.,30,"My Sliding Slinger move is now
+a thing of beauty. Don't you think?"
+1111,Elma,Hundred Shells,Special,3,1,1,,,,,
+1111,Elma,Hundred Shells,Special,3,2,2,Compassion,200,Use Hundred Shells.,3,I'll need some more practice with this.
+1111,Elma,Hundred Shells,Special,3,3,3,Compassion,300,Use Hundred Shells.,5,I think it can get even better.
+1111,Elma,Hundred Shells,Special,3,4,4,Compassion,500,Use Hundred Shells.,10,"I've got a good baseline, now it's time
+to iterate."
+1111,Elma,Hundred Shells,Special,3,5,5,Compassion,800,Use Hundred Shells.,15,"Hundred Shells is now a force
+to be reckoned with."
+1111,Elma,Violent Streak,Special,4,1,1,,,,,
+1111,Elma,Violent Streak,Special,4,2,2,Compassion,200,Use Violent Streak.,2,"I'll polish up the finer points,
+then it'll really sing."
+1111,Elma,Violent Streak,Special,4,3,3,Compassion,300,Use Violent Streak.,3,Needs more firepower.
+1111,Elma,Violent Streak,Special,4,4,4,Compassion,500,Use Violent Streak.,6,It'll be ready soon.
+1111,Elma,Violent Streak,Special,4,5,5,Compassion,800,Use Violent Streak.,10,"There's no enemy who can withstand
+my Violent Streak, not in my world,
+and not in this one, either."
+1111,Elma,Overdrive,Battle Skill,5,1,1,,,,,
+1111,Elma,Overdrive,Battle Skill,5,2,2,Justice,200,"Complete the Challenge Battle
+""Grazing Flock"".",1,"I don't care if you call it natural
+selection, I still feel bad about killing
+gentle herbivore indigens..."
+1111,Elma,Overdrive,Battle Skill,5,3,3,Justice,300,"Complete the Challenge Battle
+""Darkening Skies"".",1,"When you're fighting flying indigens,
+that's when guns really shine... But you
+really like your melee weapons, huh."
+1111,Elma,Overdrive,Battle Skill,5,4,4,Justice,500,"Complete the Challenge Battle
+""Dread Contagion"".",1,"Phew, if those things attacked NLA...
+I'll have to revamp our defenses the
+next time I'm back."
+1111,Elma,Overdrive,Battle Skill,5,5,5,Justice,800,"Complete the Challenge Battle
+""Humanoid Alliance"".",1,"If I had my Skell, that would've been
+no contest... But as things stand, at
+least it made for a nice workout."
+1111,Elma,Crisis Catalyst,Battle Skill,6,1,1,,,,,
+1111,Elma,Crisis Catalyst,Battle Skill,6,2,2,Justice,200,"Complete the Challenge Battle
+""Think of the Soldiers"".",1,"The technology looked profoundly
+mysterious at a glance... I bet if Lin
+was here, she'd be all over it."
+1111,Elma,Crisis Catalyst,Battle Skill,6,3,3,Justice,300,"Complete the Challenge Battle
+""Sacred Wood"".",1,"Tirkins, huh? I wonder if we could
+befriend them like we did the Ma-non..."
+1111,Elma,Crisis Catalyst,Battle Skill,6,4,4,Justice,500,"Complete the Challenge Battle
+""Chickenheart Challenge"".",1,"Our teamwork skills have been tried,
+and we passed with flying colors."
+1111,Elma,Crisis Catalyst,Battle Skill,6,5,5,Justice,800,"Complete the Challenge Battle
+""9th Imp. Armored Div."".",1,"The soldiers from Mòrag's homeland
+are a competent bunch. Great small-
+unit tactics, impressive leadership."
+1111,Elma,Background Noise,Battle Skill,7,1,1,,,,,
+1111,Elma,Background Noise,Battle Skill,7,2,2,Justice,200,"Complete the Challenge Battle
+""Bewitching Dance"".",1,"Alrest's indigens tend towards the
+smaller end of the spectrum...
+Perfect for target practice."
+1111,Elma,Background Noise,Battle Skill,7,3,3,Justice,300,"Complete the Challenge Battle
+""Panic at the Seaside"".",1,"Annoying pests...
+I'm so glad the beaches near NLA
+are free from this kind of menace."
+1111,Elma,Background Noise,Battle Skill,7,4,4,Justice,500,"Complete the Challenge Battle
+""Serious Showdown"".",1,"That duo was no summer picnic.
+They complemented each other...
+I have to respect that."
+1111,Elma,Background Noise,Battle Skill,7,5,5,Justice,800,"Complete the Challenge Battle
+""Cloud King's Revenge"".",1,"I'm still in awe of that simulator.
+I need to question the Archsage,
+and get him to spill its secrets..."
+1111,Elma,Keen Eye,Field Skill,8,1,1,Truth,100,"Reconnoiter Alrest with Elma. Head to
+Masrah Spring in Gormott.
+(Req. Tora & Nia & Mòrag & Zeke)",,"Gormott looks so much like Noctilum...
+I wish I could explore it methodically."
+1111,Elma,Keen Eye,Field Skill,8,2,2,Truth,200,"Reconnoiter Alrest with Elma. Head to
+the Ruins of Fountain Park in Uraya.
+(Req. Pyra & Zeke & Pandoria)",,"I've developed a soft spot for this land.
+Let's not leave yet, OK?"
+1111,Elma,Keen Eye,Field Skill,8,3,3,Truth,300,"Reconnoiter Alrest with Elma. Head to
+the Ancient Wall in Temperantia.
+(Req. Mòrag & Brighid)",,"Even though the technology in Alrest
+isn't very advanced, Blades' power can
+wreak such destruction... It's sobering."
+1111,Elma,Keen Eye,Field Skill,8,4,4,Truth,500,"Reconnoiter Alrest with Elma. Head to
+the Vault of Heroes in Spirit Crucible
+Elpys. (Req. Nia & Mythra)",,"A solemn and mystical place...
+I especially liked that single shaft of
+light. I wonder where it came from..."
+1111,Elma,Keen Eye,Field Skill,8,5,5,Truth,800,"Reconnoiter Alrest with Elma. Head to
+7th Perim. Skyport in the World Tree.
+(Req. Mythra & Shulk & KOS-MOS)",,"I've never seen a place like it in my life.
+Alrest hides many unplumbed mysteries
+still - I hope we can explore together!"
+1111,Elma,Focus,Field Skill,9,1,1,Truth,100,"Defeat a Sandl Rapchor at
+Coolley Lake in Gormott, etc.",2,"That's not an indigen you'd even meet
+on Mira. So small, yet so ferocious..."
+1111,Elma,Focus,Field Skill,9,2,2,Truth,200,"Defeat a Sprack Parisax in the
+Dragon's Stomach in Uraya, etc.",2,"I'm a fan of all these small-sized
+indigens you've got. It's nice when
+a fight ends this quickly."
+1111,Elma,Focus,Field Skill,9,3,3,Truth,300,"Defeat a Zaguin Hox at the Titan
+Weapon Dig Site in Temperantia, etc.",2,"That indigen was unexpectedly cute,
+and I bet it'd yield some excellent
+materials..."
+1111,Elma,Focus,Field Skill,9,4,4,Truth,500,"Defeat a Lun Scorpox in the
+Middle Worm-Ridden Cave in
+Spirit Crucible Elpys, etc.",2,"I wonder what the lifespan of one of
+those indigens could be... We should
+set up a study."
+1111,Elma,Focus,Field Skill,9,5,5,Truth,800,"Defeat a Riveral Ansel at the
+7th Perimeter Skyport in the
+World Tree, etc.",2,"This would be so much easier
+if we had Skells."
+1111,Elma,Lockpicking,Field Skill,10,1,1,Truth,100,"Collect Clarity Moss in Gormott.
+(Currently held items count toward
+required total.)",5,"It's said that using Clarity Moss gives
+you clarity... But I think in Noctilum,
+it'd just make things worse!"
+1111,Elma,Lockpicking,Field Skill,10,2,2,Truth,200,"Collect Dragon Incense in Uraya.
+(Currently held items count toward
+required total.)",4,"The Dragon Incense is used to make
+medicine, right? I'm lucky enough not
+to need it, but it's still fascinating."
+1111,Elma,Lockpicking,Field Skill,10,3,3,Truth,300,"Collect a Glory Angler in Temperantia.
+(Currently held items count toward
+required total.)",4,"That's one disgusting-looking fish...
+I don't think there's any sea life
+this grotesque on Mira..."
+1111,Elma,Lockpicking,Field Skill,10,4,4,Truth,500,"Collect an Addam's Tear in Spirit
+Crucible Elpys. (Currently held items
+count toward required total.)",4,"Such a beautiful stone...
+It feels very...pure, somehow."
+1111,Elma,Lockpicking,Field Skill,10,5,5,Truth,800,"Collect Robotic Placoderm in the
+World Tree. (Currently held items
+count toward required total.)",4,"To think that an organism would find a
+way to flourish in this environment...
+I guess life really does find a way."
+1112,Corvin,,Key,1,1,1,,,,,
+1112,Corvin,,Key,1,2,2,Justice,200,Increase Trust.,100,"Glad to see we get on well with each
+other!"
+1112,Corvin,,Key,1,3,3,Justice,300,Increase Trust.,700,We really have to share more stories.
+1112,Corvin,,Key,1,4,4,Justice,500,Increase Trust.,2000,"Oh, hey!
+We're pretty tight friends now, huh?"
+1112,Corvin,,Key,1,5,5,Justice,800,Increase Trust.,4000,"We have absolute faith in each other
+now, right? Not just a one-way dealio?"
+1112,Corvin,Fuga Daemonum,Special,2,1,1,,,,,
+1112,Corvin,Fuga Daemonum,Special,2,2,2,Justice,200,"Defeat a Nomad Rhinon at
+Farlaine Wells in Uraya, etc.",2,"Those Nomad Rhinon were
+a rowdy bunch!"
+1112,Corvin,Fuga Daemonum,Special,2,3,3,Justice,300,"Defeat a Flow Bunnit at
+Rigitte Harbor in Leftheria, etc.",2,"I could make an incredible pot
+roast with this Flow Bunnit meat.
+Look forward to that!"
+1112,Corvin,Fuga Daemonum,Special,2,4,4,Justice,500,"Defeat a Grad Gogol at the
+Genbu Drifts in Tantal, etc.",2,"Grad Gogol... Now that's one enemy
+I won't be forgetting any time soon."
+1112,Corvin,Fuga Daemonum,Special,2,5,5,Justice,800,"Defeat a Organl Griffox at the
+Chansagh Wastes in Mor Ardain.",2,"The Organl Griffox must be breeding
+like Bunnits!"
+1112,Corvin,Lacerna Noctis,Special,3,1,1,,,,,
+1112,Corvin,Lacerna Noctis,Special,3,2,2,Justice,200,"Defeat a Bobbile Brog at
+Farlaine Wells in Uraya, etc.",2,"Bobbile Brogs are giving folk hassle,
+are they? Shame. Their expressions
+are hilarious!"
+1112,Corvin,Lacerna Noctis,Special,3,3,3,Justice,300,"Defeat a Sloam Runner on
+Daram Isle in Leftheria, etc.",2,"You know, come to think of it, how are
+Sloam Runners and Chituk Rapchors
+different, exactly? They look identical!"
+1112,Corvin,Lacerna Noctis,Special,3,4,4,Justice,500,"Defeat a Vint Griffox at the
+Genbu Drifts in Tantal, etc.",2,"There was no way we were leaving
+those Vint Griffox unchecked."
+1112,Corvin,Lacerna Noctis,Special,3,5,5,Justice,800,"Defeat a Berserker Mammut at the
+Chansagh Wastes in Mor Ardain.",2,"Remind me never to get on a Berserker
+Mammut's bad side again."
+1112,Corvin,Ex Tenebris Lux,Special,4,1,1,,,,,
+1112,Corvin,Ex Tenebris Lux,Special,4,2,2,Justice,200,"Defeat a Massido Ardun at the
+Sternum Arch in Uraya, etc.",2,"Poor Massido Ardun.
+It knew no wrong..."
+1112,Corvin,Ex Tenebris Lux,Special,4,3,3,Justice,300,"Defeat a Segel Ansel on
+Daram Isle in Leftheria, etc.",2,"Someday, I'll find a way to tame a
+Segel Ansel and fly around Alrest!"
+1112,Corvin,Ex Tenebris Lux,Special,4,4,4,Justice,500,"Defeat a Bland Upa at the
+Genbu Drifts in Tantal, etc.",2,"Bland Upa are tenacious lil' critters.
+You've gotta be to live in these harsh
+conditions."
+1112,Corvin,Ex Tenebris Lux,Special,4,5,5,Justice,800,"Go to Theoscaldia Palace in Tantal
+and complete the quest
+""Corvin's Approach"".",,"I can tell this is going to be the
+beginning of a beautiful friendship!"
+1112,Corvin,Ensis Lucis,Battle Skill,5,1,1,,,,,
+1112,Corvin,Ensis Lucis,Battle Skill,5,2,2,Compassion,200,"Defeat a River Bunnit at the
+Cleansing Spring in Uraya, etc.",2,"I reckon Pyra could make something
+delicious out of this River Bunnit meat!"
+1112,Corvin,Ensis Lucis,Battle Skill,5,3,3,Compassion,300,"Defeat a Buma Hiln in
+Fonsett, Leftheria, etc.",2,"I wonder where Buma Hiln get those
+funny objects they carry in their beaks?"
+1112,Corvin,Ensis Lucis,Battle Skill,5,4,4,Compassion,500,"Collect Broom Icicles in Tantal.
+(Previous instances count toward total.)",10,"I thought you might be able use
+a Broom Icicle as an actual broom.
+Alas, it was not to be..."
+1112,Corvin,Ensis Lucis,Battle Skill,5,5,5,Compassion,800,"Defeat a Tempest Pterix at the
+Chansagh Wastes in Mor Ardain.",2,"We really would have been better off
+letting Mor Ardain take that Tempest
+Pterix down with one of their gunships."
+1112,Corvin,Alae Custodiae,Battle Skill,6,1,1,,,,,
+1112,Corvin,Alae Custodiae,Battle Skill,6,2,2,Compassion,200,"Defeat a Nuruba Upa at
+Farlaine Wells in Uraya, etc.",2,"No more Nuruba Upa! Uraya should
+probably thank us for that."
+1112,Corvin,Alae Custodiae,Battle Skill,6,3,3,Compassion,300,"Collect Stream Navy in Leftheria
+(Previous instances count toward total.)",10,"Stream Navy swim around so quickly.
+They kept slipping through my hands!"
+1112,Corvin,Alae Custodiae,Battle Skill,6,4,4,Compassion,500,"Defeat an Arno Kapiba at
+the Genbu Drifts in Tantal, etc.",2,"Arno Kapiba look so warm and cozy...
+"
+1112,Corvin,Alae Custodiae,Battle Skill,6,5,5,Compassion,800,"Defeat a Sarabashi Ropl at the
+Chansagh Wastes in Mor Ardain.",2,Whew. Sarabashi Ropl mean business!
+1112,Corvin,Ictus,Battle Skill,7,1,1,,,,,
+1112,Corvin,Ictus,Battle Skill,7,2,2,Compassion,200,"Collect Rainbow Bugs in Uraya.
+(Previous instances count toward total.)",3,"I can't imagine what you'd use
+Rainbow Bugs for..."
+1112,Corvin,Ictus,Battle Skill,7,3,3,Compassion,300,"Defeat a Yurem Puffot in
+Fonsett, Leftheria, etc.",2,"Yurem Puffot plumage is just
+spectacular. Just...wow."
+1112,Corvin,Ictus,Battle Skill,7,4,4,Compassion,500,"Defeat a Klim Anlood at the
+Genbu Drifts in Tantal, etc.",2,"I bet Klim Anlood are lovely and soft
+to the touch."
+1112,Corvin,Ictus,Battle Skill,7,5,5,Compassion,800,"Defeat a Growsa Aspar at the
+Chansagh Wastes in Mor Ardain.",2,"Can't say I enjoy the whole skin-
+shedding thing Growsa Aspar do.
+They really make life difficult!"
+1112,Corvin,Light Mastery,Field Skill,8,1,1,,,,,
+1112,Corvin,Light Mastery,Field Skill,8,2,2,Compassion,200,"Hear out Elaria near Waypoint Market,
+Uraya. (Requires Nia.)",,"Come on, Nia, there's people in need.
+We've gotta do our part!"
+1112,Corvin,Light Mastery,Field Skill,8,3,3,Compassion,300,"Hear out Kitson near Messet Point,
+Leftherian Archipelago. (Requires Rex.)",,"We could never turn down a request
+from Fonsett now, could we, Rex?"
+1112,Corvin,Light Mastery,Field Skill,8,4,4,Compassion,500,"Hear out Phyllistrata near Theospiti
+Temple Ruins, Tantal. (Requires Zeke.)",,"Seems like a hard life, living in Tantal,
+Zeke. I'll do whatever I can to make it
+a little easier!"
+1112,Corvin,Light Mastery,Field Skill,8,5,5,Compassion,800,"Hear out the 8th Decade Sergeant near
+Hardhaigh Palace, Mor Ardain.
+(Requires Mòrag.)",,"Mor Ardain's future's not looking too
+bright, is it, Mòrag? If there's anything
+I can help you with, just tell me."
+1112,Corvin,Forestry,Field Skill,9,1,,,,,,
+1112,Corvin,Forestry,Field Skill,9,2,1,Compassion,200,"Collect Blue Ladybirds in Uraya.
+(Previous instances count toward total.)",10,"Yeah, I think I'm pretty keen on bugs!"
+1112,Corvin,Forestry,Field Skill,9,3,2,Compassion,300,"Collect Killi-Killi Killifish in Leftheria.
+(Previous instances count toward total.)",3,"Killi-Killi Killifish...
+Do I want to know what you use
+those for?"
+1112,Corvin,Forestry,Field Skill,9,4,,,,,,
+1112,Corvin,Forestry,Field Skill,9,5,3,Compassion,800,"Collect Nitrotoluite in Mor Ardain.
+(Previous instances count toward total.)",5,"Nitrotoluite's used to make bullets,
+as I recall. Useful stuff!"
+1112,Corvin,Ancient Wisdom,Field Skill,10,1,1,,,,,
+1112,Corvin,Ancient Wisdom,Field Skill,10,2,,,,,,
+1112,Corvin,Ancient Wisdom,Field Skill,10,3,,,,,,
+1112,Corvin,Ancient Wisdom,Field Skill,10,4,2,Compassion,500,"Collect Emerald Snow in Tantal.
+(Previous instances count toward total.)",5,"Is Emerald Snow pretty, or is it pretty?!
+Makes me want to start hunting for
+precious stones..."
+1112,Corvin,Ancient Wisdom,Field Skill,10,5,3,Compassion,800,"Collect Sand Salmon in Mor Ardain.
+(Previous instances count toward total.)",10,"Sand Salmon is a prized commodity
+to the Ardainians, you know."
+1124,Utsuro,,Key,1,1,1,,,,,
+1124,Utsuro,,Key,1,2,2,Truth,200,Increase Trust.,100,"Shall we take my zappage
+out for a spin?"
+1124,Utsuro,,Key,1,3,3,Truth,300,Increase Trust.,1300,"I'll grow in no time!
+Just wait and see."
+1124,Utsuro,,Key,1,4,4,Truth,500,Increase Trust.,3800,"Oops, did I grow again?
+It's thanks to you all!"
+1124,Utsuro,,Key,1,5,5,Truth,800,Increase Trust.,9800,"Thank you for always believing in me!
+I'm feeling a lot more confident now."
+1124,Utsuro,必殺技1,Special,2,1,1,,,,,
+1124,Utsuro,必殺技1,Special,2,2,2,Compassion,200,Use Bang-Bang Bound.,10,"Get ready for a zapping!
+I'll show you in our next fight!"
+1124,Utsuro,必殺技1,Special,2,3,3,Compassion,300,Use Bang-Bang Bound.,11,Woohoo! My current runs stronger!
+1124,Utsuro,必殺技1,Special,2,4,4,Compassion,500,Use Bang-Bang Bound.,12,I'm ready to go all-in!
+1124,Utsuro,必殺技1,Special,2,5,5,Compassion,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...It's a whole new me! But you can
+rely on me just like I was the old me!"
+1124,Utsuro,必殺技2,Special,3,1,1,,,,,
+1124,Utsuro,必殺技2,Special,3,2,2,Bravery,200,Finish an enemy.,10,"Ready to go anytime!
+...Just so long as it's soon!"
+1124,Utsuro,必殺技2,Special,3,3,3,Bravery,300,"Defeat a Moskel Rhogul in
+Temperantia.",5,"My voltage's increased!
+I wanna show you now!
+Not yet? How about now?"
+1124,Utsuro,必殺技2,Special,3,4,4,Bravery,500,"Defeat mechanical enemies such as
+Dajan Sovereigns in the Land of
+Morytha. (Excludes unique monsters.)",5,I'm awesome! Aren't you impressed?
+1124,Utsuro,必殺技2,Special,3,5,5,Bravery,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...My power's more than ready
+to be used for good!"
+1124,Utsuro,必殺技3,Special,4,1,1,Truth,100,Finish an enemy.,5,"My power's gotten stronger!
+I'll put it to good use."
+1124,Utsuro,必殺技3,Special,4,2,2,Truth,200,"Use Electra's favorite pouch items.
+(Instruments category)",1,"That's a nice sound.
+Man, music is amazing!"
+1124,Utsuro,必殺技3,Special,4,3,3,Truth,300,Finish an enemy.,20,I can do anything if I put my mind to it.
+1124,Utsuro,必殺技3,Special,4,4,4,Truth,500,Finish an enemy.,30,"My power levels are shocking!
+Get it? Shocking?"
+1124,Utsuro,必殺技3,Special,4,5,5,Truth,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"Rumblerumble... Kablam!
+That's how it'll go."
+1124,Utsuro,,Battle Skill,5,1,1,,,,,
+1124,Utsuro,,Battle Skill,5,2,2,Compassion,200,Evade an attack.,5,"Don't get too close,
+unless you want a solid jolt!"
+1124,Utsuro,,Battle Skill,5,3,3,Compassion,300,Evade an attack.,7,"So you're cruising for a zapping, eh?"
+1124,Utsuro,,Battle Skill,5,4,4,Compassion,500,Evade an attack.,9,"Get ready for a shock!
+A-ah... No, I'm good, I'm good..."
+1124,Utsuro,,Battle Skill,5,5,5,Compassion,800,"In the Wall Power Control Room, Land
+of Morytha, view the Heart-to-Heart
+""Self-Confidence"".",,Mhh... I'll try harder!
+1124,Utsuro,,Battle Skill,6,1,1,Compassion,100,"Deal a certain amount
+of total damage.",200,"Oops, I got clocked? Aw, guess I've
+still got a ways to go... *sigh*"
+1124,Utsuro,,Battle Skill,6,2,2,Compassion,200,"Deal a certain amount
+of total damage.",8000,"Whaddya think?
+I've got more presence now, huh?"
+1124,Utsuro,,Battle Skill,6,3,3,Compassion,300,"Deal a certain amount
+of total damage.",16000,"I'll draw the enemies' attention!
+Um... It's kind of a scary thought."
+1124,Utsuro,,Battle Skill,6,4,4,Compassion,500,"Deal a certain amount
+of total damage.",32000,"It feels like everyone here's
+just staring at us..."
+1124,Utsuro,,Battle Skill,6,5,5,Compassion,800,"Deal a certain amount
+of total damage.",48000,"It looks like we're the center of
+attention... Oh no, I'm blushing..."
+1124,Utsuro,,Battle Skill,7,1,1,,,,,
+1124,Utsuro,,Battle Skill,7,2,2,Truth,200,Block an attack.,5,"I'll keep 'em safe, don't you worry."
+1124,Utsuro,,Battle Skill,7,3,3,Truth,300,Block an attack.,7,"I swear, you'd all be lost without me!
+Aww... You're hopeless! Tee hee."
+1124,Utsuro,,Battle Skill,7,4,4,Truth,500,Block an attack.,9,"I got stronger!
+I feel like I can take on the world!"
+1124,Utsuro,,Battle Skill,7,5,5,Truth,800,Block an attack.,10,"I've gotten better again!
+Now you can task me with everything."
+1124,Utsuro,,Field Skill,8,1,1,,,,,
+1124,Utsuro,,Field Skill,8,2,2,Compassion,200,Defeat a Tomlok Anlood in Uraya.,4,"I will administer a zapping.
+Please open wide."
+1124,Utsuro,,Field Skill,8,3,3,Compassion,300,"Use Electra's favorite pouch items.
+(Instruments category)",2,"I like musical instruments!
+Especially the bashing type."
+1124,Utsuro,,Field Skill,8,4,4,Compassion,500,"Defeat a Trilut Grebel
+at the Cliffs of Morytha.",5,"Look, look!
+I learned to use this better!"
+1124,Utsuro,,Field Skill,8,5,5,Compassion,800,"Use Electra's favorite pouch item
+from the Instruments category.",2,"It goes DON-DAKA-DAKA-DON!
+I think I'm in love."
+1124,Utsuro,,Field Skill,9,1,,,,,,
+1124,Utsuro,,Field Skill,9,2,,,,,,
+1124,Utsuro,,Field Skill,9,3,1,Compassion,300,"Use Electra's favorite pouch items.
+(Meat category)",1,"Mmman, this is tasty!
+I'm in heaven."
+1124,Utsuro,,Field Skill,9,4,2,Compassion,500,"Use Electra's favorite pouch items.
+(Meat category)",4,"Ahh, how can life even feel this great...?"
+1124,Utsuro,,Field Skill,9,5,3,Compassion,800,"Use Electra's favorite pouch item
+from the Drinks category.",4,"Honey au Lait is my absolute,
+definite, hands-down favorite."
+1124,Utsuro,,Field Skill,10,1,1,,,,,
+1124,Utsuro,,Field Skill,10,2,2,Bravery,200,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Uhh...
+Did I lose control again...?"
+1124,Utsuro,,Field Skill,10,3,3,Bravery,300,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Mmm...
+I'll give it a try..."
+1124,Utsuro,,Field Skill,10,4,4,Bravery,500,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"With a bit more practice, I think I'll
+be able to control it."
+1124,Utsuro,,Field Skill,10,5,5,Bravery,800,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Yay! Thanks to everyone,
+I think I've got it down pat!
+Now, I've got a request..."
+1125,Utsuro,,Key,1,1,1,,,,,
+1125,Utsuro,,Key,1,2,2,Truth,200,Increase Trust.,100,"Shall we take my zappage
+out for a spin?"
+1125,Utsuro,,Key,1,3,3,Truth,300,Increase Trust.,1300,"I'll grow in no time!
+Just wait and see."
+1125,Utsuro,,Key,1,4,4,Truth,500,Increase Trust.,3800,"Oops, did I grow again?
+It's thanks to you all!"
+1125,Utsuro,,Key,1,5,5,Truth,800,Increase Trust.,9800,"Thank you for always believing in me!
+I'm feeling a lot more confident now."
+1125,Utsuro,必殺技1,Special,2,1,1,,,,,
+1125,Utsuro,必殺技1,Special,2,2,2,Compassion,200,Use Bang-Bang Bound.,10,"Get ready for a zapping!
+I'll show you in our next fight!"
+1125,Utsuro,必殺技1,Special,2,3,3,Compassion,300,Use Bang-Bang Bound.,11,Woohoo! My current runs stronger!
+1125,Utsuro,必殺技1,Special,2,4,4,Compassion,500,Use Bang-Bang Bound.,12,I'm ready to go all-in!
+1125,Utsuro,必殺技1,Special,2,5,5,Compassion,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...It's a whole new me! But you can
+rely on me just like I was the old me!"
+1125,Utsuro,必殺技2,Special,3,1,1,,,,,
+1125,Utsuro,必殺技2,Special,3,2,2,Bravery,200,Finish an enemy.,10,"Ready to go anytime!
+...Just so long as it's soon!"
+1125,Utsuro,必殺技2,Special,3,3,3,Bravery,300,"Defeat a Moskel Rhogul in
+Temperantia.",5,"My voltage's increased!
+I wanna show you now!
+Not yet? How about now?"
+1125,Utsuro,必殺技2,Special,3,4,4,Bravery,500,"Defeat mechanical enemies such as
+Dajan Sovereigns in the Land of
+Morytha. (Excludes unique monsters.)",5,I'm awesome! Aren't you impressed?
+1125,Utsuro,必殺技2,Special,3,5,5,Bravery,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...My power's more than ready
+to be used for good!"
+1125,Utsuro,必殺技3,Special,4,1,1,Truth,100,Finish an enemy.,5,"My power's gotten stronger!
+I'll put it to good use."
+1125,Utsuro,必殺技3,Special,4,2,2,Truth,200,"Use Electra's favorite pouch items.
+(Instruments category)",1,"That's a nice sound.
+Man, music is amazing!"
+1125,Utsuro,必殺技3,Special,4,3,3,Truth,300,Finish an enemy.,20,I can do anything if I put my mind to it.
+1125,Utsuro,必殺技3,Special,4,4,4,Truth,500,Finish an enemy.,30,"My power levels are shocking!
+Get it? Shocking?"
+1125,Utsuro,必殺技3,Special,4,5,5,Truth,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"Rumblerumble... Kablam!
+That's how it'll go."
+1125,Utsuro,,Battle Skill,5,1,1,,,,,
+1125,Utsuro,,Battle Skill,5,2,2,Compassion,200,Evade an attack.,5,"Don't get too close,
+unless you want a solid jolt!"
+1125,Utsuro,,Battle Skill,5,3,3,Compassion,300,Evade an attack.,7,"So you're cruising for a zapping, eh?"
+1125,Utsuro,,Battle Skill,5,4,4,Compassion,500,Evade an attack.,9,"Get ready for a shock!
+A-ah... No, I'm good, I'm good..."
+1125,Utsuro,,Battle Skill,5,5,5,Compassion,800,"In the Wall Power Control Room, Land
+of Morytha, view the Heart-to-Heart
+""Self-Confidence"".",,Mhh... I'll try harder!
+1125,Utsuro,,Battle Skill,6,1,1,Compassion,100,"Deal a certain amount
+of total damage.",200,"Oops, I got clocked? Aw, guess I've
+still got a ways to go... *sigh*"
+1125,Utsuro,,Battle Skill,6,2,2,Compassion,200,"Deal a certain amount
+of total damage.",8000,"Whaddya think?
+I've got more presence now, huh?"
+1125,Utsuro,,Battle Skill,6,3,3,Compassion,300,"Deal a certain amount
+of total damage.",16000,"I'll draw the enemies' attention!
+Um... It's kind of a scary thought."
+1125,Utsuro,,Battle Skill,6,4,4,Compassion,500,"Deal a certain amount
+of total damage.",32000,"It feels like everyone here's
+just staring at us..."
+1125,Utsuro,,Battle Skill,6,5,5,Compassion,800,"Deal a certain amount
+of total damage.",48000,"It looks like we're the center of
+attention... Oh no, I'm blushing..."
+1125,Utsuro,,Battle Skill,7,1,1,,,,,
+1125,Utsuro,,Battle Skill,7,2,2,Truth,200,Block an attack.,5,"I'll keep 'em safe, don't you worry."
+1125,Utsuro,,Battle Skill,7,3,3,Truth,300,Block an attack.,7,"I swear, you'd all be lost without me!
+Aww... You're hopeless! Tee hee."
+1125,Utsuro,,Battle Skill,7,4,4,Truth,500,Block an attack.,9,"I got stronger!
+I feel like I can take on the world!"
+1125,Utsuro,,Battle Skill,7,5,5,Truth,800,Block an attack.,10,"I've gotten better again!
+Now you can task me with everything."
+1125,Utsuro,,Field Skill,8,1,1,,,,,
+1125,Utsuro,,Field Skill,8,2,2,Compassion,200,Defeat a Tomlok Anlood in Uraya.,4,"I will administer a zapping.
+Please open wide."
+1125,Utsuro,,Field Skill,8,3,3,Compassion,300,"Use Electra's favorite pouch items.
+(Instruments category)",2,"I like musical instruments!
+Especially the bashing type."
+1125,Utsuro,,Field Skill,8,4,4,Compassion,500,"Defeat a Trilut Grebel
+at the Cliffs of Morytha.",5,"Look, look!
+I learned to use this better!"
+1125,Utsuro,,Field Skill,8,5,5,Compassion,800,"Use Electra's favorite pouch item
+from the Instruments category.",2,"It goes DON-DAKA-DAKA-DON!
+I think I'm in love."
+1125,Utsuro,,Field Skill,9,1,,,,,,
+1125,Utsuro,,Field Skill,9,2,,,,,,
+1125,Utsuro,,Field Skill,9,3,1,Compassion,300,"Use Electra's favorite pouch items.
+(Meat category)",1,"Mmman, this is tasty!
+I'm in heaven."
+1125,Utsuro,,Field Skill,9,4,2,Compassion,500,"Use Electra's favorite pouch items.
+(Meat category)",4,"Ahh, how can life even feel this great...?"
+1125,Utsuro,,Field Skill,9,5,3,Compassion,800,"Use Electra's favorite pouch item
+from the Drinks category.",4,"Honey au Lait is my absolute,
+definite, hands-down favorite."
+1125,Utsuro,,Field Skill,10,1,1,,,,,
+1125,Utsuro,,Field Skill,10,2,2,Bravery,200,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Uhh...
+Did I lose control again...?"
+1125,Utsuro,,Field Skill,10,3,3,Bravery,300,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Mmm...
+I'll give it a try..."
+1125,Utsuro,,Field Skill,10,4,4,Bravery,500,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"With a bit more practice, I think I'll
+be able to control it."
+1125,Utsuro,,Field Skill,10,5,5,Bravery,800,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Yay! Thanks to everyone,
+I think I've got it down pat!
+Now, I've got a request..."
+1126,Utsuro,,Key,1,1,1,,,,,
+1126,Utsuro,,Key,1,2,2,Truth,200,Increase Trust.,100,"Shall we take my zappage
+out for a spin?"
+1126,Utsuro,,Key,1,3,3,Truth,300,Increase Trust.,1300,"I'll grow in no time!
+Just wait and see."
+1126,Utsuro,,Key,1,4,4,Truth,500,Increase Trust.,3800,"Oops, did I grow again?
+It's thanks to you all!"
+1126,Utsuro,,Key,1,5,5,Truth,800,Increase Trust.,9800,"Thank you for always believing in me!
+I'm feeling a lot more confident now."
+1126,Utsuro,必殺技1,Special,2,1,1,,,,,
+1126,Utsuro,必殺技1,Special,2,2,2,Compassion,200,Use Bang-Bang Bound.,10,"Get ready for a zapping!
+I'll show you in our next fight!"
+1126,Utsuro,必殺技1,Special,2,3,3,Compassion,300,Use Bang-Bang Bound.,11,Woohoo! My current runs stronger!
+1126,Utsuro,必殺技1,Special,2,4,4,Compassion,500,Use Bang-Bang Bound.,12,I'm ready to go all-in!
+1126,Utsuro,必殺技1,Special,2,5,5,Compassion,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...It's a whole new me! But you can
+rely on me just like I was the old me!"
+1126,Utsuro,必殺技2,Special,3,1,1,,,,,
+1126,Utsuro,必殺技2,Special,3,2,2,Bravery,200,Finish an enemy.,10,"Ready to go anytime!
+...Just so long as it's soon!"
+1126,Utsuro,必殺技2,Special,3,3,3,Bravery,300,"Defeat a Moskel Rhogul in
+Temperantia.",5,"My voltage's increased!
+I wanna show you now!
+Not yet? How about now?"
+1126,Utsuro,必殺技2,Special,3,4,4,Bravery,500,"Defeat mechanical enemies such as
+Dajan Sovereigns in the Land of
+Morytha. (Excludes unique monsters.)",5,I'm awesome! Aren't you impressed?
+1126,Utsuro,必殺技2,Special,3,5,5,Bravery,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"...My power's more than ready
+to be used for good!"
+1126,Utsuro,必殺技3,Special,4,1,1,Truth,100,Finish an enemy.,5,"My power's gotten stronger!
+I'll put it to good use."
+1126,Utsuro,必殺技3,Special,4,2,2,Truth,200,"Use Electra's favorite pouch items.
+(Instruments category)",1,"That's a nice sound.
+Man, music is amazing!"
+1126,Utsuro,必殺技3,Special,4,3,3,Truth,300,Finish an enemy.,20,I can do anything if I put my mind to it.
+1126,Utsuro,必殺技3,Special,4,4,4,Truth,500,Finish an enemy.,30,"My power levels are shocking!
+Get it? Shocking?"
+1126,Utsuro,必殺技3,Special,4,5,5,Truth,800,"Go to Torigoth Market in Gormott
+and complete the quest
+""Go for it, Electra!'",,"Rumblerumble... Kablam!
+That's how it'll go."
+1126,Utsuro,,Battle Skill,5,1,1,,,,,
+1126,Utsuro,,Battle Skill,5,2,2,Compassion,200,Evade an attack.,5,"Don't get too close,
+unless you want a solid jolt!"
+1126,Utsuro,,Battle Skill,5,3,3,Compassion,300,Evade an attack.,7,"So you're cruising for a zapping, eh?"
+1126,Utsuro,,Battle Skill,5,4,4,Compassion,500,Evade an attack.,9,"Get ready for a shock!
+A-ah... No, I'm good, I'm good..."
+1126,Utsuro,,Battle Skill,5,5,5,Compassion,800,"In the Wall Power Control Room, Land
+of Morytha, view the Heart-to-Heart
+""Self-Confidence"".",,Mhh... I'll try harder!
+1126,Utsuro,,Battle Skill,6,1,1,Compassion,100,"Deal a certain amount
+of total damage.",200,"Oops, I got clocked? Aw, guess I've
+still got a ways to go... *sigh*"
+1126,Utsuro,,Battle Skill,6,2,2,Compassion,200,"Deal a certain amount
+of total damage.",8000,"Whaddya think?
+I've got more presence now, huh?"
+1126,Utsuro,,Battle Skill,6,3,3,Compassion,300,"Deal a certain amount
+of total damage.",16000,"I'll draw the enemies' attention!
+Um... It's kind of a scary thought."
+1126,Utsuro,,Battle Skill,6,4,4,Compassion,500,"Deal a certain amount
+of total damage.",32000,"It feels like everyone here's
+just staring at us..."
+1126,Utsuro,,Battle Skill,6,5,5,Compassion,800,"Deal a certain amount
+of total damage.",48000,"It looks like we're the center of
+attention... Oh no, I'm blushing..."
+1126,Utsuro,,Battle Skill,7,1,1,,,,,
+1126,Utsuro,,Battle Skill,7,2,2,Truth,200,Block an attack.,5,"I'll keep 'em safe, don't you worry."
+1126,Utsuro,,Battle Skill,7,3,3,Truth,300,Block an attack.,7,"I swear, you'd all be lost without me!
+Aww... You're hopeless! Tee hee."
+1126,Utsuro,,Battle Skill,7,4,4,Truth,500,Block an attack.,9,"I got stronger!
+I feel like I can take on the world!"
+1126,Utsuro,,Battle Skill,7,5,5,Truth,800,Block an attack.,10,"I've gotten better again!
+Now you can task me with everything."
+1126,Utsuro,,Field Skill,8,1,1,,,,,
+1126,Utsuro,,Field Skill,8,2,2,Compassion,200,Defeat a Tomlok Anlood in Uraya.,4,"I will administer a zapping.
+Please open wide."
+1126,Utsuro,,Field Skill,8,3,3,Compassion,300,"Use Electra's favorite pouch items.
+(Instruments category)",2,"I like musical instruments!
+Especially the bashing type."
+1126,Utsuro,,Field Skill,8,4,4,Compassion,500,"Defeat a Trilut Grebel
+at the Cliffs of Morytha.",5,"Look, look!
+I learned to use this better!"
+1126,Utsuro,,Field Skill,8,5,5,Compassion,800,"Use Electra's favorite pouch item
+from the Instruments category.",2,"It goes DON-DAKA-DAKA-DON!
+I think I'm in love."
+1126,Utsuro,,Field Skill,9,1,,,,,,
+1126,Utsuro,,Field Skill,9,2,,,,,,
+1126,Utsuro,,Field Skill,9,3,1,Compassion,300,"Use Electra's favorite pouch items.
+(Meat category)",1,"Mmman, this is tasty!
+I'm in heaven."
+1126,Utsuro,,Field Skill,9,4,2,Compassion,500,"Use Electra's favorite pouch items.
+(Meat category)",4,"Ahh, how can life even feel this great...?"
+1126,Utsuro,,Field Skill,9,5,3,Compassion,800,"Use Electra's favorite pouch item
+from the Drinks category.",4,"Honey au Lait is my absolute,
+definite, hands-down favorite."
+1126,Utsuro,,Field Skill,10,1,1,,,,,
+1126,Utsuro,,Field Skill,10,2,2,Bravery,200,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Uhh...
+Did I lose control again...?"
+1126,Utsuro,,Field Skill,10,3,3,Bravery,300,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Mmm...
+I'll give it a try..."
+1126,Utsuro,,Field Skill,10,4,4,Bravery,500,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"With a bit more practice, I think I'll
+be able to control it."
+1126,Utsuro,,Field Skill,10,5,5,Bravery,800,"Speak to townsfolk in each region and
+take the Lord of Thunder training.",,"Yay! Thanks to everyone,
+I think I've got it down pat!
+Now, I've got a request..."
+1127,Utsuro,,Key,1,1,1,,,,,
+1127,Utsuro,,Key,1,2,2,,,あああ,75,あああ
+1127,Utsuro,,Key,1,3,3,,,あああ,500,あああ
+1127,Utsuro,,Key,1,4,4,,,あああ,2000,あああ
+1127,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1127,Utsuro,必殺技1,Special,2,1,1,,,,,
+1127,Utsuro,必殺技1,Special,2,2,2,,,あああ,10,あああ
+1127,Utsuro,必殺技1,Special,2,3,3,,,あああ,3,あああ
+1127,Utsuro,必殺技1,Special,2,4,4,,,あああ,25,あああ
+1127,Utsuro,必殺技1,Special,2,5,5,,,あああ,3,あああ
+1127,Utsuro,必殺技2,Special,3,1,1,,,,,
+1127,Utsuro,必殺技2,Special,3,2,2,,,あああ,1,あああ
+1127,Utsuro,必殺技2,Special,3,3,3,,,あああ,15,あああ
+1127,Utsuro,必殺技2,Special,3,4,4,,,あああ,2,あああ
+1127,Utsuro,必殺技2,Special,3,5,5,,,あああ,3,あああ
+1127,Utsuro,必殺技3,Special,4,1,1,,,,,
+1127,Utsuro,必殺技3,Special,4,2,2,,,あああ,2,あああ
+1127,Utsuro,必殺技3,Special,4,3,3,,,あああ,10,あああ
+1127,Utsuro,必殺技3,Special,4,4,4,,,あああ,1,あああ
+1127,Utsuro,必殺技3,Special,4,5,5,,,あああ,25,あああ
+1127,Utsuro,スキル1,Battle Skill,5,1,1,,,,,
+1127,Utsuro,スキル1,Battle Skill,5,2,2,,,あああ,10,あああ
+1127,Utsuro,スキル1,Battle Skill,5,3,3,,,あああ,50,あああ
+1127,Utsuro,スキル1,Battle Skill,5,4,4,,,あああ,300000,あああ
+1127,Utsuro,スキル1,Battle Skill,5,5,5,,,あああ,30,あああ
+1127,Utsuro,スキル2,Battle Skill,6,1,1,,,,,
+1127,Utsuro,スキル2,Battle Skill,6,2,2,,,あああ,15,あああ
+1127,Utsuro,スキル2,Battle Skill,6,3,3,,,あああ,10,あああ
+1127,Utsuro,スキル2,Battle Skill,6,4,4,,,あああ,5,あああ
+1127,Utsuro,スキル2,Battle Skill,6,5,5,,,あああ,350,あああ
+1127,Utsuro,スキル3,Battle Skill,7,1,1,,,あああ,4,あああ
+1127,Utsuro,スキル3,Battle Skill,7,2,2,,,あああ,20,あああ
+1127,Utsuro,スキル3,Battle Skill,7,3,3,,,あああ,100,あああ
+1127,Utsuro,スキル3,Battle Skill,7,4,4,,,あああ,150,あああ
+1127,Utsuro,スキル3,Battle Skill,7,5,5,,,あああ,,あああ
+1127,Utsuro,Mineralogy,Field Skill,8,1,1,,,,,
+1127,Utsuro,Mineralogy,Field Skill,8,2,2,,,あああ,2,あああ
+1127,Utsuro,Mineralogy,Field Skill,8,3,,,,,,
+1127,Utsuro,Mineralogy,Field Skill,8,4,,,,,,
+1127,Utsuro,Mineralogy,Field Skill,8,5,3,,,あああ,,あああ
+1127,Utsuro,FS1,Field Skill,9,1,1,,,,,
+1127,Utsuro,FS1,Field Skill,9,2,2,,,あああ,,あああ
+1127,Utsuro,FS1,Field Skill,9,3,,,,,,
+1127,Utsuro,FS1,Field Skill,9,4,3,,,あああ,,あああ
+1127,Utsuro,FS1,Field Skill,9,5,,,,,,
+1127,Utsuro,FS9,Field Skill,10,1,1,,,あああ,10,あああ
+1127,Utsuro,FS9,Field Skill,10,2,,,,,,
+1127,Utsuro,FS9,Field Skill,10,3,2,,,あああ,,あああ
+1127,Utsuro,FS9,Field Skill,10,4,,,,,,
+1127,Utsuro,FS9,Field Skill,10,5,3,,,あああ,85000,あああ
+1128,Utsuro,,Key,1,1,1,,,,,
+1128,Utsuro,,Key,1,2,2,,,あああ,30,あああ
+1128,Utsuro,,Key,1,3,3,,,あああ,500,あああ
+1128,Utsuro,,Key,1,4,4,,,あああ,1750,あああ
+1128,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1128,Utsuro,必殺技1,Special,2,1,1,,,,,
+1128,Utsuro,必殺技1,Special,2,2,2,,,あああ,5,あああ
+1128,Utsuro,必殺技1,Special,2,3,3,,,あああ,3,あああ
+1128,Utsuro,必殺技1,Special,2,4,4,,,あああ,20,あああ
+1128,Utsuro,必殺技1,Special,2,5,5,,,あああ,2,あああ
+1128,Utsuro,必殺技2,Special,3,1,1,,,,,
+1128,Utsuro,必殺技2,Special,3,2,2,,,あああ,5,あああ
+1128,Utsuro,必殺技2,Special,3,3,3,,,あああ,15,あああ
+1128,Utsuro,必殺技2,Special,3,4,4,,,あああ,1,あああ
+1128,Utsuro,必殺技2,Special,3,5,5,,,あああ,30,あああ
+1128,Utsuro,必殺技3,Special,4,1,1,,,,,
+1128,Utsuro,必殺技3,Special,4,2,2,,,あああ,3,あああ
+1128,Utsuro,必殺技3,Special,4,3,3,,,あああ,3,あああ
+1128,Utsuro,必殺技3,Special,4,4,4,,,あああ,10,あああ
+1128,Utsuro,必殺技3,Special,4,5,5,,,あああ,1,あああ
+1128,Utsuro,スキル1,Battle Skill,5,1,1,,,あああ,1,あああ
+1128,Utsuro,スキル1,Battle Skill,5,2,2,,,あああ,5,あああ
+1128,Utsuro,スキル1,Battle Skill,5,3,3,,,あああ,5,あああ
+1128,Utsuro,スキル1,Battle Skill,5,4,4,,,あああ,15,あああ
+1128,Utsuro,スキル1,Battle Skill,5,5,5,,,あああ,10,あああ
+1128,Utsuro,スキル2,Battle Skill,6,1,1,,,,,
+1128,Utsuro,スキル2,Battle Skill,6,2,2,,,あああ,5,あああ
+1128,Utsuro,スキル2,Battle Skill,6,3,3,,,あああ,25,あああ
+1128,Utsuro,スキル2,Battle Skill,6,4,4,,,あああ,30,あああ
+1128,Utsuro,スキル2,Battle Skill,6,5,5,,,あああ,,あああ
+1128,Utsuro,スキル3,Battle Skill,7,1,1,,,,,
+1128,Utsuro,スキル3,Battle Skill,7,2,2,,,あああ,60,あああ
+1128,Utsuro,スキル3,Battle Skill,7,3,3,,,あああ,2000,あああ
+1128,Utsuro,スキル3,Battle Skill,7,4,4,,,あああ,10,あああ
+1128,Utsuro,スキル3,Battle Skill,7,5,5,,,あああ,6000,あああ
+1128,Utsuro,Forestry,Field Skill,8,1,,,,,,
+1128,Utsuro,Forestry,Field Skill,8,2,1,,,あああ,50,あああ
+1128,Utsuro,Forestry,Field Skill,8,3,2,,,あああ,2,あああ
+1128,Utsuro,Forestry,Field Skill,8,4,3,,,あああ,,あああ
+1128,Utsuro,Forestry,Field Skill,8,5,,,,,,
+1128,Utsuro,FS2,Field Skill,9,1,1,,,,,
+1128,Utsuro,FS2,Field Skill,9,2,,,,,,
+1128,Utsuro,FS2,Field Skill,9,3,2,,,あああ,,あああ
+1128,Utsuro,FS2,Field Skill,9,4,,,,,,
+1128,Utsuro,FS2,Field Skill,9,5,3,,,あああ,,あああ
+1128,Utsuro,FS8,Field Skill,10,1,1,,,あああ,10,あああ
+1128,Utsuro,FS8,Field Skill,10,2,2,,,あああ,10000,あああ
+1128,Utsuro,FS8,Field Skill,10,3,,,,,,
+1128,Utsuro,FS8,Field Skill,10,4,3,,,あああ,2,"You used Haze's favorite pouch item
+2 times.
+""Thank you, Lady Lora! I love it!"""
+1128,Utsuro,FS8,Field Skill,10,5,,,,,,
+1129,Utsuro,,Key,1,1,1,,,,,
+1129,Utsuro,,Key,1,2,2,,,あああ,30,あああ
+1129,Utsuro,,Key,1,3,3,,,あああ,500,あああ
+1129,Utsuro,,Key,1,4,4,,,あああ,2000,あああ
+1129,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1129,Utsuro,必殺技1,Special,2,1,1,,,,,
+1129,Utsuro,必殺技1,Special,2,2,2,,,あああ,10,あああ
+1129,Utsuro,必殺技1,Special,2,3,3,,,あああ,3,あああ
+1129,Utsuro,必殺技1,Special,2,4,4,,,あああ,20,あああ
+1129,Utsuro,必殺技1,Special,2,5,5,,,あああ,3,あああ
+1129,Utsuro,必殺技2,Special,3,1,1,,,,,
+1129,Utsuro,必殺技2,Special,3,2,2,,,あああ,3,あああ
+1129,Utsuro,必殺技2,Special,3,3,3,,,あああ,15,あああ
+1129,Utsuro,必殺技2,Special,3,4,4,,,あああ,2,あああ
+1129,Utsuro,必殺技2,Special,3,5,5,,,あああ,30,あああ
+1129,Utsuro,必殺技3,Special,4,1,1,,,,,
+1129,Utsuro,必殺技3,Special,4,2,2,,,あああ,3,あああ
+1129,Utsuro,必殺技3,Special,4,3,3,,,あああ,4,あああ
+1129,Utsuro,必殺技3,Special,4,4,4,,,あああ,10,あああ
+1129,Utsuro,必殺技3,Special,4,5,5,,,あああ,3,あああ
+1129,Utsuro,Foresight,Battle Skill,5,1,1,,,,,
+1129,Utsuro,Foresight,Battle Skill,5,2,2,,,あああ,10,あああ
+1129,Utsuro,Foresight,Battle Skill,5,3,3,,,あああ,5,あああ
+1129,Utsuro,Foresight,Battle Skill,5,4,4,,,あああ,40,あああ
+1129,Utsuro,Foresight,Battle Skill,5,5,5,,,あああ,,あああ
+1129,Utsuro,Lightspeed Flurry,Battle Skill,6,1,1,,,,,
+1129,Utsuro,Lightspeed Flurry,Battle Skill,6,2,2,,,あああ,10,あああ
+1129,Utsuro,Lightspeed Flurry,Battle Skill,6,3,3,,,あああ,10,あああ
+1129,Utsuro,Lightspeed Flurry,Battle Skill,6,4,4,,,あああ,500000,あああ
+1129,Utsuro,Lightspeed Flurry,Battle Skill,6,5,5,,,あああ,20,あああ
+1129,Utsuro,Glint,Battle Skill,7,1,1,,,あああ,3,あああ
+1129,Utsuro,Glint,Battle Skill,7,2,2,,,あああ,20,あああ
+1129,Utsuro,Glint,Battle Skill,7,3,3,,,あああ,2,あああ
+1129,Utsuro,Glint,Battle Skill,7,4,4,,,あああ,10,あああ
+1129,Utsuro,Glint,Battle Skill,7,5,5,,,あああ,,あああ
+1129,Utsuro,FS10,Field Skill,8,1,1,,,,,
+1129,Utsuro,FS10,Field Skill,8,2,2,,,あああ,2,あああ
+1129,Utsuro,FS10,Field Skill,8,3,,,,,,
+1129,Utsuro,FS10,Field Skill,8,4,3,,,あああ,,あああ
+1129,Utsuro,FS10,Field Skill,8,5,,,,,,
+1129,Utsuro,FS3,Field Skill,9,1,1,,,,,
+1129,Utsuro,FS3,Field Skill,9,2,,,,,,
+1129,Utsuro,FS3,Field Skill,9,3,2,,,あああ,1,あああ
+1129,Utsuro,FS3,Field Skill,9,4,,,,,,
+1129,Utsuro,FS3,Field Skill,9,5,3,,,あああ,500,あああ
+1129,Utsuro,Girls' Talk,Field Skill,10,1,,,,,,
+1129,Utsuro,Girls' Talk,Field Skill,10,2,,,,,,
+1129,Utsuro,Girls' Talk,Field Skill,10,3,,,,,,
+1129,Utsuro,Girls' Talk,Field Skill,10,4,,,,,,
+1129,Utsuro,Girls' Talk,Field Skill,10,5,1,,,あああ,,あああ
+1130,Utsuro,,Key,1,1,1,,,,,
+1130,Utsuro,,Key,1,2,2,,,あああ,30,あああ
+1130,Utsuro,,Key,1,3,3,,,あああ,500,あああ
+1130,Utsuro,,Key,1,4,4,,,あああ,1500,あああ
+1130,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1130,Utsuro,必殺技1,Special,2,1,1,,,,,
+1130,Utsuro,必殺技1,Special,2,2,2,,,あああ,10,あああ
+1130,Utsuro,必殺技1,Special,2,3,3,,,あああ,2,あああ
+1130,Utsuro,必殺技1,Special,2,4,4,,,あああ,20,あああ
+1130,Utsuro,必殺技1,Special,2,5,5,,,あああ,3,あああ
+1130,Utsuro,必殺技2,Special,3,1,1,,,,,
+1130,Utsuro,必殺技2,Special,3,2,2,,,あああ,5,あああ
+1130,Utsuro,必殺技2,Special,3,3,3,,,あああ,3,あああ
+1130,Utsuro,必殺技2,Special,3,4,4,,,あああ,15,あああ
+1130,Utsuro,必殺技2,Special,3,5,5,,,あああ,2,あああ
+1130,Utsuro,必殺技3,Special,4,1,1,,,,,
+1130,Utsuro,必殺技3,Special,4,2,2,,,あああ,5,あああ
+1130,Utsuro,必殺技3,Special,4,3,3,,,あああ,2,あああ
+1130,Utsuro,必殺技3,Special,4,4,4,,,あああ,10,あああ
+1130,Utsuro,必殺技3,Special,4,5,5,,,あああ,2,あああ
+1130,Utsuro,スキル1,Battle Skill,5,1,1,,,,,
+1130,Utsuro,スキル1,Battle Skill,5,2,2,,,あああ,20000,あああ
+1130,Utsuro,スキル1,Battle Skill,5,3,3,,,あああ,5,あああ
+1130,Utsuro,スキル1,Battle Skill,5,4,4,,,あああ,15,あああ
+1130,Utsuro,スキル1,Battle Skill,5,5,5,,,あああ,30,あああ
+1130,Utsuro,スキル2,Battle Skill,6,1,1,,,あああ,3,あああ
+1130,Utsuro,スキル2,Battle Skill,6,2,2,,,あああ,2,あああ
+1130,Utsuro,スキル2,Battle Skill,6,3,3,,,あああ,100000,あああ
+1130,Utsuro,スキル2,Battle Skill,6,4,4,,,あああ,10,あああ
+1130,Utsuro,スキル2,Battle Skill,6,5,5,,,あああ,,あああ
+1130,Utsuro,スキル3,Battle Skill,7,1,1,,,,,
+1130,Utsuro,スキル3,Battle Skill,7,2,2,,,あああ,40,あああ
+1130,Utsuro,スキル3,Battle Skill,7,3,3,,,あああ,10,あああ
+1130,Utsuro,スキル3,Battle Skill,7,4,4,,,あああ,20,あああ
+1130,Utsuro,スキル3,Battle Skill,7,5,5,,,あああ,50,あああ
+1130,Utsuro,Entomology,Field Skill,8,1,1,,,,,
+1130,Utsuro,Entomology,Field Skill,8,2,,,,,,
+1130,Utsuro,Entomology,Field Skill,8,3,2,,,あああ,1,あああ
+1130,Utsuro,Entomology,Field Skill,8,4,3,,,あああ,50,あああ
+1130,Utsuro,Entomology,Field Skill,8,5,,,,,,
+1130,Utsuro,FS6,Field Skill,9,1,1,,,,,
+1130,Utsuro,FS6,Field Skill,9,2,,,,,,
+1130,Utsuro,FS6,Field Skill,9,3,2,,,あああ,,あああ
+1130,Utsuro,FS6,Field Skill,9,4,,,,,,
+1130,Utsuro,FS6,Field Skill,9,5,3,,,あああ,3,あああ
+1130,Utsuro,,Field Skill,10,1,,,,,,
+1130,Utsuro,,Field Skill,10,2,,,,,,
+1130,Utsuro,,Field Skill,10,3,,,,,,
+1130,Utsuro,,Field Skill,10,4,,,,,,
+1130,Utsuro,,Field Skill,10,5,,,,,,
+1131,Utsuro,,Key,1,1,1,,,,,
+1131,Utsuro,,Key,1,2,2,,,あああ,30,あああ
+1131,Utsuro,,Key,1,3,3,,,あああ,500,あああ
+1131,Utsuro,,Key,1,4,4,,,あああ,1750,あああ
+1131,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1131,Utsuro,必殺技1,Special,2,1,1,,,,,
+1131,Utsuro,必殺技1,Special,2,2,2,,,あああ,5,あああ
+1131,Utsuro,必殺技1,Special,2,3,3,,,あああ,3,あああ
+1131,Utsuro,必殺技1,Special,2,4,4,,,あああ,20,あああ
+1131,Utsuro,必殺技1,Special,2,5,5,,,あああ,2,あああ
+1131,Utsuro,必殺技2,Special,3,1,1,,,,,
+1131,Utsuro,必殺技2,Special,3,2,2,,,あああ,2,あああ
+1131,Utsuro,必殺技2,Special,3,3,3,,,あああ,10,あああ
+1131,Utsuro,必殺技2,Special,3,4,4,,,あああ,2,あああ
+1131,Utsuro,必殺技2,Special,3,5,5,,,あああ,30,あああ
+1131,Utsuro,必殺技3,Special,4,1,1,,,,,
+1131,Utsuro,必殺技3,Special,4,2,2,,,あああ,2,あああ
+1131,Utsuro,必殺技3,Special,4,3,3,,,あああ,2,あああ
+1131,Utsuro,必殺技3,Special,4,4,4,,,あああ,10,あああ
+1131,Utsuro,必殺技3,Special,4,5,5,,,あああ,3,あああ
+1131,Utsuro,War Pyre,Battle Skill,5,1,1,,,あああ,4,あああ
+1131,Utsuro,War Pyre,Battle Skill,5,2,2,,,あああ,10,あああ
+1131,Utsuro,War Pyre,Battle Skill,5,3,3,,,あああ,200000,あああ
+1131,Utsuro,War Pyre,Battle Skill,5,4,4,,,あああ,40,あああ
+1131,Utsuro,War Pyre,Battle Skill,5,5,5,,,あああ,10,あああ
+1131,Utsuro,Firewalker,Battle Skill,6,1,1,,,,,
+1131,Utsuro,Firewalker,Battle Skill,6,2,2,,,あああ,1,あああ
+1131,Utsuro,Firewalker,Battle Skill,6,3,3,,,あああ,50,あああ
+1131,Utsuro,Firewalker,Battle Skill,6,4,4,,,あああ,70000,あああ
+1131,Utsuro,Firewalker,Battle Skill,6,5,5,,,あああ,,あああ
+1131,Utsuro,Dance of the Flames,Battle Skill,7,1,1,,,,,
+1131,Utsuro,Dance of the Flames,Battle Skill,7,2,2,,,あああ,20000,あああ
+1131,Utsuro,Dance of the Flames,Battle Skill,7,3,3,,,あああ,20,あああ
+1131,Utsuro,Dance of the Flames,Battle Skill,7,4,4,,,あああ,75,あああ
+1131,Utsuro,Dance of the Flames,Battle Skill,7,5,5,,,あああ,15,あああ
+1131,Utsuro,Botany,Field Skill,8,1,1,,,あああ,20,あああ
+1131,Utsuro,Botany,Field Skill,8,2,,,,,,
+1131,Utsuro,Botany,Field Skill,8,3,2,,,あああ,1,あああ
+1131,Utsuro,Botany,Field Skill,8,4,,,,,,
+1131,Utsuro,Botany,Field Skill,8,5,3,,,あああ,34,あああ
+1131,Utsuro,FS7,Field Skill,9,1,1,,,,,
+1131,Utsuro,FS7,Field Skill,9,2,2,,,あああ,50,あああ
+1131,Utsuro,FS7,Field Skill,9,3,,,,,,
+1131,Utsuro,FS7,Field Skill,9,4,3,,,あああ,125,あああ
+1131,Utsuro,FS7,Field Skill,9,5,,,,,,
+1131,Utsuro,,Field Skill,10,1,,,,,,
+1131,Utsuro,,Field Skill,10,2,,,,,,
+1131,Utsuro,,Field Skill,10,3,,,,,,
+1131,Utsuro,,Field Skill,10,4,,,,,,
+1131,Utsuro,,Field Skill,10,5,,,,,,
+1132,Utsuro,,Key,1,1,1,,,,,
+1132,Utsuro,,Key,1,2,2,,,あああ,30,あああ
+1132,Utsuro,,Key,1,3,3,,,あああ,250,あああ
+1132,Utsuro,,Key,1,4,4,,,あああ,1500,あああ
+1132,Utsuro,,Key,1,5,5,,,あああ,4500,あああ
+1132,Utsuro,必殺技1,Special,2,1,1,,,,,
+1132,Utsuro,必殺技1,Special,2,2,2,,,あああ,5,あああ
+1132,Utsuro,必殺技1,Special,2,3,3,,,あああ,4,あああ
+1132,Utsuro,必殺技1,Special,2,4,4,,,あああ,20,あああ
+1132,Utsuro,必殺技1,Special,2,5,5,,,あああ,2,あああ
+1132,Utsuro,必殺技2,Special,3,1,1,,,,,
+1132,Utsuro,必殺技2,Special,3,2,2,,,あああ,2,あああ
+1132,Utsuro,必殺技2,Special,3,3,3,,,あああ,10,あああ
+1132,Utsuro,必殺技2,Special,3,4,4,,,あああ,3,あああ
+1132,Utsuro,必殺技2,Special,3,5,5,,,あああ,30,あああ
+1132,Utsuro,必殺技3,Special,4,1,1,,,,,
+1132,Utsuro,必殺技3,Special,4,2,2,,,あああ,5,あああ
+1132,Utsuro,必殺技3,Special,4,3,3,,,あああ,2,あああ
+1132,Utsuro,必殺技3,Special,4,4,4,,,あああ,10,あああ
+1132,Utsuro,必殺技3,Special,4,5,5,,,あああ,2,あああ
+1132,Utsuro,Serene Heart,Battle Skill,5,1,1,,,,,
+1132,Utsuro,Serene Heart,Battle Skill,5,2,2,,,あああ,5,あああ
+1132,Utsuro,Serene Heart,Battle Skill,5,3,3,,,あああ,30,あああ
+1132,Utsuro,Serene Heart,Battle Skill,5,4,4,,,あああ,10,あああ
+1132,Utsuro,Serene Heart,Battle Skill,5,5,5,,,あああ,50,あああ
+1132,Utsuro,Like Water,Battle Skill,6,1,1,,,,,
+1132,Utsuro,Like Water,Battle Skill,6,2,2,,,あああ,3,あああ
+1132,Utsuro,Like Water,Battle Skill,6,3,3,,,あああ,50000,あああ
+1132,Utsuro,Like Water,Battle Skill,6,4,4,,,あああ,10,あああ
+1132,Utsuro,Like Water,Battle Skill,6,5,5,,,あああ,,あああ
+1132,Utsuro,Enlightenment,Battle Skill,7,1,1,,,あああ,1,あああ
+1132,Utsuro,Enlightenment,Battle Skill,7,2,2,,,あああ,15,あああ
+1132,Utsuro,Enlightenment,Battle Skill,7,3,3,,,あああ,3,あああ
+1132,Utsuro,Enlightenment,Battle Skill,7,4,4,,,あああ,,あああ
+1132,Utsuro,Enlightenment,Battle Skill,7,5,5,,,あああ,20,あああ
+1132,Utsuro,Ichthyology,Field Skill,8,1,1,,,あああ,10,あああ
+1132,Utsuro,Ichthyology,Field Skill,8,2,,,,,,
+1132,Utsuro,Ichthyology,Field Skill,8,3,2,,,あああ,,あああ
+1132,Utsuro,Ichthyology,Field Skill,8,4,,,,,,
+1132,Utsuro,Ichthyology,Field Skill,8,5,3,,,あああ,45,あああ
+1132,Utsuro,FS5,Field Skill,9,1,1,,,,,
+1132,Utsuro,FS5,Field Skill,9,2,,,,,,
+1132,Utsuro,FS5,Field Skill,9,3,2,,,あああ,500,あああ
+1132,Utsuro,FS5,Field Skill,9,4,,,,,,
+1132,Utsuro,FS5,Field Skill,9,5,3,,,あああ,130,あああ
+1132,Utsuro,FS4,Field Skill,10,1,1,,,,,
+1132,Utsuro,FS4,Field Skill,10,2,,,,,,
+1132,Utsuro,FS4,Field Skill,10,3,2,,,あああ,1,あああ
+1132,Utsuro,FS4,Field Skill,10,4,3,,,あああ,500000,あああ
+1132,Utsuro,FS4,Field Skill,10,5,,,,,,

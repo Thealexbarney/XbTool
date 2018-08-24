@@ -2472,6 +2472,7 @@ namespace XbTool.Types
         public ushort AddTimeMin;
         public float DmgNum1;
         public ushort DmgNum2;
+        public ushort DmgNum3;
         public ushort RecastNum1;
         public float RecastNum2;
         public ushort RecastNum3;
@@ -2479,6 +2480,7 @@ namespace XbTool.Types
         public float ResistNum2;
         public ushort ResistNum3;
         public ushort PTGRev;
+        public byte SpRev;
     }
 
     [BdatType]
@@ -3421,6 +3423,7 @@ namespace XbTool.Types
         public int scriptStartId;
         public ushort nextIDtheater;
         public float toneMap;
+        public byte noRetarget;
         public EventCategory _category;
         public EventChange _chgEdID;
         public EventChange _chgStID;
@@ -3502,6 +3505,7 @@ namespace XbTool.Types
         public string scriptName;
         public int scriptStartId;
         public float toneMap;
+        public byte noRetarget;
         public EventCategory _category;
         public SYS_MapJumpEvList _edFormID;
         public SYS_MapJumpEvList _stFormID;
@@ -3669,6 +3673,7 @@ namespace XbTool.Types
         public string scriptName;
         public int scriptStartId;
         public float toneMap;
+        public byte noRetarget;
         public EventCategory _category;
         public EventChange _chgEdID;
         public EventChange _chgStID;
@@ -3766,6 +3771,7 @@ namespace XbTool.Types
         public int scriptStartId;
         public ushort nextIDtheater;
         public float toneMap;
+        public byte noRetarget;
         public EventCategory _category;
         public EventChange _chgEdID;
         public EventChange _chgStID;
@@ -3843,6 +3849,7 @@ namespace XbTool.Types
         public byte voice;
         public string scriptName;
         public int scriptStartId;
+        public byte noRetarget;
         public EventCategory _category;
         public EventChange _chgEdID;
         public EventChange _chgStID;
@@ -9017,6 +9024,13 @@ namespace XbTool.Types
         public ushort message2;
         public short window_y3;
         public ushort message3;
+        public ushort change_cond;
+        public short cond_window_y1;
+        public ushort cond_message1;
+        public short cond_window_y2;
+        public ushort cond_message2;
+        public short cond_window_y3;
+        public ushort cond_message3;
     }
 
     [BdatType]
