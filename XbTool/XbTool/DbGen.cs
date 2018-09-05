@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 using Npgsql;
 using XbTool.Bdat;
@@ -24,7 +25,7 @@ namespace XbTool
             dbUsername = Console.ReadLine();
 
             Console.Write("Enter User Password: ");
-            dbPassword = Console.ReadLine();
+            dbPassword = GetHiddenConsoleInput();
 
             string connString = $"Host=localhost;Username={dbUsername};Password={dbPassword};Database={dbName};";
             progress?.LogMessage("Writing BDAT tables to postgresql database");
@@ -200,6 +201,19 @@ namespace XbTool
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static string GetHiddenConsoleInput()
+        {
+            StringBuilder input = new StringBuilder();
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter) break;
+                if (key.Key == ConsoleKey.Backspace && input.Length > 0) input.Remove(input.Length - 1, 1);
+                else if (key.Key != ConsoleKey.Backspace) input.Append(key.KeyChar);
+            }
+            return input.ToString();
         }
     }
 }
