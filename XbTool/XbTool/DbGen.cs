@@ -84,10 +84,8 @@ namespace XbTool
             }
         }
 
-        public static string CreateTableQuery(string schemaName, BdatStringTable table)
+        private static string CreateTableQuery(string schemaName, BdatStringTable table)
         {
-            string query = $"CREATE TABLE {schemaName}.{table.Name} (";
-
             List<string> columns = new List<string>();
 
             columns.Add("\"row_id\" INTEGER");
@@ -130,13 +128,10 @@ namespace XbTool
                 columns.Add($"\"{member.Name}\" {memberType}");
             }
 
-            query += String.Join(",", columns);
-            query += ");";
-
-            return query;
+            return $"CREATE TABLE {schemaName}.{table.Name} ({String.Join(',', columns)});";
         }
 
-        public static void PrintTable(BdatStringTable table, NpgsqlConnection conn, string schemaName)
+        private static void PrintTable(BdatStringTable table, NpgsqlConnection conn, string schemaName)
         {
             List<string> memberNames = (from member in table.Members select member.Name).ToList();
 
