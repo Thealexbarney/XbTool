@@ -26,21 +26,43 @@ namespace XbTool
 
             Console.Write("Enter User Password: ");
             dbPassword = GetHiddenConsoleInput();
+            Console.WriteLine();
 
             string connString = $"Host=localhost;Username={dbUsername};Password={dbPassword};Database={dbName};";
-            progress?.LogMessage("Writing BDAT tables to postgresql database");
-            progress?.SetTotal(bdats.Tables.Count);
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (PostgresException exception)
+                {
+                    if (exception.SqlState == "28P01") Console.WriteLine($"Password authentication for user {dbUsername} failed.");
+                    if (exception.SqlState == "3D000") Console.WriteLine($"Database {dbName} does not exist.");
+                    System.Environment.Exit(1);
+                }
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = $"CREATE SCHEMA {schemaName};";
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (PostgresException exception)
+                    {
+                        if (exception.SqlState == "42P06")
+                        {
+                            Console.WriteLine($"Schema name {schemaName} is already in use. Delete the schema and retry or provide a different schema name.");
+                            System.Environment.Exit(1);
+                        }
+                    }
                 }
+
+                progress?.LogMessage("Writing BDAT tables to postgresql database");
+                progress?.SetTotal(bdats.Tables.Count);
 
                 foreach (string tableName in bdats.Tables.Keys)
                 {
