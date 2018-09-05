@@ -96,16 +96,6 @@ namespace XbTool
                             options.Output = args[i + 1];
                             i++;
                             continue;
-                        case "S":
-                            if (i + 1 >= args.Length)
-                            {
-                                PrintWithUsage("No argument after -s switch.");
-                                return null;
-                            }
-
-                            options.Schema = args[i + 1];
-                            i++;
-                            continue;
                         case "F":
                         case "-FILTER":
                             if (i + 1 >= args.Length)
@@ -195,7 +185,7 @@ namespace XbTool
             Console.WriteLine("    Bdat2Json (-a <archive> | -b <bdat_dir>) -o <output_dir>");
 
             Console.WriteLine("\n  Bdat2Psql - Uploads to a PSQL server from BDAT files");
-            Console.WriteLine("    Bdat2Json (-a <archive> | -b <bdat_dir>) -s <schema_name>");
+            Console.WriteLine("    Bdat2Psql (-a <archive> | -b <bdat_dir>) -o <schema_name>");
 
             Console.WriteLine("\n  GenerateData - Generates various data from BDAT files");
             Console.WriteLine("    GenerateData (-a <archive> | -b <bdat_dir>) -o <output_dir>");

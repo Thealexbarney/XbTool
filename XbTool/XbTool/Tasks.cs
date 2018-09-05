@@ -183,10 +183,10 @@ namespace XbTool
 
         private static void Bdat2Psql(Options options)
         {
-            if (options.Schema == null) throw new NullReferenceException("Schema was not specified.");
+            if (options.Output == null) throw new NullReferenceException("Ouput directory (Schema) was not specified.");
 
             var tables = GetBdatStringCollection(options);
-            DBGen.PrintAllTables(tables, options.Schema, options.Progress);
+            DBGen.PrintAllTables(tables, options.Output, options.Progress);
         }
 
         private static void GenerateData(Options options)
