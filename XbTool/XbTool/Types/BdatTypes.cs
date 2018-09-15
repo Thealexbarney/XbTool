@@ -8216,7 +8216,7 @@ namespace XbTool.Types
     [Serializable]
     public class MNU_DlcGift : BdatItem
     {
-        public byte releasecount;
+        public sbyte releasecount;
         public ushort title;
         public ushort condition;
         public byte category;
@@ -8547,6 +8547,16 @@ namespace XbTool.Types
         public ushort title;
         public Message _index;
         public Message _title;
+    }
+
+    [BdatType]
+    [Serializable]
+    public class MNU_MsgEvthEx : BdatItem
+    {
+        public ushort name;
+        public ushort image_id;
+        public ushort Name1;
+        public ushort Name2;
     }
 
     [BdatType]

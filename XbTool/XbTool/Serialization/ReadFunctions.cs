@@ -7448,7 +7448,7 @@ namespace XbTool.Serialization
         {
             var item = new MNU_DlcGift();
             item.Id = itemId;
-            item.releasecount = file[itemOffset];
+            item.releasecount = (sbyte)file[itemOffset];
             item.title = BitConverter.ToUInt16(file, itemOffset + 1);
             item.condition = BitConverter.ToUInt16(file, itemOffset + 3);
             item.category = file[itemOffset + 5];
@@ -7775,6 +7775,17 @@ namespace XbTool.Serialization
             item.Id = itemId;
             item.index = BitConverter.ToUInt16(file, itemOffset);
             item.title = BitConverter.ToUInt16(file, itemOffset + 2);
+            return item;
+        }
+
+        public static MNU_MsgEvthEx ReadMNU_MsgEvthEx(byte[] file, int itemId, int itemOffset, int tableOffset)
+        {
+            var item = new MNU_MsgEvthEx();
+            item.Id = itemId;
+            item.name = BitConverter.ToUInt16(file, itemOffset);
+            item.image_id = BitConverter.ToUInt16(file, itemOffset + 2);
+            item.Name1 = BitConverter.ToUInt16(file, itemOffset + 4);
+            item.Name2 = BitConverter.ToUInt16(file, itemOffset + 6);
             return item;
         }
 
