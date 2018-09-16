@@ -206,6 +206,9 @@ namespace XbTool
             Console.WriteLine("\n  ReadSave - XB2 save file reading example");
             Console.WriteLine("             Outputs common blade information");
             Console.WriteLine("    ReadSave (-a <archive> | -b <bdat_input_dir>) -i <save_file> -o <out_text_file>");
+
+            Console.WriteLine("\n  DecompressIraSave - Decompresses the save file for the Torna DLC");
+            Console.WriteLine("    DecompressIraSave -i <input_file> -o <output_file>");
         }
 
         private static string GetProgramName() => Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly()?.Location ?? "");

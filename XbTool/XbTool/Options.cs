@@ -29,6 +29,7 @@ namespace XbTool
         DescrambleScript,
         SalvageRaffle,
         ReadSave,
+        DecompressIraSave,
         CombineBdat,
         ReadGimmick,
         ReadScript,

@@ -58,6 +58,9 @@ namespace XbTool
                     case Task.ReadSave:
                         ReadSave(options);
                         break;
+                    case Task.DecompressIraSave:
+                        DecompressSave(options);
+                        break;
                     case Task.CombineBdat:
                         CombineBdat(options);
                         break;
@@ -303,6 +306,18 @@ namespace XbTool
             BdatCollection tables = GetBdatCollection(options);
             string printout = Print.PrintSave(saveData, tables);
             File.WriteAllText(options.Output, printout);
+        }
+
+        private static void DecompressSave(Options options)
+        {
+            if (options.Input == null) throw new NullReferenceException("No input file was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output file was specified.");
+
+            byte[] saveFileComp = File.ReadAllBytes(options.Input);
+            var saveFileDecomp = Compression.DecompressSave(saveFileComp);
+            File.WriteAllBytes(options.Output, saveFileDecomp);
+
+
         }
 
         private static void CombineBdat(Options options)
