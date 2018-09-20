@@ -128,7 +128,7 @@ namespace XbTool
                 columns.Add($"\"{member.Name}\" {memberType}");
             }
 
-            return $"CREATE TABLE {schemaName}.{table.Name} ({String.Join(',', columns)});";
+            return $"CREATE TABLE {schemaName}.\"{table.Name}\" ({String.Join(',', columns)});";
         }
 
         private static void PrintTable(BdatStringTable table, NpgsqlConnection conn, string schemaName)
@@ -140,7 +140,7 @@ namespace XbTool
             string columns = String.Join(",", from member in memberNames select $"\"{member}\"");
             string values = String.Join(",", from member in memberNames select $"@{member}");
 
-            string query = $"INSERT INTO {schemaName}.{table.Name} ({columns}) VALUES ({values})";
+            string query = $"INSERT INTO {schemaName}.\"{table.Name}\" ({columns}) VALUES ({values})";
 
             foreach (BdatStringItem item in table.Items.Where(x => x != null))
             {
