@@ -186,7 +186,7 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("Ouput directory (Schema) was not specified.");
 
             var tables = GetBdatStringCollection(options);
-            DBGen.PrintAllTables(tables, options.Output, options.Progress);
+            DbGen.PrintAllTables(tables, options.Output, options.Progress);
         }
 
         private static void GenerateData(Options options)

@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using XbTool.Common;
 
 namespace XbTool
 {
-    public static class DBGen
+    public static class DbGen
     {
         public static void PrintAllTables(BdatStringCollection bdats, string schemaName, IProgressReport progress = null)
         {
@@ -40,7 +39,7 @@ namespace XbTool
                 {
                     if (exception.SqlState == "28P01") Console.WriteLine($"Password authentication for user {dbUsername} failed.");
                     if (exception.SqlState == "3D000") Console.WriteLine($"Database {dbName} does not exist.");
-                    System.Environment.Exit(1);
+                    Environment.Exit(1);
                 }
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
@@ -56,7 +55,7 @@ namespace XbTool
                         if (exception.SqlState == "42P06")
                         {
                             Console.WriteLine($"Schema name {schemaName} is already in use. Delete the schema and retry or provide a different schema name.");
-                            System.Environment.Exit(1);
+                            Environment.Exit(1);
                         }
                     }
                 }
@@ -128,7 +127,7 @@ namespace XbTool
                 columns.Add($"\"{member.Name}\" {memberType}");
             }
 
-            return $"CREATE TABLE {schemaName}.\"{table.Name}\" ({String.Join(',', columns)});";
+            return $"CREATE TABLE {schemaName}.\"{table.Name}\" ({String.Join(",", columns)});";
         }
 
         private static void PrintTable(BdatStringTable table, NpgsqlConnection conn, string schemaName)
