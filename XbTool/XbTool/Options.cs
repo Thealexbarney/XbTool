@@ -23,6 +23,7 @@ namespace XbTool
         BdatCodeGen,
         Bdat2Html,
         Bdat2Json,
+        Bdat2Psql,
         GenerateData,
         CreateBlade,
         ExtractWilay,
