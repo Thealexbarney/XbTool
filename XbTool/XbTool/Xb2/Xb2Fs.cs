@@ -33,6 +33,7 @@ namespace XbTool.Xb2
                 foreach (var file in Directory.GetFiles(dirs[i], "*", SearchOption.AllDirectories))
                 {
                     var path = Helpers.GetRelativePath(file, dirs[i]);
+                    path = path.Replace('\\', '/');
                     if (path[0] != '/') path = '/' + path;
                     if (path == "key.bin") continue;
                     Files[path] = new FsFile(file, i);

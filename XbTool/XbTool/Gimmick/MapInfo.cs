@@ -36,6 +36,11 @@ namespace XbTool.Gimmick
                 area.Size = new Point3(xHi - xLo, yHi - yLo, zHi - zLo);
                 data.Position = start + 72;
                 Areas[i] = area;
+
+                if (area.Name.EndsWith("_cave1"))
+                {
+                    area.Name = "dlc3_" + area.Name.Replace("_cave1", "");
+                }
             }
         }
 

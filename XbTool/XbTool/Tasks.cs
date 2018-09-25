@@ -184,6 +184,13 @@ namespace XbTool
             return tables;
         }
 
+        public static BdatCollection GetBdatCollection(IFileReader fs, bool readMetadata)
+        {
+            BdatTables bdats = new BdatTables(fs, readMetadata);
+            BdatCollection tables = Deserialize.DeserializeTables(bdats);
+            return tables;
+        }
+
         private static void Bdat2Html(Options options)
         {
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
@@ -327,8 +334,6 @@ namespace XbTool
             byte[] saveFileComp = File.ReadAllBytes(options.Input);
             var saveFileDecomp = Compression.DecompressSave(saveFileComp);
             File.WriteAllBytes(options.Output, saveFileDecomp);
-
-
         }
 
         private static void CombineBdat(Options options)
@@ -343,17 +348,18 @@ namespace XbTool
 
         private static void ReadGimmick(Options options)
         {
-            using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
+            using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
             {
-                if (options.ArdFilename == null) throw new NullReferenceException("Archive must be specified");
-                if (options.Output == null) throw new NullReferenceException("No output file was specified.");
+                if (options.Xb2Dir == null) throw new NullReferenceException("Must specify XB2 Directory.");
+                if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+                if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
 
-                BdatCollection tables = GetBdatCollection(options);
+                BdatCollection tables = GetBdatCollection(xb2Fs, false);
 
-                var gimmicks = ReadGmk.ReadAll(archive, tables);
+                MapInfo[] gimmicks = ReadGmk.ReadAll(xb2Fs, tables);
                 ExportMap.ExportCsv(gimmicks, options.Output);
 
-                ExportMap.Export(archive, gimmicks, options.Output);
+                ExportMap.Export(xb2Fs, gimmicks, options.Output);
             }
         }
 
