@@ -20,7 +20,7 @@
     <PackageReference Include="DotNet.Glob" Version="2.0.3" />
     <PackageReference Include="Npgsql" Version="4.0.3" />
     <PackageReference Condition=" '$(TargetFramework)' == 'net45' " Include="System.ValueTuple" Version="4.5.0" />
-    <PackageReference Condition=" '$(TargetFramework)' == 'net45' " Include="DotNetZip" Version="1.10.1" />
+    <PackageReference Condition=" '$(TargetFramework)' == 'net45' " Include="DotNetZip" Version="1.11.0" />
     <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.0' " Include="Iconic.Zlib.Netstandard" Version="1.0.0" />
     <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.0' " Include="System.Drawing.Common" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
