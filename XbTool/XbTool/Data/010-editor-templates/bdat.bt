@@ -1,7 +1,7 @@
 //------------------------------------------------
 //--- 010 Editor v8.0 Binary Template
 //
-//      File: 
+//      File: Xenoblade BDAT data file
 //   Authors: 
 //   Version: 
 //   Purpose: 
@@ -11,40 +11,80 @@
 //   History: 
 //------------------------------------------------
 
+enum <byte> ValueType
+{
+    VT_None = 0,
+    UInt8 = 1,
+    UInt16 = 2,
+    UInt32 = 3,
+    Int8 = 4,
+    Int16 = 5,
+    Int32 = 6,
+    String = 7,
+    FP32 = 8
+};
+
+enum <byte> MemberType
+{
+    MT_None = 0,
+    Scalar = 1,
+    Array = 2,
+    Flag = 3
+};
+
 local int i;
 
-struct TextEntry(int size) {
+typedef struct(int size) {
     uchar Data[size];
-};
+} TextEntry;
 
-struct BdatMember {
-    short MemberDescOffset;
-    short NextHashCollisionOffset;
-    short NameOffset;
-};
-
-struct BdatMemberDesc {
-    uchar Type;
-    uchar ValType;
+typedef struct {
+    MemberType Type;
+    ValueType ValType;
     ushort MemberOffset;
-    if(Type == 2)
+    if(Type == Array)
     {
         ushort ArrayLength;
     }
-};
+} BdatMemberDesc;
 
-struct BdatId(int size){
+typedef struct(int base) {
+    SetBackColor(cLtRed);
+    short MemberDescOffset;
+    short NextHashCollisionOffset;
+    short NameOffset;
+
+    SetBackColor(cAqua);
+    local int end = FTell();
+    FSeek(base + NameOffset);
+    string Name;
+
+    SetBackColor(cLtPurple);
+    FSeek(base + MemberDescOffset);
+    BdatMemberDesc Description;
+
+    FSeek(end);
+} BdatMember <read=BdatMemberRead>;
+
+string BdatMemberRead( BdatMember &m )
+{
+    string s;   
+    SPrintf( s, "%-6s %-6s %s", EnumToString(m.Description.Type), EnumToString(m.Description.ValType), m.Name);
+    return s;
+}
+
+typedef struct(int size){
     if(size > 0) {
         uchar Data[size];
     }
-};
+} BdatId;
 
-struct BdatFile {
+typedef struct {
     local int base = FTell();
     local int i;
     SetBackColor(cAqua);
     char ID[4];
-    uint16 Field4;
+    uint16 Flags;
     uint16 NamesOffset;
     uint16 ItemSize;
     uint16 HashTableOffset;
@@ -59,24 +99,15 @@ struct BdatFile {
     uint16 MemberTableOffset;
     uint16 MemberCount;
 
-	Printf("%i\n", BaseId);
     FSeek(base + HashTableOffset);
     SetBackColor(cGray);
-    uint16 Hashes[HashTableLength];
+    uint16 HashLookupTable[HashTableLength];
 
     FSeek(base + MemberTableOffset);
     SetBackColor(cLtRed);
 
     if(MemberCount > 0) {
-        BdatMember Members[MemberCount];
-    }
-
-
-    for(i = 0; i < MemberCount; i++)
-    {
-        FSeek(base + Members[i].MemberDescOffset);
-        SetBackColor(cLtPurple);
-        BdatMemberDesc MemberDesc;
+        BdatMember Members(base)[MemberCount] <optimize=false>;
     }
 
     SetBackColor(cSilver);
@@ -84,9 +115,7 @@ struct BdatFile {
     if(ItemSize > 0) {
         BdatId Ids(ItemSize)[ItemCount] <optimize=false>;
     }
-};
-
-
+} BdatFile;
 
 int32 FileCount;
 int32 ArchiveSize;
