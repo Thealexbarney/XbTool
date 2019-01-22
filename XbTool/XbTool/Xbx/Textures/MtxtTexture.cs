@@ -44,6 +44,9 @@ namespace XbTool.Xbx.Textures
                 case 49:
                     Format = TextureFormat.BC1;
                     break;
+                case 51:
+                    Format = TextureFormat.BC3;
+                    break;
                 default:
                     throw new NotImplementedException($"Texture format {Type}");
             }

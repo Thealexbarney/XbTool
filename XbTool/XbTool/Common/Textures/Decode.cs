@@ -37,6 +37,10 @@ namespace XbTool.Common.Textures
                     Swizzle.Deswizzle(texture, 3);
                     decoded = Dxt.DecompressDxt1(texture);
                     break;
+                case TextureFormat.BC3 when texture is Xbx.Textures.MtxtTexture tex:
+                    Xbx.Textures.Swizzle.Deswizzle(tex, 7);
+                    decoded = Dxt.DecompressDxt5(texture);
+                    break;
                 case TextureFormat.BC3:
                     Swizzle.Deswizzle(texture, 4);
                     decoded = Dxt.DecompressDxt5(texture);
