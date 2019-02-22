@@ -14,9 +14,30 @@ namespace XbTool.Xb2.FS
             SwitchFs sdFs = OpenSdCard(sdPath);
             Application xb2App = sdFs.Applications[0x0100E95004038000];
 
+            IFileSystem mainFs = xb2App.Patch.MainNca.OpenSectionFileSystem(1, IntegrityCheckLevel.ErrorOnInvalid);
+            IFile mainArh = mainFs.OpenFile("/bf2.arh", OpenMode.Read);
+            IFile mainArd = mainFs.OpenFile("/bf2.ard", OpenMode.Read);
+
+            var mainArchiveFs = new ArchiveFileSystem(mainArh, mainArd);
+
             var fsList = new List<IFileSystem>();
             fsList.Add(xb2App.Patch.MainNca.OpenSectionFileSystem(1, IntegrityCheckLevel.ErrorOnInvalid));
-            fsList.AddRange(xb2App.AddOnContent.Select(x => x.MainNca.OpenSectionFileSystem(0, IntegrityCheckLevel.ErrorOnInvalid)));
+            fsList.Add(mainArchiveFs);
+
+            foreach (Title aoc in xb2App.AddOnContent.OrderBy(x => x.Id))
+            {
+                IFileSystem aocFs = aoc.MainNca.OpenSectionFileSystem(0, IntegrityCheckLevel.ErrorOnInvalid);
+                fsList.Add(aocFs);
+
+                if (aoc.Id == 0x0100E95004039001)
+                {
+                    IFile aocArh = aocFs.OpenFile("/aoc1.arh", OpenMode.Read);
+                    IFile aocArd = aocFs.OpenFile("/aoc1.ard", OpenMode.Read);
+
+                    var aocArchiveFs = new ArchiveFileSystem(aocArh, aocArd);
+                    fsList.Add(aocArchiveFs);
+                }
+            }
 
             return new LayeredFileSystem(fsList);
         }

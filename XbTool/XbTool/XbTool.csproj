@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="7.0.1" />
     <PackageReference Include="DotNet.Glob" Version="2.0.3" />
-    <PackageReference Include="LibHac" Version="0.3.0" />
+    <PackageReference Include="LibHac" Version="0.3.1-alpha.5" />
     <PackageReference Include="Npgsql" Version="4.0.3" />
     <PackageReference Condition=" '$(TargetFramework)' == 'net46' " Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Condition=" '$(TargetFramework)' == 'net46' " Include="DotNetZip" Version="1.11.0" />
