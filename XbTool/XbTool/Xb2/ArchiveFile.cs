@@ -12,8 +12,9 @@ namespace XbTool.Xb2
         private bool IsCompressed { get; set; }
         private byte[] FileData { get; set; }
 
-        public ArchiveFile(byte[] file)
+        public ArchiveFile(byte[] file, OpenMode mode)
         {
+            Mode = mode;
             FileData = file;
             IsCompressed = true;
             Size = file.Length;
@@ -33,7 +34,7 @@ namespace XbTool.Xb2
 
             if (IsCompressed)
             {
-                FileData.CopyTo(destination.Slice((int)offset, toRead));
+                FileData.AsSpan((int)offset, toRead).CopyTo(destination);
             }
             else
             {
@@ -45,9 +46,9 @@ namespace XbTool.Xb2
         }
 
         public override long GetSize() => Size;
+        public override void Flush() { }
 
         public override void Write(ReadOnlySpan<byte> source, long offset) => throw new NotSupportedException();
-        public override void Flush() => throw new NotSupportedException();
         public override void SetSize(long size) => throw new NotSupportedException();
     }
 }

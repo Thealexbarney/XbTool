@@ -118,16 +118,16 @@ namespace XbTool.Xb2
             {
                 case 2:
                     var decompData = new byte[fileInfo.UncompressedSize];
-                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30, fileInfo.CompressedSize).AsStream();
+                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30).AsStream();
 
                     using (var deflate = new ZlibStream(compStream, CompressionMode.Decompress, true))
                     {
                         deflate.CopyTo(new MemoryStream(decompData), fileInfo.UncompressedSize);
                     }
 
-                    return new ArchiveFile(decompData);
+                    return new ArchiveFile(decompData, OpenMode.Read);
                 case 0:
-                    return new ArchiveFile(DataFile, fileInfo.Offset, fileInfo.UncompressedSize);
+                    return new ArchiveFile(DataFile, fileInfo.Offset, fileInfo.CompressedSize);
                 default:
                     throw new InvalidDataException();
             }
