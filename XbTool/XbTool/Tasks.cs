@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using LibHac.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.CodeGen;
@@ -87,6 +89,9 @@ namespace XbTool
                         break;
                     case Task.ReplaceArchive:
                         ReplaceArchive(options);
+                        break;
+                    case Task.SdPrintTest:
+                        SdPrintTest(options);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -434,6 +439,15 @@ namespace XbTool
             BdatCollection tables = GetBdatCollection(options);
 
             Xb2.Quest.Read.ExportQuests(tables, options.Output);
+        }
+
+        private static void SdPrintTest(Options options)
+        {
+            if (options.Input == null) throw new NullReferenceException("No input path was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+
+            IFileSystem a = Xb2.FS.Create.CreateFileSystem(options.Input);
+            File.WriteAllLines(options.Output, a.EnumerateEntries().Select(x => x.FullPath));
         }
     }
 }

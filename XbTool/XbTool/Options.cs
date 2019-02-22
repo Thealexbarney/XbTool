@@ -38,6 +38,7 @@ namespace XbTool
         ExtractMinimap,
         GenerateSite,
         ExportQuests,
-        ReplaceArchive
+        ReplaceArchive,
+        SdPrintTest
     }
 }
