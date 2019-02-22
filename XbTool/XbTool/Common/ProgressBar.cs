@@ -3,6 +3,7 @@
 using System;
 using System.Text;
 using System.Threading;
+using LibHac;
 
 namespace XbTool.Common
 {

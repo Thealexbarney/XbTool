@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
+using LibHac;
 using Npgsql;
 using XbTool.Bdat;
 using XbTool.BdatString;
-using XbTool.Common;
 
 namespace XbTool
 {

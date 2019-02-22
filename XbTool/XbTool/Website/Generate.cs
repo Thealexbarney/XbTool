@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using LibHac;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.Common;

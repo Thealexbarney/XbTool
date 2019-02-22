@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using LibHac;
 using XbTool.Xb2;
 using XbTool.Xb2.Textures;
 using FileInfo = XbTool.Xb2.FileInfo;

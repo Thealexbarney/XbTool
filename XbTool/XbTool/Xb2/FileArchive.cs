@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using DotNet.Globbing;
 using Ionic.Zlib;
+using LibHac;
 using XbTool.Common;
 
 namespace XbTool.Xb2

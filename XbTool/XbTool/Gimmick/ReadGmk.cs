@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using LibHac;
 using XbTool.Bdat;
 using XbTool.Common;
 using XbTool.Types;

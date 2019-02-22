@@ -1,4 +1,5 @@
-﻿using XbTool.Common;
+﻿using LibHac;
+using XbTool.Common;
 
 namespace XbTool
 {
