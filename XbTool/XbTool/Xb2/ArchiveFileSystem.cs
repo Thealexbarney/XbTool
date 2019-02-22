@@ -105,6 +105,8 @@ namespace XbTool.Xb2
 
         public IFile OpenFile(string path, OpenMode mode)
         {
+            path = PathTools.Normalize(path);
+
             if (!FileTable.TryOpenFile(path, out RomFileInfo romFileInfo))
             {
                 throw new FileNotFoundException();

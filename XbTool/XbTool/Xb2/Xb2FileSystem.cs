@@ -5,11 +5,13 @@ using System.Linq;
 using LibHac;
 using LibHac.IO;
 
-namespace XbTool.Xb2.FS
+namespace XbTool.Xb2
 {
-    public class Create
+    public class Xb2FileSystem : IFileSystem
     {
-        public static IFileSystem CreateFileSystem(string sdPath)
+        private IFileSystem BaseFs { get; }
+
+        public Xb2FileSystem(string sdPath)
         {
             SwitchFs sdFs = OpenSdCard(sdPath);
             Application xb2App = sdFs.Applications[0x0100E95004038000];
@@ -39,10 +41,63 @@ namespace XbTool.Xb2.FS
                 }
             }
 
-            return new LayeredFileSystem(fsList);
+            fsList.Reverse();
+            BaseFs = new LayeredFileSystem(fsList);
         }
 
-        public static SwitchFs OpenSdCard(string path, IProgressReport logger = null)
+        public IDirectory OpenDirectory(string path, OpenDirectoryMode mode)
+        {
+            path = PathTools.Normalize(path);
+
+            IDirectory baseDir = BaseFs.OpenDirectory(path, mode);
+
+            return new Xb2Directory(this, baseDir);
+        }
+
+        public IFile OpenFile(string path, OpenMode mode)
+        {
+            path = PathTools.Normalize(path);
+
+            if(IsArchiveFile(path)) throw new FileNotFoundException();
+
+            return BaseFs.OpenFile(path, mode);
+        }
+
+        public bool DirectoryExists(string path)
+        {
+            path = PathTools.Normalize(path);
+
+            if (IsArchiveFile(path)) return false;
+
+            return BaseFs.DirectoryExists(path);
+        }
+
+        public bool FileExists(string path)
+        {
+            path = PathTools.Normalize(path);
+
+            if (IsArchiveFile(path)) return false;
+
+            return BaseFs.FileExists(path);
+        }
+
+        public DirectoryEntryType GetEntryType(string path)
+        {
+            path = PathTools.Normalize(path);
+
+            if (IsArchiveFile(path)) throw new FileNotFoundException();
+
+            return BaseFs.GetEntryType(path);
+        }
+
+        internal static bool IsArchiveFile(string path)
+        {
+            string extension = Path.GetExtension(path);
+
+            return extension == ".ard" || extension == ".arh";
+        }
+
+        private static SwitchFs OpenSdCard(string path, IProgressReport logger = null)
         {
             SwitchFs switchFs;
             Keyset keyset = OpenKeyset();
@@ -77,5 +132,14 @@ namespace XbTool.Xb2.FS
 
             return ExternalKeys.ReadKeyFile(homeKeyFile, homeTitleKeyFile, homeConsoleKeyFile);
         }
+
+        public void Commit(){}
+
+        public void CreateDirectory(string path) => throw new NotSupportedException();
+        public void CreateFile(string path, long size, CreateFileOptions options) => throw new NotSupportedException();
+        public void DeleteDirectory(string path) => throw new NotSupportedException();
+        public void DeleteFile(string path) => throw new NotSupportedException();
+        public void RenameDirectory(string srcPath, string dstPath) => throw new NotSupportedException();
+        public void RenameFile(string srcPath, string dstPath) => throw new NotSupportedException();
     }
 }

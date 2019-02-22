@@ -446,8 +446,9 @@ namespace XbTool
             if (options.Input == null) throw new NullReferenceException("No input path was specified.");
             if (options.Output == null) throw new NullReferenceException("No output path was specified.");
 
-            IFileSystem a = Xb2.FS.Create.CreateFileSystem(options.Input);
-            File.WriteAllLines(options.Output, a.EnumerateEntries().Select(x => x.FullPath));
+            IFileSystem fs = new Xb2FileSystem(options.Input);
+            File.WriteAllLines(options.Output,
+                fs.EnumerateEntries().Where(x => x.Type == DirectoryEntryType.File).Select(x => x.FullPath));
         }
     }
 }
