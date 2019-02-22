@@ -112,7 +112,7 @@ namespace XbTool
 
             using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
             {
-                var replacement = File.ReadAllBytes(options.Input);
+                byte[] replacement = File.ReadAllBytes(options.Input);
                 archive.ReplaceFile(options.Output, replacement);
             }
         }
@@ -186,7 +186,7 @@ namespace XbTool
 
         public static BdatCollection GetBdatCollection(IFileReader fs, bool readMetadata)
         {
-            BdatTables bdats = new BdatTables(fs, readMetadata);
+            var bdats = new BdatTables(fs, readMetadata);
             BdatCollection tables = Deserialize.DeserializeTables(bdats);
             return tables;
         }
@@ -195,7 +195,7 @@ namespace XbTool
         {
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
-            var tables = GetBdatStringCollection(options);
+            BdatStringCollection tables = GetBdatStringCollection(options);
             HtmlGen.PrintSeparateTables(tables, options.Output, options.Progress);
         }
 
@@ -203,7 +203,7 @@ namespace XbTool
         {
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
-            var tables = GetBdatStringCollection(options);
+            BdatStringCollection tables = GetBdatStringCollection(options);
             JsonGen.PrintAllTables(tables, options.Output, options.Progress);
         }
 
@@ -211,7 +211,7 @@ namespace XbTool
         {
             if (options.Output == null) throw new NullReferenceException("Ouput directory (Schema) was not specified.");
 
-            var tables = GetBdatStringCollection(options);
+            BdatStringCollection tables = GetBdatStringCollection(options);
             DbGen.PrintAllTables(tables, options.Output, options.Progress);
         }
 
@@ -219,16 +219,16 @@ namespace XbTool
         {
             if (options.Output == null) throw new NullReferenceException("Output directory was not specified.");
 
-            var tables = GetBdatCollection(options);
+            BdatCollection tables = GetBdatCollection(options);
             Directory.CreateDirectory(options.Output);
 
-            var chBtlRewards = ChBtlRewards.PrintHtml(tables);
+            string chBtlRewards = ChBtlRewards.PrintHtml(tables);
             File.WriteAllText(Path.Combine(options.Output, "chbtlrewards.html"), chBtlRewards);
 
-            var chBtlRewardsCsv = ChBtlRewards.PrintCsv(tables);
+            string chBtlRewardsCsv = ChBtlRewards.PrintCsv(tables);
             File.WriteAllText(Path.Combine(options.Output, "chbtlrewards.csv"), chBtlRewardsCsv);
 
-            var salvaging = SalvagingTable.Print(tables);
+            string salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(options.Output, "salvaging.html"), salvaging);
 
             using (var writer = new StreamWriter(Path.Combine(options.Output, "enemies.csv")))
@@ -244,7 +244,7 @@ namespace XbTool
 
         private static void CreateBlade(Options options)
         {
-            var tables = GetBdatCollection(options);
+            BdatCollection tables = GetBdatCollection(options);
             Run.PromptCreate(tables);
         }
 
@@ -307,7 +307,7 @@ namespace XbTool
 
         private static void SalvageRaffle(Options options)
         {
-            var tables = GetBdatCollection(options);
+            BdatCollection tables = GetBdatCollection(options);
             RunRaffle.Run(tables);
         }
 
@@ -318,7 +318,7 @@ namespace XbTool
 
             byte[] saveFile = File.ReadAllBytes(options.Input);
             SDataSave saveData = Read.ReadSave(saveFile);
-            var newSave = Write.WriteSave(saveData);
+            byte[] newSave = Write.WriteSave(saveData);
             File.WriteAllBytes(options.Input + "_new.sav", newSave);
 
             BdatCollection tables = GetBdatCollection(options);
@@ -332,7 +332,7 @@ namespace XbTool
             if (options.Output == null) throw new NullReferenceException("No output file was specified.");
 
             byte[] saveFileComp = File.ReadAllBytes(options.Input);
-            var saveFileDecomp = Compression.DecompressSave(saveFileComp);
+            byte[] saveFileDecomp = Compression.DecompressSave(saveFileComp);
             File.WriteAllBytes(options.Output, saveFileDecomp);
         }
 
@@ -341,8 +341,8 @@ namespace XbTool
             //if (options.Input == null) throw new NullReferenceException("No input file was specified.");
             if (options.Output == null) throw new NullReferenceException("No output file was specified.");
 
-            var tables = ReadBdatTables(options, false).Tables;
-            var combined = BdatTools.Combine(tables);
+            BdatTable[] tables = ReadBdatTables(options, false).Tables;
+            byte[] combined = BdatTools.Combine(tables);
             File.WriteAllBytes(options.Output, combined);
         }
 
@@ -368,18 +368,18 @@ namespace XbTool
             if (options.Input == null) throw new NullReferenceException("No input directory was specified.");
             if (options.Output == null) throw new NullReferenceException("No output directory was specified.");
 
-            var files = Directory.GetFiles(options.Input, "*.sb", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(options.Input, "*.sb", SearchOption.AllDirectories);
             Directory.CreateDirectory(options.Output);
 
             options.Progress.SetTotal(files.Length);
-            foreach (var name in files)
+            foreach (string name in files)
             {
-                var file = File.ReadAllBytes(name);
+                byte[] file = File.ReadAllBytes(name);
                 var script = new Script(new DataBuffer(file, options.Game, 0));
-                var dump = Export.PrintScript(script);
-                var relativePath = Helpers.GetRelativePath(name, options.Input);
+                string dump = Export.PrintScript(script);
+                string relativePath = Helpers.GetRelativePath(name, options.Input);
 
-                var output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
+                string output = Path.ChangeExtension(Path.Combine(options.Output, relativePath), "txt");
                 Directory.CreateDirectory(Path.GetDirectoryName(output) ?? "");
                 File.WriteAllText(output, dump);
                 options.Progress.ReportAdd(1);
@@ -431,7 +431,7 @@ namespace XbTool
         {
             if (options.Output == null) throw new NullReferenceException("No output path was specified.");
 
-            var tables = GetBdatCollection(options);
+            BdatCollection tables = GetBdatCollection(options);
 
             Xb2.Quest.Read.ExportQuests(tables, options.Output);
         }

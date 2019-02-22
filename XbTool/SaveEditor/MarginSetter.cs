@@ -38,7 +38,7 @@ namespace SaveEditor
             // Go over the children and set margin for them:
             if (panel != null)
             {
-                foreach (var child in panel.Children)
+                foreach (object child in panel.Children)
                 {
                     var fe = child as FrameworkElement;
 

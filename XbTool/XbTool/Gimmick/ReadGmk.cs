@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using XbTool.Bdat;
 using XbTool.Common;
 using XbTool.Types;
 
@@ -13,16 +14,16 @@ namespace XbTool.Gimmick
             progress?.LogMessage("Reading map info and gimmick sets");
             Dictionary<string, MapInfo> maps = MapInfo.ReadAll(fs);
 
-            var mapList = tables.FLD_maplist;
-            var areaList = tables.MNU_MapInfo;
+            BdatTable<FLD_maplist> mapList = tables.FLD_maplist;
+            BdatTable<MNU_MapInfo> areaList = tables.MNU_MapInfo;
 
             foreach (MapInfo mapInfo in maps.Values)
             {
-                var map = mapList.FirstOrDefault(x => x.resource == mapInfo.Name && x._nameID != null);
+                FLD_maplist map = mapList.FirstOrDefault(x => x.resource == mapInfo.Name && x._nameID != null);
                 if (map == null) continue;
                 if (map._nameID != null) mapInfo.DisplayName = map._nameID.name;
 
-                foreach (var areaInfo in mapInfo.Areas)
+                foreach (MapAreaInfo areaInfo in mapInfo.Areas)
                 {
                     MNU_MapInfo area = areaList.FirstOrDefault(x =>
                         x.level_name == areaInfo.Name || x.level_name2 == areaInfo.Name);
@@ -56,7 +57,7 @@ namespace XbTool.Gimmick
                     if (area._disp_name?.name != null) areaInfo.DisplayName = area._disp_name.name;
                 }
 
-                var gimmickSet = ReadGimmickSet(fs, tables, map.Id);
+                Dictionary<string, Lvb> gimmickSet = ReadGimmickSet(fs, tables, map.Id);
                 AssignGimmickAreas(gimmickSet, mapInfo);
             }
 
@@ -66,13 +67,13 @@ namespace XbTool.Gimmick
         public static Dictionary<string, Lvb> ReadGimmickSet(IFileReader fs, BdatCollection tables, int mapId)
         {
             RSC_GmkSetList setBdat = tables.RSC_GmkSetList.First(x => x.mapId == mapId);
-            var fieldsDict = setBdat.GetType().GetFields().ToDictionary(x => x.Name, x => x);
-            var fields = fieldsDict.Values.Where(x => x.FieldType == typeof(string) && !x.Name.Contains("_bdat"));
+            Dictionary<string, FieldInfo> fieldsDict = setBdat.GetType().GetFields().ToDictionary(x => x.Name, x => x);
+            IEnumerable<FieldInfo> fields = fieldsDict.Values.Where(x => x.FieldType == typeof(string) && !x.Name.Contains("_bdat"));
             var gimmicks = new Dictionary<string, Lvb>();
 
             foreach (FieldInfo field in fields)
             {
-                var value = (string)field.GetValue(setBdat);
+                string value = (string)field.GetValue(setBdat);
                 if (value == null) continue;
                 string filename = $"/gmk/{value}.lvb";
                 if (!fs.Exists(filename)) continue;
@@ -83,7 +84,7 @@ namespace XbTool.Gimmick
                 string bdatField = field.Name + "_bdat";
                 if (fieldsDict.ContainsKey(bdatField))
                 {
-                    var bdatName = (string)fieldsDict[bdatField].GetValue(setBdat);
+                    string bdatName = (string)fieldsDict[bdatField].GetValue(setBdat);
                     if (!string.IsNullOrWhiteSpace(bdatName)) lvb.BdatName = bdatName;
                 }
 
@@ -96,10 +97,10 @@ namespace XbTool.Gimmick
         public static void AssignGimmickAreas(Dictionary<string, Lvb> set, MapInfo mapInfo)
         {
             mapInfo.Gimmicks = set;
-            foreach (var gmkType in set)
+            foreach (KeyValuePair<string, Lvb> gmkType in set)
             {
-                var type = gmkType.Key;
-                foreach (var gmk in gmkType.Value.Info)
+                string type = gmkType.Key;
+                foreach (InfoEntry gmk in gmkType.Value.Info)
                 {
                     MapAreaInfo area = mapInfo.GetContainingArea(gmk.Xfrm.Position);
                     area?.AddGimmick(gmk, type);

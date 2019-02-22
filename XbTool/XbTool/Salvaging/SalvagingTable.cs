@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using XbTool.Bdat;
 using XbTool.CodeGen;
 using XbTool.Types;
 
@@ -9,7 +10,7 @@ namespace XbTool.Salvaging
         public static string Print(BdatCollection tables)
         {
             var sb = new Indenter();
-            var pointList = tables.FLD_SalvagePointList;
+            BdatTable<FLD_SalvagePointList> pointList = tables.FLD_SalvagePointList;
 
             sb.AppendLine("<!DOCTYPE html>");
             sb.AppendLineAndIncrease("<html>");
@@ -42,7 +43,7 @@ namespace XbTool.Salvaging
             sb.AppendLine("<tr><th>Button</th><th>Speed</th><th>Outer Ring</th><th>Inner Ring</th></tr>");
             for (int i = 0; i < 3; i++)
             {
-                var chal = point._BtnChallenge[i];
+                MNU_BtnChallenge2 chal = point._BtnChallenge[i];
                 sb.AppendLine($"<tr><td>{chal._BtnType1}</td><td>{chal.Speed}</td><td>{chal._Param1.PushRange}</td><td>{chal._Param1.PushSweetRange}</td></tr>");
             }
 

@@ -23,7 +23,7 @@ namespace XbTool.Scripting
 
         public int ReadOperand(DataBuffer data, int size)
         {
-            var original = data.Endianness;
+            Endianness original = data.Endianness;
             data.Endianness = Endianness.Big;
             int result;
             switch (size)
@@ -53,8 +53,8 @@ namespace XbTool.Scripting
             Address = data.Position;
             var opcode = (Opcode)data.ReadUInt8();
             Opcode = opcode;
-            var opcodeInfo = Opcode.GetInfo();
-            var operand = ReadOperand(data, opcodeInfo.Size);
+            OpcodeInfo opcodeInfo = Opcode.GetInfo();
+            int operand = ReadOperand(data, opcodeInfo.Size);
 
             switch (opcode)
             {
@@ -205,7 +205,7 @@ namespace XbTool.Scripting
                     break;
                 case Opcode.PLUGIN:
                 case Opcode.PLUGIN_W:
-                    var plugin = script.Plugins[operand];
+                    PluginFunction plugin = script.Plugins[operand];
                     Comment = $"{plugin.Plugin}::{plugin.Function}";
                     break;
                 case Opcode.CALL_FAR:

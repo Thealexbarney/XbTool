@@ -34,7 +34,7 @@ namespace XbTool.Common.Textures
         {
             progress?.SetTotal(filenames.Length);
 
-            foreach (var filename in filenames)
+            foreach (string filename in filenames)
             {
                 try
                 {

@@ -67,18 +67,18 @@ namespace XbTool.Bdat
     {
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
-            using (var stream = Helpers.OpenDataFile($"{prefix}_fieldInfo.csv"))
+            using (FileStream stream = Helpers.OpenDataFile($"{prefix}_fieldInfo.csv"))
             using (var reader = new StreamReader(stream))
             {
                 IEnumerable<BdatFieldInfo> csv = new CsvReader(reader, new Configuration { HeaderValidated = null, MissingFieldFound = null }).GetRecords<BdatFieldInfo>();
                 Dictionary<(string, string), BdatFieldInfo> readBdatFieldInfo = csv.ToDictionary(x => (x.Table, x.Field), x => x);
 
-                foreach (var info in readBdatFieldInfo.Values.Where(x => x.EnumTypeString != null))
+                foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.EnumTypeString != null))
                 {
                     info.EnumType = Type.GetType($"XbTool.Types.{info.EnumTypeString}");
                 }
 
-                foreach (var info in readBdatFieldInfo.Values.Where(x => x.Type == BdatFieldType.Flag))
+                foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.Type == BdatFieldType.Flag))
                 {
                     info.RefField = "FLG_" + info.RefField;
                 }

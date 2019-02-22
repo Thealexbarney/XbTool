@@ -45,7 +45,7 @@ namespace XbTool.Serialization
         private static Array ReadItems(BdatTable table, Type itemType)
         {
             Array items = Array.CreateInstance(itemType, table.ItemCount);
-            var func = TypeMap.GetTableReadFunction(itemType);
+            Func<byte[], int, int, int, object> func = TypeMap.GetTableReadFunction(itemType);
 
             for (int i = 0; i < table.ItemCount; i++)
             {

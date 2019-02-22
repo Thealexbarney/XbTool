@@ -9,7 +9,7 @@ namespace XbTool.Xbx.Textures
     {
         public static void ExtractTextures(string[] filenames, string outDir)
         {
-            foreach (var filename in filenames)
+            foreach (string filename in filenames)
             {
                 try
                 {

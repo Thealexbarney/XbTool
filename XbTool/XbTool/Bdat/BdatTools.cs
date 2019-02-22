@@ -71,7 +71,7 @@ namespace XbTool.Bdat
 
         public static int GetHashOffset(string value, int hashTableSize)
         {
-            var r = HashString(value);
+            int r = HashString(value);
             return r - r / hashTableSize * hashTableSize;
         }
 

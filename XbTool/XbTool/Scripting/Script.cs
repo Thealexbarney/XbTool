@@ -96,16 +96,16 @@ namespace XbTool.Scripting
         private void ReadCodeSection(DataBuffer data)
         {
             data.Position = CodeOffset;
-            var start = CodeOffset + data.ReadInt32();
+            int start = CodeOffset + data.ReadInt32();
             data.Position += 4;
-            var codeSize = data.ReadInt32();
-            var length = IdPoolOffset - CodeOffset;
+            int codeSize = data.ReadInt32();
+            int length = IdPoolOffset - CodeOffset;
 
             var section = new Section("Code", CodeOffset, codeSize, length);
             Sections.Insert(0, section);
 
             Code = new Instruction[FunctionPool.Length][];
-            var code = data.Slice(start, codeSize);
+            DataBuffer code = data.Slice(start, codeSize);
             
             for (int i = 0; i < FunctionPool.Length; i++)
             {
@@ -131,7 +131,7 @@ namespace XbTool.Scripting
                 IdPoolRefs[i] = string.Empty;
             }
 
-            var length = IntPoolOffset - IdPoolOffset;
+            int length = IntPoolOffset - IdPoolOffset;
             var section = new Section("ID Pool", IdPoolOffset, IdPool.Length, length);
             Sections.Add(section);
         }
@@ -141,7 +141,7 @@ namespace XbTool.Scripting
             data.Position = IntPoolOffset;
             int offset = data.ReadInt32();
             int count = data.ReadInt32();
-            var length = FixedPoolOffset - IntPoolOffset;
+            int length = FixedPoolOffset - IntPoolOffset;
             data.Position = IntPoolOffset + offset;
 
             IntPool = new int[count];
@@ -159,7 +159,7 @@ namespace XbTool.Scripting
             data.Position = FixedPoolOffset;
             int offset = data.ReadInt32();
             int count = data.ReadInt32();
-            var length = StringPoolOffset - FixedPoolOffset;
+            int length = StringPoolOffset - FixedPoolOffset;
             data.Position = FixedPoolOffset + offset;
 
             FixedPool = new float[count];
@@ -175,7 +175,7 @@ namespace XbTool.Scripting
         private void ReadStringPool(DataBuffer data)
         {
             StringPool = ReadStringSection(data, StringPoolOffset);
-            var length = FunctionPoolOffset - StringPoolOffset;
+            int length = FunctionPoolOffset - StringPoolOffset;
             var section = new Section("String Pool", StringPoolOffset, StringPool.Length, length);
             Sections.Add(section);
         }
@@ -185,7 +185,7 @@ namespace XbTool.Scripting
             data.Position = FunctionPoolOffset;
             int offset = data.ReadInt32();
             int count = data.ReadInt32();
-            var length = PluginsOffset - FunctionPoolOffset;
+            int length = PluginsOffset - FunctionPoolOffset;
             data.Position = FunctionPoolOffset + offset;
 
             var section = new Section("Function Pool", FunctionPoolOffset, count, length);
@@ -206,7 +206,7 @@ namespace XbTool.Scripting
             data.Position = PluginsOffset;
             int offset = data.ReadInt32();
             int count = data.ReadInt32();
-            var length = OcImportsOffset - PluginsOffset;
+            int length = OcImportsOffset - PluginsOffset;
             data.Position = PluginsOffset + offset;
 
             var section = new Section("Plugin Imports", PluginsOffset, count, length);
@@ -216,8 +216,8 @@ namespace XbTool.Scripting
             for (int i = 0; i < Plugins.Length; i++)
             {
                 Plugins[i] = new PluginFunction();
-                var pluginId = data.ReadUInt16();
-                var functionId = data.ReadUInt16();
+                ushort pluginId = data.ReadUInt16();
+                ushort functionId = data.ReadUInt16();
                 Plugins[i].Plugin = GetId(pluginId, $"Plugin Name #{i}");
                 Plugins[i].Function = GetId(functionId, $"Plugin Function Name #{i}");
             }
@@ -226,8 +226,8 @@ namespace XbTool.Scripting
         private void ReadOcImports(DataBuffer data)
         {
             data.Position = OcImportsOffset;
-            var indexes = ReadIntTable(data, OcImportsOffset);
-            var length = FuncImportsOffset - OcImportsOffset;
+            int[] indexes = ReadIntTable(data, OcImportsOffset);
+            int length = FuncImportsOffset - OcImportsOffset;
 
             var section = new Section("OC Imports", OcImportsOffset, indexes.Length, length);
             Sections.Add(section);
@@ -253,8 +253,8 @@ namespace XbTool.Scripting
             for (int i = 0; i < ImportFuncs.Length; i++)
             {
                 ImportFuncs[i] = new PluginFunction();
-                var pluginId = data.ReadUInt16();
-                var functionId = data.ReadUInt16();
+                ushort pluginId = data.ReadUInt16();
+                ushort functionId = data.ReadUInt16();
                 ImportFuncs[i].Plugin = GetId(pluginId, $"Import Script Name #{i}");
                 ImportFuncs[i].Function = GetId(functionId, $"Import Function Name #{i}");
             }
@@ -281,8 +281,8 @@ namespace XbTool.Scripting
         {
             data.Position = LocalPoolOffset;
             int length = SysAtrPoolOffset - LocalPoolOffset;
-            var tableOffset = LocalPoolOffset + data.ReadInt32();
-            var offsets = ReadIntTable(data, LocalPoolOffset);
+            int tableOffset = LocalPoolOffset + data.ReadInt32();
+            int[] offsets = ReadIntTable(data, LocalPoolOffset);
             Sections.Add(new Section("Local Pool", LocalPoolOffset, offsets.Length, length));
 
             LocalPool = new VmObject[offsets.Length][];
@@ -307,7 +307,7 @@ namespace XbTool.Scripting
         {
             data.Position = SysAtrPoolOffset;
             int length = UsrAtrPoolOffset - SysAtrPoolOffset;
-            var values = ReadIntTable(data, SysAtrPoolOffset);
+            int[] values = ReadIntTable(data, SysAtrPoolOffset);
 
             Sections.Add(new Section("Sys Atr Pool", SysAtrPoolOffset, values.Length, length));
 
@@ -322,7 +322,7 @@ namespace XbTool.Scripting
         {
             data.Position = UsrAtrPoolOffset;
             int length = (SymbolSectionOffset == 0 ? data.Length : SymbolSectionOffset) - UsrAtrPoolOffset;
-            var values = ReadIntTable(data, UsrAtrPoolOffset);
+            int[] values = ReadIntTable(data, UsrAtrPoolOffset);
 
             Sections.Add(new Section("User Atr Pool", UsrAtrPoolOffset, values.Length, length));
 
@@ -373,12 +373,12 @@ namespace XbTool.Scripting
 
         private void ReadLocalSymbols(DataBuffer data, int sectionOffset)
         {
-            var symbols = ReadSymbolSets(data, sectionOffset);
+            Symbol[][] symbols = ReadSymbolSets(data, sectionOffset);
 
             for (int set = 0; set < symbols.Length; set++)
             {
                 int localPoolIndex = FunctionPool[set].LocalPoolIndex;
-                foreach (var sym in symbols[set])
+                foreach (Symbol sym in symbols[set])
                 {
                     sym.Name = GetId(sym.IdIndex, $"Local Symbol #{localPoolIndex}.{sym.Var}");
                     LocalPool[localPoolIndex][sym.Var].Name = sym.Name;
@@ -390,12 +390,12 @@ namespace XbTool.Scripting
 
         private void ReadArgsSymbols(DataBuffer data, int sectionOffset)
         {
-            var symbols = ReadSymbolSets(data, sectionOffset);
+            Symbol[][] symbols = ReadSymbolSets(data, sectionOffset);
 
             for (int set = 0; set < symbols.Length; set++)
             {
                 int localPoolIndex = FunctionPool[set].LocalPoolIndex;
-                foreach (var sym in symbols[set])
+                foreach (Symbol sym in symbols[set])
                 {
                     sym.Name = GetId(sym.IdIndex, $"Args Symbol #{localPoolIndex}.{sym.Var}");
                 }
@@ -453,7 +453,7 @@ namespace XbTool.Scripting
 
             for (int i = 0; i < count; i++)
             {
-                var (setOffset, setCount) = sets[i];
+                (int setOffset, int setCount) = sets[i];
                 data.Position = tableOffset + setOffset;
                 symbols[i] = new Symbol[setCount];
 
@@ -468,13 +468,13 @@ namespace XbTool.Scripting
 
         private static string[] ReadStringSection(DataBuffer data, int sectionOffset)
         {
-            var tableOffset = sectionOffset + data.ReadInt32(sectionOffset);
-            var offsets = ReadIntTable(data, sectionOffset);
+            int tableOffset = sectionOffset + data.ReadInt32(sectionOffset);
+            int[] offsets = ReadIntTable(data, sectionOffset);
             var strings = new string[offsets.Length];
 
             for (int i = 0; i < offsets.Length; i++)
             {
-                var offset = tableOffset + offsets[i];
+                int offset = tableOffset + offsets[i];
                 strings[i] = data.ReadTextZ("shift-jis", offset);
             }
 
@@ -484,9 +484,9 @@ namespace XbTool.Scripting
         private static int[] ReadIntTable(DataBuffer data, int sectionOffset)
         {
             data.Position = sectionOffset;
-            var offset = data.ReadInt32();
-            var count = data.ReadInt32();
-            var size = data.ReadInt32();
+            int offset = data.ReadInt32();
+            int count = data.ReadInt32();
+            int size = data.ReadInt32();
 
             data.Position = sectionOffset + offset;
             var values = new int[count];

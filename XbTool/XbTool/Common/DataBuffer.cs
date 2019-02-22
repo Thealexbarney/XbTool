@@ -125,7 +125,7 @@ namespace XbTool.Common
 
         public byte[] ReadBytes(int index, int length, bool updatePosition = false)
         {
-            byte[] result = new byte[length];
+            var result = new byte[length];
             Array.Copy(File, Start + index, result, 0, length);
             if (updatePosition) Position = index + length;
             return result;
@@ -300,14 +300,14 @@ namespace XbTool.Common
 
         public void WriteUTF8(string value, int index, bool updatePosition = false)
         {
-            var bytes = Encoding.UTF8.GetBytes(value);
+            byte[] bytes = Encoding.UTF8.GetBytes(value);
             Array.Copy(bytes, 0, File, Start + index, bytes.Length);
             if (updatePosition) Position = index + bytes.Length;
         }
 
         public void WriteUTF8Z(string value, int index, bool updatePosition = false)
         {
-            var bytes = Encoding.UTF8.GetBytes(value);
+            byte[] bytes = Encoding.UTF8.GetBytes(value);
             Array.Copy(bytes, 0, File, Start + index, bytes.Length);
             File[Start + index + bytes.Length] = 0;
             if (updatePosition) Position = index + bytes.Length + 1;
@@ -328,11 +328,11 @@ namespace XbTool.Common
 
         public void GuessEndianness32(int index, Func<int, bool> expected)
         {
-            var original = Endianness;
+            Endianness original = Endianness;
             Endianness = Endianness.Little;
-            var matchLittle = expected(ReadInt32(index));
+            bool matchLittle = expected(ReadInt32(index));
             Endianness = Endianness.Big;
-            var matchBig = expected(ReadInt32(index));
+            bool matchBig = expected(ReadInt32(index));
 
             if (!(matchLittle ^ matchBig))
             {

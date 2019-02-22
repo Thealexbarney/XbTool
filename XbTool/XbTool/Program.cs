@@ -20,7 +20,7 @@ namespace XbTool
     {
         public static string ReadUTF8Z(this BinaryReader reader)
         {
-            var start = reader.BaseStream.Position;
+            long start = reader.BaseStream.Position;
 
             // Read until we hit the end of the stream (-1) or a zero
             while (reader.BaseStream.ReadByte() - 1 > 0) { }
@@ -41,7 +41,7 @@ namespace XbTool
         public static void CopyStream(this Stream input, Stream output, int length)
         {
             int remaining = length;
-            byte[] buffer = new byte[32768];
+            var buffer = new byte[32768];
             int read;
             while ((read = input.Read(buffer, 0, Math.Min(buffer.Length, remaining))) > 0)
             {
@@ -52,7 +52,7 @@ namespace XbTool
 
         public static string GetUTF8Z(byte[] value, int offset)
         {
-            var length = 0;
+            int length = 0;
 
             while (value[offset + length] != 0)
             {
@@ -73,7 +73,7 @@ namespace XbTool
             T[] arr = source.ToArray();
             int[] probs = probabilities as int[] ?? probabilities.ToArray();
 
-            var randVal = rand.NextDouble() * probs.Sum();
+            double randVal = rand.NextDouble() * probs.Sum();
             float sum = 0;
 
             for (int i = 0; i < probs.Length; i++)

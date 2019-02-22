@@ -9,7 +9,7 @@ namespace XbTool.Save
     {
         public static void GenerateSaveCode()
         {
-            var types = ReadTypes();
+            List<SaveType> types = ReadTypes();
             var sb = new Indenter();
             bool first = true;
 
@@ -20,7 +20,7 @@ namespace XbTool.Save
             sb.AppendLine("namespace XbTool.Save");
             sb.AppendLineAndIncrease("{");
 
-            foreach (var type in types)
+            foreach (SaveType type in types)
             {
                 if (!first)
                 {
@@ -41,7 +41,7 @@ namespace XbTool.Save
             sb.AppendLine($"public partial class {type.Name}");
             sb.AppendLineAndIncrease("{");
 
-            foreach (var field in type.Fields)
+            foreach (SaveField field in type.Fields)
             {
                 switch (field.Type)
                 {
@@ -52,7 +52,7 @@ namespace XbTool.Save
                         sb.AppendLine($"public {field.DataType}[] {field.Name} {{ get; set; }} = new {field.DataType}[{field.Length}];");
                         break;
                     case "Bitfield":
-                        foreach (var value in field.Bitfield)
+                        foreach (SaveField value in field.Bitfield)
                         {
                             sb.AppendLine($"public {field.DataType} {value.Name} {{ get; set; }}");
                         }
@@ -76,7 +76,7 @@ namespace XbTool.Save
             bool firstField = true;
             bool prevWasArray = false;
 
-            foreach (var field in type.Fields)
+            foreach (SaveField field in type.Fields)
             {
                 switch (field.Type)
                 {
@@ -106,7 +106,7 @@ namespace XbTool.Save
                     case "Bitfield":
                         sb.AppendLine($"{field.DataType} {field.Name} = {GetReadValue(field)}");
                         int bit = 0;
-                        foreach (var value in field.Bitfield)
+                        foreach (SaveField value in field.Bitfield)
                         {
                             sb.AppendLine(
                                 $"{value.Name} = ({field.DataType})({field.Name} >> {bit} & ((1u << {value.Size}) - 1));");
@@ -135,7 +135,7 @@ namespace XbTool.Save
             bool firstField = true;
             bool prevWasArray = false;
 
-            foreach (var field in type.Fields)
+            foreach (SaveField field in type.Fields)
             {
                 switch (field.Type)
                 {
@@ -165,7 +165,7 @@ namespace XbTool.Save
                     case "Bitfield":
                         sb.AppendLine($"{field.DataType} {field.Name} = 0;");
                         int bit = 0;
-                        foreach (var value in field.Bitfield)
+                        foreach (SaveField value in field.Bitfield)
                         {
                             sb.AppendLine($"{field.Name} |= ({field.DataType})(({value.Name} & ((1u << {value.Size}) - 1)) << {bit});");
                             bit += int.Parse(value.Size);
@@ -209,11 +209,11 @@ namespace XbTool.Save
                 case "long":
                 case "ulong":
                 case "float":
-                    var readFunc = ReadFunctions[dataType];
+                    string readFunc = ReadFunctions[dataType];
                     result += $"save.{readFunc}();";
                     break;
                 case "bool":
-                    var readFuncBool = ReadFunctions[SizeToType[field.Length]];
+                    string readFuncBool = ReadFunctions[SizeToType[field.Length]];
                     result += $"save.{readFuncBool}() != 0;";
                     break;
                 case "string" when !string.IsNullOrWhiteSpace(field.Size):
@@ -253,11 +253,11 @@ namespace XbTool.Save
                 case "long":
                 case "ulong":
                 case "float":
-                    var writeFunc = WriteFunctions[dataType];
+                    string writeFunc = WriteFunctions[dataType];
                     result += $"save.{writeFunc}({enumCast}{field.Name}{append});";
                     break;
                 case "bool":
-                    var writeFuncBool = WriteFunctions[SizeToType[field.Length]];
+                    string writeFuncBool = WriteFunctions[SizeToType[field.Length]];
                     result += $"save.{writeFuncBool}(({SizeToType[field.Length]})({field.Name} ? 1 : 0));";
                     break;
                 case "string" when !string.IsNullOrWhiteSpace(field.Size):
@@ -284,7 +284,7 @@ namespace XbTool.Save
                 SaveType type = null;
                 SaveField bitfield = null;
 
-                foreach (var field in csv)
+                foreach (SaveField field in csv)
                 {
                     switch (field.Type)
                     {

@@ -18,7 +18,7 @@ namespace XbTool.Save
         public static string GetFieldSkillLevel(this SDataBlade blade, string name, BdatCollection tables)
         {
             FLD_FieldSkillList a = tables.FLD_FieldSkillList.First(x => x?._Name?.name == name);
-            foreach (var skill in blade.FieldSkills)
+            foreach (GfDataBladeSkill skill in blade.FieldSkills)
             {
                 if (skill.Id == a.Id) return skill.MaxLevel.ToString();
             }
@@ -29,7 +29,7 @@ namespace XbTool.Save
         public static string GetBattleSkillLevel(this SDataBlade blade, string name, BdatCollection tables)
         {
             BTL_Skill_Bl a = tables.BTL_Skill_Bl.First(x => x?._Name?.name == name);
-            foreach (var skill in blade.BattleSkills)
+            foreach (GfDataBladeSkill skill in blade.BattleSkills)
             {
                 if (skill.Id == a.Id) return skill.MaxLevel.ToString();
             }

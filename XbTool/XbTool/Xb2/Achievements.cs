@@ -13,7 +13,7 @@ namespace XbTool.Xb2
     {
         public static void PrintAchievements(BdatCollection tables, StreamWriter writer)
         {
-            var achievements = GetBladeAchievements(tables.CHR_Bl);
+            IEnumerable<Achievement> achievements = GetBladeAchievements(tables.CHR_Bl);
             var csv = new CsvWriter(writer, new Configuration { HasHeaderRecord = false });
             writer.WriteLine("Blade ID,Blade Name,Skill,Type,Col,Row,Level,Idea Category,Idea Points,Condition,Count,Result");
             csv.WriteRecords(achievements);
@@ -25,7 +25,7 @@ namespace XbTool.Xb2
             int level = 1;
             for (int i = 0; i < set._AchievementID.Length; i++)
             {
-                var achieve = set._AchievementID[i];
+                FLD_AchievementList achieve = set._AchievementID[i];
                 var output = new Achievement();
                 achievements.Add(output);
 

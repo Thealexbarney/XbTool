@@ -8,7 +8,7 @@ namespace XbTool.Scripting
         {
             script.GuessEndianness32(8, x => x > 0 && x < 100000);
 
-            var flags = script.ReadUInt8(6);
+            byte flags = script.ReadUInt8(6);
             if ((flags & 2) == 0) return;
 
             int idPoolOffset = script.ReadInt32(0xC, true);
@@ -39,7 +39,7 @@ namespace XbTool.Scripting
 
         private static void DescrambleSection(DataBuffer data)
         {
-            var originalEndianness = data.Endianness;
+            Endianness originalEndianness = data.Endianness;
             data.Endianness = Endianness.Big;
 
             for (int i = 0; i < data.Length / 4; i++)

@@ -24,7 +24,7 @@ namespace XbTool.Common
         private static IEnumerable<Enum> GetFlags(object value, Enum[] values)
         {
             ulong bits = Convert.ToUInt64(value);
-            List<Enum> results = new List<Enum>();
+            var results = new List<Enum>();
             for (int i = values.Length - 1; i >= 0; i--)
             {
                 ulong mask = Convert.ToUInt64(values[i]);
@@ -49,7 +49,7 @@ namespace XbTool.Common
         private static IEnumerable<Enum> GetFlagValues(Type enumType)
         {
             ulong flag = 0x1;
-            foreach (var value in Enum.GetValues(enumType).Cast<Enum>())
+            foreach (Enum value in Enum.GetValues(enumType).Cast<Enum>())
             {
                 ulong bits = Convert.ToUInt64(value);
                 if (bits == 0L)

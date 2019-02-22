@@ -12,7 +12,7 @@ namespace BdatEditor.Bdat
         public EditTable(BdatTable bdat)
         {
             Name = bdat.Name;
-            foreach (var member in bdat.Members)
+            foreach (BdatMember member in bdat.Members)
             {
                 Columns.Add(member);
             }

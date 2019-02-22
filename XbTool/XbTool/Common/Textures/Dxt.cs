@@ -7,8 +7,8 @@ namespace XbTool.Common.Textures
         public static byte[] DecompressDxt1(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
-            var widthBlocks = texture.Width / 4;
-            var heightBlocks = texture.Height / 4;
+            int widthBlocks = texture.Width / 4;
+            int heightBlocks = texture.Height / 4;
             int pos = 0;
 
             for (int y = 0; y < heightBlocks; y++)
@@ -26,11 +26,11 @@ namespace XbTool.Common.Textures
         public static void DecompressDxt1Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
             if (pos >= texture.Data.Length) return;
-            Color[] c = new Color[4];
+            var c = new Color[4];
 
-            var color0 = BitConverter.ToUInt16(texture.Data, pos);
-            var color1 = BitConverter.ToUInt16(texture.Data, pos + 2);
-            var mask = BitConverter.ToUInt32(texture.Data, pos + 4);
+            ushort color0 = BitConverter.ToUInt16(texture.Data, pos);
+            ushort color1 = BitConverter.ToUInt16(texture.Data, pos + 2);
+            uint mask = BitConverter.ToUInt32(texture.Data, pos + 4);
 
             Color(color0, ref c[0]);
             Color(color1, ref c[1]);
@@ -66,14 +66,14 @@ namespace XbTool.Common.Textures
             {
                 for (int x = 0; x < 4; x++)
                 {
-                    var index = mask & 3;
+                    uint index = mask & 3;
                     mask >>= 2;
-                    var col = c[index];
+                    Color col = c[index];
 
-                    var x2 = xPos + x;
-                    var y2 = yPos + y;
+                    int x2 = xPos + x;
+                    int y2 = yPos + y;
 
-                    var offset = (x2 + y2 * texture.Width) * 4;
+                    int offset = (x2 + y2 * texture.Width) * 4;
                     output[offset] = col.B;
                     output[offset + 1] = col.G;
                     output[offset + 2] = col.R;
@@ -85,8 +85,8 @@ namespace XbTool.Common.Textures
         public static byte[] DecompressDxt4(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
-            var widthBlocks = texture.Width / 4;
-            var heightBlocks = texture.Height / 4;
+            int widthBlocks = texture.Width / 4;
+            int heightBlocks = texture.Height / 4;
             int pos = 0;
 
             for (int y = 0; y < heightBlocks; y++)
@@ -104,11 +104,11 @@ namespace XbTool.Common.Textures
         public static void DecompressDxt4Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
             if (pos >= texture.Data.Length) return;
-            byte[] alpha = new byte[8];
+            var alpha = new byte[8];
 
-            var alpha0 = texture.Data[pos];
-            var alpha1 = texture.Data[pos + 1];
-            var alphaMask = BitConverter.ToUInt64(texture.Data, pos) >> 16;
+            byte alpha0 = texture.Data[pos];
+            byte alpha1 = texture.Data[pos + 1];
+            ulong alphaMask = BitConverter.ToUInt64(texture.Data, pos) >> 16;
 
             alpha[0] = alpha0;
             alpha[1] = alpha1;
@@ -135,13 +135,13 @@ namespace XbTool.Common.Textures
             {
                 for (int x = 0; x < 4; x++)
                 {
-                    var alphaIndex = alphaMask & 7;
+                    ulong alphaIndex = alphaMask & 7;
                     alphaMask >>= 3;
 
-                    var x2 = xPos + x;
-                    var y2 = yPos + y;
+                    int x2 = xPos + x;
+                    int y2 = yPos + y;
 
-                    var offset = (x2 + y2 * texture.Width) * 4;
+                    int offset = (x2 + y2 * texture.Width) * 4;
                     output[offset] = alpha[alphaIndex];
                     output[offset + 1] = alpha[alphaIndex];
                     output[offset + 2] = alpha[alphaIndex];
@@ -153,8 +153,8 @@ namespace XbTool.Common.Textures
         public static byte[] DecompressDxt5(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
-            var widthBlocks = texture.Width / 4;
-            var heightBlocks = texture.Height / 4;
+            int widthBlocks = texture.Width / 4;
+            int heightBlocks = texture.Height / 4;
             int pos = 0;
 
             for (int y = 0; y < heightBlocks; y++)
@@ -172,16 +172,16 @@ namespace XbTool.Common.Textures
         public static void DecompressDxt5Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
             if (pos >= texture.Data.Length) return;
-            Color[] c = new Color[4];
-            byte[] alpha = new byte[8];
+            var c = new Color[4];
+            var alpha = new byte[8];
 
-            var alpha0 = texture.Data[pos];
-            var alpha1 = texture.Data[pos + 1];
-            var alphaMask = BitConverter.ToUInt64(texture.Data, pos) >> 16;
+            byte alpha0 = texture.Data[pos];
+            byte alpha1 = texture.Data[pos + 1];
+            ulong alphaMask = BitConverter.ToUInt64(texture.Data, pos) >> 16;
 
-            var color0 = BitConverter.ToUInt16(texture.Data, pos + 8);
-            var color1 = BitConverter.ToUInt16(texture.Data, pos + 10);
-            var mask = BitConverter.ToUInt32(texture.Data, pos + 12);
+            ushort color0 = BitConverter.ToUInt16(texture.Data, pos + 8);
+            ushort color1 = BitConverter.ToUInt16(texture.Data, pos + 10);
+            uint mask = BitConverter.ToUInt32(texture.Data, pos + 12);
 
             alpha[0] = alpha0;
             alpha[1] = alpha1;
@@ -219,17 +219,17 @@ namespace XbTool.Common.Textures
             {
                 for (int x = 0; x < 4; x++)
                 {
-                    var index = mask & 3;
+                    uint index = mask & 3;
                     mask >>= 2;
-                    var alphaIndex = alphaMask & 7;
+                    ulong alphaIndex = alphaMask & 7;
                     alphaMask >>= 3;
 
-                    var col = c[index];
+                    Color col = c[index];
 
-                    var x2 = xPos + x;
-                    var y2 = yPos + y;
+                    int x2 = xPos + x;
+                    int y2 = yPos + y;
 
-                    var offset = (x2 + y2 * texture.Width) * 4;
+                    int offset = (x2 + y2 * texture.Width) * 4;
                     output[offset] = col.B;
                     output[offset + 1] = col.G;
                     output[offset + 2] = col.R;
@@ -241,8 +241,8 @@ namespace XbTool.Common.Textures
         public static byte[] DecompressBc7(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
-            var widthBlocks = texture.Width / 4;
-            var heightBlocks = texture.Height / 4;
+            int widthBlocks = texture.Width / 4;
+            int heightBlocks = texture.Height / 4;
             int pos = 0;
 
             for (int y = 0; y < heightBlocks; y++)
@@ -259,15 +259,15 @@ namespace XbTool.Common.Textures
 
         internal static void DecompressBC7Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
-            var colours = BC7.DecompressBC7(texture.Data, pos);
+            DX10_Helpers.LDRColour[] colours = BC7.DecompressBC7(texture.Data, pos);
             BC7.SetColoursFromDX10(colours, output, xPos, yPos, texture.Width);
         }
 
         public static byte[] DecompressBc6(ITexture texture)
         {
             var image = new byte[texture.Height * texture.Width * 4];
-            var widthBlocks = texture.Width / 4;
-            var heightBlocks = texture.Height / 4;
+            int widthBlocks = texture.Width / 4;
+            int heightBlocks = texture.Height / 4;
             int pos = 0;
 
             for (int y = 0; y < heightBlocks; y++)
@@ -284,7 +284,7 @@ namespace XbTool.Common.Textures
 
         internal static void DecompressBC6Block(ITexture texture, int pos, byte[] output, int xPos, int yPos)
         {
-            var colours = BC6.DecompressBC6(texture.Data, pos, texture.Format != TextureFormat.BC6H_UF16);
+            DX10_Helpers.LDRColour[] colours = BC6.DecompressBC6(texture.Data, pos, texture.Format != TextureFormat.BC6H_UF16);
             BC7.SetColoursFromDX10(colours, output, xPos, yPos, texture.Width);
         }
 

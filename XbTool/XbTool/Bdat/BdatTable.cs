@@ -75,10 +75,10 @@ namespace XbTool.Bdat
 
         public string ReadValue(int itemId, string memberName)
         {
-            var member = MembersDict[memberName];
-            var itemIndex = itemId - BaseId;
-            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
-            var valueOffset = itemOffset + member.MemberPos;
+            BdatMember member = MembersDict[memberName];
+            int itemIndex = itemId - BaseId;
+            int itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            int valueOffset = itemOffset + member.MemberPos;
 
             if (member.Type == BdatMemberType.Array) return "Array";
             if (member.Type == BdatMemberType.Flag) return "Flag";
@@ -112,10 +112,10 @@ namespace XbTool.Bdat
 
         public void WriteValue(int itemId, string memberName, string value)
         {
-            var member = MembersDict[memberName];
-            var itemIndex = itemId - BaseId;
-            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
-            var valueOffset = itemOffset + member.MemberPos;
+            BdatMember member = MembersDict[memberName];
+            int itemIndex = itemId - BaseId;
+            int itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            int valueOffset = itemOffset + member.MemberPos;
 
             if (member.Type != BdatMemberType.Scalar)
                 return;
@@ -145,9 +145,9 @@ namespace XbTool.Bdat
                     break;
                 case BdatValueType.String:
                     int offset = Data.ReadInt32(valueOffset);
-                    var oldValue = Data.ReadUTF8Z(offset);
-                    var oldLength = Encoding.UTF8.GetByteCount(oldValue);
-                    var length = Encoding.UTF8.GetByteCount(value);
+                    string oldValue = Data.ReadUTF8Z(offset);
+                    int oldLength = Encoding.UTF8.GetByteCount(oldValue);
+                    int length = Encoding.UTF8.GetByteCount(value);
                     if (length > oldLength) throw new ArgumentOutOfRangeException(nameof(value), "String is too long");
                     Data.WriteUTF8Z(value, offset);
                     break;
@@ -158,10 +158,10 @@ namespace XbTool.Bdat
 
         public long ReadInt(int itemId, string memberName)
         {
-            var member = MembersDict[memberName];
-            var itemIndex = itemId - BaseId;
-            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
-            var valueOffset = itemOffset + member.MemberPos;
+            BdatMember member = MembersDict[memberName];
+            int itemIndex = itemId - BaseId;
+            int itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            int valueOffset = itemOffset + member.MemberPos;
 
             if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadIntValue(valueOffset, member.ValType);
@@ -169,10 +169,10 @@ namespace XbTool.Bdat
 
         public float ReadFloat(int itemId, string memberName)
         {
-            var member = MembersDict[memberName];
-            var itemIndex = itemId - BaseId;
-            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
-            var valueOffset = itemOffset + member.MemberPos;
+            BdatMember member = MembersDict[memberName];
+            int itemIndex = itemId - BaseId;
+            int itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            int valueOffset = itemOffset + member.MemberPos;
 
             if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadFloatValue(valueOffset, member.ValType);
@@ -180,10 +180,10 @@ namespace XbTool.Bdat
 
         public string ReadString(int itemId, string memberName)
         {
-            var member = MembersDict[memberName];
-            var itemIndex = itemId - BaseId;
-            var itemOffset = ItemTableOffset + itemIndex * ItemSize;
-            var valueOffset = itemOffset + member.MemberPos;
+            BdatMember member = MembersDict[memberName];
+            int itemIndex = itemId - BaseId;
+            int itemOffset = ItemTableOffset + itemIndex * ItemSize;
+            int valueOffset = itemOffset + member.MemberPos;
 
             if (member.Type != BdatMemberType.Scalar) throw new NotImplementedException();
             return ReadStringValue(valueOffset, member.ValType);

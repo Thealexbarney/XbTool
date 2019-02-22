@@ -9,9 +9,9 @@ namespace XbTool.Save
         public static string PrintSave(SDataSave save, BdatCollection tables)
         {
             var sb = new StringBuilder();
-            var delim = new string('=', 25);
+            string delim = new string('=', 25);
 
-            var blades = save.GameSave.CommonBladeIds.Where(x => x > 0).Select(x => save.GameSave.Blades[x - 1001])
+            IOrderedEnumerable<SDataBlade> blades = save.GameSave.CommonBladeIds.Where(x => x > 0).Select(x => save.GameSave.Blades[x - 1001])
                 .OrderBy(x => x.GetName(tables));
 
             foreach (SDataBlade blade in blades)
@@ -51,7 +51,7 @@ namespace XbTool.Save
 
             for (int i = 0; i < 3; i++)
             {
-                var sk = blade.BArts[i];
+                GfDataBladeArts sk = blade.BArts[i];
                 if (sk.Id == 0) continue;
                 sb.AppendLine($"Special {i + 1}: {tables.BTL_Arts_Bl.GetItemOrNull(sk.Id)?._Name.name} {sk.Level}/{sk.MaxLevel}");
             }
@@ -63,7 +63,7 @@ namespace XbTool.Save
 
             for (int i = 0; i < 3; i++)
             {
-                var sk = blade.NArts[i];
+                GfDataBladeArtsN sk = blade.NArts[i];
                 if (sk.Id == 0) continue;
                 sb.AppendLine($"Blade Art {i + 1}: {tables.BTL_Buff.GetItemOrNull(sk.Id)?._Name.name}");
             }
@@ -71,7 +71,7 @@ namespace XbTool.Save
 
             for (int i = 0; i < 3; i++)
             {
-                var sk = blade.BattleSkills[i];
+                GfDataBladeSkill sk = blade.BattleSkills[i];
                 if (sk.Id == 0) continue;
                 sb.AppendLine($"Battle Skill {i + 1}: {tables.BTL_Skill_Bl.GetItemOrNull(sk.Id)?._Name?.name} {sk.Level}/{sk.MaxLevel}");
             }
@@ -79,7 +79,7 @@ namespace XbTool.Save
 
             for (int i = 0; i < 3; i++)
             {
-                var sk = blade.FieldSkills[i];
+                GfDataBladeSkill sk = blade.FieldSkills[i];
                 if (sk.Id == 0) continue;
                 sb.AppendLine($"Field Skill {i + 1}: {tables.FLD_FieldSkillList.GetItemOrNull(sk.Id)?._Name?.name} {sk.Level}/{sk.MaxLevel}");
             }
@@ -108,7 +108,7 @@ namespace XbTool.Save
             sb.Append($"{tables.CHR_Dr.GetItemOrNull(blade.Creator)?._Name.name},");
             sb.Append($"{blade.Attribute},");
             sb.Append($"{tables.ITM_PcWpnType.GetItemOrNull(blade.WeaponType)?._Name.name},");
-            var mod = blade.GetStatMod();
+            (string type, int percent) mod = blade.GetStatMod();
             sb.Append($"{mod.type},");
             sb.Append($"{mod.percent},");
             sb.Append($"{tables.MNU_MsgTrustRank.GetItemOrNull(blade.TrustRank)?._name.name},");

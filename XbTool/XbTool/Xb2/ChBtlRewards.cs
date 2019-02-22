@@ -24,9 +24,9 @@ namespace XbTool.Xb2
 
             sb.AppendLine("<body>");
             sb.AppendLine("<pre>");
-            foreach (var chBtl in rewards)
+            foreach (RewardSet chBtl in rewards)
             {
-                foreach (var set in chBtl.Rewards)
+                foreach (Reward set in chBtl.Rewards)
                 {
                     sb.AppendLine($"{chBtl.Name} Treasure Box {set.BoxNum}");
                     sb.AppendLine($"Need {set.Need} Ether Cubes");
@@ -34,7 +34,7 @@ namespace XbTool.Xb2
                     sb.AppendLine($"{set.MinGold}-{set.MaxGold} gold");
                     sb.AppendLine($"{set.MinItems}-{set.MaxItems} items:");
                     var table = new Table("Name", "Prob");
-                    foreach (var item in set.Items)
+                    foreach (Item item in set.Items)
                     {
                         table.AddRow(item.Name, item.Percent.ToString("P"));
                     }
@@ -57,11 +57,11 @@ namespace XbTool.Xb2
 
             sb.AppendLine("Challenge,Challenge Name,Box,Item,Item Name,Prob");
 
-            foreach (var chBtl in rewards)
+            foreach (RewardSet chBtl in rewards)
             {
-                foreach (var set in chBtl.Rewards)
+                foreach (Reward set in chBtl.Rewards)
                 {
-                    foreach (var item in set.Items)
+                    foreach (Item item in set.Items)
                     {
                         sb.AppendLine(
                             $"{chBtl.Id},\"{chBtl.Name}\",{set.BoxNum},{item.Id},\"{item.Name}\",{item.Percent:R}");
@@ -76,7 +76,7 @@ namespace XbTool.Xb2
         {
             var rewards = new List<RewardSet>();
 
-            foreach (var chBtl in tables.BTL_ChBtl)
+            foreach (BTL_ChBtl chBtl in tables.BTL_ChBtl)
             {
                 rewards.Add(ReadRewardSet(tables, chBtl.Id));
             }
@@ -101,7 +101,7 @@ namespace XbTool.Xb2
 
         public static Reward ReadReward(BdatCollection tables, int rewardSetId)
         {
-            var set = tables.BTL_ChBtlRewardSet[rewardSetId];
+            BTL_ChBtlRewardSet set = tables.BTL_ChBtlRewardSet[rewardSetId];
             var reward = new Reward
             {
                 Id = rewardSetId,
@@ -119,9 +119,9 @@ namespace XbTool.Xb2
             reward.Items = tables.BTL_ChBtlRewardItem.Where(x => x.ItemValue >= minValue && x.ItemValue <= maxValue)
                 .Select(x => new Item { Id = x.ItemID, Prob = x.Param1 }).ToList();
 
-            foreach (var item in reward.Items)
+            foreach (Item item in reward.Items)
             {
-                var cat = ItemData.GetItemCategory(item.Id);
+                ItemTypeXb2 cat = ItemData.GetItemCategory(item.Id);
                 if (cat == set._UpCategory1 || cat == set._UpCategory2) item.Prob *= 2;
                 if (cat == set._DownCategory1 || cat == set._DownCategory2) item.Prob /= 2;
 
@@ -134,9 +134,9 @@ namespace XbTool.Xb2
                 }
             }
 
-            var totalProb = reward.Items.Sum(x => x.Prob);
+            int totalProb = reward.Items.Sum(x => x.Prob);
 
-            foreach (var item in reward.Items)
+            foreach (Item item in reward.Items)
             {
                 item.Name = ItemData.GetName(item.Id, tables);
                 item.Percent = (float)item.Prob / totalProb;

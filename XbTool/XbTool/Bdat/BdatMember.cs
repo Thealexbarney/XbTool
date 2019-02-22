@@ -30,7 +30,7 @@ namespace XbTool.Bdat
             int infoOffset = table.ReadUInt16(offset);
             int nameOffset = table.Game == Game.XB1 ? offset + 4 : table.ReadUInt16(offset + 4);
 
-            var name = table.ReadUTF8Z(nameOffset);
+            string name = table.ReadUTF8Z(nameOffset);
             int dupe = 0;
             Name = name;
 

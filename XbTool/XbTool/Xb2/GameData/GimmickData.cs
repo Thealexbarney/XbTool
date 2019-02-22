@@ -6,9 +6,9 @@ namespace XbTool.Xb2.GameData
     {
         public static string GetPlaceName(PlaceCategory category, int id, BdatCollection tables)
         {
-            var tableName = GetPlaceTable(category, id);
+            string tableName = GetPlaceTable(category, id);
             if (tableName == null) return string.Empty;
-            var name = tables[tableName].GetBdatItem(id).Read<string>("name");
+            string name = tables[tableName].GetBdatItem(id).Read<string>("name");
             return name;
         }
 

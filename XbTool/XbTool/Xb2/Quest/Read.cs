@@ -12,8 +12,8 @@ namespace XbTool.Xb2.Quest
         {
             Directory.CreateDirectory(outDir);
 
-            var quests = ReadQuests(tables.FLD_QuestListNormal);
-            var export = Export.ExportQuests(quests, tables);
+            List<QuestParent> quests = ReadQuests(tables.FLD_QuestListNormal);
+            string export = Export.ExportQuests(quests, tables);
             File.WriteAllText(Path.Combine(outDir, "quests normal.txt"), export);
 
             quests = ReadQuests(tables.FLD_QuestListBlade);
@@ -39,12 +39,12 @@ namespace XbTool.Xb2.Quest
 
         public static List<QuestParent> ReadQuests(BdatTable<FLD_QuestList> table)
         {
-            var parents = table.Where(x => x.FlagPRT != 0).ToArray();
+            FLD_QuestList[] parents = table.Where(x => x.FlagPRT != 0).ToArray();
             var quests = new List<QuestParent>();
 
-            foreach (var parent in parents)
+            foreach (FLD_QuestList parent in parents)
             {
-                var quest = ReadParentQuest(parent);
+                QuestParent quest = ReadParentQuest(parent);
                 quests.Add(quest);
             }
 
@@ -60,11 +60,11 @@ namespace XbTool.Xb2.Quest
             quest.Title = parentQuest._QuestTitle?.name;
             if (string.IsNullOrWhiteSpace(quest.Title)) quest.Title = $"Quest #{quest.Id}";
 
-            var childQuest = parentQuest._NextQuestA;
+            FLD_QuestList childQuest = parentQuest._NextQuestA;
             int stage = 1;
             while (childQuest != null)
             {
-                var child = ReadChildQuest(childQuest);
+                QuestChild child = ReadChildQuest(childQuest);
                 child.Parent = quest;
                 child.Stage = stage++;
 
@@ -81,7 +81,7 @@ namespace XbTool.Xb2.Quest
             quest.Id = childQuest.Id;
             quest.Flag = childQuest.FlagCLD;
 
-            var purpose = childQuest._PurposeID;
+            FLD_QuestTask purpose = childQuest._PurposeID;
             if (purpose?.TaskType1 > 0)
             {
                 var task = new QuestTask();

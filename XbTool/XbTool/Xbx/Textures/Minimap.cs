@@ -13,14 +13,14 @@ namespace XbTool.Xbx.Textures
     {
         public static void ExtractMinimap(string inDir, string outDir)
         {
-            var filenames = Directory.GetFiles(inDir, "map_???_???_???.catex");
+            string[] filenames = Directory.GetFiles(inDir, "map_???_???_???.catex");
             Directory.CreateDirectory(outDir);
-            var segmentGroups = filenames.Select(x => new Segment(x)).GroupBy(x => x.MapId);
+            IEnumerable<IGrouping<int, Segment>> segmentGroups = filenames.Select(x => new Segment(x)).GroupBy(x => x.MapId);
             var maps = new List<Map>();
 
-            foreach (var segmentGroup in segmentGroups)
+            foreach (IGrouping<int, Segment> segmentGroup in segmentGroups)
             {
-                var normalSegs = segmentGroup.Where(x => x.XSeg < 999 && x.YSeg < 999).ToList();
+                List<Segment> normalSegs = segmentGroup.Where(x => x.XSeg < 999 && x.YSeg < 999).ToList();
                 var map = new Map
                 {
                     Id = segmentGroup.Key,
@@ -35,7 +35,7 @@ namespace XbTool.Xbx.Textures
                 map.Height = map.YMax - map.YMin + 1;
                 map.Width = map.XMax - map.XMin + 1;
 
-                foreach (var seg in map.Segments)
+                foreach (Segment seg in map.Segments)
                 {
                     seg.X = seg.XSeg - map.XMin;
                     seg.Y = seg.YSeg - map.YMin;
@@ -44,18 +44,18 @@ namespace XbTool.Xbx.Textures
                 maps.Add(map);
             }
 
-            foreach (var map in maps)
+            foreach (Map map in maps)
             {
-                var png = StitchMap(map);
-                var outName = Path.Combine(outDir, $"{map.Id}.png");
+                byte[] png = StitchMap(map);
+                string outName = Path.Combine(outDir, $"{map.Id}.png");
                 File.WriteAllBytes(outName, png);
             }
         }
 
         private static byte[] StitchMap(Map map)
         {
-            var defaultSegFile = File.ReadAllBytes(map.DefaultSegment.Filename);
-            var defaultSeg = new MtxtTexture(new DataBuffer(defaultSegFile, Game.XBX, 0)).ToBitmap();
+            byte[] defaultSegFile = File.ReadAllBytes(map.DefaultSegment.Filename);
+            Bitmap defaultSeg = new MtxtTexture(new DataBuffer(defaultSegFile, Game.XBX, 0)).ToBitmap();
 
             using (var bitmap = new Bitmap(map.Width * 256, map.Height * 256, PixelFormat.Format32bppArgb))
             using (Graphics img = Graphics.FromImage(bitmap))
@@ -68,11 +68,11 @@ namespace XbTool.Xbx.Textures
                     }
                 }
 
-                foreach (var seg in map.Segments)
+                foreach (Segment seg in map.Segments)
                 {
-                    var segFile = File.ReadAllBytes(seg.Filename);
+                    byte[] segFile = File.ReadAllBytes(seg.Filename);
                     var segmentTex = new MtxtTexture(new DataBuffer(segFile, Game.XBX, 0));
-                    var segBitmap = segmentTex.ToBitmap();
+                    Bitmap segBitmap = segmentTex.ToBitmap();
                     img.DrawImage(segBitmap, seg.X * 256, seg.Y * 256);
                 }
 
@@ -107,7 +107,7 @@ namespace XbTool.Xbx.Textures
                 Filename = filename;
                 string name = Path.GetFileNameWithoutExtension(filename);
                 if (name == null) throw new ArgumentException($"Invalid minimap filename {filename}");
-                var split = name.Split('_');
+                string[] split = name.Split('_');
                 MapId = int.Parse(split[1]);
                 XSeg = int.Parse(split[2]);
                 YSeg = int.Parse(split[3]);

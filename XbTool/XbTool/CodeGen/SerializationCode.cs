@@ -61,13 +61,13 @@ namespace XbTool.CodeGen
             sb.AppendLine($"public class {type.Name} : BdatItem");
             sb.AppendLineAndIncrease("{");
 
-            foreach (var member in type.Members)
+            foreach (BdatMember member in type.Members)
             {
                 if (added.Contains(member.Name)) continue;
                 added.Add(member.Name);
 
-                var memberType = member.Type;
-                var name = GetIdentifier(member.Name);
+                BdatMemberType memberType = member.Type;
+                string name = GetIdentifier(member.Name);
                 switch (memberType)
                 {
                     case BdatMemberType.Flag:
@@ -78,7 +78,7 @@ namespace XbTool.CodeGen
                         break;
                     case BdatMemberType.Array:
                         int length = member.ArrayCount;
-                        var valType = GetType(member.ValType);
+                        string valType = GetType(member.ValType);
                         sb.AppendLine($"public readonly {valType}[] {name} = new {valType}[{length}];");
                         break;
                     default:
@@ -86,7 +86,7 @@ namespace XbTool.CodeGen
                 }
             }
 
-            foreach (var bdatRef in type.TableRefs)
+            foreach (BdatFieldInfo bdatRef in type.TableRefs)
             {
                 bdatRef.Member = type.Members.First(x => x.Name == bdatRef.Field);
                 string itemType = "";
@@ -127,7 +127,7 @@ namespace XbTool.CodeGen
                 }
             }
 
-            foreach (var array in type.Arrays)
+            foreach (BdatArrayInfo array in type.Arrays)
             {
                 sb.AppendLine($"public {array.Type}[] _{array.Name};");
             }
@@ -151,7 +151,7 @@ namespace XbTool.CodeGen
             sb.AppendLineAndIncrease("{");
             bool firstFunction = true;
 
-            foreach (var type in info.Types)
+            foreach (BdatType type in info.Types)
             {
                 if (!firstFunction) sb.AppendLine();
                 firstFunction = false;
@@ -173,19 +173,19 @@ namespace XbTool.CodeGen
             sb.AppendLine($"var item = new {type.Name}();");
             sb.AppendLine("item.Id = itemId;");
 
-            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Scalar))
+            foreach (BdatMember member in type.Members.Where(x => x.Type == BdatMemberType.Scalar))
             {
                 sb.AppendLine(GetReader(member));
             }
 
-            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Array))
+            foreach (BdatMember member in type.Members.Where(x => x.Type == BdatMemberType.Array))
             {
                 GetArrayReader(member, sb);
             }
 
-            foreach (var member in type.Members.Where(x => x.Type == BdatMemberType.Flag))
+            foreach (BdatMember member in type.Members.Where(x => x.Type == BdatMemberType.Flag))
             {
-                var flagVarName = GetIdentifier(type.Members[member.FlagVarIndex].Name);
+                string flagVarName = GetIdentifier(type.Members[member.FlagVarIndex].Name);
                 sb.AppendLine($"item.{GetIdentifier(member.Name)} = (item.{flagVarName} & {member.FlagMask}) != 0;");
             }
 
@@ -199,7 +199,7 @@ namespace XbTool.CodeGen
             sb.AppendLineAndIncrease("{");
             bool firstTable = true;
 
-            foreach (var table in info.TableDesc)
+            foreach (BdatTableDesc table in info.TableDesc)
             {
                 if (!firstTable) sb.AppendLine();
                 firstTable = false;
@@ -214,7 +214,7 @@ namespace XbTool.CodeGen
         {
             sb.AppendLine($"foreach ({table.Type.Name} item in tables.{table.Name}.Items)");
             sb.AppendLineAndIncrease("{");
-            foreach (var fieldRef in table.TableRefs.OrderBy(x => x.Field))
+            foreach (BdatFieldInfo fieldRef in table.TableRefs.OrderBy(x => x.Field))
             {
                 if (fieldRef.Member?.Type == BdatMemberType.Array)
                 {
@@ -271,12 +271,12 @@ namespace XbTool.CodeGen
                 }
             }
 
-            foreach (var array in table.Arrays.OrderBy(x => x.Name))
+            foreach (BdatArrayInfo array in table.Arrays.OrderBy(x => x.Name))
             {
                 sb.AppendLine($"item._{array.Name} = new[]");
                 sb.AppendLineAndIncrease("{");
 
-                var elementCount = array.Elements.Count;
+                int elementCount = array.Elements.Count;
                 for (int i = 0; i < elementCount; i++)
                 {
                     string name = (array.IsReferences ? "_" : "") + array.Elements[i];
@@ -310,10 +310,10 @@ namespace XbTool.CodeGen
         {
             var sb = new StringBuilder();
 
-            foreach (var type in info.Types)
+            foreach (BdatType type in info.Types)
             {
                 sb.Append(type.Name);
-                foreach (var table in type.TableNames.OrderBy(x => x))
+                foreach (string table in type.TableNames.OrderBy(x => x))
                 {
                     sb.Append($",{table}");
                 }
@@ -337,7 +337,7 @@ namespace XbTool.CodeGen
             sb.AppendLine("public partial class BdatCollection");
             sb.AppendLineAndIncrease("{");
 
-            foreach (var type in info.Types)
+            foreach (BdatType type in info.Types)
             {
                 foreach (string table in type.TableNames.OrderBy(x => x))
                 {

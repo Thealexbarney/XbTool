@@ -89,8 +89,8 @@ namespace XbTool.Common.Textures
 
         public static byte[] CreateDds(LahdTexture tex)
         {
-            var header = CreateHeader(tex);
-            var bodyLength = BitConverter.ToInt32(header, 20);
+            byte[] header = CreateHeader(tex);
+            int bodyLength = BitConverter.ToInt32(header, 20);
 
             var file = new byte[header.Length + bodyLength];
             Array.Copy(header, file, header.Length);

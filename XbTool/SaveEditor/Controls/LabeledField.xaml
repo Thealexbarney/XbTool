@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="SaveEditor.Controls.LabeledField"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              x:Name="Lf"
              mc:Ignorable="d"
@@ -9,8 +9,8 @@
     <Grid Background="White">
 
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Path=Label, ElementName=Lf}"/>
-            <TextBox Text="{Binding Path=Value, ElementName=Lf}"/>
+            <TextBlock Text="{Binding Path=Label, ElementName=Lf}" />
+            <TextBox Text="{Binding Path=Value, ElementName=Lf}" />
         </StackPanel>
     </Grid>
 </UserControl>

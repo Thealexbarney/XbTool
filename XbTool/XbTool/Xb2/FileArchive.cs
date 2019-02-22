@@ -113,7 +113,7 @@ namespace XbTool.Xb2
         public FileInfo[] GetChildFileInfos(string path)
         {
             var fileInfos = new List<FileInfo>();
-            foreach (var file in FileInfo)
+            foreach (FileInfo file in FileInfo)
             {
                 if (file.Filename != null && file.Filename.StartsWith(path))
                 {
@@ -129,7 +129,7 @@ namespace XbTool.Xb2
             Glob glob = Glob.Parse(pattern,
                 new GlobOptions { Evaluation = new EvaluationOptions { CaseInsensitive = true } });
             var fileInfos = new List<string>();
-            foreach (var file in FileInfo)
+            foreach (FileInfo file in FileInfo)
             {
                 if (file.Filename != null && glob.IsMatch(file.Filename))
                 {
@@ -250,14 +250,14 @@ namespace XbTool.Xb2
         private string GetStringFromEndNode(int endNodeIdx)
         {
             int cur = endNodeIdx;
-            var curNode = Nodes[cur];
-            var nameSuffix = Stuff.GetUTF8Z(StringTable, -curNode.Next);
+            Node curNode = Nodes[cur];
+            string nameSuffix = Stuff.GetUTF8Z(StringTable, -curNode.Next);
             var chars = new List<char>(nameSuffix.Reverse());
 
             while (curNode.Next != 0)
             {
                 int prev = curNode.Prev;
-                var prevNode = Nodes[prev];
+                Node prevNode = Nodes[prev];
                 chars.Add((char)(cur ^ prevNode.Next));
                 cur = prev;
                 curNode = prevNode;
@@ -295,7 +295,7 @@ namespace XbTool.Xb2
 
         public static void Extract(FileArchive archive, string outDir, IProgressReport progress = null)
         {
-            var fileInfos = archive.FileInfo.Where(x => !string.IsNullOrWhiteSpace(x.Filename)).ToArray();
+            FileInfo[] fileInfos = archive.FileInfo.Where(x => !string.IsNullOrWhiteSpace(x.Filename)).ToArray();
             progress?.SetTotal(fileInfos.Length);
             progress?.LogMessage("Extracting ARD archive");
 
@@ -347,7 +347,7 @@ namespace XbTool.Xb2
 
         public int GetDataLength()
         {
-            var length = CompressedSize;
+            int length = CompressedSize;
             if (Type == 2) length += 0x30;
             length = Helpers.GetNextMultiple(length, 0x10);
             return length;

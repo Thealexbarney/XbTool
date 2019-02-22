@@ -37,7 +37,7 @@ namespace XbTool.BdatString
 
             if (value.Array != null)
             {
-                foreach (var element in value.Array)
+                foreach (BdatStringValue element in value.Array)
                 {
                     ResolveItemRef(element);
                 }
@@ -130,7 +130,7 @@ namespace XbTool.BdatString
                     AddFlag(tables, field.RefTable, refId, value);
                     break;
                 case BdatFieldType.GameFlag:
-                    var flagType = item[field.RefField].ValueString;
+                    string flagType = item[field.RefField].ValueString;
                     AddFlag(tables, flagType + "bit", refId, value);
                     break;
                 case BdatFieldType.Change:
@@ -148,7 +148,7 @@ namespace XbTool.BdatString
                     break;
                 case BdatFieldType.Place:
                     var placeCat = (PlaceCategory)int.Parse(item[field.RefField].ValueString);
-                    var placeTable = GimmickData.GetPlaceTable(placeCat, refId);
+                    string placeTable = GimmickData.GetPlaceTable(placeCat, refId);
                     if(placeTable != null) ApplyRef(placeTable);
                     break;
             }
@@ -175,7 +175,7 @@ namespace XbTool.BdatString
                     return;
                 }
 
-                var reft = tables[refTable][refId].Display;
+                BdatStringValue reft = tables[refTable][refId].Display;
 
                 if (reft != null)
                 {
@@ -242,9 +242,9 @@ namespace XbTool.BdatString
         {
             if (value == null) return null;
 
-            var item = value.Parent;
-            var field = value.Member.Metadata;
-            var tables = item.Table.Collection;
+            BdatStringItem item = value.Parent;
+            BdatFieldInfo field = value.Member.Metadata;
+            BdatStringCollection tables = item.Table.Collection;
 
             int captionId = int.Parse(value.ValueString);
             BdatStringValue captionValue = tables["BTL_PouchBuff"][captionId]?["Name"];
@@ -261,9 +261,9 @@ namespace XbTool.BdatString
 
             var sb = new StringBuilder(caption);
 
-            var tags = BdatStringTools.ParseTags(caption);
+            List<BdatTag> tags = BdatStringTools.ParseTags(caption);
 
-            foreach (var tag in tags.OrderByDescending(x => x.Start))
+            foreach (BdatTag tag in tags.OrderByDescending(x => x.Start))
             {
                 if (tag.SubType != "PouchParam") continue;
 
@@ -288,18 +288,18 @@ namespace XbTool.BdatString
             newMembers.Add(captionMember);
             effects.Members = newMembers.ToArray();
 
-            foreach (var effect in effects.Items)
+            foreach (BdatStringItem effect in effects.Items)
             {
                 effect.AddMember("Caption", new BdatStringValue("0", effect, captionMember));
                 effect["Caption"].Display = "";
             }
 
-            foreach (var enhance in enhances.Items)
+            foreach (BdatStringItem enhance in enhances.Items)
             {
                 int captionId = int.Parse(enhance["Caption"].ValueString);
                 if (captionId == 0) continue;
 
-                var effect = effects[int.Parse(enhance["EnhanceEffect"].ValueString)]["Caption"];
+                BdatStringValue effect = effects[int.Parse(enhance["EnhanceEffect"].ValueString)]["Caption"];
 
                 string caption = tables["btl_enhance_cap"][captionId]?["name"].ValueString;
 
@@ -307,13 +307,13 @@ namespace XbTool.BdatString
                 effect.Display = caption;
             }
 
-            foreach (var enhance in enhances.Items)
+            foreach (BdatStringItem enhance in enhances.Items)
             {
-                var effectCaptionId = int.Parse(enhance["EnhanceEffect"].ValueString);
+                int effectCaptionId = int.Parse(enhance["EnhanceEffect"].ValueString);
                 int enhanceCaptionId = int.Parse(enhance["Caption"].ValueString);
                 if (enhanceCaptionId != 0 || effectCaptionId == 0) continue;
 
-                var effect = effects[effectCaptionId]["Caption"];
+                BdatStringValue effect = effects[effectCaptionId]["Caption"];
                 enhance["Caption"].Value = effect.ValueString;
             }
         }

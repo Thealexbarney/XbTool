@@ -59,9 +59,9 @@ namespace XbTool.Xb2.GameData
 
         public static string GetName(int id, BdatCollection tables)
         {
-            var category = GetItemCategory(id);
-            var tableName = GetCategoryTable(category);
-            var name = tables[tableName].GetBdatItem(id).Read<Message>("_Name").name;
+            ItemTypeXb2 category = GetItemCategory(id);
+            string tableName = GetCategoryTable(category);
+            string name = tables[tableName].GetBdatItem(id).Read<Message>("_Name").name;
 
             if (category == ItemTypeXb2.PcEquip)
             {

@@ -11,7 +11,7 @@ namespace XbTool.Xb2
     {
         public static void PrintEnemies(BdatCollection tables, StreamWriter writer)
         {
-            var enemies = ReadEnemies(tables);
+            List<Xb2Enemy> enemies = ReadEnemies(tables);
             var csv = new CsvWriter(writer);
             csv.WriteRecords(enemies);
         }
@@ -43,7 +43,7 @@ namespace XbTool.Xb2
                 en.EtherRst = enemy._ParamID.RstEther;
                 en.Element = (BladeAttribute)enemy._ParamID.Atr;
 
-                var lv = Math.Min(130, en.Level);
+                int lv = Math.Min(130, en.Level);
                 en.Exp = (int)(enemy.ExpRev * 0.01 * tables.BTL_Grow[lv].EnemyExp);
                 en.Gold = (int)(enemy.GoldRev * 0.01 * tables.BTL_Grow[lv].EnemyGold);
                 en.Wp = (int)(enemy.WPRev * 0.01 * tables.BTL_Grow[lv].EnemyWP);

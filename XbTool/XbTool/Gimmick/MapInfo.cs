@@ -15,7 +15,7 @@ namespace XbTool.Gimmick
 
         public MapInfo(DataBuffer data)
         {
-            var count = data.ReadInt32(4, true);
+            int count = data.ReadInt32(4, true);
             Areas = new MapAreaInfo[count];
 
             for (int i = 0; i < count; i++)
@@ -25,12 +25,12 @@ namespace XbTool.Gimmick
                 area.Name = data.ReadUTF8Z();
                 area.DisplayName = area.Name;
                 data.Position = start + 32;
-                var xLo = data.ReadSingle();
-                var yLo = data.ReadSingle();
-                var zLo = data.ReadSingle();
-                var xHi = data.ReadSingle();
-                var yHi = data.ReadSingle();
-                var zHi = data.ReadSingle();
+                float xLo = data.ReadSingle();
+                float yLo = data.ReadSingle();
+                float zLo = data.ReadSingle();
+                float xHi = data.ReadSingle();
+                float yHi = data.ReadSingle();
+                float zHi = data.ReadSingle();
                 area.LowerBound = new Point3(xLo, yLo, zLo);
                 area.UpperBound = new Point3(xHi, yHi, zHi);
                 area.Size = new Point3(xHi - xLo, yHi - yLo, zHi - zLo);
@@ -49,7 +49,7 @@ namespace XbTool.Gimmick
             MapAreaInfo containingArea = null;
             int minPriority = int.MaxValue;
 
-            foreach (var area in Areas)
+            foreach (MapAreaInfo area in Areas)
             {
                 if (area.Contains(point) && area.Priority < minPriority)
                 {
@@ -64,7 +64,7 @@ namespace XbTool.Gimmick
         public static Dictionary<string, MapInfo> ReadAll(IFileReader fs)
         {
             var infos = new Dictionary<string, MapInfo>();
-            var filenames = fs.FindFiles("/menu/minimap/*.mi");
+            IEnumerable<string> filenames = fs.FindFiles("/menu/minimap/*.mi");
 
             foreach (string filename in filenames)
             {
@@ -78,12 +78,12 @@ namespace XbTool.Gimmick
                 infos.Add(info.Name, info);
             }
 
-            foreach (var map in infos.Values)
+            foreach (MapInfo map in infos.Values)
             {
-                foreach (var area in map.Areas)
+                foreach (MapAreaInfo area in map.Areas)
                 {
-                    var name = area.Name;
-                    var file = fs.ReadFile($"/menu/minimap/{name}_map.seg");
+                    string name = area.Name;
+                    byte[] file = fs.ReadFile($"/menu/minimap/{name}_map.seg");
                     area.SegmentInfo = new MapSegmentInfo(new DataBuffer(file, Game.XB2, 0));
                 }
             }
@@ -124,8 +124,8 @@ namespace XbTool.Gimmick
 
         public Point2 Get2DPosition(Point3 point3)
         {
-            var x = (point3.X - LowerBound.X) / Size.X * SegmentInfo.FullWidth;
-            var y = (point3.Z - LowerBound.Z) / Size.Z * SegmentInfo.FullHeight;
+            float x = (point3.X - LowerBound.X) / Size.X * SegmentInfo.FullWidth;
+            float y = (point3.Z - LowerBound.Z) / Size.Z * SegmentInfo.FullHeight;
             return new Point2(x, y);
         }
     }

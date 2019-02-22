@@ -12,18 +12,18 @@ namespace XbTool.Xb2.Quest
         public static string ExportQuests(IList<QuestParent> quests, BdatCollection tables)
         {
             var sb = new StringBuilder();
-            var delim = new String('=', 20);
+            string delim = new String('=', 20);
 
-            foreach (var quest in quests)
+            foreach (QuestParent quest in quests)
             {
                 sb.AppendLine(delim);
                 sb.AppendLine(quest.Title);
 
-                foreach (var child in quest.Children)
+                foreach (QuestChild child in quest.Children)
                 {
                     sb.AppendLine();
                     sb.AppendLine($"Stage {child.Stage}");
-                    foreach (var task in child.Tasks)
+                    foreach (QuestTask task in child.Tasks)
                     {
                         PrintTask(sb, task, tables);
                     }
@@ -56,17 +56,17 @@ namespace XbTool.Xb2.Quest
         {
             if (battle.EnemyID > 0)
             {
-                var enemy = battle._EnemyID;
-                var rsc = enemy._ParamID?._ResourceID;
+                CHR_EnArrange enemy = battle._EnemyID;
+                RSC_En rsc = enemy._ParamID?._ResourceID;
                 sb.AppendLine(
                     $"{enemy._Name?.name}; {enemy.Debug_Name} ;{rsc?.DebugName}; {rsc?._TypeFamily?._name.name} {rsc?._TypeGenus?._NAME?.name}");
             }
 
             if (battle.EnemyGroupID > 0)
             {
-                foreach (var enemy in battle._EnemyGroupID._EnemyID.Where(x => x != null))
+                foreach (CHR_EnArrange enemy in battle._EnemyGroupID._EnemyID.Where(x => x != null))
                 {
-                    var rsc = enemy._ParamID?._ResourceID;
+                    RSC_En rsc = enemy._ParamID?._ResourceID;
                     sb.AppendLine(
                         $"{enemy._Name?.name}; {enemy.Debug_Name} ;{rsc?.DebugName}; {rsc?._TypeFamily?._name.name} {rsc?._TypeGenus?._NAME?.name}");
                 }
@@ -75,7 +75,7 @@ namespace XbTool.Xb2.Quest
 
         private static void PrintTalkTask(StringBuilder sb, FLD_QuestTalk talk, BdatCollection tables)
         {
-            var character = CharacterData.GetCharacter(talk.NpcID, tables);
+            object character = CharacterData.GetCharacter(talk.NpcID, tables);
 
             switch (character)
             {
@@ -93,7 +93,7 @@ namespace XbTool.Xb2.Quest
 
         private static void PrintReachTask(StringBuilder sb, FLD_QuestReach reach, BdatCollection tables)
         {
-            var name = GimmickData.GetPlaceName(reach._Category, reach.PlaceID, tables);
+            string name = GimmickData.GetPlaceName(reach._Category, reach.PlaceID, tables);
             sb.AppendLine($"{reach._Category}; {reach._MapID?._nameID?.name}; {name}");
         }
     }

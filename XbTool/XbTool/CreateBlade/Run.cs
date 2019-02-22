@@ -7,7 +7,7 @@ namespace XbTool.CreateBlade
     {
         private static bool TryReadInt(int min, int max, out int value)
         {
-            var line = Console.ReadLine();
+            string line = Console.ReadLine();
             if (!int.TryParse(line, out value))
             {
                 return false;
@@ -44,7 +44,7 @@ namespace XbTool.CreateBlade
 
             int times = 10;
 
-            var delim = new string('=', 25);
+            string delim = new string('=', 25);
             var create = new CreateCommon(tables, driver, createParams);
 
             for (int i = 0; i < times; i++)
@@ -76,7 +76,7 @@ namespace XbTool.CreateBlade
 
             int times = ReadIntFromConsole(1, 100, "Number of blades to generate (1-100)");
 
-            var delim = new string('=', 25);
+            string delim = new string('=', 25);
             var create = new CreateCommon(tables, driver, createParams);
 
             for (int i = 0; i < times; i++)

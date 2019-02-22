@@ -59,7 +59,7 @@ namespace XbTool.Serialization
 
             var item = new BdatStringItem();
 
-            foreach (var member in table.Members)
+            foreach (BdatMember member in table.Members)
             {
                 switch (member.Type)
                 {
@@ -68,12 +68,12 @@ namespace XbTool.Serialization
                         item.AddMember(member.Name, new BdatStringValue(v, item, member));
                         break;
                     case BdatMemberType.Array:
-                        var a = ReadArray(table.Data, itemOffset + member.MemberPos, member);
+                        string[] a = ReadArray(table.Data, itemOffset + member.MemberPos, member);
                         item.AddMember(member.Name, new BdatStringValue(a, item, member));
                         break;
                     case BdatMemberType.Flag:
-                        var flagsMember = table.Members[member.FlagVarIndex];
-                        var f = ReadFlag(table.Data, itemOffset, member, flagsMember);
+                        BdatMember flagsMember = table.Members[member.FlagVarIndex];
+                        string f = ReadFlag(table.Data, itemOffset, member, flagsMember);
                         item.AddMember(member.Name, new BdatStringValue(f, item, member));
                         break;
                 }

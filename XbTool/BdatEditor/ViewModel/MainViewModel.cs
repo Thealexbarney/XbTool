@@ -47,15 +47,15 @@ namespace BdatEditor.ViewModel
         {
             if (!IsFileOpened) return;
 
-            var table = BdatTables.Tables[SelectedTable];
+            BdatTable table = BdatTables.Tables[SelectedTable];
             var editTable = new EditTable(table);
             EditingTable = new DataTable();
             CurrentTable = table;
 
             EditingTable.Columns.Add(new DataColumn("ID") { ReadOnly = true });
-            foreach (var col in editTable.Columns)
+            foreach (BdatMember col in editTable.Columns)
             {
-                DataColumn column = new DataColumn();
+                var column = new DataColumn();
                 if (col.Type != BdatMemberType.Scalar)
                 {
                     column.ReadOnly = true;
@@ -65,9 +65,9 @@ namespace BdatEditor.ViewModel
                 EditingTable.Columns.Add(column);
             }
 
-            foreach (var item in editTable.Items)
+            foreach (object[] item in editTable.Items)
             {
-                var row = EditingTable.NewRow();
+                DataRow row = EditingTable.NewRow();
                 row.ItemArray = item;
                 EditingTable.Rows.Add(item);
             }
@@ -75,7 +75,7 @@ namespace BdatEditor.ViewModel
             EditingTable.AcceptChanges();
             IsTableOpened = true;
 
-            var temp = EditingTable;
+            DataTable temp = EditingTable;
             EditingTable = null;
             EditingTable = temp;
         }
@@ -84,17 +84,17 @@ namespace BdatEditor.ViewModel
         {
             if (!IsTableOpened) return;
 
-            var rows = EditingTable.GetChanges();
+            DataTable rows = EditingTable.GetChanges();
             if (rows == null) return;
-            var members = CurrentTable.Members;
+            BdatMember[] members = CurrentTable.Members;
 
-            foreach (var row in rows.Rows.Cast<DataRow>())
+            foreach (DataRow row in rows.Rows.Cast<DataRow>())
             {
-                var itemId = int.Parse((string)row.ItemArray[0]);
+                int itemId = int.Parse((string)row.ItemArray[0]);
                 for (int m = 0; m < members.Length; m++)
                 {
                     if (members[m].Type != BdatMemberType.Scalar) continue;
-                    var value = (string)row.ItemArray[m + 1];
+                    string value = (string)row.ItemArray[m + 1];
                     try
                     {
                         CurrentTable.WriteValue(itemId, members[m].Name, value);

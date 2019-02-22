@@ -91,7 +91,7 @@ namespace SaveEditor.ViewModel
 
         public void ReadSave(string filename)
         {
-            var file = File.ReadAllBytes(filename);
+            byte[] file = File.ReadAllBytes(filename);
             var save = new SDataSave(new DataBuffer(file, Game.XB2, 0));
             SaveFile = save;
             SaveFilename = filename;
@@ -99,20 +99,20 @@ namespace SaveEditor.ViewModel
 
         public void ReadSaveDialog()
         {
-            var filename = OpenViaFileBrowser(".sav", "SAV Files (*.sav)|*.sav|All Files|*.*");
+            string filename = OpenViaFileBrowser(".sav", "SAV Files (*.sav)|*.sav|All Files|*.*");
             if (filename == null) return;
             ReadSave(filename);
         }
 
         public void WriteSave()
         {
-            var file = Write.WriteSave(SaveFile);
+            byte[] file = Write.WriteSave(SaveFile);
             File.WriteAllBytes(SaveFilename, file);
         }
 
         public void LoadBdats()
         {
-            var dirName = OpenDirViaFileBrowser();
+            string dirName = OpenDirViaFileBrowser();
             var options = new Options
             {
                 BdatDir = dirName,

@@ -45,7 +45,7 @@ namespace XbTool.Bdat
             FileData = File.ReadAllBytes(filename);
             var tables = new List<BdatTable>();
 
-            DataBuffer buffer = new DataBuffer(FileData, game, 0);
+            var buffer = new DataBuffer(FileData, game, 0);
             tables.AddRange(ReadBdatFile(buffer, filename));
             Tables = tables.ToArray();
             TablesDict = Tables.ToDictionary(x => x.Name, x => x);
@@ -55,7 +55,7 @@ namespace XbTool.Bdat
         public BdatTables(byte[] tables, Game game, bool readMetadata)
         {
             Game = game;
-            DataBuffer buffer = new DataBuffer(tables, game, 0);
+            var buffer = new DataBuffer(tables, game, 0);
             Tables = ReadBdatFile(buffer, "");
             TablesDict = Tables.ToDictionary(x => x.Name, x => x);
             if (readMetadata) ReadMetadata();
@@ -63,7 +63,7 @@ namespace XbTool.Bdat
 
         public BdatTable GetTable(string tableName)
         {
-            return TablesDict.TryGetValue(tableName, out var table) ? table : null;
+            return TablesDict.TryGetValue(tableName, out BdatTable table) ? table : null;
         }
 
         private void ReadMetadata()
@@ -89,12 +89,12 @@ namespace XbTool.Bdat
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/lookat.bdat"), Game.XB2, 0), "/bdat/lookat.bdat"));
 
-            var files = fs.FindFiles($"/bdat/{lang}/*").ToArray();
+            string[] files = fs.FindFiles($"/bdat/{lang}/*").ToArray();
             progress?.SetTotal(files.Length);
 
-            foreach (var filename in files)
+            foreach (string filename in files)
             {
-                DataBuffer buffer = new DataBuffer(fs.ReadFile(filename), Game.XB2, 0);
+                var buffer = new DataBuffer(fs.ReadFile(filename), Game.XB2, 0);
                 tables.AddRange(ReadBdatFile(buffer, filename));
                 progress?.ReportAdd(1);
             }
@@ -106,9 +106,9 @@ namespace XbTool.Bdat
         {
             var tables = new List<BdatTable>();
 
-            foreach (var file in filenames)
+            foreach (string file in filenames)
             {
-                DataBuffer buffer = new DataBuffer(File.ReadAllBytes(file), game, 0);
+                var buffer = new DataBuffer(File.ReadAllBytes(file), game, 0);
                 tables.AddRange(ReadBdatFile(buffer, file));
             }
 
@@ -146,21 +146,21 @@ namespace XbTool.Bdat
             BdatFields = BdatInfoImport.ReadBdatFieldInfo(Game.ToString().ToLower());
             ResolveWildcards();
 
-            var tablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
 
             int removed = 0;
-            foreach (var fieldKvp in BdatFields.ToArray())
+            foreach (KeyValuePair<(string table, string member), BdatFieldInfo> fieldKvp in BdatFields.ToArray())
             {
                 BdatFieldInfo field = fieldKvp.Value;
 
-                if (!tablesDict.TryGetValue(field.Table, out var table))
+                if (!tablesDict.TryGetValue(field.Table, out BdatTable table))
                 {
                     BdatFields.Remove(fieldKvp.Key);
                     removed++;
                     continue;
                 }
 
-                var fieldInfo = table.Members.FirstOrDefault(x => x.Name == field.Field);
+                BdatMember fieldInfo = table.Members.FirstOrDefault(x => x.Name == field.Field);
                 if (fieldInfo == null)
                 {
                     BdatFields.Remove(fieldKvp.Key);
@@ -177,14 +177,14 @@ namespace XbTool.Bdat
 
         public void ReadArrayInfos()
         {
-            foreach (var array in BdatArrays)
+            foreach (BdatArrayInfo array in BdatArrays)
             {
-                var type = Types.First(x => x.Name == array.Table);
+                BdatType type = Types.First(x => x.Name == array.Table);
                 array.IsReferences = true;
 
-                foreach (var element in array.Elements)
+                foreach (string element in array.Elements)
                 {
-                    var tableRef = type.TableRefs.FirstOrDefault(x => x.Field == element);
+                    BdatFieldInfo tableRef = type.TableRefs.FirstOrDefault(x => x.Field == element);
 
                     if (tableRef == null)
                     {
@@ -202,9 +202,9 @@ namespace XbTool.Bdat
 
                 if (!array.IsReferences)
                 {
-                    foreach (var element in array.Elements)
+                    foreach (string element in array.Elements)
                     {
-                        var member = type.Members.First(x => x.Name == element);
+                        BdatMember member = type.Members.First(x => x.Name == element);
 
                         if (array.Type != null && array.Type != SerializationCode.GetType(member.ValType))
                         {
@@ -223,7 +223,7 @@ namespace XbTool.Bdat
         {
             DisplayFields = BdatInfoImport.ReadBdatTableInfo(Game.ToString().ToLower());
 
-            foreach (var table in Tables)
+            foreach (BdatTable table in Tables)
             {
                 if (DisplayFields.ContainsKey(table.Name)) continue;
 
@@ -238,15 +238,15 @@ namespace XbTool.Bdat
 
         private void ResolveWildcards()
         {
-            var fields = BdatFields.Where(x => x.Value.Table.Contains('*')).ToArray();
-            var tablesDict = Tables.ToDictionary(x => x.Name, x => x);
+            KeyValuePair<(string table, string member), BdatFieldInfo>[] fields = BdatFields.Where(x => x.Value.Table.Contains('*')).ToArray();
+            Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
 
-            foreach (var field in fields)
+            foreach (KeyValuePair<(string table, string member), BdatFieldInfo> field in fields)
             {
                 bool hasFieldWildcard = field.Value.Field?.Contains('*') == true;
                 var regex = new Regex("^" + Regex.Escape(field.Value.Table).Replace(@"\*\#", "(.\\d*)").Replace(@"\*", "(.*)") + "$");
-                var matches = Tables.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
-                foreach (var match in matches)
+                Match[] matches = Tables.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
+                foreach (Match match in matches)
                 {
                     if (!hasFieldWildcard && !tablesDict[match.Value].Members.Select(x => x.Name).Contains(field.Value.Field))
                     {
@@ -274,16 +274,16 @@ namespace XbTool.Bdat
 
             fields = BdatFields.Where(x => x.Value.Field.Contains('*')).ToArray();
 
-            foreach (var field in fields)
+            foreach (KeyValuePair<(string table, string member), BdatFieldInfo> field in fields)
             {
-                var st = "^" + Regex.Escape(field.Value.Field).Replace(@"\*\#", "(.\\d*)").Replace(@"\*", "(.*)") + "$";
+                string st = "^" + Regex.Escape(field.Value.Field).Replace(@"\*\#", "(.\\d*)").Replace(@"\*", "(.*)") + "$";
                 var regex = new Regex(st);
-                if (tablesDict.TryGetValue(field.Value.Table, out var table))
+                if (tablesDict.TryGetValue(field.Value.Table, out BdatTable table))
                 {
-                    var matches = table.Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
-                    foreach (var match in matches)
+                    Match[] matches = table.Members.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
+                    foreach (Match match in matches)
                     {
-                        var newInfo = field.Value.Clone();
+                        BdatFieldInfo newInfo = field.Value.Clone();
                         newInfo.Field = match.Value;
 
                         if (newInfo.RefTable?.Contains('*') == true)
@@ -309,7 +309,7 @@ namespace XbTool.Bdat
 
         private static BdatType[] CalculateBdatTypes(BdatTable[] tables)
         {
-            var customTypeNames = ReadTypeNames();
+            Dictionary<string, string> customTypeNames = ReadTypeNames();
 
             return tables
                 .ToLookup(x => x, x => x.Name, new BdatTableComparer())
@@ -376,14 +376,14 @@ namespace XbTool.Bdat
 
         private void GetTableDesc()
         {
-            List<BdatTableDesc> tables = new List<BdatTableDesc>();
+            var tables = new List<BdatTableDesc>();
 
-            var refs = BdatFields.Values.Where(x => ReadableFieldTypes.Contains(x.Type)).ToLookup(x => x.Table);
-            var arrays = BdatArrays.ToLookup(x => x.Table);
+            ILookup<string, BdatFieldInfo> refs = BdatFields.Values.Where(x => ReadableFieldTypes.Contains(x.Type)).ToLookup(x => x.Table);
+            ILookup<string, BdatArrayInfo> arrays = BdatArrays.ToLookup(x => x.Table);
 
-            var tableNames = refs.Select(x => x.Key).Concat(arrays.Select(x => x.Key)).Distinct().OrderBy(x => x);
+            IOrderedEnumerable<string> tableNames = refs.Select(x => x.Key).Concat(arrays.Select(x => x.Key)).Distinct().OrderBy(x => x);
 
-            foreach (var table in tableNames)
+            foreach (string table in tableNames)
             {
                 var desc = new BdatTableDesc
                 {
@@ -401,11 +401,11 @@ namespace XbTool.Bdat
 
         private void MarkFlagMembers()
         {
-            foreach (var table in Tables)
+            foreach (BdatTable table in Tables)
             {
-                foreach (var member in table.Members.Where(x => x.Type == BdatMemberType.Flag))
+                foreach (BdatMember member in table.Members.Where(x => x.Type == BdatMemberType.Flag))
                 {
-                    var flagVar = table.Members[member.FlagVarIndex];
+                    BdatMember flagVar = table.Members[member.FlagVarIndex];
 
                     if (flagVar.Metadata == null)
                     {

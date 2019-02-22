@@ -15,24 +15,24 @@ namespace XbTool.Xb2
 
         public Xb2Fs(string directory)
         {
-            var baseDir = Path.Combine(directory, "base");
-            var dlcDir = Path.Combine(directory, "dlc");
+            string baseDir = Path.Combine(directory, "base");
+            string dlcDir = Path.Combine(directory, "dlc");
             if (!Directory.Exists(baseDir)) throw new DirectoryNotFoundException($"Could not find {baseDir}");
 
             var dirs = new List<string>();
 
             if (Directory.Exists(dlcDir))
             {
-                var dlcDirs = Directory.GetDirectories(dlcDir);
+                string[] dlcDirs = Directory.GetDirectories(dlcDir);
                 dirs.AddRange(dlcDirs);
             }
             dirs.Add(baseDir);
 
             for (int i = 0; i < dirs.Count; i++)
             {
-                foreach (var file in Directory.GetFiles(dirs[i], "*", SearchOption.AllDirectories))
+                foreach (string file in Directory.GetFiles(dirs[i], "*", SearchOption.AllDirectories))
                 {
-                    var path = Helpers.GetRelativePath(file, dirs[i]);
+                    string path = Helpers.GetRelativePath(file, dirs[i]);
                     path = path.Replace('\\', '/');
                     if (path[0] != '/') path = '/' + path;
                     if (path == "key.bin") continue;
@@ -41,13 +41,13 @@ namespace XbTool.Xb2
                 }
             }
 
-            var arh = Path.Combine(baseDir, "bf2.arh");
-            var ard = Path.Combine(baseDir, "bf2.ard");
+            string arh = Path.Combine(baseDir, "bf2.arh");
+            string ard = Path.Combine(baseDir, "bf2.ard");
 
             if (File.Exists(arh) && File.Exists(ard))
             {
                 Archive = new FileArchive(arh, ard);
-                foreach (var file in Archive.FileInfo.Where(x => x.Filename != null)) //Todo: Investigate
+                foreach (FileInfo file in Archive.FileInfo.Where(x => x.Filename != null)) //Todo: Investigate
                 {
                     Files.Add(file.Filename, new FsFile(file.Filename, -1));
                 }
@@ -56,7 +56,7 @@ namespace XbTool.Xb2
 
         public byte[] ReadFile(string filename)
         {
-            if (!Files.TryGetValue(filename, out var file))
+            if (!Files.TryGetValue(filename, out FsFile file))
             {
                 throw new FileNotFoundException("File does not exist", filename);
             }
@@ -76,7 +76,7 @@ namespace XbTool.Xb2
             Glob glob = Glob.Parse(pattern,
                 new GlobOptions { Evaluation = new EvaluationOptions { CaseInsensitive = true } });
 
-            var matches = Files.Keys.Where(x => glob.IsMatch(x));
+            IEnumerable<string> matches = Files.Keys.Where(x => glob.IsMatch(x));
 
             return matches;
         }

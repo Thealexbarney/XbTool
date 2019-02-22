@@ -33,11 +33,11 @@ namespace XbTool.Website
 
             BdatCollection tables = Deserialize.DeserializeTables(bdats, progress);
 
-            var dataDir = Path.Combine(outDir, DataDir);
+            string dataDir = Path.Combine(outDir, DataDir);
             progress.SetTotal(0);
             progress.LogMessage("Creating salvaging tables");
             Directory.CreateDirectory(dataDir);
-            var salvaging = SalvagingTable.Print(tables);
+            string salvaging = SalvagingTable.Print(tables);
             File.WriteAllText(Path.Combine(dataDir, "salvaging.html"), salvaging);
 
             progress.LogMessage("Creating enemy tables");
@@ -52,8 +52,8 @@ namespace XbTool.Website
                 Achievements.PrintAchievements(tables, writer);
             }
 
-            var gmkDir = Path.Combine(outDir, GmkDir);
-            var gimmicks = ReadGmk.ReadAll(fs, tables, progress);
+            string gmkDir = Path.Combine(outDir, GmkDir);
+            MapInfo[] gimmicks = ReadGmk.ReadAll(fs, tables, progress);
             progress.LogMessage("Writing map info and gimmick data");
             ExportMap.ExportCsv(gimmicks, gmkDir);
         }

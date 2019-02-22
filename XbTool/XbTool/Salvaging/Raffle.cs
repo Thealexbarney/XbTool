@@ -32,20 +32,20 @@ namespace XbTool.Salvaging
 
         public void Create()
         {
-            FLD_SalvageItemSet[] coll = new FLD_SalvageItemSet[3];
-            FLD_SalvageItemSet[] treasure = new FLD_SalvageItemSet[3];
+            var coll = new FLD_SalvageItemSet[3];
+            var treasure = new FLD_SalvageItemSet[3];
 
             {
-                var collTables = SalvageTable._ColleTable;
-                var collPer = SalvageTable._ColleTablePercent.Select(x => (int)x).ToArray();
+                FLD_SalvageItemSet[] collTables = SalvageTable._ColleTable;
+                int[] collPer = SalvageTable._ColleTablePercent.Select(x => (int)x).ToArray();
 
                 double decayMult = 1.0;
                 double skillPercent = SkillLevel * 0.01;
-                var skillMod = skillPercent * SkillEffectColl + 1;
+                double skillMod = skillPercent * SkillEffectColl + 1;
 
                 for (int i = 0; i < 3; i++)
                 {
-                    var c = ButtonLevel * (ButtonEffect * 0.01) + skillMod * decayMult;
+                    double c = ButtonLevel * (ButtonEffect * 0.01) + skillMod * decayMult;
                     if (c < Rand.NextDouble()) break;
 
                     coll[i] = collTables.ChooseRandom(Rand, collPer);
@@ -54,17 +54,17 @@ namespace XbTool.Salvaging
             }
 
             {
-                var treasureTables = SalvageTable._TresureTable;
-                var treasurePer = SalvageTable._TresureTablePercent.Select(x => (int)x).ToArray();
-                var tBoxHit = SalvageTable.TresureBoxHit;
+                FLD_SalvageItemSet[] treasureTables = SalvageTable._TresureTable;
+                int[] treasurePer = SalvageTable._TresureTablePercent.Select(x => (int)x).ToArray();
+                ushort tBoxHit = SalvageTable.TresureBoxHit;
 
                 double decayMult = 1.0;
                 double skillPercent = SkillLevel * 0.01;
-                var skillMod = skillPercent * SkillEffectTBox + tBoxHit * .0001;
+                double skillMod = skillPercent * SkillEffectTBox + tBoxHit * .0001;
 
                 for (int i = 0; i < 3; i++)
                 {
-                    var c = ButtonLevel * (ButtonEffect * 0.01) + skillMod * decayMult;
+                    double c = ButtonLevel * (ButtonEffect * 0.01) + skillMod * decayMult;
                     if (c < Rand.NextDouble()) break;
 
                     treasure[i] = treasureTables.ChooseRandom(Rand, treasurePer);

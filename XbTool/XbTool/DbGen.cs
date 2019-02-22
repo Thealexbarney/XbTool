@@ -29,7 +29,7 @@ namespace XbTool
 
             string connString = $"Host=localhost;Username={dbUsername};Password={dbPassword};Database={dbName};";
 
-            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            using (var conn = new NpgsqlConnection(connString))
             {
                 try
                 {
@@ -42,7 +42,7 @@ namespace XbTool
                     Environment.Exit(1);
                 }
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand())
+                using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = $"CREATE SCHEMA {schemaName};";
@@ -85,7 +85,7 @@ namespace XbTool
 
         private static string CreateTableQuery(string schemaName, BdatStringTable table)
         {
-            List<string> columns = new List<string>();
+            var columns = new List<string>();
 
             columns.Add("\"row_id\" INTEGER");
 
@@ -143,18 +143,18 @@ namespace XbTool
 
             foreach (BdatStringItem item in table.Items.Where(x => x != null))
             {
-                NpgsqlCommand cmd = new NpgsqlCommand();
+                var cmd = new NpgsqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandText = query;
 
-                var param = cmd.CreateParameter();
+                NpgsqlParameter param = cmd.CreateParameter();
                 param.ParameterName = "row_id";
                 param.Value = item.Id;
                 cmd.Parameters.Add(param);
 
                 foreach (BdatMember member in table.Members)
                 {
-                    var parameter = cmd.CreateParameter();
+                    NpgsqlParameter parameter = cmd.CreateParameter();
                     parameter.ParameterName = member.Name;
 
                     switch (member.Type)
@@ -167,7 +167,7 @@ namespace XbTool
                             parameter.Value = bool.Parse(item[member.Name].ValueString);
                             break;
                         case BdatMemberType.Array:
-                            List<object> array = new List<object>();
+                            var array = new List<object>();
 
                             foreach (string val in (string[])item[member.Name].Value)
                             {
@@ -221,10 +221,10 @@ namespace XbTool
 
         private static string GetHiddenConsoleInput()
         {
-            StringBuilder input = new StringBuilder();
+            var input = new StringBuilder();
             while (true)
             {
-                var key = Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Enter) break;
                 if (key.Key == ConsoleKey.Backspace && input.Length > 0) input.Remove(input.Length - 1, 1);
                 else if (key.Key != ConsoleKey.Backspace) input.Append(key.KeyChar);

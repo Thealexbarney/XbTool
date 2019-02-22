@@ -49,7 +49,7 @@ namespace XbTool.Common
             }
             else
             {
-                var localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", filename);
+                string localPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", filename);
                 if (File.Exists(localPath)) path = localPath;
             }
 

@@ -19,9 +19,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="395*" />
-                <ColumnDefinition Width="184*"/>
+                <ColumnDefinition Width="184*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="5" Command="{Binding ReadSaveCommand}" Content="Open Save"  />
+            <Button Grid.Column="0" Margin="5" Command="{Binding ReadSaveCommand}" Content="Open Save" />
             <Button Grid.Column="1" Margin="5" Command="{Binding LoadBdatsCommand}" Content="Load Bdats" />
             <Button Grid.Column="2" Margin="5" Command="{Binding WriteSaveCommand}" Content="Write Save" />
         </Grid>
@@ -29,10 +29,10 @@
         <Grid Grid.Row="1">
             <TabControl>
                 <TabItem Header="Main">
-                    <view:MainSave/>
+                    <view:MainSave />
                 </TabItem>
                 <TabItem Header="Items">
-                    <view:Items/>
+                    <view:Items />
                 </TabItem>
             </TabControl>
         </Grid>

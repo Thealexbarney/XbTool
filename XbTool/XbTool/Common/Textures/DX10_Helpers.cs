@@ -343,7 +343,7 @@ namespace XbTool.Common.Textures
 
         internal static LDRColour InterpolateRGB(LDRColour lDRColour1, LDRColour lDRColour2, int wc, int wcPrec)
         {
-            LDRColour temp = new LDRColour();
+            var temp = new LDRColour();
             int[] weights;
             switch (wcPrec)
             {
@@ -378,7 +378,7 @@ namespace XbTool.Common.Textures
 
         internal static LDRColour Unquantise(LDRColour colour, LDRColour rGBPrecisionWithP)
         {
-            LDRColour temp = new LDRColour
+            var temp = new LDRColour
             {
                 R = Unquantise(colour.R, rGBPrecisionWithP.R),
                 G = Unquantise(colour.G, rGBPrecisionWithP.G),

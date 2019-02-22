@@ -62,8 +62,8 @@ namespace XbTool.Common.Textures
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    var offset = (xPos + j + (yPos+ i) * width) * 4;
-                    var colour = block[(i * 4) + j];
+                    int offset = (xPos + j + (yPos+ i) * width) * 4;
+                    DX10_Helpers.LDRColour colour = block[(i * 4) + j];
 
                     destination[offset] = (byte) colour.B;
                     destination[offset + 1] = (byte) colour.G;
@@ -89,12 +89,12 @@ namespace XbTool.Common.Textures
                 int indexPrecision = mode.IndexPrecision;
                 int APrecision = mode.APrecision;
                 int i;
-                int[] P = new int[mode.PBits];
+                var P = new int[mode.PBits];
                 int shape = DX10_Helpers.GetBits(source, sourceStart, ref start, mode.PartitionBits);
                 int rotation = DX10_Helpers.GetBits(source, sourceStart, ref start, mode.RotationBits);
                 int indexMode = DX10_Helpers.GetBits(source, sourceStart, ref start, mode.IndexModeBits);
 
-                DX10_Helpers.LDRColour[] c = new DX10_Helpers.LDRColour[6];
+                var c = new DX10_Helpers.LDRColour[6];
                 DX10_Helpers.LDRColour RGBPrecision = mode.RawRGBPrecision;
                 DX10_Helpers.LDRColour RGBPrecisionWithP = mode.RGBPrecisionWithP;
 
@@ -174,8 +174,8 @@ namespace XbTool.Common.Textures
                 for (i = 0; i < numEndPoints; i++)
                     c[i] = DX10_Helpers.Unquantise(c[i], RGBPrecisionWithP);
 
-                int[] w1 = new int[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
-                int[] w2 = new int[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
+                var w1 = new int[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
+                var w2 = new int[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
 
                 // Read colour indicies
                 for (i = 0; i < DX10_Helpers.NUM_PIXELS_PER_BLOCK; i++)

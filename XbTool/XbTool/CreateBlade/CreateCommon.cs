@@ -93,10 +93,10 @@ namespace XbTool.CreateBlade
 
         private void ChooseBladeTemplate()
         {
-            var driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
-            var ideaCatBits = 1 << (int)IdeaCat;
+            int driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
+            int ideaCatBits = 1 << (int)IdeaCat;
 
-            var possible = Tables.BLD_CommonList
+            BLD_CommonList[] possible = Tables.BLD_CommonList
                 .Where(x => x.IdeaMin <= driverIdea && x.IdeaMax >= driverIdea)
                 .Where(x => (x.IdeaType & ideaCatBits) != 0).ToArray();
 
@@ -114,7 +114,7 @@ namespace XbTool.CreateBlade
             }
 
             BladeAttribute[] attributes = IdeaToAttributes(IdeaCat);
-            foreach (var attribute in attributes)
+            foreach (BladeAttribute attribute in attributes)
             {
                 probs[(int)attribute] = attProb;
             }
@@ -134,7 +134,7 @@ namespace XbTool.CreateBlade
 
         private void ChooseBladeModel()
         {
-            var driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
+            int driverIdea = DriverInfo.IdeaLevels[(int)IdeaCat];
 
             BLD_BladeModelList[] modelMatch = Tables.BLD_BladeModelList.Where(x =>
                 x.Gender == (byte)Blade.Gender &&
@@ -148,7 +148,7 @@ namespace XbTool.CreateBlade
             int sum = 0;
             bool isBrute = false;
 
-            foreach (var modelInfo in modelMatch)
+            foreach (BLD_BladeModelList modelInfo in modelMatch)
             {
                 sum += modelInfo.Model1;
                 if (sum >= randVal)
@@ -195,7 +195,7 @@ namespace XbTool.CreateBlade
         {
             int race = (int)Blade.QuestRace << 1;
             int gender = (int)Blade.Gender;
-            var name = Tables.BLD_NameList.Where(x => (x.Race & race) != 0 && (x.Gender & gender) != 0).ChooseRandom(Rand);
+            BLD_NameList name = Tables.BLD_NameList.Where(x => (x.Race & race) != 0 && (x.Gender & gender) != 0).ChooseRandom(Rand);
 
             Blade.NameId = name.Id;
             Blade.Name = name._Category.name;
@@ -261,7 +261,7 @@ namespace XbTool.CreateBlade
 
         private void ChooseSpecialLv4()
         {
-            var special = Tables.BTL_Arts_BlSp.Where(x =>
+            BTL_Arts_BlSp special = Tables.BTL_Arts_BlSp.Where(x =>
                     x.CmnBlType == (int)Blade.CommonBladeType &&
                     x.WpnType == (int)Blade.WeaponType)
                 .ChooseRandom(Rand);
@@ -281,7 +281,7 @@ namespace XbTool.CreateBlade
             Blade.NArts = new List<Art>();
 
             BTL_Buff[] arts = Tables.BTL_Buff.ChooseRandom(Rand, probs, nArtsCount);
-            foreach (var nArt in arts)
+            foreach (BTL_Buff nArt in arts)
             {
                 Blade.NArts.Add(new Art { Id = nArt.Id, Name = nArt._Name.name });
             }
@@ -299,7 +299,7 @@ namespace XbTool.CreateBlade
                 role == Role.Healer && x.Healer != 0)
                 .ChooseRandom(Rand, skillCount);
 
-            foreach (var skill in bSkills)
+            foreach (BTL_Skill_Bl skill in bSkills)
             {
                 int maxLevel = GetRandomIndex(Capacity._SkillLvProb) + 1;
                 Blade.BSkills.Add(new Skill(skill.Id, skill._Name.name, maxLevel));
@@ -322,7 +322,7 @@ namespace XbTool.CreateBlade
                 .Where(x => (x._Category & Template._Fskill) != 0 && x.Name != 0)
                 .ChooseRandom(Rand, skillCount - 1));
 
-            foreach (var skill in fSkills)
+            foreach (FLD_FieldSkillList skill in fSkills)
             {
                 int maxLevel = Math.Min(Rand.Next(skill.MinLevel, skill.MaxLevel + 1), 3);
                 skills.Add(new Skill(skill.Id, skill._Name.name, maxLevel));

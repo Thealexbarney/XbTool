@@ -30,7 +30,7 @@ namespace XbTool.Common
             var sb = new StringBuilder();
             var width = new int[ColumnCount];
 
-            foreach (var row in Rows)
+            foreach (string[] row in Rows)
             {
                 for (int i = 0; i < ColumnCount - 1; i++)
                 {
@@ -38,7 +38,7 @@ namespace XbTool.Common
                 }
             }
 
-            foreach (var row in Rows)
+            foreach (string[] row in Rows)
             {
                 for (int i = 0; i < ColumnCount; i++)
                 {

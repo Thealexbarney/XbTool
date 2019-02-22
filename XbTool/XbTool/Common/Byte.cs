@@ -21,7 +21,7 @@ namespace XbTool.Common
 
         public static float ByteSwap(float value)
         {
-            var a = BitConverter.GetBytes(value);
+            byte[] a = BitConverter.GetBytes(value);
             byte t = a[0];
             a[0] = a[3];
             a[3] = t;

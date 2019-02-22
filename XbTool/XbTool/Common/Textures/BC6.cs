@@ -108,11 +108,11 @@ namespace XbTool.Common.Textures
 
             internal DX10_Helpers.LDRColour ToLDRColour(bool isSigned)
             {
-                var r = IntToFloatIsh(R, isSigned);
-                var g = IntToFloatIsh(G, isSigned);
-                var b = IntToFloatIsh(B, isSigned);
+                float r = IntToFloatIsh(R, isSigned);
+                float g = IntToFloatIsh(G, isSigned);
+                float b = IntToFloatIsh(B, isSigned);
 
-                DX10_Helpers.LDRColour colour = new DX10_Helpers.LDRColour
+                var colour = new DX10_Helpers.LDRColour
                 {
                     R = ScRgbTosRgb(r),
                     G = ScRgbTosRgb(g),
@@ -204,7 +204,7 @@ namespace XbTool.Common.Textures
 
 
                 // Reinterpret cast
-                var bytes = BitConverter.GetBytes(longResult);
+                byte[] bytes = BitConverter.GetBytes(longResult);
                 return BitConverter.ToSingle(bytes, 0);
             }
         }
@@ -438,7 +438,7 @@ namespace XbTool.Common.Textures
         #region Decompression
         internal static DX10_Helpers.LDRColour[] DecompressBC6(byte[] source, int sourceStart, bool isSigned)
         {
-            DX10_Helpers.LDRColour[] block = new DX10_Helpers.LDRColour[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
+            var block = new DX10_Helpers.LDRColour[DX10_Helpers.NUM_PIXELS_PER_BLOCK];
 
             int startBit = 0;
             int mode = DX10_Helpers.GetBits(source, sourceStart, ref startBit, 2);
@@ -451,7 +451,7 @@ namespace XbTool.Common.Textures
                 List<ModeDescriptor> desc = ms_aDesc[ModeToInfo[mode]];
                 ModeInfo info = ms_aInfo[ModeToInfo[mode]];
                 int shape = 0;
-                INTColourPair[] endPoints = new INTColourPair[BC6H_MAX_REGIONS];
+                var endPoints = new INTColourPair[BC6H_MAX_REGIONS];
 
                 // Header?
                 int headerBits = info.Partitions > 0 ? 82 : 65;
@@ -527,7 +527,7 @@ namespace XbTool.Common.Textures
                     int b2 = Unquantise(endPoints[region].B.B, info.RGBAPrec[0][0].B, isSigned);
 
                     int[] aWeights = info.Partitions > 0 ? DX10_Helpers.AWeights3 : DX10_Helpers.AWeights4;
-                    INTColour fc = new INTColour
+                    var fc = new INTColour
                     {
                         R = FinishUnquantise((r1 * (DX10_Helpers.BC67_WEIGHT_MAX - aWeights[index]) + r2 * aWeights[index] + DX10_Helpers.BC67_WEIGHT_ROUND) >> DX10_Helpers.BC67_WEIGHT_SHIFT, isSigned),
                         G = FinishUnquantise((g1 * (DX10_Helpers.BC67_WEIGHT_MAX - aWeights[index]) + g2 * aWeights[index] + DX10_Helpers.BC67_WEIGHT_ROUND) >> DX10_Helpers.BC67_WEIGHT_SHIFT, isSigned),
@@ -593,7 +593,7 @@ namespace XbTool.Common.Textures
 
         private static void TransformInverse(INTColourPair[] endPoints, DX10_Helpers.LDRColour prec, bool isSigned)
         {
-            INTColour wrapMask = new INTColour((1 << prec.R) - 1, (1 << prec.G) - 1, (1 << prec.B) - 1);
+            var wrapMask = new INTColour((1 << prec.R) - 1, (1 << prec.G) - 1, (1 << prec.B) - 1);
             endPoints[0].B += endPoints[0].A;
             endPoints[0].B &= wrapMask;
 

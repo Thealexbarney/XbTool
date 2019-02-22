@@ -21,9 +21,9 @@ namespace XbTool.BdatString
 
             var sb = new StringBuilder(caption);
 
-            var tags = ParseTags(caption);
+            List<BdatTag> tags = ParseTags(caption);
 
-            foreach (var tag in tags.OrderByDescending(x => x.Start))
+            foreach (BdatTag tag in tags.OrderByDescending(x => x.Start))
             {
                 if (tag.SubType != "Enhance") continue;
                 string replace = string.Empty;
@@ -388,7 +388,7 @@ namespace XbTool.BdatString
             var sb = new StringBuilder();
             bool first = true;
 
-            foreach (var flag in EnumExtensions.GetIndividualFlags(enumType, value))
+            foreach (Enum flag in EnumExtensions.GetIndividualFlags(enumType, value))
             {
                 if (!first) sb.Append(", ");
                 sb.Append(flag);
@@ -405,7 +405,7 @@ namespace XbTool.BdatString
             var sb = new StringBuilder();
             bool first = true;
 
-            Weather[] weathers = new Weather[4];
+            var weathers = new Weather[4];
             BdatStringItem map = tables["FLD_maplist"][mapId];
             weathers[0] = (Weather)Enum.Parse(typeof(Weather), map["wa_type"].ValueString);
             weathers[1] = (Weather)Enum.Parse(typeof(Weather), map["wb_type"].ValueString);
@@ -445,12 +445,12 @@ namespace XbTool.BdatString
                 int length = end - start + 1;
                 pos = end + 1;
 
-                var tagText = text.Substring(start + 1, length - 2).Trim(); // Leave out brackets
-                var values = tagText.Split(' ');
+                string tagText = text.Substring(start + 1, length - 2).Trim(); // Leave out brackets
+                string[] values = tagText.Split(' ');
 
                 if (values.Length == 0) throw new InvalidDataException();
 
-                var tagHead = values[0].Split(':');
+                string[] tagHead = values[0].Split(':');
                 if (tagHead.Length != 2) throw new InvalidDataException();
 
                 var tag = new BdatTag

@@ -76,11 +76,11 @@ namespace XbTool.Scripting
             sb.AppendLine("Local Pool:");
             for (int i = 0; i < script.FunctionPool.Length; i++)
             {
-                var func = script.FunctionPool[i];
+                LocalFunction func = script.FunctionPool[i];
                 if (func.LocalPoolIndex == ushort.MaxValue) continue;
 
                 var table = new Table("Name", "Type", "Len", "Value", "F8");
-                var items = script.LocalPool[func.LocalPoolIndex];
+                VmObject[] items = script.LocalPool[func.LocalPoolIndex];
 
                 for (int j = 0; j < items.Length; j++)
                 {
@@ -135,7 +135,7 @@ namespace XbTool.Scripting
             var table = new Table("Idx", "Name", "Type", "Len", "Value", "F8");
             for (int i = 0; i < script.StaticVars.Length; i++)
             {
-                var item = script.StaticVars[i];
+                VmObject item = script.StaticVars[i];
                 table.AddRow(i.ToString(), item.Name, item.Type.ToString(), item.Length.ToString(), item.Value.ToString(), item.Field8.ToString());
             }
 
@@ -162,7 +162,7 @@ namespace XbTool.Scripting
             var table = new Table("Name", "Set", "Var", "F6", "F8");
             for (int i = 0; i < script.StaticSymbols.Length; i++)
             {
-                var item = script.StaticSymbols[i];
+                Symbol item = script.StaticSymbols[i];
                 table.AddRow(item.Name, item.Field2.ToString(), item.Var.ToString(),
                     item.Field6.ToString(), item.Field8.ToString());
             }
@@ -178,10 +178,10 @@ namespace XbTool.Scripting
             var table = new Table("Function", "Name", "F2", "Var", "F6", "F8");
             for (int i = 0; i < script.LocalSymbols.Length; i++)
             {
-                var function = script.FunctionPool[i].Name;
+                string function = script.FunctionPool[i].Name;
                 for (int j = 0; j < script.LocalSymbols[i].Length; j++)
                 {
-                    var item = script.LocalSymbols[i][j];
+                    Symbol item = script.LocalSymbols[i][j];
                     table.AddRow(function, item.Name, item.Field2.ToString(), item.Var.ToString(),
                         item.Field6.ToString(), item.Field8.ToString());
                 }
@@ -198,10 +198,10 @@ namespace XbTool.Scripting
             var table = new Table("Function", "Name", "F2", "Var", "F6", "F8");
             for (int i = 0; i < script.ArgsSymbols.Length; i++)
             {
-                var function = script.FunctionPool[i].Name;
+                string function = script.FunctionPool[i].Name;
                 for (int j = 0; j < script.ArgsSymbols[i].Length; j++)
                 {
-                    var item = script.ArgsSymbols[i][j];
+                    Symbol item = script.ArgsSymbols[i][j];
                     table.AddRow(function, item.Name, item.Field2.ToString(), item.Var.ToString(),
                         item.Field6.ToString(), item.Field8.ToString());
                 }
@@ -232,7 +232,7 @@ namespace XbTool.Scripting
             var table = new Table("F0", "F2", "Address");
             for (int i = 0; i < script.LineSymbols.Length; i++)
             {
-                var item = script.LineSymbols[i];
+                SymbolLine item = script.LineSymbols[i];
                 table.AddRow(item.Field0.ToString(), item.Field2.ToString(), item.Address.ToString("x6"));
             }
 
@@ -241,11 +241,11 @@ namespace XbTool.Scripting
 
         private static void PrintFunction(Script script, StringBuilder sb, int index)
         {
-            var func = script.FunctionPool[index];
+            LocalFunction func = script.FunctionPool[index];
             sb.Append($"function {func.Name}");
             sb.Append("(");
 
-            var symbols = script.ArgsSymbols?[index];
+            Symbol[] symbols = script.ArgsSymbols?[index];
 
             bool isFirst = true;
 
@@ -262,7 +262,7 @@ namespace XbTool.Scripting
             {
                 sb.AppendLine("Local Variable Pool:");
                 var table = new Table("Idx", "Name", "Type", "Len", "Value");
-                var locals = script.LocalPool[func.LocalPoolIndex];
+                VmObject[] locals = script.LocalPool[func.LocalPoolIndex];
 
                 for (int i = 0; i < locals.Length; i++)
                 {
@@ -274,7 +274,7 @@ namespace XbTool.Scripting
 
             sb.AppendLine("Code:");
             var codeTab = new Table("Addr", "opcode", "operand", "comment");
-            foreach (var inst in script.Code[index])
+            foreach (Instruction inst in script.Code[index])
             {
                 codeTab.AddRow(inst.Address.ToString("x"), inst.Opcode.ToString(), inst.Operand, inst.Comment);
             }

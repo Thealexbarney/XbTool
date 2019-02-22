@@ -13,7 +13,7 @@ namespace XbTool.Serialization
 
         static TypeMap()
         {
-            var dictionaries = CreateDictionary();
+            Tuple<Dictionary<string, Type>, Dictionary<Type, Func<byte[], int, int, int, object>>> dictionaries = CreateDictionary();
             Types = dictionaries.Item1;
             Functions = dictionaries.Item2;
         }
@@ -21,8 +21,8 @@ namespace XbTool.Serialization
         public static Tuple<Dictionary<string, Type>, Dictionary<Type, Func<byte[], int, int, int, object>>> CreateDictionary()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            var types = assembly.GetTypes().Where(x => x.IsClass && x.Namespace == "XbTool.Types").ToDictionary(x => x.Name, x => x);
-            var methods = typeof(ReadFunctions).GetMethods().ToDictionary(x => x.Name, x => x);
+            Dictionary<string, Type> types = assembly.GetTypes().Where(x => x.IsClass && x.Namespace == "XbTool.Types").ToDictionary(x => x.Name, x => x);
+            Dictionary<string, MethodInfo> methods = typeof(ReadFunctions).GetMethods().ToDictionary(x => x.Name, x => x);
 
             var typeDict = new Dictionary<string, Type>();
             var funcDict = new Dictionary<Type, Func<byte[], int, int, int, object>>();

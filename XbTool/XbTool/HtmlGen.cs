@@ -25,7 +25,7 @@ namespace XbTool
             {
                 string outDir = bdatHtmlDir;
                 string tableFilename = bdats[tableName].Filename;
-                var indexPath = tableFilename == null ? "index.html" : "../index.html";
+                string indexPath = tableFilename == null ? "index.html" : "../index.html";
 
                 var sb = new Indenter(2);
                 sb.AppendLine("<!DOCTYPE html>");
@@ -71,21 +71,21 @@ namespace XbTool
             sb.AppendLineAndIncrease("<html>");
             sb.AppendLineAndIncrease("<head>");
             sb.AppendLine("<meta charset=\"utf-8\" />");
-            var name = bdats.Game == Game.XB2 ? "2" : "X";
+            string name = bdats.Game == Game.XB2 ? "2" : "X";
             sb.AppendLine($"<title>Xenoblade {name} Data Tables</title>");
             sb.DecreaseAndAppendLine("</head>");
 
             sb.AppendLineAndIncrease("<body>");
 
-            var grouped = bdats.Tables.Values.GroupBy(x => x.Filename).OrderBy(x => x.Key ?? "zzz");
+            IOrderedEnumerable<IGrouping<string, BdatStringTable>> grouped = bdats.Tables.Values.GroupBy(x => x.Filename).OrderBy(x => x.Key ?? "zzz");
 
-            foreach (var group in grouped)
+            foreach (IGrouping<string, BdatStringTable> group in grouped)
             {
                 sb.AppendLine($"<h2>{group.Key ?? "Other"}</h2>");
-                var subDir = group.Key ?? string.Empty;
-                foreach (var table in group.OrderBy(x => x.Name))
+                string subDir = group.Key ?? string.Empty;
+                foreach (BdatStringTable table in group.OrderBy(x => x.Name))
                 {
-                    var path = Path.Combine(subDir, table.Name) + ".html";
+                    string path = Path.Combine(subDir, table.Name) + ".html";
                     sb.AppendLine($"<a href=\"{path}\">{table.Name}</a><br/>");
                 }
             }
@@ -93,7 +93,7 @@ namespace XbTool
             sb.DecreaseAndAppendLine("</body>");
             sb.DecreaseAndAppendLine("</html>");
 
-            var filename = Path.Combine(htmlDir, "index.html");
+            string filename = Path.Combine(htmlDir, "index.html");
             File.WriteAllText(filename, sb.ToString());
         }
 
@@ -119,16 +119,16 @@ namespace XbTool
             using (var reader = new StreamReader(stream))
             {
                 IEnumerable<BdatFriendlyInfo> csv = new CsvReader(reader).GetRecords<BdatFriendlyInfo>();
-                var grouped = csv.GroupBy(x => x.Group).OrderBy(x => x.Key);
+                IOrderedEnumerable<IGrouping<string, BdatFriendlyInfo>> grouped = csv.GroupBy(x => x.Group).OrderBy(x => x.Key);
 
-                foreach (var group in grouped)
+                foreach (IGrouping<string, BdatFriendlyInfo> group in grouped)
                 {
                     sb.AppendLine($"<h2>{group.Key ?? "Other"}</h2>");
 
-                    foreach (var tableInfo in group.OrderBy(x => x.Display))
+                    foreach (BdatFriendlyInfo tableInfo in group.OrderBy(x => x.Display))
                     {
-                        var table = bdats[tableInfo.TableName];
-                        var path = Path.Combine("bdat", table.Filename ?? "", table.Name) + ".html";
+                        BdatStringTable table = bdats[tableInfo.TableName];
+                        string path = Path.Combine("bdat", table.Filename ?? "", table.Name) + ".html";
                         sb.AppendLine($"<a href=\"{path}\">{tableInfo.Display}</a><br/>");
                     }
                 }
@@ -136,7 +136,7 @@ namespace XbTool
             sb.DecreaseAndAppendLine("</body>");
             sb.DecreaseAndAppendLine("</html>");
 
-            var filename = Path.Combine(htmlDir, "index.html");
+            string filename = Path.Combine(htmlDir, "index.html");
             File.WriteAllText(filename, sb.ToString());
         }
 
@@ -152,8 +152,8 @@ namespace XbTool
             {
                 if (member.Metadata?.Type == BdatFieldType.Hide) continue;
 
-                var sticky = table.DisplayMember == member.Name;
-                var cellTag = $"<th{(sticky ? " class=\"side\"" : "")}";
+                bool sticky = table.DisplayMember == member.Name;
+                string cellTag = $"<th{(sticky ? " class=\"side\"" : "")}";
 
                 switch (member.Type)
                 {
@@ -204,8 +204,8 @@ namespace XbTool
                     BdatMember member = value.Member;
                     if (member.Metadata?.Type == BdatFieldType.Hide) continue;
 
-                    var sticky = value.Parent.Display == value;
-                    var cellTag = $"<td{(sticky ? " class=\"side\"" : "")}>";
+                    bool sticky = value.Parent.Display == value;
+                    string cellTag = $"<td{(sticky ? " class=\"side\"" : "")}>";
                     switch (member.Type)
                     {
                         case BdatMemberType.Scalar:
@@ -214,7 +214,7 @@ namespace XbTool
 
                             break;
                         case BdatMemberType.Array:
-                            foreach (var arrValue in value.Array)
+                            foreach (BdatStringValue arrValue in value.Array)
                             {
                                 PrintValue(arrValue, cellTag);
                             }
@@ -239,7 +239,7 @@ namespace XbTool
                         display = child.Id.ToString();
                     }
 
-                    var link = GetLink(table, child.Table, child.Id.ToString());
+                    string link = GetLink(table, child.Table, child.Id.ToString());
                     sb.AppendLine($"{cellTag}<a href=\"{link}\">{WebUtility.HtmlEncode(display)}</td></a>");
                 }
                 else

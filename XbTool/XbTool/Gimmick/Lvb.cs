@@ -23,7 +23,7 @@ namespace XbTool.Gimmick
 
             while (data.Position + 0x20 < length)
             {
-                var sectionStart = data.Position;
+                int sectionStart = data.Position;
                 var section = new LvlbSection(data);
                 Sections.Add(section);
                 data.Position += 8;
@@ -71,7 +71,7 @@ namespace XbTool.Gimmick
                 data.Position = sectionStart + section.SectionLength;
             }
 
-            foreach (var info in Info)
+            foreach (InfoEntry info in Info)
             {
                 info.Name = Stuff.GetUTF8Z(Strings, info.StringOffset);
                 info.Xfrm = Xfrm[info.XfrmId];
@@ -80,9 +80,9 @@ namespace XbTool.Gimmick
             for (int i = 2; i < Sections.Count; i++)
             {
                 if (Sections[i].Id == "STRG") continue;
-                var start = Sections[i].BaseId;
-                var end = Sections[i].BaseId + Sections[i].ItemCount;
-                var gmkType = Types.GimmickIds[Sections[i].Id];
+                int start = Sections[i].BaseId;
+                int end = Sections[i].BaseId + Sections[i].ItemCount;
+                string gmkType = Types.GimmickIds[Sections[i].Id];
 
                 for (int j = start, k = 0; j < end; j++, k++)
                 {
@@ -103,7 +103,7 @@ namespace XbTool.Gimmick
 
             for (int i = 0; i < Info.Length; i++)
             {
-                var xfrm = Xfrm[Info[i].XfrmId];
+                Transform xfrm = Xfrm[Info[i].XfrmId];
                 sb.Append(Info[i].Name + ",");
                 sb.Append(xfrm.Position.X + ",");
                 sb.Append(xfrm.Position.Y + ",");

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
@@ -15,37 +16,37 @@ namespace XbTool.Gimmick
         {
             Directory.CreateDirectory(Path.Combine(outDir, "png"));
 
-            foreach (var map in gimmicks)
+            foreach (MapInfo map in gimmicks)
             {
                 //if (map.Name != "ma02a") continue;
-                foreach (var area in map.Areas)
+                foreach (MapAreaInfo area in map.Areas)
                 {
                     //if (area.Name != "ma02a_f01") continue;
                     string texPath = $"/menu/image/{area.Name}_map.wilay";
-                    var texBytes = fs.ReadFile(texPath);
+                    byte[] texBytes = fs.ReadFile(texPath);
                     var wilay = new WilayRead(texBytes);
                     LahdTexture texture = wilay.Textures[0];
-                    var bitmapBase = texture.ToBitmap();
+                    Bitmap bitmapBase = texture.ToBitmap();
                     float scale = 1;
                     bitmapBase = ResizeImage(bitmapBase, (int)(bitmapBase.Width * scale), (int)(bitmapBase.Height * scale));
 
                     var outerBrush = new SolidBrush(System.Drawing.Color.Black);
                     //var backing = new SolidBrush(System.Drawing.Color.White);
                     var innerBrush = new SolidBrush(System.Drawing.Color.GreenYellow);
-                    Pen pen = new Pen(outerBrush, 1 * scale);
+                    var pen = new Pen(outerBrush, 1 * scale);
 
                     bitmapBase.RotateFlip(RotateFlipType.Rotate180FlipNone);
 
-                    foreach (var gmkType in area.Gimmicks)
+                    foreach (KeyValuePair<string, List<InfoEntry>> gmkType in area.Gimmicks)
                     {
-                        var type = gmkType.Key;
+                        string type = gmkType.Key;
                         //if (type != "landmark") continue;
                         var bitmap = (Bitmap)bitmapBase.Clone();
                         using (Graphics graphics = Graphics.FromImage(bitmap))
                         {
                             foreach (InfoEntry gmk in gmkType.Value)
                             {
-                                var point = area.Get2DPosition(gmk.Xfrm.Position);
+                                Point2 point = area.Get2DPosition(gmk.Xfrm.Position);
                                 graphics.FillCircle(innerBrush, point.X * scale, point.Y * scale, 8 * scale);
                                 graphics.DrawCircle(pen, point.X * scale, point.Y * scale, 8 * scale);
                             }
@@ -72,7 +73,7 @@ namespace XbTool.Gimmick
                             //}
                         }
 
-                        var png = bitmap.ToPng();
+                        byte[] png = bitmap.ToPng();
 
                         File.WriteAllBytes(Path.Combine(outDir, $"png/{map.DisplayName} - {area.DisplayName} - {type}.png"), png);
                     }
@@ -89,7 +90,7 @@ namespace XbTool.Gimmick
                 var sb = new StringBuilder();
                 sb.AppendLine("Name,DisplayName,Priority,Width,Height,LowerX,LowerY,LowerZ,UpperX,UpperY,UpperZ");
 
-                foreach (var area in map.Areas)
+                foreach (MapAreaInfo area in map.Areas)
                 {
                     sb.AppendLine(
                         $"{area.Name},\"{area.DisplayName}\",{area.Priority}," +
@@ -105,18 +106,18 @@ namespace XbTool.Gimmick
             sbAll.Append("Map,Filename,");
             sbAll.AppendLine(header);
 
-            foreach (var map in gimmicks)
+            foreach (MapInfo map in gimmicks)
             {
-                foreach (var gmkTypeKv in map.Gimmicks)
+                foreach (KeyValuePair<string, Lvb> gmkTypeKv in map.Gimmicks)
                 {
                     var sb = new StringBuilder();
                     sb.AppendLine(header);
-                    var type = gmkTypeKv.Key;
+                    string type = gmkTypeKv.Key;
 
-                    foreach (var gmk in gmkTypeKv.Value.Info)
+                    foreach (InfoEntry gmk in gmkTypeKv.Value.Info)
                     {
-                        var pos = gmk.Xfrm.Position;
-                        var xfrm = gmk.Xfrm;
+                        Point3 pos = gmk.Xfrm.Position;
+                        Transform xfrm = gmk.Xfrm;
                         string csvLine = $"{gmk.GmkType},{gmk.Id},{gmk.IdInFile},{gmk.Name},{gmk.Type},{pos.X},{pos.Y},{pos.Z},{xfrm.FieldC}," +
                                          $"{xfrm.Rotation.X},{xfrm.Rotation.Y},{xfrm.Rotation.Z},{xfrm.Field1C}," +
                                          $"{xfrm.Scale.X},{xfrm.Scale.Y},{xfrm.Scale.Z},{xfrm.Field2C}," +
@@ -140,7 +141,7 @@ namespace XbTool.Gimmick
 
             destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
-            using (var graphics = Graphics.FromImage(destImage))
+            using (Graphics graphics = Graphics.FromImage(destImage))
             {
                 graphics.CompositingMode = CompositingMode.SourceCopy;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
