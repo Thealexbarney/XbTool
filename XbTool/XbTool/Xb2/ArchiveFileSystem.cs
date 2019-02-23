@@ -118,7 +118,7 @@ namespace XbTool.Xb2
             {
                 case 2:
                     var decompData = new byte[fileInfo.UncompressedSize];
-                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30).AsStream();
+                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30, fileInfo.CompressedSize).AsStream();
 
                     using (var deflate = new ZlibStream(compStream, CompressionMode.Decompress, true))
                     {

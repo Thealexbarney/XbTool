@@ -449,6 +449,9 @@ namespace XbTool
             IFileSystem fs = new Xb2FileSystem(options.Input);
             File.WriteAllLines(options.Output,
                 fs.EnumerateEntries().Where(x => x.Type == DirectoryEntryType.File).Select(x => x.FullPath));
+
+            var localFs = new LocalFileSystem("output");
+            fs.CopyFileSystem(localFs, options.Progress);
         }
     }
 }
