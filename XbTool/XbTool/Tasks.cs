@@ -430,7 +430,7 @@ namespace XbTool
         {
             if (options.SdPath == null) throw new NullReferenceException("Must specify SD card path.");
             if (options.Output == null) throw new NullReferenceException("No output path was specified.");
-            if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
+            if (!Directory.Exists(options.SdPath)) throw new DirectoryNotFoundException($"{options.SdPath} is not a valid directory.");
 
             options.Progress.LogMessage("Reading XB2 directories");
             var xb2Fs = new Xb2FileSystem(options.SdPath);
