@@ -93,7 +93,7 @@ namespace XbTool.Xb2
 
         public IDirectory OpenDirectory(string path, OpenDirectoryMode mode)
         {
-            path = PathTools.Normalize(path);
+            path = PathTools.Normalize(path).ToLowerInvariant();
 
             if (!FileTable.TryOpenDirectory(path, out FindPosition position))
             {
@@ -105,7 +105,7 @@ namespace XbTool.Xb2
 
         public IFile OpenFile(string path, OpenMode mode)
         {
-            path = PathTools.Normalize(path);
+            path = PathTools.Normalize(path).ToLowerInvariant();
 
             if (!FileTable.TryOpenFile(path, out RomFileInfo romFileInfo))
             {
@@ -135,21 +135,21 @@ namespace XbTool.Xb2
 
         public bool DirectoryExists(string path)
         {
-            path = PathTools.Normalize(path);
+            path = PathTools.Normalize(path).ToLowerInvariant();
 
             return FileTable.TryOpenDirectory(path, out FindPosition _);
         }
 
         public bool FileExists(string path)
         {
-            path = PathTools.Normalize(path);
+            path = PathTools.Normalize(path).ToLowerInvariant();
 
             return FileTable.TryOpenFile(path, out RomFileInfo _);
         }
 
         public DirectoryEntryType GetEntryType(string path)
         {
-            path = PathTools.Normalize(path);
+            path = PathTools.Normalize(path).ToLowerInvariant();
 
             if (FileExists(path)) return DirectoryEntryType.File;
             if (DirectoryExists(path)) return DirectoryEntryType.Directory;
@@ -221,6 +221,33 @@ namespace XbTool.Xb2
             }
 
             Buffer.BlockCopy(filei, 0, file, 0, file.Length);
+        }
+
+        public FileInfo GetFileInfo(string filename)
+        {
+            int cur = 0;
+            Node curNode = Nodes[cur];
+
+            for (int i = 0; i < filename.Length; i++)
+            {
+                if (curNode.Next < 0) break;
+
+                int next = curNode.Next ^ char.ToLower(filename[i]);
+                Node nextNode = Nodes[next];
+                if (nextNode.Prev != cur) return null;
+                cur = next;
+                curNode = nextNode;
+            }
+
+            int offset = -curNode.Next;
+            while (StringTable[offset] != 0)
+            {
+                offset++;
+            }
+            offset++;
+
+            int fileId = BitConverter.ToInt32(StringTable, offset);
+            return FileInfo[fileId];
         }
 
         private class Node
