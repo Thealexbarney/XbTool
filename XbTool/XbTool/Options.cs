@@ -14,6 +14,7 @@ namespace XbTool
         public string Output { get; set; }
         public string Filter { get; set; }
         public string Xb2Dir { get; set; }
+        public string SdPath { get; set; }
         public IProgressReport Progress { get; set; }
     }
 

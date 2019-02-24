@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using LibHac;
+using LibHac.IO;
 using XbTool.CodeGen;
 using XbTool.Common;
 
@@ -22,7 +23,7 @@ namespace XbTool.Bdat
         public BdatTableDesc[] TableDesc { get; set; }
         public byte[] FileData { get; }
 
-        public BdatTables(IFileReader fs, bool readMetadata, IProgressReport progress = null, string lang = "gb")
+        public BdatTables(IFileSystem fs, bool readMetadata, IProgressReport progress = null, string lang = "gb")
         {
             Game = Game.XB2;
             progress?.LogMessage("Reading BDAT files");
@@ -82,7 +83,7 @@ namespace XbTool.Bdat
             MarkFlagMembers();
         }
 
-        public static BdatTable[] ReadAllBdats(IFileReader fs, IProgressReport progress = null, string lang = "gb")
+        public static BdatTable[] ReadAllBdats(IFileSystem fs, IProgressReport progress = null, string lang = "gb")
         {
             var tables = new List<BdatTable>();
 
@@ -90,7 +91,7 @@ namespace XbTool.Bdat
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/lookat.bdat"), Game.XB2, 0), "/bdat/lookat.bdat"));
 
-            string[] files = fs.FindFiles($"/bdat/{lang}/*").ToArray();
+            string[] files = fs.OpenDirectory($"/bdat/{lang}", OpenDirectoryMode.Files).Read().Select(x => x.FullPath).ToArray();
             progress?.SetTotal(files.Length);
 
             foreach (string filename in files)

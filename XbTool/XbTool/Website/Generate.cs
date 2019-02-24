@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using LibHac;
+using LibHac.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
-using XbTool.Common;
 using XbTool.Gimmick;
 using XbTool.Salvaging;
 using XbTool.Serialization;
@@ -18,13 +18,13 @@ namespace XbTool.Website
         private const string DataDir = "data";
         private const string GmkDir = "gimmick";
 
-        public static void GenerateSite(IFileReader fs, string outDir, IProgressReport progress)
+        public static void GenerateSite(IFileSystem fs, string outDir, IProgressReport progress)
         {
             Directory.CreateDirectory(outDir);
             GenerateBdatHtml(fs, outDir, progress);
         }
 
-        public static void GenerateBdatHtml(IFileReader fs, string outDir, IProgressReport progress)
+        public static void GenerateBdatHtml(IFileSystem fs, string outDir, IProgressReport progress)
         {
             var bdats = new BdatTables(fs, true, progress);
             BdatStringCollection tablesStr = DeserializeStrings.DeserializeTables(bdats, progress);

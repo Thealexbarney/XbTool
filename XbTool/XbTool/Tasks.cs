@@ -163,10 +163,18 @@ namespace XbTool
         {
             if (options.Game == Game.XB2 && options.ArdFilename != null)
             {
-                using (var archive = new FileArchive(options.ArhFilename, options.ArdFilename))
+                using (var headerFile = new LocalFile(options.ArhFilename, OpenMode.Read))
+                using (var dataFile = new LocalFile(options.ArdFilename, OpenMode.Read))
                 {
+                    var archive = new ArchiveFileSystem(headerFile, dataFile);
                     return new BdatTables(archive, readMetadata);
                 }
+            }
+
+            if (options.Game == Game.XB2 && options.SdPath != null)
+            {
+                var archive = new Xb2FileSystem(options.SdPath);
+                return new BdatTables(archive, readMetadata);
             }
 
             string pattern = options.Filter ?? "*";
@@ -189,7 +197,7 @@ namespace XbTool
             return tables;
         }
 
-        public static BdatCollection GetBdatCollection(IFileReader fs, bool readMetadata)
+        public static BdatCollection GetBdatCollection(IFileSystem fs, bool readMetadata)
         {
             var bdats = new BdatTables(fs, readMetadata);
             BdatCollection tables = Deserialize.DeserializeTables(bdats);
@@ -353,19 +361,18 @@ namespace XbTool
 
         private static void ReadGimmick(Options options)
         {
-            using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
-            {
-                if (options.Xb2Dir == null) throw new NullReferenceException("Must specify XB2 Directory.");
-                if (options.Output == null) throw new NullReferenceException("No output path was specified.");
-                if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
+            if (options.SdPath == null) throw new NullReferenceException("Must specify SD card path.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+            if (!Directory.Exists(options.SdPath)) throw new DirectoryNotFoundException($"{options.SdPath} is not a valid directory.");
 
-                BdatCollection tables = GetBdatCollection(xb2Fs, false);
+            var xb2Fs = new Xb2FileSystem(options.SdPath);
 
-                MapInfo[] gimmicks = ReadGmk.ReadAll(xb2Fs, tables);
-                ExportMap.ExportCsv(gimmicks, options.Output);
+            BdatCollection tables = GetBdatCollection(xb2Fs, false);
 
-                ExportMap.Export(xb2Fs, gimmicks, options.Output);
-            }
+            MapInfo[] gimmicks = ReadGmk.ReadAll(xb2Fs, tables);
+            ExportMap.ExportCsv(gimmicks, options.Output);
+
+            ExportMap.Export(xb2Fs, gimmicks, options.Output);
         }
 
         private static void ReadScript(Options options)
@@ -421,15 +428,15 @@ namespace XbTool
 
         private static void GenerateSite(Options options)
         {
-            if (options.Xb2Dir == null) throw new NullReferenceException("Must specify XB2 Directory.");
+            if (options.SdPath == null) throw new NullReferenceException("Must specify SD card path.");
             if (options.Output == null) throw new NullReferenceException("No output path was specified.");
             if (!Directory.Exists(options.Xb2Dir)) throw new DirectoryNotFoundException($"{options.Xb2Dir} is not a valid directory.");
 
             options.Progress.LogMessage("Reading XB2 directories");
-            using (var xb2Fs = new Xb2Fs(options.Xb2Dir))
-            {
-                Website.Generate.GenerateSite(xb2Fs, options.Output, options.Progress);
-            }
+            var xb2Fs = new Xb2FileSystem(options.SdPath);
+
+            Website.Generate.GenerateSite(xb2Fs, options.Output, options.Progress);
+
         }
 
         private static void ExportQuests(Options options)

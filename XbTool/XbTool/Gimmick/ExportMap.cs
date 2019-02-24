@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
+using LibHac.IO;
 using XbTool.Common;
 using XbTool.Common.Textures;
 using XbTool.Xb2.Textures;
@@ -12,7 +13,7 @@ namespace XbTool.Gimmick
 {
     public static class ExportMap
     {
-        public static void Export(IFileReader fs, MapInfo[] gimmicks, string outDir)
+        public static void Export(IFileSystem fs, MapInfo[] gimmicks, string outDir)
         {
             Directory.CreateDirectory(Path.Combine(outDir, "png"));
 

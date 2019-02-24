@@ -117,6 +117,16 @@ namespace XbTool
                             options.Xb2Dir = args[i + 1];
                             i++;
                             continue;
+                        case "-SD":
+                            if (i + 1 >= args.Length)
+                            {
+                                PrintWithUsage("No argument after -sd option.");
+                                return null;
+                            }
+
+                            options.SdPath = args[i + 1];
+                            i++;
+                            continue;
                     }
                 }
 

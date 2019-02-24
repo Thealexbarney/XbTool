@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using LibHac.IO;
 
 namespace XbTool.Common
 {
@@ -71,6 +72,15 @@ namespace XbTool.Common
                 return value;
 
             return value + multiple - value % multiple;
+        }
+
+        public static byte[] ReadFile(this IFileSystem fs, string path)
+        {
+            IFile file = fs.OpenFile(path, OpenMode.Read);
+            var fileArr = new byte[file.GetSize()];
+            file.Read(fileArr, 0);
+
+            return fileArr;
         }
     }
 }

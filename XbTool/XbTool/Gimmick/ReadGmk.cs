@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using LibHac;
+using LibHac.IO;
 using XbTool.Bdat;
 using XbTool.Common;
 using XbTool.Types;
@@ -10,7 +11,7 @@ namespace XbTool.Gimmick
 {
     public static class ReadGmk
     {
-        public static MapInfo[] ReadAll(IFileReader fs, BdatCollection tables, IProgressReport progress = null)
+        public static MapInfo[] ReadAll(IFileSystem fs, BdatCollection tables, IProgressReport progress = null)
         {
             progress?.LogMessage("Reading map info and gimmick sets");
             Dictionary<string, MapInfo> maps = MapInfo.ReadAll(fs);
@@ -65,7 +66,7 @@ namespace XbTool.Gimmick
             return maps.Values.ToArray();
         }
 
-        public static Dictionary<string, Lvb> ReadGimmickSet(IFileReader fs, BdatCollection tables, int mapId)
+        public static Dictionary<string, Lvb> ReadGimmickSet(IFileSystem fs, BdatCollection tables, int mapId)
         {
             RSC_GmkSetList setBdat = tables.RSC_GmkSetList.First(x => x.mapId == mapId);
             Dictionary<string, FieldInfo> fieldsDict = setBdat.GetType().GetFields().ToDictionary(x => x.Name, x => x);
@@ -77,7 +78,7 @@ namespace XbTool.Gimmick
                 string value = (string)field.GetValue(setBdat);
                 if (value == null) continue;
                 string filename = $"/gmk/{value}.lvb";
-                if (!fs.Exists(filename)) continue;
+                if (!fs.FileExists(filename)) continue;
 
                 byte[] file = fs.ReadFile(filename);
                 var lvb = new Lvb(new DataBuffer(file, Game.XB2, 0)) { Filename = field.Name };

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using LibHac.IO;
 using XbTool.Common;
 
 namespace XbTool.Gimmick
@@ -61,10 +63,11 @@ namespace XbTool.Gimmick
             return containingArea;
         }
 
-        public static Dictionary<string, MapInfo> ReadAll(IFileReader fs)
+        public static Dictionary<string, MapInfo> ReadAll(IFileSystem fs)
         {
             var infos = new Dictionary<string, MapInfo>();
-            IEnumerable<string> filenames = fs.FindFiles("/menu/minimap/*.mi");
+            IEnumerable<string> filenames = fs.OpenDirectory("/menu/minimap", OpenDirectoryMode.Files)
+                .EnumerateEntries("*.mi", SearchOptions.Default).Select(x => x.FullPath);
 
             foreach (string filename in filenames)
             {
