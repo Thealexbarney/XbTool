@@ -2704,6 +2704,7 @@ namespace XbTool.Types
         public BdatTable<LabeledMessage> qst560211_ms;
         public BdatTable<LabeledMessage> qst560212_ms;
         public BdatTable<LabeledMessage> qst560213_ms;
+        public BdatTable<LabeledMessage> qst560214_ms;
         public BdatTable<LabeledMessage> qst610101_ms;
         public BdatTable<LabeledMessage> qst610102_ms;
         public BdatTable<LabeledMessage> qst610103_ms;
@@ -4984,6 +4985,7 @@ namespace XbTool.Types
         public BdatTable<LabeledMessage> tlk7000015401_ms;
         public BdatTable<LabeledMessage> tlk7000015801_ms;
         public BdatTable<LabeledMessage> tlk7000015901_ms;
+        public BdatTable<LabeledMessage> tlk7000016101_ms;
         public BdatTable<LabeledMessage> tlk7900000101_ms;
         public BdatTable<LabeledMessage> tlk7900000201_ms;
         public BdatTable<LabeledMessage> tlk7900000202_ms;

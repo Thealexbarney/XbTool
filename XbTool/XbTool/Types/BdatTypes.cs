@@ -1878,6 +1878,7 @@ namespace XbTool.Types
         public byte AttackBonus;
         public byte RecastBonus;
         public ushort ReduceElmCombo;
+        public Message _Name;
     }
 
     [BdatType]
@@ -3074,6 +3075,7 @@ namespace XbTool.Types
         public BTL_Arts_En _ArtsNum9;
         public MNU_Name _Atr;
         public BTL_Aura _Aura;
+        public BTL_EnAwake _AwakeLev;
         public RSC_En _ResourceID;
     }
 
@@ -9457,8 +9459,15 @@ namespace XbTool.Types
         public ushort MSGID3;
         public ushort AreaNumber3;
         public ushort result;
+        public FLD_ConditionList _Condition1;
+        public FLD_ConditionList _Condition2;
         public Gender _Gender;
+        public Message _Job;
+        public Message _MSGID;
+        public Message _MSGID2;
+        public Message _MSGID3;
         public Message _Name;
+        public Message _result;
         public NpcRoot _Roots;
     }
 

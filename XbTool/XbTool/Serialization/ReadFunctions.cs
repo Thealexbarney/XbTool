@@ -9527,6 +9527,11 @@ namespace XbTool.Serialization
                 item._Name = tables.btl_elementaleffect_ms.GetItemOrNull(item.Name);
             }
 
+            foreach (BTL_EnAwake item in tables.BTL_EnAwake.Items)
+            {
+                item._Name = tables.btl_buff_ms.GetItemOrNull(item.Name);
+            }
+
             foreach (BTL_EnBook item in tables.BTL_EnBook.Items)
             {
                 item._BaseEnemyID = tables.CHR_EnArrange.GetItemOrNull(item.BaseEnemyID);
@@ -9873,6 +9878,7 @@ namespace XbTool.Serialization
                 item._ArtsNum9 = tables.BTL_Arts_En.GetItemOrNull(item.ArtsNum9);
                 item._Atr = tables.MNU_Msg_Attr.GetItemOrNull(item.Atr + 1);
                 item._Aura = tables.BTL_Aura.GetItemOrNull(item.Aura);
+                item._AwakeLev = tables.BTL_EnAwake.GetItemOrNull(item.AwakeLev);
                 item._ResourceID = tables.RSC_En.GetItemOrNull(item.ResourceID);
             }
 
@@ -15351,8 +15357,15 @@ namespace XbTool.Serialization
 
             foreach (RSC_NpcList item in tables.RSC_NpcList.Items)
             {
+                item._Condition1 = tables.FLD_ConditionList.GetItemOrNull(item.Condition1);
+                item._Condition2 = tables.FLD_ConditionList.GetItemOrNull(item.Condition2);
                 item._Gender = (Gender)item.Gender;
+                item._Job = tables.fld_npcjobname.GetItemOrNull(item.Job);
+                item._MSGID = tables.fld_landmark.GetItemOrNull(item.MSGID);
+                item._MSGID2 = tables.fld_landmark.GetItemOrNull(item.MSGID2);
+                item._MSGID3 = tables.fld_landmark.GetItemOrNull(item.MSGID3);
                 item._Name = tables.fld_npcname.GetItemOrNull(item.Name);
+                item._result = tables.fld_npcresult.GetItemOrNull(item.result);
                 item._Roots = (NpcRoot)item.Roots;
             }
 
