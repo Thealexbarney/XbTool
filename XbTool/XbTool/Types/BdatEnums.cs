@@ -508,4 +508,11 @@ namespace XbTool.Types
         Type20,
         Type21
     }
+
+    public enum SkillTypeXbx
+    {
+        Mechanical = 1,
+        Biological,
+        Archaeological
+    }
 }

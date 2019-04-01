@@ -99,9 +99,14 @@ FLD_GameCondition,condType*,Enum,,,0,ConditionTypeXbx
 FLD_Location,gameCondId,Reference,FLD_GameCondition,,0,
 FLD_Location,Loc_name,Message,fieldnamelist_ms,,0,
 FLD_Location,SkipTravel_id,Reference,FLD_SkipTravel,,0,
+FLD_MobGrpList*,mob_*,Reference,FLD_MobIndivList*,,0,
 FLD_SkipTravel,loc_name,Message,fieldnamelist_ms,,0,
 FLD_SkipTravel,zone_id,Reference,MNU_ZoneNameConvert,,0,
+FLD_TboxAll,item_cat,Enum,,,0,ItemTypeXbx
 FLD_TboxAll,item_id,Item,,item_cat,0,
+FLD_TboxPopList,name_id,Message,FLD_ObjectName,,0,
+FLD_TboxPopList,reward,Reference,FLD_TboxAll,,0,
+FLD_TboxPopList,skill_type,Enum,,,0,SkillTypeXbx
 ITM_*,Caption,Message,ITM_*_ms,,0,
 ITM_*,Name,Message,ITM_*_ms,,0,
 ITM_Blueprint,category,Enum,,,0,ItemTypeXbx
