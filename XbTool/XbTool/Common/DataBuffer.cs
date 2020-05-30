@@ -24,7 +24,7 @@ namespace XbTool.Common
             File = file;
             Start = start;
             Game = game;
-            Endianness = game == Game.XB2 ? Endianness.Little : Endianness.Big;
+            Endianness = GetGameEndianness(game);
             Length = file.Length - start;
         }
 
@@ -33,8 +33,22 @@ namespace XbTool.Common
             File = file;
             Start = start;
             Game = game;
-            Endianness = game == Game.XB2 ? Endianness.Little : Endianness.Big;
+            Endianness = GetGameEndianness(game);
             Length = length;
+        }
+
+        private Endianness GetGameEndianness(Game game)
+        {
+            switch (game)
+            {
+                case Game.XB1:
+                case Game.XBX:
+                    return Endianness.Big;
+                case Game.XB2:
+                case Game.XB1DE:
+                default:
+                    return Endianness.Little;
+            }
         }
 
         public byte this[int index]
@@ -354,6 +368,7 @@ namespace XbTool.Common
     {
         XB1 = 1,
         XBX,
-        XB2
+        XB2,
+        XB1DE
     }
 }

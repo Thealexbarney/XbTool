@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -65,6 +66,23 @@ namespace XbTool
             }
         }
 
+        private static string GetGameName(Game game)
+        {
+            switch (game)
+            {
+                case Game.XB1:
+                    return "1";
+                case Game.XBX:
+                    return "X";
+                case Game.XB2:
+                    return "2";
+                case Game.XB1DE:
+                    return "1 DE";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(game), game, null);
+            }
+        }
+
         public static void PrintBdatIndex(BdatStringCollection bdats, string htmlDir)
         {
             var sb = new Indenter(2);
@@ -72,8 +90,7 @@ namespace XbTool
             sb.AppendLineAndIncrease("<html>");
             sb.AppendLineAndIncrease("<head>");
             sb.AppendLine("<meta charset=\"utf-8\" />");
-            string name = bdats.Game == Game.XB2 ? "2" : "X";
-            sb.AppendLine($"<title>Xenoblade {name} Data Tables</title>");
+            sb.AppendLine($"<title>Xenoblade {GetGameName(bdats.Game)} Data Tables</title>");
             sb.DecreaseAndAppendLine("</head>");
 
             sb.AppendLineAndIncrease("<body>");

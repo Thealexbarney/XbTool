@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using XbTool.Bdat;
@@ -68,7 +69,7 @@ namespace XbTool.BdatString
                     break;
                 case BdatFieldType.Item:
                     if (tables.Game == Game.XB2) ApplyRef(BdatStringTools.GetItemTableXb2(refId));
-                    if (tables.Game == Game.XB1)
+                    if (tables.Game == Game.XB1 || tables.Game == Game.XB1DE)
                     {
                         var itemType = (ItemTypeXb1)int.Parse(item[field.RefField].ValueString);
                         ApplyRef(BdatStringTools.GetItemTableXb1(itemType));
@@ -86,6 +87,11 @@ namespace XbTool.BdatString
                 case BdatFieldType.EventSetup:
                     ApplyRef(BdatStringTools.GetEventSetupTable(refId));
                     break;
+                case BdatFieldType.Quest when tables.Game == Game.XB1DE:
+                    ApplyRef(BdatStringTools.GetQuestTableXb1(refId));
+                    break;
+                case BdatFieldType.Quest:
+                    throw new InvalidDataException();
                 case BdatFieldType.QuestFlag:
                     ApplyRef(BdatStringTools.GetQuestListTable(refId));
                     break;
@@ -95,19 +101,24 @@ namespace XbTool.BdatString
                 case BdatFieldType.Condition:
                     if (tables.Game == Game.XB2)
                     {
-                        var conditionType = (ConditionType) int.Parse(item[field.RefField].ValueString);
+                        var conditionType = (ConditionType)int.Parse(item[field.RefField].ValueString);
                         ApplyRef(BdatStringTools.GetConditionTable(conditionType));
                     }
                     if (tables.Game == Game.XBX)
                     {
-                        var conditionType = (ConditionTypeXbx) int.Parse(item[field.RefField].ValueString);
+                        var conditionType = (ConditionTypeXbx)int.Parse(item[field.RefField].ValueString);
                         ApplyRef(BdatStringTools.GetConditionTableXbx(conditionType));
                     }
 
                     break;
-                case BdatFieldType.Task:
+                case BdatFieldType.Task when tables.Game == Game.XB2:
                     var taskType = (TaskType)int.Parse(item[field.RefField].ValueString);
                     ApplyRef(BdatStringTools.GetTaskTable(taskType));
+                    break;
+                case BdatFieldType.Task when tables.Game == Game.XB1 || tables.Game == Game.XB1DE:
+                    var taskTypeXb1 = (TaskTypeXb1)int.Parse(item[field.RefField].ValueString);
+                    int itemId = int.Parse(item[field.Field].ValueString);
+                    ApplyRef(BdatStringTools.GetTaskTableXb1(taskTypeXb1, itemId));
                     break;
                 case BdatFieldType.ShopTable:
                     var shopType = (ShopType)int.Parse(item[field.RefField].ValueString);
@@ -117,8 +128,8 @@ namespace XbTool.BdatString
                     ApplyRef(BdatStringTools.GetCharacterTable(refId));
                     break;
                 case BdatFieldType.Enhance:
-                    if(tables.Game == Game.XB2) value.Display = BdatStringTools.GetEnhanceCaption(value);
-                    if(tables.Game == Game.XBX) value.Display = BdatStringTools.GetEnhanceCaptionXbx(value);
+                    if (tables.Game == Game.XB2) value.Display = BdatStringTools.GetEnhanceCaption(value);
+                    if (tables.Game == Game.XBX) value.Display = BdatStringTools.GetEnhanceCaptionXbx(value);
                     break;
                 case BdatFieldType.WeatherIdMap:
                     value.Display = BdatStringTools.PrintWeatherIdMap(refId, 13, tables);
@@ -149,7 +160,7 @@ namespace XbTool.BdatString
                 case BdatFieldType.Place:
                     var placeCat = (PlaceCategory)int.Parse(item[field.RefField].ValueString);
                     string placeTable = GimmickData.GetPlaceTable(placeCat, refId);
-                    if(placeTable != null) ApplyRef(placeTable);
+                    if (placeTable != null) ApplyRef(placeTable);
                     break;
             }
 

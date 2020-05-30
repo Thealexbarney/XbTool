@@ -84,6 +84,37 @@ namespace XbTool.BdatString
             }
         }
 
+        public static string GetQuestTableXb1(int id)
+        {
+            if (id > 1200) return "JNL_quest2601";
+            if (id > 1000) return "JNL_quest2501";
+            if (id > 960) return "JNL_quest2201";
+            if (id > 920) return "JNL_quest2101";
+            if (id > 890) return "JNL_quest2001";
+            if (id > 850) return "JNL_quest1901";
+            if (id > 849) return "JNL_quest1801";
+            if (id > 810) return "JNL_quest1701";
+            if (id > 809) return "JNL_quest1602";
+            if (id > 750) return "JNL_quest1601";
+            if (id > 720) return "JNL_quest1501";
+            if (id > 680) return "JNL_quest1401";
+            if (id > 640) return "JNL_quest1301";
+            if (id > 625) return "JNL_quest1202";
+            if (id > 610) return "JNL_quest1201";
+            if (id > 535) return "JNL_quest1101";
+            if (id > 495) return "JNL_quest1001";
+            if (id > 465) return "JNL_quest0901";
+            if (id > 464) return "JNL_quest0801";
+            if (id > 350) return "JNL_quest0701";
+            if (id > 310) return "JNL_quest0601";
+            if (id > 275) return "JNL_quest0501";
+            if (id > 260) return "JNL_quest0402";
+            if (id > 173) return "JNL_quest0401";
+            if (id > 115) return "JNL_quest0301";
+            if (id > 85) return "JNL_quest0201";
+            return "JNL_quest0101";
+        }
+
         public static string GetItemTableXbx(ItemTypeXbx type)
         {
             switch (type)
@@ -378,6 +409,25 @@ namespace XbTool.BdatString
                     return "MNU_ShopChange";
                 case ShopType.Inn:
                     return "MNU_ShopInn";
+            }
+
+            return null;
+        }
+
+        public static string GetTaskTableXb1(TaskTypeXb1 taskType, int itemId)
+        {
+            switch (taskType)
+            {
+                case TaskTypeXb1.KillEnemy:
+                    return "BTL_enelist";
+                case TaskTypeXb1.GetItem:
+                    return "ITM_itemlist";
+                case TaskTypeXb1.TalkNpc:
+                    return "FLD_npclist";
+                case TaskTypeXb1.CompleteQuest:
+                    return GetQuestTableXb1(itemId);
+                case TaskTypeXb1.InteractObject:
+                    break;
             }
 
             return null;

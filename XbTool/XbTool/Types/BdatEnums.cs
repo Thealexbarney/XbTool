@@ -515,4 +515,28 @@ namespace XbTool.Types
         Biological,
         Archaeological
     }
+
+    public enum TrialType
+    {
+        Free = 0,
+        Restricted = 1
+    }
+
+    public enum TaskTypeXb1
+    {
+        KillEnemy = 1,
+        GetItem,
+        TalkNpc,
+        CompleteQuest,
+        InteractObject,
+    }
+
+    public enum SkillShapeXb1
+    {
+        Circle = 1,
+        Square,
+        Hexagon,
+        Octagram,
+        Diamond
+    }
 }

@@ -37,7 +37,20 @@ namespace XbTool.Bdat
         {
             Game = game;
             Tables = ReadAllBdats(filenames, game);
-            TablesDict = Tables.ToDictionary(x => x.Name, x => x);
+
+            // todo: better way of dealing with XB1's duplicate name
+            var dictionary = new Dictionary<string, BdatTable>();
+
+            foreach (BdatTable table in Tables)
+            {
+                if (dictionary.ContainsKey(table.Name))
+                {
+                    table.Name = table.Filename + table.Name;
+                }
+                dictionary.Add(table.Name, table);
+            }
+
+            TablesDict = dictionary;
             if (readMetadata) ReadMetadata();
         }
 
@@ -146,7 +159,7 @@ namespace XbTool.Bdat
         public void ReadFieldInfo()
         {
             BdatFields = BdatInfoImport.ReadBdatFieldInfo(Game.ToString().ToLower());
-            ResolveWildcards();
+            ResolveFieldInfoWildcards();
 
             Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
 
@@ -181,7 +194,10 @@ namespace XbTool.Bdat
         {
             foreach (BdatArrayInfo array in BdatArrays)
             {
-                BdatType type = Types.First(x => x.Name == array.Table);
+                BdatType type = Types.FirstOrDefault(x => x.Name == array.Table);
+
+                if (type == null) continue;
+
                 array.IsReferences = true;
 
                 foreach (string element in array.Elements)
@@ -225,6 +241,8 @@ namespace XbTool.Bdat
         {
             DisplayFields = BdatInfoImport.ReadBdatTableInfo(Game.ToString().ToLower());
 
+            ResolveTableInfoWildcards();
+
             foreach (BdatTable table in Tables)
             {
                 if (DisplayFields.ContainsKey(table.Name)) continue;
@@ -238,7 +256,7 @@ namespace XbTool.Bdat
             }
         }
 
-        private void ResolveWildcards()
+        private void ResolveFieldInfoWildcards()
         {
             KeyValuePair<(string table, string member), BdatFieldInfo>[] fields = BdatFields.Where(x => x.Value.Table.Contains('*')).ToArray();
             Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
@@ -306,6 +324,24 @@ namespace XbTool.Bdat
                 }
 
                 BdatFields.Remove(field.Key);
+            }
+        }
+
+        private void ResolveTableInfoWildcards()
+        {
+            KeyValuePair<string, string>[] tables = DisplayFields.Where(x => x.Key.Contains('*')).ToArray();
+            Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
+
+            foreach (KeyValuePair<string, string> table in tables)
+            {
+                var regex = new Regex("^" + Regex.Escape(table.Key).Replace(@"\*\#", "(.\\d*)").Replace(@"\*", "(.*)") + "$");
+                Match[] matches = Tables.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
+                foreach (Match match in matches)
+                {
+                    DisplayFields.Add(match.Value, table.Value);
+                }
+
+                DisplayFields.Remove(table.Key);
             }
         }
 

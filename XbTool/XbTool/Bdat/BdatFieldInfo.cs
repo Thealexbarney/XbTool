@@ -43,6 +43,7 @@ namespace XbTool.Bdat
         Event,
         ShopTable,
         Enum,
+        Quest,
         QuestFlag,
         QuestFlagIra,
         Flag,
