@@ -478,6 +478,16 @@ namespace XbTool.BdatString
             return null;
         }
 
+        public static string GetArmorStyleTableXb1(int characterId)
+        {
+            return $"MNU_StyleArmorPc{characterId:D2}";
+        }
+
+        public static string GetWeaponStyleTableXb1(int characterId)
+        {
+            return $"MNU_StyleWeaponPc{characterId:D2}";
+        }
+
         public static string PrintEnumFlags(Type enumType, object value)
         {
             var sb = new StringBuilder();

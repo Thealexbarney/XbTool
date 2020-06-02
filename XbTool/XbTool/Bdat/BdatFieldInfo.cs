@@ -55,7 +55,9 @@ namespace XbTool.Bdat
         ItemComment,
         Layer,
         Place,
-        Enemy
+        Enemy,
+        ArmorStyle,
+        WeaponStyle
     }
 
     public class BdatArrayInfo
@@ -83,12 +85,12 @@ namespace XbTool.Bdat
         {
             using (FileStream stream = Helpers.TryOpenDataFile(filename))
             {
-                if(stream == null) return new Dictionary<(string table, string member), BdatFieldInfo>();
+                if (stream == null) return new Dictionary<(string table, string member), BdatFieldInfo>();
 
                 using (var reader = new StreamReader(stream))
                 {
                     IEnumerable<BdatFieldInfo> csv =
-                        new CsvReader(reader, new Configuration {HeaderValidated = null, MissingFieldFound = null})
+                        new CsvReader(reader, new Configuration { HeaderValidated = null, MissingFieldFound = null })
                             .GetRecords<BdatFieldInfo>();
                     Dictionary<(string, string), BdatFieldInfo> readBdatFieldInfo =
                         csv.ToDictionary(x => (x.Table, x.Field), x => x);

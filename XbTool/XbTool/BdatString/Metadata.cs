@@ -177,6 +177,41 @@ namespace XbTool.BdatString
                 case BdatFieldType.Enemy when tables.Game == Game.XB1DE:
                     ApplyRef(BdatStringTools.GetEnemyTableXb1(refId), member.Type != BdatMemberType.None);
                     break;
+                case BdatFieldType.ArmorStyle when tables.Game == Game.XB1DE:
+                {
+                    int characterId = int.Parse(item[field.RefField].ValueString);
+                    int equipItemId = int.Parse(item[field.Field].ValueString);
+
+                    if (equipItemId != 0)
+                    {
+                        ApplyRef(BdatStringTools.GetArmorStyleTableXb1(characterId));
+                    }
+                    break;
+                }
+                case BdatFieldType.WeaponStyle when tables.Game == Game.XB1DE:
+                {
+                    int characterId = 0;
+                    int equipItemId = int.Parse(item[field.Field].ValueString);
+
+                    for (int i = 0; i <= 16; i++)
+                    {
+                        string fieldName = $"equip_pc{i}";
+                        if (item.Values.TryGetValue(fieldName, out BdatStringValue equipPcValue))
+                        {
+                            if (equipPcValue.ValueString == "1")
+                            {
+                                characterId = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (equipItemId != 0 && characterId != 0)
+                    {
+                        ApplyRef(BdatStringTools.GetWeaponStyleTableXb1(characterId));
+                    }
+                    break;
+                }
             }
 
             if (field.EnumType != null)
