@@ -159,7 +159,12 @@ namespace XbTool.Bdat
         public void ReadFieldInfo()
         {
             BdatFields = BdatInfoImport.ReadBdatFieldInfo(Game.ToString().ToLower());
-            ResolveFieldInfoWildcards();
+            Dictionary<(string table, string member), BdatFieldInfo> newFields = BdatInfoImport.ReadBdatNewFieldInfo(Game.ToString().ToLower());
+
+            ResolveFieldInfoWildcards(newFields, false);
+            AddNewFields(newFields);
+
+            ResolveFieldInfoWildcards(BdatFields, true);
 
             Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
 
@@ -256,9 +261,9 @@ namespace XbTool.Bdat
             }
         }
 
-        private void ResolveFieldInfoWildcards()
+        private void ResolveFieldInfoWildcards(Dictionary<(string table, string member), BdatFieldInfo> bdatFields, bool verifyFieldExists)
         {
-            KeyValuePair<(string table, string member), BdatFieldInfo>[] fields = BdatFields.Where(x => x.Value.Table.Contains('*')).ToArray();
+            KeyValuePair<(string table, string member), BdatFieldInfo>[] fields = bdatFields.Where(x => x.Value.Table.Contains('*')).ToArray();
             Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
 
             foreach (KeyValuePair<(string table, string member), BdatFieldInfo> field in fields)
@@ -268,7 +273,9 @@ namespace XbTool.Bdat
                 Match[] matches = Tables.Select(x => regex.Match(x.Name)).Where(x => x.Success).ToArray();
                 foreach (Match match in matches)
                 {
-                    if (!hasFieldWildcard && !tablesDict[match.Value].Members.Select(x => x.Name).Contains(field.Value.Field))
+                    if (!hasFieldWildcard &&
+                        verifyFieldExists &&
+                        !tablesDict[match.Value].Members.Select(x => x.Name).Contains(field.Value.Field))
                     {
                         continue;
                     }
@@ -283,16 +290,16 @@ namespace XbTool.Bdat
                         if (!tablesDict.ContainsKey(newInfo.RefTable)) continue;
                     }
 
-                    if (!BdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
+                    if (!bdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
                     {
-                        BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                        bdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
                     }
                 }
 
-                BdatFields.Remove(field.Key);
+                bdatFields.Remove(field.Key);
             }
 
-            fields = BdatFields.Where(x => x.Value.Field.Contains('*')).ToArray();
+            fields = bdatFields.Where(x => x.Value.Field.Contains('*')).ToArray();
 
             foreach (KeyValuePair<(string table, string member), BdatFieldInfo> field in fields)
             {
@@ -316,14 +323,14 @@ namespace XbTool.Bdat
                             }
                         }
 
-                        if (!BdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
+                        if (!bdatFields.ContainsKey((newInfo.Table, newInfo.Field)))
                         {
-                            BdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
+                            bdatFields.Add((newInfo.Table, newInfo.Field), newInfo);
                         }
                     }
                 }
 
-                BdatFields.Remove(field.Key);
+                bdatFields.Remove(field.Key);
             }
         }
 
@@ -343,6 +350,36 @@ namespace XbTool.Bdat
 
                 DisplayFields.Remove(table.Key);
             }
+        }
+
+        private void AddNewFields(Dictionary<(string table, string member), BdatFieldInfo> newFields)
+        {
+            Dictionary<string, BdatTable> tablesDict = Tables.ToDictionary(x => x.Name, x => x);
+
+            int removed = 0;
+            foreach (KeyValuePair<(string table, string member), BdatFieldInfo> fieldKvp in newFields)
+            {
+                BdatFieldInfo field = fieldKvp.Value;
+
+                if (!tablesDict.TryGetValue(field.Table, out BdatTable table))
+                {
+                    removed++;
+                    continue;
+                }
+
+                BdatMember fieldInfo = table.Members.FirstOrDefault(x => x.Name == fieldKvp.Key.member);
+                if (fieldInfo != null)
+                {
+                    removed++;
+                    continue;
+                }
+
+                var newMember = new BdatMember(fieldKvp.Key.member, BdatMemberType.None, BdatValueType.None);
+                table.PrependMember(newMember);
+
+                BdatFields.Add(fieldKvp.Key, fieldKvp.Value);
+            }
+            if (removed > 0) Console.WriteLine($"Ignoring {removed} invalid new fields.");
         }
 
         private static BdatType[] CalculateBdatTypes(BdatTable[] tables)
@@ -459,6 +496,7 @@ namespace XbTool.Bdat
         private static readonly BdatFieldType[] ReadableFieldTypes =
         {
             BdatFieldType.Reference,
+            BdatFieldType.OneWayReference,
             BdatFieldType.Message,
             BdatFieldType.Item,
             BdatFieldType.Enum,

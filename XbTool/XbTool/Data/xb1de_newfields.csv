@@ -1,0 +1,4 @@
+Table,Field,Type,RefTable,RefField,Adjust,EnumTypeString
+JNL_quest*#,menu_text,QuestMenu,,,0,
+BTL_enelist*#,name,OneWayReference,BTL_enelist,,0,
+BTL_enelist,stats,Enemy,,,0,

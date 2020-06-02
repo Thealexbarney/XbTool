@@ -32,6 +32,7 @@ namespace XbTool.Bdat
     {
         Message,
         Reference,
+        OneWayReference,
         Item,
         Condition,
         Character,
@@ -44,6 +45,7 @@ namespace XbTool.Bdat
         ShopTable,
         Enum,
         Quest,
+        QuestMenu,
         QuestFlag,
         QuestFlagIra,
         Flag,
@@ -52,7 +54,8 @@ namespace XbTool.Bdat
         EventSetup,
         ItemComment,
         Layer,
-        Place
+        Place,
+        Enemy
     }
 
     public class BdatArrayInfo
@@ -68,22 +71,40 @@ namespace XbTool.Bdat
     {
         public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfo(string prefix)
         {
-            using (FileStream stream = Helpers.OpenDataFile($"{prefix}_fieldInfo.csv"))
-            using (var reader = new StreamReader(stream))
+            return ReadBdatFieldInfoImpl($"{prefix}_fieldInfo.csv");
+        }
+
+        public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatNewFieldInfo(string prefix)
+        {
+            return ReadBdatFieldInfoImpl($"{prefix}_newfields.csv");
+        }
+
+        public static Dictionary<(string table, string member), BdatFieldInfo> ReadBdatFieldInfoImpl(string filename)
+        {
+            using (FileStream stream = Helpers.TryOpenDataFile(filename))
             {
-                IEnumerable<BdatFieldInfo> csv = new CsvReader(reader, new Configuration { HeaderValidated = null, MissingFieldFound = null }).GetRecords<BdatFieldInfo>();
-                Dictionary<(string, string), BdatFieldInfo> readBdatFieldInfo = csv.ToDictionary(x => (x.Table, x.Field), x => x);
+                if(stream == null) return new Dictionary<(string table, string member), BdatFieldInfo>();
 
-                foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.EnumTypeString != null))
+                using (var reader = new StreamReader(stream))
                 {
-                    info.EnumType = Type.GetType($"XbTool.Types.{info.EnumTypeString}");
-                }
+                    IEnumerable<BdatFieldInfo> csv =
+                        new CsvReader(reader, new Configuration {HeaderValidated = null, MissingFieldFound = null})
+                            .GetRecords<BdatFieldInfo>();
+                    Dictionary<(string, string), BdatFieldInfo> readBdatFieldInfo =
+                        csv.ToDictionary(x => (x.Table, x.Field), x => x);
 
-                foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.Type == BdatFieldType.Flag))
-                {
-                    info.RefField = "FLG_" + info.RefField;
+                    foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.EnumTypeString != null))
+                    {
+                        info.EnumType = Type.GetType($"XbTool.Types.{info.EnumTypeString}");
+                    }
+
+                    foreach (BdatFieldInfo info in readBdatFieldInfo.Values.Where(x => x.Type == BdatFieldType.Flag))
+                    {
+                        info.RefField = "FLG_" + info.RefField;
+                    }
+
+                    return readBdatFieldInfo;
                 }
-                return readBdatFieldInfo;
             }
         }
 

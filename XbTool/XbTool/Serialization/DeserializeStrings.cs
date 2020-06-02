@@ -77,6 +77,10 @@ namespace XbTool.Serialization
                         string f = ReadFlag(table.Data, itemOffset, member, flagsMember);
                         item.AddMember(member.Name, new BdatStringValue(f, item, member));
                         break;
+                    case BdatMemberType.None:
+                        int rowId = itemIndex + table.BaseId;
+                        item.AddMember(member.Name, new BdatStringValue(rowId.ToString(), item, member));
+                        break;
                 }
             }
 

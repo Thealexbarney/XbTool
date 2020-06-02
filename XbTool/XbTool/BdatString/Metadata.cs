@@ -53,7 +53,13 @@ namespace XbTool.BdatString
                 return;
             }
 
-            int refId = int.Parse(value.ValueString) + field.Adjust;
+            if (!int.TryParse(value.ValueString, out int refId))
+            {
+                value.Resolved = true;
+                return;
+            }
+
+            refId += field.Adjust;
 
             switch (field.Type)
             {
@@ -66,6 +72,9 @@ namespace XbTool.BdatString
                     break;
                 case BdatFieldType.Reference:
                     ApplyRef(field.RefTable);
+                    break;
+                case BdatFieldType.OneWayReference:
+                    ApplyRef(field.RefTable, false);
                     break;
                 case BdatFieldType.Item:
                     if (tables.Game == Game.XB2) ApplyRef(BdatStringTools.GetItemTableXb2(refId));
@@ -88,7 +97,10 @@ namespace XbTool.BdatString
                     ApplyRef(BdatStringTools.GetEventSetupTable(refId));
                     break;
                 case BdatFieldType.Quest when tables.Game == Game.XB1DE:
-                    ApplyRef(BdatStringTools.GetQuestTableXb1(refId));
+                    ApplyRef(BdatStringTools.GetQuestJournalTableXb1(refId));
+                    break;
+                case BdatFieldType.QuestMenu when tables.Game == Game.XB1DE:
+                    ApplyRef(BdatStringTools.GetQuestMenuTableXb1(refId));
                     break;
                 case BdatFieldType.Quest:
                     throw new InvalidDataException();
@@ -162,6 +174,9 @@ namespace XbTool.BdatString
                     string placeTable = GimmickData.GetPlaceTable(placeCat, refId);
                     if (placeTable != null) ApplyRef(placeTable);
                     break;
+                case BdatFieldType.Enemy when tables.Game == Game.XB1DE:
+                    ApplyRef(BdatStringTools.GetEnemyTableXb1(refId), member.Type != BdatMemberType.None);
+                    break;
             }
 
             if (field.EnumType != null)
@@ -178,7 +193,7 @@ namespace XbTool.BdatString
 
             value.Resolved = true;
 
-            void ApplyRef(string refTable)
+            void ApplyRef(string refTable, bool addReverseRef = true)
             {
                 if (refTable == null || !tables.Tables.ContainsKey(refTable) || !tables[refTable].ContainsId(refId))
                 {
@@ -202,7 +217,11 @@ namespace XbTool.BdatString
                 }
 
                 value.Reference = tables[refTable][refId];
-                tables[refTable][refId].ReferencedBy.Add(value.Parent);
+
+                if (addReverseRef)
+                {
+                    tables[refTable][refId].ReferencedBy.Add(value.Parent);
+                }
             }
         }
 

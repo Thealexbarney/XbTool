@@ -177,6 +177,7 @@ namespace XbTool
                 {
                     case BdatMemberType.Scalar:
                     case BdatMemberType.Flag:
+                    case BdatMemberType.None:
                         sb.AppendLine($"{cellTag}>{member.Name}</th>");
                         break;
                     case BdatMemberType.Array:
@@ -228,6 +229,7 @@ namespace XbTool
                     {
                         case BdatMemberType.Scalar:
                         case BdatMemberType.Flag:
+                        case BdatMemberType.None:
                             PrintValue(value, cellTag);
 
                             break;

@@ -1,4 +1,5 @@
 Display,bgmlist,file_name
+Display,BTL_enelist*#,name
 Display,ITM_itemlist,itemID
 Display,JNL_quest*#,title
 Display,MNU_arts_tag,tagStr

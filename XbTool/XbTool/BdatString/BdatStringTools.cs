@@ -84,35 +84,80 @@ namespace XbTool.BdatString
             }
         }
 
-        public static string GetQuestTableXb1(int id)
+        public static string GetQuestJournalTableXb1(int id) => $"JNL_quest{GetQuestTableSuffixXb1(id)}";
+        public static string GetQuestMenuTableXb1(int id) => $"MNU_qt{GetQuestTableSuffixXb1(id)}";
+
+        private static string GetQuestTableSuffixXb1(int id)
         {
-            if (id > 1200) return "JNL_quest2601";
-            if (id > 1000) return "JNL_quest2501";
-            if (id > 960) return "JNL_quest2201";
-            if (id > 920) return "JNL_quest2101";
-            if (id > 890) return "JNL_quest2001";
-            if (id > 850) return "JNL_quest1901";
-            if (id > 849) return "JNL_quest1801";
-            if (id > 810) return "JNL_quest1701";
-            if (id > 809) return "JNL_quest1602";
-            if (id > 750) return "JNL_quest1601";
-            if (id > 720) return "JNL_quest1501";
-            if (id > 680) return "JNL_quest1401";
-            if (id > 640) return "JNL_quest1301";
-            if (id > 625) return "JNL_quest1202";
-            if (id > 610) return "JNL_quest1201";
-            if (id > 535) return "JNL_quest1101";
-            if (id > 495) return "JNL_quest1001";
-            if (id > 465) return "JNL_quest0901";
-            if (id > 464) return "JNL_quest0801";
-            if (id > 350) return "JNL_quest0701";
-            if (id > 310) return "JNL_quest0601";
-            if (id > 275) return "JNL_quest0501";
-            if (id > 260) return "JNL_quest0402";
-            if (id > 173) return "JNL_quest0401";
-            if (id > 115) return "JNL_quest0301";
-            if (id > 85) return "JNL_quest0201";
-            return "JNL_quest0101";
+            if (id > 1200) return "2601";
+            if (id > 1000) return "2501";
+            if (id > 960) return "2201";
+            if (id > 920) return "2101";
+            if (id > 890) return "2001";
+            if (id > 850) return "1901";
+            if (id > 849) return "1801";
+            if (id > 810) return "1701";
+            if (id > 809) return "1602";
+            if (id > 750) return "1601";
+            if (id > 720) return "1501";
+            if (id > 680) return "1401";
+            if (id > 640) return "1301";
+            if (id > 625) return "1202";
+            if (id > 610) return "1201";
+            if (id > 535) return "1101";
+            if (id > 495) return "1001";
+            if (id > 465) return "0901";
+            if (id > 464) return "0801";
+            if (id > 350) return "0701";
+            if (id > 310) return "0601";
+            if (id > 275) return "0501";
+            if (id > 260) return "0402";
+            if (id > 173) return "0401";
+            if (id > 115) return "0301";
+            if (id > 85) return "0201";
+            return "0101";
+        }
+
+        public static string GetEnemyTableXb1(int id) => $"BTL_enelist{GetEnemyTableSuffixXb1(id)}";
+
+        private static string GetEnemyTableSuffixXb1(int id)
+        {
+            if (id > 3500) return "6001";
+            if (id > 3450) return "5901";
+            if (id > 3400) return "5801";
+            if (id > 3350) return "5701";
+            if (id > 3300) return "5601";
+            if (id > 3250) return "5501";
+            if (id > 3200) return "5401";
+            if (id > 3150) return "5301";
+            if (id > 3100) return "5201";
+            if (id > 3050) return "5101";
+            if (id > 2900) return "2601";
+            if (id > 2700) return "2501";
+            if (id > 2600) return "2401";
+            if (id > 2500) return "2301";
+            if (id > 2400) return "2201";
+            if (id > 2300) return "2101";
+            if (id > 2200) return "2001";
+            if (id > 2100) return "1901";
+            if (id > 1900) return "1701";
+            if (id > 1700) return "1601";
+            if (id > 1600) return "1501";
+            if (id > 1500) return "1401";
+            if (id > 1400) return "1301";
+            if (id > 1300) return "1202";
+            if (id > 1200) return "1201";
+            if (id > 1100) return "1101";
+            if (id > 1000) return "1001";
+            if (id > 900) return "0901";
+            if (id > 700) return "0701";
+            if (id > 600) return "0601";
+            if (id > 500) return "0501";
+            if (id > 400) return "0402";
+            if (id > 300) return "0401";
+            if (id > 200) return "0301";
+            if (id > 100) return "0201";
+            return "0101";
         }
 
         public static string GetItemTableXbx(ItemTypeXbx type)
@@ -425,7 +470,7 @@ namespace XbTool.BdatString
                 case TaskTypeXb1.TalkNpc:
                     return "FLD_npclist";
                 case TaskTypeXb1.CompleteQuest:
-                    return GetQuestTableXb1(itemId);
+                    return GetQuestJournalTableXb1(itemId);
                 case TaskTypeXb1.InteractObject:
                     break;
             }

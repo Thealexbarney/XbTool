@@ -29,7 +29,7 @@ namespace XbTool.Bdat
         public int MemberTableOffset { get; }
         public int MemberCount { get; }
 
-        public BdatMember[] Members { get; }
+        public BdatMember[] Members { get; private set; }
         private Dictionary<string, BdatMember> MembersDict { get; }
         public DataBuffer Data { get; }
 
@@ -275,6 +275,22 @@ namespace XbTool.Bdat
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
+        }
+
+        public void PrependMember(BdatMember newMember)
+        {
+            foreach (BdatMember member in Members.Where(x => x.Type == BdatMemberType.Flag))
+            {
+                member.FlagVarIndex++;
+            }
+
+            MembersDict.Add(newMember.Name, newMember);
+
+            var newMemberArray = new BdatMember[Members.Length + 1];
+            newMemberArray[0] = newMember;
+            Array.Copy(Members, 0, newMemberArray, 1, Members.Length);
+
+            Members = newMemberArray;
         }
     }
 

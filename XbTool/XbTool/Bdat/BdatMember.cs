@@ -15,7 +15,7 @@ namespace XbTool.Bdat
         public int FlagVarOffset { get; }
         public int FlagIndex { get; }
         public uint FlagMask { get; }
-        public int FlagVarIndex { get; }
+        public int FlagVarIndex { get; set; }
         public BdatFieldInfo Metadata { get; set; }
 
         public BdatMember(string name, BdatMemberType type, BdatValueType valType)

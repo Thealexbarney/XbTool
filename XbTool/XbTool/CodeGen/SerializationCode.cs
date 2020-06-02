@@ -81,6 +81,8 @@ namespace XbTool.CodeGen
                         string valType = GetType(member.ValType);
                         sb.AppendLine($"public readonly {valType}[] {name} = new {valType}[{length}];");
                         break;
+                    case BdatMemberType.None:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -95,6 +97,7 @@ namespace XbTool.CodeGen
                 switch (bdatRef.Type)
                 {
                     case BdatFieldType.Reference:
+                    case BdatFieldType.OneWayReference:
                     case BdatFieldType.Message:
                         itemType = bdatRef.ChildType;
                         break;
@@ -121,6 +124,8 @@ namespace XbTool.CodeGen
                         break;
                     case BdatMemberType.Array:
                         sb.AppendLine($"public {itemType}[] _{itemName} = new {itemType}[{bdatRef.Member.ArrayCount}];");
+                        break;
+                    case BdatMemberType.None:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -224,8 +229,13 @@ namespace XbTool.CodeGen
                     switch (fieldRef.Type)
                     {
                         case BdatFieldType.Reference:
+                        case BdatFieldType.OneWayReference:
                             sb.AppendLine(
                                 $"item._{fieldRef.Field}[i] = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)}[i]);");
+                            break;
+                        case BdatFieldType.Message:
+                            sb.AppendLine(
+                                $"item._{fieldRef.Field}[i] = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
                             break;
                         default:
                             throw new NotImplementedException();
@@ -237,6 +247,7 @@ namespace XbTool.CodeGen
                     switch (fieldRef.Type)
                     {
                         case BdatFieldType.Reference:
+                        case BdatFieldType.OneWayReference:
                             sb.AppendLine(
                                 $"item._{fieldRef.Field} = tables.{fieldRef.RefTable}.GetItemOrNull(item.{PrintFieldRefId(fieldRef)});");
                             break;
