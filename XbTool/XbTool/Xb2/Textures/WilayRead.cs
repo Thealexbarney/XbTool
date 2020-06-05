@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Ionic.Zlib;
 
 namespace XbTool.Xb2.Textures
 {
@@ -9,42 +10,60 @@ namespace XbTool.Xb2.Textures
 
         public WilayRead(byte[] file)
         {
-            using (var stream = new MemoryStream(file))
-            using (var reader = new BinaryReader(stream))
+            var stream = new MemoryStream(file);
+            var reader = new BinaryReader(stream);
+
+            string magic = reader.ReadUTF8(4);
+
+            if (magic == "xbc1")
             {
-                string magic = reader.ReadUTF8(4);
-                if (magic != "LAHD")
+                reader.BaseStream.Position += 4;
+                int uncompressedSize = reader.ReadInt32();
+                stream.Position = 0x30;
+
+                file = new byte[uncompressedSize];
+                var uncompressedData = new MemoryStream(file);
+
+                using (var deflate = new ZlibStream(stream, CompressionMode.Decompress, true))
                 {
-                    throw new NotSupportedException($"Can't read type {magic}");
+                    deflate.CopyTo(uncompressedData, uncompressedSize);
                 }
 
-                int texturesOffset = BitConverter.ToInt32(file, 36);
-                stream.Position = texturesOffset;
+                uncompressedData.Position = 0;
+                stream = uncompressedData;
+                reader = new BinaryReader(stream);
+            }
+            else if (magic != "LAHD")
+            {
+                throw new NotSupportedException($"Can't read type {magic}");
+            }
 
-                int offset = reader.ReadInt32();
-                int length = reader.ReadInt32();
-                stream.Position = texturesOffset + offset;
-                var offsets = new TextureOffset[length];
-                Textures = new LahdTexture[length];
+            int texturesOffset = BitConverter.ToInt32(file, 36);
+            stream.Position = texturesOffset;
 
-                for (int i = 0; i < length; i++)
+            int offset = reader.ReadInt32();
+            int length = reader.ReadInt32();
+            stream.Position = texturesOffset + offset;
+            var offsets = new TextureOffset[length];
+            Textures = new LahdTexture[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                offsets[i] = new TextureOffset
                 {
-                    offsets[i] = new TextureOffset
-                    {
-                        Field0 = reader.ReadInt32(),
-                        Offset = reader.ReadInt32(),
-                        Length = reader.ReadInt32()
-                    };
-                }
+                    Field0 = reader.ReadInt32(),
+                    Offset = reader.ReadInt32(),
+                    Length = reader.ReadInt32()
+                };
+            }
 
-                for (int i = 0; i < length; i++)
-                {
-                    stream.Position = texturesOffset + offsets[i].Offset + offsets[i].Length - 56;
+            for (int i = 0; i < length; i++)
+            {
+                stream.Position = texturesOffset + offsets[i].Offset + offsets[i].Length - 56;
 
-                    var texture = new byte[offsets[i].Length];
-                    Array.Copy(file, texturesOffset + offsets[i].Offset, texture, 0, offsets[i].Length);
-                    Textures[i] = new LahdTexture(texture);
-                }
+                var texture = new byte[offsets[i].Length];
+                Array.Copy(file, texturesOffset + offsets[i].Offset, texture, 0, offsets[i].Length);
+                Textures[i] = new LahdTexture(texture);
             }
         }
     }
