@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CsvHelper;
+using CsvHelper.Configuration;
 using XbTool.BdatString;
 using XbTool.CodeGen;
 
@@ -17,6 +19,8 @@ namespace XbTool.Xb1De.Drops
         {
             var enemies = ReadBdatTables(bdats);
             CalculateDropRates(enemies);
+
+            PrintCsv(enemies, $"{outputFile}.csv");
 
             string html = PrintDropTables(enemies);
             File.WriteAllText(outputFile, html, Encoding.UTF8);
@@ -56,6 +60,18 @@ namespace XbTool.Xb1De.Drops
                 CalculateNormalDropRates(enemy.NormalDrops, enemy.IsUm);
                 CalculateRareDropRates(enemy.RareDrops);
                 CalculateSuperRareDropRates(enemy.SuperRareDrops);
+            }
+        }
+
+        private static void PrintCsv(List<Enemy> enemies, string fileName)
+        {
+            List<CsvEnemyEntry> entries = GetCsvEntries(enemies);
+
+            using (var writer = new StreamWriter(fileName))
+            using (var csv = new CsvWriter(writer, true))
+            {
+                csv.Configuration.RegisterClassMap<CsvEnemyEntryMap>();
+                csv.WriteRecords(entries);
             }
         }
 
@@ -693,6 +709,168 @@ namespace XbTool.Xb1De.Drops
 
             return entry;
         }
+
+        private static List<CsvEnemyEntry> GetCsvEntries(List<Enemy> enemies)
+        {
+            var csvList = new List<CsvEnemyEntry>();
+
+            foreach (Enemy enemy in enemies)
+            {
+                csvList.Add(GetCsvEntry(enemy));
+            }
+
+            return csvList;
+        }
+
+        private static CsvEnemyEntry GetCsvEntry(Enemy enemy)
+        {
+            var entry = new CsvEnemyEntry();
+            entry.EnemyId = enemy.Id;
+            entry.EnemyName = enemy.Name;
+
+            entry.NormalDropPer = enemy.NormalRate;
+            entry.RareDropPer = enemy.RareRate;
+            entry.SuperRareDropPer = enemy.SuperRareRate;
+
+            entry.NaturalNormalDropPer = enemy.NormalDropRate;
+            entry.NaturalRareDropPer = enemy.RareDropRate;
+            entry.NaturalSuperRareDropPer = enemy.SuperRareDropRate;
+
+            enemy.NormalDrops.MaterialsSingle.CopyTo(entry.NormalMatSingle);
+            enemy.NormalDrops.MaterialsDouble.CopyTo(entry.NormalMatDouble);
+
+            enemy.RareDrops.Crystals.CopyTo(entry.RareCrystals);
+            enemy.RareDrops.Weapons.CopyTo(entry.RareWeapons);
+            enemy.RareDrops.Armor.CopyTo(entry.RareArmor);
+            enemy.RareDrops.ArtBooks.CopyTo(entry.RareArtBooks);
+
+            enemy.SuperRareDrops.Weapons.CopyTo(entry.SprWeapons);
+            enemy.SuperRareDrops.UniqueWeapons.CopyTo(entry.SprUniqueWeapons);
+            enemy.SuperRareDrops.UniqueArmor.CopyTo(entry.SprUniqueArmor);
+            enemy.SuperRareDrops.ArtBooks.CopyTo(entry.SprArtBooks);
+
+            return entry;
+        }
+    }
+
+    internal sealed class CsvEnemyEntryMap : ClassMap<CsvEnemyEntry>
+    {
+        public CsvEnemyEntryMap()
+        {
+            Map(m => m.EnemyId);
+            Map(m => m.EnemyName);
+
+            Map(m => m.NormalDropPer);
+            Map(m => m.RareDropPer);
+            Map(m => m.SuperRareDropPer);
+
+            Map(m => m.NaturalNormalDropPer);
+            Map(m => m.NaturalRareDropPer);
+            Map(m => m.NaturalSuperRareDropPer);
+
+            for (int i = 0; i < 2; i++)
+            {
+                int i2 = i;
+                Map(m => m.NormalMatSingle, false).Name($"NormalMatSingleName{i}").ConvertUsing(x => x.NormalMatSingle[i2]?.Item.Name ?? "");
+                Map(m => m.NormalMatSingle, false).Name($"NormalMatSingleRate{i}").ConvertUsing(x => x.NormalMatSingle[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                int i2 = i;
+                Map(m => m.NormalMatDouble, false).Name($"NormalMatDoubleName{i}").ConvertUsing(x => x.NormalMatDouble[i2]?.Item.Name ?? "");
+                Map(m => m.NormalMatDouble, false).Name($"NormalMatDoubleRate{i}").ConvertUsing(x => x.NormalMatDouble[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                int i2 = i;
+                Map(m => m.RareCrystals, false).Name($"RareCrystalSkill1Name{i}").ConvertUsing(x => x.RareCrystals[i2]?.Item.Skill1Name ?? "");
+                Map(m => m.RareCrystals, false).Name($"RareCrystalSkill2Name{i}").ConvertUsing(x => x.RareCrystals[i2]?.Item.Skill2Name ?? "");
+                Map(m => m.RareCrystals, false).Name($"RareCrystalRank{i}").ConvertUsing(x => x.RareCrystals[i2]?.Item.Rank.ToString() ?? "");
+                Map(m => m.RareCrystals, false).Name($"RareCrystalIsCylinder{i}").ConvertUsing(x => x.RareCrystals[i2]?.Item.IsCylinder.ToString() ?? "");
+                Map(m => m.RareCrystals, false).Name($"RareCrystalRate{i}").ConvertUsing(x => x.RareCrystals[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int i2 = i;
+                Map(m => m.RareWeapons, false).Name($"RareWeaponName{i}").ConvertUsing(x => x.RareWeapons[i2]?.Item.Name ?? "");
+                Map(m => m.RareWeapons, false).Name($"RareWeaponSlots{i}").ConvertUsing(x => x.RareWeapons[i2]?.SlotCount.ToString() ?? "");
+                Map(m => m.RareWeapons, false).Name($"RareWeaponRate{i}").ConvertUsing(x => x.RareWeapons[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int i2 = i;
+                Map(m => m.RareArmor, false).Name($"RareArmorName{i}").ConvertUsing(x => x.RareArmor[i2]?.Item.Name ?? "");
+                Map(m => m.RareArmor, false).Name($"RareArmorSlots{i}").ConvertUsing(x => x.RareArmor[i2]?.SlotCount.ToString() ?? "");
+                Map(m => m.RareArmor, false).Name($"RareArmorRate{i}").ConvertUsing(x => x.RareArmor[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 0; i++)
+            {
+                int i2 = i;
+                Map(m => m.RareArtBooks, false).Name($"RareArtBooksName{i}").ConvertUsing(x => x.RareArtBooks[i2]?.Item.Name ?? "");
+                Map(m => m.RareArtBooks, false).Name($"RareArtBooksRate{i}").ConvertUsing(x => x.RareArtBooks[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int i2 = i;
+                Map(m => m.SprWeapons, false).Name($"SuperRareWeaponName{i}").ConvertUsing(x => x.SprWeapons[i2]?.Item.Name ?? "");
+                Map(m => m.SprWeapons, false).Name($"SuperRareWeaponSlots{i}").ConvertUsing(x => x.SprWeapons[i2]?.SlotCount.ToString() ?? "");
+                Map(m => m.SprWeapons, false).Name($"SuperRareWeaponRate{i}").ConvertUsing(x => x.SprWeapons[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                int i2 = i;
+                Map(m => m.SprUniqueWeapons, false).Name($"SuperRareUniqueWeaponName{i}").ConvertUsing(x => x.SprUniqueWeapons[i2]?.Item.Name ?? "");
+                Map(m => m.SprUniqueWeapons, false).Name($"SuperRareUniqueWeaponRate{i}").ConvertUsing(x => x.SprUniqueWeapons[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                int i2 = i;
+                Map(m => m.SprUniqueArmor, false).Name($"SuperRareUniqueArmorName{i}").ConvertUsing(x => x.SprUniqueArmor[i2]?.Item.Name ?? "");
+                Map(m => m.SprUniqueArmor, false).Name($"SuperRareUniqueArmorRate{i}").ConvertUsing(x => x.SprUniqueArmor[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int i2 = i;
+                Map(m => m.SprArtBooks, false).Name($"SuperRareArtBookName{i}").ConvertUsing(x => x.SprArtBooks[i2]?.Item.Name ?? "");
+                Map(m => m.SprArtBooks, false).Name($"SuperRareArtBookRate{i}").ConvertUsing(x => x.SprArtBooks[i2]?.TotalDropRate.ToString("F4") ?? "");
+            }
+        }
+    }
+
+    internal class CsvEnemyEntry
+    {
+        public int EnemyId { get; set; }
+        public string EnemyName { get; set; }
+
+        public int NormalDropPer { get; set; }
+        public int RareDropPer { get; set; }
+        public int SuperRareDropPer { get; set; }
+
+        public double NaturalNormalDropPer { get; set; }
+        public double NaturalRareDropPer { get; set; }
+        public double NaturalSuperRareDropPer { get; set; }
+
+        public DropEntry<MaterialEntry>[] NormalMatSingle { get; set; } = new DropEntry<MaterialEntry>[2];
+        public DropEntry<MaterialEntry>[] NormalMatDouble { get; set; } = new DropEntry<MaterialEntry>[2];
+
+        public DropEntry<CrystalItemEntry>[] RareCrystals { get; set; } = new DropEntry<CrystalItemEntry>[2];
+        public DropEntry<WeaponItemEntry>[] RareWeapons { get; set; } = new DropEntry<WeaponItemEntry>[4];
+        public DropEntry<EquipItemEntry>[] RareArmor { get; set; } = new DropEntry<EquipItemEntry>[4];
+        public DropEntry<ArtBookItemEntry>[] RareArtBooks { get; set; } = new DropEntry<ArtBookItemEntry>[8];
+
+        public DropEntry<WeaponItemEntry>[] SprWeapons { get; set; } = new DropEntry<WeaponItemEntry>[4];
+        public DropEntry<WeaponItemEntry>[] SprUniqueWeapons { get; set; } = new DropEntry<WeaponItemEntry>[8];
+        public DropEntry<EquipItemEntry>[] SprUniqueArmor { get; set; } = new DropEntry<EquipItemEntry>[8];
+        public DropEntry<ArtBookItemEntry>[] SprArtBooks { get; set; } = new DropEntry<ArtBookItemEntry>[8];
     }
 
     [DebuggerDisplay("{Name}")]
