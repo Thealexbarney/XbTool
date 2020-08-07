@@ -41,6 +41,7 @@ namespace XbTool
         GenerateSite,
         ExportQuests,
         ReplaceArchive,
-        SdPrintTest
+        SdPrintTest,
+        GenerateDropTables
     }
 }
