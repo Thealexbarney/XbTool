@@ -1,7 +1,8 @@
-﻿using System;
+﻿using LibHac.Fs;
+using LibHac.FsSystem;
+using System;
 using System.IO;
 using System.Linq;
-using LibHac.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.CodeGen;
@@ -457,8 +458,8 @@ namespace XbTool
             File.WriteAllLines(options.Output,
                 fs.EnumerateEntries().Where(x => x.Type == DirectoryEntryType.File).Select(x => x.FullPath));
 
-            var localFs = new LocalFileSystem("output");
-            fs.CopyFileSystem(localFs, options.Progress);
+            //var localFs = new LocalFileSystem("output");
+            //fs.CopyFileSystem(localFs, options.Progress);
         }
     }
 }

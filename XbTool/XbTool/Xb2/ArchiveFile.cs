@@ -1,5 +1,6 @@
-﻿using System;
-using LibHac.IO;
+﻿using LibHac;
+using LibHac.Fs;
+using System;
 
 namespace XbTool.Xb2
 {
@@ -14,7 +15,6 @@ namespace XbTool.Xb2
 
         public ArchiveFile(byte[] file, OpenMode mode)
         {
-            Mode = mode;
             FileData = file;
             IsCompressed = true;
             Size = file.Length;
@@ -22,33 +22,38 @@ namespace XbTool.Xb2
 
         public ArchiveFile(IStorage baseStorage, long offset, long size)
         {
-            Mode = OpenMode.Read;
             BaseStorage = baseStorage;
             Offset = offset;
             Size = size;
         }
 
-        public override int Read(Span<byte> destination, long offset)
+        protected override Result ReadImpl(out long bytesRead, long offset, Span<byte> destination, ReadOption options)
         {
-            int toRead = ValidateReadParamsAndGetSize(destination, offset);
+            Result res = ValidateReadParams(out bytesRead, offset, destination.Length, OpenMode.Read);
+            if (res.IsFailure())
+                return res;
 
             if (IsCompressed)
             {
-                FileData.AsSpan((int)offset, toRead).CopyTo(destination);
+                FileData.AsSpan((int)offset, (int)bytesRead).CopyTo(destination);
+                res = Result.Success;
             }
             else
             {
                 long storageOffset = Offset + offset;
-                BaseStorage.Read(destination.Slice(0, toRead), storageOffset);
+                res = BaseStorage.Read(storageOffset, destination.Slice(0, (int)bytesRead));
             }
 
-            return toRead;
+            return res;
         }
 
-        public override long GetSize() => Size;
-        public override void Flush() { }
-
-        public override void Write(ReadOnlySpan<byte> source, long offset) => throw new NotSupportedException();
-        public override void SetSize(long size) => throw new NotSupportedException();
+        protected override Result WriteImpl(long offset, ReadOnlySpan<byte> source, WriteOption options) => throw new NotSupportedException();
+        protected override Result FlushImpl() => Result.Success;
+        protected override Result SetSizeImpl(long size) => throw new NotSupportedException();
+        protected override Result GetSizeImpl(out long size)
+        {
+            size = Size;
+            return Result.Success;
+        }
     }
 }

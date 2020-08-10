@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ionic.Zlib;
-using LibHac.IO;
-using LibHac.IO.RomFs;
+using LibHac;
+using LibHac.Common;
+using LibHac.Fs;
+using LibHac.FsSystem;
+using LibHac.FsSystem.RomFs;
 
 namespace XbTool.Xb2
 {
@@ -24,12 +27,13 @@ namespace XbTool.Xb2
         public uint Key { get; }
 
         private IStorage DataFile { get; }
-        public HierarchicalRomFileTable FileTable { get; }
+        public HierarchicalRomFileTable<RomFileInfo> FileTable { get; }
 
         public ArchiveFileSystem(IFile headerFile, IFile dataFile)
         {
-            var header = new byte[headerFile.GetSize()];
-            headerFile.Read(header, 0);
+            headerFile.GetSize(out long size);
+            var header = new byte[size];
+            headerFile.Read(out long bytesRead, 0, header);
 
             DecryptArh(header);
 
@@ -75,7 +79,7 @@ namespace XbTool.Xb2
 
             DataFile = dataFile.AsStorage();
 
-            FileTable = new HierarchicalRomFileTable();
+            FileTable = new HierarchicalRomFileTable<RomFileInfo>();
             var romFileInfo = new RomFileInfo();
 
             File.WriteAllLines("archive.txt", FileInfo.Select(x => x.Filename));
@@ -90,74 +94,6 @@ namespace XbTool.Xb2
 
             FileTable.TrimExcess();
         }
-
-        public IDirectory OpenDirectory(string path, OpenDirectoryMode mode)
-        {
-            path = PathTools.Normalize(path).ToLowerInvariant();
-
-            if (!FileTable.TryOpenDirectory(path, out FindPosition position))
-            {
-                throw new DirectoryNotFoundException();
-            }
-
-            return new ArchiveDirectory(this, path, position, mode);
-        }
-
-        public IFile OpenFile(string path, OpenMode mode)
-        {
-            path = PathTools.Normalize(path).ToLowerInvariant();
-
-            if (!FileTable.TryOpenFile(path, out RomFileInfo romFileInfo))
-            {
-                throw new FileNotFoundException();
-            }
-
-            FileInfo fileInfo = FileInfo[romFileInfo.Offset];
-
-            switch (fileInfo.Type)
-            {
-                case 2:
-                    var decompData = new byte[fileInfo.UncompressedSize];
-                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30, fileInfo.CompressedSize).AsStream();
-
-                    using (var deflate = new ZlibStream(compStream, CompressionMode.Decompress, true))
-                    {
-                        deflate.CopyTo(new MemoryStream(decompData), fileInfo.UncompressedSize);
-                    }
-
-                    return new ArchiveFile(decompData, OpenMode.Read);
-                case 0:
-                    return new ArchiveFile(DataFile, fileInfo.Offset, fileInfo.CompressedSize);
-                default:
-                    throw new InvalidDataException();
-            }
-        }
-
-        public bool DirectoryExists(string path)
-        {
-            path = PathTools.Normalize(path).ToLowerInvariant();
-
-            return FileTable.TryOpenDirectory(path, out FindPosition _);
-        }
-
-        public bool FileExists(string path)
-        {
-            path = PathTools.Normalize(path).ToLowerInvariant();
-
-            return FileTable.TryOpenFile(path, out RomFileInfo _);
-        }
-
-        public DirectoryEntryType GetEntryType(string path)
-        {
-            path = PathTools.Normalize(path).ToLowerInvariant();
-
-            if (FileExists(path)) return DirectoryEntryType.File;
-            if (DirectoryExists(path)) return DirectoryEntryType.Directory;
-
-            throw new FileNotFoundException(path);
-        }
-
-        public void Commit() { }
 
         private void AddAllFilenames()
         {
@@ -256,11 +192,89 @@ namespace XbTool.Xb2
             public int Prev { get; set; }
         }
 
-        public void CreateDirectory(string path) => throw new NotSupportedException();
-        public void CreateFile(string path, long size, CreateFileOptions options) => throw new NotSupportedException();
-        public void DeleteDirectory(string path) => throw new NotSupportedException();
-        public void DeleteFile(string path) => throw new NotSupportedException();
-        public void RenameDirectory(string srcPath, string dstPath) => throw new NotSupportedException();
-        public void RenameFile(string srcPath, string dstPath) => throw new NotSupportedException();
+        public Result CreateFile(U8Span path, long size, CreateFileOptions options) => throw new NotSupportedException();
+        public Result DeleteFile(U8Span path) => throw new NotSupportedException();
+        public Result CreateDirectory(U8Span path) => throw new NotSupportedException();
+        public Result DeleteDirectory(U8Span path) => throw new NotSupportedException();
+        public Result DeleteDirectoryRecursively(U8Span path) => throw new NotSupportedException();
+        public Result CleanDirectoryRecursively(U8Span path) => throw new NotSupportedException();
+        public Result RenameFile(U8Span oldPath, U8Span newPath) => throw new NotSupportedException();
+        public Result RenameDirectory(U8Span oldPath, U8Span newPath) => throw new NotSupportedException();
+
+        public Result GetEntryType(out DirectoryEntryType entryType, U8Span path)
+        {
+            string normPath = PathTools.Normalize(path.ToString()).ToLowerInvariant();
+            if (FileTable.TryOpenFile(normPath, out RomFileInfo _))
+            {
+                entryType = DirectoryEntryType.File;
+                return Result.Success;
+            }
+            if (FileTable.TryOpenDirectory(normPath, out FindPosition _))
+            {
+                entryType = DirectoryEntryType.Directory;
+                return Result.Success;
+            }
+
+            entryType = DirectoryEntryType.Directory;
+            return ResultFs.PathNotFound.Log();
+        }
+
+        public Result GetFreeSpaceSize(out long freeSpace, U8Span path) => throw new NotSupportedException();
+
+        public Result GetTotalSpaceSize(out long totalSpace, U8Span path) => throw new NotSupportedException();
+
+        public Result OpenFile(out IFile file, U8Span path, OpenMode mode)
+        {
+            string normPath = PathTools.Normalize(path.ToString()).ToLowerInvariant();
+
+            if (!FileTable.TryOpenFile(normPath, out RomFileInfo romFileInfo))
+            {
+                throw new FileNotFoundException();
+            }
+
+            FileInfo fileInfo = FileInfo[romFileInfo.Offset];
+
+            switch (fileInfo.Type)
+            {
+                case 2:
+                    var decompData = new byte[fileInfo.UncompressedSize];
+                    Stream compStream = DataFile.Slice(fileInfo.Offset + 0x30, fileInfo.CompressedSize).AsStream();
+
+                    using (var deflate = new ZlibStream(compStream, CompressionMode.Decompress, true))
+                    {
+                        deflate.CopyTo(new MemoryStream(decompData), fileInfo.UncompressedSize);
+                    }
+                    file = new ArchiveFile(decompData, OpenMode.Read);
+                    return Result.Success;
+                case 0:
+                    file = new ArchiveFile(DataFile, fileInfo.Offset, fileInfo.CompressedSize);
+                    return Result.Success;
+                default:
+                    throw new InvalidDataException();
+            }
+        }
+
+        public Result OpenDirectory(out IDirectory directory, U8Span path, OpenDirectoryMode mode)
+        {
+            string normPath = PathTools.Normalize(path.ToString()).ToLowerInvariant();
+
+            if (!FileTable.TryOpenDirectory(normPath, out FindPosition position))
+            {
+                throw new DirectoryNotFoundException();
+            }
+            directory = new ArchiveDirectory(this, path.ToString(), position, mode);
+            return Result.Success;
+        }
+
+        Result IFileSystem.Commit() => Result.Success;
+        public Result CommitProvisionally(long commitCount) => Result.Success;
+        public Result Rollback() => Result.Success;
+        public Result Flush() => Result.Success;
+        public Result GetFileTimeStampRaw(out FileTimeStampRaw timeStamp, U8Span path) => throw new NotSupportedException();
+        public Result QueryEntry(Span<byte> outBuffer, ReadOnlySpan<byte> inBuffer, QueryId queryId, U8Span path) => throw new NotSupportedException();
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

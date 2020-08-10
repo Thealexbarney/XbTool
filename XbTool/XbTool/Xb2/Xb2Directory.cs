@@ -1,33 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using LibHac;
+using LibHac.Fs;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using LibHac.IO;
 
 namespace XbTool.Xb2
 {
     public class Xb2Directory : IDirectory
     {
         private IDirectory BaseDirectory { get; }
-
         public IFileSystem ParentFileSystem { get; }
-        public string FullPath { get; }
-        public OpenDirectoryMode Mode { get; }
 
         public Xb2Directory(IFileSystem fs, IDirectory baseDirectory)
         {
             BaseDirectory = baseDirectory;
             ParentFileSystem = fs;
-            FullPath = baseDirectory.FullPath;
-            Mode = baseDirectory.Mode;
         }
 
-        public IEnumerable<DirectoryEntry> Read()
-        {
-            return BaseDirectory.Read().Where(x => !Xb2FileSystem.IsArchiveFile(x.Name));
-        }
+        public Result Read(out long entriesRead, Span<DirectoryEntry> entryBuffer) => BaseDirectory.Read(out entriesRead, entryBuffer);
 
-        public int GetEntryCount()
-        {
-            return Read().Count();
-        }
+        public Result GetEntryCount(out long entryCount) => BaseDirectory.GetEntryCount(out entryCount);
     }
 }

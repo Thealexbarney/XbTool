@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using LibHac.Fs;
+using LibHac.FsSystem;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using LibHac.IO;
 using XbTool.Common;
 
 namespace XbTool.Gimmick
@@ -66,8 +67,7 @@ namespace XbTool.Gimmick
         public static Dictionary<string, MapInfo> ReadAll(IFileSystem fs)
         {
             var infos = new Dictionary<string, MapInfo>();
-            IEnumerable<string> filenames = fs.OpenDirectory("/menu/minimap", OpenDirectoryMode.Files)
-                .EnumerateEntries("*.mi", SearchOptions.Default).Select(x => x.FullPath);
+            IEnumerable<string> filenames = fs.EnumerateEntries("/menu/minimap", "*.mi", SearchOptions.Default).Where(x=>x.Type == DirectoryEntryType.File).Select(x => x.FullPath);
 
             foreach (string filename in filenames)
             {

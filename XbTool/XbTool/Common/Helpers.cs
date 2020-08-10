@@ -1,6 +1,11 @@
-﻿using System;
+﻿using LibHac.Common;
+using LibHac.Fs;
+using LibHac.FsService.Creators;
+using LibHac.FsSystem;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using LibHac.IO;
 
 namespace XbTool.Common
 {
@@ -76,11 +81,26 @@ namespace XbTool.Common
 
         public static byte[] ReadFile(this IFileSystem fs, string path)
         {
-            IFile file = fs.OpenFile(path, OpenMode.Read);
-            var fileArr = new byte[file.GetSize()];
-            file.Read(fileArr, 0);
+            fs.OpenFile(out IFile file, path.ToU8Span(), OpenMode.Read);
+            file.GetSize(out long size);
+            var fileArr = new byte[size];
+            file.Read(out _, 0, fileArr.AsSpan());
 
             return fileArr;
+        }
+
+        public static IDirectory OpenDirectory(this IFileSystem fs, string path, OpenDirectoryMode mode)
+        {
+            fs.OpenDirectory(out IDirectory outDir, path.ToU8Span(), mode);
+            return outDir;
+        }
+
+        public static IEnumerable<DirectoryEntry> Read(this IDirectory directory)
+        {
+            directory.GetEntryCount(out long entryCount);
+            DirectoryEntry[] dirEntries = new DirectoryEntry[entryCount];
+            directory.Read(out long _, dirEntries.AsSpan());
+            return dirEntries;
         }
     }
 }

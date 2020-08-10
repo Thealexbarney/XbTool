@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using LibHac.Fs;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using LibHac.IO;
 using XbTool.Common;
 using XbTool.Common.Textures;
 using XbTool.Xb2.Textures;

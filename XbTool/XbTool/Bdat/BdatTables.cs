@@ -5,9 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using LibHac;
-using LibHac.IO;
+using LibHac.Fs;
+using LibHac.FsSystem;
 using XbTool.CodeGen;
 using XbTool.Common;
+using XbTool.Types;
 
 namespace XbTool.Bdat
 {
@@ -104,7 +106,8 @@ namespace XbTool.Bdat
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/common_gmk.bdat"), Game.XB2, 0), "/bdat/common_gmk.bdat"));
             tables.AddRange(ReadBdatFile(new DataBuffer(fs.ReadFile("/bdat/lookat.bdat"), Game.XB2, 0), "/bdat/lookat.bdat"));
 
-            string[] files = fs.OpenDirectory($"/bdat/{lang}", OpenDirectoryMode.Files).Read().Select(x => x.FullPath).ToArray();
+            string[] files = fs.EnumerateEntries($"/bdat/{lang}", "*").Select(x => x.FullPath).ToArray();
+
             progress?.SetTotal(files.Length);
 
             foreach (string filename in files)

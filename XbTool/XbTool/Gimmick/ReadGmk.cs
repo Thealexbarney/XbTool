@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using LibHac;
-using LibHac.IO;
+using LibHac.Fs;
+using LibHac.FsSystem;
 using XbTool.Bdat;
 using XbTool.Common;
 using XbTool.Types;

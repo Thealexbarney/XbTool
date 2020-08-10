@@ -1,6 +1,6 @@
-﻿using System.IO;
-using LibHac;
-using LibHac.IO;
+﻿using LibHac;
+using LibHac.Fs;
+using System.IO;
 using XbTool.Bdat;
 using XbTool.BdatString;
 using XbTool.Gimmick;
