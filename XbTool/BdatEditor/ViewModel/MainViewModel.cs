@@ -19,15 +19,18 @@ namespace BdatEditor.ViewModel
         public ICommand OpenBdatCommand { get; set; }
         public ICommand ViewTableCommand { get; set; }
         public ICommand SaveTableCommand { get; set; }
+        public ICommand RefreshTableCommand { get; set; }
+
 
         private bool IsFileOpened { get; set; }
         private bool IsTableOpened { get; set; }
 
         public BdatTables BdatTables { get; private set; }
         private string Filename { get; set; }
+        public string FileDisplayName { get; set; } = "Select a file";
         public List<string> TableNames { get; private set; }
         public int SelectedTable { get; set; }
-        private BdatTable CurrentTable { get; set; }
+        public BdatTable CurrentTable { get; set; }
         public DataTable EditingTable { get; set; }
 
         public MainViewModel()
@@ -35,12 +38,25 @@ namespace BdatEditor.ViewModel
             OpenBdatCommand = new RelayCommand(OpenBdatViaFileBrowser);
             ViewTableCommand = new RelayCommand(ViewTable);
             SaveTableCommand = new RelayCommand(SaveTable);
+            RefreshTableCommand = new RelayCommand(RefreshTable);
         }
+
+        private void tables_list_DoubleClick(object sender, System.EventArgs e)
+        {
+            ViewTable();
+        }
+
 
         public void OpenBdatViaFileBrowser()
         {
             Filename = OpenViaFileBrowser(".bdat", "BDAT Files (*.bdat)|*.bdat|All Files|*.*");
+            if (Filename == null)
+                return;
             OpenBdat(Filename);
+            FileDisplayName = Filename.Split('\\')[Filename.Split('\\').Length - 1];
+            CurrentTable = null;
+            EditingTable = new DataTable();
+            EditingTable.AcceptChanges();
         }
 
         public void ViewTable()
@@ -48,18 +64,22 @@ namespace BdatEditor.ViewModel
             if (!IsFileOpened) return;
 
             BdatTable table = BdatTables.Tables[SelectedTable];
-            var editTable = new EditTable(table);
-            EditingTable = new DataTable();
             CurrentTable = table;
+            RefreshTable();
+        }
 
+        public void RefreshTable() {
+            if (CurrentTable == null) return;
+            var editTable = new EditTable(CurrentTable);
+            EditingTable = new DataTable();
             EditingTable.Columns.Add(new DataColumn("ID") { ReadOnly = true });
             foreach (BdatMember col in editTable.Columns)
             {
                 var column = new DataColumn();
-                if (col.Type != BdatMemberType.Scalar)
+                /*if (col.Type != BdatMemberType.Scalar)
                 {
                     column.ReadOnly = true;
-                }
+                }*/
 
                 column.ColumnName = $"{col.Name}\n({col.ValType})";
                 EditingTable.Columns.Add(column);
@@ -79,7 +99,6 @@ namespace BdatEditor.ViewModel
             EditingTable = null;
             EditingTable = temp;
         }
-
         public void SaveTable()
         {
             if (!IsTableOpened) return;
@@ -93,7 +112,7 @@ namespace BdatEditor.ViewModel
                 int itemId = int.Parse((string)row.ItemArray[0]);
                 for (int m = 0; m < members.Length; m++)
                 {
-                    if (members[m].Type != BdatMemberType.Scalar) continue;
+                    //if (members[m].Type != BdatMemberType.Scalar) continue;
                     string value = (string)row.ItemArray[m + 1];
                     try
                     {
@@ -104,7 +123,7 @@ namespace BdatEditor.ViewModel
                         string caption = null;
                         if (ex is ArgumentOutOfRangeException)
                         {
-                            caption = "Replacement string was too large to fit in the original space.";
+                            caption = "Error: " + ex.Message;
                         }
 
                         if (ex is FormatException || ex is OverflowException)
@@ -112,10 +131,13 @@ namespace BdatEditor.ViewModel
                             caption = $"Error parsing \"{value}\" as a {members[m].ValType} " +
                                       $"from Item \"{itemId}\" Column \"{members[m].Name}\".";
                         }
+                        else
+                        {
 
-                        if (caption == null) throw;
+                            if (caption == null) throw;
 
-                        MessageBox.Show(caption, "Format Error");
+                            MessageBox.Show(caption, "Format Error");
+                        }
                     }
                 }
             }
@@ -127,9 +149,34 @@ namespace BdatEditor.ViewModel
 
         public void OpenBdat(string filename)
         {
-            BdatTables = new BdatTables(filename, Game.XB2, false);
-            TableNames = BdatTables.Tables.Select(x => x.Name).ToList();
-            IsFileOpened = true;
+            try
+            {
+                BdatTables = new BdatTables(filename, Game.XB2, false);
+                TableNames = BdatTables.Tables.Select(x => x.Name).ToList();
+                IsFileOpened = true;
+            }
+            catch
+            {
+                try
+                {
+                    BdatTables = new BdatTables(filename, Game.XBX, false);
+                    TableNames = BdatTables.Tables.Select(x => x.Name).ToList();
+                    IsFileOpened = true;
+                }
+                catch
+                {
+                    try
+                    {
+                        BdatTables = new BdatTables(filename, Game.XB1DE, false);
+                        TableNames = BdatTables.Tables.Select(x => x.Name).ToList();
+                        IsFileOpened = true;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Failed to open file. Is it a valid bdat?");
+                    }
+                }
+            }
         }
 
         private static string OpenViaFileBrowser(string extension, string filter)

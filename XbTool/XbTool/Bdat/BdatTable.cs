@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using XbTool.Bdat;
+using XbTool.BdatString;
+using XbTool.CodeGen;
 using XbTool.Common;
 
 namespace XbTool.Bdat
@@ -81,8 +85,48 @@ namespace XbTool.Bdat
             int itemOffset = ItemTableOffset + itemIndex * ItemSize;
             int valueOffset = itemOffset + member.MemberPos;
 
-            if (member.Type == BdatMemberType.Array) return "Array";
-            if (member.Type == BdatMemberType.Flag) return "Flag";
+            if (member.Type == BdatMemberType.Array) //return "Array";
+            {
+                String outString = "";
+                //Set data length by type
+                int bytes = GetTypeBytes(member.ValType);
+                //Add each item
+                for (int i = 0; i < member.ArrayCount; i++)
+                {
+                    outString = string.Concat(outString, ReadIndividualValue(member, valueOffset + i * bytes).ToString());
+                    if (i < member.ArrayCount - 1)
+                        outString = string.Concat(outString, ":");
+                }
+                return outString;
+            }
+            if (member.Type == BdatMemberType.Flag) return ((sbyte)Data[valueOffset]).ToString();
+            return ReadIndividualValue(member, valueOffset);
+        }
+        private int GetTypeBytes (BdatValueType type)
+        {
+            //also for arrays
+            switch (type)
+            {
+                case BdatValueType.Int8:
+                case BdatValueType.UInt8:
+                    return 1;
+                case BdatValueType.UInt16:
+                case BdatValueType.Int16:
+                    return 2;
+                    break;
+                case BdatValueType.Int32:
+                case BdatValueType.UInt32:
+                case BdatValueType.String:
+                case BdatValueType.FP32:
+                    return 4;
+                default:
+                    return 1;
+            }
+        }
+
+        private string ReadIndividualValue(BdatMember member, int valueOffset)
+        //Custom, only used for arrays.
+        {
             switch (member.ValType)
             {
                 case BdatValueType.UInt8:
@@ -113,14 +157,39 @@ namespace XbTool.Bdat
 
         public void WriteValue(int itemId, string memberName, string value)
         {
+
             BdatMember member = MembersDict[memberName];
             int itemIndex = itemId - BaseId;
             int itemOffset = ItemTableOffset + itemIndex * ItemSize;
             int valueOffset = itemOffset + member.MemberPos;
 
-            if (member.Type != BdatMemberType.Scalar)
-                return;
+            if (member.Type == BdatMemberType.Array)
+            {
+                int i = 0;
+                int bytes = GetTypeBytes(member.ValType);
+                string[] array_items = value.Split(':');
+                foreach (String array_item in array_items)
+                {
+                    WriteIndividualValue(member, valueOffset + i*bytes, array_item);
+                    i++;
+                }
+            }
 
+            if (member.Type == BdatMemberType.Flag)
+            {
+                if (value == "0" || value == "1")
+                {
+                    Data.WriteUInt8(byte.Parse(value), valueOffset);
+                    return;
+                }
+                else
+                    throw new ArgumentOutOfRangeException(nameof(value), "Flags must be 1 or 0!");
+            }
+
+            WriteIndividualValue(member, valueOffset, value);
+        }
+        private void WriteIndividualValue(BdatMember member, int valueOffset, string value)
+        {
             switch (member.ValType)
             {
                 case BdatValueType.UInt8:
@@ -149,7 +218,7 @@ namespace XbTool.Bdat
                     string oldValue = Data.ReadUTF8Z(offset);
                     int oldLength = Encoding.UTF8.GetByteCount(oldValue);
                     int length = Encoding.UTF8.GetByteCount(value);
-                    if (length > oldLength) throw new ArgumentOutOfRangeException(nameof(value), "String is too long");
+                    if (length > oldLength) throw new ArgumentOutOfRangeException(nameof(value), "String is too long! Must be shorter or equal to previous.");
                     Data.WriteUTF8Z(value, offset);
                     break;
                 default:
