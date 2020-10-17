@@ -8,3 +8,4 @@ The bdat editor has been massively improved, but other tools are unchanged (and 
 - Arrays are now properly displayed and can be edited
 - Flags (boolean) are now properly displayed and can be edited
 - UI Improved for better readability and usability
+![ScreenShot](https://media.discordapp.net/attachments/675922372263411747/766828597734014994/unknown.png?width=960&height=525)
