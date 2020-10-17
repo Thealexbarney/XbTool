@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="Xenoblade Games BDAT Editor+" Height="550" Width="1000">
+        Title="Xenoblade Games Bdat Editor+" Height="550" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,7 +31,7 @@
                 <Button Content="{Binding FileDisplayName}" Command="{Binding OpenBdatCommand}" VerticalAlignment="Top" Height="32" Grid.ColumnSpan="2" Background="White" Foreground="Black" BorderBrush="{x:Null}" FontSize="18" />
                 <ListBox x:Name="tables_list" Grid.Row="0" ItemsSource="{Binding TableNames}" SelectedIndex="{Binding SelectedTable}" Margin="0,37,0,0" Grid.ColumnSpan="2" BorderBrush="White" Grid.RowSpan="2"/>
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
-                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" BorderBrush="#FFDEDEDE" Height="29" Background="#FFDEDEDE" />
+                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" />
                     <!-- Button Command="{Binding SaveTableCommand}" Content="Save Table" VerticalAlignment="Top" BorderBrush="{x:Null}" /-->
                 </StackPanel>
             </Grid>
@@ -43,7 +43,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="18" Margin="0,5,74,268" Text="{Binding Path=CurrentTable.Name}"/>
                 <Button Command="{Binding SaveTableCommand}" Content="=" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Wingdings" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Width="37"/>
-                <Button Command="{Binding RefreshTableCommand}" Content="q" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Webdings" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="37" Margin="711,0,0,0"/>
+                <Button Command="{Binding RefreshTableCommand}" Content="q" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Webdings" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Width="37" Margin="0,0,37,0"/>
 
                 <DataGrid x:Name="Tables" AutoGenerateColumns="true" CanUserAddRows="False" EnableColumnVirtualization="true"
                           EnableRowVirtualization="true"
