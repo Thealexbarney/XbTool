@@ -78,6 +78,13 @@ namespace XbTool.Bdat
             MembersDict = Members.ToDictionary(x => x.Name, x => x);
         }
 
+        private static string ReadFlag(DataBuffer table, int itemOffset, BdatMember member, BdatMember flagsMember)
+        {
+            uint flags = table[itemOffset + flagsMember.MemberPos];
+            return ((flags & member.FlagMask) != 0).ToString();
+            //return (Convert.ToString(flags, 2).PadLeft(8, '0') + " & "+ Convert.ToString(member.FlagMask, 2).PadLeft(8,'0') + " -> " + ((flags & member.FlagMask) != 0).ToString());
+        }
+
         public string ReadValue(int itemId, string memberName)
         {
             BdatMember member = MembersDict[memberName];
@@ -99,7 +106,11 @@ namespace XbTool.Bdat
                 }
                 return outString;
             }
-            if (member.Type == BdatMemberType.Flag) return ((sbyte)Data[valueOffset]).ToString();
+            if (member.Type == BdatMemberType.Flag)
+            {
+                BdatMember flagsMember = Members[member.FlagVarIndex];
+                return ReadFlag(Data, itemOffset, member, flagsMember);
+            }
             return ReadIndividualValue(member, valueOffset);
         }
         private int GetTypeBytes (BdatValueType type)
@@ -113,7 +124,6 @@ namespace XbTool.Bdat
                 case BdatValueType.UInt16:
                 case BdatValueType.Int16:
                     return 2;
-                    break;
                 case BdatValueType.Int32:
                 case BdatValueType.UInt32:
                 case BdatValueType.String:
@@ -177,13 +187,20 @@ namespace XbTool.Bdat
 
             if (member.Type == BdatMemberType.Flag)
             {
-                if (value == "0" || value == "1")
+                if (value == "True" || value == "False")
                 {
-                    Data.WriteUInt8(byte.Parse(value), valueOffset);
+                    BdatMember flagsMember = Members[member.FlagVarIndex];
+                    uint flags = Data[itemOffset + flagsMember.MemberPos];
+                    uint newVal = 0;
+                    if (value == "True")
+                        newVal = flags | member.FlagMask;
+                    else
+                        newVal = flags ^ (flags & member.FlagMask);
+                    Data.WriteUInt8(Convert.ToByte(newVal), itemOffset + flagsMember.MemberPos);
                     return;
                 }
                 else
-                    throw new ArgumentOutOfRangeException(nameof(value), "Flags must be 1 or 0!");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Flags must be True or False exactly!");
             }
 
             WriteIndividualValue(member, valueOffset, value);
