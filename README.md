@@ -1,11 +1,6 @@
-# Xenoblade X/2/DE Bdat Editor
+# Xenoblade Research
 
-A mod of TheAlexBarney's xbtool.
-The bdat editor has been massively improved, but other tools are unchanged (and may become out of date)
+Repo for scratch work from reversing all 3 Xenoblade games, tools for reading their files, and information discovered by reverse engineering them.\
 
-### Bdat Editor Changes
-- Support for Xenoblade X, 2, and DE instead of only 2 (Automatically tries each format when opening a file)
-- Arrays are now properly displayed and can be edited
-- Flags (boolean) are now properly displayed and can be edited
-- UI Improved for better readability and usability
-![ScreenShot](https://media.discordapp.net/attachments/675922372263411747/766828597734014994/unknown.png?width=960&height=525)
+# Includes: Xenoblade X/2/DE Bdat Editor+
+(Modified by threethan to support all three HD-engine games, as well as array and flag values)
