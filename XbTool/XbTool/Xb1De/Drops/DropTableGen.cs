@@ -402,8 +402,8 @@ namespace XbTool.Xb1De.Drops
             BdatStringItem enemyMapRow = row["stats"].Reference;
 
             if (enemyMapRow == null ||
-                enemyMapRow["drop_nml"].Reference == null ||
-                enemyMapRow["drop_rar"].Reference == null ||
+                enemyMapRow["drop_nml"].Reference == null &&
+                enemyMapRow["drop_rar"].Reference == null &&
                 enemyMapRow["drop_spr"].Reference == null)
             {
                 return null;
@@ -431,6 +431,9 @@ namespace XbTool.Xb1De.Drops
         {
             var entry = new DropNormalEntry();
 
+            if (row is null)
+                return entry;
+
             for (int i = 0; i < MaxLotItems; i++)
             {
                 DropEntry<MaterialEntry> item = GetMaterialEntry(row, i);
@@ -446,6 +449,9 @@ namespace XbTool.Xb1De.Drops
         private static DropRareEntry TryGetRareTable(BdatStringItem row)
         {
             var entry = new DropRareEntry();
+
+            if (row is null)
+                return entry;
 
             entry.CrystalRate = int.Parse(row["crystal_per"].ValueString);
             entry.WeaponRate = int.Parse(row["wpn_per"].ValueString);
@@ -490,6 +496,9 @@ namespace XbTool.Xb1De.Drops
         private static DropSuperRareEntry TryGetSuperRareTable(BdatStringItem row)
         {
             var entry = new DropSuperRareEntry();
+
+            if (row is null)
+                return entry;
 
             entry.WeaponRate = int.Parse(row["wpn_per"].ValueString);
             entry.UniqueWeaponRate = int.Parse(row["uni_wpn_per"].ValueString);
