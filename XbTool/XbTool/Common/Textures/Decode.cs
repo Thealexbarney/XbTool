@@ -57,6 +57,10 @@ namespace XbTool.Common.Textures
                     Swizzle.Deswizzle(texture, 4);
                     decoded = Dxt.DecompressBc7(texture);
                     break;
+                case TextureFormat.R8G8B8A8_UNORM:
+                    Swizzle.Deswizzle(texture, 4, 1);
+                    decoded = texture.Data;
+                    break;
             }
 
             return decoded;
