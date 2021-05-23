@@ -5,13 +5,13 @@ namespace XbTool.Xb2.Textures
 {
     public static class Swizzle
     {
-        public static void Deswizzle(ITexture texture, int bppPower)
+        public static void Deswizzle(ITexture texture, int bppPower, int swizzleSize = 4)
         {
             int bpp = 1 << bppPower;
 
             int len = texture.Data.Length;
             int originWidth = (texture.Width + 3) / 4;
-            int originHeight = (texture.Height + 3) / 4;
+            int originHeight = (texture.Height + 3) / swizzleSize;
 
             int xb = CountZeros(Pow2RoundUp(originWidth));
             int yb = CountZeros(Pow2RoundUp(originHeight));
