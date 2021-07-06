@@ -56,7 +56,9 @@ namespace XbTool.Gimmick
                         areaInfo.Priority = area.level_priority;
                     }
 
-                    if (area._disp_name?.name != null) areaInfo.DisplayName = area._disp_name.name;
+					if (area._disp_name?.name != null) areaInfo.DisplayName = ( area._disp_name.name == "Entire Area" ?
+							tables.ma40a_FLD_LandmarkPop.Union(tables.ma41a_FLD_LandmarkPop)
+							.FirstOrDefault(x => x._menuMapImage?.Id == area.Id)._menuGroup._disp_name.name : area._disp_name.name);
                 }
 
                 Dictionary<string, Lvb> gimmickSet = ReadGimmickSet(fs, tables, map.Id);
