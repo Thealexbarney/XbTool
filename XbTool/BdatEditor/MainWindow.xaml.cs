@@ -1,4 +1,7 @@
-﻿namespace BdatEditor
+﻿using BdatEditor.ViewModel;
+using System.Windows.Data;
+
+namespace BdatEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

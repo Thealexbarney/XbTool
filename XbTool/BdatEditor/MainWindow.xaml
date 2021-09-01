@@ -5,19 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="Xenoblade 2 BDAT Editor" Height="450" Width="800">
+        Title="Xenoblade Games Bdat Editor+" Height="550" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_Open" Command="{Binding OpenBdatCommand}" />
-                </MenuItem>
-            </Menu>
-        </DockPanel>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -26,21 +19,37 @@
                 <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="78*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="102*" />
+                    <RowDefinition Height="397*"/>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <ListBox Grid.Row="0" ItemsSource="{Binding TableNames}" SelectedIndex="{Binding SelectedTable}" />
-                <StackPanel Grid.Row="1">
-                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" />
-                    <Button Command="{Binding SaveTableCommand}" Content="Save Table" VerticalAlignment="Top" />
+                <Button Content="{Binding FileDisplayName}" Command="{Binding OpenBdatCommand}" VerticalAlignment="Top" Height="32" Grid.ColumnSpan="2" Background="White" Foreground="Black" BorderBrush="{x:Null}" FontSize="18" />
+                <ListBox x:Name="tables_list" Grid.Row="0" ItemsSource="{Binding TableNames}" SelectedIndex="{Binding SelectedTable}" Margin="0,37,0,0" Grid.ColumnSpan="2" BorderBrush="White" Grid.RowSpan="2"/>
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0" />
+                    <Button Command="{Binding StringExportCommand}" Content="String Export" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0"/>
+                    <Button Command="{Binding StringImportCommand}" Content="String Import" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0"/>
+                    <!-- Button Command="{Binding SaveTableCommand}" Content="Save Table" VerticalAlignment="Top" BorderBrush="{x:Null}" /-->
                 </StackPanel>
             </Grid>
             <GridSplitter Grid.Column="1" ShowsPreview="true" HorizontalAlignment="Stretch" Width="5" />
-            <Grid Grid.Column="2">
-                <DataGrid AutoGenerateColumns="true" CanUserAddRows="False" EnableColumnVirtualization="true"
+            <Grid Grid.Column="2" Margin="5,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="246*"/>
+                    <RowDefinition Height="173*"/>
+                </Grid.RowDefinitions>
+                <TextBlock FontSize="18" Margin="0,5,74,268" Text="{Binding Path=CurrentTable.Name}"/>
+                <Button Command="{Binding SaveTableCommand}" Content="=" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Wingdings" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Width="37"/>
+                <Button Command="{Binding RefreshTableCommand}" Content="q" Background="{x:Null}" BorderBrush="{x:Null}" FontFamily="Webdings" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Top" Height="37" Width="37" Margin="0,0,37,0"/>
+
+                <DataGrid x:Name="Tables" AutoGenerateColumns="true" CanUserAddRows="False" EnableColumnVirtualization="true"
                           EnableRowVirtualization="true"
-                          ItemsSource="{Binding Path=EditingTable, Mode=TwoWay, IsAsync=True}" />
+                          ItemsSource="{Binding Path=EditingTable, Mode=TwoWay, IsAsync=True}" Grid.RowSpan="2" Margin="-7,37,0,0"/>
             </Grid>
         </Grid>
 
