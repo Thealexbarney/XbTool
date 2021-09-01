@@ -31,7 +31,9 @@
                 <Button Content="{Binding FileDisplayName}" Command="{Binding OpenBdatCommand}" VerticalAlignment="Top" Height="32" Grid.ColumnSpan="2" Background="White" Foreground="Black" BorderBrush="{x:Null}" FontSize="18" />
                 <ListBox x:Name="tables_list" Grid.Row="0" ItemsSource="{Binding TableNames}" SelectedIndex="{Binding SelectedTable}" Margin="0,37,0,0" Grid.ColumnSpan="2" BorderBrush="White" Grid.RowSpan="2"/>
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
-                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" />
+                    <Button Command="{Binding ViewTableCommand}" Content="View Table" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0" />
+                    <Button Command="{Binding StringExportCommand}" Content="String Export" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0"/>
+                    <Button Command="{Binding StringImportCommand}" Content="String Import" VerticalAlignment="Top" BorderBrush="#FFF4F4F4" Height="29" Background="#FFF4F4F4" Margin="0,0,-0.4,0"/>
                     <!-- Button Command="{Binding SaveTableCommand}" Content="Save Table" VerticalAlignment="Top" BorderBrush="{x:Null}" /-->
                 </StackPanel>
             </Grid>
