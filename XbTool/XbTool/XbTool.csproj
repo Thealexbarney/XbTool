@@ -24,7 +24,7 @@
     <PackageReference Condition=" '$(TargetFramework)' == 'net46' " Include="DotNetZip" Version="1.11.0" />
     <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.1' " Include="Iconic.Zlib.Netstandard" Version="1.0.0" />
     <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.1' " Include="System.Drawing.Common" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
