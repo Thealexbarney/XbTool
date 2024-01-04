@@ -15,6 +15,7 @@ using XbTool.Save;
 using XbTool.Scripting;
 using XbTool.Serialization;
 using XbTool.Types;
+using XbTool.Xb1De.Drops;
 using XbTool.Xb2;
 
 namespace XbTool
@@ -93,6 +94,9 @@ namespace XbTool
                         break;
                     case Task.SdPrintTest:
                         SdPrintTest(options);
+                        break;
+                    case Task.GenerateDropTables:
+                        GenerateDropTables(options);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -460,6 +464,15 @@ namespace XbTool
 
             //var localFs = new LocalFileSystem("output");
             //fs.CopyFileSystem(localFs, options.Progress);
+        }
+
+        private static void GenerateDropTables(Options options)
+        {
+            if (options.BdatDir == null) throw new NullReferenceException("No bdat path was specified.");
+            if (options.Output == null) throw new NullReferenceException("No output path was specified.");
+
+            BdatStringCollection tables = GetBdatStringCollection(options);
+            DropTableGen.GenerateDropTables(tables, options.Output);
         }
     }
 }

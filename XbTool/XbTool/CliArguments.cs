@@ -222,6 +222,9 @@ namespace XbTool
 
             Console.WriteLine("\n  DecompressIraSave - Decompresses the save file for the Torna DLC");
             Console.WriteLine("    DecompressIraSave -i <input_file> -o <output_file>");
+
+            Console.WriteLine("\n  GenerateDropTables - Generate drop tables for Xenoblade 1: DE");
+            Console.WriteLine("    GenerateDropTables -b <bdat_dir> -o <output_file>");
         }
 
         private static string GetProgramName() => Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly()?.Location ?? "");
